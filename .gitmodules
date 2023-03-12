@@ -1,0 +1,6 @@
+[submodule "configurations/awesome"]
+	path = configurations/awesome
+	url = https://github.com/Sanatana-Linux/nixos-awesomewm
+[submodule "configurations/zsh"]
+	path = configurations/zsh
+	url = https://github.com/Sanatana-Linux/nixos-zsh

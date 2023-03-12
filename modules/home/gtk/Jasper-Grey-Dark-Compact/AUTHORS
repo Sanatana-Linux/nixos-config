@@ -1,0 +1,13 @@
+------------------------ Colloid-dark ICON THEME ------------------------
+
+SOURCES:
+arc-icon-theme: https://github.com/horst3180/arc-icon-theme
+faba-icon-theme: https://github.com/snwh/faba-icon-theme
+Tela icon theme: https://github.com/vinceliuice/Tela-icon-theme
+
+CUSTOMIZERs:
+Vince Liuice <vinceliuice@hotmail.com> - Colloid-dark icon theme (https://github.com/vinceliuice/Colloid-dark-icon-theme)
+
+Thomas Leon Highbaugh <me@thomasleonhighbaugh.me> - modifications to Colloid-dark icon theme as part of my NixOS configuration, SanatanaOS. 
+
+------------------------ Colloid-dark ICON THEME ------------------------

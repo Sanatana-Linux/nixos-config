@@ -83,7 +83,9 @@ in {
     (import ../../modules/home/programs/picom { })
     (import ../../modules/home/programs/rofi { inherit pkgs config; })
     (import ../../modules/home/programs/starship)
-    (import ../../modules/home/programs/zathura)
+
+
+
 
     # (import ./theme/nvim { inherit colors; })
   ];

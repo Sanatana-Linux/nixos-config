@@ -3,7 +3,7 @@
 {
 
   console = {
-    font = "ter-i32b";
+    font = "ter-c14b";
     keyMap = "us";
     #-------------------------------------------#
     # normally would abstract the below to a

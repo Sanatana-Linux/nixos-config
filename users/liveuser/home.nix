@@ -10,7 +10,7 @@ let
   # Integrate nur within Home-Manager
   nur = import (builtins.fetchTarball {
     url = "https://github.com/nix-community/NUR/archive/master.tar.gz";
-    sha256 = "16rmzn230nvagwhpby1xclix3mksv8893gjypg8acjd358imrry4";
+    sha256 = "0xyz48n6db8n8ws7prr4nv93979bmpmaxcx63rdk2maxaxkvpi28";
 
   }) { inherit pkgs; };
 

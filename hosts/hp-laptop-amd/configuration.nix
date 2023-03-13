@@ -7,43 +7,43 @@
 
 let
 
-  core-packages = import ../../modules/system/profiiles/core/pkgs.nix { inherit pkgs; };
+  core-packages = import ../../modules/system/profiles//core/pkgs.nix { inherit pkgs; };
 
   development-packages =
-    import ../../modules/system/profiiles/development/pkgs.nix { inherit pkgs; };
+    import ../../modules/system/profiles//development/pkgs.nix { inherit pkgs; };
 
   interface-packages =
-    import ../../modules/system/profiiles/interface/pkgs.nix { inherit pkgs; };
+    import ../../modules/system/profiles//interface/pkgs.nix { inherit pkgs; };
 
-  fonts-packages = import ../../modules/system/profiiles/fonts/pkgs.nix { inherit pkgs; };
+  fonts-packages = import ../../modules/system/profiles//fonts/pkgs.nix { inherit pkgs; };
 
-  laptop-packages = pkgs.callPackage ../../modules/system/profiiles/core/laptop/pkgs.nix {
+  laptop-packages = pkgs.callPackage ../../modules/system/profiles//core/laptop/pkgs.nix {
     inherit pkgs;
   };
 
   networking-packages =
-    import ../../modules/system/profiiles/networking/pkgs.nix { inherit pkgs; };
+    import ../../modules/system/profiles//networking/pkgs.nix { inherit pkgs; };
 
   shell-packages =
-    pkgs.callPackage ../../modules/system/profiiles/shell/pkgs.nix { inherit pkgs; };
+    pkgs.callPackage ../../modules/system/profiles//shell/pkgs.nix { inherit pkgs; };
 
-  sound-packages = import ../../modules/system/profiiles/sound/pkgs.nix { inherit pkgs; };
+  sound-packages = import ../../modules/system/profiles//sound/pkgs.nix { inherit pkgs; };
 
   virtualisation-packages =
-    import ../../modules/system/profiiles/virtualisation/pkgs.nix { inherit pkgs; };
+    import ../../modules/system/profiles//virtualisation/pkgs.nix { inherit pkgs; };
 
   material-symbols = pkgs.callPackage ../../pkgs/material-symbols.nix { };
 
 in {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/system/profiiles/fonts
-    ../../modules/system/profiiles/development
-    ../../modules/system/profiiles/interface
-    ../../modules/system/profiiles/networking
-    ../../modules/system/profiiles/shell
-    ../../modules/system/profiiles/sound
-    ../../modules/system/profiiles/virtualisation
+    ../../modules/system/profiles//fonts
+    ../../modules/system/profiles//development
+    ../../modules/system/profiles//interface
+    ../../modules/system/profiles//networking
+    ../../modules/system/profiles//shell
+    ../../modules/system/profiles//sound
+    ../../modules/system/profiles//virtualisation
 
   ];
 

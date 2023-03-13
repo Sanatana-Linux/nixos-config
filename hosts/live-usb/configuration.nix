@@ -3,18 +3,18 @@
 { config, pkgs, lib, modulesPath, inputs, ... }:
 
 let
-  sound-packages = import ../../modules/system/profiiles/sound/pkgs.nix { inherit pkgs; };
+  sound-packages = import ../../modules/system/profiles//sound/pkgs.nix { inherit pkgs; };
   interface-packages =
-    import ../../modules/system/profiiles/interface/minimal.nix { inherit pkgs; };
+    import ../../modules/system/profiles//interface/minimal.nix { inherit pkgs; };
 in {
   imports = [
     "${toString modulesPath}/installer/cd-dvd/iso-image.nix"
-    "${toString modulesPath}/modules/system/profiiles/all-hardware.nix"
-    "${toString modulesPath}/modules/system/profiiles/base.nix"
-    "${toString modulesPath}/modules/system/profiiles/installation-device.nix"
-    ../../modules/system/profiiles/sound
-    ../../modules/system/profiiles/interface
-    ../../modules/system/profiiles/networking
+    "${toString modulesPath}/modules/system/profiles//all-hardware.nix"
+    "${toString modulesPath}/modules/system/profiles//base.nix"
+    "${toString modulesPath}/modules/system/profiles//installation-device.nix"
+    ../../modules/system/profiles//sound
+    ../../modules/system/profiles//interface
+    ../../modules/system/profiles//networking
 
   ];
 

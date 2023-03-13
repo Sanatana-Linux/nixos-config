@@ -1,6 +1,11 @@
 { config, pkgs, ... }:
 
 {
-# configurations go here
-# remember to import them from the host's `configuration.nix` file!
+  gtk = {
+    enable = true;
+    gtk3.extraConfig.gtk-decoration-layout = "menu:";
+    cursorTheme.name = "Numix-Cursor-Light";
+    iconTheme.name = "Fluent-dark";
+    theme.name = "Jasper-Grey-Dark-Compact";
+  };
 }

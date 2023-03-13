@@ -4,8 +4,6 @@ with pkgs; [
 appimage-run
 appstream-glib
 bitwarden
-    
-
 bitwarden-cli
 bleachbit
 discord

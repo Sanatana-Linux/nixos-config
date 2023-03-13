@@ -10,14 +10,11 @@ let
   images-packages =
     import ../../modules/home/profiles/images/pkgs.nix { inherit pkgs; };
 
-    
-
   desktop-packages =
     import ../../modules/home/profiles/desktop/pkgs.nix { inherit pkgs; };
 
   awesomewm-packages =
     import ../../modules/home/profiles/awesomewm/pkgs.nix { inherit pkgs; };
-
 
   # Integrate nur within Home-Manager
   nur = import (builtins.fetchTarball {
@@ -68,7 +65,7 @@ in {
   '';
   #--------------------------------------------------#
 
-  #--------------------------------------------------#
+  # -------------------------------------------------------------------------- #
   # Programs Imports
   imports = lib.attrValues nur.repos.rycee.hmModules ++ [
     (import ../../modules/home/programs/kitty { inherit pkgs; })
@@ -83,9 +80,11 @@ in {
     (import ../../modules/home/programs/picom { })
     (import ../../modules/home/programs/rofi { inherit pkgs config; })
     (import ../../modules/home/programs/starship)
+# -------------------------------------------------------------------------- #
+    # Profiles
 
-
-
+      # gtk configuration
+    (import ../../modules/home/profiles/desktop)
 
     # (import ./theme/nvim { inherit colors; })
   ];
@@ -93,21 +92,15 @@ in {
   xresources.extraConfig =
     import ../../modules/home/programs/xresources { inherit colors; };
 
-  #--------------------------------------------------#
+  # -------------------------------------------------------------------------- #
   # Let Home Manager install and manage itself.
+  # 
   programs.home-manager.enable = true;
 
   # services
   services.playerctld.enable = true;
 
-  # gtk configuration
-  gtk = {
-    enable = true;
-    gtk3.extraConfig.gtk-decoration-layout = "menu:";
-    cursorTheme.name = "Numix-Cursor-Light";
-    iconTheme.name = "Fluent-dark";
-    theme.name = "Jasper-Grey-Dark-Compact";
-  };
+
 
   # editor (nvim)
   systemd.user.sessionVariables.EDITOR = "nvim";
@@ -135,12 +128,13 @@ in {
   };
 
   # import more packages to home-manager ones.
-  home.packages = awesomewm-packages ++ desktop-packages ++ images-packages ++ (with pkgs; [
-    extract
-    nux
-    run
-    ueberzug
+  home.packages = awesomewm-packages ++ desktop-packages ++ images-packages
+    ++ (with pkgs; [
+      extract
+      nux
+      run
+      ueberzug
 
-  ]);
+    ]);
 
 }

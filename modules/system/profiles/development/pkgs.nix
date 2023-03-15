@@ -50,6 +50,7 @@ with pkgs; [
   nix-tree
   nixfmt
   nixpkgs-fmt
+  nps
   nodejs
   nodePackages_latest.diagnostic-languageserver
   nodePackages_latest.eslint

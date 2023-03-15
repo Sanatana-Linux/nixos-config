@@ -35,6 +35,9 @@
     emacs-overlay.url = "github:nix-community/emacs-overlay";
     emacs-overlay.inputs.nixpkgs.follows = "nixpkgs";
 
+    nps.url = "github:OleMussmann/Nix-Package-Search";
+    nps.inputs.nixpkgs.follows = "nixpkgs";
+
     rust-overlay.url = "github:oxalica/rust-overlay";
     rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -46,7 +49,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, nixpkgs-f2k, luaFormatter
+  outputs = { self, nixpkgs, home-manager, nixpkgs-f2k, luaFormatter, nps
     , nixos-hardware, ... }@inputs:
     let
       system = "x86_64-linux";
@@ -76,6 +79,7 @@
             src = prev.luaFormatter-src;
             version = "999-master";
           };
+          nps = inputs.nps.defaultPackage.${prev.system};
         })
         nixpkgs-f2k.overlays.default
         nur.overlay

@@ -9,6 +9,8 @@
       lt = "exa -lT";
       lat = "exa -laT";
 
+      nps = "nix run github:OleMussmann/Nix-Package-Search -- ";
+
       cat = "bat";
 
       # DO NOT DO THIS 

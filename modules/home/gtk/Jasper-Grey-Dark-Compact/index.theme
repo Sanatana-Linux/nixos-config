@@ -7,6 +7,6 @@ Encoding=UTF-8
 [X-GNOME-Metatheme]
 GtkTheme=Jasper-Grey-Dark-Compact
 MetacityTheme=Jasper-Grey-Dark-Compact
-IconTheme=Colloid-dark
-CursorTheme=Colloid-dark-cursors
+IconTheme=Fluent-dark
+CursorTheme=phinger-cursors-light
 ButtonLayout=:menu:minimize,maximize,close

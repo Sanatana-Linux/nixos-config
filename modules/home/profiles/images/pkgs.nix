@@ -3,7 +3,7 @@
 with pkgs; [
   ascii-image-converter
   figlet
-  gimp
+  gimp-with-plugins
   gimpPlugins.exposureBlend
   gimpPlugins.fourier
   gimpPlugins.gap

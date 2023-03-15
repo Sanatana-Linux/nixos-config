@@ -39,7 +39,7 @@ in {
 
   #--------------------------------------------------#
   # Symlink Configuration Files
-  xdg.configFile."BetterDiscord/themes".source = ../../configurations/bd-themes;
+  # xdg.configFile."BetterDiscord/themes".source = ../../configurations/bd-themes;
 
   # Enable AwesomeWM Configuration
   home.activation.installAwesomeWMConfig = ''
@@ -59,6 +59,7 @@ in {
   # Enable GTK theme
   home.activation.installGTKConfig = ''
     if [ ! -d "$HOME/.themes/Jasper-Gray-Dark-Compact" ]; then
+      mkdir -p "$HOME/.themes/"
       ln -sf "/etc/nixos/modules/home/gtk/Jasper-Grey-Dark-Compact" "$HOME/.themes/"
       chmod -R +w "$HOME/.themes"
       fi
@@ -80,12 +81,11 @@ in {
     (import ../../modules/home/programs/picom { })
     (import ../../modules/home/programs/rofi { inherit pkgs config; })
     (import ../../modules/home/programs/starship)
-# -------------------------------------------------------------------------- #
+    # -------------------------------------------------------------------------- #
     # Profiles
 
-      # gtk configuration
+    # gtk configuration
     (import ../../modules/home/profiles/desktop)
-
     # (import ./theme/nvim { inherit colors; })
   ];
 
@@ -99,8 +99,6 @@ in {
 
   # services
   services.playerctld.enable = true;
-
-
 
   # editor (nvim)
   systemd.user.sessionVariables.EDITOR = "nvim";

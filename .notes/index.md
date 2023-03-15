@@ -10,3 +10,4 @@ The notes contained in this `.notes` directory are related to the overarching Ni
 ## Index of Notes 
 
 - [Errors](./errors/index.md)
+- [TODOs](./todo/index.md)

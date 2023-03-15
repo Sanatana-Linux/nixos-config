@@ -13,10 +13,12 @@ gnome.gnome-disk-utility
 google-chrome
 gpick
 librewolf-unwrapped
+luakit
 networkmanagerapplet
 nicotine-plus
 obs-studio
 obsidian
+phinger-cursors
 rclone-browser
 tdesktop
 themechanger

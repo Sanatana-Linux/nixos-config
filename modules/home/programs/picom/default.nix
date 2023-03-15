@@ -1,11 +1,11 @@
-{...}: {
+{ ... }: {
   services.picom = {
     enable = true;
     backend = "glx";
     vSync = true;
 
     shadow = true;
-    shadowOffsets = [(-10) (-10)];
+    shadowOffsets = [ (-10) (-10) ];
     shadowOpacity = 0.35;
     shadowExclude = [
       "name = 'Notification'"
@@ -16,14 +16,15 @@
     ];
 
     fade = true;
-    fadeDelta = 4;
-    fadeSteps = [0.025 0.025];
-    fadeExclude = [];
+    fadeDelta = 3;
+    fadeSteps = [ 0.06 0.06 ];
+    fadeExclude = [ ];
 
-    activeOpacity = 1.0;
-    inactiveOpacity = 1.0;
-    menuOpacity = 1.0;
-    opacityRules = ["70:class_g = 'splash'"];
+
+    activeOpacity = "1.0";
+    inactiveOpacity = "1.0";
+    menuOpacity = "1.0";
+    opacityRules = [ "70:class_g = 'splash'" ];
 
     wintypes = {
       tooltip = {
@@ -32,25 +33,23 @@
         focus = true;
         full-shadow = true;
       };
-      dock = {shadow = false;};
-      dnd = {shadow = false;};
-      popup_menu = {opacity = 1;};
-      dropdown_menu = {opacity = 1;};
-      desktop = {full-shadow = false;};
-      normal = {full-shadow = false;};
+      dock = { shadow = false; };
+      dnd = { shadow = false; };
+      popup_menu = { opacity = 1; };
+      dropdown_menu = { opacity = 1; };
+      desktop = { full-shadow = false; };
+      normal = { full-shadow = false; };
     };
 
     settings = {
-      shadow-radius = 10;
+      shadow-radius = 40;
       shadow-color = "#000000";
       shadow-ignore-shaped = false;
+      shadow-opacity = ".55";
+      shadow-offset-x = "-40";
+      shadow-offset-y = "-20";
 
-      frame-opacity = 1.0;
-      inactive-opacity-override = false;
-      focus-exclude = [
-        "class_g = 'Peek'"
-        "class_g = 'Cairo-clock'"
-      ];
+      focus-exclude = [ "class_g = 'Peek'" "class_g = 'Cairo-clock'" ];
 
       corner-radius = 12;
       rounded-corners-exclude = [
@@ -61,8 +60,8 @@
 
       blur-method = "dual_kawase";
       blur-kernel = "11x11gaussian";
-      blur-deviation = 3.0;
-      blur-strength = 8;
+      blur-deviation = "1.0";
+      blur-strength = "8";
       blur-background = false;
       blur-background-frame = true;
       blur-background-fixed = true;
@@ -73,16 +72,25 @@
         "window_type = 'desktop'"
         "window_type = 'menu'"
       ];
+      # Opacity
+      inactive-opacity = 1;
+      frame-opacity = 1;
+      inactive-opacity-override = false;
+      active-opacity = 1.0;
+      inactive-dim = 0.0;
 
-      mark-wmwin-focused = true;
       mark-ovredir-focused = true;
-      detect-rounded-corners = true;
-      detect-client-opacity = true;
-      detect-transient = true;
-      detect-client-leader = true;
       glx-no-stencil = true;
       use-damage = true;
+      mark-wmwin-focused = true;
+      mark-oredir-focused = true;
+      detect-client-opacity = true;
+      detect-rounded-corners = true;
+      detect-transient = true;
+      detect-client-leader = true;
+      resize-damage = 1;
       transparent-clipping = false;
+
       log-level = "warn";
     };
   };

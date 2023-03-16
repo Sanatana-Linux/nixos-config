@@ -11,3 +11,5 @@ These are to-do items for this repository, which may have additional notes on ea
 - [ ] [Firefox Items](firefox.md)
 
 - [x] **2023-03-15** GIMP + GMIC  - while GMIC package doesn't work, gimp-with-plugins comes with GMIC installed, solving this issue finally. 
+
+- [x] **2023-03-16** User Fonts Added Reliably, Refactored `home-manager` fonts 

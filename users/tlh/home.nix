@@ -19,7 +19,7 @@ let
   # Integrate nur within Home-Manager
   nur = import (builtins.fetchTarball {
     url = "https://github.com/nix-community/NUR/archive/master.tar.gz";
-    sha256 = "0xyz48n6db8n8ws7prr4nv93979bmpmaxcx63rdk2maxaxkvpi28";
+    sha256 = "1pbkx3bd4vz7qmawz8pmd2k5ac4z702hc2aik4mg7bh11fpqfv4p";
 
   }) { inherit pkgs; };
 
@@ -66,7 +66,7 @@ in {
   '';
 
     # extra fonts
-  home.activation.installGTKConfig = ''
+  home.activation.installFontConfig = ''
     if [ ! -d "$HOME/.local/share/fonts" ]; then
       mkdir -p "$HOME/.local/share/fonts"
       ln -sf "/etc/nixos/modules/home/fonts" "$HOME/.local/share/fonts"

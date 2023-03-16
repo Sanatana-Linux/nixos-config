@@ -26,7 +26,7 @@ let
   colors = import ../../modules/home/theme/colors.nix { };
   base16-theme = import ../../modules/home/theme/base16.nix { };
 
-  home.extra-fonts = import ../../modules/home/fonts { };
+
 
 in {
   # User Name 
@@ -68,9 +68,9 @@ in {
     # extra fonts
   home.activation.installFontConfig = ''
     if [ ! -d "$HOME/.local/share/fonts" ]; then
-      mkdir -p "$HOME/.local/share/fonts"
-      ln -sf "/etc/nixos/modules/home/fonts" "$HOME/.local/share/fonts"
+      ln -sf "/etc/nixos/modules/home/fonts" "$HOME/.local/share/"
       chmod -R +w "$HOME/.local/share/fonts"
+      fc-cache -f
       fi
   '';
   #--------------------------------------------------#

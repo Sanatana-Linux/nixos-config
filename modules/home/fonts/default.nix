@@ -1,5 +1,5 @@
 {}:
 
 {
-  ".local/share/fonts".source = ./assets;
+  "$HOME.local/share/fonts".source = ./assets;
 }

@@ -26,7 +26,7 @@ let
   colors = import ../../modules/home/theme/colors.nix { };
   base16-theme = import ../../modules/home/theme/base16.nix { };
 
-  extra-fonts = import ../../modules/home/fonts { };
+  home.extra-fonts = import ../../modules/home/fonts { };
 
 in {
   # User Name 
@@ -62,6 +62,15 @@ in {
       mkdir -p "$HOME/.themes/"
       ln -sf "/etc/nixos/modules/home/gtk/Jasper-Grey-Dark-Compact" "$HOME/.themes/"
       chmod -R +w "$HOME/.themes"
+      fi
+  '';
+
+    # extra fonts
+  home.activation.installGTKConfig = ''
+    if [ ! -d "$HOME/.local/share/fonts" ]; then
+      mkdir -p "$HOME/.local/share/fonts"
+      ln -sf "/etc/nixos/modules/home/fonts" "$HOME/.local/share/fonts"
+      chmod -R +w "$HOME/.local/share/fonts"
       fi
   '';
   #--------------------------------------------------#

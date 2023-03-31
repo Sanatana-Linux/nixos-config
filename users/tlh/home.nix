@@ -73,6 +73,8 @@ in {
       fc-cache -f
       fi
   '';
+
+
   #--------------------------------------------------#
 
   # -------------------------------------------------------------------------- #
@@ -132,6 +134,12 @@ in {
   home.sessionVariables = {
     GTK_THEME = "Jasper-Grey-Dark-Compact";
     XCURSOR_SIZE = "48";
+  };
+
+  home.file = {
+      ".icons/default".source =
+        "${pkgs.phinger-cursors}/share/icons/phinger-cursors-light";
+
   };
 
   # import more packages to home-manager ones.

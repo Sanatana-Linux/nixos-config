@@ -4,9 +4,9 @@
     backend = "glx";
     vSync = true;
 
-    shadow = true;
-    shadowOffsets = [ (-10) (-10) ];
-    shadowOpacity = 0.35;
+    shadow = false;
+    shadowOffsets = [ (-1) (-1) ];
+    shadowOpacity = 0.15;
     shadowExclude = [
       "name = 'Notification'"
       "class_g = 'Conky'"

@@ -1,96 +1,102 @@
 { pkgs }:
 
 with pkgs; [
-  abootimg
-  android-file-transfer
-  android-udev-rules
-  apktool
-  arduino
-  bash
-  cargo
-  cava
-  cmake
-  deadnix
-  direnv
-  distrobox
-  efm-langserver
-  emacs
-  emacs-all-the-icons-fonts
-  ffmpeg
-  fnm
-  gcc
-  glib
-  gnumake
-  gnutls
-  go
-  gource
-  ispell
-  isync
-  libimobiledevice
-  libtool
-  lightningcss
-  lua
-  lua51Packages.luarocks-nix
-  lua52Packages.luarocks-nix
-  lua53Packages.luarocks-nix
-  lua54Packages.luarocks-nix
-  luajitPackages.luadbi-sqlite3
-  luajitPackages.luarocks-nix
-  luajitPackages.luasql-sqlite3
-  luajitPackages.sqlite
-  lynis
-  marksman
-  mu
-  ncdu
-  neovim
-  nil
-  nimble-unwrapped
-  nimlsp
-  nimPackages.nim
-  nix-tree
-  nixfmt
-  nixpkgs-fmt
-  nps
-  nodejs
-  nodePackages_latest.diagnostic-languageserver
-  nodePackages_latest.eslint
-  nodePackages_latest.gulp
-  nodePackages_latest.neovim
-  nodePackages.prettier
-  nvd
-  onefetch
-  openai-whisper
-  openjdk
-  pciutils
-  pipenv
-  pipx
-  postman
-  python310
-  python310Packages.pip
-  python310Packages.pynvim
-  python310Packages.python
-  python311
-  python311Packages.pip
-  python311Packages.pynvim
-  python311Packages.python
-  rnix-lsp
-  ruby
-  rustc
-  sass
-  sassc
-  shellcheck
-  sqlite
-  sqlite-utils
-  stylua
-  sublime4
-  tokei
-  tree-sitter
-  ueberzug
-  vim
-  vim-vint
-  vscode
-  wget
-  yarn
-  zeal
+abootimg
+android-file-transfer
+android-udev-rules
+apktool
+arduino
+bash
+black
+cargo
+cava
+cmake
+deadnix
+direnv
+distrobox
+efm-langserver
+emacs
+emacs-all-the-icons-fonts
+ffmpeg
+fnm
+gcc
+glib
+gnumake
+gnutls
+go
+gource
+ispell
+isync
+ktlint
+libimobiledevice
+libtool
+lightningcss
+lua
+lua51Packages.luarocks-nix
+lua52Packages.luarocks-nix
+lua53Packages.luarocks-nix
+lua54Packages.luarocks-nix
+luaFormatter
+luajitPackages.luadbi-sqlite3
+luajitPackages.luarocks-nix
+luajitPackages.luasql-sqlite3
+luajitPackages.sqlite
+lynis
+jupyter
+marksman
+mu
+ncdu
+neovim
+nil
+nimble-unwrapped
+nimlsp
+nimPackages.nim
+nix-tree
+nixfmt
+nixpkgs-fmt
+nodejs
+nodePackages_latest.diagnostic-languageserver
+nodePackages_latest.eslint
+nodePackages_latest.gulp
+nodePackages_latest.neovim
+nodePackages.prettier
+nps
+nvd
+onefetch
+openai-whisper
+openjdk
+pciutils
+pipenv
+pipx
+postman
+python310
+python310Packages.pip
+python310Packages.pynvim
+python310Packages.python
+python311
+python311Packages.pip
+python311Packages.pynvim
+python311Packages.python
+rnix-lsp
+ruby
+rustc
+rustfmt
+sass
+sassc
+shellcheck
+shfmt
+sqlite
+sqlite-utils
+stylua
+sublime4
+tokei
+tree-sitter
+ueberzug
+vim
+vim-vint
+vscode
+wget
+yarn
+zeal
 ]
 

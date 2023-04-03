@@ -43,6 +43,10 @@ luajitPackages.luasql-sqlite3
 luajitPackages.sqlite
 lynis
 jupyter
+python311Packages.openai
+python311Packages.python-dotenv
+python311Packages.ipython
+python311Packages.ipykernel
 marksman
 mu
 ncdu

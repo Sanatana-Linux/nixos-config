@@ -62,10 +62,10 @@ nodejs
 nodePackages_latest.diagnostic-languageserver
 nodePackages_latest.eslint
 python311Packages.notebook
-chatgpt-cli
 nodePackages_latest.gulp
 nodePackages_latest.neovim
 nodePackages.prettier
+openai-full
 nps
 nvd
 onefetch

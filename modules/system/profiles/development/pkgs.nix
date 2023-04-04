@@ -43,7 +43,6 @@ luajitPackages.luasql-sqlite3
 luajitPackages.sqlite
 lynis
 jupyter
-python311Packages.openai
 python311Packages.python-dotenv
 python311Packages.ipython
 python311Packages.ipykernel
@@ -74,10 +73,6 @@ pciutils
 pipenv
 pipx
 postman
-python310
-python310Packages.pip
-python310Packages.pynvim
-python310Packages.python
 python311
 python311Packages.pip
 python311Packages.pynvim

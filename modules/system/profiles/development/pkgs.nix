@@ -65,7 +65,6 @@ python311Packages.notebook
 nodePackages_latest.gulp
 nodePackages_latest.neovim
 nodePackages.prettier
-openai-full
 nps
 nvd
 onefetch

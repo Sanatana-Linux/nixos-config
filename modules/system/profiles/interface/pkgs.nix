@@ -17,6 +17,7 @@ gnome.gnome-themes-extra
 inotify-tools
 libdbusmenu
     ventoy-bin-full
+    lightlocker
 libgee
 libglibutil
 libgudev

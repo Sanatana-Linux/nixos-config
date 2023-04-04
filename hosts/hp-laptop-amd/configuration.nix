@@ -65,7 +65,7 @@ in {
 
   # unstable kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
-
+programs.zsh.enable = true;
   # time zone
   time.timeZone = "America/Los_Angeles";
 
@@ -85,7 +85,7 @@ in {
     defaultSession = "none+awesome";
     lightdm = {
       enable = true;
-      greeters.mini.enable = true;
+      greeters.gtk.enable = true;
     };
     autoLogin = {
       enable = true;

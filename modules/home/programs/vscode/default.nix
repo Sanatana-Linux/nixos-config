@@ -49,6 +49,7 @@
       mads-hartmann.bash-ide-vscode
       streetsidesoftware.code-spell-checker
       christian-kohler.path-intellisense
+      ms-toolsai.jupyter
 
     ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
       {

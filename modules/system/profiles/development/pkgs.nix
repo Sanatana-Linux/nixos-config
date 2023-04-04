@@ -42,10 +42,6 @@ luajitPackages.luarocks-nix
 luajitPackages.luasql-sqlite3
 luajitPackages.sqlite
 lynis
-jupyter
-python311Packages.python-dotenv
-python311Packages.ipython
-python311Packages.ipykernel
 marksman
 mu
 ncdu
@@ -60,7 +56,6 @@ nixpkgs-fmt
 nodejs
 nodePackages_latest.diagnostic-languageserver
 nodePackages_latest.eslint
-python311Packages.notebook
 nodePackages_latest.gulp
 nodePackages_latest.neovim
 nodePackages.prettier
@@ -77,6 +72,11 @@ python311
 python311Packages.pip
 python311Packages.pynvim
 python311Packages.python
+python311Packages.notebook
+python311Packages.ipykernel
+python311Packages.ipython
+python311Packages.python-dotenv
+python311Packages.jupyter
 rnix-lsp
 ruby
 rustc

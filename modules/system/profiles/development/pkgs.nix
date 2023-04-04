@@ -10,6 +10,7 @@ android-udev-rules
 apktool
 arduino
 bash
+bfg-repo-cleaner
 black
 cargo
 cava

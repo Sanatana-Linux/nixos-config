@@ -13,6 +13,7 @@ with pkgs; [
   gimpPlugins.resynthesizer
   gimpPlugins.texturize
   gimpPlugins.waveletSharpen
+  metadata-cleaner
   giph
   graphicsmagick
   image_optim

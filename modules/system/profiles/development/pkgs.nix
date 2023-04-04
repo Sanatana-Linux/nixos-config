@@ -16,6 +16,7 @@ cargo
 cava
 cmake
 deadnix
+devbox
 direnv
 distrobox
 efm-langserver

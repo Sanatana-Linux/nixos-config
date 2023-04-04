@@ -3,6 +3,9 @@
 with pkgs; [
 abootimg
 android-file-transfer
+android-backup-extractor
+android-tools
+apksigcopier
 android-udev-rules
 apktool
 arduino
@@ -62,7 +65,6 @@ nodePackages.prettier
 nps
 nvd
 onefetch
-openai-whisper
 openjdk
 pciutils
 pipenv
@@ -75,6 +77,10 @@ python311Packages.python
 python311Packages.notebook
 python311Packages.ipykernel
 python311Packages.ipython
+python311Packages.setuptoolsBuildHook
+python311Packages.wheelUnpackHook
+python311Packages.youtube-transcript-api
+python311Packages.numpy
 python311Packages.python-dotenv
 python311Packages.jupyter
 rnix-lsp

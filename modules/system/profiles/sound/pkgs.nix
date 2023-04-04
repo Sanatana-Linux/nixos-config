@@ -1,11 +1,12 @@
 { pkgs }:
 
 with pkgs; [
+alsaequal
 alsa-tools
 alsa-utils
 audacity
-easyeffects
 lmms
+pulseeffects-legacy
 mediainfo
 mpc_cli
 mpd

@@ -19,7 +19,6 @@
       "editor.defaultFormatter" = "Koihik.vscode-lua-format";
       "vscode-lua-format.binaryPath" = "${pkgs.luaFormatter}/bin/lua-format";
       "vscode-lua-format.configPath" = "${config.xdg.configHome}/LuaFormatter.cfg";
-      "window.menuBarVisibility" = "toggle";
       "editor.tabSize" = 2;
       "editor.inlineSuggest.enabled" = true;
       "[python]"."editor.tabSize" = 4;

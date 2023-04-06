@@ -8,7 +8,7 @@ with pkgs; [
   docker-compose
   docker-gc
   docker-slim
-  # virtualboxWithExtpack # takes too damn long to buildz
+  # virtualboxWithExtpack # takes too damn long to build
   qemu_full
   virt-manager
   x11docker

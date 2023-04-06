@@ -29,7 +29,7 @@ let
 
 
 in {
-  # User Name 
+  # User Name
   home.username = "tlh";
   home.homeDirectory = "/home/tlh";
   # DO NOT CHANGE THIS apparently
@@ -97,6 +97,7 @@ in {
 
     # gtk configuration
     (import ../../modules/home/profiles/desktop)
+    (import ../../modules/home/profiles/awesomewm)
     # (import ./theme/nvim { inherit colors; })
   ];
 
@@ -105,7 +106,7 @@ in {
 
   # -------------------------------------------------------------------------- #
   # Let Home Manager install and manage itself.
-  # 
+  #
   programs.home-manager.enable = true;
 
   # services

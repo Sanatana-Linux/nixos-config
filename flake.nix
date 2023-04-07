@@ -14,7 +14,6 @@
   ];
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-
     utils.url = "github:numtide/flake-utils";
 
     home-manager = {
@@ -52,10 +51,14 @@
   outputs = { self, nixpkgs, home-manager, nixpkgs-f2k, luaFormatter, nps
     , nixos-hardware, ... }@inputs:
     let
+      inherit (self) outputs;
+      forSystems = nixpkgs.lib.genAttrs nixpkgs.lib.systems.flakeExposed;
       system = "x86_64-linux";
 
-      pkgs = nixpkgs.legacyPackages.${system};
-
+     # pkgs = nixpkgs.legacyPackages.${system};
+      pkgs = import nixpkgs {
+        inherit system;
+      };
       config = {
         system = system;
         allowUnfree = true;

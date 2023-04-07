@@ -27,7 +27,10 @@ xdg-desktop-portal-gtk
 xdotool
 xfce.exo
 xfce.libxfce4ui
-xfce.thunar
+xfce.thunar-bare
+xfce.thunar-archive-plugin
+xfce.thunar-media-tags-plugin
+xfce.thunar-volman
 xfce.xfce4-settings
 xfce.xfconf
 xlsfonts

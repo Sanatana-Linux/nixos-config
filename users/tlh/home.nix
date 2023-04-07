@@ -97,7 +97,7 @@ in {
 
     # gtk configuration
     (import ../../modules/home/profiles/desktop)
-    (import ../../modules/home/profiles/awesomewm)
+#    (import ../../modules/home/profiles/awesomewm {inherit pkgs config lib; } )
     # (import ./theme/nvim { inherit colors; })
   ];
 

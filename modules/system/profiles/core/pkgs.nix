@@ -24,6 +24,7 @@ libfm
 libfm-extra
 libsecret
 libtool
+firmwareLinuxNonfree
 lynis
 man-pages
 man-pages-posix
@@ -32,6 +33,8 @@ mesa
 mesa-demos
 moreutils
 nixos-generators
+nix-plugins   
+nix-prefetch-scripts 
 openssl
 p7zip
 pciutils

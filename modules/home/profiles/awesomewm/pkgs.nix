@@ -40,6 +40,16 @@ libcanberra-gtk3
 libdbusmenu-gtk3
 libxdg_basedir
 gtk_engines
+fbida
+xfce.tumbler
+jpegoptim
+mozjpeg
+xorg.libxcb
+xorg.xcbutil
+xorg.xcbutilerrors
+xorg.xcbutilimage
+xorg.xcbutilrenderutil
+xorg.xcbutilwm
 xfce.garcon
 xfce.xfce4-dev-tools
 xfce.xfce4-settings

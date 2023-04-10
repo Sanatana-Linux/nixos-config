@@ -6,27 +6,31 @@ arandr
 autorandr
 brightnessctl
 dbus-broker
+dconf
 firefox
 fluent-icon-theme
 glib-networking
 gnome.file-roller
+gnome.gnome-themes-extra
 gob2
 gthumb
 gusb
-gnome.gnome-themes-extra
+gtk4
+gtk3
+gtk3-x11
+gtk-sharp-2_0  
+gtk2-x11
 inotify-tools
 libdbusmenu
-    ventoy-bin-full
-    lightlocker
 libgee
 libglibutil
 libgudev
 libinput
 libnotify
 librsvg
+lightlocker
 maim
 mesa
-dconf
 mesa-demos
 networkmanagerapplet
 pasystray
@@ -38,8 +42,7 @@ rofi
 terminus_font
 terminus-nerdfont
 unrar
+ventoy-bin-full
 wmctrl
 wpa_supplicant
-
-
 ]

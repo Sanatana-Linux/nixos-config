@@ -2,11 +2,11 @@
 
 with pkgs; [
 abootimg
-android-file-transfer
 android-backup-extractor
+android-file-transfer
 android-tools
-apksigcopier
 android-udev-rules
+apksigcopier
 apktool
 arduino
 bash
@@ -48,6 +48,7 @@ luajitPackages.luasql-sqlite3
 luajitPackages.sqlite
 lynis
 marksman
+mdbook
 mu
 ncdu
 neovim
@@ -68,23 +69,25 @@ nps
 nvd
 onefetch
 openjdk
+pandoc
+pandoc-lua-filters
 pciutils
 pipenv
 pipx
 postman
 python311
+python311Packages.ipykernel
+python311Packages.ipython
+python311Packages.jupyter
+python311Packages.notebook
+python311Packages.numpy
 python311Packages.pip
 python311Packages.pynvim
 python311Packages.python
-python311Packages.notebook
-python311Packages.ipykernel
-python311Packages.ipython
+python311Packages.python-dotenv
 python311Packages.setuptoolsBuildHook
 python311Packages.wheelUnpackHook
 python311Packages.youtube-transcript-api
-python311Packages.numpy
-python311Packages.python-dotenv
-python311Packages.jupyter
 rnix-lsp
 ruby
 rustc

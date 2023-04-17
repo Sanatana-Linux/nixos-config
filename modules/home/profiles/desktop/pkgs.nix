@@ -17,7 +17,6 @@ luakit
 networkmanagerapplet
 nicotine-plus
 obs-studio
-obsidian
 phinger-cursors
 rclone-browser
 tdesktop

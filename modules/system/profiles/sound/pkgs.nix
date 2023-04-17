@@ -1,12 +1,16 @@
 { pkgs }:
 
 with pkgs; [
-alsaequal
+alsa-firmware
+alsa-lib
+alsa-oss
+alsa-plugins
 alsa-tools
 alsa-utils
+alsaequal
 audacity
+cava
 lmms
-pulseeffects-legacy
 mediainfo
 mpc_cli
 mpd
@@ -16,16 +20,15 @@ mpdevil
 mpv
 ncmpcpp
 pamixer
-pamixer
 pavucontrol
 picard
 playerctl
 psmisc
 pulseaudio
+pulseeffects-legacy
 pulsemixer
 python310Packages.deemix
 scdl
-spotify
 spotify
 vlc
 zyn-fusion

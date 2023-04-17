@@ -82,7 +82,7 @@ html#main-window body box toolbox#navigator-toolbox toolbar#nav-bar.browser-tool
 #main-window[tabsintitlebar] #toolbar-menubar[autohide=true]:not([inactive=true]) ~ #TabsToolbar {
   margin-top: 4px!important
 }
-#main-window[tabsintitlebar] #PanelUI-button {
+#main-window[tabsintitlebar] #PanelUI-button #unified-extensions-button {
   -moz-appearance: none!important;
   -moz-box-ordinal-group: 0!important;
   position: fixed!important;
@@ -203,8 +203,7 @@ html#main-window body box toolbox#navigator-toolbox toolbar#nav-bar.browser-tool
 #main-window[tabsintitlebar] #PanelUI-button > :not(#PanelUI-menu-button) {
   display: none!important
 }
-#main-window[tabsintitlebar]:not([uidensity=compact]):not([uidensity=touch]) #PanelUI-menu-button .toolbarbutton-badge-stack,
-#main-window[tabsintitlebar]:not([uidensity=compact]):not([uidensity=touch]) #PanelUI-menu-button .toolbarbutton-icon,
+#main-window[tabsintitlebar]:not([uidensity=compact]):not([uidensity=touch]) #PanelUI-menu-button .toolbarbutton-badge-stack, #unified-extensions-button, #main-window[tabsintitlebar]:not([uidensity=compact]):not([uidensity=touch]) #PanelUI-menu-button .toolbarbutton-icon,
 #main-window[tabsintitlebar][uidensity=compact] #PanelUI-menu-button .toolbarbutton-badge-stack,
 #main-window[tabsintitlebar][uidensity=compact] #PanelUI-menu-button .toolbarbutton-icon,
 #main-window[tabsintitlebar][uidensity=touch] #PanelUI-menu-button .toolbarbutton-badge-stack,

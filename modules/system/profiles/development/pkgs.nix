@@ -7,7 +7,6 @@ android-file-transfer
 android-tools
 android-udev-rules
 apksigcopier
-apktool
 arduino
 bash
 bfg-repo-cleaner

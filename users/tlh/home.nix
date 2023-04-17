@@ -26,14 +26,9 @@ let
   colors = import ../../modules/home/theme/colors.nix { };
   base16-theme = import ../../modules/home/theme/base16.nix { };
 
-
-
 in {
   # User Name
-  home.username = "tlh";
-  home.homeDirectory = "/home/tlh";
-  # DO NOT CHANGE THIS apparently
-  home.stateVersion = "22.05";
+
   # Declare Themes
   theme.base16.colors = base16-theme;
 
@@ -65,7 +60,7 @@ in {
       fi
   '';
 
-    # extra fonts
+  # extra fonts
   home.activation.installFontConfig = ''
     if [ ! -d "$HOME/.local/share/fonts" ]; then
       ln -sf "/etc/nixos/modules/home/fonts" "$HOME/.local/share/"
@@ -73,7 +68,6 @@ in {
       fc-cache -f
       fi
   '';
-
 
   #--------------------------------------------------#
 
@@ -97,7 +91,7 @@ in {
 
     # gtk configuration
     (import ../../modules/home/profiles/desktop)
-#    (import ../../modules/home/profiles/awesomewm {inherit pkgs config lib; } )
+    #    (import ../../modules/home/profiles/awesomewm {inherit pkgs config lib; } )
     # (import ./theme/nvim { inherit colors; })
   ];
 
@@ -109,48 +103,37 @@ in {
   #
   programs.home-manager.enable = true;
 
-  # services
-  services.playerctld.enable = true;
-
-  # editor (nvim)
-  systemd.user.sessionVariables.EDITOR = "nvim";
-
-  # bat (cat clone)
-  programs.bat = {
-    enable = true;
-    config = {
-      paging = "never";
-      style = "plain";
-      theme = "base16";
-    };
-  };
-
   # enable unfree packages (again, just to be sure)
   nixpkgs.config.allowUnfree = true;
 
-  # add support for .local/bin
-  home.sessionPath = [ "$HOME/.local/bin" ];
+  home = {
+    username = "tlh";
+    homeDirectory = "/home/tlh";
+    # DO NOT CHANGE THIS apparently
+    stateVersion = "22.05";
+    # add support for .local/bin
+    sessionPath = [ "$HOME/.local/bin" ];
 
-  # cursor size (again) through sessionVariables
-  home.sessionVariables = {
-    GTK_THEME = "Jasper-Grey-Dark-Compact";
-    XCURSOR_SIZE = "48";
-  };
+    # cursor size (again) through sessionVariables
+    sessionVariables = {
+      GTK_THEME = "Jasper-Grey-Dark-Compact";
+      XCURSOR_SIZE = "48";
+    };
 
-  home.file = {
+    file = {
       ".icons/default".source =
         "${pkgs.phinger-cursors}/share/icons/phinger-cursors-light";
 
+    };
+
+    # import more packages to home-manager ones.
+    packages = awesomewm-packages ++ desktop-packages ++ images-packages
+      ++ (with pkgs; [
+        extract
+        nux
+        run
+        ueberzug
+
+      ]);
   };
-
-  # import more packages to home-manager ones.
-  home.packages = awesomewm-packages ++ desktop-packages ++ images-packages
-    ++ (with pkgs; [
-      extract
-      nux
-      run
-      ueberzug
-
-    ]);
-
 }

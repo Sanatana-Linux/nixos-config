@@ -87,10 +87,10 @@ programs.zsh.enable = true;
       enable = true;
       greeters.gtk.enable = true;
     };
-    autoLogin = {
-      enable = true;
-      user = "tlh";
-    };
+    #autoLogin = {
+    #  enable = true;
+    #  user = "tlh";
+    #};
   };
 
   # Defines my account, on first boot I change the passwd as root, don't worry!

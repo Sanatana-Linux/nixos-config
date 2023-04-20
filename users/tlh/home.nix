@@ -4,6 +4,7 @@ let
 
   # Script Construction (must be included with the packages below)
   run = import ../../modules/home/bin/run.nix { inherit pkgs; };
+  gita = import ../../modules/home/bin/gita { inherit pkgs; };
   nux = import ../../modules/home/bin/nux.nix { inherit pkgs; };
   extract = import ../../modules/home/bin/extract.nix { inherit pkgs; };
 
@@ -132,6 +133,7 @@ in {
         extract
         nux
         run
+        gita
         ueberzug
 
       ]);

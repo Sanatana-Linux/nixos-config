@@ -52,6 +52,7 @@ squashfsTools
 squashfuse
 tbb
 tealdeer
+toybox
 trash-cli
 unrar
 unzip

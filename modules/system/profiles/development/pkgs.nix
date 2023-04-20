@@ -87,6 +87,7 @@ python311Packages.python-dotenv
 python311Packages.setuptoolsBuildHook
 python311Packages.wheelUnpackHook
 python311Packages.youtube-transcript-api
+python311Packages.huggingface-hub 
 rnix-lsp
 ruby
 rustc

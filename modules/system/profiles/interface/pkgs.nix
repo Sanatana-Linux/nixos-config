@@ -42,7 +42,7 @@ rofi
 terminus_font
 terminus-nerdfont
 unrar
-ventoy-bin-full
+ventoy-full
 wmctrl
 wpa_supplicant
 ]

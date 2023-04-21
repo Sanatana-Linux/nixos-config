@@ -1,11 +1,7 @@
 { config, pkgs }:
 
 {
-  home.packages = with pkgs; [
-    luaFormatter
-  ];
-
-  programs.vscode = {
+   programs.vscode = {
     enable = true;
     userSettings = {
       "workbench.colorTheme" = "Xresources Bordered Theme";
@@ -30,7 +26,6 @@
       bbenoist.nix
       esbenp.prettier-vscode
       naumovs.color-highlight
-      svelte.svelte-vscode
       sumneko.lua
       stkb.rewrap
       spywhere.guides
@@ -44,19 +39,19 @@
       coolbear.systemd-unit-file
       brettm12345.nixfmt-vscode
       formulahendry.auto-close-tag
-      alefragnani.project-manager
       mads-hartmann.bash-ide-vscode
       streetsidesoftware.code-spell-checker
       christian-kohler.path-intellisense
-      ms-toolsai.jupyter
-
+      golang.go
+      usernamehw.errorlens
+      bbenoist.nix   
+      formulahendry.auto-close-tag 
+      formulahendry.auto-rename-tag
+      irongeek.vscode-env
+      jnoortheen.nix-ide   
+      jock.svg 
+      
     ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-      {
-        name = "volar";
-        publisher = "vue";
-        version = "1.0.12";
-        sha256 = "sha256-D9E3KRUOlNVXH4oMv1W0+/mbqO8Se7+6E2F5P/KvCro=";
-      }
       {
         name = "material-icon-theme";
         publisher = "pkief";
@@ -71,14 +66,4 @@
       }
     ];
   };
-
-  xdg.configFile."LuaFormatter.cfg".text = ''
-    indent_width: 2
-    use_tab: false
-    keep_simple_control_block_one_line: false
-    keep_simple_function_one_line: false
-    single_quote_to_double_quote: true
-    chop_down_table: true
-    chop_down_kv_table: true
-  '';
 }

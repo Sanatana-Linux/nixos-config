@@ -1,6 +1,7 @@
 { pkgs }:
 
 with pkgs; [
+as-tree   
 binutils
 bottom
 cmake
@@ -52,8 +53,10 @@ squashfsTools
 squashfuse
 tbb
 tealdeer
+busybox
 toybox
 trash-cli
+tree
 unrar
 unzip
 usbmuxd

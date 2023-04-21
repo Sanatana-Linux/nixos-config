@@ -6,7 +6,7 @@
 { config, pkgs, lib, ... }:
 
 let
-
+awesomewm-packages = import ../../modules/home/profiles/awesomewm/pkgs.nix { inherit pkgs; };
   core-packages = import ../../modules/system/profiles/core/pkgs.nix { inherit pkgs; };
 
   development-packages =
@@ -40,6 +40,7 @@ in {
     ../../modules/system/profiles/fonts
     ../../modules/system/profiles/development
     ../../modules/system/profiles/interface
+    ../../modules/system/profiles/awesomewm
     ../../modules/system/profiles/networking
     ../../modules/system/profiles/shell
     ../../modules/system/profiles/sound
@@ -81,17 +82,9 @@ programs.zsh.enable = true;
   services.blueman.enable = true;
   #  services.xserver.displayManager.startx.enable = true;
   #services.xserver.displayManager.lightdm.enable = true;
-  services.xserver.displayManager = {
-    defaultSession = "none+awesome";
-    lightdm = {
-      enable = true;
-      greeters.gtk.enable = true;
-    };
-    #autoLogin = {
-    #  enable = true;
-    #  user = "tlh";
-    #};
-  };
+ 
+
+
 
   # Defines my account, on first boot I change the passwd as root, don't worry!
   users.users.tlh = {
@@ -104,17 +97,10 @@ programs.zsh.enable = true;
   # Just not hardcore enough I guess, this makes NixOS much less painful
   users.mutableUsers = true;
 
-  services.xserver.windowManager.awesome = {
-    enable = true;
-    luaModules = lib.attrValues {
-      inherit (pkgs.luaPackages)
-        cjson dkjson ldbus luasec lgi ldoc lpeg luadbi-mysql luaposix argparse
-        vicious;
-    };
-  };
+  
 
   # List packages installed in system profile. 
-  environment.systemPackages = core-packages ++ development-packages
+  environment.systemPackages = awesomewm-packages ++ core-packages ++ development-packages
     ++ interface-packages ++ laptop-packages ++ networking-packages
     ++ shell-packages ++ sound-packages ++ virtualisation-packages
     ++ (with pkgs;

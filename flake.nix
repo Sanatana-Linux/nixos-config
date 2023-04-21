@@ -55,10 +55,8 @@
       forSystems = nixpkgs.lib.genAttrs nixpkgs.lib.systems.flakeExposed;
       system = "x86_64-linux";
 
-     # pkgs = nixpkgs.legacyPackages.${system};
-      pkgs = import nixpkgs {
-        inherit system;
-      };
+      # pkgs = nixpkgs.legacyPackages.${system};
+      pkgs = import nixpkgs { inherit system; };
       config = {
         system = system;
         allowUnfree = true;
@@ -72,7 +70,10 @@
         (final: _:
           let inherit (final) system;
           in { } // (with nixpkgs-f2k.packages.${system}; {
+            awesome-git = prev.awesome-git.override { lua = prev.luajit; };
+
             awesome = awesome-git;
+
             picom = picom-git;
           }) // {
             luaFormatter-src = luaFormatter;
@@ -90,7 +91,8 @@
     in {
       nixosConfigurations = {
         hp-laptop-amd = import ./hosts/hp-laptop-amd {
-          inherit config nixpkgs overlays lib inputs system home-manager;
+          inherit config nixpkgs overlays lib inputs system home-manager
+            nixos-hardware;
         };
         live-usb = import ./hosts/live-usb {
           inherit config nixpkgs overlays lib inputs system home-manager;

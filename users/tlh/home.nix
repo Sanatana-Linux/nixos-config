@@ -14,8 +14,7 @@ let
   desktop-packages =
     import ../../modules/home/profiles/desktop/pkgs.nix { inherit pkgs; };
 
-  awesomewm-packages =
-    import ../../modules/home/profiles/awesomewm/pkgs.nix { inherit pkgs; };
+  
 
   # Integrate nur within Home-Manager
   nur = import (builtins.fetchTarball {
@@ -128,7 +127,7 @@ in {
     };
 
     # import more packages to home-manager ones.
-    packages = awesomewm-packages ++ desktop-packages ++ images-packages
+    packages = desktop-packages ++ images-packages
       ++ (with pkgs; [
         extract
         nux

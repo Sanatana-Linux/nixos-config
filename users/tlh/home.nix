@@ -14,19 +14,20 @@ let
   desktop-packages =
     import ../../modules/home/profiles/desktop/pkgs.nix { inherit pkgs; };
 
-  
-
   # Integrate nur within Home-Manager
-  nur = import (builtins.fetchTarball {
-    url = "https://github.com/nix-community/NUR/archive/master.tar.gz";
-    sha256 = "10n68cminhvwhmawfaspalkn601zrnzkzys7hvq2ri1l78bamz39";
+  nur = import
+    (builtins.fetchTarball {
+      url = "https://github.com/nix-community/NUR/archive/master.tar.gz";
+      sha256 = "10n68cminhvwhmawfaspalkn601zrnzkzys7hvq2ri1l78bamz39";
 
-  }) { inherit pkgs; };
+    })
+    { inherit pkgs; };
 
   colors = import ../../modules/home/theme/colors.nix { };
   base16-theme = import ../../modules/home/theme/base16.nix { };
 
-in {
+in
+{
   # User Name
 
   # Declare Themes
@@ -123,17 +124,10 @@ in {
     file = {
       ".icons/default".source =
         "${pkgs.phinger-cursors}/share/icons/phinger-cursors-light";
-
     };
 
     # import more packages to home-manager ones.
     packages = desktop-packages ++ images-packages
-      ++ (with pkgs; [
-        extract
-        nux
-        run
-        gita
-        ueberzug
-      ]);
+      ++ (with pkgs; [ extract nux run gita ueberzug ]);
   };
 }

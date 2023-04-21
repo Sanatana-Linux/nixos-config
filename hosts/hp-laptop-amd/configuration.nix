@@ -1,12 +1,6 @@
-# vim:tabstop=2 shiftwidth=2 expandtab
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, lib, ... }:
 
 let
-awesomewm-packages = import ../../modules/home/profiles/awesomewm/pkgs.nix { inherit pkgs; };
   core-packages = import ../../modules/system/profiles/core/pkgs.nix { inherit pkgs; };
 
   development-packages =
@@ -32,7 +26,6 @@ awesomewm-packages = import ../../modules/home/profiles/awesomewm/pkgs.nix { inh
   virtualisation-packages =
     import ../../modules/system/profiles/virtualisation/pkgs.nix { inherit pkgs; };
 
-  material-symbols = pkgs.callPackage ../../pkgs/material-symbols.nix { };
 
 in {
   imports = [
@@ -40,7 +33,6 @@ in {
     ../../modules/system/profiles/fonts
     ../../modules/system/profiles/development
     ../../modules/system/profiles/interface
-    ../../modules/system/profiles/awesomewm
     ../../modules/system/profiles/networking
     ../../modules/system/profiles/shell
     ../../modules/system/profiles/sound
@@ -73,17 +65,55 @@ programs.zsh.enable = true;
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  #  services.xserver.videoDrivers = [ "xorg.xf86amdgpu" ];
+    # Enable the X11 windowing system.
+ 	services.xserver = {
+		enable = true;
+		exportConfiguration = true;
+    dpi = 96;
+		libinput.enable = true;
+	};
 
-  services.xserver.dpi = 96;
 
   services.blueman.enable = true;
-  #  services.xserver.displayManager.startx.enable = true;
-  #services.xserver.displayManager.lightdm.enable = true;
- 
 
+ services.xserver.displayManager = {
+    defaultSession = "none+awesome";
+    lightdm = {
+      enable = true;
+       	enable = true;
+				background = ../modules/system/programs/lightdm/wallpaper.png;
+				greeters.gtk = {
+					enable = true;
+					theme = {
+						package = pkgs.orchis-theme;
+						name="Orchis-Dark";
+					};
+					cursorTheme = {
+						package = pkgs.phinger-cursors;
+						name = "Phinger Cursors (light)";
+					};
+					iconTheme = {
+						package = pkgs.fluent-icon-theme;
+						name = "Fluent-dark";
+					};
+					indicators = [ "~session" "~spacer" ];
+				};
+    };
+    #autoLogin = {
+    #  enable = true;
+    #  user = "tlh";
+    #};
+  };
+
+  services.xserver.xautolock.enable = true;
+  services.xserver.windowManager.awesome = {
+    enable = true;
+    luaModules = lib.attrValues {
+      inherit (pkgs.luaPackages)
+        cjson dkjson  ldbus luasec lgi ldoc lpeg lpeg_patterns luafilesystem  luasocket luasystem stdlib luaposix argparse
+        vicious;
+    };
+  };
 
 
   # Defines my account, on first boot I change the passwd as root, don't worry!
@@ -100,11 +130,12 @@ programs.zsh.enable = true;
   
 
   # List packages installed in system profile. 
-  environment.systemPackages = awesomewm-packages ++ core-packages ++ development-packages
+  environment.systemPackages =  core-packages ++ development-packages
     ++ interface-packages ++ laptop-packages ++ networking-packages
     ++ shell-packages ++ sound-packages ++ virtualisation-packages
     ++ (with pkgs;
       [
+        awesome-git
         home-manager
 
       ]);

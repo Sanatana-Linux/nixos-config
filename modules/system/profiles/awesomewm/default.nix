@@ -19,7 +19,7 @@
     enable = true;
     luaModules = lib.attrValues {
       inherit (pkgs.luajitPackages)
-        cjson dkjson ldbus luasec lgi ldoc lpeg luadbi-mysql luaposix argparse
+        cjson dkjson ldbus luasec lgi ldoc lpeg lpeg_patterns luafilesystem  luasocket luasystem stdlib  luadbi-mysql luaposix argparse
         vicious;
     };
   };

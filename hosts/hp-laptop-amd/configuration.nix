@@ -1,7 +1,8 @@
 { config, pkgs, lib, ... }:
 
 let
-  core-packages = import ../../modules/system/profiles/core/pkgs.nix { inherit pkgs; };
+  core-packages =
+    import ../../modules/system/profiles/core/pkgs.nix { inherit pkgs; };
 
   development-packages =
     import ../../modules/system/profiles/development/pkgs.nix { inherit pkgs; };
@@ -9,23 +10,29 @@ let
   interface-packages =
     import ../../modules/system/profiles/interface/pkgs.nix { inherit pkgs; };
 
-  fonts-packages = import ../../modules/system/profiles/fonts/pkgs.nix { inherit pkgs; };
+  fonts-packages =
+    import ../../modules/system/profiles/fonts/pkgs.nix { inherit pkgs; };
 
-  laptop-packages = pkgs.callPackage ../../modules/system/profiles/core/laptop/pkgs.nix {
-    inherit pkgs;
-  };
+  laptop-packages =
+    pkgs.callPackage ../../modules/system/profiles/core/laptop/pkgs.nix {
+      inherit pkgs;
+    };
 
   networking-packages =
     import ../../modules/system/profiles/networking/pkgs.nix { inherit pkgs; };
 
   shell-packages =
-    pkgs.callPackage ../../modules/system/profiles/shell/pkgs.nix { inherit pkgs; };
+    pkgs.callPackage ../../modules/system/profiles/shell/pkgs.nix {
+      inherit pkgs;
+    };
 
-  sound-packages = import ../../modules/system/profiles/sound/pkgs.nix { inherit pkgs; };
+  sound-packages =
+    import ../../modules/system/profiles/sound/pkgs.nix { inherit pkgs; };
 
   virtualisation-packages =
-    import ../../modules/system/profiles/virtualisation/pkgs.nix { inherit pkgs; };
-
+    import ../../modules/system/profiles/virtualisation/pkgs.nix {
+      inherit pkgs;
+    };
 
 in {
   imports = [
@@ -58,46 +65,44 @@ in {
 
   # unstable kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
-programs.zsh.enable = true;
+  programs.zsh.enable = true;
   # time zone
   time.timeZone = "America/Los_Angeles";
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
-    # Enable the X11 windowing system.
- 	services.xserver = {
-		enable = true;
-		exportConfiguration = true;
+  # Enable the X11 windowing system.
+  services.xserver = {
+    enable = true;
+    exportConfiguration = true;
     dpi = 96;
-		libinput.enable = true;
-	};
-
+    libinput.enable = true;
+  };
 
   services.blueman.enable = true;
 
- services.xserver.displayManager = {
+  services.xserver.displayManager = {
     defaultSession = "none+awesome";
     lightdm = {
       enable = true;
-       	enable = true;
-				background = ../modules/system/programs/lightdm/wallpaper.png;
-				greeters.gtk = {
-					enable = true;
-					theme = {
-						package = pkgs.orchis-theme;
-						name="Orchis-Dark";
-					};
-					cursorTheme = {
-						package = pkgs.phinger-cursors;
-						name = "Phinger Cursors (light)";
-					};
-					iconTheme = {
-						package = pkgs.fluent-icon-theme;
-						name = "Fluent-dark";
-					};
-					indicators = [ "~session" "~spacer" ];
-				};
+      background = ../modules/system/programs/lightdm/wallpaper.png;
+      greeters.gtk = {
+        enable = true;
+        theme = {
+          package = pkgs.orchis-theme;
+          name = "Orchis-Dark";
+        };
+        cursorTheme = {
+          package = pkgs.phinger-cursors;
+          name = "Phinger Cursors (light)";
+        };
+        iconTheme = {
+          package = pkgs.fluent-icon-theme;
+          name = "Fluent-dark";
+        };
+        indicators = [ "~session" "~spacer" ];
+      };
     };
     #autoLogin = {
     #  enable = true;
@@ -110,11 +115,10 @@ programs.zsh.enable = true;
     enable = true;
     luaModules = lib.attrValues {
       inherit (pkgs.luaPackages)
-        cjson dkjson  ldbus luasec lgi ldoc lpeg lpeg_patterns luafilesystem  luasocket luasystem stdlib luaposix argparse
-        vicious;
+        cjson dkjson ldbus luasec lgi ldoc lpeg lpeg_patterns luafilesystem
+        luasocket luasystem stdlib luaposix argparse vicious;
     };
   };
-
 
   # Defines my account, on first boot I change the passwd as root, don't worry!
   users.users.tlh = {
@@ -127,18 +131,15 @@ programs.zsh.enable = true;
   # Just not hardcore enough I guess, this makes NixOS much less painful
   users.mutableUsers = true;
 
-  
-
   # List packages installed in system profile. 
-  environment.systemPackages =  core-packages ++ development-packages
+  environment.systemPackages = core-packages ++ development-packages
     ++ interface-packages ++ laptop-packages ++ networking-packages
     ++ shell-packages ++ sound-packages ++ virtualisation-packages
-    ++ (with pkgs;
-      [
-        awesome-git
-        home-manager
+    ++ (with pkgs; [
+      awesome-git
+      home-manager
 
-      ]);
+    ]);
 
   system.stateVersion = "22.05";
 

@@ -52,16 +52,7 @@ in
       ln -s "$HOME/.zsh/zshenv" "$HOME/.zshenv"
     fi
   '';
-  # Enable GTK theme
-  home.activation.installGTKConfig = ''
-    if [ ! -d "$HOME/.themes/Jasper-Gray-Dark-Compact" ]; then
-      mkdir -p "$HOME/.themes/"
-      ln -sf "/etc/nixos/modules/home/gtk/Jasper-Grey-Dark-Compact" "$HOME/.themes/"
-      chmod -R +w "$HOME/.themes"
-      fi
-  '';
-
-  # extra fonts
+   # extra fonts
   home.activation.installFontConfig = ''
     if [ ! -d "$HOME/.local/share/fonts" ]; then
       ln -sf "/etc/nixos/modules/home/fonts" "$HOME/.local/share/"
@@ -117,7 +108,7 @@ in
 
     # cursor size (again) through sessionVariables
     sessionVariables = {
-      GTK_THEME = "Jasper-Grey-Dark-Compact";
+      GTK_THEME = "Colloid-Dark";
       XCURSOR_SIZE = "48";
     };
 

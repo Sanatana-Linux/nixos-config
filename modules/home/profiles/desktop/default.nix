@@ -18,8 +18,8 @@
 		size = 24;
 	};
 	theme = {
-		name = "Orchis-Dark";
-		package = pkgs.orchis;
+		name = "Colloid-Dark";
+		package = pkgs.colloid-gtk-theme;
 	};
 	gtk2 = {
 		configLocation = "/home/paul/.gtkrc-2.0";

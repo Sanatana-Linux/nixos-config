@@ -48,13 +48,7 @@ in {
     fi
 
   '';
-  # enable GTK theme
-  home.activation.installGTKConfig = ''
-    if [ ! -d "${config.home.homeDirectory}/.themes" ]; then
-      ln -s "/etc/nixos/modules/home/gtk/Jasper-Grey-Dark-Compact"  "${config.home.homeDirectory}/.themes/Jasper-Grey-Dark-Compact" 
-      chmod -R +w "${config.home.homeDirectory}/.themes" 
-    fi
-  '';
+ 
 
   home.activation.installIconsConfig = ''
     if [ ! -d "${config.home.homeDirectory}/.icons" ]; then

@@ -67,7 +67,6 @@ mate.python-caja
 libsForQt5.qt5ct
 libsForQt5.qtstyleplugin-kvantum
 maim
-numix-cursor-theme
 pango
 pangomm
 perl536Packages.CairoGObject

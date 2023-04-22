@@ -70,8 +70,6 @@
         (final: _:
           let inherit (final) system;
           in { } // (with nixpkgs-f2k.packages.${system}; {
-            awesome-git = prev.awesome-git.override { lua = prev.luajit; };
-
             awesome = awesome-git;
 
             picom = picom-git;
@@ -83,6 +81,7 @@
             src = prev.luaFormatter-src;
             version = "999-master";
           };
+          awesome-git-luajit = prev.awesome.override { lua = prev.luajit; };
           nps = inputs.nps.defaultPackage.${prev.system};
         })
         nixpkgs-f2k.overlays.default

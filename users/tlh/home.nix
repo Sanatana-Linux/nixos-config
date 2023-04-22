@@ -129,5 +129,14 @@ in
     # import more packages to home-manager ones.
     packages = desktop-packages ++ images-packages
       ++ (with pkgs; [ extract nux run gita ueberzug ]);
+
+
+    sessionVariables = {
+      BROWSER = "${pkgs.firefox}/bin/firefox";
+      EDITOR = "${pkgs.neovim}/bin/nvim";
+      GOPATH = "${config.home.homeDirectory}/go";
+      RUSTUP_HOME = "${config.home.homeDirectory}/.local/share/rustup";
+      XDG_DATA_HOME = "${config.home.homeDirectory}/.local/share";
+    };
   };
 }

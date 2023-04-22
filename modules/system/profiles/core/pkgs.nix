@@ -10,7 +10,7 @@ dconf
 deadnix
 dosfstools
 feh
-ffmpeg
+ffmpeg-full
 gcc
 glib
 glibc

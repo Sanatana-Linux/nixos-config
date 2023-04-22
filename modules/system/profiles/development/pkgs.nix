@@ -21,7 +21,6 @@ distrobox
 efm-langserver
 emacs
 emacs-all-the-icons-fonts
-ffmpeg
 fnm
 gcc
 glib

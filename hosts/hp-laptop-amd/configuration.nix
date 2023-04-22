@@ -48,7 +48,9 @@ in {
   ];
 
   # use grub with os-prober support
-  boot.loader = {
+  boot= {
+    		initrd.systemd.enable = true;
+    loader = {
     systemd-boot.enable = false;
     efi = {
       canTouchEfiVariables = true;
@@ -60,7 +62,9 @@ in {
       device = "nodev";
       efiSupport = true;
       useOSProber = true;
+      
     };
+  };
   };
 
   # unstable kernel
@@ -86,7 +90,7 @@ in {
     defaultSession = "none+awesome";
     lightdm = {
       enable = true;
-      background = ../modules/system/programs/lightdm/wallpaper.png;
+      background = ../../modules/system/programs/lightdm/wallpaper.png;
       greeters.gtk = {
         enable = true;
         theme = {
@@ -111,14 +115,18 @@ in {
   };
 
   services.xserver.xautolock.enable = true;
+  
   services.xserver.windowManager.awesome = {
     enable = true;
+    package = pkgs.awesome-git-luajit;
+    
     luaModules = lib.attrValues {
-      inherit (pkgs.luaPackages)
+      inherit (pkgs.luajitPackages)
         cjson dkjson ldbus luasec lgi ldoc lpeg lpeg_patterns luafilesystem
         luasocket luasystem stdlib luaposix argparse vicious;
     };
   };
+
 
   # Defines my account, on first boot I change the passwd as root, don't worry!
   users.users.tlh = {
@@ -136,7 +144,7 @@ in {
     ++ interface-packages ++ laptop-packages ++ networking-packages
     ++ shell-packages ++ sound-packages ++ virtualisation-packages
     ++ (with pkgs; [
-      awesome-git
+      awesome-git-luajit
       home-manager
 
     ]);

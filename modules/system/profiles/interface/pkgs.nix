@@ -29,6 +29,7 @@ libinput
 libnotify
 librsvg
 lightlocker
+luajit
 maim
 mesa
 mesa-demos

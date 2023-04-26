@@ -45,6 +45,7 @@ in {
     ../../modules/system/profiles/sound
     ../../modules/system/profiles/virtualisation
     ../../modules/system/programs/nix-ld
+    ../../modules/system/profiles/bluetooth
 
   ];
 

@@ -76,7 +76,6 @@ in {
 
     # gtk configuration
     (import ../../modules/home/profiles/desktop)
-    (import ../../modules/home/profiles/bluetooth { inherit pkgs config; })
 
   ];
 

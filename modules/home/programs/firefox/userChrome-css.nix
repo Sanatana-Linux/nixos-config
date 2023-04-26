@@ -84,21 +84,21 @@ with colors; ''
  }
 
  /* Reorder toolbars */
-/* #navigator-toolbox #nav-bar {
-   -moz-box-ordinal-group: 0;
- }
- #navigator-toolbox #PersonalToolbar {
-   -moz-box-ordinal-group: 1;
- }
- #navigator-toolbox #titlebar {
-   -moz-box-ordinal-group: 2;
- }
- #navigator-toolbox toolbar {
-   -moz-box-ordinal-group: 10;
- }
- #navigator-toolbox #TabsToolbar {
-   -moz-box-ordinal-group: 100;
- }*/
+ /* #navigator-toolbox #nav-bar {
+ *  -moz-box-ordinal-group: 0;
+ *}
+ *#navigator-toolbox #PersonalToolbar {
+ *  -moz-box-ordinal-group: 1;
+ *}
+ *#navigator-toolbox #titlebar {
+ *  -moz-box-ordinal-group: 2;
+ *}
+ *#navigator-toolbox toolbar {
+ *  -moz-box-ordinal-group: 10;
+ *}
+ *#navigator-toolbox #TabsToolbar {
+ *  -moz-box-ordinal-group: 100;
+ *}*/
 
  /* Overrides: Don't shift other toolbars on tab drag and drop */
  #TabsToolbar[movingtab] {
@@ -175,7 +175,7 @@ with colors; ''
  }
  /* Headerbar */
 #nav-bar {
-	padding: 6px 3px !important;
+	padding: 3px !important;
 }
 
 /* Headerbar CSD colors */
@@ -319,7 +319,7 @@ with colors; ''
 
 /* Fix the issue when dragging tabs */
 :root[tabsintitlebar] #navigator-toolbox[movingtab] #TabsToolbar {
-	padding-bottom: 0 !important;
+	padding-bottom: 0px !important;
 }
 
 /* Window buttons box */
@@ -449,8 +449,8 @@ with colors; ''
 }
 
 #urlbar {
-	--urlbar-height: 34.00px;
-	--urlbar-toolbar-height: 34.00px !important;
+	--urlbar-height: 38px;
+	--urlbar-toolbar-height: 38px !important;
 }
 
 /* Center the URL bar */
@@ -2209,26 +2209,20 @@ treechildren::-moz-tree-image {
 	.identity-popup-content-blocking-category::after,
 	#identity-popup-security-expander .button-icon,
 	.subviewbutton-back .toolbarbutton-icon,
-
 	.menu-right,
-
 	#urlbar[pageproxystate="invalid"] > #identity-box > #identity-icon,
 	#urlbar:not(.searchButton) > #urlbar-input-container > #identity-box[pageproxystate="invalid"] #identity-icon,
 	.searchbar-search-icon,
 	#search-box .textbox-search-sign,
-
 	.menulist-label-box:after,
 	.expander-down image,
 	.expander-up image,
 	#sidebar-switcher-arrow,
 	#viewButton .button-menu-dropmarker,
-
 	menuitem[type="checkbox"] .menu-iconic-icon,
 	menuitem[type="radio"] .menu-iconic-icon,
-
 	.close-icon:not(.tab-close-button) image,
 	.identity-popup-permission-remove-button .button-icon,
-
 	:root[tabsintitlebar] #titlebar .titlebar-buttonbox .titlebar-close .toolbarbutton-icon,
 	:root[tabsintitlebar] #titlebar #titlebar-close .toolbarbutton-icon,
 	:root[tabsintitlebar] #titlebar .titlebar-buttonbox .titlebar-max .toolbarbutton-icon,
@@ -2326,74 +2320,6 @@ treechildren::-moz-tree-image {
 	.menu-iconic.bookmark-item[container] .menu-iconic-icon,
 	.panel-info-button > image {
 		filter: invert(60%) brightness(150%);
-	}
-
-	.tab-icon-overlay[soundplaying] {
-		list-style-image: url("../icons/audio-playing-symbolic-light.svg") !important;
-	}
-
-	.tab-icon-overlay[muted] {
-		list-style-image: url("../icons/audio-muted-symbolic-light.svg") !important;
-	}
-
-	#pocket-button,
-	#save-to-pocket-button,
-	#pageAction-panel-pocket {
-		list-style-image: url("../icons/save-to-pocket-light.svg") !important;
-	}
-
-	#save-to-pocket-button[open="true"], #save-to-pocket-button[pocketed="true"] {
-		list-style-image: url("../icons/save-to-pocket-open-light.svg") !important;
-	}
-
-	#mo-url2qr-icon {
-		list-style-image: url("../icons/url2qr-icon-light.svg") !important;
-	}
-
-	/* Tree views */
-	treechildren::-moz-tree-twisty,
-	.item.client .item-twisty-container {
-		list-style-image: url("../icons/pan-end-symbolic-light.svg") !important;
-		width: 16px !important;
-		height: 16px !important;
-	}
-	.item.client .item-twisty-container {
-		background-image: url("../icons/pan-end-symbolic-light.svg") !important;
-	}
-	treechildren::-moz-tree-twisty(open) {
-		list-style-image: url("../icons/pan-down-symbolic-light.svg") !important;
-	}
-	.item.client.closed .item-twisty-container {
-		background-image: url("../icons/pan-down-symbolic-light.svg") !important;
-	}
-
-	treechildren::-moz-tree-image(title, container),
-	treechildren::-moz-tree-image(title, open) {
-		list-style-image: url("../icons/folder-symbolic-light.svg") !important;
-	}
-	treechildren::-moz-tree-image(title, query, dayContainer),
-	treechildren::-moz-tree-image(query, OrganizerQuery_history____v) {
-		list-style-image: url("../icons/preferences-system-time-symbolic-light.svg") !important;
-	}
-
-	.tabbrowser-tab[image="chrome://global/skin/icons/info.svg"]:not([busy]):not([progress]):not([crashed]) .tab-icon-stack::before {
-		background-image: url("../icons/info-symbolic-light.svg") !important;
-	}
-
-	.tab-icon-image:not([src]), .tab-icon-image:-moz-broken {
-		content: url("../icons/network-workgroup-symbolic-light.svg") !important;
-	}
-
-	#sidebar-box[sidebarcommand="viewTabsSidebar"] > #sidebar-header > #sidebar-switcher-target > #sidebar-icon,
-	.urlbarView-row[source="tabs"] > .urlbarView-row-inner > .urlbarView-no-wrap > .urlbarView-favicon,
-	#urlbar-engine-one-off-item-tabs {
-		list-style-image: url("../icons/tab-sync-symbolic-light.svg") !important;
-	}
-
-	#sidebar-box[sidebarcommand="viewHistorySidebar"] > #sidebar-header > #sidebar-switcher-target > #sidebar-icon,
-	.urlbarView-row[source="history"] > .urlbarView-row-inner > .urlbarView-no-wrap > .urlbarView-favicon,
-	#urlbar-engine-one-off-item-history {
-		list-style-image: url("../icons/preferences-system-time-symbolic-light.svg") !important;
 	}
 
 	/* Fix for extensions icons */
@@ -3688,39 +3614,168 @@ browser {
 .tabbrowser-tab:not([selected]):not([pinned]):hover .tab-close-button {
   display: -moz-box !important;
 }
-/* GPL-3.9 Copyright (C) 2007 Timvde/UserChrome-Tweaks; Code pulled from https://github.com/Timvde/UserChrome-Tweaks */
-/*
- * Auto-hide the URL-bar show on hover or focus
- * as seen in https://www.reddit.com/r/FirefoxCSS/comments/boetx7/annoying_page_jump_with_address_bar_autohide/engne27/
- * by https://www.reddit.com/user/SkyrimForTheDragons/
- *
- * slightly modified for more responsiveness
- *
- * Note that this version DOES NOT hide the bookmarks toolbar!
- */
-#nav-bar:not([customizing="true"]):not([inFullscreen]) {
-	min-height: 1px !important;
-	max-height: 0px !important;
-	margin-top: 1px !important;
-	margin-bottom: -1px !important;
-	transition: all 50ms linear 0s !important;
-	z-index: -5 !important;
+/* Source file https://github.com/MrOtherGuy/firefox-csshacks/tree/master/chrome/autohide_main_toolbar.css made available under Mozilla Public License v. 2.0
+See the above repository for updates as well as full license text. */
+
+/* This style hides the main toolbar and shows it when the cursor is over the tabs toolbar as well as whenever the focus is inside nav-bar, such as when urlbar is focused. */
+
+:root{ --uc-navbar-transform: -40px }
+:root[uidensity="compact"]{ --uc-navbar-transform: -34px }
+
+#navigator-toolbox > div{ display: contents; }
+:root[sessionrestored] :where(#nav-bar,#PersonalToolbar,#tab-notification-deck,.global-notificationbox){
+  transform: translateY(var(--uc-navbar-transform))
+}
+:root:is([customizing],[chromehidden*="toolbar"]) :where(#nav-bar,#PersonalToolbar,#tab-notification-deck,.global-notificationbox){
+  transform: none !important;
+  opacity: 1 !important;
 }
 
-#navigator-toolbox:hover:not([inFullscreen]) :-moz-any(#nav-bar),
-#navigator-toolbox:focus-within :-moz-any(#nav-bar) {
-	min-height: 38px !important;
-	max-height: 38px !important;
-	margin-top: 1px !important;
-	margin-bottom: -38px !important;
-	transition: all 75ms linear 0s !important;
-	z-index: 5 !important;
+#nav-bar:not([customizing]){
+  opacity: 0;
+  transition:  transform 400ms ease 1.8s, opacity 400ms ease 1.8s !important;
+  position: relative;
+  z-index: 2;
+}
+#TabsToolbar{ position: relative; z-index: 3 }
+
+/* Show when toolbox is focused, like when urlbar has received focus */
+#navigator-toolbox:focus-within > .browser-toolbar{
+  transform: translateY(0);
+  opacity: 1;
+  transition-duration: 250ms, 100ms !important;
+  transition-delay: 0s !important;
+}
+/* Show when toolbox is hovered */
+#titlebar:hover ~ .browser-toolbar,
+#nav-bar:hover,
+#nav-bar:hover + #PersonalToolbar{
+  transform: translateY(0);
+  opacity: 1;
+  transition-duration: 250ms, 100ms !important;
+  transition-delay: 0s !important;
 }
 
-/* Needed for for FF 75 megabar */
-#urlbar {
-	--urlbar-toolbar-height: 38px !important;
+/* Bookmarks toolbar needs so extra rules */
+#PersonalToolbar{ transition: transform 400ms ease 1.8s !important; position: relative; z-index: 1 }
+
+/* Move up the content view */
+:root[sessionrestored]:not([inFullscreen]) > body > #browser{ margin-top: var(--uc-navbar-transform); }
+
+// 
+/* -------------------------------------------------------------------------- */
+// https://github.com/Sanatana-Linux/nixos-config/blob/e81d597048f00188400349f4557d0c647fce4feb/modules/home/programs/firefox/userContent-css.nix
+
+/* Line up tabs with urlbar configured with back/next/reload on compact uidensity: */
+.titlebar-spacer[type="pre-tabs"] {
+    width: 21px !important;
+}
+    
+/* Moooar tab space at right */
+.titlebar-spacer[type="post-tabs"] {
+    width: 13px !important;
+}
+    
+/* Shorten gap between pinned tabs and normal */
+#tabbrowser-tabs[haspinnedtabs]:not([positionpinnedtabs]) > #tabbrowser-arrowscrollbox > .tabbrowser-tab[first-visible-unpinned-tab] {
+    margin-inline-start: 5px !important;
 }
 
+/* Fixes the gap between tab rows */
+#tabbrowser-tabs .tabbrowser-tab {
+    height:34px !important;
+}
+#TabsToolbar {
+    padding-bottom:1px
+}
 
+/* Fix close button right alignment */
+.tabbrowser-tab .tab-close-button {
+    transform: translate(1px,0) !important;
+    height:20px !important;
+    margin-inline-end:0px !important;
+    padding:5px !important;
+    width:20px !important;
+}
+
+/* gap above tabs */
+#tabbrowser-tabs {
+    padding-top:2px !important;
+}
+
+/* alignment fix */
+.tabbrowser-tab[first-visible-tab=true] {
+    padding-left:2px !important
+}
+
+/* alignment fix */
+.tab-label-container .tab-text {
+    transform:translate(0,-1px)
+}
+
+/* Removes the side borders from active and inactive tabs. */
+.tabbrowser-tab::after,
+.tabbrowser-tab::before {
+    border-left: none !important; /* Remove borders from inactive tabs */
+}
+
+/* Show X on hover tab in multiline */
+.tabbrowser-tab:not([selected]):not([pinned]):hover .tab-close-button {
+	display: -moz-box !important;
+}
+
+/* Align new tab button */
+#TabsToolbar .toolbarbutton-1 > .toolbarbutton-icon {
+    height:26px !important;
+    width:26px !important
+}
+
+/* Compact tabs */
+.tab-content {
+    padding-left:5px !important;
+    padding-right:5px !important;
+}
+
+:root[uidensity="compact"] {
+    --tab-min-height:20px;
+    --inline-tab-padding:4px
+}
+
+.tabbrowser-tab {
+    --tab-min-height:20px;
+}
+/* -------------------------------------------------------------------------- */
+
+https://www.reddit.com/r/FirefoxCSS/comments/s4wsww/show_the_number_of_open_tabs_on_the_list_all_tabs/
+/* show tab manager button even when tabs aren't overflowing -  
+   can instead use browser.tabs.tabmanager.enabled;true as well  
+   or skip this part if you want to retain the default behaviour */  
+#alltabs-button {  
+    display: -moz-box !important;  
+}  
+
+/* tab counter */  
+#TabsToolbar-customization-target {  
+    counter-reset: tabCount;  
+}  
+.tabbrowser-tab {  
+    counter-increment: tabCount;  
+}  
+#alltabs-button > .toolbarbutton-badge-stack > .toolbarbutton-icon {  
+    visibility: collapse !important;  
+}  
+#alltabs-button > .toolbarbutton-badge-stack {  
+    position: relative !important;  
+}  
+#alltabs-button > .toolbarbutton-badge-stack::before {  
+    content: counter(tabCount);  
+    border-bottom: 1px solid var(--toolbarbutton-icon-fill);  
+    color: var(--toolbarbutton-icon-fill);  
+    opacity: var(--toolbarbutton-icon-fill-opacity);  
+    position: absolute;  
+    bottom: var(--toolbarbutton-inner-padding);  
+    left: 50%;  
+    transform: translateX(-50%);  
+    padding: 0 3px;  
+}
 ''

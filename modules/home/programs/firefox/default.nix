@@ -27,6 +27,8 @@
          user_pref("widget.disable-native-theme-for-content", true);
         user_pref("widget.non-native-theme.win.scrollbar.use-system-size", false);
         user_pref("browser.tabs.tabmanager.enabled", true);
+        user_pref("browser.uidensity", "1");
+        user_perf("browser.compactmode.show", true);
 
       '';
     };

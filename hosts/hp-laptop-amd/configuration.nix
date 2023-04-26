@@ -44,6 +44,7 @@ in {
     ../../modules/system/profiles/shell
     ../../modules/system/profiles/sound
     ../../modules/system/profiles/virtualisation
+    ../../modules/system/programs/nix-ld
 
   ];
 

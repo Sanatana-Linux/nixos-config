@@ -25,7 +25,7 @@ let
   base16-theme = import ../../modules/home/theme/base16.nix { };
 
 in {
- 
+
   # Declare Themes
   theme.base16.colors = base16-theme;
 
@@ -63,6 +63,7 @@ in {
       inherit pkgs config nur colors;
     })
     (import ../../modules/home/programs/vscode { inherit pkgs config; })
+    (import ../../modules/home/programs/bluetooth { inherit pkgs config; })
     (import ../../modules/home/programs/bat { inherit config; })
     (import ../../modules/home/programs/direnv { inherit config; })
     (import ../../modules/home/programs/exa { inherit config; })

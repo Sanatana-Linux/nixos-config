@@ -1,4 +1,4 @@
-{ config, nixpkgs, overlays, inputs, home-manager, nixos-hardware, system, ... }:
+{ config, nur, nixpkgs, overlays, inputs, home-manager, nixos-hardware, system, ... }:
 
 with nixpkgs;
 
@@ -6,6 +6,7 @@ lib.nixosSystem rec {
   inherit system;
   
   modules = [
+        nur.nixosModules.nur
     ./configuration.nix
     nixos-hardware.nixosModules.common-cpu-amd
     nixos-hardware.nixosModules.common-pc-laptop-ssd

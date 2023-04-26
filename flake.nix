@@ -48,7 +48,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, nixpkgs-f2k, luaFormatter, nps
+  outputs = { self, nixpkgs,  nur, home-manager, nixpkgs-f2k, luaFormatter, nps
     , nixos-hardware, ... }@inputs:
     let
       inherit (self) outputs;
@@ -90,7 +90,7 @@
     in {
       nixosConfigurations = {
         hp-laptop-amd = import ./hosts/hp-laptop-amd {
-          inherit config nixpkgs overlays lib inputs system home-manager
+          inherit config nixpkgs overlays lib inputs system home-manager nur
             nixos-hardware;
         };
         live-usb = import ./hosts/live-usb {

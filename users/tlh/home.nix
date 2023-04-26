@@ -17,7 +17,7 @@ let
   # Integrate nur within Home-Manager
   nur = import (builtins.fetchTarball {
     url = "https://github.com/nix-community/NUR/archive/master.tar.gz";
-    sha256 = "1cgr4z0qf1kks5mq346i76bx6zldfsr647zxsbf0bdh9yx43irz3";
+    sha256 = "19pjdslf5skfalyhxpspgbhmscmq7ygprvbpnzppp0bdibbg2sbv";
 
   }) { inherit pkgs; };
 
@@ -89,6 +89,11 @@ in {
   # enable unfree packages (again, just to be sure)
   nixpkgs.config.allowUnfree = true;
 
+ nix.extraOptions = ''
+    keep-outputs = true
+    keep-derivations = true
+  '';
+
   home = {
     username = "tlh";
     homeDirectory = "/home/tlh";
@@ -106,7 +111,7 @@ in {
 
     # import more packages to home-manager ones.
     packages = desktop-packages ++ images-packages
-      ++ (with pkgs; [ extract nux run gita ueberzug direnv lorri ]);
+      ++ (with pkgs; [ extract nux run gita ueberzug direnv  ]);
 
     sessionVariables = {
       GTK_THEME = "Colloid-Dark";

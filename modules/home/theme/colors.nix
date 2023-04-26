@@ -9,7 +9,10 @@ rec {
   dimblack = "#363636";
   light-black = "#414141";
   fg = "#d1d1d1";
+  light-white = "#FBFBFB";
   white = "#b6b6b6";
+  dark-grey = "#444444";
+  dimgrey ="#4f4f4f";
   grey = "#555555";
   grey-lighter = "#818181";
   red-darker = "#F83D80";

@@ -40,9 +40,6 @@
     rust-overlay.url = "github:oxalica/rust-overlay";
     rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
 
-nix-ld.url = "github:Mic92/nix-ld";
-nix-ld.inputs.nixpkgs.follows = "nixpkgs";
-
     luaFormatter = {
       type = "git";
       url = "https://github.com/Koihik/LuaFormatter.git";
@@ -51,7 +48,7 @@ nix-ld.inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nix-ld, nixpkgs, home-manager, nixpkgs-f2k, luaFormatter, nps
+  outputs = { self, nixpkgs, home-manager, nixpkgs-f2k, luaFormatter, nps
     , nixos-hardware, ... }@inputs:
     let
       inherit (self) outputs;

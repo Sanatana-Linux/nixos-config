@@ -1,4 +1,4 @@
-{ config, nixpkgs, nix-ld, overlays, inputs, home-manager, nixos-hardware, system, ... }:
+{ config, nixpkgs, overlays, inputs, home-manager, nixos-hardware, system, ... }:
 
 with nixpkgs;
 
@@ -9,8 +9,7 @@ lib.nixosSystem rec {
     ./configuration.nix
     nixos-hardware.nixosModules.common-cpu-amd
     nixos-hardware.nixosModules.common-pc-laptop-ssd
-#    nixos-hardware.nixosModules.common-gpu-amd
-   nix-ld.nixosModules.nix-ld
+
     {
       nixpkgs = {
         inherit overlays config;

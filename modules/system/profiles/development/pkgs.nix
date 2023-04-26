@@ -119,5 +119,7 @@ wkhtmltopdf-bin
 yarn
 zeal
 zlib
+lorri 
+direnv
 ]
 

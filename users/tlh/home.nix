@@ -106,7 +106,7 @@ in {
 
     # import more packages to home-manager ones.
     packages = desktop-packages ++ images-packages
-      ++ (with pkgs; [ extract nux run gita ueberzug ]);
+      ++ (with pkgs; [ extract nux run gita ueberzug direnv lorri ]);
 
     sessionVariables = {
       GTK_THEME = "Colloid-Dark";

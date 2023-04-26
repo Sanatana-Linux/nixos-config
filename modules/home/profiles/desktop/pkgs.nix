@@ -12,6 +12,7 @@ fuseiso
 gnome.gnome-disk-utility
 google-chrome
 gpick
+hunspell
 librewolf-unwrapped
 luakit
 networkmanagerapplet

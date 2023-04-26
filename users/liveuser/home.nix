@@ -10,7 +10,7 @@ let
   # Integrate nur within Home-Manager
   nur = import (builtins.fetchTarball {
     url = "https://github.com/nix-community/NUR/archive/master.tar.gz";
-    sha256 = "10n68cminhvwhmawfaspalkn601zrnzkzys7hvq2ri1l78bamz39";
+    sha256 = "15d2r6ya2g5nlj2mqvzy97l19ahk8rfvmbpd3v9l8fj0738pnqwn";
 
   }) { inherit pkgs; };
 
@@ -50,12 +50,6 @@ in {
   '';
  
 
-  home.activation.installIconsConfig = ''
-    if [ ! -d "${config.home.homeDirectory}/.icons" ]; then
-      ln -s" /etc/nixos/modules/home/gtk/Colloid-dark"  "${config.home.homeDirectory}/.icons/Colloid-dark" 
-      chmod -R +w "${config.home.homeDirectory}/.icons" 
-    fi
-  '';
 
   theme.base16.colors = base16-theme;
 
@@ -86,9 +80,8 @@ in {
   gtk = {
     enable = true;
     gtk3.extraConfig.gtk-decoration-layout = "menu:";
-    cursorTheme.name = "Colloid-dark";
     iconTheme.name = "Colloid-dark";
-    theme.name = "Jasper-Grey-Dark-Compact";
+    theme.name = "Colloid-Dark";
   };
 
   # editor (nvim)

@@ -15,28 +15,23 @@ let
     import ../../modules/home/profiles/desktop/pkgs.nix { inherit pkgs; };
 
   # Integrate nur within Home-Manager
-  nur = import
-    (builtins.fetchTarball {
-      url = "https://github.com/nix-community/NUR/archive/master.tar.gz";
-      sha256 = "10n68cminhvwhmawfaspalkn601zrnzkzys7hvq2ri1l78bamz39";
+  nur = import (builtins.fetchTarball {
+    url = "https://github.com/nix-community/NUR/archive/master.tar.gz";
+    sha256 = "15d2r6ya2g5nlj2mqvzy97l19ahk8rfvmbpd3v9l8fj0738pnqwn";
 
-    })
-    { inherit pkgs; };
+  }) { inherit pkgs; };
 
   colors = import ../../modules/home/theme/colors.nix { };
   base16-theme = import ../../modules/home/theme/base16.nix { };
 
-in
-{
-  # User Name
-
+in {
+ 
   # Declare Themes
   theme.base16.colors = base16-theme;
 
   #--------------------------------------------------#
   # Symlink Configuration Files
-  # xdg.configFile."BetterDiscord/themes".source = ../../configurations/bd-themes;
-
+  #
   # Enable AwesomeWM Configuration
   home.activation.installAwesomeWMConfig = ''
     if [ ! -d "$HOME/.config/awesome" ]; then
@@ -52,7 +47,7 @@ in
       ln -s "$HOME/.zsh/zshenv" "$HOME/.zshenv"
     fi
   '';
-   # extra fonts
+  # extra fonts
   home.activation.installFontConfig = ''
     if [ ! -d "$HOME/.local/share/fonts" ]; then
       ln -sf "/etc/nixos/modules/home/fonts" "$HOME/.local/share/"
@@ -60,9 +55,6 @@ in
       fc-cache -f
       fi
   '';
-
-  #--------------------------------------------------#
-
   # -------------------------------------------------------------------------- #
   # Programs Imports
   imports = lib.attrValues nur.repos.rycee.hmModules ++ [
@@ -78,13 +70,13 @@ in
     (import ../../modules/home/programs/picom { })
     (import ../../modules/home/programs/rofi { inherit pkgs config; })
     (import ../../modules/home/programs/starship)
+    (import ../../modules/home/programs/default-applications { inherit lib; })
     # -------------------------------------------------------------------------- #
     # Profiles
 
     # gtk configuration
     (import ../../modules/home/profiles/desktop)
-    #    (import ../../modules/home/profiles/awesomewm {inherit pkgs config lib; } )
-    # (import ./theme/nvim { inherit colors; })
+
   ];
 
   xresources.extraConfig =
@@ -92,7 +84,6 @@ in
 
   # -------------------------------------------------------------------------- #
   # Let Home Manager install and manage itself.
-  #
   programs.home-manager.enable = true;
 
   # enable unfree packages (again, just to be sure)
@@ -107,10 +98,6 @@ in
     sessionPath = [ "$HOME/.local/bin" ];
 
     # cursor size (again) through sessionVariables
-    sessionVariables = {
-      GTK_THEME = "Colloid-Dark";
-      XCURSOR_SIZE = "48";
-    };
 
     file = {
       ".icons/default".source =
@@ -121,8 +108,9 @@ in
     packages = desktop-packages ++ images-packages
       ++ (with pkgs; [ extract nux run gita ueberzug ]);
 
-
     sessionVariables = {
+      GTK_THEME = "Colloid-Dark";
+      XCURSOR_SIZE = "48";
       BROWSER = "${pkgs.firefox}/bin/firefox";
       EDITOR = "${pkgs.neovim}/bin/nvim";
       GOPATH = "${config.home.homeDirectory}/go";

@@ -1,6 +1,8 @@
 { colors, ... }:
 
-with colors; ''@namespace xul "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul";
+with colors; ''
+@namespace xul "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul";
+@namespace html url("http://www.w3.org/1999/xhtml");
 
 /* Set theme version text in customization panel */
 #customization-footer::before {
@@ -24,20 +26,20 @@ with colors; ''@namespace xul "http://www.mozilla.org/keymaster/gatekeeper/there
    border: 0 !important;
    background: none !important;
  }
- 
+
  #nav-bar, #PersonalToolbar, #toolbar-menubar, #TabsToolbar, findbar {
    border: none !important;
    background: var(--gnome-toolbar-background) !important;
  }
- 
+
  #nav-bar, #PersonalToolbar, #toolbar-menubar, #TabsToolbar {
    border-bottom: 1px solid var(--gnome-toolbar-border-color) !important;
  }
- 
+
  findbar {
    border-top: 1px solid var(--gnome-toolbar-border-color) !important;
  }
- 
+
  #toolbar-menubar[autohide="true"][inactive="true"]:not([customizing="true"]) {
    min-height: 0 !important;
    height: 0 !important;
@@ -45,18 +47,18 @@ with colors; ''@namespace xul "http://www.mozilla.org/keymaster/gatekeeper/there
    appearance: none !important;
    border-bottom: none !important;
  }
- 
+
  #nav-bar:-moz-window-inactive,
- #PersonalToolbar:-moz-window-inactive, 
- #toolbar-menubar:-moz-window-inactive, 
- #TabsToolbar:-moz-window-inactive, 
+ #PersonalToolbar:-moz-window-inactive,
+ #toolbar-menubar:-moz-window-inactive,
+ #TabsToolbar:-moz-window-inactive,
  findbar:-moz-window-inactive,
  .container.infobar:-moz-window-inactive {
    background: var(--gnome-inactive-toolbar-background) !important;
    border-color: var(--gnome-inactive-toolbar-border-color) !important;
  }
- 
- #navigator-toolbox:-moz-window-inactive label, #navigator-toolbox:-moz-window-inactive image, 
+
+ #navigator-toolbox:-moz-window-inactive label, #navigator-toolbox:-moz-window-inactive image,
  #downloads-indicator-anchor:-moz-window-inactive,
  findbar:-moz-window-inactive image:not(#hack),
  findbar:-moz-window-inactive label,
@@ -65,14 +67,14 @@ with colors; ''@namespace xul "http://www.mozilla.org/keymaster/gatekeeper/there
  .container.infobar:-moz-window-inactive {
    opacity: 0.7 !important;
  }
- 
+
  #toolbar-menubar:not([inactive=true]) {
    margin-bottom: 0 !important;
  }
  #PersonalToolbar {
    padding: 1px !important;
  }
- 
+
  /* Overrides: Remove border below the menu bar / above the header bar */
  #TabsToolbar:not([collapsed="true"]) + #nav-bar {
    border-top-width: 0 !important;
@@ -80,9 +82,9 @@ with colors; ''@namespace xul "http://www.mozilla.org/keymaster/gatekeeper/there
  #navigator-toolbox::after {
    border-bottom-width: 0 !important;
  }
- 
+
  /* Reorder toolbars */
- #navigator-toolbox #nav-bar {
+/* #navigator-toolbox #nav-bar {
    -moz-box-ordinal-group: 0;
  }
  #navigator-toolbox #PersonalToolbar {
@@ -96,8 +98,8 @@ with colors; ''@namespace xul "http://www.mozilla.org/keymaster/gatekeeper/there
  }
  #navigator-toolbox #TabsToolbar {
    -moz-box-ordinal-group: 100;
- }
- 
+ }*/
+
  /* Overrides: Don't shift other toolbars on tab drag and drop */
  #TabsToolbar[movingtab] {
    padding-bottom: 0 !important;
@@ -109,7 +111,7 @@ with colors; ''@namespace xul "http://www.mozilla.org/keymaster/gatekeeper/there
  #TabsToolbar[movingtab] + #nav-bar {
    margin-top: 0 !important;
  }
- 
+
  /* Content notifications */
  .notificationbox-stack notification-message {
    border: 0 !important;
@@ -121,7 +123,7 @@ with colors; ''@namespace xul "http://www.mozilla.org/keymaster/gatekeeper/there
  .notificationbox-stack notification-message[style*="margin-top"] {
    margin-top: -48px !important;
  }
- 
+
  .container.infobar {
    background: var(--gnome-toolbar-background) !important;
    box-shadow: none !important;
@@ -131,37 +133,37 @@ with colors; ''@namespace xul "http://www.mozilla.org/keymaster/gatekeeper/there
  .container.infobar::before {
    display: none !important;
  }
- 
+
  .container.infobar .icon {
    height: 16px !important;
    width: 16px !important;
  }
  .notificationbox-stack notification-message[type="warning"] {
-   background: #ffe900 !important;	
+   background: #ffe900 !important;
  }
  .notificationbox-stack notification-message[type="critical"] {
    background: #d70022 !important;
  }
- 
+
  .notificationbox-stack[notificationside="top"] notification-message {
    border-bottom: 1px solid var(--gnome-toolbar-border-color) !important;
  }
  .notificationbox-stack[notificationside="bottom"] notification-message {
    border-top: 1px solid var(--gnome-toolbar-border-color) !important;
  }
- 
+
  /* Text link */
  .text-link {
    color: var(--gnome-accent) !important;
  }
- 
+
  /* OPTIONAL: Hide WebRTC indicator */
  @supports -moz-bool-pref("gnomeTheme.hideWebrtcIndicator") {
    #webrtcIndicator {
      display: none;
    }
  }
- 
+
  /* OPTIONAL: Move Bookmarks toolbar under tabs */
  @supports -moz-bool-pref("gnomeTheme.bookmarksToolbarUnderTabs") {
    #navigator-toolbox #titlebar {
@@ -195,9 +197,9 @@ with colors; ''@namespace xul "http://www.mozilla.org/keymaster/gatekeeper/there
 	--gnome-accent-fg: var(--gnome-private-accent) !important;
 	/* Toolbars */
 	--gnome-toolbar-background: var(--gnome-private-toolbar-background) !important;
-	--gnome-inactive-toolbar-background: var(--gnome-private-inactive-toolbar-background)  !important;		
+	--gnome-inactive-toolbar-background: var(--gnome-private-inactive-toolbar-background)  !important;
 	/* Menus */
-	--gnome-menu-background: var(--gnome-private-menu-background) !important;		
+	--gnome-menu-background: var(--gnome-private-menu-background) !important;
 	/* Change headerbar colors */
 	--gnome-headerbar-background: var(--gnome-private-headerbar-background) !important;
 	--gnome-inactive-headerbar-background: var(--gnome-private-inactive-headerbar-background) !important;
@@ -207,7 +209,7 @@ with colors; ''@namespace xul "http://www.mozilla.org/keymaster/gatekeeper/there
 :root[privatebrowsingmode="temporary"] #nav-bar toolbarspring:first-of-type:before {
 	background-size: 64px 64px;
 	content: "";
-	display: block;	
+	display: block;
 	position: absolute;
 	width: 64px;
 	height: 46px;
@@ -258,7 +260,7 @@ with colors; ''@namespace xul "http://www.mozilla.org/keymaster/gatekeeper/there
 	:root[tabsintitlebar]:not([inFullscreen]) #nav-bar {
 		padding-right: 3px !important;
 	}
-	
+
 	/* Window buttons box */
 	:root[tabsintitlebar] #titlebar .titlebar-buttonbox-container {
 		left: 9px;
@@ -284,7 +286,7 @@ with colors; ''@namespace xul "http://www.mozilla.org/keymaster/gatekeeper/there
 		:root[tabsintitlebar]:not([inFullscreen]) #nav-bar {
 			padding-left: 130px !important;
 		}
-	} 
+	}
 }
 
 /* Fullscreen headerbar padding for 1 button */
@@ -438,7 +440,7 @@ with colors; ''@namespace xul "http://www.mozilla.org/keymaster/gatekeeper/there
 	:root[tabsintitlebar][inFullscreen] #window-controls toolbarbutton {
 		-moz-window-dragging: drag;
 	}
-	
+
 	/* Avoid window dragging from urlbar */
 	:root[tabsintitlebar] #nav-bar .urlbar-input-box,
 	:root[tabsintitlebar] #nav-bar .urlbar-input-box * {
@@ -1127,7 +1129,7 @@ hbox[anonid="findbar-textbox-wrapper"] {
 	margin-right: auto !important;
 }
 
-.findbar-find-status, .found-matches {	
+.findbar-find-status, .found-matches {
 	margin-right: 6px !important;
 }
 
@@ -1639,7 +1641,7 @@ button.close {
 }
 
 button.close.ghost-button {
-	
+
 	background-repeat: no-repeat !important;
 	background-position: center !important;
 }
@@ -1852,7 +1854,7 @@ button.popup-notification-primary-button:active,
 #urlbar[breakout][breakout-extend],
 #urlbar[focused="true"]:not([suppress-focus-border]),
 #searchbar:focus-within,
-#search-box[focused], 
+#search-box[focused],
 .findbar-textbox[focused],
 .findbar-textbox:focus,
 #loginTextbox:focus,
@@ -1902,7 +1904,7 @@ button.popup-notification-primary-button:active,
 .urlbar-page-action:hover:not([open="true"]) .urlbar-icon,
 .urlbar-icon:not([disabled]):hover {
 	background: none !important;
-	fill-opacity: 1 !important;	
+	fill-opacity: 1 !important;
 }
 
 .identity-box-button:hover:active,
@@ -1916,7 +1918,7 @@ button.popup-notification-primary-button:active,
 .urlbar-page-action:hover:active .urlbar-icon,
 .urlbar-page-action[open=true] .urlbar-icon {
 	background: none !important;
-	fill-opacity: 1 !important;	
+	fill-opacity: 1 !important;
 }
 
 /* Entries fixes */
@@ -3250,7 +3252,7 @@ browser {
 	--gnome-button-flat-active-background: rgba(0, 0, 0, .128);
 	--gnome-button-suggested-action-background: var(--gnome-accent-bg);
 	--gnome-button-destructive-action-background: #e01b24;
-	
+
 	--gnome-button-close-background: var(--gnome-button-flat-hover-background);
 	--gnome-button-hover-close-background:var(--gnome-button-hover-background);
 	--gnome-button-active-close-background: var(--gnome-button-active-background);
@@ -3298,7 +3300,7 @@ browser {
 /* Private window colors */
 :root {
 	--gnome-private-accent: #272F42;
-	
+
 	/* Toolbars */
 	--gnome-private-toolbar-background: #EAF0F7;
 	--gnome-private-inactive-toolbar-background: var(--gnome-private-toolbar-background);
@@ -3618,12 +3620,12 @@ browser {
 	}
 
 	/* Context back button */
-	#context-back .menu-iconic-icon { 
+	#context-back .menu-iconic-icon {
 		filter: var(--gnome-icons-hack-filter);
 		list-style-image: url("moz-icon://stock/go-previous-symbolic?size=dialog") !important;
 	}
 	/* Context forward button */
-	#context-forward .menu-iconic-icon { 
+	#context-forward .menu-iconic-icon {
 		filter: var(--gnome-icons-hack-filter);
 		list-style-image: url("moz-icon://stock/go-next-symbolic?size=dialog") !important;
 	}
@@ -3672,7 +3674,53 @@ browser {
 		filter: var(--gnome-convert-icon-to-symbolic-hack-filter);
 	}
 }
+/* GPL-3.9 Copyright (C) 2007 Timvde/UserChrome-Tweaks; Code pulled from https://github.com/Timvde/UserChrome-Tweaks */
+/*
+ * Only show close buttons on background tabs when hovering with the mouse
+ *
+ * Contributor(s): Timvde
+ */
 
+.tabbrowser-tab:not([selected]):not([pinned]) .tab-close-button {
+  display: none !important;
+}
+
+.tabbrowser-tab:not([selected]):not([pinned]):hover .tab-close-button {
+  display: -moz-box !important;
+}
+/* GPL-3.9 Copyright (C) 2007 Timvde/UserChrome-Tweaks; Code pulled from https://github.com/Timvde/UserChrome-Tweaks */
+/*
+ * Auto-hide the URL-bar show on hover or focus
+ * as seen in https://www.reddit.com/r/FirefoxCSS/comments/boetx7/annoying_page_jump_with_address_bar_autohide/engne27/
+ * by https://www.reddit.com/user/SkyrimForTheDragons/
+ *
+ * slightly modified for more responsiveness
+ *
+ * Note that this version DOES NOT hide the bookmarks toolbar!
+ */
+#nav-bar:not([customizing="true"]):not([inFullscreen]) {
+	min-height: 1px !important;
+	max-height: 0px !important;
+	margin-top: 1px !important;
+	margin-bottom: -1px !important;
+	transition: all 50ms linear 0s !important;
+	z-index: -5 !important;
+}
+
+#navigator-toolbox:hover:not([inFullscreen]) :-moz-any(#nav-bar),
+#navigator-toolbox:focus-within :-moz-any(#nav-bar) {
+	min-height: 32px !important;
+	max-height: 32px !important;
+	margin-top: 1px !important;
+	margin-bottom: -32px !important;
+	transition: all 50ms linear 0s !important;
+	z-index: 5 !important;
+}
+
+/* Needed for for FF 75 megabar */
+#urlbar {
+	--urlbar-toolbar-height: 38px !important;
+}
 
 
 ''

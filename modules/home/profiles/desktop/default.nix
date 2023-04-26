@@ -5,12 +5,12 @@
   gtk = {
     	enable = true;
 	font = {
-		name = "Monomaniac One";
+		name = "Alatsi Regular";
 		size = 11;
 	};
 	iconTheme = {
-		name = "Fluent-Dark";
-		package = pkgs.fluent-icon-theme;
+		name = "Tela-dark";
+		package = pkgs.tela-circle-icon-theme;
 	};
 	cursorTheme = {
 		name = "Phinger Cursors (light)";

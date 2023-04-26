@@ -63,8 +63,6 @@ goocanvas3
 gtk_engines
 i3lock-color
 libcanberra-gtk3
-mate.caja-with-extensions
-mate.python-caja
 libsForQt5.qt5ct
 libsForQt5.qtstyleplugin-kvantum
 numix-cursor-theme

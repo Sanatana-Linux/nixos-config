@@ -18,7 +18,7 @@ gusb
 gtk4
 gtk3
 gtk3-x11
-gtk-sharp-2_0  
+gtk-sharp-2_0
 gtk2-x11
 inotify-tools
 libdbusmenu
@@ -62,8 +62,6 @@ i3lock-color
 inotify-tools
 libcanberra-gtk3
 librsvg
-mate.caja-with-extensions
-mate.python-caja
 libsForQt5.qt5ct
 libsForQt5.qtstyleplugin-kvantum
 maim

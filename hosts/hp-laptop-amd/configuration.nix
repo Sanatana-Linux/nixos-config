@@ -94,16 +94,16 @@ in {
       greeters.gtk = {
         enable = true;
         theme = {
-          package = pkgs.orchis-theme;
-          name = "Orchis-Dark";
+          package = pkgs.colloid-gtk-theme;
+          name = "Colloid-Dark";
         };
         cursorTheme = {
           package = pkgs.phinger-cursors;
           name = "Phinger Cursors (light)";
         };
         iconTheme = {
-          package = pkgs.fluent-icon-theme;
-          name = "Fluent-dark";
+          package = pkgs.tela-circle-icon-theme;
+          name = "Tela";
         };
         indicators = [ "~session" "~spacer" ];
       };

@@ -17,8 +17,6 @@ i3lock-color
 inotify-tools
 libcanberra-gtk3
 librsvg
-mate.caja-with-extensions
-mate.python-caja
 libsForQt5.qt5ct
 libsForQt5.qtstyleplugin-kvantum
 maim

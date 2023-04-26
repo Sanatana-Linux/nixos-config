@@ -3214,14 +3214,14 @@ browser {
 	--gnome-browser-before-load-background: #F7F7F7;
 
 	/* Accent */
-	--gnome-accent-bg: #5b9bf8;
-	--gnome-accent: #3c84f7;
+	--gnome-accent-bg: ${blue};
+	--gnome-accent: ${blue-darker};
 
 	/* Toolbars */
 	--gnome-toolbar-background: #efefef;
 	--gnome-toolbar-color: rgb(46, 52, 54);
 	--gnome-toolbar-border-color: rgba(0, 0, 0, .15);
-	--gnome-toolbar-icon-fill: #2e3436;
+	--gnome-toolbar-icon-fill: ${dimblack};
 	--gnome-inactive-toolbar-background: #fafafa;
 	--gnome-inactive-toolbar-color: #d5d0cc;
 	--gnome-inactive-toolbar-border-color: #DCDCDC;
@@ -3239,7 +3239,7 @@ browser {
 	--gnome-menu-separator-color: rgba(0, 0, 0, 0.1);
 
 	/* Header bar */
-	--gnome-headerbar-background: #f2f2f2;
+	--gnome-headerbar-background: ${light-white};
 	--gnome-headerbar-border-color: var(--gnome-toolbar-border-color);
 	--gnome-inactive-headerbar-background: #fafafa;
 	--gnome-inactive-headerbar-border-color: var(--gnome-inactive-toolbar-border-color);
@@ -3258,15 +3258,15 @@ browser {
 	--gnome-button-active-close-background: var(--gnome-button-active-background);
 
 	/* TitleButtons */
-	--gnome-titlebutton-min-background: #fdbe04;
-	--gnome-titlebutton-max-background: #38c76a;
-	--gnome-titlebutton-close-background: #fd5f51;
-	--gnome-titlebutton-min-hover-background: #fdbe04;
-	--gnome-titlebutton-max-hover-background: #38c76a;
-	--gnome-titlebutton-close-hover-background: #fd5f51;
-	--gnome-titlebutton-min-active-background: #fdcd43;
-	--gnome-titlebutton-max-active-background: #6ad48e;
-	--gnome-titlebutton-close-active-background: #fb857c;
+	--gnome-titlebutton-min-background: ${yellow};
+	--gnome-titlebutton-max-background: ${green};
+	--gnome-titlebutton-close-background: ${red};
+	--gnome-titlebutton-min-hover-background: ${yellow};
+	--gnome-titlebutton-max-hover-background: ${green};
+	--gnome-titlebutton-close-hover-background: ${red};
+	--gnome-titlebutton-min-active-background: ${yellow-darker};
+	--gnome-titlebutton-max-active-background: ${green-darker};
+	--gnome-titlebutton-close-active-background: ${red-darker};
 
 	/* Entries */
 	--gnome-entry-background: rgba(0, 0, 0, .08);
@@ -3299,7 +3299,7 @@ browser {
 
 /* Private window colors */
 :root {
-	--gnome-private-accent: #272F42;
+	--gnome-private-accent: ${bg};;
 
 	/* Toolbars */
 	--gnome-private-toolbar-background: #EAF0F7;
@@ -3311,13 +3311,13 @@ browser {
 	--gnome-private-inactive-headerbar-background: var(--gnome-private-toolbar-background);
 
 	/* Text color for Firefox Logo in new private tab */
-	--gnome-private-wordmark: #20123A;
+	--gnome-private-wordmark: ${dimblack};
 
 	/* New private tab background */
 	--gnome-private-in-content-page-background: #EAF0F7;
 
 	/* Private browsing info box */
-	--gnome-private-text-primary-color: #15141A;
+	--gnome-private-text-primary-color: ${bg-darker};
 }
 
 /* Variables that start with --gnome- are added by me and are assigned
@@ -3330,8 +3330,8 @@ browser {
 		--gnome-browser-before-load-background: ${bg};
 
 		/* Accent */
-		--gnome-accent-bg: #3584e4;
-		--gnome-accent: #78aeed;
+		--gnome-accent-bg: ${grey};
+		--gnome-accent: ${light-black};
 
 		/* Toolbars */
 		--gnome-toolbar-background: ${black};
@@ -3417,7 +3417,7 @@ browser {
 
 	/* Private window colors */
 	:root {
-		--gnome-private-accent: #71A1DB;
+		--gnome-private-accent: ${dark-grey};;
 
 		/* Toolbars */
 		--gnome-private-toolbar-background: ${bg-darker};

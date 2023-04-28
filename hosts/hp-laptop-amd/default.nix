@@ -1,4 +1,4 @@
-{ config, nur, nixpkgs, overlays, inputs, home-manager, nixos-hardware, system
+{ config, nur, nixpkgs, overlays, inputs, home-manager, nixos-hardware,bhairava-grub-theme,  system
 , ... }:
 
 with nixpkgs;
@@ -7,6 +7,8 @@ lib.nixosSystem rec {
   inherit system;
 
   modules = [
+    bhairava-grub-theme.nixosModules
+    
     nur.nixosModules.nur
     ./configuration.nix
     nixos-hardware.nixosModules.common-cpu-amd

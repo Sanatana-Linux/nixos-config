@@ -664,6 +664,8 @@ toolbarspring {
 tab > stack {
 	height: 32px !important;
 	min-height: 32px !important;
+  	max-width:  350px !important;
+
 }
 
 /* Remove hover effects on tab bar buttons */
@@ -743,7 +745,7 @@ tab > stack {
 /*	border: none !important;*/
 	padding-inline: 0 !important;
 	padding: 3px 2px 3px !important;
-	max-width:  350px !important;
+
 }
 
 #tabbrowser-tabs[haspinnedtabs]:not([positionpinnedtabs]) > #tabbrowser-arrowscrollbox > .tabbrowser-tab[first-visible-unpinned-tab] {
@@ -773,6 +775,7 @@ tab {
 	justify-content: center;
 	align-items: center;
 	min-width: 100% !important;
+ 	max-width:  350px !important;
 	padding: 0 10px !important;
 }
 

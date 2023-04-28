@@ -46,10 +46,17 @@
       submodules = true;
       flake = false;
     };
+    
+     bhairava-grub-theme = {
+          type = "git";
+      url = "https://github.com/Sanatana-Linux/Bhairava-Grub-Theme";
+      inputs.nixpkgs.follows = "nixpkgs";
+
+    };
   };
 
   outputs = { self, nixpkgs,  nur, home-manager, nixpkgs-f2k, luaFormatter, nps
-    , nixos-hardware, ... }@inputs:
+    , nixos-hardware, bhairava-grub-theme, ... }@inputs:
     let
       inherit (self) outputs;
       forSystems = nixpkgs.lib.genAttrs nixpkgs.lib.systems.flakeExposed;
@@ -90,7 +97,7 @@
     in {
       nixosConfigurations = {
         hp-laptop-amd = import ./hosts/hp-laptop-amd {
-          inherit config nixpkgs overlays lib inputs system home-manager nur
+          inherit config nixpkgs overlays lib inputs system home-manager nur bhairava-grub-theme
             nixos-hardware;
         };
         live-usb = import ./hosts/live-usb {

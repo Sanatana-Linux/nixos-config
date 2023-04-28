@@ -67,6 +67,12 @@ in {
         device = "nodev";
         efiSupport = true;
         useOSProber = true;
+        bhairava-grub-theme = {
+      enable = true;
+      style = "nixos";
+      icon = "color";
+      resolution = "1080p";
+    };
 
       };
     };

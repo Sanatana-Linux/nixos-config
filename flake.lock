@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "bhairava-grub-theme": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1682671519,
+        "narHash": "sha256-Z25XHEnaVmxBzaXj5J0npPFRBL0Lyi+A1N2mxw/+b/8=",
+        "ref": "refs/heads/main",
+        "rev": "8832635803dfa931bf063f299505b9a4678218d4",
+        "revCount": 48,
+        "type": "git",
+        "url": "https://github.com/Sanatana-Linux/Bhairava-Grub-Theme"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://github.com/Sanatana-Linux/Bhairava-Grub-Theme"
+      }
+    },
     "crane": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -503,6 +519,7 @@
     },
     "root": {
       "inputs": {
+        "bhairava-grub-theme": "bhairava-grub-theme",
         "emacs-overlay": "emacs-overlay",
         "home-manager": "home-manager",
         "luaFormatter": "luaFormatter",

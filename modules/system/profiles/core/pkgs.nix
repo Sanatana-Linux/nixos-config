@@ -36,9 +36,7 @@ mesa
 mesa-demos
 moreutils
 nix-plugins
-nix-plugins
 nix-prefetch
-nix-prefetch-scripts
 nix-prefetch-scripts
 nix-universal-prefetch
 nixos-generators

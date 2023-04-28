@@ -3,12 +3,12 @@
 with pkgs;
 
 writeScriptBin "gita" ''
-#!/usr/bin/env bash
+  #!/usr/bin/env bash
 
-git add --all .
+  git add --all .
 
-git commit $1 || git commit
+  git commit $1 || git commit
 
-git push \
+  git push \
 
 ''

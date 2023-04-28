@@ -1,4 +1,4 @@
-{ config,inputs, pkgs, lib, ... }:
+{ config, inputs, pkgs, lib, ... }:
 
 let
   core-packages =
@@ -45,34 +45,33 @@ in {
     ../../modules/system/profiles/sound
     ../../modules/system/profiles/virtualisation
     ../../modules/system/profiles/bluetooth
-    ../../modules/system/profiles/security 
+    ../../modules/system/profiles/security
 
   ];
 
   # use grub with os-prober support
-  boot= {
+  boot = {
     initrd.systemd.enable = true;
     # unstable kernel   
     kernelPackages = pkgs.linuxPackages_latest;
-  # Boot Loader
-  loader = {
-    systemd-boot.enable = false;
-    efi = {
-      canTouchEfiVariables = true;
-      efiSysMountPoint = "/boot";
+    # Boot Loader
+    loader = {
+      systemd-boot.enable = false;
+      efi = {
+        canTouchEfiVariables = true;
+        efiSysMountPoint = "/boot";
+      };
+      grub = {
+        enable = true;
+        version = 2;
+        device = "nodev";
+        efiSupport = true;
+        useOSProber = true;
+
+      };
     };
-    grub = {
-      enable = true;
-      version = 2;
-      device = "nodev";
-      efiSupport = true;
-      useOSProber = true;
-      
-    };
-  };
   };
 
- 
   programs.zsh.enable = true;
   # time zone
   time.timeZone = "America/Los_Angeles";
@@ -86,47 +85,46 @@ in {
     exportConfiguration = true;
     dpi = 96;
     libinput.enable = true;
-  displayManager = {
-    defaultSession = "none+awesome";
-    lightdm = {
-      enable = true;
-      background = ../../modules/system/programs/lightdm/wallpaper.png;
-      greeters.gtk = {
+    displayManager = {
+      defaultSession = "none+awesome";
+      lightdm = {
         enable = true;
-        theme = {
-          package = pkgs.colloid-gtk-theme;
-          name = "Colloid-Dark";
+        background = ../../modules/system/programs/lightdm/wallpaper.png;
+        greeters.gtk = {
+          enable = true;
+          theme = {
+            package = pkgs.colloid-gtk-theme;
+            name = "Colloid-Dark";
+          };
+          cursorTheme = {
+            package = pkgs.phinger-cursors;
+            name = "Phinger Cursors (light)";
+          };
+          iconTheme = {
+            package = pkgs.tela-circle-icon-theme;
+            name = "Tela";
+          };
+          indicators = [ "~session" "~spacer" ];
         };
-        cursorTheme = {
-          package = pkgs.phinger-cursors;
-          name = "Phinger Cursors (light)";
-        };
-        iconTheme = {
-          package = pkgs.tela-circle-icon-theme;
-          name = "Tela";
-        };
-        indicators = [ "~session" "~spacer" ];
+      };
+      #autoLogin = {
+      #  enable = true;
+      #  user = "tlh";
+      #};
+    };
+
+    windowManager.awesome = {
+      enable = true;
+      package = pkgs.awesome-git-luajit;
+
+      luaModules = lib.attrValues {
+        inherit (pkgs.luajitPackages)
+          cjson dkjson ldbus luasec lgi ldoc lpeg lpeg_patterns luafilesystem
+          luasocket luasystem stdlib luaposix argparse vicious;
       };
     };
-    #autoLogin = {
-    #  enable = true;
-    #  user = "tlh";
-    #};
-  };
 
-  
-windowManager.awesome = {
-    enable = true;
-    package = pkgs.awesome-git-luajit;
-    
-    luaModules = lib.attrValues {
-      inherit (pkgs.luajitPackages)
-        cjson dkjson ldbus luasec lgi ldoc lpeg lpeg_patterns luafilesystem
-        luasocket luasystem stdlib luaposix argparse vicious;
-    };
   };
-
-};
   # Defines my account, on first boot I change the passwd as root, don't worry!
   users.users.tlh = {
     isNormalUser = true;
@@ -154,6 +152,9 @@ windowManager.awesome = {
   nix = {
     package = pkgs.nixFlakes;
     extraOptions = "experimental-features = nix-command flakes";
+    generateRegistryFromInputs = true;
+    generateNixPathFromInputs = true;
+
   };
 
   # allow unfree pkgs through configuration.nix

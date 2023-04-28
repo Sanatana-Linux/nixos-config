@@ -117,10 +117,11 @@ in {
       GTK_THEME = "Colloid-Dark";
       XCURSOR_SIZE = "48";
       BROWSER = "${pkgs.firefox}/bin/firefox";
-      EDITOR = "${pkgs.neovim}/bin/nvim";
+      EDITOR = "nvim";
       GOPATH = "${config.home.homeDirectory}/go";
       RUSTUP_HOME = "${config.home.homeDirectory}/.local/share/rustup";
       XDG_DATA_HOME = "${config.home.homeDirectory}/.local/share";
+      QT_QPA_PLATFORMTHEME = "qt5ct";
     };
   };
 }

@@ -22,10 +22,12 @@ gnome.dconf-editor
 gnumake
 gnutls
 gptfdisk
+grub2
 gsettings-desktop-schemas
 iputils
 libfm
 libfm-extra
+libisoburn
 libsecret
 libtool
 lynis

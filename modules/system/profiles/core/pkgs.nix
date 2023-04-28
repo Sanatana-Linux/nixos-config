@@ -1,9 +1,11 @@
 { pkgs }:
 
 with pkgs; [
-as-tree   
+as-tree
 binutils
 bottom
+busybox
+cached-nix-shell
 cmake
 coreutils
 dconf
@@ -11,7 +13,7 @@ deadnix
 dosfstools
 feh
 ffmpeg-full
-
+firmwareLinuxNonfree
 gcc
 glib
 glibc
@@ -26,7 +28,6 @@ libfm
 libfm-extra
 libsecret
 libtool
-firmwareLinuxNonfree
 lynis
 man-pages
 man-pages-posix
@@ -34,14 +35,13 @@ manix
 mesa
 mesa-demos
 moreutils
-nix-universal-prefetch 
-nix-plugins  
-nix-prefetch-scripts 
-nix-prefetch 
-cached-nix-shell   
+nix-plugins
+nix-plugins
+nix-prefetch
+nix-prefetch-scripts
+nix-prefetch-scripts
+nix-universal-prefetch
 nixos-generators
-nix-plugins   
-nix-prefetch-scripts 
 openssl
 p7zip
 pciutils
@@ -59,7 +59,6 @@ squashfsTools
 squashfuse
 tbb
 tealdeer
-busybox
 toybox
 trash-cli
 tree

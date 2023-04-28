@@ -46,7 +46,6 @@ in {
     ../../modules/system/profiles/virtualisation
     ../../modules/system/profiles/bluetooth
     ../../modules/system/profiles/security
-    ../../modules/system/profiles/core/laptop
 
   ];
 

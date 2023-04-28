@@ -37,6 +37,7 @@ let
 in {
   imports = [
     ./hardware-configuration.nix
+    ../../modules/system/profiles/nix
     ../../modules/system/profiles/fonts
     ../../modules/system/profiles/development
     ../../modules/system/profiles/interface

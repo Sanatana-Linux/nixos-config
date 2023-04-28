@@ -24,7 +24,7 @@ efm-langserver
 emacs
 emacs-all-the-icons-fonts
 expat
-fnm
+nodejs
 fuse3
 gcc
 glib

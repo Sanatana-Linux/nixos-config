@@ -48,10 +48,10 @@
     };
     
      bhairava-grub-theme = {
-          type = "git";
-      url = "https://github.com/Sanatana-Linux/Bhairava-Grub-Theme";
+          #type = "git";
+      #url = "https://github.com/Sanatana-Linux/Bhairava-Grub-Theme";
+      url = "github:Sanatana-Linux/Bhairava-Grub-Theme";
       inputs.nixpkgs.follows = "nixpkgs";
-
     };
   };
 

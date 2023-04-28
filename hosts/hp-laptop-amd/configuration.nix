@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config,inputs, pkgs, lib, ... }:
 
 let
   core-packages =

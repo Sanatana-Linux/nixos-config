@@ -64,6 +64,7 @@ nixfmt
 nixpkgs-fmt
 nodejs
 nodePackages_latest.diagnostic-languageserver
+nodePackages_latest.vscode-json-languageserver-bin
 nodePackages_latest.eslint
 nodePackages_latest.gulp
 nodePackages_latest.neovim
@@ -119,7 +120,7 @@ wkhtmltopdf-bin
 yarn
 zeal
 zlib
- 
+vimPlugins.rust-tools-nvim
 direnv
 ]
 

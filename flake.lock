@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1682674599,
-        "narHash": "sha256-S3XnCziyZVDJiDI+92c26DiWE+Wy+zwu53RdjP2xuJc=",
+        "lastModified": 1682679074,
+        "narHash": "sha256-AlbKRKGhHzFXJBS9bFRI7qTGGzIT6FJHQ/qJuS1XRhA=",
         "owner": "Sanatana-Linux",
         "repo": "Bhairava-Grub-Theme",
-        "rev": "fd890a06f3bfcd79c38924cda075c18a6e1e1e89",
+        "rev": "a3cafe2e28064baf23e43df3cce9f2d9219babf5",
         "type": "github"
       },
       "original": {

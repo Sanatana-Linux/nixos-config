@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1682679074,
-        "narHash": "sha256-AlbKRKGhHzFXJBS9bFRI7qTGGzIT6FJHQ/qJuS1XRhA=",
+        "lastModified": 1682687812,
+        "narHash": "sha256-20hQchJDo4hVH8QXDoRHZCyOmgOrYcNXnBy74AP8jMo=",
         "owner": "Sanatana-Linux",
         "repo": "Bhairava-Grub-Theme",
-        "rev": "a3cafe2e28064baf23e43df3cce9f2d9219babf5",
+        "rev": "1960bfb932705ac354268dd30dfdf1bd1591bc88",
         "type": "github"
       },
       "original": {
@@ -490,11 +490,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1682670842,
-        "narHash": "sha256-xgPqeYZVMgCTtiBsgdfRizhr9YedyyaHmqtom5K7R1c=",
+        "lastModified": 1682686658,
+        "narHash": "sha256-h2gpcWIEcO5CYfdLFBvxI59cOS65YJejpxVqdh1sZGU=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "0debdae70a437f91abf9327a055cd0a504738707",
+        "rev": "8814b947eb4f10b1f26ed7cb7b067c58b28b065a",
         "type": "github"
       },
       "original": {

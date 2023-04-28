@@ -62,7 +62,6 @@ nimPackages.nim
 nix-tree
 nixfmt
 nixpkgs-fmt
-nodejs
 nodePackages_latest.diagnostic-languageserver
 nodePackages_latest.vscode-json-languageserver-bin
 nodePackages_latest.eslint

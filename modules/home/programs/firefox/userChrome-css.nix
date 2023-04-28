@@ -743,6 +743,7 @@ tab > stack {
 /*	border: none !important;*/
 	padding-inline: 0 !important;
 	padding: 3px 2px 3px !important;
+	max-width:  350px !important;
 }
 
 #tabbrowser-tabs[haspinnedtabs]:not([positionpinnedtabs]) > #tabbrowser-arrowscrollbox > .tabbrowser-tab[first-visible-unpinned-tab] {
@@ -752,9 +753,9 @@ tab > stack {
 /* Tab labels */
 tab {
 	color: var(--gnome-toolbar-color) !important;
-	font-family: Cantarell, inherit;
 	font-weight: normal;
 	font-size: 1em;
+
 }
 
 /* Reset tab background */

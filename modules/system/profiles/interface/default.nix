@@ -29,11 +29,8 @@
   services.upower.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManagers but this is linux so better to be safe than irritated).
-  services.xserver.libinput= {
-    enable = true;
-                pointer_accel = "0.63";
-      accel_profile = "flat"; # flat good adaptive trash
-  };
+  services.xserver.libinput.enable = true;
+
   hardware.opengl = { enable = true; };
 
   # light

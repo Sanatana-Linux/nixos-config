@@ -65,6 +65,7 @@ in {
     (import ../../modules/home/programs/vscode { inherit pkgs config; })
     (import ../../modules/home/programs/bat { inherit config; })
     (import ../../modules/home/programs/direnv { inherit config lib pkgs inputs; })
+    (import ../../modules/home/programs/zellij { inherit config lib pkgs inputs; })
     (import ../../modules/home/programs/exa { inherit config; })
     (import ../../modules/home/programs/git { inherit config; })
     (import ../../modules/home/programs/picom { })

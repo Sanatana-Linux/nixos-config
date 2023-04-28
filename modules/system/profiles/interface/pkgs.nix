@@ -61,7 +61,7 @@ goocanvas
 goocanvas3
 gtk_engines
 i3lock-color
-file-roller
+
 inotify-tools
 libcanberra-gtk3
 librsvg

@@ -3785,4 +3785,10 @@ https://www.reddit.com/r/FirefoxCSS/comments/s4wsww/show_the_number_of_open_tabs
 .tabbrowser-tab[fadein]:not([pinned]){ 
   max-width: 180px !important; 
   }
+  .tabbrowser-tabs{
+    display: inline-flex !important;
+      justify-items: start !important;
+      justify-content: start !important;
+      align-items: left; 
+    }
 ''

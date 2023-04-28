@@ -121,5 +121,6 @@ zeal
 zlib
 vimPlugins.rust-tools-nvim
 direnv
+yarn2nix
 ]
 

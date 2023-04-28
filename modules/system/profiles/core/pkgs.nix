@@ -11,6 +11,7 @@ deadnix
 dosfstools
 feh
 ffmpeg-full
+
 gcc
 glib
 glibc
@@ -33,6 +34,11 @@ manix
 mesa
 mesa-demos
 moreutils
+nix-universal-prefetch 
+nix-plugins  
+nix-prefetch-scripts 
+nix-prefetch 
+cached-nix-shell   
 nixos-generators
 nix-plugins   
 nix-prefetch-scripts 

@@ -22,6 +22,8 @@ gtk-sharp-2_0
 gtk2-x11
 inotify-tools
 libdbusmenu
+xscreensaver
+xsuspender
 libgee
 libglibutil
 libgudev

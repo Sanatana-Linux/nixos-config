@@ -37,7 +37,6 @@ let
 in {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/system/profiles/nix
     ../../modules/system/profiles/fonts
     ../../modules/system/profiles/development
     ../../modules/system/profiles/interface
@@ -52,8 +51,11 @@ in {
 
   # use grub with os-prober support
   boot= {
-    		initrd.systemd.enable = true;
-    loader = {
+    initrd.systemd.enable = true;
+    # unstable kernel   
+    kernelPackages = pkgs.linuxPackages_latest;
+  # Boot Loader
+  loader = {
     systemd-boot.enable = false;
     efi = {
       canTouchEfiVariables = true;
@@ -70,8 +72,7 @@ in {
   };
   };
 
-  # unstable kernel
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+ 
   programs.zsh.enable = true;
   # time zone
   time.timeZone = "America/Los_Angeles";
@@ -85,11 +86,7 @@ in {
     exportConfiguration = true;
     dpi = 96;
     libinput.enable = true;
-  };
-
-  services.blueman.enable = true;
-
-  services.xserver.displayManager = {
+  displayManager = {
     defaultSession = "none+awesome";
     lightdm = {
       enable = true;
@@ -117,9 +114,8 @@ in {
     #};
   };
 
-  services.xserver.xautolock.enable = true;
   
-  services.xserver.windowManager.awesome = {
+windowManager.awesome = {
     enable = true;
     package = pkgs.awesome-git-luajit;
     
@@ -130,7 +126,7 @@ in {
     };
   };
 
-
+};
   # Defines my account, on first boot I change the passwd as root, don't worry!
   users.users.tlh = {
     isNormalUser = true;

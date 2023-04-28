@@ -7,8 +7,8 @@ lib.nixosSystem rec {
   inherit system;
 
   modules = [
-    bhairava-grub-theme.nixosModules
-    
+    bhairava-grub-theme.nixosModule
+
     nur.nixosModules.nur
     ./configuration.nix
     nixos-hardware.nixosModules.common-cpu-amd

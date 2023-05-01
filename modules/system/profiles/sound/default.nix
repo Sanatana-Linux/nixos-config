@@ -4,7 +4,6 @@
   # Sound
   sound.enable = true; 
 
-
   systemd.user.services = {
     pulseaudio.wantedBy = [ "default.target" ];
   };

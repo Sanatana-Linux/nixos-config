@@ -2,6 +2,7 @@
 
 with pkgs; [
   ascii-image-converter
+  ciano
   figlet
   gimp-with-plugins
   gimpPlugins.exposureBlend
@@ -24,9 +25,14 @@ with pkgs; [
   jp2a
   jpegoptim
   krita
+  libwebp
+  meme
   nodePackages_latest.svgo
   optipng
   pinsel
+  webp-pixbuf-loader
+  gdk-pixbuf
+  rubyPackages.gdk_pixbuf2
   pngcrush
   python311Packages.pyfiglet
   svgcleaner

@@ -9,6 +9,7 @@ binutils
 btop
 comma
 conda
+imgurbash2
 coreutils
 curl
 exa

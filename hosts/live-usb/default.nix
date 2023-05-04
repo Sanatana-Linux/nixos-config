@@ -5,7 +5,7 @@ with nixpkgs;
 lib.nixosSystem rec {
   inherit system;
 
-  modules = [
+  settings = [
     ./configuration.nix
 
     {

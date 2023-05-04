@@ -7,8 +7,8 @@ in {
     layer = "top";
     position = "left";
     width = 40;
-    modules-left = ["custom/launcher" "wlr/workspaces"];
-    modules-right = ["keyboard-state" "custom/settings" "pulseaudio" "network" "custom/hour" "custom/mins" "custom/powermenu"];
+    settings-left = ["custom/launcher" "wlr/workspaces"];
+    settings-right = ["keyboard-state" "custom/settings" "pulseaudio" "network" "custom/hour" "custom/mins" "custom/powermenu"];
     "custom/launcher" = {
       format = "";
       on-click = "rofi -show drun";

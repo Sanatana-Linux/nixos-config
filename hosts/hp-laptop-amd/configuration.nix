@@ -2,51 +2,51 @@
 
 let
   core-packages =
-    import ../../modules/system/profiles/core/pkgs.nix { inherit pkgs; };
+    import ../../settings/system/profiles/core/pkgs.nix { inherit pkgs; };
 
   development-packages =
-    import ../../modules/system/profiles/development/pkgs.nix { inherit pkgs; };
+    import ../../settings/system/profiles/development/pkgs.nix { inherit pkgs; };
 
   interface-packages =
-    import ../../modules/system/profiles/interface/pkgs.nix { inherit pkgs; };
+    import ../../settings/system/profiles/interface/pkgs.nix { inherit pkgs; };
 
   fonts-packages =
-    import ../../modules/system/profiles/fonts/pkgs.nix { inherit pkgs; };
+    import ../../settings/system/profiles/fonts/pkgs.nix { inherit pkgs; };
 
   laptop-packages =
-    pkgs.callPackage ../../modules/system/profiles/core/laptop/pkgs.nix {
+    pkgs.callPackage ../../settings/system/profiles/core/laptop/pkgs.nix {
       inherit pkgs;
     };
 
   networking-packages =
-    import ../../modules/system/profiles/networking/pkgs.nix { inherit pkgs; };
+    import ../../settings/system/profiles/networking/pkgs.nix { inherit pkgs; };
 
   shell-packages =
-    pkgs.callPackage ../../modules/system/profiles/shell/pkgs.nix {
+    pkgs.callPackage ../../settings/system/profiles/shell/pkgs.nix {
       inherit pkgs;
     };
 
   sound-packages =
-    import ../../modules/system/profiles/sound/pkgs.nix { inherit pkgs; };
+    import ../../settings/system/profiles/sound/pkgs.nix { inherit pkgs; };
 
   virtualisation-packages =
-    import ../../modules/system/profiles/virtualisation/pkgs.nix {
+    import ../../settings/system/profiles/virtualisation/pkgs.nix {
       inherit pkgs;
     };
 
 in {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/system/profiles/fonts
-    ../../modules/system/profiles/development
-    ../../modules/system/profiles/interface
-    ../../modules/system/profiles/networking
-    ../../modules/system/profiles/shell
-    ../../modules/system/profiles/sound
-    ../../modules/system/profiles/virtualisation
-    ../../modules/system/profiles/bluetooth
-    ../../modules/system/profiles/security
-    ../../modules/system/profiles/core/laptop
+    ../../settings/system/profiles/fonts
+    ../../settings/system/profiles/development
+    ../../settings/system/profiles/interface
+    ../../settings/system/profiles/networking
+    ../../settings/system/profiles/shell
+    ../../settings/system/profiles/sound
+    ../../settings/system/profiles/virtualisation
+    ../../settings/system/profiles/bluetooth
+    ../../settings/system/profiles/security
+    ../../settings/system/profiles/core/laptop
 
   ];
 
@@ -91,7 +91,7 @@ in {
       defaultSession = "none+awesome";
       lightdm = {
         enable = true;
-        background = ../../modules/system/programs/lightdm/wallpaper.png;
+        background = ../../settings/system/programs/lightdm/wallpaper.png;
         greeters.gtk = {
           enable = true;
           theme = {

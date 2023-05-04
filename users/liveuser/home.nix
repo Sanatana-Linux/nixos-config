@@ -3,21 +3,21 @@
 let
 
   # Script Construction (must be included with the packages below)
-  run = import ../../modules/home/bin/run.nix { inherit pkgs; };
-  nux = import ../../modules/home/bin/nux.nix { inherit pkgs; };
-  extract = import ../../modules/home/bin/extract.nix { inherit pkgs; };
+  run = import ../../settings/home/bin/run.nix { inherit pkgs; };
+  nux = import ../../settings/home/bin/nux.nix { inherit pkgs; };
+  extract = import ../../settings/home/bin/extract.nix { inherit pkgs; };
 
   # Integrate nur within Home-Manager
   nur = import (builtins.fetchTarball {
     url = "https://github.com/nix-community/NUR/archive/master.tar.gz";
-    sha256 = "0rb4dhfpcshmlyirfq5r5qwmr7r3y4di8jzpc51fww04c9qjjs47";
+    sha256 = "00lpla5das5vf96588zgq001iak39kws953yszjwmbsri0cazf2a";
 
   }) { inherit pkgs; };
 
-  colors = import ../../modules/home/theme/colors.nix { };
-  base16-theme = import ../../modules/home/theme/base16.nix { };
+  colors = import ../../settings/home/theme/colors.nix { };
+  base16-theme = import ../../settings/home/theme/base16.nix { };
 
-  extra-fonts = import ../../modules/home/fonts { };
+  extra-fonts = import ../../settings/home/fonts { };
 
 in {
   # Home Manager needs a bit of information about you and the
@@ -54,19 +54,19 @@ in {
   theme.base16.colors = base16-theme;
 
   imports = lib.attrValues nur.repos.rycee.hmModules ++ [
-    (import ../../modules/home/programs/kitty { inherit pkgs; })
-    (import ../../modules/home/programs/firefox { inherit pkgs config nur colors; })
-    (import ../../modules/home/programs/bat { inherit config; })
-    (import ../../modules/home/programs/exa { inherit config; })
-    (import ../../modules/home/programs/git { inherit config; })
-    (import ../../modules/home/programs/picom { })
-    (import ../../modules/home/programs/rofi { inherit pkgs config; })
-    (import ../../modules/home/programs/starship)
-    (import ../../modules/home/programs/zathura)
-    #(import ../../modules/home/programs/xresources)
+    (import ../../settings/home/programs/kitty { inherit pkgs; })
+    (import ../../settings/home/programs/firefox { inherit pkgs config nur colors; })
+    (import ../../settings/home/programs/bat { inherit config; })
+    (import ../../settings/home/programs/exa { inherit config; })
+    (import ../../settings/home/programs/git { inherit config; })
+    (import ../../settings/home/programs/picom { })
+    (import ../../settings/home/programs/rofi { inherit pkgs config; })
+    (import ../../settings/home/programs/starship)
+    (import ../../settings/home/programs/zathura)
+    #(import ../../settings/home/programs/xresources)
     # (import ./theme/nvim { inherit colors; })
   ];
-  xresources.extraConfig = import ../../modules/home/programs/xresources { inherit colors; };
+  xresources.extraConfig = import ../../settings/home/programs/xresources { inherit colors; };
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 

@@ -4,6 +4,9 @@ with pkgs; [
   ascii-image-converter
   ciano
   figlet
+  gifsicle 
+  giflib
+  gifski
   gimp-with-plugins
   gimpPlugins.exposureBlend
   gimpPlugins.fourier
@@ -31,8 +34,15 @@ with pkgs; [
   optipng
   pinsel
   webp-pixbuf-loader
-  gdk-pixbuf
   rubyPackages.gdk_pixbuf2
+  yeetgif
+  jhead
+  jpegoptim 
+  jpegrescan
+  pngout
+  pngquant
+  resvg
+  emacsPackages.svgo  
   pngcrush
   python311Packages.pyfiglet
   svgcleaner

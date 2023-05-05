@@ -3668,7 +3668,7 @@ See the above repository for updates as well as full license text. */
 
 // 
 /* -------------------------------------------------------------------------- */
-// https://github.com/Sanatana-Linux/nixos-config/blob/e81d597048f00188400349f4557d0c647fce4feb/settings/home/programs/firefox/userContent-css.nix
+// https://github.com/Sanatana-Linux/nixos-config/blob/e81d597048f00188400349f4557d0c647fce4feb/modules/home/programs/firefox/userContent-css.nix
 
 /* Line up tabs with urlbar configured with back/next/reload on compact uidensity: */
 .titlebar-spacer[type="pre-tabs"] {

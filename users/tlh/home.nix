@@ -3,26 +3,26 @@
 let
 
   # Script Construction (must be included with the packages below)
-  run = import ../../settings/home/bin/run.nix { inherit pkgs; };
-  gita = import ../../settings/home/bin/gita.nix { inherit pkgs; };
-  nux = import ../../settings/home/bin/nux.nix { inherit pkgs; };
-  extract = import ../../settings/home/bin/extract.nix { inherit pkgs; };
+  run = import ../../modules/home/bin/run.nix { inherit pkgs; };
+  gita = import ../../modules/home/bin/gita.nix { inherit pkgs; };
+  nux = import ../../modules/home/bin/nux.nix { inherit pkgs; };
+  extract = import ../../modules/home/bin/extract.nix { inherit pkgs; };
 
   images-packages =
-    import ../../settings/home/profiles/images/pkgs.nix { inherit pkgs; };
+    import ../../modules/home/profiles/images/pkgs.nix { inherit pkgs; };
 
   desktop-packages =
-    import ../../settings/home/profiles/desktop/pkgs.nix { inherit pkgs; };
+    import ../../modules/home/profiles/desktop/pkgs.nix { inherit pkgs; };
 
   # Integrate nur within Home-Manager
   nur = import (builtins.fetchTarball {
     url = "https://github.com/nix-community/NUR/archive/master.tar.gz";
-    sha256 = "00lpla5das5vf96588zgq001iak39kws953yszjwmbsri0cazf2a";
+    sha256 = "0ai0iyk0zfjrgaghhvi747cz4s16yzd1g67b5vi0l5x6akjf0l49";
 
   }) { inherit pkgs; };
 
-  colors = import ../../settings/home/theme/colors.nix { };
-  base16-theme = import ../../settings/home/theme/base16.nix { };
+  colors = import ../../modules/home/theme/colors.nix { };
+  base16-theme = import ../../modules/home/theme/base16.nix { };
 
 in {
 
@@ -50,7 +50,7 @@ in {
   # extra fonts
   home.activation.installFontConfig = ''
     if [ ! -d "$HOME/.local/share/fonts" ]; then
-      ln -sf "/etc/nixos/settings/home/fonts" "$HOME/.local/share/"
+      ln -sf "/etc/nixos/modules/home/fonts" "$HOME/.local/share/"
       chmod -R +w "$HOME/.local/share/fonts"
       fc-cache -f
       fi
@@ -58,29 +58,29 @@ in {
   # -------------------------------------------------------------------------- #
   # Programs Imports
   imports = lib.attrValues nur.repos.rycee.hmModules ++ [
-    (import ../../settings/home/programs/kitty { inherit pkgs; })
-    (import ../../settings/home/programs/firefox {
+    (import ../../modules/home/programs/kitty { inherit pkgs; })
+    (import ../../modules/home/programs/firefox {
       inherit pkgs config nur colors;
     })
-    (import ../../settings/home/programs/vscode { inherit pkgs config; })
-    (import ../../settings/home/programs/bat { inherit config; })
-    (import ../../settings/home/programs/direnv { inherit config lib pkgs inputs; })
-    (import ../../settings/home/programs/exa { inherit config; })
-    (import ../../settings/home/programs/git { inherit config; })
-    (import ../../settings/home/programs/picom { })
-    (import ../../settings/home/programs/rofi { inherit pkgs config; })
-    (import ../../settings/home/programs/starship)
-    (import ../../settings/home/programs/default-applications { inherit lib; })
+    (import ../../modules/home/programs/vscode { inherit pkgs config; })
+    (import ../../modules/home/programs/bat { inherit config; })
+    (import ../../modules/home/programs/direnv { inherit config lib pkgs inputs; })
+    (import ../../modules/home/programs/exa { inherit config; })
+    (import ../../modules/home/programs/git { inherit config; })
+    (import ../../modules/home/programs/picom { })
+    (import ../../modules/home/programs/rofi { inherit pkgs config; })
+    (import ../../modules/home/programs/starship)
+    (import ../../modules/home/programs/default-applications { inherit lib; })
     # -------------------------------------------------------------------------- #
     # Profiles
 
     # gtk configuration
-    (import ../../settings/home/profiles/desktop)
+    (import ../../modules/home/profiles/desktop)
 
   ];
 
   xresources.extraConfig =
-    import ../../settings/home/programs/xresources { inherit colors; };
+    import ../../modules/home/programs/xresources { inherit colors; };
 
   # -------------------------------------------------------------------------- #
   # Let Home Manager install and manage itself.

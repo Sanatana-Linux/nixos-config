@@ -11,6 +11,8 @@ alsaequal
 audacity
 cava
 lmms
+libpulseaudio
+
 mediainfo
 mpc_cli
 mpd
@@ -24,7 +26,8 @@ pavucontrol
 picard
 playerctl
 psmisc
-pulseaudio
+pulseaudioFull
+pulseaudio-ctl
 pulseeffects-legacy
 pulsemixer
 python310Packages.deemix

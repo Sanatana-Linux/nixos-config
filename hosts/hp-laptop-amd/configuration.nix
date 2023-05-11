@@ -143,7 +143,7 @@ in {
     ++ interface-packages ++ laptop-packages ++ networking-packages
     ++ shell-packages ++ sound-packages ++ virtualisation-packages
     ++ (with pkgs; [
-      awesome-git-luajit
+      awesome-git
       home-manager
 
     ]);

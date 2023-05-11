@@ -2,7 +2,9 @@
 
 with pkgs; [
 abootimg
+awscli
 macchina
+prisma-engines
 android-backup-extractor
 android-file-transfer
 android-tools

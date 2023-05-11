@@ -117,7 +117,7 @@ in {
 
     windowManager.awesome = {
       enable = true;
-      package = pkgs.awesome-git-luajit;
+      package = pkgs.awesome-git;
 
       luaModules = lib.attrValues {
         inherit (pkgs.luaPackages)

@@ -120,7 +120,7 @@ in {
       package = pkgs.awesome-git-luajit;
 
       luaModules = lib.attrValues {
-        inherit (pkgs.luajitPackages)
+        inherit (pkgs.luaPackages)
           cjson dkjson ldbus luasec lgi ldoc lpeg lpeg_patterns luafilesystem
           luasocket luasystem stdlib luaposix argparse vicious;
       };

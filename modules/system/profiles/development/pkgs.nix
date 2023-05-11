@@ -2,12 +2,15 @@
 
 with pkgs; [
 abootimg
+macchina
 android-backup-extractor
 android-file-transfer
 android-tools
 android-udev-rules
 apksigcopier
+ipfs
 arduino
+pkg-config-unwrapped
 bash
 bfg-repo-cleaner
 black

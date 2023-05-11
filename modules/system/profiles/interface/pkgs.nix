@@ -3,6 +3,7 @@
 with pkgs; [
 acpi
 arandr
+llama
 autorandr
 brightnessctl
 dbus-broker

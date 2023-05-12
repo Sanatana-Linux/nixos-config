@@ -21,6 +21,9 @@
       "editor.wordWrap" = "on";
        "files.autoSave" = "onFocusChange";
        "nix.enableLanguageServer.enabled" = true;
+       "prettier.bracketSameLine"= true;
+       "prettier.jsxSingleQuote"= true;
+       "prettier.quoteProps"= "consistent";
     };
     extensions = with pkgs.vscode-extensions; [
       bbenoist.nix

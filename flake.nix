@@ -77,8 +77,7 @@
         (final: _:
           let inherit (final) system;
           in { } // (with nixpkgs-f2k.packages.${system}; {
-            awesome = awesome-git;
-
+       
             picom = picom-git;
           }) // {
             luaFormatter-src = luaFormatter;
@@ -88,6 +87,8 @@
             src = prev.luaFormatter-src;
             version = "999-master";
           };
+               awesome = awesome-git;
+
           awesome-git-luajit = awesome.override { lua = prev.luajit; };
           nps = inputs.nps.defaultPackage.${prev.system};
         })

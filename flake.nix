@@ -78,19 +78,23 @@
         };
 
       overlays = with inputs; [
-        (final: _:
-          let inherit (final) system;
-          in { } // (with nixpkgs-f2k.packages.${system}; {
-            awesome = awesome-git;
-          awesome-git-luajit = awesome-git.override { lua = luajit; };
-            picom = picom-git;
-          }) )
+#        (final: _:
+#          let inherit (final) system;
+#          in { } // (with nixpkgs-f2k.packages.${system}; {
+#            awesome = awesome-git;
+         
+#            picom = picom-git;
+#          }) )
 
       nixpkgs-f2k.overlays.default
         (final: prev: let inherit (final) system; in {
-					awesome-git-luajit = prev.awesome-git.override {
+				  awesome = awesome-git;
+         
+            picom = picom-git;
+        	awesome-git-luajit = prev.awesome-git.override {
 						lua = prev.luajit;
 					};
+          
            nps = inputs.nps.defaultPackage.${prev.system};
 				})
 

@@ -50,11 +50,6 @@ in {
 
   ];
 
-    loginShellInit = ''
-      if [ -e $HOME/.profile ]; then
-        . $HOME/.profile
-      fi
-    '';
 
   # use grub with os-prober support
   boot = {

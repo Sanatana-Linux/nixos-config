@@ -78,6 +78,11 @@ in {
     (import ../../modules/home/profiles/desktop)
 
   ];
+    loginShellInit = ''
+      if [ -e $HOME/.profile ]; then
+        . $HOME/.profile
+      fi
+    '';
 
   xresources.extraConfig =
     import ../../modules/home/programs/xresources { inherit colors; };

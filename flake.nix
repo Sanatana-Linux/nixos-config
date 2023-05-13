@@ -78,11 +78,11 @@
           let inherit (final) system;
           in { } // (with nixpkgs-f2k.packages.${system}; {
             awesome = awesome-git;
-
+          awesome-git-luajit = awesome.override { lua = luajit; };
             picom = picom-git;
           }) )
         (final: prev: {
-          awesome-git-luajit = prev.awesome.override { lua = prev.luajit; };
+
           nps = inputs.nps.defaultPackage.${prev.system};
         })
         nixpkgs-f2k.overlays.default

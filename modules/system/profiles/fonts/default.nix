@@ -34,9 +34,9 @@
       subpixel.lcdfilter = "default";
 
       defaultFonts = {
-        monospace = [ "BigBlueTerm Nerd Font Mono Regular " ];
-        sansSerif = [ "BigBlueTerm Nerd Font Mono Regular " ];
-        serif = [ "BigBlueTerm Nerd Font Mono Regular " ];
+        monospace = [ "GohuFont uni-11 Nerd Font Propo " ];
+        sansSerif = [ "Asap Condensed, Semi-Bold Condensed " ];
+        serif = [ "Agave Nerd Font Propo Bold " ];
       };
     };
   };

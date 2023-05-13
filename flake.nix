@@ -78,22 +78,13 @@
         };
 
       overlays = with inputs; [
-#        (final: _:
-#          let inherit (final) system;
-#          in { } // (with nixpkgs-f2k.packages.${system}; {
-#            awesome = awesome-git;
-         
-#            picom = picom-git;
-#          }) )
 
       nixpkgs-f2k.overlays.default
         (final: prev: let inherit (final) system; in {
-			#	  awesome = prev.awesome-git;
+			  awesome = prev.awesome-git;
          
             picom = prev.picom-git;
-        	awesome = prev.awesome-git.override {
-						lua = prev.luajit;
-					};
+
           
            nps = inputs.nps.defaultPackage.${prev.system};
 				})

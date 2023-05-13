@@ -11,6 +11,10 @@
       nerdfonts
       norwester-font
       noto-fonts-cjk
+      font-awesome
+      line-awesome 
+      font-awesome_4
+      font-awesome_5
       noto-fonts-emoji
       noto-fonts-extra
       powerline-fonts

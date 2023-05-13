@@ -144,6 +144,7 @@ in {
     ++ shell-packages ++ sound-packages ++ virtualisation-packages
     ++ (with pkgs; [
       awesome-luajit-git
+      luabind_luajit
       home-manager
 
     ]);

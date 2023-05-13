@@ -34,9 +34,9 @@
       subpixel.lcdfilter = "default";
 
       defaultFonts = {
-        monospace = [ "mplus Nerd Font Mono Medium " ];
-        sansSerif = [ "mplus Nerd Font Mono Medium " ];
-        serif = [ "mplus Nerd Font Mono Medium " ];
+        monospace = [ "BigBlueTerm Nerd Font Mono Regular " ];
+        sansSerif = [ "BigBlueTerm Nerd Font Mono Regular " ];
+        serif = [ "BigBlueTerm Nerd Font Mono Regular " ];
       };
     };
   };

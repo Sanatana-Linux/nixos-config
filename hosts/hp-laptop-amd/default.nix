@@ -8,11 +8,11 @@ lib.nixosSystem rec {
 
   modules = [
     bhairava-grub-theme.nixosModule
-
-    nur.nixosModules.nur
-    ./configuration.nix
     nixos-hardware.nixosModules.common-cpu-amd
     nixos-hardware.nixosModules.common-pc-laptop-ssd
+    nur.nixosModules.nur
+    ./configuration.nix
+
 
     { nixpkgs = { inherit overlays config; }; }
 

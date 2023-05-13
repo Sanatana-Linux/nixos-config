@@ -72,20 +72,31 @@
       };
 
       lib = nixpkgs.lib;
+         nur-modules = import nur {
+          nurpkgs = nixpkgs.legacyPackages.x86_64-linux;
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        };
 
       overlays = with inputs; [
         (final: _:
           let inherit (final) system;
           in { } // (with nixpkgs-f2k.packages.${system}; {
             awesome = awesome-git;
-          awesome-git-luajit = awesome.override { lua = luajit; };
+          awesome-git-luajit = awesome-git.override { lua = luajit; };
             picom = picom-git;
           }) )
-        (final: prev: {
 
-          nps = inputs.nps.defaultPackage.${prev.system};
-        })
-        nixpkgs-f2k.overlays.default
+      nixpkgs-f2k.overlays.default
+        (final: prev: let inherit (final) system; in {
+					unstable = import inputs.unstable { inherit config system; };
+					cosmic-comp = inputs.cosmic.packages.${system}.default;
+					awesome-git-luajit = prev.awesome-git.override {
+						lua = prev.luajit;
+					};
+           nps = inputs.nps.defaultPackage.${prev.system};
+				})
+
+  
         nur.overlay
       ];
     in {

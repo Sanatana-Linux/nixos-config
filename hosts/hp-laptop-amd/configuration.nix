@@ -146,6 +146,13 @@ in {
   # Just not hardcore enough I guess, this makes NixOS much less painful
   users.mutableUsers = true;
 
+  environment.loginShellInit = ''
+      if [ -e $HOME/.profile ]; then
+        . $HOME/.profile
+      fi
+    '';
+
+
   # List packages installed in system profile. 
   environment.systemPackages = core-packages ++ development-packages
     ++ interface-packages ++ laptop-packages ++ networking-packages

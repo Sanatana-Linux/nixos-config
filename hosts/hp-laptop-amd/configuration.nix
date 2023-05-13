@@ -50,9 +50,22 @@ in {
 
   ];
 
+    loginShellInit = ''
+      if [ -e $HOME/.profile ]; then
+        . $HOME/.profile
+      fi
+    '';
+
   # use grub with os-prober support
   boot = {
     initrd.systemd.enable = true;
+    initrd.verbose = false;
+    consoleLogLevel = 3;
+    kernelParams = [
+      "quiet"
+      "rd.udev.log_level=3"
+    ];
+
     # unstable kernel   
     kernelPackages = pkgs.linuxPackages_latest;
     # Boot Loader
@@ -154,6 +167,9 @@ in {
   nix = {
     package = pkgs.nixFlakes;
     extraOptions = "experimental-features = nix-command flakes";
+    daemonCPUSchedPolicy = "idle";
+    daemonIOSchedClass = "idle";
+
 
   };
 

@@ -82,10 +82,6 @@
             picom = picom-git;
           }) )
         (final: prev: {
-          luaFormatter = prev.callPackage ./pkgs/luaFormatter.nix {
-            src = prev.luaFormatter-src;
-            version = "999-master";
-          };
           awesome-git-luajit = awesome.override { lua = prev.luajit; };
           nps = inputs.nps.defaultPackage.${prev.system};
         })

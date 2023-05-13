@@ -88,10 +88,10 @@
 
       nixpkgs-f2k.overlays.default
         (final: prev: let inherit (final) system; in {
-				  awesome = awesome-git;
+			#	  awesome = prev.awesome-git;
          
-            picom = picom-git;
-        	awesome-git-luajit = prev.awesome-git.override {
+            picom = prev.picom-git;
+        	awesome = prev.awesome-git.override {
 						lua = prev.luajit;
 					};
           

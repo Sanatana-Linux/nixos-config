@@ -111,8 +111,8 @@ in {
             name = "Phinger Cursors (light)";
           };
           iconTheme = {
-            package = pkgs.tela-circle-icon-theme;
-            name = "Tela";
+            package = pkgs.papirus-icon-theme;
+            name = "Papirus-Dark";
           };
           indicators = [ "~session" "~spacer" ];
         };
@@ -143,7 +143,7 @@ in {
     initialPassword = "tlh123";
   };
 
-  # Just not hardcore enough I guess, this makes NixOS much less painful
+  # Just until I work in the immutable library and mark my needed mutable directories, coming soon
   users.mutableUsers = true;
 
   environment.loginShellInit = ''

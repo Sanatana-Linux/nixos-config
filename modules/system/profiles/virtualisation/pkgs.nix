@@ -8,7 +8,7 @@ anbox
 distrobox
 docker-compose
 docker-gc
-docker-slim
+docker
 qemu_full
 virt-manager
 kvmtool 

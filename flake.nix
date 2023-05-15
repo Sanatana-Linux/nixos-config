@@ -66,7 +66,7 @@
   };
 
   outputs = { self, nixpkgs, nur, home-manager, nixpkgs-f2k, luaFormatter, nps
-    , nixos-hardware, bhairava-grub-theme, mozilla-addons-to-nix, ... }@inputs:
+    , nixos-hardware, bhairava-grub-theme, ... }@inputs:
     let
       inherit (self) outputs;
       forSystems = nixpkgs.lib.genAttrs nixpkgs.lib.systems.flakeExposed;
@@ -106,7 +106,7 @@
       nixosConfigurations = {
         hp-laptop-amd = import ./hosts/hp-laptop-amd {
           inherit config nixpkgs overlays lib inputs system home-manager nur
-            bhairava-grub-theme nixos-hardware  mozilla-addons-to-nix;
+            bhairava-grub-theme nixos-hardware;
         };
         live-usb = import ./hosts/live-usb {
           inherit config nixpkgs overlays lib inputs system home-manager;

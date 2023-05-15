@@ -41,7 +41,7 @@
     };
 
     mozilla-addons-to-nix = {
-      url = "https://git.sr.ht/~rycee/mozilla-addons-to-nix";
+      url = "git.sr.ht:~rycee/mozilla-addons-to-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

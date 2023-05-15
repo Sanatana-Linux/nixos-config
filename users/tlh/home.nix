@@ -1,4 +1,4 @@
-{ config, pkgs, lib, inputs, ... }:
+{ config, nur, pkgs, lib, inputs, ... }:
 
 let
 
@@ -98,7 +98,7 @@ in {
     username = "tlh";
     homeDirectory = "/home/tlh";
     # DO NOT CHANGE THIS apparently
-    stateVersion = "22.05";
+    stateVersion = "23.05";
     # add support for .local/bin
     sessionPath = [ "$HOME/.local/bin" ];
 

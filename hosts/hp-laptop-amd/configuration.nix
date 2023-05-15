@@ -162,12 +162,12 @@ in {
 
     ]);
 
-  system.stateVersion = "22.05";
+  system.stateVersion = "23.05";
 
   # enable flakes
   nix = {
     package = pkgs.nixFlakes;
-    extraOptions = "experimental-features = nix-command flakes";
+    extraOptions = "experimental-features = nix-command flakes ca-derivations";
     daemonCPUSchedPolicy = "idle";
     daemonIOSchedClass = "idle";
 

@@ -173,7 +173,7 @@ environment.etc."nixos".source = /etc/nixos;
   # Change Console Colors to match theme 
 
   console.colors = [ "1c1c1c" "ff3d81" "85ff94" "f0ffaa" "00caff" "660ed0" "00eaff" "b6b6b6" "f83d80" "4dd564" "ffff73" "0badff" "b92b27" "8265ff" "d1d1d1" ]; 
-  system.stateVersion = "22.05";
+  system.stateVersion = "23.05";
 
   # enable flakes
   nix = {

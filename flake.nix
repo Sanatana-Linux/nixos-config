@@ -31,14 +31,24 @@
 
     nil.url = "github:oxalica/nil";
 
-    emacs-overlay.url = "github:nix-community/emacs-overlay";
-    emacs-overlay.inputs.nixpkgs.follows = "nixpkgs";
+    emacs-overlay = {
+      url = "github:nix-community/emacs-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nps = {
+      url = "github:OleMussmann/Nix-Package-Search";
+      nps.inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    nps.url = "github:OleMussmann/Nix-Package-Search";
-    nps.inputs.nixpkgs.follows = "nixpkgs";
+    mozilla-addons-to-nix = {
+      url = "https://git.sr.ht/~rycee/mozilla-addons-to-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    rust-overlay.url = "github:oxalica/rust-overlay";
-    rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     luaFormatter = {
       type = "git";
@@ -46,17 +56,17 @@
       submodules = true;
       flake = false;
     };
-    
-     bhairava-grub-theme = {
-          #type = "git";
+
+    bhairava-grub-theme = {
+      #type = "git";
       #url = "https://github.com/Sanatana-Linux/Bhairava-Grub-Theme";
       url = "github:Sanatana-Linux/Bhairava-Grub-Theme";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nixpkgs,  nur, home-manager, nixpkgs-f2k, luaFormatter, nps
-    , nixos-hardware, bhairava-grub-theme, ... }@inputs:
+  outputs = { self, nixpkgs, nur, home-manager, nixpkgs-f2k, luaFormatter, nps
+    , nixos-hardware, bhairava-grub-theme, mozilla-addons-to-nix, ... }@inputs:
     let
       inherit (self) outputs;
       forSystems = nixpkgs.lib.genAttrs nixpkgs.lib.systems.flakeExposed;
@@ -72,31 +82,31 @@
       };
 
       lib = nixpkgs.lib;
-         nur-modules = import nur {
-          nurpkgs = nixpkgs.legacyPackages.x86_64-linux;
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        };
+      nur-modules = import nur {
+        nurpkgs = nixpkgs.legacyPackages.x86_64-linux;
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+      };
 
       overlays = with inputs; [
 
-      nixpkgs-f2k.overlays.default
-        (final: prev: let inherit (final) system; in {
-			  awesome = prev.awesome-git;
-      
+        nixpkgs-f2k.overlays.default
+        (final: prev:
+          let inherit (final) system;
+          in {
+            awesome = prev.awesome-git;
+
             picom = prev.picom-git;
 
-          
-           nps = inputs.nps.defaultPackage.${prev.system};
-				})
+            nps = inputs.nps.defaultPackage.${prev.system};
+          })
 
-  
         nur.overlay
       ];
     in {
       nixosConfigurations = {
         hp-laptop-amd = import ./hosts/hp-laptop-amd {
-          inherit config nixpkgs overlays lib inputs system home-manager nur bhairava-grub-theme
-            nixos-hardware;
+          inherit config nixpkgs overlays lib inputs system home-manager nur
+            bhairava-grub-theme nixos-hardware  mozilla-addons-to-nix;
         };
         live-usb = import ./hosts/live-usb {
           inherit config nixpkgs overlays lib inputs system home-manager;

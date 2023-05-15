@@ -118,6 +118,7 @@ nodePackages_latest.gulp
 nodePackages_latest.neovim
 nodePackages.prettier
 nps
+mozilla-addons-to-nix
 nss
 nvd
 onefetch

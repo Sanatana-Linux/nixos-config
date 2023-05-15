@@ -13,4 +13,14 @@ qemu_full
 virt-manager
 kvmtool 
 x11docker
+docker-distribution  
+docker-client  
+docker-buildx  
+arion    
+waydroid
+containerd   
+containerpilot    
+conmon 
+convoy
+devbox
 ]

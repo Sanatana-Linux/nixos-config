@@ -21,6 +21,7 @@
        "nix.enableLanguageServer.enabled" = true;
        "prettier.bracketSameLine"= true;
        "prettier.jsxSingleQuote"= true;
+       "lua-format-extension.linebreakMultipleAssignments" = true;
        "prettier.quoteProps"= "consistent";
     };
     extensions = with pkgs.vscode-extensions; [

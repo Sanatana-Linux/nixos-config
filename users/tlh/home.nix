@@ -15,13 +15,7 @@ let
     import ../../modules/home/profiles/desktop/pkgs.nix { inherit pkgs; };
 
   # Integrate nur within Home-Manager
-  nur = import
-    (builtins.fetchTarball {
-      url = "https://github.com/nix-community/NUR/archive/master.tar.gz";
-      sha256 = "0qyf0db9gyps1k76q7k06c195p7s8dw2czhpj59nrl4bmajil71z";
-
-    })
-    { inherit pkgs; };
+    nur-no-pkgs = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {};
 
   colors = import ../../modules/home/theme/colors.nix { };
   base16-theme = import ../../modules/home/theme/base16.nix { };
@@ -60,10 +54,10 @@ in
   '';
   # -------------------------------------------------------------------------- #
   # Programs Imports
-  imports = lib.attrValues nur.repos.rycee.hmModules ++ [
+  imports = lib.attrValues nur-no-pkgs.repos.rycee.hmModules ++ [
     (import ../../modules/home/programs/kitty { inherit pkgs; })
     (import ../../modules/home/programs/firefox {
-      inherit pkgs config nur colors;
+      inherit pkgs config colors;
     })
     (import ../../modules/home/programs/vscode { inherit pkgs config; })
     (import ../../modules/home/programs/bat { inherit config; })

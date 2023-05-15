@@ -42,6 +42,7 @@ nix-prefetch
 nix-prefetch-scripts
 nix-universal-prefetch
 nixos-generators
+nurl
 openssl
 p7zip
 pciutils

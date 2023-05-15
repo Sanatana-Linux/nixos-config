@@ -98,6 +98,8 @@
             picom = prev.picom-git;
 
             nps = inputs.nps.defaultPackage.${prev.system};
+
+            mozilla-addons-to-nix = inputs.mozilla-addons-to-nix.defaultPackage.${prev.system};
           })
 
         nur.overlay

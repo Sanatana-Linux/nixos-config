@@ -73,7 +73,7 @@
       system = "x86_64-linux";
 
       # pkgs = nixpkgs.legacyPackages.${system};
-      pkgs = import nixpkgs { inherit system; };
+      #pkgs = import nixpkgs { inherit system; };
       config = {
         system = system;
         allowUnfree = true;
@@ -84,7 +84,7 @@
       lib = nixpkgs.lib;
       nur-modules = import nur {
         nurpkgs = nixpkgs.legacyPackages.x86_64-linux;
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        pkgs = nixpkgs.legacyPackages.x86_64-linux  { inherit system; };
       };
 
       overlays = with inputs; [
@@ -98,8 +98,6 @@
             picom = prev.picom-git;
 
             nps = inputs.nps.defaultPackage.${prev.system};
-
-            mozilla-addons-to-nix = inputs.mozilla-addons-to-nix.defaultPackage.${prev.system};
           })
 
         nur.overlay

@@ -37,7 +37,7 @@
     };
     nps = {
       url = "github:OleMussmann/Nix-Package-Search";
-      nps.inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     mozilla-addons-to-nix = {

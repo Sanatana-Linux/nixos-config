@@ -23,4 +23,5 @@ containerpilot
 conmon 
 convoy
 devbox
+appvm
 ]

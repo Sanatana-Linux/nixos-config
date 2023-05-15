@@ -15,16 +15,19 @@ let
     import ../../modules/home/profiles/desktop/pkgs.nix { inherit pkgs; };
 
   # Integrate nur within Home-Manager
-  nur = import (builtins.fetchTarball {
-    url = "https://github.com/nix-community/NUR/archive/master.tar.gz";
-    sha256 = "0qyf0db9gyps1k76q7k06c195p7s8dw2czhpj59nrl4bmajil71z";
+  nur = import
+    (builtins.fetchTarball {
+      url = "https://github.com/nix-community/NUR/archive/master.tar.gz";
+      sha256 = "0qyf0db9gyps1k76q7k06c195p7s8dw2czhpj59nrl4bmajil71z";
 
-  }) { inherit pkgs; };
+    })
+    { inherit pkgs; };
 
   colors = import ../../modules/home/theme/colors.nix { };
   base16-theme = import ../../modules/home/theme/base16.nix { };
 
-in {
+in
+{
 
   # Declare Themes
   theme.base16.colors = base16-theme;
@@ -89,7 +92,7 @@ in {
   # enable unfree packages (again, just to be sure)
   nixpkgs.config.allowUnfree = true;
 
- nix.extraOptions = ''
+  nix.extraOptions = ''
     keep-outputs = true
     keep-derivations = true
   '';
@@ -111,7 +114,7 @@ in {
 
     # import more packages to home-manager ones.
     packages = desktop-packages ++ images-packages
-      ++ (with pkgs; [ extract nux run gita ueberzug direnv  ]);
+      ++ (with pkgs; [ extract nux run gita ueberzug direnv ]);
 
     sessionVariables = {
       GTK_THEME = "Colloid-Dark";

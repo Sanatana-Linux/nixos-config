@@ -1,4 +1,4 @@
-{ config, pkgs, nur, colors, ... }:
+{ config, pkgs, colors, ... }:
 
 {
   programs.firefox = {

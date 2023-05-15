@@ -45,12 +45,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    luaFormatter = {
-      type = "git";
-      url = "https://github.com/Koihik/LuaFormatter.git";
-      submodules = true;
-      flake = false;
-    };
+
 
     bhairava-grub-theme = {
       #type = "git";

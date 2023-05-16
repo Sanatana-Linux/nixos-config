@@ -1,5 +1,4 @@
-# this file basically configures everything needed to get working
-# a virtualization with virt-manager.
+# Because virtualization remains one of things I find most fascinating
 
 { ... }:
 
@@ -10,4 +9,9 @@
   programs.dconf.enable = true;
     # docker
   virtualisation.docker.enable = true;
+
+  virtualisation.appvm = {
+  enable = true;
+  user = "tlh";
+};
 }

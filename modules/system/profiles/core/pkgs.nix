@@ -2,6 +2,7 @@
 
 with pkgs; [
 as-tree
+chatblade
 binutils
 bottom
 busybox
@@ -43,6 +44,7 @@ nix-prefetch-scripts
 nix-universal-prefetch
 nixos-generators
 nurl
+chatgpt-cli       
 openssl
 p7zip
 pciutils

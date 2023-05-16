@@ -1,5 +1,5 @@
 {
-  description = "A glowing, radioactive nixos config.";
+  description = "The Sanatana Linux, the NixOS configuration of Thomas Leon Highbaugh";
 
   nixConfig.extra-substituters = [
     "https://nix-community.cachix.org"

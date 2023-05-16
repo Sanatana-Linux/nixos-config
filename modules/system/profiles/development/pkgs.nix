@@ -126,6 +126,7 @@ openssl
 pandoc
 pandoc-lua-filters
 pciutils
+pet
 pipenv
 pipx
 postman

@@ -11,6 +11,10 @@ font-manager
 fuseiso
 gnome.gnome-disk-utility
 google-chrome
+vivaldi-ffmpeg-codecs  
+vivaldi
+brave 
+badwolf   
 gpick
 hunspell
 luakit

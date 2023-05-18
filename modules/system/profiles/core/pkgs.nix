@@ -42,6 +42,7 @@ nix-plugins
 nix-prefetch
 nix-prefetch-scripts
 nix-universal-prefetch
+update-nix-fetchgit
 nixos-generators
 nurl
 chatgpt-cli       

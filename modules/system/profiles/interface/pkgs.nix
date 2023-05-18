@@ -46,8 +46,6 @@ libsForQt5.qt5ct
 libsForQt5.qtstyleplugin-kvantum
 libxdg_basedir
 lightlocker
-llama
-luajit
 maim
 menu-cache
 mesa

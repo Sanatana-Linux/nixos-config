@@ -3,18 +3,16 @@
 with pkgs; [
 appimage-run
 appstream-glib
+badwolf
 bitwarden
 bitwarden-cli
 bleachbit
+brave
 discord
 font-manager
 fuseiso
 gnome.gnome-disk-utility
 google-chrome
-vivaldi-ffmpeg-codecs  
-vivaldi
-brave 
-badwolf   
 gpick
 hunspell
 luakit
@@ -24,6 +22,8 @@ tdesktop
 themechanger
 thunderbird
 tor-browser-bundle-bin
+vivaldi
+vivaldi-ffmpeg-codecs
 vlc
 zathura
 zotero

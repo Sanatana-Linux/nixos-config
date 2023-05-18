@@ -63,8 +63,8 @@ in {
     (import ../../modules/home/programs/rofi { inherit pkgs config; })
     (import ../../modules/home/programs/starship)
     (import ../../modules/home/programs/zathura)
-    #(import ../../modules/home/programs/xresources)
-    # (import ./theme/nvim { inherit colors; })
+    
+    
   ];
   xresources.extraConfig = import ../../modules/home/programs/xresources { inherit colors; };
   # Let Home Manager install and manage itself.

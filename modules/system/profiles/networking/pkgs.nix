@@ -1,15 +1,13 @@
 { pkgs }:
 
 with pkgs; [
-nmap
-sssd
-iw 
+dnsutils
+iw
 iwd
 networkmanager
-nmap 
-dnsutils
+nmap
+sssd
 tor
-    wirelesstools
-
+wirelesstools
 ]
 

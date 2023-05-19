@@ -2,6 +2,23 @@
 
 with pkgs; [
 appimage-run
+aspell 
+aspellDicts.de
+aspellDicts.en
+aspellDicts.en-computers
+aspellDicts.en-science
+aspellDicts.hi
+codespell
+gspell
+gtkspell3 
+gtkspellmm 
+hunspell 
+hunspellDicts.de_DE
+hunspellDicts.en_US-large
+hunspellDicts.es_MX
+mythes
+nuspell
+typos
 pdf-parser
 poppler_utils
 leela

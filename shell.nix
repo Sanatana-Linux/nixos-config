@@ -1,3 +1,4 @@
+# TODO get this to work right 
 # Development Shell for Bootstrapping NixOS with Flakes enabled and including useful programs like git and home manager.
 # use "nix shell" or 'nix develop' to use it 
 { pkgs ? (import ./nixpkgs.nix) { } }: {

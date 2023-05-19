@@ -1,7 +1,7 @@
 # Sanatana Linux
 
-> सनातन sanātana a. (-नी f.) 1 Perpetual, constant, eternal, permanent; ज्वलन्मणिव्योमसदां सनातनम् Ki.8.1; एष धर्मः सनातनः. -2 Firm, fixed, settled; एष धर्मः सनातनः U.5.22. -3 Primeval, ancient. -तः
-- [UChicago's DSAL Online Sanskrit Dictionary](https://dsal.uchicago.edu/cgi-bin/app/apte_query.py?qs=Sanatana&matchtype=default)
+> सनातन SANĀTANA a. (-नी f.) 1 Perpetual, constant, eternal, permanent; ज्वलन्मणिव्योमसदां सनातनम् Ki.8.1; एष धर्मः सनातनः. -2 Firm, fixed, settled; एष धर्मः सनातनः U.5.22. -3 Primeval, ancient. -तः
+> [UChicago's DSAL Online Sanskrit Dictionary](https://dsal.uchicago.edu/cgi-bin/app/apte_query.py?qs=Sanatana&matchtype=default)
 
 
 <img src="./assets/dreams.gif" alt="Palm trees aflame on Bikini Atoll in the early 1960s as part of US thermonuclear testing in the Pacific" align="center" />

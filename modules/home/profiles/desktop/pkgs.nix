@@ -3,9 +3,6 @@
 with pkgs; [
 appimage-run
 pdf-parser
-poppler
-poppler_data
-poppler_gi
 poppler_utils
 leela
 ebook_tools

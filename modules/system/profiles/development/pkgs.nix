@@ -3,6 +3,7 @@
 with pkgs; [
 abootimg
 stylua
+marksman
 awscli
 macchina
 prisma-engines

@@ -3,6 +3,7 @@
 with pkgs; [
 as-tree
 chatblade
+ngrok
 binutils
 bottom
 busybox

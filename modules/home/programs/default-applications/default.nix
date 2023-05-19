@@ -282,7 +282,7 @@
       // (lib.genAttrs urls (_: [ "firefox.desktop" ]))
       // (lib.genAttrs documents (_: [ "zathura.desktop" ]))
       // (lib.genAttrs audioVideo (_: [ "vlc.desktop" ]))
-      // (lib.genAttrs archives (_: [ "org.gnome.FileRoller.desktop" ]))
+      // (lib.genAttrs archives (_: [ "xarchiver.desktop" ]))
       // (lib.genAttrs archives (_: [ "thunar.desktop" ]));
   };
 }

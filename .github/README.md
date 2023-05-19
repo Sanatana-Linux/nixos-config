@@ -1,10 +1,12 @@
-# SanatanaOS
+# Sanatana Linux
 
-The term `sanatana` is most often translated as eternal and reoccurring, perennial if you will.
+> सनातन sanātana a. (-नी f.) 1 Perpetual, constant, eternal, permanent; ज्वलन्मणिव्योमसदां सनातनम् Ki.8.1; एष धर्मः सनातनः. -2 Firm, fixed, settled; एष धर्मः सनातनः U.5.22. -3 Primeval, ancient. -तः
+- [UChicago's DSAL Online Sanskrit Dictionary](https://dsal.uchicago.edu/cgi-bin/app/apte_query.py?qs=Sanatana&matchtype=default)
 
-This configuration of NixOS is named after the concept because its use of flakes makes the recreation of the system eternal, all but the specific needs of your hardware generated according to the instructions below enable the `relatively` easy reproduction of my precise environment by installing it according to the below instructions.
 
-> **Note:** While I hope you can gain from my configuration and have attempted, for my own sake, to document what is going on in the configuration as thoroughly as possible, this is my configuration and is liable to broken as I am still piecing the whole Nix ecosystem together from its many disjointed pieces.
+<img src="./assets/dreams.gif" alt="Palm trees aflame on Bikini Atoll in the early 1960s as part of US thermonuclear testing in the Pacific" align="center" />
+
+ **Note:** While I hope you can gain from my configuration and have attempted, for my own sake, to document what is going on in the configuration as thoroughly as possible, this is my configuration and is liable to broken as I am still piecing the whole Nix ecosystem together from its many disjointed pieces.
 
 ## What and Why of NixOS
 

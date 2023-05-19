@@ -19,6 +19,9 @@ hunspellDicts.es_MX
 mythes
 nuspell
 typos
+libusb
+gusb
+ibus-with-plugins
 pdf-parser
 poppler_utils
 leela

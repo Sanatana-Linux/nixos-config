@@ -15,25 +15,22 @@ $ nix flake new --template templates#full ./my-new-project
 Each template ships with a tutorial (`README.md`) which explains in details how
 to use it and extend it.
 
-
 # How to contribute
 
-Main purpose of this repository is to collect most common templates to *help
-newcomers learn Nix*. For this purpose the collection of templates is limited
+Main purpose of this repository is to collect most common templates to _help
+newcomers learn Nix_. For this purpose the collection of templates is limited
 to provided an opinionated and curated list.
 
 Other templates for more advanced topics can be found in
 [nix-community/templates](https://github.com/nix-community/templates).
 
-TODO: templates should be also discoverable on search.nixos.org
-
+TODO fix the templates to my use
 
 ## Opening issues
 
-* Make sure you have a [GitHub account](https://github.com/signup/free)
-* Make sure there is no open issue on the topic
-* [Submit a new issue](https://github.com/NixOS/templates/issues/new)
-
+- Make sure you have a [GitHub account](https://github.com/signup/free)
+- Make sure there is no open issue on the topic
+- [Submit a new issue](https://github.com/NixOS/templates/issues/new)
 
 ## What is required to submit a template?
 
@@ -58,7 +55,6 @@ Each template needs:
 - `tutorial`
 
   Tutorial showing the usage of the template should be placed in `README.md`.
-
 
 # License
 

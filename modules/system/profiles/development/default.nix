@@ -20,6 +20,7 @@
 
       purge = "doas sync; echo 3 | doas tee /proc/sys/vm/drop_caches";
 
+      nps="nps -C=description --separator=true"
 
     };
 

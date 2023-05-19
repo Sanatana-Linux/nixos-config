@@ -3,6 +3,6 @@
 {
   programs.exa = {
     enable = true;
-    enableAliases = false;
+    enableAliases = true;
   };
 }

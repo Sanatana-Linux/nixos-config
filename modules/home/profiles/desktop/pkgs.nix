@@ -2,6 +2,15 @@
 
 with pkgs; [
 appimage-run
+pdf-parser
+pdfmm 
+pdftag
+pdftk
+pdfstudio2022
+ocrmypdf
+termpdfpy
+updfparser
+python311Packages.pdftotext
 appstream-glib
 badwolf
 bitwarden

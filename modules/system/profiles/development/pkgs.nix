@@ -2,6 +2,7 @@
 
 with pkgs; [
 abootimg
+notepad-next
 stylua
 marksman
 awscli
@@ -147,6 +148,7 @@ python311Packages.setuptoolsBuildHook
 python311Packages.wheelUnpackHook
 python311Packages.youtube-transcript-api
 rnix-lsp
+chruby
 ruby
 rustc
 rustfmt

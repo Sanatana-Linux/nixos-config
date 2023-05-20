@@ -170,10 +170,11 @@ in {
     extraOptions = "experimental-features = nix-command flakes ca-derivations";
     daemonCPUSchedPolicy = "idle";
     daemonIOSchedClass = "idle";
+  
 
 
   };
-
+nix.settings.trusted-users = [ "root" "tlh" ];
   # allow unfree pkgs through configuration.nix
   nixpkgs.config.allowUnfree = true;
 

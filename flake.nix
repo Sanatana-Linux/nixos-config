@@ -20,6 +20,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+   treefmt = {
+      url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
@@ -61,7 +65,7 @@
   };
 
   outputs = { self, nixpkgs, nur, home-manager, nixpkgs-f2k, luaFormatter, nps
-    , nixos-hardware, bhairava-grub-theme, ... }@inputs:
+    , nixos-hardware, bhairava-grub-theme, treefmt, ... }@inputs:
     let
       inherit (self) outputs;
       forSystems = nixpkgs.lib.genAttrs nixpkgs.lib.systems.flakeExposed;
@@ -101,7 +105,7 @@
       nixosConfigurations = {
         hp-laptop-amd = import ./hosts/hp-laptop-amd {
           inherit config nixpkgs overlays lib inputs system home-manager nur
-            bhairava-grub-theme nixos-hardware;
+            bhairava-grub-theme nixos-hardware treefmt;
         };
         live-usb = import ./hosts/live-usb {
           inherit config nixpkgs overlays lib inputs system home-manager;

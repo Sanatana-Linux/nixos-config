@@ -2,6 +2,8 @@
 
 with pkgs; [
 abootimg
+imlib2Full
+libtiff
 notepad-next
 stylua
 marksman

@@ -1,4 +1,4 @@
-{ config, nur, nixpkgs, overlays, inputs, home-manager, nixos-hardware,bhairava-grub-theme,  system
+{ config, nur, nixpkgs, overlays, inputs, home-manager, nixos-hardware,bhairava-grub-theme, treefmt,  system
 , ... }:
 
 with nixpkgs;
@@ -20,6 +20,7 @@ lib.nixosSystem rec {
     {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
+      home-manager.backupFileExtension = "bak";
       home-manager.users.tlh = { imports = [ ../../users/tlh/home.nix ]; };
     }
   ];

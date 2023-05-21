@@ -48,8 +48,8 @@ function vm() {
 }
 
 function full() {
-    nix-sync
-    nix-rebuild
+    sync
+    rebuild
 }
 
 function rollback() {

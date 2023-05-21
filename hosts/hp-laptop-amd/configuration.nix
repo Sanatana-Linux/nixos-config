@@ -159,7 +159,7 @@ in {
     ++ (with pkgs; [
       awesome-git
       home-manager
-
+    treefmt
     ]);
 
   system.stateVersion = "23.05";
@@ -170,9 +170,6 @@ in {
     extraOptions = "experimental-features = nix-command flakes ca-derivations";
     daemonCPUSchedPolicy = "idle";
     daemonIOSchedClass = "idle";
-  
-
-
   };
 nix.settings.trusted-users = [ "root" "tlh" ];
   # allow unfree pkgs through configuration.nix

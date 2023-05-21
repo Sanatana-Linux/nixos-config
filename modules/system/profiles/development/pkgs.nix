@@ -2,6 +2,12 @@
 
 with pkgs; [
 abootimg
+libexif 
+exiftool
+biber
+skim
+just
+terraform
 imlib2Full
 libtiff
 notepad-next

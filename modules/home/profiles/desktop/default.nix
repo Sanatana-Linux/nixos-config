@@ -5,13 +5,14 @@
   gtk = {
     	enable = true;
 	font = {
-		name = "Alatsi Regular";
-		size = 11;
+		name = "Asap Condensed, Semi-Bold Condensed";
+		size = 10;
 	};
 	iconTheme = {
 		name = "Tela-dark";
 		package = pkgs.tela-circle-icon-theme;
 	};
+	
 	cursorTheme = {
 		name = "Phinger Cursors (light)";
 		package = pkgs.phinger-cursors;

@@ -55,7 +55,7 @@
       submodules = true;
       flake = false;
     };
-
+# my configurations 
     bhairava-grub-theme = {
       #type = "git";
       #url = "https://github.com/Sanatana-Linux/Bhairava-Grub-Theme";
@@ -68,6 +68,7 @@
       flake = false;
       url = "https://github.com/Thomashighbaugh/nvim-forge.git";
     };
+
 
   };
 

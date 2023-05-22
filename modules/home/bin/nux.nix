@@ -16,7 +16,6 @@ Options:
     help         show this text
 
     clean        clean and garabge collect store
-    full         sync and rebuild configuration
     rebuild      rebuild configuration for host
     rollback     rollback to previous generation
     search       search packages available
@@ -47,10 +46,7 @@ function vm() {
     doas nixos-rebuild --flake $dots#"$2" --impure build-vm
 }
 
-function full() {
-    sync
-    rebuild
-}
+
 
 function rollback() {
     echo "Rolling back"
@@ -81,7 +77,6 @@ case "$1" in
     sync)      sync ;;
     rebuild)   rebuild "$@";;
     vm)        vm "$@";;
-    full)      full ;;
     rollback)  rollback ;;
     update)    update ;;
     clean)     clean ;;

@@ -20,10 +20,12 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-   treefmt = {
+    treefmt = {
       url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    devshell.url = "github:numtide/devshell";
 
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
@@ -55,7 +57,7 @@
       submodules = true;
       flake = false;
     };
-# my configurations 
+    # my configurations
     bhairava-grub-theme = {
       #type = "git";
       #url = "https://github.com/Sanatana-Linux/Bhairava-Grub-Theme";
@@ -68,57 +70,78 @@
       flake = false;
       url = "https://github.com/Thomashighbaugh/nvim-forge.git";
     };
-
-
   };
 
-  outputs = { self, nixpkgs, nur, nvim-forge, home-manager, nixpkgs-f2k, luaFormatter, nps
-    , nixos-hardware, bhairava-grub-theme, treefmt, ... }@inputs:
-    let
-      inherit (self) outputs;
-      forSystems = nixpkgs.lib.genAttrs nixpkgs.lib.systems.flakeExposed;
-      system = "x86_64-linux";
+  outputs = {
+    self,
+    nixpkgs,
+    nur,
+    nvim-forge,
+    home-manager,
+    nixpkgs-f2k,
+    luaFormatter,
+    nps,
+    devshell,
+    nixos-hardware,
+    bhairava-grub-theme,
+    treefmt,
+    ...
+  } @ inputs: let
+    inherit (self) outputs;
+    forSystems = nixpkgs.lib.genAttrs nixpkgs.lib.systems.flakeExposed;
+    system = "x86_64-linux";
 
-      # pkgs = nixpkgs.legacyPackages.${system};
-      #pkgs = import nixpkgs { inherit system; };
-      config = {
-        system = system;
-        allowUnfree = true;
-        allowUnsupportedSystem = true;
-        allowBroken = true;
+    # pkgs = nixpkgs.legacyPackages.${system};
+    #pkgs = import nixpkgs { inherit system; };
+    config = {
+      system = system;
+      allowUnfree = true;
+      allowUnsupportedSystem = true;
+      allowBroken = true;
+    };
+
+    lib = nixpkgs.lib;
+    nur-modules = import nur {
+      nurpkgs = nixpkgs.legacyPackages.x86_64-linux;
+      pkgs = nixpkgs.legacyPackages.x86_64-linux {inherit system;};
+    };
+
+    overlays = with inputs; [
+      nixpkgs-f2k.overlays.default
+      (final: prev: let
+        inherit (final) system;
+      in {
+        awesome = prev.awesome-git;
+
+        picom = prev.picom-git;
+
+        nps = inputs.nps.defaultPackage.${prev.system};
+      })
+
+      nur.overlay
+    ];
+  in {
+    nixosConfigurations = {
+      hp-laptop-amd = import ./hosts/hp-laptop-amd {
+        inherit
+          config
+          nixpkgs
+          overlays
+          lib
+          inputs
+          system
+          home-manager
+          nur
+          bhairava-grub-theme
+          nvim-forge
+          nixos-hardware
+          treefmt
+          ;
       };
-
-      lib = nixpkgs.lib;
-      nur-modules = import nur {
-        nurpkgs = nixpkgs.legacyPackages.x86_64-linux;
-        pkgs = nixpkgs.legacyPackages.x86_64-linux  { inherit system; };
-      };
-
-      overlays = with inputs; [
-
-        nixpkgs-f2k.overlays.default
-        (final: prev:
-          let inherit (final) system;
-          in {
-            awesome = prev.awesome-git;
-
-            picom = prev.picom-git;
-
-            nps = inputs.nps.defaultPackage.${prev.system};
-          })
-
-        nur.overlay
-      ];
-    in {
-      nixosConfigurations = {
-        hp-laptop-amd = import ./hosts/hp-laptop-amd {
-          inherit config nixpkgs overlays lib inputs system home-manager nur
-            bhairava-grub-theme nvim-forge nixos-hardware treefmt;
-        };
-        live-usb = import ./hosts/live-usb {
-          inherit config nixpkgs overlays lib inputs system home-manager;
-          format = "isoImage";
-        };
+      live-usb = import ./hosts/live-usb {
+        inherit config nixpkgs overlays lib inputs system home-manager;
+        format = "isoImage";
       };
     };
+  };
 }

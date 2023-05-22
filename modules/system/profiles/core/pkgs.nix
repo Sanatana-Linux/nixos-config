@@ -1,13 +1,15 @@
 { pkgs }:
 
 with pkgs; [
+alejandra
+any-nix-shell
 as-tree
-chatblade
-ngrok
 binutils
 bottom
 busybox
 cached-nix-shell
+chatblade
+chatgpt-cli       
 cmake
 coreutils
 dconf
@@ -39,21 +41,20 @@ manix
 mesa
 mesa-demos
 moreutils
-nix-plugins
+ngrok
 nix-binary-cache 
-nix-template
-treefmt
 nix-direnv-flakes 
+nix-plugins
 nix-prefetch
 nix-prefetch-scripts
+nix-template
 nix-universal-prefetch
-update-nix-fetchgit
 nixos-generators
 nurl
-chatgpt-cli       
 openssl
 p7zip
 pciutils
+pfetch
 pmutils
 ps_mem
 python3
@@ -71,8 +72,10 @@ tealdeer
 toybox
 trash-cli
 tree
+treefmt
 unrar
 unzip
+update-nix-fetchgit
 usbmuxd
 usbutils
 utillinux

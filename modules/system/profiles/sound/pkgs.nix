@@ -10,9 +10,8 @@ alsa-utils
 alsaequal
 audacity
 cava
-lmms
 libpulseaudio
-
+lmms
 mediainfo
 mpc_cli
 mpd
@@ -26,12 +25,13 @@ pavucontrol
 picard
 playerctl
 psmisc
-pulseaudioFull
 pulseaudio-ctl
+pulseaudioFull
 pulseeffects-legacy
 pulsemixer
 python310Packages.deemix
 scdl
+soundfont-fluid  
 spotify
 vlc
 zyn-fusion

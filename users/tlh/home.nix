@@ -36,14 +36,8 @@ in
       chmod -R +w "$HOME/.config/awesome"
     fi
   '';
-  # Enable ZSH Configuration
-  home.activation.installZSHConfig = ''
-    if [ ! -d "$HOME/.zsh" ]; then
-      ln -sf "/etc/nixos/configurations/zsh" "$HOME/.zsh"
-      chmod -R +w "$HOME/.zsh"
-      ln -s "$HOME/.zsh/zshenv" "$HOME/.zshenv"
-    fi
-  '';
+
+
   # extra fonts
   home.activation.installFontConfig = ''
     if [ ! -d "$HOME/.local/share/fonts" ]; then
@@ -58,6 +52,9 @@ in
     (import ../../modules/home/programs/kitty { inherit pkgs; })
     (import ../../modules/home/programs/firefox {
       inherit pkgs config colors;
+    })
+        (import ../../modules/home/programs/zsh {
+      inherit pkgs config lib colors;
     })
     (import ../../modules/home/programs/vscode { inherit pkgs config; })
     (import ../../modules/home/programs/bat { inherit config; })

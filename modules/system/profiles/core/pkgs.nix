@@ -40,6 +40,10 @@ mesa
 mesa-demos
 moreutils
 nix-plugins
+nix-binary-cache 
+nix-template
+treefmt
+nix-direnv-flakes 
 nix-prefetch
 nix-prefetch-scripts
 nix-universal-prefetch

@@ -1,4 +1,4 @@
-{ config, nur, nixpkgs, overlays, inputs, home-manager, nixos-hardware,bhairava-grub-theme, treefmt,  system
+{ config, nur, nixpkgs, overlays, inputs, home-manager, nixos-hardware,bhairava-grub-theme, nvim-forge, treefmt,  system
 , ... }:
 
 with nixpkgs;

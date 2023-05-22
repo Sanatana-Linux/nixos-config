@@ -62,9 +62,16 @@
       url = "github:Sanatana-Linux/Bhairava-Grub-Theme";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nvim-forge = {
+      type = "git";
+      flake = false;
+      url = "https://github.com/Thomashighbaugh/nvim-forge.git";
+    };
+
   };
 
-  outputs = { self, nixpkgs, nur, home-manager, nixpkgs-f2k, luaFormatter, nps
+  outputs = { self, nixpkgs, nur, nvim-forge, home-manager, nixpkgs-f2k, luaFormatter, nps
     , nixos-hardware, bhairava-grub-theme, treefmt, ... }@inputs:
     let
       inherit (self) outputs;
@@ -105,7 +112,7 @@
       nixosConfigurations = {
         hp-laptop-amd = import ./hosts/hp-laptop-amd {
           inherit config nixpkgs overlays lib inputs system home-manager nur
-            bhairava-grub-theme nixos-hardware treefmt;
+            bhairava-grub-theme nvim-forge nixos-hardware treefmt;
         };
         live-usb = import ./hosts/live-usb {
           inherit config nixpkgs overlays lib inputs system home-manager;

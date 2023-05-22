@@ -4,6 +4,12 @@ with pkgs; [
 abootimg
 libexif 
 exiftool
+labelImg
+shutter
+nix-init 
+resvg
+librsvg
+svgcleaner
 biber
 skim
 just

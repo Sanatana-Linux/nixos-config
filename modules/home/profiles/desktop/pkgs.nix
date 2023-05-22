@@ -2,6 +2,7 @@
 
 with pkgs; [
 appimage-run
+appimagekit 
 aspell 
 aspellDicts.de
 aspellDicts.en
@@ -35,7 +36,6 @@ termpdfpy
 updfparser
 python311Packages.pdftotext
 appstream-glib
-badwolf
 bitwarden
 bitwarden-cli
 bleachbit
@@ -46,6 +46,7 @@ fuseiso
 gnome.gnome-disk-utility
 google-chrome
 gpick
+epiphany
 hunspell
 luakit
 networkmanagerapplet
@@ -54,10 +55,7 @@ tdesktop
 themechanger
 thunderbird
 tor-browser-bundle-bin
-vivaldi
-vivaldi-ffmpeg-codecs
 vlc
 zathura
-zotero
 ]
 

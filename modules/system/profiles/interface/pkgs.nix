@@ -30,8 +30,13 @@ gtk3
 gtk3-x11
 gtk4
 gusb
+shotcut
+olive-editor
+avidemux
+openshot-qt
 i3lock-color
 inotify-tools
+xscreensaver 
 jpegoptim
 libcanberra-gtk3
 libdbusmenu

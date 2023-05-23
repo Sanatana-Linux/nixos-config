@@ -1,13 +1,12 @@
 # Sanatana Linux
 
 > सनातन SANĀTANA a. (-नी f.) 1. Perpetual, constant, eternal, permanent; ज्वलन्मणिव्योमसदां सनातनम् Ki.8.1; एष धर्मः सनातनः. 2. Firm, fixed, settled; एष धर्मः सनातनः U.5.22. 3. Primeval, ancient. -तः
-> 
+>
 > [UChicago's DSAL Online Sanskrit Dictionary](https://dsal.uchicago.edu/cgi-bin/app/apte_query.py?qs=Sanatana&matchtype=default)
 
+<img width="100%" height="100%"  src="./assets/dreams.gif" alt="Palm trees aflame on Bikini Atoll in the early 1960s as part of US thermonuclear testing in the Pacific" align="center" />
 
-<img src="./assets/dreams.gif" alt="Palm trees aflame on Bikini Atoll in the early 1960s as part of US thermonuclear testing in the Pacific" align="center" />
-
- **Note:** While I hope you can gain from my configuration and have attempted, for my own sake at least, to document what is going on in the configuration as thoroughly as possible, this is my configuration and is liable to broken as I am still piecing the whole Nix ecosystem together from its many disjointed pieces and ambiguous terminology.
+**Note:** While I hope you can gain from my configuration and have attempted, for my own sake at least, to document what is going on in the configuration as thoroughly as possible, this is my configuration and is liable to broken as I am still piecing the whole Nix ecosystem together from its many disjointed pieces and ambiguous terminology.
 
 ## What and Why of NixOS
 
@@ -115,23 +114,24 @@ If you are confused, want better explainations, find an error/ineffciency in thi
 
 ## Credit Where It's Due
 
-Thanks to these configurations and their authors that I was able to 
+Thanks to these configurations and their authors that I was able to
 
-### NixOS + awesomewm 
+### NixOS + awesomewm
 
-- [AlphaTechnolog's nixdots](https://github.com/AlphaTechnolog/nixdots) 
-- [MCotocel's nixdots](https://github.com/MCotocel/nixdots) 
-- [JavaCafe01's frostedflakes] 
-- [rxyhn's yuki](https://github.com/rxyhn/yuki) 
+- [AlphaTechnolog's nixdots](https://github.com/AlphaTechnolog/nixdots)
+- [MCotocel's nixdots](https://github.com/MCotocel/nixdots)
+- [JavaCafe01's frostedflakes]
+- [rxyhn's yuki](https://github.com/rxyhn/yuki)
 - [nuxshed's dotfiles](https://github.com/nuxshed/dotfiles)
 - [hlissner's dotfiles](https://github.com/hlissner/dotfiles)
 
 ### More Generalized NixOS + Flakes
+
 - [devos example provided by digga](https://github.com/divnix/digga/tree/main/examples/devos)
 - [GTrunSec's nixos-flk](https://github.com/GTrunSec/nixos-flk)
 - [thiagokokada/nix-configs](https://github.com/thiagokokada/nix-configs)
 - [lourkeur's distro](https://github.com/lourkeur/distro)
-- 
+-
 
 ## ISO
 
@@ -140,4 +140,3 @@ Mostly a personal reminder of how to generate the iso
 ```bash
  doas nixos-generate --flake '/etc/nixos/#live-usb' --format iso -o sanatana_linux
 ```
-

@@ -1,6 +1,10 @@
 # Sanatana Linux
 
-> सनातन SANĀTANA a. (-नी f.) 1. Perpetual, constant, eternal, permanent; ज्वलन्मणिव्योमसदां सनातनम् Ki.8.1; एष धर्मः सनातनः. 2. Firm, fixed, settled; एष धर्मः सनातनः U.5.22. 3. Primeval, ancient. -तः
+> सनातन SANĀTANA (adjective)
+>
+> 1.  Perpetual, constant, eternal, permanent
+> 2.  Firm, fixed, settled;
+> 3.  Primeval, ancient. ः
 >
 > [UChicago's DSAL Online Sanskrit Dictionary](https://dsal.uchicago.edu/cgi-bin/app/apte_query.py?qs=Sanatana&matchtype=default)
 
@@ -8,13 +12,22 @@
 
 **Note:** While I hope you can gain from my configuration and have attempted, for my own sake at least, to document what is going on in the configuration as thoroughly as possible, this is my configuration and is liable to broken as I am still piecing the whole Nix ecosystem together from its many disjointed pieces and ambiguous terminology.
 
-## What and Why of NixOS
+## The NixOS Experience Summarized in a Digestible Format
 
-Just as `notion.so` has opened up a dark potential to fully over
+<img src="./assets/NIXOS-LEARNING-CURVE.jpg" width="100%" alt="Tux as the deranged husband in the Shining that approximates the process of learning how to deal with NixOS"/>
+
+### "What About the Documentation?"
+
+Documentation for NixOS, especially since it has pivoted towards flakes you want?
+<img src="./assets/jack-nicholson-laugh.gif" alt="Jack Nicholson laughing while on an airplane, suggesting there is not documentation to the degree suggesting as much induces hysterical laughing" />
+
+There is plenty, some are better than others but comparatively it is easier to find high quality guides on making caustic chemicals with cleaning products than finding anything that is going to impart the wisdom of the Nix upon you. The only reasonable way involves trial and error. Lots and lots of error.
 
 ## Installation
 
-To install it see the next steps:
+> NOTE: This is my bootstrapping process, yours probably will vary.
+
+<img src="./assets/patrick-meme.jpg" width="100%" alt="Patrick Star wearing a shirt about wanting to be picked up by his mother because he is scared. This is to make a light joke at my own and the reader's expense about the overwhelming aspects of the bootstrap process"/>
 
 - Boot into the installer environment
 - Format and mount your disks inside /mnt

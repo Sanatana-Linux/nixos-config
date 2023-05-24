@@ -31,7 +31,7 @@
       path = "${config.xdg.dataHome}/zsh/history";
       save = 9000000; # number of lines to save
       size = 9000000; # number of lines to keep
-      share = false; # share between sessions
+      share = true; # share between sessions
     };
     historySubstringSearch = {
       enable = true;

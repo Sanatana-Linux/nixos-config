@@ -17,14 +17,44 @@
 
   programs.zsh = {
     enable = true;
+    enableAutosuggestions = true;
+    enableCompletion = true;
+    enableSyntaxHighlighting = true;
+    autocd = true;
     dotDir = ".config/zsh";
     history = {
       save = 10000;
       size = 10000;
       path = "${config.xdg.dataHome}/zsh/history";
     };
+    history = {
+      extended = true;
+      ignoreDups = false;
+      expireDuplicatesFirst = false;
+      ignoreSpace = false; # TODO I might change that
 
-    sessionVariables = {};
+      path = "${config.xdg.dataHome}/zsh/history";
+      save = 9000000; # number of lines to save
+      size = 9000000; # number of lines to keep
+      share = false; # share between sessions
+    };
+    historySubstringSearch = {
+      enable = true;
+      searchDownKey = "^[[B"; # DOWN Arrow key
+      searchUpKey = "^[[A"; # UP Arrow key
+    };
+
+    sessionVariables = {
+      EDITOR = "nvim";
+      IVIEWER = "feh";
+      READER = "zathura";
+      VISUAL = "nvim";
+      CODEEDITOR = "nvim";
+      TERMINAL = "kitty";
+      BROWSER = "brave";
+      COLORTERM = "truecolor";
+      QT_QPA_PLATFORMTHEME = "qt5ct"; # needs qt5ct
+    };
 
     completionInit = ''
       autoload -Uz compinit
@@ -114,6 +144,7 @@
         --pointer ''
         --marker ''
       "
+
     '';
 
     initExtra = ''
@@ -179,56 +210,16 @@
       MENU_COMPLETE
       EOF
 
-      any-nix-shell zsh --info-right | source /dev/stdin
-
-      function run() {
-        nix run nixpkgs#$@
-      }
-
-      function extract() {
-        if [ -z "$1" ]; then
-           # display usage if no parameters given
-           echo "Usage: extract <path/file_name>.<zip|rar|bz2|gz|tar|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz|.zlib|.cso>"
-           echo "       extract <path/file_name_1.ext> [path/file_name_2.ext] [path/file_name_3.ext]"
-        else
-           for n in "$@"
-           do
-             if [ -f "$n" ] ; then
-                 case "''${n%,}" in
-                   *.cbt|*.tar.bz2|*.tar.gz|*.tar.xz|*.tbz2|*.tgz|*.txz|*.tar)
-                                tar xvf "$n"       ;;
-                   *.lzma)      unlzma ./"$n"      ;;
-                   *.bz2)       bunzip2 ./"$n"     ;;
-                   *.cbr|*.rar) unrar x -ad ./"$n" ;;
-                   *.gz)        gunzip ./"$n"      ;;
-                   *.cbz|*.epub|*.zip) unzip ./"$n"   ;;
-                   *.z)         uncompress ./"$n"  ;;
-                   *.7z|*.apk|*.arj|*.cab|*.cb7|*.chm|*.deb|*.dmg|*.iso|*.lzh|*.msi|*.pkg|*.rpm|*.udf|*.wim|*.xar)
-                                7z x ./"$n"        ;;
-                   *.xz)        unxz ./"$n"        ;;
-                   *.exe)       cabextract ./"$n"  ;;
-                   *.cpio)      cpio -id < ./"$n"  ;;
-                   *.cba|*.ace) unace x ./"$n"     ;;
-                   *.zpaq)      zpaq x ./"$n"      ;;
-                   *.arc)       arc e ./"$n"       ;;
-                   *.cso)       ciso 0 ./"$n" ./"$n.iso" && \
-                                     extract "$n.iso" && \rm -f "$n" ;;
-                   *.zlib)      zlib-flate -uncompress < ./"$n" > ./"$n.tmp" && \
-                                     mv ./"$n.tmp" ./"''${n%.*zlib}" && rm -f "$n"   ;;
-                   *)
-                                echo "extract: '$n' - unknown archive method"
-                                return 1
-                                ;;
-                 esac
-             else
-                 echo "'$n' - file doesn't exist"
-                 return 1
-             fi
-           done
-      fi
-      }
+      any-nix-shell zsh --info-right | source /dev/stdin;
 
 
+
+
+    '';
+
+    loginExtra = ''
+      autoload -U promptinit; promptinit
+       prompt pure;
     '';
 
     shellAliases = with pkgs; {

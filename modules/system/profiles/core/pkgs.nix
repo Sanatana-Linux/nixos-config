@@ -13,6 +13,7 @@ chatgpt-cli
 cmake
 coreutils
 dconf
+pure-prompt
 deadnix
 dosfstools
 feh

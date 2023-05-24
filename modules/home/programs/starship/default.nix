@@ -14,8 +14,8 @@
       right_format = "$status";
 
       character = {
-        success_symbol = "[](cyan)";
-        error_symbol = "[](red)";
+        success_symbol = "[ॐ](cyan)";
+        error_symbol = "[ॐ](red)";
       };
 
       directory = {

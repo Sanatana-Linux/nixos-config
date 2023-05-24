@@ -63,7 +63,7 @@ in {
       (import ../../modules/home/programs/direnv {inherit config lib pkgs inputs;})
       (import ../../modules/home/programs/exa {inherit config;})
       (import ../../modules/home/programs/git {inherit config;})
-      (import ../../modules/home/programs/picom {})
+      (import ../../modules/home/programs/picom {inherit config;})
       (import ../../modules/home/programs/rofi {inherit pkgs config;})
       (import ../../modules/home/programs/starship)
       (import ../../modules/home/programs/default-applications {inherit lib;})

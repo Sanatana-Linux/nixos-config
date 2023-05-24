@@ -1,7 +1,8 @@
-{ config, pkgs, ... }:
-
 {
-
+  config,
+  pkgs,
+  ...
+}: {
   console = {
     font = "ter-c14b";
     keyMap = "us";
@@ -11,9 +12,9 @@
     # so it stays where it is as inspired by the
     # auspicious learnings of the Trashmen's
     # Surfin Bird playing on repeat
-    # 
-    packages = with pkgs; [ terminus_font ];
-    # Change Console Colors to match theme 
+    #
+    packages = with pkgs; [terminus_font];
+    # Change Console Colors to match theme
     colors = [
       "1c1c1c"
       "ff3d81"
@@ -32,26 +33,21 @@
       "919191"
     ];
   };
-  # shell 
+  # shell
   users.defaultUserShell = pkgs.zsh;
-
-  # bash gets starship as I do not want 
-  programs.bash = {
-    promptInit = ''eval "$(${pkgs.starship}/bin/starship init bash)"'';
-  };
 
   security.doas = {
     enable = true;
-    extraRules = [{
-      users = [ "tlh" ];
-      groups = [ "wheel" ];
-      noPass = true;
-      keepEnv = true;
-      persist = false;
-    }];
+    extraRules = [
+      {
+        users = ["tlh"];
+        groups = ["wheel"];
+        noPass = true;
+        keepEnv = true;
+        persist = false;
+      }
+    ];
   };
 
   security.sudo.wheelNeedsPassword = false;
-
 }
-

@@ -53,5 +53,12 @@ xorg.xev
 yt-dlp
 zip
 zsh
+nix-zsh-completions
+zsh-you-should-use
+zsh-autocomplete
+zsh-navigation-tools
+zsh-edit
+deer
+
 ]
 

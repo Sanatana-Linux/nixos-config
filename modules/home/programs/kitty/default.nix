@@ -1,6 +1,4 @@
-{ pkgs }:
-
-{
+{pkgs}: {
   programs.kitty = {
     enable = true;
     extraConfig = import ./settings.nix;

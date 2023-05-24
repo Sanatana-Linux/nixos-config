@@ -1,186 +1,183 @@
-{ pkgs }:
-
+{pkgs}:
 with pkgs; [
-abootimg
-libexif 
-exiftool
-labelImg
-shutter
-nix-init 
-resvg
-librsvg
-svgcleaner
-biber
-skim
-just
-terraform
-imlib2Full
-libtiff
-notepad-next
-stylua
-marksman
-awscli
-macchina
-prisma-engines
-android-backup-extractor
-android-file-transfer
-android-tools
-android-udev-rules
-apksigcopier
-ipfs
-arduino
-pkg-config-unwrapped
-bash
-bfg-repo-cleaner
-black
-cargo
-cava
-cmake
-curl
-deadnix
-dejsonlz4
-devbox
-direnv
-distrobox
-efm-langserver
-emacs
-emacs-all-the-icons-fonts
-expat
-nodejs
-fuse3
-gcc
-glib
-gnumake
-gnutls
-go
-gource
-icu
-ispell
-isync
-ktlint
-libimobiledevice
-libtool
-lightningcss
-lua
-lua53Packages.luarocks
-lua53Packages.luarocks-nix
-luabind 
-lua53Packages.wrapLua
-lua53Packages.vicious
-lua53Packages.cqueues
-lua53Packages.dkjson
-lua53Packages.ldbus
-lua53Packages.lpeglabel
-lua53Packages.lpeg
-lua53Packages.lpeg_patterns
-lua53Packages.ldoc
-lua53Packages.ldbus
-lua53Packages.libluv
-lua53Packages.lua-curl
-lua53Packages.lua-lsp
-lua53Packages.lua-messagepack
-lua53Packages.lua-protobuf
-lua53Packages.luaffi
-lua53Packages.luasocket
-lua53Packages.mediator_lua
-luaformatter
-lua53Packages.lua-subprocess
-lua53Packages.stdlib
-lua53Packages.std-_debug
-lua53Packages.std-normalize
-lua53Packages.luacheck
-lua53Packages.mpack
-lua53Packages.lua-subprocess
-lua53Packages.stdlib
-lua53Packages.std-_debug
-lua53Packages.std-normalize
-lua53Packages.luacheck
-lua53Packages.mpack
-lua5_3_compat
-lua5_4_compat
-lua-language-server
-lua53Packages.lua
-lua54Packages.lua
-lua54Packages.luarocks-nix
-lua53Packages.luadbi-sqlite3
-lua53Packages.luarocks-nix
-lua53Packages.luasql-sqlite3
-lua53Packages.sqlite
-lynis
-marksman
-mdbook
-mu
-ncdu
-neovim
-nil
-nimble-unwrapped
-nimlsp
-nimPackages.nim
-nix-tree
-nixfmt
-nixpkgs-fmt
-nodePackages_latest.diagnostic-languageserver
-nodePackages_latest.vscode-json-languageserver-bin
-nodePackages_latest.eslint
-nodePackages_latest.gulp
-nodePackages_latest.neovim
-nodePackages.prettier
-nps
-nss
-nvd
-onefetch
-openjdk
-openssl
-pandoc
-pandoc-lua-filters
-pciutils
-pet
-pipenv
-pipx
-postman
-puppeteer-cli
-python311
-python311Packages.huggingface-hub
-python311Packages.ipykernel
-python311Packages.ipython
-python311Packages.jupyter
-python311Packages.notebook
-python311Packages.numpy
-python311Packages.pip
-python311Packages.pynvim
-python311Packages.python
-python311Packages.python-dotenv
-python311Packages.setuptoolsBuildHook
-python311Packages.wheelUnpackHook
-python311Packages.youtube-transcript-api
-rnix-lsp
-chruby
-ruby
-rustc
-rustfmt
-sass
-sassc
-shellcheck
-shfmt
-sqlite
-sqlite-utils
-stdenv.cc.cc
-sumneko-lua-language-server
-stylua
-sublime4
-tokei
-tree-sitter
-ueberzug
-vim
-vim-vint
-vscode
-wget
-wkhtmltopdf-bin
-yarn
-zeal
-zlib
-vimPlugins.rust-tools-nvim
-direnv
-yarn2nix
+  abootimg
+  libexif
+  exiftool
+  labelImg
+  shutter
+  nix-init
+  resvg
+  librsvg
+  svgcleaner
+  biber
+  skim
+  just
+  terraform
+  imlib2Full
+  libtiff
+  notepad-next
+  stylua
+  marksman
+  awscli
+  macchina
+  prisma-engines
+  android-backup-extractor
+  android-file-transfer
+  android-tools
+  android-udev-rules
+  apksigcopier
+  ipfs
+  arduino
+  pkg-config-unwrapped
+  bash
+  bfg-repo-cleaner
+  black
+  cargo
+  cava
+  cmake
+  curl
+  deadnix
+  dejsonlz4
+  devbox
+  direnv
+  distrobox
+  efm-langserver
+  emacs
+  emacs-all-the-icons-fonts
+  expat
+  nodejs
+  fuse3
+  gcc
+  glib
+  gnumake
+  gnutls
+  go
+  gource
+  icu
+  ispell
+  isync
+  ktlint
+  libimobiledevice
+  libtool
+  lightningcss
+  lua
+  lua53Packages.luarocks
+  lua53Packages.luarocks-nix
+  luabind
+  lua53Packages.wrapLua
+  lua53Packages.vicious
+  lua53Packages.cqueues
+  lua53Packages.dkjson
+  lua53Packages.ldbus
+  lua53Packages.lpeglabel
+  lua53Packages.lpeg
+  lua53Packages.lpeg_patterns
+  lua53Packages.ldoc
+  lua53Packages.ldbus
+  lua53Packages.libluv
+  lua53Packages.lua-curl
+  lua53Packages.lua-lsp
+  lua53Packages.lua-messagepack
+  lua53Packages.lua-protobuf
+  lua53Packages.luaffi
+  lua53Packages.luasocket
+  lua53Packages.mediator_lua
+  luaformatter
+  lua53Packages.lua-subprocess
+  lua53Packages.stdlib
+  lua53Packages.std-_debug
+  lua53Packages.std-normalize
+  lua53Packages.luacheck
+  lua53Packages.mpack
+  lua53Packages.lua-subprocess
+  lua53Packages.stdlib
+  lua53Packages.std-_debug
+  lua53Packages.std-normalize
+  lua53Packages.luacheck
+  lua53Packages.mpack
+  lua5_3_compat
+  lua5_4_compat
+  lua-language-server
+  lua53Packages.lua
+  lua54Packages.lua
+  lua54Packages.luarocks-nix
+  lua53Packages.luadbi-sqlite3
+  lua53Packages.luarocks-nix
+  lua53Packages.luasql-sqlite3
+  lua53Packages.sqlite
+  lynis
+  marksman
+  mdbook
+  mu
+  ncdu
+  neovim
+  nil
+  nimble-unwrapped
+  nimlsp
+  nimPackages.nim
+  nix-tree
+  nixfmt
+  nixpkgs-fmt
+  nodePackages_latest.diagnostic-languageserver
+  nodePackages_latest.vscode-json-languageserver-bin
+  nodePackages_latest.eslint
+  nodePackages_latest.gulp
+  nodePackages_latest.neovim
+  nodePackages.prettier
+  nps
+  nss
+  nvd
+  onefetch
+  openjdk
+  pandoc
+  pandoc-lua-filters
+  pciutils
+  pet
+  pipenv
+  pipx
+  postman
+  puppeteer-cli
+  python311
+  python311Packages.huggingface-hub
+  python311Packages.ipykernel
+  python311Packages.ipython
+  python311Packages.jupyter
+  python311Packages.notebook
+  python311Packages.numpy
+  python311Packages.pip
+  python311Packages.pynvim
+  python311Packages.python
+  python311Packages.python-dotenv
+  python311Packages.setuptoolsBuildHook
+  python311Packages.wheelUnpackHook
+  python311Packages.youtube-transcript-api
+  rnix-lsp
+  chruby
+  ruby
+  rustc
+  rustfmt
+  sass
+  sassc
+  shellcheck
+  shfmt
+  sqlite
+  sqlite-utils
+  stdenv.cc.cc
+  sumneko-lua-language-server
+  stylua
+  sublime4
+  tokei
+  tree-sitter
+  ueberzug
+  vim
+  vim-vint
+  vscode
+  wget
+  wkhtmltopdf-bin
+  yarn
+  zeal
+  zlib
+  vimPlugins.rust-tools-nvim
+  direnv
+  yarn2nix
 ]
-

@@ -1,117 +1,116 @@
-{ pkgs }:
-
+{pkgs}:
 with pkgs; [
-acpi
-arandr
-autorandr
-brightnessctl
-cairo
-cairomm
-dbus-broker
-dconf
-fbida
-feh
-firefox
-fluent-icon-theme
-glib-networking
-gnome.file-roller
-gnome.gnome-themes-extra
-gnome.gvfs
-gnome2.gtkglext
-gob2
-gobject-introspection-unwrapped
-goocanvas
-goocanvas3
-gthumb
-gtk_engines
-gtk-sharp-2_0
-gtk2-x11
-gtk3
-gtk3-x11
-gtk4
-gusb
-shotcut
-olive-editor
-avidemux
-openshot-qt
-i3lock-color
-inotify-tools
-xscreensaver 
-jpegoptim
-libcanberra-gtk3
-libdbusmenu
-libdbusmenu-gtk3
-libgee
-libglibutil
-libgudev
-libinput
-libnotify
-librsvg
-libsForQt5.qt5ct
-libsForQt5.qtstyleplugin-kvantum
-libxdg_basedir
-lightlocker
-maim
-menu-cache
-mesa
-mesa-demos
-mozjpeg
-networkmanagerapplet
-pango
-pangomm
-papirus-folders
-papirus-icon-theme
-pasystray
-perl536Packages.CairoGObject
-perl536Packages.GooCanvas2CairoTypes
-picom
-pixcat
-polkit_gnome
-poppler_utils
-python311Packages.pyxdg
-ranger
-rofi
-terminus_font
-terminus-nerdfont
-unrar
-ventoy-full
-wirelesstools
-wmctrl
-wpa_supplicant
-xclip
-xdg-desktop-portal-gtk
-xdg-utils
-xdotool
-xfce.exo
-xfce.garcon
-xfce.libxfce4ui
-xfce.libxfce4util
-xfce.tumbler
-xfce.xfce4-dev-tools
-xfce.xfce4-settings
-xfce.xfconf
-xlsfonts
-xorg.fontalias
-xorg.fonttosfnt
-xorg.fontutil
-xorg.libxcb
-xorg.mkfontdir
-xorg.xbacklight
-xorg.xcbutil
-xorg.xcbutilerrors
-xorg.xcbutilimage
-xorg.xcbutilrenderutil
-xorg.xcbutilwm
-xorg.xconsole
-xorg.xev
-xorg.xfontsel
-xorg.xinit
-xorg.xkill
-xorg.xorgproto
-xorg.xprop
-xorg.xwininfo
-xscreensaver
-xsecurelock
-xsuspender
-xterm
+  acpi
+  arandr
+  autorandr
+  brightnessctl
+  cairo
+  cairomm
+  dbus-broker
+  dconf
+  fbida
+  feh
+  firefox
+  fluent-icon-theme
+  glib-networking
+  gnome.file-roller
+  gnome.gnome-themes-extra
+  gnome.gvfs
+  gnome2.gtkglext
+  gob2
+  gobject-introspection-unwrapped
+  goocanvas
+  goocanvas3
+  gthumb
+  gtk_engines
+  gtk-sharp-2_0
+  gtk2-x11
+  gtk3
+  gtk3-x11
+  gtk4
+  gusb
+  shotcut
+  olive-editor
+  avidemux
+  openshot-qt
+  i3lock-color
+  inotify-tools
+  xscreensaver
+  jpegoptim
+  libcanberra-gtk3
+  libdbusmenu
+  libdbusmenu-gtk3
+  libgee
+  libglibutil
+  libgudev
+  libinput
+  libnotify
+  librsvg
+  libsForQt5.qt5ct
+  libsForQt5.qtstyleplugin-kvantum
+  libxdg_basedir
+  lightlocker
+  maim
+  menu-cache
+  mesa
+  mesa-demos
+  mozjpeg
+  networkmanagerapplet
+  pango
+  pangomm
+  papirus-folders
+  papirus-icon-theme
+  pasystray
+  perl536Packages.CairoGObject
+  perl536Packages.GooCanvas2CairoTypes
+  picom
+  pixcat
+  polkit_gnome
+  poppler_utils
+  python311Packages.pyxdg
+  ranger
+  rofi
+  terminus_font
+  terminus-nerdfont
+  unrar
+  ventoy-full
+  wirelesstools
+  wmctrl
+  wpa_supplicant
+  xclip
+  xdg-desktop-portal-gtk
+  xdg-utils
+  xdotool
+  xfce.exo
+  xfce.garcon
+  xfce.libxfce4ui
+  xfce.libxfce4util
+  xfce.tumbler
+  xfce.xfce4-dev-tools
+  xfce.xfce4-settings
+  xfce.xfconf
+  xlsfonts
+  xorg.fontalias
+  xorg.fonttosfnt
+  xorg.fontutil
+  xorg.libxcb
+  xorg.mkfontdir
+  xorg.xbacklight
+  xorg.xcbutil
+  xorg.xcbutilerrors
+  xorg.xcbutilimage
+  xorg.xcbutilrenderutil
+  xorg.xcbutilwm
+  xorg.xconsole
+  xorg.xev
+  xorg.xfontsel
+  xorg.xinit
+  xorg.xkill
+  xorg.xorgproto
+  xorg.xprop
+  xorg.xwininfo
+  xscreensaver
+  xsecurelock
+  xsuspender
+  xterm
 ]

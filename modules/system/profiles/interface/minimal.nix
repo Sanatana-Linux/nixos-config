@@ -1,95 +1,94 @@
-{ pkgs }:
-
+{pkgs}:
 with pkgs; [
-acpi
-appimage-run
-arandr
-autorandr
-brightnessctl
-cbatticon
-firefox
-fluent-icon-theme
-gnome.file-roller
-gnome.gnome-disk-utility
-gnome.gnome-themes-extra
-gthumb
-gtk-engine-murrine
-inotify-tools
-libinput
-libnotify
-librsvg
-maim
-mesa-demos
-networkmanagerapplet
-pasystray
-picom
-polkit_gnome
-ranger
-rofi
-terminus_font
-terminus-nerdfont
-unrar
-wpa_supplicant
-xclip
-xdg-desktop-portal-gtk
-xdotool
-xlsfonts
-xorg.fontalias
-xorg.fonttosfnt
-xorg.fontutil
-xorg.mkfontdir
-xorg.xbacklight
-xorg.xcbutilwm
-xorg.xconsole
-xorg.xev
-xorg.xfontsel
-xorg.xinit
-xorg.xkill
-xorg.xorgproto
-xorg.xprop
-xorg.xwininfo
-xscreensaver
-xsecurelock
-cairo
-cairomm
-feh
-gnome2.gtkglext
-gnome.gvfs
-menu-cache
-python311Packages.pyxdg
-gobject-introspection-unwrapped
-goocanvas
-goocanvas3
-gtk_engines
-i3lock-color
-libcanberra-gtk3
-libsForQt5.qt5ct
-libsForQt5.qtstyleplugin-kvantum
-numix-cursor-theme
-pango
-pangomm
-perl536Packages.CairoGObject
-perl536Packages.GooCanvas2CairoTypes
-pixcat
-xdg-utils
-xfce.exo
-xfce.libxfce4ui
-xfce.libxfce4util
-wirelesstools
-libdbusmenu-gtk3
-libxdg_basedir
-fbida
-xfce.tumbler
-jpegoptim
-mozjpeg
-xorg.libxcb
-xorg.xcbutil
-xorg.xcbutilerrors
-xorg.xcbutilimage
-xorg.xcbutilrenderutil
-xfce.garcon
-xfce.xfce4-dev-tools
-xfce.xfce4-settings
-xfce.xfconf
-xterm
+  acpi
+  appimage-run
+  arandr
+  autorandr
+  brightnessctl
+  cbatticon
+  firefox
+  fluent-icon-theme
+  gnome.file-roller
+  gnome.gnome-disk-utility
+  gnome.gnome-themes-extra
+  gthumb
+  gtk-engine-murrine
+  inotify-tools
+  libinput
+  libnotify
+  librsvg
+  maim
+  mesa-demos
+  networkmanagerapplet
+  pasystray
+  picom
+  polkit_gnome
+  ranger
+  rofi
+  terminus_font
+  terminus-nerdfont
+  unrar
+  wpa_supplicant
+  xclip
+  xdg-desktop-portal-gtk
+  xdotool
+  xlsfonts
+  xorg.fontalias
+  xorg.fonttosfnt
+  xorg.fontutil
+  xorg.mkfontdir
+  xorg.xbacklight
+  xorg.xcbutilwm
+  xorg.xconsole
+  xorg.xev
+  xorg.xfontsel
+  xorg.xinit
+  xorg.xkill
+  xorg.xorgproto
+  xorg.xprop
+  xorg.xwininfo
+  xscreensaver
+  xsecurelock
+  cairo
+  cairomm
+  feh
+  gnome2.gtkglext
+  gnome.gvfs
+  menu-cache
+  python311Packages.pyxdg
+  gobject-introspection-unwrapped
+  goocanvas
+  goocanvas3
+  gtk_engines
+  i3lock-color
+  libcanberra-gtk3
+  libsForQt5.qt5ct
+  libsForQt5.qtstyleplugin-kvantum
+  numix-cursor-theme
+  pango
+  pangomm
+  perl536Packages.CairoGObject
+  perl536Packages.GooCanvas2CairoTypes
+  pixcat
+  xdg-utils
+  xfce.exo
+  xfce.libxfce4ui
+  xfce.libxfce4util
+  wirelesstools
+  libdbusmenu-gtk3
+  libxdg_basedir
+  fbida
+  xfce.tumbler
+  jpegoptim
+  mozjpeg
+  xorg.libxcb
+  xorg.xcbutil
+  xorg.xcbutilerrors
+  xorg.xcbutilimage
+  xorg.xcbutilrenderutil
+  xfce.garcon
+  xfce.xfce4-dev-tools
+  xfce.xfce4-settings
+  xfce.xfconf
+  xterm
 ]

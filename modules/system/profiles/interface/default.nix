@@ -1,22 +1,23 @@
-{ config, pkgs, lib, ... }:
-
 {
- # For saving passwords
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
+  # For saving passwords
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.login.enableGnomeKeyring = true;
   programs.seahorse.enable = true;
-    programs.gnupg.agent = {
+  programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
   };
 
-
   # good old dbus
   services.dbus = {
     enable = true;
-    packages = with pkgs; [ dconf gcr ];
+    packages = with pkgs; [dconf gcr];
   };
-
 
   # Everything is bad without it
   # Configure keymap in X11
@@ -31,7 +32,7 @@
   # Enable touchpad support (enabled default in most desktopManagers but this is linux so better to be safe than irritated).
   services.xserver.libinput.enable = true;
 
-  hardware.opengl = { enable = true; };
+  hardware.opengl = {enable = true;};
 
   # light
   programs.light.enable = true;
@@ -44,8 +45,4 @@
 
   # acpid
   services.acpid.enable = true;
-
-
-
-
 }

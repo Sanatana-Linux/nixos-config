@@ -1,8 +1,10 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   fonts = {
-    fonts =  with pkgs; [
+    fonts = with pkgs; [
       google-fonts
       inter
       kreative-square-fonts
@@ -12,7 +14,7 @@
       norwester-font
       noto-fonts-cjk
       font-awesome
-      line-awesome 
+      line-awesome
       font-awesome_4
       font-awesome_5
       noto-fonts-emoji
@@ -34,9 +36,9 @@
       subpixel.lcdfilter = "default";
 
       defaultFonts = {
-        monospace = [ "GohuFont uni-11 Nerd Font Propo " ];
-        sansSerif = [ "Asap Condensed, Semi-Bold Condensed " ];
-        serif = [ "Agave Nerd Font Propo Bold " ];
+        monospace = ["GohuFont uni-11 Nerd Font Propo "];
+        sansSerif = ["Asap Condensed, Semi-Bold Condensed "];
+        serif = ["Agave Nerd Font Propo Bold "];
       };
     };
   };

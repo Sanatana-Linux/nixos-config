@@ -59,6 +59,7 @@ zsh-autocomplete
 zsh-navigation-tools
 zsh-edit
 deer
-
+cookiecutter
+copier
 ]
 

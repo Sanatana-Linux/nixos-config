@@ -3,6 +3,7 @@ with pkgs; [
   acpi
   arandr
   autorandr
+  avidemux
   brightnessctl
   cairo
   cairomm
@@ -12,7 +13,12 @@ with pkgs; [
   feh
   firefox
   fluent-icon-theme
+  geocode-glib_2
+  glib
   glib-networking
+  glibc
+  glibc_memusage
+  glibmm 
   gnome.file-roller
   gnome.gnome-themes-extra
   gnome.gvfs
@@ -22,25 +28,23 @@ with pkgs; [
   goocanvas
   goocanvas3
   gthumb
-  gtk_engines
   gtk-sharp-2_0
   gtk2-x11
   gtk3
   gtk3-x11
   gtk4
+  gtk_engines
   gusb
-  shotcut
-  olive-editor
-  avidemux
-  openshot-qt
   i3lock-color
   inotify-tools
-  xscreensaver
   jpegoptim
   libcanberra-gtk3
   libdbusmenu
   libdbusmenu-gtk3
+  libfm
+  libfm-extra
   libgee
+  libglibutil
   libglibutil
   libgudev
   libinput
@@ -56,6 +60,8 @@ with pkgs; [
   mesa-demos
   mozjpeg
   networkmanagerapplet
+  olive-editor
+  openshot-qt
   pango
   pangomm
   papirus-folders
@@ -70,9 +76,12 @@ with pkgs; [
   python311Packages.pyxdg
   ranger
   rofi
-  terminus_font
+  shotcut
+  template-glib
   terminus-nerdfont
+  terminus_font
   unrar
+  unscd
   ventoy-full
   wirelesstools
   wmctrl
@@ -109,6 +118,7 @@ with pkgs; [
   xorg.xorgproto
   xorg.xprop
   xorg.xwininfo
+  xscreensaver
   xscreensaver
   xsecurelock
   xsuspender

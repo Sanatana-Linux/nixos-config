@@ -1,12 +1,12 @@
-{ ... }: {
+{...}: {
   services.picom = {
     enable = true;
     backend = "glx";
     vSync = true;
 
     shadow = false;
-    shadowOffsets = [ (-1) (-1) ];
-    shadowOpacity = 0.15;
+    shadowOffsets = [(-1) (-1)];
+
     shadowExclude = [
       "name = 'Notification'"
       "class_g = 'Conky'"
@@ -17,14 +17,13 @@
 
     fade = true;
     fadeDelta = 3;
-    fadeSteps = [ 0.06 0.06 ];
-    fadeExclude = [ ];
+    fadeSteps = [0.06 0.06];
+    fadeExclude = [];
 
-
-    activeOpacity = "1.0";
-    inactiveOpacity = "1.0";
-    menuOpacity = "1.0";
-    opacityRules = [ "70:class_g = 'splash'" ];
+    activeOpacity = "0.999";
+    inactiveOpacity = "0.999";
+    menuOpacity = "0.999";
+    opacityRules = ["70:class_g = 'splash'"];
 
     wintypes = {
       tooltip = {
@@ -33,12 +32,12 @@
         focus = true;
         full-shadow = true;
       };
-      dock = { shadow = false; };
-      dnd = { shadow = false; };
-      popup_menu = { opacity = 1; };
-      dropdown_menu = { opacity = 1; };
-      desktop = { full-shadow = false; };
-      normal = { full-shadow = false; };
+      dock = {shadow = false;};
+      dnd = {shadow = false;};
+      popup_menu = {opacity = 0.99999;};
+      dropdown_menu = {opacity = 0.99;};
+      desktop = {full-shadow = false;};
+      normal = {full-shadow = false;};
     };
 
     settings = {
@@ -49,7 +48,7 @@
       shadow-offset-x = "-40";
       shadow-offset-y = "-20";
 
-      focus-exclude = [ "class_g = 'Peek'" "class_g = 'Cairo-clock'" ];
+      focus-exclude = ["class_g = 'Peek'" "class_g = 'Cairo-clock'"];
 
       corner-radius = 12;
       rounded-corners-exclude = [
@@ -61,7 +60,7 @@
       blur-method = "dual_kawase";
       blur-kernel = "11x11gaussian";
       blur-deviation = "1.0";
-      blur-strength = "8";
+      blur-strength = "2";
       blur-background = false;
       blur-background-frame = true;
       blur-background-fixed = true;
@@ -73,10 +72,10 @@
         "window_type = 'menu'"
       ];
       # Opacity
-      inactive-opacity = 1;
-      frame-opacity = 1;
+      inactive-opacity = 0.99999;
+      frame-opacity = 0.99999;
       inactive-opacity-override = false;
-      active-opacity = 1.0;
+      active-opacity = 0.99999;
       inactive-dim = 0.0;
 
       mark-ovredir-focused = true;
@@ -89,7 +88,7 @@
       detect-transient = true;
       detect-client-leader = true;
       resize-damage = 1;
-      transparent-clipping = false;
+      transparent-clipping = true;
 
       log-level = "warn";
     };

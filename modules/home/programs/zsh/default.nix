@@ -23,11 +23,6 @@
     autocd = true;
     dotDir = ".config/zsh";
     history = {
-      save = 10000;
-      size = 10000;
-      path = "${config.xdg.dataHome}/zsh/history";
-    };
-    history = {
       extended = true;
       ignoreDups = false;
       expireDuplicatesFirst = false;

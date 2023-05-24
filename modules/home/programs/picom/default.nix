@@ -48,7 +48,7 @@
         "_NET_WM_STATE@:32a *= '_NET_WM_STATE_MAXIMIZED_HORZ'"
       ];
       blur-method = "dual_kawase";
-      blur-strength = 7.0;
+      blur-strength = 1.00;
       kernel = "11x11gaussian";
       blur-background = false;
       blur-background-frame = true;

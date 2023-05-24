@@ -1,39 +1,39 @@
-{ config, inputs, pkgs, lib, ... }:
-
-let
+{
+  config,
+  inputs,
+  pkgs,
+  lib,
+  ...
+}: let
   core-packages =
-    import ../../modules/system/profiles/core/pkgs.nix { inherit pkgs; };
+    import ../../modules/system/profiles/core/pkgs.nix {inherit pkgs;};
 
   development-packages =
-    import ../../modules/system/profiles/development/pkgs.nix { inherit pkgs; };
+    import ../../modules/system/profiles/development/pkgs.nix {inherit pkgs;};
 
   interface-packages =
-    import ../../modules/system/profiles/interface/pkgs.nix { inherit pkgs; };
+    import ../../modules/system/profiles/interface/pkgs.nix {inherit pkgs;};
 
   fonts-packages =
-    import ../../modules/system/profiles/fonts/pkgs.nix { inherit pkgs; };
+    import ../../modules/system/profiles/fonts/pkgs.nix {inherit pkgs;};
 
-  laptop-packages =
-    pkgs.callPackage ../../modules/system/profiles/core/laptop/pkgs.nix {
-      inherit pkgs;
-    };
+  laptop-packages = pkgs.callPackage ../../modules/system/profiles/core/laptop/pkgs.nix {
+    inherit pkgs;
+  };
 
   networking-packages =
-    import ../../modules/system/profiles/networking/pkgs.nix { inherit pkgs; };
+    import ../../modules/system/profiles/networking/pkgs.nix {inherit pkgs;};
 
-  shell-packages =
-    pkgs.callPackage ../../modules/system/profiles/shell/pkgs.nix {
-      inherit pkgs;
-    };
+  shell-packages = pkgs.callPackage ../../modules/system/profiles/shell/pkgs.nix {
+    inherit pkgs;
+  };
 
   sound-packages =
-    import ../../modules/system/profiles/sound/pkgs.nix { inherit pkgs; };
+    import ../../modules/system/profiles/sound/pkgs.nix {inherit pkgs;};
 
-  virtualisation-packages =
-    import ../../modules/system/profiles/virtualisation/pkgs.nix {
-      inherit pkgs;
-    };
-
+  virtualisation-packages = import ../../modules/system/profiles/virtualisation/pkgs.nix {
+    inherit pkgs;
+  };
 in {
   imports = [
     ./hardware-configuration.nix
@@ -47,9 +47,7 @@ in {
     ../../modules/system/profiles/bluetooth
     ../../modules/system/profiles/security
     ../../modules/system/profiles/core/laptop
-
   ];
-
 
   # use grub with os-prober support
   boot = {
@@ -61,7 +59,7 @@ in {
       "rd.udev.log_level=3"
     ];
 
-    # unstable kernel   
+    # unstable kernel
     kernelPackages = pkgs.linuxPackages_latest;
     # Boot Loader
     loader = {
@@ -75,8 +73,7 @@ in {
         device = "nodev";
         efiSupport = true;
         useOSProber = true;
-        bhairava-grub-theme = { enable = true; };
-
+        bhairava-grub-theme = {enable = true;};
       };
     };
   };
@@ -113,7 +110,7 @@ in {
             package = pkgs.papirus-icon-theme;
             name = "Papirus-Dark";
           };
-          indicators = [ "~session" "~spacer" ];
+          indicators = ["~session" "~spacer"];
         };
       };
       #autoLogin = {
@@ -127,18 +124,31 @@ in {
       package = pkgs.awesome-git;
 
       luaModules = lib.attrValues {
-        inherit (pkgs.luaPackages)
-          cjson dkjson ldbus luasec lgi ldoc lpeg lpeg_patterns luafilesystem
-          luasocket luasystem stdlib luaposix argparse vicious;
+        inherit
+          (pkgs.luaPackages)
+          cjson
+          dkjson
+          ldbus
+          luasec
+          lgi
+          ldoc
+          lpeg
+          lpeg_patterns
+          luafilesystem
+          luasocket
+          luasystem
+          stdlib
+          luaposix
+          argparse
+          vicious
+          ;
       };
     };
-
   };
   # Defines my account, on first boot I change the passwd as root, don't worry!
   users.users.tlh = {
     isNormalUser = true;
-    extraGroups =
-      [ "wheel" "docker" "networkmanager" "libvirtd" "video" "audio" "input" ];
+    extraGroups = ["wheel" "docker" "networkmanager" "libvirtd" "video" "audio" "input"];
     initialPassword = "tlh123";
   };
 
@@ -146,20 +156,25 @@ in {
   users.mutableUsers = true;
 
   environment.loginShellInit = ''
-      if [ -e $HOME/.profile ]; then
-        . $HOME/.profile
-      fi
-    '';
+    if [ -e $HOME/.profile ]; then
+      . $HOME/.profile
+    fi
+  '';
 
-
-  # List packages installed in system profile. 
-  environment.systemPackages = core-packages ++ development-packages
-    ++ interface-packages ++ laptop-packages ++ networking-packages
-    ++ shell-packages ++ sound-packages ++ virtualisation-packages
+  # List packages installed in system profile.
+  environment.systemPackages =
+    core-packages
+    ++ development-packages
+    ++ interface-packages
+    ++ laptop-packages
+    ++ networking-packages
+    ++ shell-packages
+    ++ sound-packages
+    ++ virtualisation-packages
     ++ (with pkgs; [
       awesome-git
       home-manager
-    treefmt
+      treefmt
     ]);
 
   system.stateVersion = "23.05";
@@ -171,12 +186,14 @@ in {
     daemonCPUSchedPolicy = "idle";
     daemonIOSchedClass = "idle";
   };
-nix.settings.trusted-users = [ "root" "tlh" ];
+  nix.settings.trusted-users = ["root" "tlh"];
   # allow unfree pkgs through configuration.nix
   nixpkgs.config.allowUnfree = true;
 
   # Because sometimes, I don't want to wait a day to use my computer
   nixpkgs.config.allowBroken = true;
 
+  nixpkgs.config.permittedInsecurePackages = [
+    "openssl-1.1.1t"
+  ];
 }
-

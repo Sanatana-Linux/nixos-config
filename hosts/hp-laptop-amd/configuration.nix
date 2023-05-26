@@ -125,7 +125,7 @@ in {
 
       luaModules = lib.attrValues {
         inherit
-          (pkgs.luaPackages)
+          (pkgs.lua52Packages)
           cjson
           dkjson
           ldbus

@@ -8,9 +8,12 @@
 >
 > [UChicago's DSAL Online Sanskrit Dictionary](https://dsal.uchicago.edu/cgi-bin/app/apte_query.py?qs=Sanatana&matchtype=default)
 
-<img width="100%" height="100%"  src="./assets/dreams.gif" alt="Palm trees aflame on Bikini Atoll in the early 1960s as part of US thermonuclear testing in the Pacific" align="center" />
+<img width="100%" height="100%"  src="./assets/eternal.gif" alt="Palm trees aflame on Bikini Atoll in the early 1960s as part of US thermonuclear testing in the Pacific" align="center" />
+
+---
 
 > **Warning**
+>
 > While I hope you can gain from my configuration and have attempted, for my own sake at least, to document what is going on in the configuration as thoroughly as possible, this is my configuration and is liable to broken as I am still piecing the whole Nix ecosystem together from its many disjointed pieces and ambiguous terminology.
 
 ## The NixOS Experience Summarized in a Digestible Format

@@ -10,7 +10,8 @@
 
 <img width="100%" height="100%"  src="./assets/dreams.gif" alt="Palm trees aflame on Bikini Atoll in the early 1960s as part of US thermonuclear testing in the Pacific" align="center" />
 
-**Note:** While I hope you can gain from my configuration and have attempted, for my own sake at least, to document what is going on in the configuration as thoroughly as possible, this is my configuration and is liable to broken as I am still piecing the whole Nix ecosystem together from its many disjointed pieces and ambiguous terminology.
+> **Warning**
+> While I hope you can gain from my configuration and have attempted, for my own sake at least, to document what is going on in the configuration as thoroughly as possible, this is my configuration and is liable to broken as I am still piecing the whole Nix ecosystem together from its many disjointed pieces and ambiguous terminology.
 
 ## The NixOS Experience Summarized in a Digestible Format
 
@@ -133,7 +134,6 @@ Thanks to these configurations and their authors that I was able to
 
 - [AlphaTechnolog's nixdots](https://github.com/AlphaTechnolog/nixdots)
 - [MCotocel's nixdots](https://github.com/MCotocel/nixdots)
-- [JavaCafe01's frostedflakes]
 - [rxyhn's yuki](https://github.com/rxyhn/yuki)
 - [nuxshed's dotfiles](https://github.com/nuxshed/dotfiles)
 - [hlissner's dotfiles](https://github.com/hlissner/dotfiles)
@@ -144,7 +144,7 @@ Thanks to these configurations and their authors that I was able to
 - [GTrunSec's nixos-flk](https://github.com/GTrunSec/nixos-flk)
 - [thiagokokada/nix-configs](https://github.com/thiagokokada/nix-configs)
 - [lourkeur's distro](https://github.com/lourkeur/distro)
--
+- tons more I will add later if I remember to ;]
 
 ## ISO
 

@@ -1,0 +1,3 @@
+{
+  awesome = import ./awesome.nix;
+}

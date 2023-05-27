@@ -3,6 +3,13 @@
   pkgs,
   ...
 }: {
+  # ------------------------------------------------- #
+  programs.thunar.plugins = with pkgs.xfce; [
+    thunar-archive-plugin
+    thunar-volman
+    thunar-dropbox-plugin
+    thunar-media-tags-plugin
+  ];
   home.pointerCursor = {
     name = "Phinger Cursors (light)";
     package = pkgs.phinger-cursors;

@@ -149,14 +149,6 @@ in {
             waitPID=$!
           '';
         };
-      # ------------------------------------------------- #
-      # TODO determine where else might be a better place for this
-      programs.thunar.plugins = with pkgs.xfce; [
-        thunar-archive-plugin
-        thunar-volman
-        thunar-dropbox-plugin
-        thunar-media-tags-plugin
-      ];
     };
     # ------------------------------------------------- #
     # TODO lint the other packages and pull out the awesome dependencies

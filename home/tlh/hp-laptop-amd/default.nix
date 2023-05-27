@@ -13,7 +13,8 @@
     ../shared/optional/programs/mpv.nix
     ../shared/optional/programs/obs-studio.nix
     ../shared/optional/programs/vscode.nix
-    ../shared/optional/programs/neovim.nix
+    ../shared/optional/programs/neovim/default.nix
+    ../shared/optional/programs/kitty/default.nix
 
     # Specific configuration
     ./desktop

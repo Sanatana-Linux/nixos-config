@@ -49,15 +49,13 @@
         device = "nodev";
         efiSupport = true;
         useOSProber = true;
-        #  enableCryptodisk = true;
-        # configurationLimit = 3;
-        gfxmodeEfi = "1920x1080";
-        theme = pkgs.fetchzip {
-          #
-          url = "https://github.com/Sanatana-Linux/Bhairava-Grub-Theme/archive/refs/tags/1.zip";
-          hash = "";
-          stripRoot = false;
-        };
+        gfxmodeEfi = "1600x900";
+        # theme = pkgs.fetchzip {
+        #
+        #  url = "https://github.com/Sanatana-Linux/Bhairava-Grub-Theme/archive/refs/tags/1.zip";
+        #  hash = "";
+        #  stripRoot = false;
+        #};
       };
     };
   };

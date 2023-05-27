@@ -54,8 +54,8 @@
         gfxmodeEfi = "1920x1080";
         theme = pkgs.fetchzip {
           #
-          url = "https://github.com/Sanatana-Linux/Bhairava-Grub-Theme/archive/refs/tags/1.tar.gz";
-          hash = "sha256-6ZevSnSNJ/Q67DTNJj8k4pjOjWZFj0tG0ljG3gwbLuc=";
+          url = "https://github.com/Sanatana-Linux/Bhairava-Grub-Theme/archive/refs/tags/1.zip";
+          sha256 = lock.narHash;
           stripRoot = false;
         };
       };

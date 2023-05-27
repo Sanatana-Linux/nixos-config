@@ -55,7 +55,7 @@
         theme = pkgs.fetchzip {
           #
           url = "https://github.com/Sanatana-Linux/Bhairava-Grub-Theme/archive/refs/tags/1.zip";
-          sha256 = lock.narHash;
+          hash = "";
           stripRoot = false;
         };
       };

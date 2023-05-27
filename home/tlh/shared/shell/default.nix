@@ -19,7 +19,6 @@ in {
     ./cli.nix
     ./git.nix
     ./nix.nix
-    ./bin/default.nix
   ];
 
   home = {

@@ -24,20 +24,20 @@
 
   boot = {
     initrd = {
-      supportedFilesystems = ["btrfs"];
       systemd.enable = true;
+      verbose = false;
     };
 
     kernelModules = ["acpi_call"];
     kernelPackages = pkgs.linuxPackages_latest;
     extraModulePackages = with config.boot.kernelPackages; [acpi_call];
     kernelParams = [
-      "i8042.direct"
-      "i8042.dumbkbd"
-      "i915.force_probe=46a6"
+      "quiet"
+      "rd.udev.log_level=3"
     ];
 
     loader = {
+      systemd-boot.enable = false;
       efi = {
         canTouchEfiVariables = true;
         efiSysMountPoint = "/boot";
@@ -72,6 +72,8 @@
     systemPackages = with pkgs; [
       acpi
       cryptsetup
+      mesa
+      mesa-demos
       libva
       libva-utils
       vulkan-loader

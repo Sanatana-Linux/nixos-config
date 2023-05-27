@@ -63,6 +63,7 @@
   };
 
   environment = {
+    etc."nixos".source = /etc/nixos;
     variables = {
       GDK_SCALE = "2";
       GDK_DPI_SCALE = "0.5";

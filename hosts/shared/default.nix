@@ -33,7 +33,7 @@
     config = {
       allowUnfree = true;
       allowUnsupportedSystem = true;
-      allowUnfreePredicate = _: true;''
+      allowUnfreePredicate = _: true;
       allowBroken = true;
     };
   };

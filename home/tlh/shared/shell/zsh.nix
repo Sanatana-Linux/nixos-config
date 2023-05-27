@@ -251,7 +251,7 @@
       grep = lib.getExe ripgrep;
       du = lib.getExe du-dust;
       ps = lib.getExe procs;
-      rm = lib.getExe trash-cli;
+      trm = lib.getExe trash-cli;
 
       cat = "${lib.getExe bat} --style=plain";
 

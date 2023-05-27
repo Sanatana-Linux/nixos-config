@@ -27,11 +27,13 @@
     overlays = [
       outputs.overlays.default
       inputs.nixpkgs-f2k.overlays.stdenvs
+      inputs.nur.overlay
     ];
 
     config = {
       allowUnfree = true;
       allowUnsupportedSystem = true;
+      allowUnfreePredicate = _: true;''
       allowBroken = true;
     };
   };

@@ -6,8 +6,9 @@
     bright = ["2c2c2c" "Ff28a9" "4dd564" "Ffff73" "0badff" "85ff95" "8265ff" "919191"];
   in {
     colors = normal ++ bright;
-    font = "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
+    font = "${pkgs.terminus_font}/share/consolefonts/ter-c14b.psf.gz";
     useXkbConfig = true;
+    keyMap = "us";
   };
 
   i18n = {

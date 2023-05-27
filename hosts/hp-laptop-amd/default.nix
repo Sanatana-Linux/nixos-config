@@ -50,12 +50,11 @@
         efiSupport = true;
         useOSProber = true;
         gfxmodeEfi = "1600x900";
-        # theme = pkgs.fetchzip {
-        #
-        #  url = "https://github.com/Sanatana-Linux/Bhairava-Grub-Theme/archive/refs/tags/1.zip";
-        #  hash = "";
-        #  stripRoot = false;
-        #};
+        theme = pkgs.fetchzip {
+          url = "https://github.com/Sanatana-Linux/Bhairava-Grub-Theme/archive/refs/tags/1.zip";
+          hash = "";
+          stripRoot = false;
+        };
       };
     };
   };
@@ -70,7 +69,6 @@
 
     systemPackages = with pkgs; [
       acpi
-      cryptsetup
       mesa
       mesa-demos
       libva

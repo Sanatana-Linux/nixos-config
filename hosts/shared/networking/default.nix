@@ -3,7 +3,7 @@
     networkmanager = {
       enable = true;
       unmanaged = ["docker0" "rndis0"];
-      wifi.macAddress = "random";
+      #    wifi.macAddress = "random";
     };
 
     firewall = {

@@ -40,8 +40,7 @@
   virtualisation = {
     docker = {
       enable = true;
-      enableOnBoot = false;
-      enableNvidia = true;
+      enableOnBoot = true;
     };
   };
 }

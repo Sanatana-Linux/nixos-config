@@ -21,4 +21,5 @@
     ./services
     ./X
   ];
+  #users.users.tlh.shell = pkgs.zsh;
 }

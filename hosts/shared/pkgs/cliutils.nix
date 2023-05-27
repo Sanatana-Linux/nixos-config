@@ -48,6 +48,7 @@ with pkgs; [
   ps_mem
   ranger
   rclone
+  pure-prompt
   ripgrep
   slop
   smartmontools

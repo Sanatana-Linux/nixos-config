@@ -26,8 +26,8 @@
   programs.git = {
     enable = true;
     lfs.enable = true;
-    userName = "rxyhn";
-    userEmail = "rxyhn.dev@gmail.com";
+    userName = "Thomas Leon Highbaugh";
+    userEmail = "thighbaugh@zoho.com";
     signing = {
       key = "F01BC62D2BAE2122";
       signByDefault = true;

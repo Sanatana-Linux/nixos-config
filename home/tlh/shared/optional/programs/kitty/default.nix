@@ -1,4 +1,9 @@
-{pkgs}: {
+{
+  pkgs,
+  outputs,
+  lib,
+  ...
+}: {
   programs.kitty = {
     enable = true;
     # TODO implement color theme and add the below

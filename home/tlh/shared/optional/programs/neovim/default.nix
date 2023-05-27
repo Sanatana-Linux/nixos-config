@@ -2,6 +2,7 @@
   pkgs,
   inputs,
   outputs,
+  lib,
 }: {
   programs.neovim = {
     enable = true;

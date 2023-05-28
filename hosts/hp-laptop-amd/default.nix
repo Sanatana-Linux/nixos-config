@@ -28,12 +28,6 @@
       verbose = false;
     };
 
-    kernelModules = [
-    "acpi_call"  
-    "quiet"
-    "rd.udev.log_level=3"
-    ];
-    
     kernelPackages = pkgs.linuxPackages_latest;
     extraModulePackages = with config.boot.kernelPackages; [acpi_call];
     kernelParams = [
@@ -87,8 +81,6 @@
       driSupport = true;
       driSupport32Bit = true;
       extraPackages = with pkgs; [
-        libvdpau-va-gl
-        vaapiVdpau
         mesa
         mesa-demos
       ];

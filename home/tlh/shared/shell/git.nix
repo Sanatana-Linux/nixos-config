@@ -28,10 +28,6 @@
     lfs.enable = true;
     userName = "Thomas Leon Highbaugh";
     userEmail = "thighbaugh@zoho.com";
-    signing = {
-      key = "F01BC62D2BAE2122";
-      signByDefault = true;
-    };
 
     delta = {
       enable = true;

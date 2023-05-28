@@ -178,11 +178,8 @@
       EOF
 
       any-nix-shell zsh --info-right | source /dev/stdin
-
-      function run() {
-        nix run nixpkgs#$@
-      }
-
+  autoload -U promptinit; promptinit
+   prompt pure;
        '';
 
     shellAliases = with pkgs; {

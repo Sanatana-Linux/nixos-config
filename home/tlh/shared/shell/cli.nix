@@ -5,8 +5,6 @@
 }: {
   home.packages = with pkgs; [
     bc
-    bandwhich
-    bottom
     btop
     catimg
     coreutils
@@ -17,9 +15,7 @@
     fd
     findutils
     file
-    hyperfine
     imv
-    joshuto
     jq
     killall
     lm_sensors

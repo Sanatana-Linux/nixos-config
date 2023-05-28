@@ -11,12 +11,13 @@
   pythonpackages = import ./python.nix {pkgs = pkgs;};
   developmentpackages = import ./development.nix {pkgs = pkgs;};
   soundpackages = import ./sound.nix {pkgs = pkgs;};
-  virtualizationpackages = import ./virtualization {pkgs = pkgs;};
+  virtualizationpackages = import ./virtualization.nix {pkgs = pkgs;};
 in {
   imports = [./fonts.nix];
   environment.systemPackages = with pkgs;
     [
       figlet
+      toilet
       pfetch
     ]
     ++ common
@@ -26,6 +27,6 @@ in {
     ++ media
     ++ pythonpackages
     ++ developmentpackages
-    ++ virtualizationnixnix
+    ++ virtualizationpackages
     ++ soundpackages;
 }

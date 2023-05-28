@@ -138,5 +138,5 @@ with pkgs; [
   xsecurelock
   xsuspender
   xterm
-  zathuraa
+  zathura
 ]

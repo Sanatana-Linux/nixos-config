@@ -66,7 +66,6 @@ with pkgs; [
   luajitPackages.lua-subprocess
   luajitPackages.luacheck
   luajitPackages.luadbi-sqlite3
-  luajitPackages.luaffi
   luajitPackages.luarocks
   luajitPackages.luarocks-nix
   luajitPackages.luasocket

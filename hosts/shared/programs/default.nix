@@ -30,9 +30,6 @@
       package = pkgs.jre;
     };
 
-    seahorse.enable = true;
-    ssh.startAgent = true;
-
     # ------------------------------------------------- #
     thunar = {
       enable = true;

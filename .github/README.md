@@ -8,7 +8,7 @@
 >
 > [UChicago's DSAL Online Sanskrit Dictionary](https://dsal.uchicago.edu/cgi-bin/app/apte_query.py?qs=Sanatana&matchtype=default)
 
-<img width="100%" height="100%"  src="./assets/eternal.gif" alt="Palm trees aflame on Bikini Atoll in the early 1960s as part of US thermonuclear testing in the Pacific" align="center" />
+<img width="100%" height="100%"  src="./assets/eternal.gif" alt="A gif symbolic of eternity that features a rotating triangle that when pointed upwards is analoguous to the Deva symbol and when pointed down is symbolic of the Devi, thus subtly referring to the Divine in both essential aspects." align="center" />
 
 ---
 

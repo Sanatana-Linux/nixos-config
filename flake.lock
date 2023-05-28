@@ -1,5 +1,25 @@
 {
   "nodes": {
+    "bhairava-grub-theme": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1682687812,
+        "narHash": "sha256-20hQchJDo4hVH8QXDoRHZCyOmgOrYcNXnBy74AP8jMo=",
+        "owner": "Sanatana-Linux",
+        "repo": "Bhairava-Grub-Theme",
+        "rev": "1960bfb932705ac354268dd30dfdf1bd1591bc88",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Sanatana-Linux",
+        "repo": "Bhairava-Grub-Theme",
+        "type": "github"
+      }
+    },
     "crane": {
       "flake": false,
       "locked": {
@@ -669,6 +689,7 @@
     },
     "root": {
       "inputs": {
+        "bhairava-grub-theme": "bhairava-grub-theme",
         "helix": "helix",
         "home-manager": "home-manager",
         "nil": "nil",

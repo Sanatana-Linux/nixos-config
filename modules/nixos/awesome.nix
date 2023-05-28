@@ -176,7 +176,6 @@ in {
       inherit
         (pkgs.xorg)
         xwininfo
-        thunarS
         ;
     };
   };

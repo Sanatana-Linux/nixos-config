@@ -28,7 +28,12 @@
       verbose = false;
     };
 
-    kernelModules = ["acpi_call"];
+    kernelModules = [
+    "acpi_call"  
+    "quiet"
+    "rd.udev.log_level=3"
+    ];
+    
     kernelPackages = pkgs.linuxPackages_latest;
     extraModulePackages = with config.boot.kernelPackages; [acpi_call];
     kernelParams = [
@@ -45,16 +50,10 @@
 
       grub = {
         enable = true;
-        version = 2;
         device = "nodev";
         efiSupport = true;
         useOSProber = true;
-        gfxmodeEfi = "1600x900";
-        theme = pkgs.fetchzip {
-          url = "https://github.com/Sanatana-Linux/Bhairava-Grub-Theme/archive/refs/tags/1.zip";
-          hash = "";
-          stripRoot = false;
-        };
+       #bhairava-grub-theme = {enable = true;};
       };
     };
   };

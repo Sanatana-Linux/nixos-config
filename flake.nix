@@ -35,12 +35,22 @@
       flake = false;
       url = "https://github.com/Thomashighbaugh/nvim-forge.git";
     };
+ 
+ bhairava-grub-theme = {
+      #type = "git";
+      #url = "https://github.com/Sanatana-Linux/Bhairava-Grub-Theme";
+      url = "github:Sanatana-Linux/Bhairava-Grub-Theme";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+
   };
 
   outputs = {
     self,
     nixpkgs,
     home-manager,
+    bhairava-grub-theme,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -56,7 +66,7 @@
     nixosConfigurations = {
       # Laptop
       hp-laptop-amd = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
+        specialArgs = {inherit inputs outputs bhairava-grub-theme;};
         modules = [./hosts/hp-laptop-amd];
       };
     };

@@ -82,6 +82,8 @@
       extraPackages = with pkgs; [
         mesa
         mesa-demos
+        xorg.xf86videoamdgpu
+        
       ];
     };
   };

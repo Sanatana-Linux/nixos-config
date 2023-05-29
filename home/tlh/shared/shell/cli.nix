@@ -9,6 +9,8 @@
     catimg
     coreutils
     curl
+    direnv
+    nix-direnv
     du-dust
     duf
     editorconfig-core-c

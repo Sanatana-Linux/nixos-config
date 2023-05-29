@@ -85,7 +85,7 @@
         "window_type = 'utility'"
       ];
 
-      corner-radius = 22;
+      corner-radius = 12;
       rounded-corners-exclude = [
         "_PICOM_SHADOW@:32c = 0"
         "window_type = 'dock'"

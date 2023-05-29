@@ -15,7 +15,7 @@ with lib; let
     "application/xhtml+xml" = browser;
     "text/html" = browser;
     "x-scheme-handler/about" = browser;
-    "x-scheme-handler/chrome" = ["chromium-browser.desktop"];
+    "x-scheme-handler/chrome" = ["google-chrome.desktop"];
     "x-scheme-handler/ftp" = browser;
     "x-scheme-handler/http" = browser;
     "x-scheme-handler/https" = browser;
@@ -26,7 +26,7 @@ with lib; let
     "image/*" = ["imv.desktop"];
     "application/json" = browser;
     "application/pdf" = ["org.pwmt.zathura.desktop.desktop"];
-    "x-scheme-handler/discord" = ["discordcanary.desktop"];
+    "x-scheme-handler/discord" = ["discord.desktop"];
     "x-scheme-handler/spotify" = ["spotify.desktop"];
     "x-scheme-handler/tg" = ["telegramdesktop.desktop"];
   };
@@ -39,7 +39,7 @@ in {
       enable = true;
       createDirectories = true;
       extraConfig = {
-        XDG_DEVELOPMENT_DIR = "${config.xdg.userDirs.documents}/Dev";
+        XDG_DEVELOPMENT_DIR = "${config.xdg.userDirs.documents}/Projects";
       };
     };
 

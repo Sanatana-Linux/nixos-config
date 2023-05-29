@@ -16,6 +16,8 @@
       go
       gopls
       grex
+      keychain
+      policykit
       java-language-server
       lldb
       nodejs
@@ -29,6 +31,11 @@
       sumneko-lua-language-server
       stylua
       uncrustify
+      ;
+      inherit 
+      (pkgs.gnome)
+        gnome-keyring
+        libgnome-keyring
       ;
 
     inherit

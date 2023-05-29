@@ -9,8 +9,11 @@
   gita = import ./gita.nix {inherit pkgs;};
   nux = import ./nux.nix {inherit pkgs;};
   preview = import ./preview.nix {inherit pkgs;};
-  run = import ./run.nix {inherit pkgs;};
   updoot = import ./updoot.nix {inherit pkgs;};
+  extract = import ./extract.nix {inherit pkgs;};
+  panes = import ./panes.nix {inherit pkgs;};
+  fetch = import ./nixfetch.nix {inherit pkgs;};
+
 in {
-  home.packages = with pkgs; [ gita nux preview run updoot];
+  home.packages = with pkgs; [ gita nux preview updoot extract panes fetch ];
 }

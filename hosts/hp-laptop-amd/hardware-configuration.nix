@@ -23,6 +23,12 @@
       fsType = "vfat";
     };
 
+  fileSystems."/boot" =
+    { device = "/boot/efi";
+      fsType = "none";
+      options = [ "bind" ];
+    };
+
   swapDevices =
     [ { device = "/dev/disk/by-uuid/04ef9c80-b51f-4764-895b-e7828691a16e"; }
     ];

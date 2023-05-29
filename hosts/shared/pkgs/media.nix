@@ -62,6 +62,5 @@ with pkgs; [
   vlc
   webp-pixbuf-loader
   xcftools
-  yeetgif
   zathura
 ]

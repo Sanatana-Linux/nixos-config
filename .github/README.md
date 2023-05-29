@@ -14,18 +14,10 @@
 
 > **Warning**
 >
-> While I hope you can gain from my configuration and have attempted, for my own sake at least, to document what is going on in the configuration as thoroughly as possible, this is my configuration and is liable to broken as I am still piecing the whole Nix ecosystem together from its many disjointed pieces and ambiguous terminology.
+> While I hope you can gain from my configuration and have attempted, for my own sake at least, to document what is going on in the configuration as thoroughly as possible, this is my configuration that I use personally and as such it is reasonable to assume it is unstable and a work in progress.  
 
-## The NixOS Experience Summarized in a Digestible Format
+---
 
-<img src="./assets/NIXOS-LEARNING-CURVE.jpg" width="100%" alt="Tux as the deranged husband in the Shining that approximates the process of learning how to deal with NixOS"/>
-
-### "What About the Documentation?"
-
-Documentation for NixOS, especially since it has pivoted towards flakes you want?
-<img src="./assets/jack-nicholson-laugh.gif" alt="Jack Nicholson laughing while on an airplane, suggesting there is not documentation to the degree suggesting as much induces hysterical laughing" />
-
-There is plenty, some are better than others but comparatively it is easier to find high quality guides on making caustic chemicals with cleaning products than finding anything that is going to impart the wisdom of the Nix upon you. The only reasonable way involves trial and error. Lots and lots of error.
 
 ## Installation
 
@@ -93,48 +85,26 @@ nixos-rebuild switch --impure --flake '/etc/nixos#hp-laptop-amd'
 
 ```
 
-### Note About Submodules
-
-The way that I have set up the inclusion as is of several pieces of this configuration that
-are included as submodules is that if the directory already exists on the system during a
-`nixos-build switch`, the configuration from the submodules will not be included.
-
-This is because that means I can locally clone the submodule and work on it locally, then
-run the typical git commands locally as they will not have been checked out at a specific
-commit and detatched from the repository's HEAD.
-
-This makes for a cleaner experience working on those pieces of my overall system than creating
-a monorepo and enables a style of compartmentalization that I find more productive and is the
-way that professional projects are administered as well, but requires me to explain in order
-for those trying to find inspiration in this configuration to be able to best determine how
-it is working, a labor I clearly don't mind considering my reputation as a `wall post` generator.
-
-### Note on Effort Duplication
-
-While submodules provide my other projects needed for this one, recently I have overcome the need
-to reinvent wheels, which in development is known as effort duplication and
-
 ---
 
 ## Enjoy
 
 I hope you find something useful or something that enables you to come to a better understanding
-of NixOS, flakes, etc. While new documentation is in the works according to the NixOS project, and
-many resources are available to give you some insight (even if a gold standard remains
-elusive), some of which are listed below for your benefit.
+of NixOS, flakes, etc when reviewing this configuration and encourage you to use whatever portions of this code you would like for your own purposes, whatever they may be.  
 
-Keep in mind, that I am using this as my personal configuration, it is subject to change
-as I am often stumbling upon information that deepens my own knowledge (and tend to immeadiately
-apply it even if it means large rewrites of critical code such as this because its a personal project).
+
+### Feel Free to Get in Touch! 
 
 If you are confused, want better explainations, find an error/ineffciency in this repo or even just want to tell me that all I have done for the last several years has been a complete waste of time (hey Mom!), just open an issue and I will respond when I notice it (my life is chaos so sometimes this may take a while, you can also email me [here](mailto:me@thomasleonhighbaugh.me).
 
 ## Credit Where It's Due
 
-Thanks to these configurations and their authors that I was able to
+This configuration, like many if not most others, owes a huge debt of gratitude to other configurations that have inspired it and provided many snippets, organizational patterns and epiphanies when rummaged through. 
+
 
 ### NixOS + awesomewm
 
+- [rxyhn's yuki](https://github.com/rxyhn/yuki)
 - [AlphaTechnolog's nixdots](https://github.com/AlphaTechnolog/nixdots)
 - [MCotocel's nixdots](https://github.com/MCotocel/nixdots)
 - [rxyhn's yuki](https://github.com/rxyhn/yuki)

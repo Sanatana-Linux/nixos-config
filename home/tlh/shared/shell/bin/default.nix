@@ -1,19 +1,32 @@
-{
-  pkgs,
-  lib,
-  config,
-  ...
-}: let
-  # calls the packages specified in the directory and adds them to home.packages (cleaner then home.files imho)
-  
-  gita = import ./gita.nix {inherit pkgs;};
-  nux = import ./nux.nix {inherit pkgs;};
-  preview = import ./preview.nix {inherit pkgs;};
-  updoot = import ./updoot.nix {inherit pkgs;};
-  extract = import ./extract.nix {inherit pkgs;};
-  panes = import ./panes.nix {inherit pkgs;};
-  fetch = import ./nixfetch.nix {inherit pkgs;};
+{ config, ... }:
 
-in {
-  home.packages = with pkgs; [ gita nux preview updoot extract panes fetch ];
+{
+  home = {
+    file = {
+      ".local/bin/extract" = {
+        executable = true;
+        text = import ./extract.nix { };
+      };
+      ".local/bin/gita" = {
+        executable = true;
+        text = import ./gita.nix { };
+      };
+      ".local/bin/fetch" = {
+        executable = true;
+        text = import ./nixfetch.nix { };
+      };
+      ".local/bin/nux" = {
+        executable = true;
+        text = import ./nux.nix { };
+      };
+      ".local/bin/panes" = {
+        executable = true;
+        text = import ./panes.nix { };
+      };
+      ".local/bin/updoot" = {
+        executable = true;
+        text = import ./updoot.nix { };
+      };
+    };
+  };
 }

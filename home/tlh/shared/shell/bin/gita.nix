@@ -1,9 +1,6 @@
-{ pkgs }:
-
-with pkgs;
-
-writeScriptBin "gita" ''
-  #!/usr/bin/env bash
+_:
+''
+  #> Syntax: bash
 
   git add --all .
 

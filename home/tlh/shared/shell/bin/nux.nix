@@ -1,9 +1,7 @@
-{ pkgs }:
-
-with pkgs;
-
-writeScriptBin "nux" ''
- #!/usr/bin/env bash
+_:
+''
+  #> Syntax: bash
+  # Nix Helper Utility 
  dots="/etc/nixos"
 
 

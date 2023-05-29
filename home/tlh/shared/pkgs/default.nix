@@ -17,7 +17,6 @@
       gopls
       grex
       keychain
-      policykit
       java-language-server
       lldb
       nodejs

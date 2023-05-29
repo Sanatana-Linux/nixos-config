@@ -1,10 +1,6 @@
-{ pkgs }:
-
-with pkgs;
-
-writeScriptBin "extract" ''
-
-#!/bin/sh
+_: ''
+#> Syntax: bash
+# Colors
 # archive extractor
 if [ -f $1 ] ; then
     case $1 in

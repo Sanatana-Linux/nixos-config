@@ -5,7 +5,8 @@
 }: let
   ifTheyExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
 in {
-  users.mutableUsers = false;
+  # just until implementing the impermanence module
+  users.mutableUsers = true;
   users.users.tlh = {
     description = "Thomas Leon Highbaugh";
     initialPassword = "nixos";

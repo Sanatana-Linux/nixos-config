@@ -13,11 +13,7 @@
     pathsToLink = ["/share/zsh"];
 
     loginShellInit = ''
-      dbus-update-activation-environment --all
       eval $(ssh-agent)
-
-
-
     '';
   };
 }

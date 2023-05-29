@@ -1,5 +1,5 @@
 {
-  description = "Rxyhn's NixOS Configuration";
+  description = "The Sanatana Linux NixOS Configuration";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -35,6 +35,12 @@
       flake = false;
       url = "https://github.com/Thomashighbaugh/nvim-forge.git";
     };
+
+    awesome-config = {
+      type = "git";
+      flake = false;
+      url = "https://github.com/Sanatana-Linux/nixos-awesomewm.git";
+    };
  
  bhairava-grub-theme = {
       #type = "git";
@@ -67,7 +73,7 @@
       # Laptop
       hp-laptop-amd = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs bhairava-grub-theme;};
-        modules = [./hosts/hp-laptop-amd];
+        modules = [./hosts/hp-laptop-amd    bhairava-grub-theme.nixosModule];
       };
     };
 

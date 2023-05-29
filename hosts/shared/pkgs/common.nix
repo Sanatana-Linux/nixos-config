@@ -15,7 +15,6 @@ with pkgs; [
   fbida
   feh
   firefox
-  fluent-icon-theme
   font-manager
   geocode-glib_2
   giflib
@@ -128,6 +127,7 @@ with pkgs; [
   xorg.xcbutilwm
   xorg.xconsole
   xorg.xev
+  xorg.xhost
   xorg.xfontsel
   xorg.xinit
   xorg.xkill

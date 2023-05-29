@@ -1,10 +1,64 @@
 {pkgs, ...}:
 with pkgs; [
+appimage-run
+appimagekit 
+aspell 
+aspellDicts.de
+aspellDicts.en
+aspellDicts.en-computers
+aspellDicts.en-science
+aspellDicts.hi
+codespell
+gspell
+gtkspell3 
+gtkspellmm 
+hunspell 
+hunspellDicts.de_DE
+hunspellDicts.en_US-large
+hunspellDicts.es_MX
+mythes
+nuspell
+typos
+libusb
+gusb
+ibus-with-plugins
+pdf-parser
+poppler_utils
+leela
+ebook_tools
+pdfmm 
+pdftag
+pdftk
+pdfstudio2022
+ocrmypdf
+termpdfpy
+updfparser
+python311Packages.pdftotext
+appstream-glib
+bitwarden
+bitwarden-cli
+bleachbit
+brave
+discord
+font-manager
+fuseiso
+gnome.gnome-disk-utility
+google-chrome
+gpick
+epiphany
+hunspell
+luakit
+networkmanagerapplet
+phinger-cursors
+tdesktop
+themechanger
+thunderbird
+tor-browser-bundle-bin
+vlc
   blueman
   galculator
   gparted
   xarchiver
-
   arandr
   autorandr
   avidemux
@@ -45,7 +99,6 @@ with pkgs; [
   libfm-extra
   libgee
   libglibutil
-  libglibutil
   libgudev
   libinput
   libnotify
@@ -70,7 +123,6 @@ with pkgs; [
   ranger
   rofi
   template-glib
-
   unrar
   unscd
   ventoy-full
@@ -90,4 +142,62 @@ with pkgs; [
   xfce.xfce4-settings
   xfce.xfconf
   xlsfonts
+    acpi
+  brightnessctl
+  firefox
+  fluent-icon-theme
+  glibmm 
+  jpegoptim
+  librsvg
+  mozjpeg
+  olive-editor
+  openshot-qt
+  pasystray
+  picom
+  python311Packages.pyxdg
+  shotcut
+  terminus-nerdfont
+  terminus_font
+  xorg.fontalias
+  xorg.fonttosfnt
+  xorg.fontutil
+  xorg.libxcb
+  xorg.mkfontdir
+  xorg.xbacklight
+  xorg.xcbutil
+  xorg.xcbutilerrors
+  xorg.xcbutilimage
+  xorg.xcbutilrenderutil
+  xorg.xcbutilwm
+  xorg.xconsole
+  xorg.xev
+  xorg.xfontsel
+  xorg.xinit
+  xorg.xkill
+  xorg.xorgproto
+  xorg.xprop
+  xorg.xwininfo
+  xscreensaver
+  xsecurelock
+  xsuspender
+  bitwarden
+  discord
+  epiphany
+  font-manager
+  giflib
+  gifsicle
+  gifski
+  google-chrome
+  inkscape-with-extensions
+  librewolf
+  meme
+  pdfarranger
+  signal-desktop
+  tdesktop
+  themechanger
+  thunderbird-bin
+  xcftools
+  xorg.xhost
+  xterm
+  zathura
 ]

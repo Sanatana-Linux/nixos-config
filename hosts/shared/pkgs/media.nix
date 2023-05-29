@@ -18,7 +18,6 @@ with pkgs; [
   jpegoptim
   mozjpeg
   shotcut
-
   svgcleaner
   gimp
   gimp-with-plugins
@@ -41,7 +40,6 @@ with pkgs; [
   inkscape-with-extensions
   jhead
   jp2a
-  jpegoptim
   jpegrescan
   krita
   libwebp
@@ -54,13 +52,14 @@ with pkgs; [
   pngout
   pngquant
   python311Packages.pyfiglet
-  resvg
   rubyPackages.gdk_pixbuf2
-  svgcleaner
   toilet
   updfparser
   vlc
   webp-pixbuf-loader
   xcftools
-  zathura
+   ascii-image-converter
+  gifsicle 
+  jpegoptim 
+  emacsPackages.svgo  
 ]

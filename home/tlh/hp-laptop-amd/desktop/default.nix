@@ -65,4 +65,6 @@
       package = pkgs.adwaita-qt;
     };
   };
+
+  xdg.configFile."awesome".source = "${inputs.awesome-config}";
 }

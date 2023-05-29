@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "awesome-config": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1685236960,
+        "narHash": "sha256-OjYiAwa7bSwinkRvtihUxU60MBxsWV0QqWdCdQmpxIo=",
+        "ref": "refs/heads/main",
+        "rev": "f1748778db35e3563f7c20e646ae1d6b95455c46",
+        "revCount": 25,
+        "type": "git",
+        "url": "https://github.com/Sanatana-Linux/nixos-awesomewm.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://github.com/Sanatana-Linux/nixos-awesomewm.git"
+      }
+    },
     "bhairava-grub-theme": {
       "inputs": {
         "nixpkgs": [
@@ -689,6 +705,7 @@
     },
     "root": {
       "inputs": {
+        "awesome-config": "awesome-config",
         "bhairava-grub-theme": "bhairava-grub-theme",
         "helix": "helix",
         "home-manager": "home-manager",

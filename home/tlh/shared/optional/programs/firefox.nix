@@ -14,12 +14,10 @@
       tlh = {
         id = 0;
         extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-          adnauseam
           enhanced-github
           enhancer-for-youtube
           octotree
           refined-github
-          stylus
           ublock-origin
         ];
 

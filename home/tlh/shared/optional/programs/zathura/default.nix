@@ -2,8 +2,6 @@
   programs.zathura = {
     enable = true;
     options = {
-
-      font = "Rounded Mplus 1c Medium 13";
       selection-clipboard = "clipboard";
       adjust-open = "best-fit";
       pages-per-row = "1";

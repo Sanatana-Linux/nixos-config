@@ -1,6 +1,13 @@
-# Rebase Process 
+# Rebase Process
 
 
-The following items motivated this refactor:
-	- **Modules vs. Settings** - what I was calling modules were more akin to my specific settings as modules tend to be units of code which simply ennumerate the settings in nix available for an application and are then called elsewhere in the configuration. This enables others to import them in their own configurations, has numerous potential uses when building things other than opinonated NixOS configurations and makes a lot of sense to conform with the general community sense of the word's meaning in this case (ambiguity and arbitrariness are challenges the NixOS community is afflicted deeply with). *Thus the refactor takes this into account and utilizes the term as the community consensus understands it, which is leveraged here to provide the luajit variant of AwesomeWM*. 
-	- **Improved Structure** - I really like projects like `devos` in that they provide a reasonable structure and illuminate valuable ways one can organize a system configuration that utilizes Nix to provision their entire ecosystem with a single monorepo. However, most of these projects feature extraneous elements that are a hassle to fully remove (darwin support mostly), are opinionated for use in specific contexts by their individual authors (which is understandable) or have other characteristics making them challenging to adopt as configuration frameworks. So instead of using them wholesale, it seems best to take from them valuable elements and snippets according to need and weld together a framework tailored to my needs 
+Motivation:
+	- improved understanding of terminology (modules was being used incorrectly prior)
+	- better isolation of home and system-wide configuration
+	- streamline configuration, remove remaining elements from old methodology which prioritized quantity over quality
+	- include other dotfiles as flake inputs instead of submodules (still dubious as to utility given frustrations listed below)
+
+
+
+Lingering Pain Points
+	- included dotfiles repos do not come with their `.git` folders, meaning additional development on them is frozen. These are things I modify often, so I have to comment the inclusion code out before 

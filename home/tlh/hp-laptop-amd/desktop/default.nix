@@ -1,5 +1,6 @@
 {
   inputs,
+  lib,
   pkgs,
   ...
 }: {
@@ -60,6 +61,14 @@
       package = pkgs.adwaita-qt;
     };
   };
-  # commented out so I can work on it in place, will restore later (since the .git repo is not included in the symlink for whatever reason I am not willing to hunt down presently)
+  # maybe the below is more elegant, but it doesn't include the necessary `.git` directory so I can't do any work on the repo, that's useless
   # xdg.configFile."awesome".source = "${inputs.awesome-config}";
+
+  # Enable AwesomeWM Configuration
+  home.activation.installAwesomeWMConfig = ''
+    if [ ! -d "$HOME/.config/awesome" ]; then
+     ${pkgs.git}/bin/git clone https://github.com/Sanatana-Linux/nixos-awesomewm "$HOME/.config/awesome"
+      chmod -R +w "$HOME/.config/awesome"
+    fi
+  '';
 }

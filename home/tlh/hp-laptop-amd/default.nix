@@ -3,9 +3,7 @@
   pkgs,
   inputs,
   ...
-}: let
-  colors = import ../shared/theme/colors.nix;
-in {
+}: {
   imports = [
     # Specific configuration
     ./desktop
@@ -23,6 +21,5 @@ in {
     ../shared/optional/programs/neovim/default.nix
     ../shared/optional/programs/kitty/default.nix
     ../shared/optional/programs/zathura/default.nix
-    ../shared/optional/programs/rofi/default.nix
   ];
 }

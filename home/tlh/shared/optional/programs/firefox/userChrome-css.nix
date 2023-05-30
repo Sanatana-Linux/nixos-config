@@ -1,5 +1,4 @@
-{colors, ...}:
-with colors; ''
+{}: ''
   @namespace xul "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul";
   @namespace html url("http://www.w3.org/1999/xhtml");
 
@@ -138,10 +137,10 @@ with colors; ''
      width: 16px !important;
    }
    .notificationbox-stack notification-message[type="warning"] {
-     background: ${yellow} !important;
+     background: #f0ffaa !important;
    }
    .notificationbox-stack notification-message[type="critical"] {
-     background: ${red} !important;
+     background:#F83D80 !important;
    }
 
    .notificationbox-stack[notificationside="top"] notification-message {
@@ -3143,14 +3142,14 @@ with colors; ''
   	--gnome-browser-before-load-background: #F7F7F7;
 
   	/* Accent */
-  	--gnome-accent-bg: ${blue};
-  	--gnome-accent: ${blue-darker};
+  	--gnome-accent-bg: #00caff;
+  	--gnome-accent: #0badff;
 
   	/* Toolbars */
   	--gnome-toolbar-background: #efefef;
   	--gnome-toolbar-color: rgb(46, 52, 54);
   	--gnome-toolbar-border-color: rgba(0, 0, 0, .15);
-  	--gnome-toolbar-icon-fill: ${dimblack};
+  	--gnome-toolbar-icon-fill: #2c2c2c;
   	--gnome-inactive-toolbar-background: #fafafa;
   	--gnome-inactive-toolbar-color: #d5d0cc;
   	--gnome-inactive-toolbar-border-color: #DCDCDC;
@@ -3161,14 +3160,14 @@ with colors; ''
   	--gnome-inactive-sidebar-background: var(--gnome-sidebar-background);
 
   	/* Menu */
-  	--gnome-menu-background: ${light-white};
+  	--gnome-menu-background:#f4f4f4;
   	--gnome-menu-border-color: rgba(0, 0, 0, .2);
   	--gnome-menu-shadow: 0 1px 5px 1px rgba(0,0,0, .09), 0 2px 14px 3px rgba(0,0,0, .05);
   	--gnome-menu-button-hover-background: var(--gnome-button-background);
   	--gnome-menu-separator-color: rgba(0, 0, 0, 0.1);
 
   	/* Header bar */
-  	--gnome-headerbar-background: ${light-white};
+  	--gnome-headerbar-background:#f4f4f4;
   	--gnome-headerbar-border-color: var(--gnome-toolbar-border-color);
   	--gnome-inactive-headerbar-background: #fafafa;
   	--gnome-inactive-headerbar-border-color: var(--gnome-inactive-toolbar-border-color);
@@ -3187,20 +3186,20 @@ with colors; ''
   	--gnome-button-active-close-background: var(--gnome-button-active-background);
 
   	/* TitleButtons */
-  	--gnome-titlebutton-min-background: ${yellow};
-  	--gnome-titlebutton-max-background: ${green};
-  	--gnome-titlebutton-close-background: ${red};
-  	--gnome-titlebutton-min-hover-background: ${yellow};
-  	--gnome-titlebutton-max-hover-background: ${green};
-  	--gnome-titlebutton-close-hover-background: ${red};
-  	--gnome-titlebutton-min-active-background: ${yellow-darker};
-  	--gnome-titlebutton-max-active-background: ${green-darker};
-  	--gnome-titlebutton-close-active-background: ${red-darker};
+  	--gnome-titlebutton-min-background: #f0ffaa;
+  	--gnome-titlebutton-max-background: #85FF94;
+  	--gnome-titlebutton-close-background:#F83D80;
+  	--gnome-titlebutton-min-hover-background: #f0ffaa;
+  	--gnome-titlebutton-max-hover-background: #85FF94;
+  	--gnome-titlebutton-close-hover-background:#F83D80;
+  	--gnome-titlebutton-min-active-background: #ffff73;
+  	--gnome-titlebutton-max-active-background: #4dd564;
+  	--gnome-titlebutton-close-active-background: #ff3d81;
 
   	/* Entries */
   	--gnome-entry-background: rgba(0, 0, 0, .08);
-  	--gnome-entry-color: ${bg-contrast};
-  	--gnome-inactive-entry-color: ${bg-contrast};
+  	--gnome-entry-color: #282828;
+  	--gnome-inactive-entry-color: #282828;
   	--gnome-focused-urlbar-border-color: rgba(28, 113, 216, .5);
   	--gnome-urlbarView-shadow: 0 1px 5px 1px rgba(0,0,0, .15),
   	                           0 2px 14px 3px rgba(0,0,0, .1),
@@ -3208,15 +3207,15 @@ with colors; ''
 
   	/* Switch */
   	--gnome-switch-background: rgba(0, 0, 0, .12);
-  	--gnome-switch-slider-background: ${light-white};
+  	--gnome-switch-slider-background:#f4f4f4;
   	--gnome-switch-active-background: var(--gnome-accent-bg);
-  	--gnome-switch-active-slider-background: ${light-white};
+  	--gnome-switch-active-slider-background:#f4f4f4;
 
   	/* Tabs */
   	--gnome-tabbar-tab-background: #efefef;
   	--gnome-tabbar-tab-border-color: var(--gnome-toolbar-border-color);
   	--gnome-tabbar-tab-hover-background: #dedede;
-  	--gnome-tabbar-tab-active-background: ${light-white};
+  	--gnome-tabbar-tab-active-background:#f4f4f4;
   	--gnome-tabbar-tab-active-background-contrast: #FAFAFA;
   	--gnome-tabbar-tab-active-hover-background: #fafafa;
   	--gnome-inactive-tabbar-tab-background: #f0f0f0;
@@ -3228,7 +3227,7 @@ with colors; ''
 
   /* Private window colors */
   :root {
-  	--gnome-private-accent: ${bg};;
+  	--gnome-private-accent: #1c1c1c;;
 
   	/* Toolbars */
   	--gnome-private-toolbar-background: #EAF0F7;
@@ -3240,13 +3239,13 @@ with colors; ''
   	--gnome-private-inactive-headerbar-background: var(--gnome-private-toolbar-background);
 
   	/* Text color for Firefox Logo in new private tab */
-  	--gnome-private-wordmark: ${dimblack};
+  	--gnome-private-wordmark: #2c2c2c;
 
   	/* New private tab background */
   	--gnome-private-in-content-page-background: #EAF0F7;
 
   	/* Private browsing info box */
-  	--gnome-private-text-primary-color: ${bg-darker};
+  	--gnome-private-text-primary-color: #0c0c0c;
   }
 
   /* Variables that start with --gnome- are added by me and are assigned
@@ -3256,28 +3255,28 @@ with colors; ''
    @media (prefers-color-scheme: dark) {
   	:root {
   		/* Browser area before a page starts loading */
-  		--gnome-browser-before-load-background: ${bg};
+  		--gnome-browser-before-load-background: #1c1c1c;
 
   		/* Accent */
-  		--gnome-accent-bg: ${grey};
-  		--gnome-accent: ${light-black};
+  		--gnome-accent-bg: #555555;
+  		--gnome-accent: #3c3c3c;
 
   		/* Toolbars */
-  		--gnome-toolbar-background: ${black};
-  		--gnome-toolbar-color: ${fg};
+  		--gnome-toolbar-background: #222222;
+  		--gnome-toolbar-color: #f3f3f3;
   		--gnome-toolbar-border-color: rgba(255, 255, 255, .15);
-  		--gnome-toolbar-icon-fill: ${white};
-  		--gnome-inactive-toolbar-color: ${grey-lighter};
+  		--gnome-toolbar-icon-fill: #e9e9e9;
+  		--gnome-inactive-toolbar-color: #818181;
   		--gnome-inactive-toolbar-background: var(--gnome-toolbar-background);
-  		--gnome-inactive-toolbar-border-color: ${bg-contrast};
-  		--gnome-inactive-toolbar-icon-fill: ${grey};
+  		--gnome-inactive-toolbar-border-color: #282828;
+  		--gnome-inactive-toolbar-icon-fill: #555555;
 
   		/* Sidebar */
   		--gnome-sidebar-background: var(--gnome-toolbar-background);
   		--gnome-inactive-sidebar-background: var(--gnome-sidebar-background);
 
   		/* Menus */
-  		--gnome-menu-background: ${bg-lighter};
+  		--gnome-menu-background: #313131;
   		--gnome-menu-border-color: rgba(0, 0, 0, .65);
   		--gnome-menu-shadow: 0 1px 5px 1px rgba(0,0,0, .09),
   		                     0 2px 14px 3px rgba(0,0,0, .05),
@@ -3286,9 +3285,9 @@ with colors; ''
   		--gnome-menu-separator-color: rgba(255, 255, 255, .1);
 
   		/* Header bar */
-  		--gnome-headerbar-background: ${black};
+  		--gnome-headerbar-background: #222222;
   		--gnome-headerbar-border-color: var(--gnome-toolbar-border-color);
-  		--gnome-inactive-headerbar-background: ${dimblack};
+  		--gnome-inactive-headerbar-background: #2c2c2c;
   		--gnome-inactive-headerbar-border-color: var(--gnome-inactive-toolbar-border-color);
 
   		/* Buttons */
@@ -3298,27 +3297,27 @@ with colors; ''
   		--gnome-button-flat-hover-background: rgba(255, 255, 255, .07);
   		--gnome-button-flat-active-background: rgba(255, 255, 255, .1);
   		--gnome-button-suggested-action-background: var(--gnome-accent-bg);
-  		--gnome-button-destructive-action-background: ${red};
+  		--gnome-button-destructive-action-background:#F83D80;
 
   		--gnome-button-close-background: var(--gnome-button-flat-hover-background);
   		--gnome-button-hover-close-background:var(--gnome-button-hover-background);
   		--gnome-button-active-close-background: var(--gnome-button-active-background);
 
   		/* TitleButtons */
-  		--gnome-titlebutton-min-background: ${yellow};
-  		--gnome-titlebutton-max-background: ${green};
-  		--gnome-titlebutton-close-background: ${red};
-  		--gnome-titlebutton-min-hover-background: ${yellow-darker};
-  		--gnome-titlebutton-max-hover-background: ${green-darker};
-  		--gnome-titlebutton-close-hover-background: ${red-darker};
-  		--gnome-titlebutton-min-active-background: ${yellow};
-  		--gnome-titlebutton-max-active-background: ${green};
-  		--gnome-titlebutton-close-active-background: ${red};
+  		--gnome-titlebutton-min-background: #f0ffaa;
+  		--gnome-titlebutton-max-background: #85FF94;
+  		--gnome-titlebutton-close-background:#F83D80;
+  		--gnome-titlebutton-min-hover-background: #ffff73;
+  		--gnome-titlebutton-max-hover-background: #4dd564;
+  		--gnome-titlebutton-close-hover-background: #ff3d81;
+  		--gnome-titlebutton-min-active-background: #f0ffaa;
+  		--gnome-titlebutton-max-active-background: #85FF94;
+  		--gnome-titlebutton-close-active-background:#F83D80;
 
   		/* Entries */
   		--gnome-entry-background: rgba(255, 255, 255, .08);
-  		--gnome-entry-color: ${light-white};
-  		--gnome-inactive-entry-color: ${fg};
+  		--gnome-entry-color:#f4f4f4;
+  		--gnome-inactive-entry-color: #f3f3f3;
   		--gnome-focused-urlbar-border-color: rgba(120, 120, 120, .5); /* Same as --gnome-accent but with opacity*/
   		--gnome-urlbarView-shadow: 0 1px 5px 1px rgba(0,0,0, .2),
   		                           0 2px 14px 3px rgba(0,0,0, .15),
@@ -3328,17 +3327,17 @@ with colors; ''
   		--gnome-switch-background: rgba(255, 255, 255, .15);
   		--gnome-switch-slider-background: #d2d2d2;
   		--gnome-switch-active-background: var(--gnome-accent-bg);
-  		--gnome-switch-active-slider-background: ${light-white};
+  		--gnome-switch-active-slider-background:#f4f4f4;
 
   		/* Tabs */
-  		--gnome-tabbar-tab-background: ${black};
+  		--gnome-tabbar-tab-background: #222222;
   		--gnome-tabbar-tab-border-color: var(--gnome-toolbar-border-color);
-  		--gnome-tabbar-tab-hover-background: ${dimblack};
-  		--gnome-tabbar-tab-active-background: ${light-black};
-  		--gnome-tabbar-tab-active-background-contrast: ${dimgrey};
-  		--gnome-tabbar-tab-active-hover-background: ${dark-grey};
-  		--gnome-inactive-tabbar-tab-background: ${black};
-  		--gnome-inactive-tabbar-tab-active-background: ${bg-lighter};
+  		--gnome-tabbar-tab-hover-background: #2c2c2c;
+  		--gnome-tabbar-tab-active-background: #3c3c3c;
+  		--gnome-tabbar-tab-active-background-contrast: #4f4f4f;
+  		--gnome-tabbar-tab-active-hover-background: #444444;
+  		--gnome-inactive-tabbar-tab-background: #222222;
+  		--gnome-inactive-tabbar-tab-active-background: #313131;
   		--gnome-tab-button-background: rgba(0, 0, 0, .5);
   		--gnome-tab-button-hover-background: rgba(0, 0, 0, .6);
   		--gnome-tabbar-tab-identity-base-opacity: 0;
@@ -3346,25 +3345,25 @@ with colors; ''
 
   	/* Private window colors */
   	:root {
-  		--gnome-private-accent: ${dark-grey};;
+  		--gnome-private-accent: #444444;
 
   		/* Toolbars */
-  		--gnome-private-toolbar-background: ${bg-darker};
+  		--gnome-private-toolbar-background: #0c0c0c;
   		--gnome-private-inactive-toolbar-background: var(--gnome-private-toolbar-background);
   		/* Menus */
-  		--gnome-private-menu-background: ${bg-contrast};
+  		--gnome-private-menu-background: #282828;
   		/* Header bar */
-  		--gnome-private-headerbar-background: ${bg-contrast};
+  		--gnome-private-headerbar-background: #282828;
   		--gnome-private-inactive-headerbar-background: var(--gnome-private-toolbar-background);
 
   		/* Text color for Firefox Logo in new private tab */
-  		--gnome-private-wordmark: ${light-white};
+  		--gnome-private-wordmark:#f4f4f4;
 
   		/* New private tab background */
-  		--gnome-private-in-content-page-background: ${bg-darker};
+  		--gnome-private-in-content-page-background: #0c0c0c;
 
   		/* Private browsing info box */
-  		--gnome-private-text-primary-color: ${light-white};
+  		--gnome-private-text-primary-color:#f4f4f4;
   	}
   }
 

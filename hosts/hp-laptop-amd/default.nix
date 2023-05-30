@@ -40,7 +40,7 @@
       systemd-boot.enable = false;
       efi = {
         canTouchEfiVariables = true;
-        efiSysMountPoint = "/boot/efi";
+        efiSysMountPoint = "/boot/";
       };
 
       grub = {
@@ -48,21 +48,35 @@
         device = "nodev";
         efiSupport = true;
         useOSProber = true;
-       bhairava-grub-theme = {enable = true;};
+        bhairava-grub-theme = {enable = true;};
       };
     };
   };
 
   environment = {
     variables = {
-      GDK_SCALE = "2";
-      GDK_DPI_SCALE = "0.5";
+      GDK_SCALE = "1";
+      GDK_DPI_SCALE = "1";
       QT_AUTO_SCREEN_SCALE_FACTOR = "1";
     };
 
-    systemPackages = with pkgs; [ acpi mesa mesa-demos libva libdbusmenu
-    libdbusmenu-gtk3 dbus-broker  dbus-glib dbus lua53Packages.ldbus
-    lua54Packages.ldbus luajitPackages.ldbus polkit_gnome libva-utils ]; };
+    systemPackages = with pkgs; [
+      acpi
+      mesa
+      mesa-demos
+      libva
+      libdbusmenu
+      libdbusmenu-gtk3
+      dbus-broker
+      dbus-glib
+      dbus
+      lua53Packages.ldbus
+      lua54Packages.ldbus
+      luajitPackages.ldbus
+      polkit_gnome
+      libva-utils
+    ];
+  };
 
   hardware = {
     enableRedistributableFirmware = true;
@@ -78,8 +92,7 @@
       extraPackages = with pkgs; [
         mesa
         mesa-demos
-        xorg.xf86videoamdgpu
-        glfw 
+        glfw
       ];
     };
   };
@@ -118,7 +131,6 @@
 
   # Use custom Awesome WM module
   services.xserver.windowManager.awesome.enable = true;
- 
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.05";

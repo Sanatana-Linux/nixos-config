@@ -3,14 +3,6 @@
   pkgs,
   ...
 }: {
-  home.pointerCursor = {
-    name = "Phinger Cursors (light)";
-    package = pkgs.phinger-cursors;
-    size = 32;
-    gtk.enable = true;
-    x11.enable = true;
-  };
-
   fonts.fontconfig.enable = true;
 
   gtk = {
@@ -18,7 +10,16 @@
     font = {
       name = "Lato";
       package = pkgs.lato;
-      size = 13;
+      size = 10;
+    };
+    iconTheme = {
+      name = "Papirus-Dark";
+      package = pkgs.papirus-icon-theme;
+    };
+    cursorTheme = {
+      name = "Phinger Cursors (light)";
+      package = pkgs.phinger-cursors;
+      size = 32;
     };
 
     gtk2 = {
@@ -45,12 +46,6 @@
       gtk-application-prefer-dark-theme = true;
       gtk-decoration-layout = "menu:";
     };
-
-    iconTheme = {
-      name = "Papirus-Dark";
-      package = pkgs.papirus-icon-theme;
-    };
-
     theme = {
       name = "Colloid-Dark";
       package = pkgs.colloid-gtk-theme;

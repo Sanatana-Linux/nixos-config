@@ -31,10 +31,10 @@
       stylua
       uncrustify
       ;
-      inherit 
+    inherit
       (pkgs.gnome)
-        gnome-keyring
-        libgnome-keyring
+      gnome-keyring
+      libgnome-keyring
       ;
 
     inherit

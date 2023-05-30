@@ -1,66 +1,64 @@
 {pkgs, ...}:
 with pkgs; [
-appimage-run
-appimagekit 
-aspell 
-aspellDicts.de
-aspellDicts.en
-aspellDicts.en-computers
-aspellDicts.en-science
-aspellDicts.hi
-codespell
-gspell
-gtkspell3 
-gtkspellmm 
-hunspell 
-hunspellDicts.de_DE
-hunspellDicts.en_US-large
-hunspellDicts.es_MX
-mythes
-nuspell
-typos
-libusb
-gusb
-ibus-with-plugins
-pdf-parser
-poppler_utils
-leela
-ebook_tools
-pdfmm 
-pdftag
-pdftk
-pdfstudio2022
-ocrmypdf
-termpdfpy
-updfparser
-python311Packages.pdftotext
-appstream-glib
-bitwarden
-bitwarden-cli
-bleachbit
-brave
-discord
-font-manager
-fuseiso
-gnome.gnome-disk-utility
-google-chrome
-gpick
-epiphany
-hunspell
-luakit
-networkmanagerapplet
-phinger-cursors
-tdesktop
-themechanger
-thunderbird
-tor-browser-bundle-bin
-vlc
+  appimage-run
+  appimagekit
+  aspell
+  aspellDicts.de
+  aspellDicts.en
+  aspellDicts.en-computers
+  aspellDicts.en-science
+  aspellDicts.hi
+  codespell
+  gspell
+  gtkspell3
+  gtkspellmm
+  hunspell
+  hunspellDicts.de_DE
+  hunspellDicts.en_US-large
+  hunspellDicts.es_MX
+  mythes
+  nuspell
+  typos
+  libusb
+  gusb
+  ibus-with-plugins
+  pdf-parser
+  poppler_utils
+  leela
+  ebook_tools
+  pdfmm
+  pdftag
+  pdftk
+  pdfstudio2022
+  ocrmypdf
+  termpdfpy
+  updfparser
+  python311Packages.pdftotext
+  appstream-glib
+  bitwarden
+  bitwarden-cli
+  bleachbit
+  brave
+  discord
+  font-manager
+  fuseiso
+  gnome.gnome-disk-utility
+  google-chrome
+  gpick
+  epiphany
+  hunspell
+  luakit
+  networkmanagerapplet
+  phinger-cursors
+  tdesktop
+  themechanger
+  thunderbird
+  tor-browser-bundle-bin
+  vlc
   blueman
   galculator
   gparted
   xarchiver
-  arandr
-  autorandr
   avidemux
   cairo
   cairomm
@@ -142,11 +140,11 @@ vlc
   xfce.xfce4-settings
   xfce.xfconf
   xlsfonts
-    acpi
+  acpi
   brightnessctl
   firefox
   fluent-icon-theme
-  glibmm 
+  glibmm
   jpegoptim
   librsvg
   mozjpeg

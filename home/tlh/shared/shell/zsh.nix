@@ -30,11 +30,11 @@
     sessionVariables = {
       SSH_AUTH_SOCK = "/run/user/1000/keyring/ssh";
     };
-  
 
     initExtra = ''
-      any-nix-shell zsh --info-right | source /dev/stdin
-       '';
+      export PATH=$HOME/.local/bin:$PATH;
+       any-nix-shell zsh --info-right | source /dev/stdin
+    '';
 
     shellAliases = with pkgs; {
       cleanup = "sudo nix-collect-garbage --delete-older-than 7d";

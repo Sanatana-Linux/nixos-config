@@ -58,8 +58,8 @@ with pkgs; [
   vlc
   webp-pixbuf-loader
   xcftools
-   ascii-image-converter
-  gifsicle 
-  jpegoptim 
-  emacsPackages.svgo  
+  ascii-image-converter
+  gifsicle
+  jpegoptim
+  emacsPackages.svgo
 ]

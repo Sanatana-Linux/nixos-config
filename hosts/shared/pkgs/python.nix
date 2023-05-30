@@ -21,7 +21,7 @@ with pkgs;
   ]
   ++ [
     gobject-introspection
-      python311
-      pipx
+    python311
+    pipx
     pipenv
   ]

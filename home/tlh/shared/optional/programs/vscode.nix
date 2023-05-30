@@ -89,8 +89,6 @@ in {
         cursorSmoothCaretAnimation = "on";
         cursorWidth = 2;
         find.addExtraSpaceOnTop = false;
-        fontFamily = "'Phosphor', 'monospace', monospace";
-        fontSize = 12;
         formatOnSave = true;
         inlayHints.enabled = "off";
         inlineSuggest.enabled = true;
@@ -105,17 +103,14 @@ in {
         smoothScrolling = true;
         suggest.showStatusBar = true;
         suggestSelection = "first";
-
         bracketPairColorization = {
           enabled = true;
           independentColorPoolPerBracketType = true;
         };
-
         codeActionsOnSave.source = {
           organizeImports = true;
           fixAll.eslint = true;
         };
-
         guides = {
           bracketPairs = true;
           indentation = true;
@@ -160,8 +155,6 @@ in {
 
       window = {
         menuBarVisibility = "toggle";
-        nativeTabs = true;
-        titleBarStyle = "custom";
         zoomLevel = 1;
       };
 

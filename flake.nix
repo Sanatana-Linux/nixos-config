@@ -41,15 +41,13 @@
       flake = false;
       url = "https://github.com/Sanatana-Linux/nixos-awesomewm.git";
     };
- 
- bhairava-grub-theme = {
+
+    bhairava-grub-theme = {
       #type = "git";
       #url = "https://github.com/Sanatana-Linux/Bhairava-Grub-Theme";
       url = "github:Sanatana-Linux/Bhairava-Grub-Theme";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-
   };
 
   outputs = {
@@ -73,7 +71,15 @@
       # Laptop
       hp-laptop-amd = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs bhairava-grub-theme;};
-        modules = [./hosts/hp-laptop-amd    bhairava-grub-theme.nixosModule];
+        modules = [
+          ./hosts/hp-laptop-amd
+          bhairava-grub-theme.nixosModule
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useUserPackages = true;
+            home-manager.backupFileExtension = "bak";
+          }
+        ];
       };
     };
 

@@ -1,32 +1,14 @@
-{ config, ... }:
-
 {
-  home = {
-    file = {
-      ".local/bin/extract" = {
-        executable = true;
-        text = import ./extract.nix { };
-      };
-      ".local/bin/gita" = {
-        executable = true;
-        text = import ./gita.nix { };
-      };
-      ".local/bin/fetch" = {
-        executable = true;
-        text = import ./nixfetch.nix { };
-      };
-      ".local/bin/nux" = {
-        executable = true;
-        text = import ./nux.nix { };
-      };
-      ".local/bin/panes" = {
-        executable = true;
-        text = import ./panes.nix { };
-      };
-      ".local/bin/updoot" = {
-        executable = true;
-        text = import ./updoot.nix { };
-      };
-    };
-  };
+  config,
+  pkgs,
+  ...
+}: let
+  extract = import ./extract.nix {inherit pkgs;};
+  gita = import ./gita.nix {inherit pkgs;};
+  nixfetch = import ./nixfetch.nix {inherit pkgs;};
+  nux = import ./nux.nix {inherit pkgs;};
+  panes = import ./panes.nix {inherit pkgs;};
+  updoot = import ./updoot.nix {inherit pkgs;};
+in {
+  home.packages = with pkgs; [extract nux run gita nixfetch updoot panes];
 }

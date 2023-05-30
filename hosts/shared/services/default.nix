@@ -26,13 +26,13 @@
 
     gvfs.enable = true;
 
-#   openssh = {
-#     enable = true;
-#     settings = {
-#       PasswordAuthentication = lib.mkForce false;
-#       PermitRootLogin = lib.mkForce "no";
-#     };
-#   };
+    #   openssh = {
+    #     enable = true;
+    #     settings = {
+    #       PasswordAuthentication = lib.mkForce false;
+    #       PermitRootLogin = lib.mkForce "no";
+    #     };
+    #   };
 
     udev.packages = [pkgs.gnome.gnome-settings-daemon];
   };
@@ -40,7 +40,7 @@
   virtualisation = {
     docker = {
       enable = true;
-#      enableOnBoot = true;
+      #      enableOnBoot = true;
     };
   };
 }

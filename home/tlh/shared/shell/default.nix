@@ -3,7 +3,7 @@
   lib,
   config,
   ...
-}:{
+}: {
   imports = [
     ./xdg.nix
     ./zsh.nix
@@ -12,7 +12,7 @@
     ./git.nix
     ./nix.nix
     ./bin/default.nix
-    ];
+  ];
 
   home = {
     sessionPath = [

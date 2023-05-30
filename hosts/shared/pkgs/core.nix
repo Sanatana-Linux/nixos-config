@@ -29,7 +29,7 @@ with pkgs; [
   tor
   xorg.xhost
   wirelesstools
-    alejandra
+  alejandra
   any-nix-shell
   as-tree
   binutils

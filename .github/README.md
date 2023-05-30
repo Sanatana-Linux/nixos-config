@@ -14,10 +14,9 @@
 
 > **Warning**
 >
-> While I hope you can gain from my configuration and have attempted, for my own sake at least, to document what is going on in the configuration as thoroughly as possible, this is my configuration that I use personally and as such it is reasonable to assume it is unstable and a work in progress.  
+> While I hope you can gain from my configuration and have attempted, for my own sake at least, to document what is going on in the configuration as thoroughly as possible, this is my configuration that I use personally and as such it is reasonable to assume it is unstable and a work in progress.
 
 ---
-
 
 ## Installation
 
@@ -56,14 +55,12 @@ cd /mnt/etc/nixos
 # to install the xorg version:
 nixos-install --flake '.#hp-laptop-amd' --impure
 
-# to install the wayland version
-nixos-install --flake '.#fancy' --impure
 ```
 
 > You could get some hashes errors, just change the bad hashes in the config file to the given ones by the Nix Output.
 
-- Reboot, login as root, and change the password for your user using `passwd` (by default, it's alpha)
-- Log-in in the displayManager.
+- Reboot, login as root, and change the password for your user using `passwd`
+- Log-in in to the display manager.
 - Then do this:
 
 ```sh
@@ -90,21 +87,20 @@ nixos-rebuild switch --impure --flake '/etc/nixos#hp-laptop-amd'
 ## Enjoy
 
 I hope you find something useful or something that enables you to come to a better understanding
-of NixOS, flakes, etc when reviewing this configuration and encourage you to use whatever portions of this code you would like for your own purposes, whatever they may be.  
+of NixOS, flakes, etc when reviewing this configuration and encourage you to use whatever portions of this code you would like for your own purposes, whatever they may be.
 
+### Feel Free to Get in Touch!
 
-### Feel Free to Get in Touch! 
-
-If you are confused, want better explainations, find an error/ineffciency in this repo or even just want to tell me that all I have done for the last several years has been a complete waste of time (hey Mom!), just open an issue and I will respond when I notice it (my life is chaos so sometimes this may take a while, you can also email me [here](mailto:me@thomasleonhighbaugh.me).
+If you are confused, want better explanations, find an error/inefficiency in this repo or even just want to tell me that all I have done for the last several years has been a complete waste of time (hey Mom!), just open an issue and I will respond when I notice it (my life is chaos so sometimes this may take a while, you can also email me [here](mailto:me@thomasleonhighbaugh.me).
 
 ## Credit Where It's Due
 
-This configuration, like many if not most others, owes a huge debt of gratitude to other configurations that have inspired it and provided many snippets, organizational patterns and epiphanies when rummaged through. 
-
+This configuration, like many if not most others, owes a huge debt of gratitude to other configurations that have inspired it and provided many snippets, organizational patterns and epiphanies when rummaged through.
 
 ### NixOS + awesomewm
 
 - [rxyhn's yuki](https://github.com/rxyhn/yuki)
+- [chadcat7's fuyu](https://github.com/chadcat7/fuyu)
 - [AlphaTechnolog's nixdots](https://github.com/AlphaTechnolog/nixdots)
 - [MCotocel's nixdots](https://github.com/MCotocel/nixdots)
 - [rxyhn's yuki](https://github.com/rxyhn/yuki)
@@ -117,7 +113,18 @@ This configuration, like many if not most others, owes a huge debt of gratitude 
 - [GTrunSec's nixos-flk](https://github.com/GTrunSec/nixos-flk)
 - [thiagokokada/nix-configs](https://github.com/thiagokokada/nix-configs)
 - [lourkeur's distro](https://github.com/lourkeur/distro)
-- tons more I will add later if I remember to ;]
+- [cole h's nixos-config](https://github.com/cole-h/nixos-config)
+- [viperML's dotfiles](https://github.com/viperML/dotfiles)
+
+...and a whole lot more, see below
+
+#### Additional Lists of NixOS Resources
+
+- [My NixOS stars list](https://github.com/stars/Thomashighbaugh/lists/nixos)
+- [NixOS Wiki's Configuration Collection](https://nixos.wiki/wiki/Configuration_Collection)
+- [Awesome Nix List](https://github.com/nix-community/awesome-nix)
+- [Comparison of NixOS Setups](https://nixos.wiki/wiki/Comparison_of_NixOS_setups)
+- [NixOS Wiki's Resources Page](https://nixos.wiki/wiki/Resources)
 
 ## ISO
 

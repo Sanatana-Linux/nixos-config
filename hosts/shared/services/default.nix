@@ -6,7 +6,7 @@
   imports = [
     ./pipewire.nix
   ];
-
+  hardware.bluetooth.enable = true;
   services = {
     blueman.enable = true;
     udisks2.enable = true;
@@ -37,10 +37,17 @@
     udev.packages = [pkgs.gnome.gnome-settings-daemon];
   };
 
+  
+
   virtualisation = {
     docker = {
       enable = true;
       #      enableOnBoot = true;
     };
+    appvm = {
+      enable = true;
+      user = "tlh";
+    };
+    libvirtd.enable = true;
   };
 }

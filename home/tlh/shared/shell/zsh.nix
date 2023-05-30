@@ -32,8 +32,8 @@
     };
 
     initExtra = ''
-      export PATH=$HOME/.local/bin:$PATH;
-       any-nix-shell zsh --info-right | source /dev/stdin
+      any-nix-shell zsh --info-right | source /dev/stdin
+      zle reset-prompt;
     '';
 
     shellAliases = with pkgs; {
@@ -82,8 +82,10 @@
       zplugHome = "${config.xdg.configHome}/zsh/zplug";
       plugins = [
         {name = "Aloxaf/fzf-tab";}
+        {name = "zdharma-continuum/fast-syntax-highlighting";}
         {name = "zsh-users/zsh-completions";}
         {name = "hlissner/zsh-autopair";}
+        {name = "zsh-users/zsh-autosuggestions";}
         {name = "chisui/zsh-nix-shell";}
         {name = "marlonrichert/zsh-hist";}
         {name = "marlonrichert/zsh-edit";}

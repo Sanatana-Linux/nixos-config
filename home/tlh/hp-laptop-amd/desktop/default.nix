@@ -60,6 +60,6 @@
       package = pkgs.adwaita-qt;
     };
   };
-
-  xdg.configFile."awesome".source = "${inputs.awesome-config}";
+  # commented out so I can work on it in place, will restore later (since the .git repo is not included in the symlink for whatever reason I am not willing to hunt down presently)
+  # xdg.configFile."awesome".source = "${inputs.awesome-config}";
 }

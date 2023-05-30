@@ -58,11 +58,16 @@ with pkgs; [
   blueman
   galculator
   gparted
-  xarchiver helix.url = "github:SoraTenshi/helix/experimental-22.12";
+  xarchiver
   avidemux
   cairo
   cairomm
   dbus-broker
+  xcolor
+  epick
+  eyedropper
+  gpick
+  xmcp
   dconf
   fbida
   feh

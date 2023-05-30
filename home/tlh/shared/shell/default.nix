@@ -9,7 +9,6 @@
     ./zsh.nix
     ./starship.nix
     ./cli.nix
-    ./git.nix
     ./nix.nix
     ./bin/default.nix
   ];

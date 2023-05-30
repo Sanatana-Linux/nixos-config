@@ -6,29 +6,35 @@
   home.packages = lib.attrValues {
     inherit
       (pkgs)
+      bfg-repo-cleaner
       black
       cargo
       ccls
       clang
       clang-tools
       cmake
+      colordiff
       delve
+      gist
+      git-filter-repo
       go
       gopls
       grex
-      keychain
       java-language-server
+      keychain
       lldb
       nodejs
+      pre-commit
       rust-analyzer
       rustfmt
       selene
-      shfmt
       shellcheck
+      shfmt
       sqlite
-      texlab
-      sumneko-lua-language-server
       stylua
+      subversion
+      sumneko-lua-language-server
+      texlab
       uncrustify
       ;
     inherit
@@ -36,7 +42,13 @@
       gnome-keyring
       libgnome-keyring
       ;
-
+    inherit
+      (pkgs.gitAndTools)
+      git-absorb
+      gitui
+      git-machete
+      gh
+      ;
     inherit
       (pkgs.luaPackages)
       lua

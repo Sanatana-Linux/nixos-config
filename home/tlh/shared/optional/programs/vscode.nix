@@ -149,7 +149,7 @@ in {
         cursorStyle = "line";
         cursorWidth = 2;
         fontFamily = "'monospace'";
-        fontSize = 16;
+        fontSize = 11;
         smoothScrolling = true;
       };
 

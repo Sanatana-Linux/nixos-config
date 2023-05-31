@@ -44,9 +44,9 @@
 
       defaultFonts = {
         emoji = ["Noto Color Emoji"];
-        monospace = ["Maple Mono NF"];
-        sansSerif = ["Lato"];
-        serif = ["Roboto Slab"];
+        monospace = ["Agave Nerd Font Mono Bold"];
+        sansSerif = ["Asap Condensed, Semi-Bold Condensed"];
+        serif = ["Asap VF Beta Bold Italic"];
       };
     };
   };

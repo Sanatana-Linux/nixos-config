@@ -9,13 +9,12 @@
   gtk = {
     enable = true;
     font = {
-      name = "Lato";
-      package = pkgs.lato;
+      name = "Asap Condensed, Semi-Bold Condensed";
       size = 10;
     };
     iconTheme = {
-      name = "Papirus-Dark";
-      package = pkgs.papirus-icon-theme;
+      name = "Fluent-dark";
+      package = pkgs.fluent-icon-theme;
     };
     cursorTheme = {
       name = "Phinger Cursors (light)";

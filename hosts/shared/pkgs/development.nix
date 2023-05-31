@@ -11,6 +11,7 @@ with pkgs; [
   bash
   bfg-repo-cleaner
   biber
+  bibtex2html
   black
   cargo
   cava
@@ -21,14 +22,15 @@ with pkgs; [
   dejsonlz4
   direnv
   efm-langserver
-
   expat
   fuse3
   gcc
+  git-trim
   glib
   gnumake
   gnutls
   go
+  gofumpt
   gource
   icu
   imlib2Full
@@ -37,7 +39,6 @@ with pkgs; [
   isync
   just
   ktlint
-
   libimobiledevice
   libtiff
   libtool
@@ -83,7 +84,7 @@ with pkgs; [
   mdbook
   mu
   ncdu
-  neovim
+  neovim-unwrapped
   nil
   nimble-unwrapped
   nimlsp
@@ -112,6 +113,7 @@ with pkgs; [
   postman
   prisma-engines
   puppeteer-cli
+  python311Packages.pynvim
   rnix-lsp
   ruby
   rustc
@@ -128,6 +130,7 @@ with pkgs; [
   stylua
   sublime4
   sumneko-lua-language-server
+  tectonic
   terraform
   tokei
   tree-sitter

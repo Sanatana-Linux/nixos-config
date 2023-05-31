@@ -28,7 +28,7 @@
     };
     font = {
       size = 10;
-      name = "mplus Nerd Font Mono medium ";
+      name = "Agave Nerd Font Mono Bold ";
     };
   };
 }

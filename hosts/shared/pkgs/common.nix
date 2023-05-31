@@ -24,6 +24,9 @@ with pkgs; [
   glib-networking
   glibc
   glibc_memusage
+  glibcInfo
+  glibcLocalesUtf8
+  glibc_multi
   glibmm
   gnome.file-roller
   gnome.gnome-themes-extra

@@ -3,9 +3,11 @@ with pkgs; [
   abootimg
   android-backup-extractor
   luajitPackages.lgi
-  lua51Packages.lgi   
+  lua51Packages.lgi
   fclones
   libffi
+  luajitPackages.vusted
+  luajitPackages.busted
   android-file-transfer
   android-tools
   android-udev-rules
@@ -58,6 +60,8 @@ with pkgs; [
   lua54Packages.lua
   lua54Packages.luarocks-nix
   luabind
+  gdk-pixbuf-xlib
+  gdk-pixbuf
   luaformatter
   luajitPackages.cqueues
   luajitPackages.dkjson
@@ -92,7 +96,7 @@ with pkgs; [
   mdbook
   mu
   ncdu
-  fcppt 
+  fcppt
   neovim-unwrapped
   nil
   nimble-unwrapped

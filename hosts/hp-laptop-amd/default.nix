@@ -9,7 +9,7 @@
 }: {
   disabledModules = [
     # Disable the default Awesome WM module
-    # "services/x11/window-managers/awesome.nix"
+    "services/x11/window-managers/awesome.nix"
   ];
 
   imports = [
@@ -130,25 +130,7 @@
   };
 
   # Use custom Awesome WM module
-  #v services.xserver.windowManager.awesome.enable = true;
-
-  services.xserver = {
-    enable = true;
-    exportConfiguration = true;
-
-    displayManager = {
-      defaultSession = "none+awesome";
-      lightdm = {
-        enable = true;
-      };
-    };
-    windowManager.awesome = {
-      enable = true;
-      package = awesome.override {
-        lua = luajit;
-      };
-    };
-  };
+  services.xserver.windowManager.awesome.enable = true;
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.05";

@@ -34,7 +34,22 @@ with pkgs; [
   libarchive
   libpar2
   fastjar
-  
+  pcre 
+  pcre2
+  glib-networking
+  glib-testing
+  glibmm
+  glib
+  xcbutilxrm
+xorg.xcbutilwm     
+xorg.xcbutilrenderutil
+xorg.xcbutilerrors
+xorg.xcbutil
+cmake
+xorg.gccmakedep
+extra-cmake-modules
+cmake
+  pcre-cpp
   cpio 
   btar
   arj

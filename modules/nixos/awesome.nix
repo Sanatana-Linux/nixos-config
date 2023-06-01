@@ -7,7 +7,7 @@
 }:
 with lib; let
   cfg = config.services.xserver.windowManager.awesome;
-  # ------------------------------------------------- #
+
   dbus_proxy = pkgs.callPackage ({
     luajit,
     luajitPackages,
@@ -33,7 +33,7 @@ with lib; let
         cp -r src/${pname} "$out/share/lua/${luajit.luaversion}/"
       '';
     }) {};
-  # ------------------------------------------------- #
+
   async-lua = pkgs.callPackage ({
     luajit,
     fetchFromGitHub,
@@ -55,7 +55,7 @@ with lib; let
 
       propagatedBuildInputs = [luajit];
     }) {};
-  # ------------------------------------------------- #
+
   lgi-async-extra = pkgs.callPackage ({
     luajit,
     luajitPackages,
@@ -78,8 +78,7 @@ with lib; let
 
       propagatedBuildInputs = [async-lua luajit luajitPackages.lgi];
     }) {};
-  # ------------------------------------------------- #
-  # Insure Awesome can access lgi
+
   getLuaPath = lib: dir: "${lib}/${dir}/lua/${pkgs.luajit.luaversion}";
   makeSearchPath = lib.concatMapStrings (
     path:
@@ -88,14 +87,42 @@ with lib; let
       + " --search "
       + (getLuaPath path "lib")
   );
-  # ------------------------------------------------- #
-  # lua modules that Awesome requires
 
   luaModules = with pkgs.luajitPackages; [
     lgi
     ldbus
     luadbi-mysql
     luaposix
+    ldoc
+    luafilesystem
+    cqueues
+    dkjson
+    ldbus
+    ldoc
+    libluv
+    lpeg
+    lpeg_patterns
+    lpeglabel
+    lua
+    lua-curl
+    lua-lsp
+    lua-messagepack
+    lua-protobuf
+    lua-subprocess
+    luacheck
+    luadbi-sqlite3
+    luarocks
+    luarocks-nix
+    luasocket
+    luasql-sqlite3
+    mediator_lua
+    mpack
+    sqlite
+    std-_debug
+    std-normalize
+    stdlib
+    vicious
+    wrapLua
 
     # custom modules
     dbus_proxy
@@ -105,7 +132,7 @@ with lib; let
 in {
   options = {
     services.xserver.windowManager.awesome = {
-      enable = mkEnableOption (lib.mdDoc "Awesome Window Manager Luajit");
+      enable = mkEnableOption (lib.mdDoc "Awesome window manager");
     };
   };
 
@@ -113,30 +140,11 @@ in {
     services.xserver = {
       enable = true;
       exportConfiguration = true;
-      # ------------------------------------------------- #
-      # lightdm configuration
+
       displayManager = {
         defaultSession = "none+awesome";
         lightdm = {
           enable = true;
-          background = ../../hosts/shared/wallpaper/wallpaper.png;
-          # TODO use lightdm-webkit2 greeter from NUR, or maybe
-          greeters.gtk = {
-            enable = true;
-            theme = {
-              package = pkgs.colloid-gtk-theme;
-              name = "Colloid-Dark";
-            };
-            cursorTheme = {
-              package = pkgs.phinger-cursors;
-              name = "Phinger Cursors (light)";
-            };
-            iconTheme = {
-              package = pkgs.papirus-icon-theme;
-              name = "Papirus-Dark";
-            };
-            indicators = ["~session" "~spacer"];
-          };
         };
       };
 
@@ -150,8 +158,7 @@ in {
           '';
         };
     };
-    # ------------------------------------------------- #
-    # TODO lint the other packages and pull out the awesome dependencies
+
     environment.systemPackages = lib.attrValues {
       inherit
         (pkgs)

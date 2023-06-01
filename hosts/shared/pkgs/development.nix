@@ -2,6 +2,10 @@
 with pkgs; [
   abootimg
   android-backup-extractor
+  luajitPackages.lgi
+  lua51Packages.lgi   
+  fclones
+  libffi
   android-file-transfer
   android-tools
   android-udev-rules

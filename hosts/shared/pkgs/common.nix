@@ -26,6 +26,23 @@ with pkgs; [
   glibc_memusage
   glibcInfo
   glibcLocalesUtf8
+  zip
+  zarchive
+  zziplib
+  unzip
+  rar 
+  libarchive
+  libpar2
+  fastjar
+  
+  cpio 
+  btar
+  arj
+  _7zz
+  dtrx
+  gnutar
+  tarlz
+  runzip
   glibc_multi
   glibmm
   gnome.file-roller

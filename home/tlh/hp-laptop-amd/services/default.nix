@@ -94,24 +94,18 @@
       ];
 
       blur-method = "dual_kawase";
-      blur-kernel = "11x11gaussian";
-      blur-deviation = 1.0;
-      blur-strength = 10;
+      blur-kernel = "15x15gaussian";
+      blur-deviation = 5.0;
+      blur-strength = 18;
       blur-background = true;
       blur-background-frame = true;
       blur-background-fixed = true;
       blur-background-exclude = [
         "_GTK_FRAME_EXTENTS@:c"
-        "window_type = 'combo'"
         "window_type = 'desktop'"
-        "window_type = 'dnd'"
-        "window_type = 'menu'"
-        "window_type = 'toolbar'"
-        "window_type = 'tooltip'"
-        "window_type = 'utility'"
-        "window_type = 'unknown'"
-        "class_g = 'firefox' && window_type != 'normal'"
         "class_g = 'slop'"
+        "class_g = 'maim'"
+        "class_g = 'scrot'"
       ];
 
       mark-wmwin-focused = true;

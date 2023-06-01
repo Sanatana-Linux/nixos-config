@@ -7,7 +7,7 @@
 
   # Modifies existing packages
   modifications = final: prev: {
-    awesome-git-luajit = inputs.nixpkgs-f2k.packages.${prev.system}.awesome-git-luajit;
+    awesome-git-luajit = inputs.nixpkgs-f2k.packages.${prev.system}.awesome-luajit-git;
 
     nps = inputs.nps.defaultPackage.${prev.system};
 

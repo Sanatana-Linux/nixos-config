@@ -3,6 +3,7 @@ with pkgs; [
   acpi
   android-tools
   aria
+  slop
   bash
   bat
   binutils

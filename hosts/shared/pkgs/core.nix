@@ -1,34 +1,5 @@
 {pkgs, ...}:
 with pkgs; [
-  dbus
-  dconf
-  ffmpeg-full
-  gcc
-  glib
-  gnumake
-  gnuplot
-  gnused
-  gnutls
-  imagemagick
-  inotify-tools
-  libappindicator
-  libcanberra-gtk3
-  libgudev
-  libnotify
-  libsecret
-  librsvg
-  libtool
-  pulseaudio
-  zlib
-  dnsutils
-  iw
-  iwd
-  networkmanager
-  nmap
-  sssd
-  tor
-  xorg.xhost
-  wirelesstools
   alejandra
   any-nix-shell
   as-tree
@@ -38,23 +9,48 @@ with pkgs; [
   cached-nix-shell
   chatblade
   chatgpt-cli
+  clangStdenv
+  clang-ocl
+  clang-tools
+  libstdcxx5
+  opencl-clang  
   cmake
-  coreutils
-  pure-prompt
+  coreutils-full
+  dbus
+  dconf
   deadnix
+  dnsutils
   dosfstools
   feh
+  ffmpeg-full
   firmwareLinuxNonfree
+  gcc
+  glib
   glibc
   glibmm
   gnome.dconf-editor
+  gnumake
+  gnuplot
+  gnused
+  gnutls
   gptfdisk
   grub2
   gsettings-desktop-schemas
+  imagemagick
+  inotify-tools
   iputils
+  iw
+  iwd
+  libappindicator
+  libcanberra-gtk3
   libfm
   libfm-extra
+  libgudev
   libisoburn
+  libnotify
+  librsvg
+  libsecret
+  libtool
   lynis
   man-pages
   man-pages-posix
@@ -62,6 +58,7 @@ with pkgs; [
   mesa
   mesa-demos
   moreutils
+  networkmanager
   ngrok
   nix-binary-cache
   nix-direnv-flakes
@@ -71,12 +68,15 @@ with pkgs; [
   nix-template
   nix-universal-prefetch
   nixos-generators
+  nmap
   nurl
   p7zip
   pciutils
   pfetch
   pmutils
   ps_mem
+  pulseaudio
+  pure-prompt
   python3
   python311
   ripgrep
@@ -87,8 +87,10 @@ with pkgs; [
   squashfs-tools-ng
   squashfsTools
   squashfuse
+  sssd
   tbb
   tealdeer
+  tor
   toybox
   trash-cli
   tree
@@ -99,9 +101,12 @@ with pkgs; [
   usbmuxd
   usbutils
   utillinux
+  wirelesstools
   xarchiver
   xclip
   xfce.xfce4-settings
+  xorg.xhost
   xsettingsd
   zip
+  zlib
 ]

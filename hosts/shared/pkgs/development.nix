@@ -31,6 +31,10 @@ with pkgs; [
   gnutls
   go
   gofumpt
+  cpp-utilities
+  cppclean
+  cppdb
+  cpp-hocon
   gource
   icu
   imlib2Full
@@ -84,6 +88,7 @@ with pkgs; [
   mdbook
   mu
   ncdu
+  fcppt 
   neovim-unwrapped
   nil
   nimble-unwrapped

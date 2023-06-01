@@ -12,7 +12,6 @@ with pkgs; [
   conda
   cookiecutter
   copier
-  coreutils
   curl
   deer
   efibootmgr
@@ -46,9 +45,9 @@ with pkgs; [
   pciutils
   playerctl
   ps_mem
+  pure-prompt
   ranger
   rclone
-  pure-prompt
   ripgrep
   slop
   smartmontools
@@ -77,63 +76,4 @@ with pkgs; [
   zsh-edit
   zsh-navigation-tools
   zsh-you-should-use
-  aria
-  bash
-  bat
-  binutils
-  btop
-  comma
-  conda
-  imgurbash2
-  coreutils
-  curl
-  exa
-  fd
-  file
-  fzf
-  fzy
-  gh
-  git
-  htop
-  jq
-  linuxConsoleTools
-  lm_sensors
-  lshw
-  man-pages
-  man-pages-posix
-  manix
-  neofetch
-  nix-index
-  nixos-generators
-  ps_mem
-  ranger
-  rclone
-  ripgrep
-  smartmontools
-  speedtest-cli
-  squashfs-tools-ng
-  squashfsTools
-  squashfuse
-  sysz
-  trash-cli
-  ueberzug
-  unrar
-  unzip
-  usbmuxd
-  wget
-  whois
-  xarchiver
-  xclip
-  xorg.xev
-  yt-dlp
-  zip
-  zsh
-  nix-zsh-completions
-  zsh-you-should-use
-  zsh-autocomplete
-  zsh-navigation-tools
-  zsh-edit
-  deer
-  cookiecutter
-  copier
 ]

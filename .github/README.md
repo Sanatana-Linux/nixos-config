@@ -33,7 +33,7 @@
 sudo su
 
 # Get the nix shell with the features you need
-nix-shell -p git nixUnstable
+nix-shell -p git nixUnstable neovim
 
 # Create the /etc/ file you'll be working in
 mkdir -p /mnt/etc/
@@ -57,7 +57,7 @@ nixos-install --flake '.#hp-laptop-amd' --impure
 
 ```
 
-> You could get some hashes errors, just change the bad hashes in the config file to the given ones by the Nix Output.
+> You could get some hashes errors, just change the bad hashes in the configuration file to the given ones by the Nix Output.
 
 - Reboot, login as root, and change the password for your user using `passwd`
 - Log-in in to the display manager.

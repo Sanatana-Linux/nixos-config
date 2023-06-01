@@ -7,7 +7,7 @@
     bc
     btop
     catimg
-    coreutils
+
     curl
     direnv
     nix-direnv

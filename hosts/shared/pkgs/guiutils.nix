@@ -2,6 +2,10 @@
 with pkgs; [
   appimage-run
   appimagekit
+  gnome.file-roller
+  pantheon.file-roller-contract
+  xarchiver
+  archiver
   aspell
   aspellDicts.de
   aspellDicts.en

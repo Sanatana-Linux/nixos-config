@@ -36,6 +36,70 @@
     #     zle reset-prompt;
     #   '';
 
+    profileExtra = ''
+      while read -r option
+       do
+      setopt $option
+       done <<-EOF
+      ALWAYS_TO_END
+      APPEND_HISTORY
+      APPENDHISTORY        # IMMEDIATELY APPEND HISTORY INSTEAD OF OVERWRITING
+      AUTO_CD
+      AUTO_LIST
+      AUTO_MENU
+      AUTO_PARAM_SLASH
+      AUTO_PUSHD
+        COMPLETE_IN_WORD
+        CORRECT
+        CORRECT                                                  # AUTO CORRECT MISTAKES
+        EXTENDED_HISTORY
+        EXTENDEDGLOB                                             # EXTENDED GLOBBING. ALLOWS USING REGULAR EXPRESSIONS WITH *
+        HIST_EXPIRE_DUPS_FIRST
+        HIST_FCNTL_LOCK
+        HIST_IGNORE_ALL_DUPS
+        HIST_IGNORE_DUPS
+        HIST_IGNORE_SPACE
+        HIST_REDUCE_BLANKS
+        HIST_SAVE_NO_DUPS
+        HIST_VERIFY
+        HISTFINDNODUPS
+        HISTREDUCEBLANKS
+        HISTVERIFY
+        INC_APPEND_HISTORY
+        INCAPPENDHISTORY
+        INTERACTIVE_COMMENTS
+        INTERACTIVECOMMENTS
+        MENU_COMPLETE
+        NO_NOMATCH
+        NOCASEGLOB                                               # CASE INSENSITIVE GLOBBING
+        NUMERICGLOBSORT                                          # SORT FILENAMES NUMERICALLY WHEN IT MAKES SENSE
+        PUSHD_IGNORE_DUPS
+        PUSHD_SILENT
+        PUSHD_TO_HOME
+        RCEXPANDPARAM                                            # ARRAY EXPENSION WITH PARAMETERS
+        SHARE_HISTORY                       # DON'T WARN ABOUT RUNNING PROCESSES WHEN EXITING                                                # ENABLE BEEp
+              EOF
+                  while read -r option
+        do
+          unsetopt $option
+        done <<-EOF
+        CORRECT_ALL
+        HIST_BEEP
+        MENU_COMPLETE
+        EOF
+
+              zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'       # Case insensitive tab completion
+              zstyle ':completion:*' list-colors "''${(s.:.)LS_COLORS}"       # Colored completion (different colors for dirs/files/etc)
+              zstyle ':completion:*' rehash true                              # automatically find new executables in path
+              # Speed up completions
+              zstyle ':completion:*' accept-exact '*(N)'
+              zstyle ':completion:*' use-cache on
+              mkdir -p "$(dirname ${config.xdg.cacheHome}/zsh/completion-cache)"
+              zstyle ':completion:*' cache-path "${config.xdg.cacheHome}/zsh/completion-cache"
+              zstyle ':completion:*' menu select
+              WORDCHARS=''${WORDCHARS//\/[&.;]}                                 # Don't consider certain characters part of the word
+    '';
+
     shellAliases = with pkgs; {
       cleanup = "sudo nix-collect-garbage --delete-older-than 7d";
 
@@ -98,95 +162,10 @@
       ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor regexp root line)
       ZSH_HIGHLIGHT_MAXLENGTH=512
 
-      while read -r option
-      do
-        setopt $option
-      done <<-EOF
-      AUTO_CD
-      AUTO_LIST
-      AUTO_MENU
-      AUTO_PARAM_SLASH
-      AUTO_PUSHD
-      APPEND_HISTORY
-      ALWAYS_TO_END
-      COMPLETE_IN_WORD
-      CORRECT
-      EXTENDED_HISTORY
-      HIST_EXPIRE_DUPS_FIRST
-      HIST_FCNTL_LOCK
-      HIST_IGNORE_ALL_DUPS
-      HIST_IGNORE_DUPS
-      HIST_IGNORE_SPACE
-      HIST_REDUCE_BLANKS
-      HIST_SAVE_NO_DUPS
-      HIST_VERIFY
-      INC_APPEND_HISTORY
-      INTERACTIVE_COMMENTS
-      MENU_COMPLETE
-      NO_NOMATCH
-      PUSHD_IGNORE_DUPS
-      PUSHD_TO_HOME
-      PUSHD_SILENT
-      SHARE_HISTORY
-      EOF
 
-      while read -r option
-      do
-        unsetopt $option
-      done <<-EOF
-      CORRECT_ALL
-      HIST_BEEP
-      MENU_COMPLETE
-      EOF
+
 
       any-nix-shell zsh --info-right | source /dev/stdin
-
-      function run() {
-        nix run nixpkgs#$@
-      }
-
-      function extract() {
-        if [ -z "$1" ]; then
-           # display usage if no parameters given
-           echo "Usage: extract <path/file_name>.<zip|rar|bz2|gz|tar|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz|.zlib|.cso>"
-           echo "       extract <path/file_name_1.ext> [path/file_name_2.ext] [path/file_name_3.ext]"
-        else
-           for n in "$@"
-           do
-             if [ -f "$n" ] ; then
-                 case "''${n%,}" in
-                   *.cbt|*.tar.bz2|*.tar.gz|*.tar.xz|*.tbz2|*.tgz|*.txz|*.tar)
-                                tar xvf "$n"       ;;
-                   *.lzma)      unlzma ./"$n"      ;;
-                   *.bz2)       bunzip2 ./"$n"     ;;
-                   *.cbr|*.rar) unrar x -ad ./"$n" ;;
-                   *.gz)        gunzip ./"$n"      ;;
-                   *.cbz|*.epub|*.zip) unzip ./"$n"   ;;
-                   *.z)         uncompress ./"$n"  ;;
-                   *.7z|*.apk|*.arj|*.cab|*.cb7|*.chm|*.deb|*.dmg|*.iso|*.lzh|*.msi|*.pkg|*.rpm|*.udf|*.wim|*.xar)
-                                7z x ./"$n"        ;;
-                   *.xz)        unxz ./"$n"        ;;
-                   *.exe)       cabextract ./"$n"  ;;
-                   *.cpio)      cpio -id < ./"$n"  ;;
-                   *.cba|*.ace) unace x ./"$n"     ;;
-                   *.zpaq)      zpaq x ./"$n"      ;;
-                   *.arc)       arc e ./"$n"       ;;
-                   *.cso)       ciso 0 ./"$n" ./"$n.iso" && \
-                                     extract "$n.iso" && \rm -f "$n" ;;
-                   *.zlib)      zlib-flate -uncompress < ./"$n" > ./"$n.tmp" && \
-                                     mv ./"$n.tmp" ./"''${n%.*zlib}" && rm -f "$n"   ;;
-                   *)
-                                echo "extract: '$n' - unknown archive method"
-                                return 1
-                                ;;
-                 esac
-             else
-                 echo "'$n' - file doesn't exist"
-                 return 1
-             fi
-           done
-      fi
-      }
     '';
 
     zplug = {

@@ -42,9 +42,9 @@
       "_PICOM_FADE@:32c = 0"
     ];
 
-    activeOpacity = 1.0;
-    inactiveOpacity = 1.0;
-    menuOpacity = 1.0;
+    activeOpacity = 0.95;
+    inactiveOpacity = 0.95;
+    menuOpacity = 0.95;
     opacityRules = ["70:class_g = 'splash'"];
 
     wintypes = {
@@ -95,8 +95,8 @@
 
       blur-method = "dual_kawase";
       blur-kernel = "15x15gaussian";
-      blur-deviation = 5.0;
-      blur-strength = 18;
+      blur-deviation = 2.5;
+      blur-strength = 12;
       blur-background = true;
       blur-background-frame = true;
       blur-background-fixed = true;

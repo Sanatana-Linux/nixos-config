@@ -32,6 +32,8 @@
       shfmt
       sqlite
       stylua
+      keybase
+      keybase-gui
       subversion
       sumneko-lua-language-server
       texlab

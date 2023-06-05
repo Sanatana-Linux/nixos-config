@@ -1,0 +1,78 @@
+{
+  lib,
+  pkgs,
+  ...
+}: {
+  home.packages = lib.attrValues {
+    inherit
+      (pkgs)
+      bfg-repo-cleaner
+      black
+      cargo
+      ccls
+      clang
+      clang-tools
+      cmake
+      colordiff
+      delve
+      gist
+      git-filter-repo
+      go
+      gopls
+      grex
+      java-language-server
+      keychain
+      lldb
+      shiori
+      nb
+      nodejs
+      pre-commit
+      rust-analyzer
+      rustfmt
+      selene
+      shellcheck
+      shfmt
+      sqlite
+      stylua
+      keybase
+      keybase-gui
+      subversion
+      sumneko-lua-language-server
+      texlab
+      uncrustify
+      ;
+    inherit
+      (pkgs.gnome)
+      gnome-keyring
+      libgnome-keyring
+      ;
+    inherit
+      (pkgs.gitAndTools)
+      git-absorb
+      gitui
+      git-machete
+      gh
+      ;
+    inherit
+      (pkgs.luaPackages)
+      lua
+      ;
+
+    inherit
+      (pkgs.nodePackages_latest)
+      jsonlint
+      prettier
+      typescript-language-server
+      vls
+      vscode-langservers-extracted
+      yaml-language-server
+      yarn
+      ;
+
+    pylsp = pkgs.python310.withPackages (p:
+      with p; [
+        python-lsp-server
+        flake8
+      ]);
+  };
+}

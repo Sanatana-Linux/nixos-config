@@ -5,7 +5,6 @@ These are to-do items for this repository, which may have additional notes on ea
 ## NixOS Configuration TODOs
 
 - [ ] [Firefox Items](firefox.md)
-- [ ] [DevOS Refactoring Items](devos.md)
 - [ ] Work in immutable library and mark directories I need as immutable 
   - see that awfully corny article "Erase Your Darlings" 
 - [x] add in the templates from nixos-community/templates 

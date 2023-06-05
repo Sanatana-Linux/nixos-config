@@ -108,6 +108,7 @@ with pkgs; [
   openshot-qt
   pango
   pangomm
+  qogir-icon-theme
   papirus-folders
   papirus-icon-theme
   pasystray

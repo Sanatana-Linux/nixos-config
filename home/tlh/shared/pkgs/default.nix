@@ -25,6 +25,7 @@
       lldb
       shiori
       nb
+      kbfs
       nodejs
       pre-commit
       rust-analyzer

@@ -14,10 +14,20 @@
       tlh = {
         id = 0;
         extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-          enhanced-github
-          enhancer-for-youtube
           refined-github
           ublock-origin
+          bitwarden
+          buster-captcha-solver
+          floccus
+          greasemonkey
+          keybase
+          link-gopher
+          metamask
+          search-by-image
+          tab-stash
+          undoclosetabbutton
+          unpaywall
+          view-image
         ];
 
         settings = {

@@ -132,8 +132,8 @@ in {
               name = "Phinger Cursors (light)";
             };
             iconTheme = {
-              package = pkgs.papirus-icon-theme;
-              name = "Papirus-Dark";
+              package = pkgs.qogir-icon-theme;
+              name = "Qogir-dark";
             };
             indicators = ["~session" "~spacer"];
           };

@@ -13,8 +13,8 @@
       size = 10;
     };
     iconTheme = {
-      name = "Fluent-dark";
-      package = pkgs.fluent-icon-theme;
+      name = "Qogir-dark";
+      package = pkgs.qogir-icon-theme;
     };
     cursorTheme = {
       name = "Phinger Cursors (light)";

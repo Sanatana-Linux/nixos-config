@@ -23,6 +23,8 @@
       java-language-server
       keychain
       lldb
+      shiori
+      nb
       nodejs
       pre-commit
       rust-analyzer

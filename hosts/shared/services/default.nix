@@ -37,8 +37,6 @@
     udev.packages = [pkgs.gnome.gnome-settings-daemon];
   };
 
-  
-
   virtualisation = {
     docker = {
       enable = true;

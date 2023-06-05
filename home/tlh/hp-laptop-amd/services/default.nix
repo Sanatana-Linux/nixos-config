@@ -106,6 +106,10 @@
         "class_g = 'slop'"
         "class_g = 'maim'"
         "class_g = 'scrot'"
+        "window_type = 'tooltip'"
+        "window_type = 'unknown'"
+        "window_type = 'menu'"
+        "window_type = 'utility'"
       ];
 
       mark-wmwin-focused = true;

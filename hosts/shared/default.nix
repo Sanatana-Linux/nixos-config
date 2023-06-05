@@ -35,6 +35,9 @@
       allowUnsupportedSystem = true;
       allowUnfreePredicate = _: true;
       allowBroken = true;
+      permittedInsecurePackages = [
+        "openssl-1.1.1u"
+      ];
     };
   };
 }

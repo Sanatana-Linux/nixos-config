@@ -142,30 +142,31 @@
     };
 
     initExtra = ''
-      FZF_TAB_COMMAND=(
-        ${lib.getExe pkgs.fzf}
-        --ansi
-        --expect='$continuous_trigger'
-        --nth=2,3 --delimiter='\x00'
-        --layout=reverse --height="''${FZF_TMUX_HEIGHT:=50%}"
-        --tiebreak=begin -m --bind=tab:down,btab:up,change:top,ctrl-space:toggle --cycle
-        '--query=$query'
-        '--header-lines=$#headers'
-      )
+            FZF_TAB_COMMAND=(
+              ${lib.getExe pkgs.fzf}
+              --ansi
+              --expect='$continuous_trigger'
+              --nth=2,3 --delimiter='\x00'
+              --layout=reverse --height="''${FZF_TMUX_HEIGHT:=50%}"
+              --tiebreak=begin -m --bind=tab:down,btab:up,change:top,ctrl-space:toggle --cycle
+              '--query=$query'
+              '--header-lines=$#headers'
+            )
 
-      zstyle ':fzf-tab:*' command $FZF_TAB_COMMAND
-      zstyle ':fzf-tab:*' switch-group ',' '.'
-      zstyle ':fzf-tab:complete:_zlua:*' query-string input
-      zstyle ':fzf-tab:complete:*:*' fzf-preview 'preview.sh $realpath'
+            zstyle ':fzf-tab:*' command $FZF_TAB_COMMAND
+            zstyle ':fzf-tab:*' switch-group ',' '.'
+            zstyle ':fzf-tab:complete:_zlua:*' query-string input
+            zstyle ':fzf-tab:complete:*:*' fzf-preview 'preview.sh $realpath'
 
-      ZSH_AUTOSUGGEST_USE_ASYNC="true"
-      ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor regexp root line)
-      ZSH_HIGHLIGHT_MAXLENGTH=512
-
-
+            ZSH_AUTOSUGGEST_USE_ASYNC="true"
+            ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor regexp root line)
+            ZSH_HIGHLIGHT_MAXLENGTH=512
 
 
-      any-nix-shell zsh --info-right | source /dev/stdin
+
+
+            any-nix-shell zsh --info-right | source /dev/stdin
+      source ${config.xdg.configHome}/zsh/zplug/**/*.zsh
     '';
 
     zplug = {

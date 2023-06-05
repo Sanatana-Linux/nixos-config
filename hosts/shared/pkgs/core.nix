@@ -13,7 +13,7 @@ with pkgs; [
   clang-ocl
   clang-tools
   libstdcxx5
-  opencl-clang  
+  opencl-clang
   cmake
   coreutils-full
   dbus

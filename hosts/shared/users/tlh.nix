@@ -34,5 +34,4 @@ in {
   };
 
   home-manager.users.tlh = import ../../../home/tlh/${config.networking.hostName};
-
 }

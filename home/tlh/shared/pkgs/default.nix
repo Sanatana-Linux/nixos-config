@@ -27,6 +27,8 @@
       nb
       kbfs
       nodejs
+      parted
+      gpart
       pre-commit
       rust-analyzer
       rustfmt

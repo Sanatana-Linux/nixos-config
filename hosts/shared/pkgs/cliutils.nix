@@ -9,6 +9,7 @@ with pkgs; [
   binutils
   brightnessctl
   btop
+  chatgpt-cli
   comma
   conda
   cookiecutter

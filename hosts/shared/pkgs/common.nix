@@ -49,6 +49,9 @@ with pkgs; [
   xorg.gccmakedep
   extra-cmake-modules
   cmake
+  testdisk
+  ntfs3g
+  fuse3
   pcre-cpp
   cpio
   btar

@@ -12,6 +12,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-hardware.url = "github:nixos/nixos-hardware";
 
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
@@ -77,18 +78,18 @@
           {
             home-manager.useUserPackages = true;
             home-manager.backupFileExtension = "bak";
+            home-manager.users.tlh = {imports = [./home/tlh/hp-laptop-amd];};
           }
         ];
       };
     };
-
-    homeConfigurations = {
-      # Laptop
-      "tlh@hp-laptop-amd" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages."x86_64-linux";
-        extraSpecialArgs = {inherit inputs outputs;};
-        modules = [./home/tlh/hp-laptop-amd];
-      };
-    };
+    # # TODO is this necessary? We will see this way if nothing else
+    # homeConfigurations = {
+    #   "tlh@hp-laptop-amd" = home-manager.lib.homeManagerConfiguration {
+    #     pkgs = nixpkgs.legacyPackages."x86_64-linux";
+    #     extraSpecialArgs = {inherit inputs outputs;};
+    #     modules = [./home/tlh/hp-laptop-amd];
+    #   };
+    # };
   };
 }

@@ -38,7 +38,7 @@
       done <<-EOF
         ALWAYS_TO_END
         APPEND_HISTORY
-        APPENDHISTORY        # IMMEDIATELY APPEND HISTORY INSTEAD OF OVERWRITING
+        APPENDHISTORY
         AUTO_CD
         AUTO_LIST
         AUTO_MENU
@@ -46,9 +46,8 @@
         AUTO_PUSHD
         COMPLETE_IN_WORD
         CORRECT
-        CORRECT                                                  # AUTO CORRECT MISTAKES
         EXTENDED_HISTORY
-        EXTENDEDGLOB                                             # EXTENDED GLOBBING. ALLOWS USING REGULAR EXPRESSIONS WITH *
+        EXTENDEDGLOB
         HIST_EXPIRE_DUPS_FIRST
         HIST_FCNTL_LOCK
         HIST_IGNORE_ALL_DUPS
@@ -66,19 +65,20 @@
         INTERACTIVECOMMENTS
         MENU_COMPLETE
         NO_NOMATCH
-        NOCASEGLOB                                               # CASE INSENSITIVE GLOBBING
-        NUMERICGLOBSORT                                          # SORT FILENAMES NUMERICALLY WHEN IT MAKES SENSE
+        NOCASEGLOB
+        NUMERICGLOBSORT
         PUSHD_IGNORE_DUPS
         PUSHD_SILENT
         PUSHD_TO_HOME
-        RCEXPANDPARAM                                            # ARRAY EXPENSION WITH PARAMETERS
-        SHARE_HISTORY                       # DON'T WARN ABOUT RUNNING PROCESSES WHEN EXITING                                                # ENABLE BEEp
+        RCEXPANDPARAM
+        SHARE_HISTORY
         EOF
 
         while read -r option
         do
           unsetopt $option
         done <<-EOF
+        BEEP
         CORRECT_ALL
         HIST_BEEP
         MENU_COMPLETE
@@ -86,31 +86,33 @@
 
         zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'       # Case insensitive tab completion
         zstyle ':completion:*' list-colors "''${(s.:.)LS_COLORS}"       # Colored completion (different colors for dirs/files/etc)
-        zstyle ':completion:*' rehash true                              # automatically find new executables in path
+        zstyle ':completion:*' rehash true      # automatically find new executables in path
         # Speed up completions
         zstyle ':completion:*' accept-exact '*(N)'
         zstyle ':completion:*' use-cache on
         mkdir -p "$(dirname ${config.xdg.cacheHome}/zsh/completion-cache)"
         zstyle ':completion:*' cache-path "${config.xdg.cacheHome}/zsh/completion-cache"
         zstyle ':completion:*' menu select
-        WORDCHARS=''${WORDCHARS//\/[&.;]}                                 # Don't consider certain characters part of the word/
+        WORDCHARS=''${WORDCHARS//\/[&.;]}         # Don't consider certain characters part of the word/
 
-        FZF_TAB_COMMAND=(${lib.getExe pkgs.fzf}
-                  --ansi
-                  --expect='$continuous_trigger'
-                  --nth=2,3 --delimiter='\x00'
-                  --layout=reverse --height="''${FZF_TMUX_HEIGHT:=50%}"
-                  --tiebreak=begin -m --bind=tab:down,btab:up,change:top,ctrl-space:toggle --cycle
-                  '--query=$query'
-                  '--header-lines=$#headers')
-                  zstyle ':fzf-tab:*' command $FZF_TAB_COMMAND
-                  zstyle ':fzf-tab:*' switch-group ',' '.'
-                  zstyle ':fzf-tab:complete:_zlua:*' query-string input
-                  zstyle ':fzf-tab:complete:*:*' fzf-preview 'preview.sh $realpath'
+
     '';
 
-    envExtra = ''
+    initExtraFirst = ''
       source ${config.xdg.configHome}/zsh/zplug/**/*.zsh
+
+      FZF_TAB_COMMAND=(${lib.getExe pkgs.fzf}
+      --ansi
+      --expect='$continuous_trigger'
+      --nth=2,3 --delimiter='\x00'
+      --layout=reverse --height="''${FZF_TMUX_HEIGHT:=50%}"
+      --tiebreak=begin -m --bind=tab:down,btab:up,change:top,ctrl-space:toggle --cycle
+      '--query=$query'
+      '--header-lines=$#headers')
+      zstyle ':fzf-tab:*' command $FZF_TAB_COMMAND
+      zstyle ':fzf-tab:*' switch-group ',' '.'
+      zstyle ':fzf-tab:complete:_zlua:*' query-string input
+      zstyle ':fzf-tab:complete:*:*' fzf-preview 'preview.sh $realpath'
     '';
 
     shellAliases = with pkgs; {

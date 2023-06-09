@@ -6,11 +6,11 @@
 }: {
   imports = [
     ./xdg.nix
-    ./zsh.nix
     ./starship.nix
     ./cli.nix
     ./nix.nix
     ./bin/default.nix
+    ./zsh.nix
   ];
 
   home = {

@@ -110,6 +110,15 @@ in {
   };
 
   config = mkIf cfg.enable {
+    programs.thunar = {
+      enable = true;
+      plugins = with pkgs.xfce; [
+        thunar-archive-plugin
+        thunar-volman
+        thunar-dropbox-plugin
+        thunar-media-tags-plugin
+      ];
+    };
     services.xserver = {
       enable = true;
       exportConfiguration = true;
@@ -170,7 +179,10 @@ in {
       inherit
         (pkgs.xfce)
         xfce4-clipman-plugin
-        thunar
+        # configured
+        
+        # thunar
+        
         ;
 
       inherit

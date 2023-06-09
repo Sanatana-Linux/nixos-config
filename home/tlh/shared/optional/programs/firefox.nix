@@ -98,7 +98,15 @@
         };
 
         userChrome = ''
-          @import "${pkgs.firefox-gnome-theme}/share/firefox-gnome-theme/userChrome.css";
+                      @import "${pkgs.firefox-gnome-theme}/share/firefox-gnome-theme/userChrome.css";
+           ::-moz-selection { /* Code for Firefox */
+            color: #202020 !important;
+            background: #00caff !important;
+            }
+            ::selection {
+          color: #202020 !important;
+            background: #00caff !important;
+            }
         '';
 
         userContent = ''

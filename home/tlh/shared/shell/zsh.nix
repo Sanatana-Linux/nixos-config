@@ -93,26 +93,14 @@
         mkdir -p "$(dirname ${config.xdg.cacheHome}/zsh/completion-cache)"
         zstyle ':completion:*' cache-path "${config.xdg.cacheHome}/zsh/completion-cache"
         zstyle ':completion:*' menu select
-        WORDCHARS=''${WORDCHARS//\/[&.;]}         # Don't consider certain characters part of the word/
+        WORDCHARS=''${WORDCHARS//\/[&.;]}
 
 
     '';
 
     initExtraFirst = ''
       source ${config.xdg.configHome}/zsh/zplug/**/*.zsh
-
-      FZF_TAB_COMMAND=(${lib.getExe pkgs.fzf}
-      --ansi
-      --expect='$continuous_trigger'
-      --nth=2,3 --delimiter='\x00'
-      --layout=reverse --height="''${FZF_TMUX_HEIGHT:=50%}"
-      --tiebreak=begin -m --bind=tab:down,btab:up,change:top,ctrl-space:toggle --cycle
-      '--query=$query'
-      '--header-lines=$#headers')
-      zstyle ':fzf-tab:*' command $FZF_TAB_COMMAND
-      zstyle ':fzf-tab:*' switch-group ',' '.'
-      zstyle ':fzf-tab:complete:_zlua:*' query-string input
-      zstyle ':fzf-tab:complete:*:*' fzf-preview 'preview.sh $realpath'
+      enable-fzf-tab
     '';
 
     shellAliases = with pkgs; {

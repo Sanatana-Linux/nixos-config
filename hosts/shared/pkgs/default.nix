@@ -9,9 +9,9 @@
   guiutils = import ./guiutils.nix {pkgs = pkgs;};
   media = import ./media.nix {pkgs = pkgs;};
   pythonpackages = import ./python.nix {pkgs = pkgs;};
-  developmentpackages = import ./development.nix {pkgs = pkgs;};
-  soundpackages = import ./sound.nix {pkgs = pkgs;};
-  virtualizationpackages = import ./virtualization.nix {pkgs = pkgs;};
+  development = import ./development.nix {pkgs = pkgs;};
+  sound = import ./sound.nix {pkgs = pkgs;};
+  virtualization = import ./virtualization.nix {pkgs = pkgs;};
 in {
   imports = [./fonts.nix];
   environment.systemPackages = with pkgs;
@@ -20,13 +20,13 @@ in {
       toilet
       pfetch
     ]
+    ++ cliutils
     ++ common
     ++ core
-    ++ cliutils
+    ++ development
     ++ guiutils
     ++ media
     ++ pythonpackages
-    ++ developmentpackages
-    ++ virtualizationpackages
-    ++ soundpackages;
+    ++ sound
+    ++ virtualization;
 }

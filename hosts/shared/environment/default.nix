@@ -9,7 +9,7 @@
     binsh = lib.getExe bash;
     shells = [zsh];
     pathsToLink = ["/share/zsh"];
-
+  
     loginShellInit = ''
       ZSH_AUTOSUGGEST_USE_ASYNC="true"
       ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor regexp root line)
@@ -18,5 +18,6 @@
       eval $(ssh-agent)
       zsh
     '';
+
   };
 }

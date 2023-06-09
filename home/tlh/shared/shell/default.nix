@@ -12,7 +12,7 @@
     ./bin/default.nix
     ./zsh.nix
   ];
-
+  
   home = {
     sessionPath = [
       "${config.home.homeDirectory}/.local/bin"

@@ -2,12 +2,6 @@
 with pkgs; [
   abootimg
   android-backup-extractor
-  luajitPackages.lgi
-  lua51Packages.lgi
-  fclones
-  libffi
-  luajitPackages.vusted
-  luajitPackages.busted
   android-file-transfer
   android-tools
   android-udev-rules
@@ -23,24 +17,28 @@ with pkgs; [
   cava
   chruby
   cmake
+  cpp-hocon
+  cpp-utilities
+  cppclean
+  cppdb
   curl
   deadnix
   dejsonlz4
   direnv
   efm-langserver
   expat
+  fclones
+  fcppt
   fuse3
   gcc
+  gdk-pixbuf
+  gdk-pixbuf-xlib
   git-trim
   glib
   gnumake
   gnutls
   go
   gofumpt
-  cpp-utilities
-  cppclean
-  cppdb
-  cpp-hocon
   gource
   icu
   imlib2Full
@@ -49,6 +47,7 @@ with pkgs; [
   isync
   just
   ktlint
+  libffi
   libimobiledevice
   libtiff
   libtool
@@ -57,12 +56,12 @@ with pkgs; [
   lua-language-server
   lua5_3_compat
   lua5_4_compat
+  lua51Packages.lgi
   lua54Packages.lua
   lua54Packages.luarocks-nix
   luabind
-  gdk-pixbuf-xlib
-  gdk-pixbuf
   luaformatter
+  luajitPackages.busted
   luajitPackages.cqueues
   luajitPackages.dkjson
   luajitPackages.ldbus
@@ -79,7 +78,6 @@ with pkgs; [
   luajitPackages.lua-protobuf
   luajitPackages.lua-subprocess
   luajitPackages.luacheck
-  luajitPackages.luadbi-sqlite3
   luajitPackages.luarocks
   luajitPackages.luarocks-nix
   luajitPackages.luasocket
@@ -91,13 +89,13 @@ with pkgs; [
   luajitPackages.std-normalize
   luajitPackages.stdlib
   luajitPackages.vicious
+  luajitPackages.vusted
   luajitPackages.wrapLua
   lynis
   marksman
   mdbook
   mu
   ncdu
-  fcppt
   neovim-unwrapped
   nil
   nimble-unwrapped

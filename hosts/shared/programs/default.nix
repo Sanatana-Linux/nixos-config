@@ -3,14 +3,21 @@
   pkgs,
   ...
 }: {
+  hardware = {
+    logitech.wireless = {
+      enable = true;
+      enableGraphical = true;
+    };
+  };
   programs = {
-    adb.enable = true;
-    bash.promptInit = ''eval "$(${lib.getExe pkgs.starship} init bash)"'';
+    # bash.promptInit = ''eval "$(${lib.getExhosts/shared/programs/default.nixe pkgs.starship} init bash)"'';
     dconf.enable = true;
 
     nix-ld = {
       enable = true;
       libraries = with pkgs; [
+        android-tools
+        android-udev-rules
         binutils
         curl
         glib
@@ -55,7 +62,6 @@
         luajitPackages.lua-protobuf
         luajitPackages.lua-subprocess
         luajitPackages.luacheck
-        luajitPackages.luadbi-sqlite3
         luajitPackages.luarocks
         luajitPackages.luarocks-nix
         luajitPackages.luasocket
@@ -69,6 +75,7 @@
         luajitPackages.vicious
         luajitPackages.wrapLua
         openssl
+        sassc
         stdenv.cc.cc
         util-linux
         xsettingsd
@@ -80,7 +87,17 @@
       enable = true;
       package = pkgs.jre;
     };
+    # gnome's keyring manager
+    seahorse.enable = true;
 
+    # help manage android devices via command line
+    adb.enable = true;
+
+    # networkmanager tray uility
+    nm-applet.enable = false;
+
+    # allow users to mount fuse filesystems with allow_other
+    fuse.userAllowOther = true;
     # ------------------------------------------------- #
   };
 }

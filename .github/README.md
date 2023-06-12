@@ -8,7 +8,7 @@
 >
 > [UChicago's DSAL Online Sanskrit Dictionary](https://dsal.uchicago.edu/cgi-bin/app/apte_query.py?qs=Sanatana&matchtype=default)
 
-<img width="100%" height="100%"  src="./assets/eternal.gif" alt="A gif symbolic of eternity that features a rotating triangle that when pointed upwards is analoguous to the Deva symbol and when pointed down is symbolic of the Devi, thus subtly referring to the Divine in both essential aspects." align="center" />
+<img width="350px" align="center"  src="./assets/eternal.gif" alt="A gif symbolic of eternity that features a rotating triangle that when pointed upwards is analoguous to the Deva symbol and when pointed down is symbolic of the Devi, thus subtly referring to the Divine in both essential aspects."  />
 
 ---
 
@@ -22,11 +22,9 @@
 
 > NOTE: This is my bootstrapping process, yours probably will vary.
 
-<img src="./assets/patrick-meme.jpg" width="100%" alt="Patrick Star wearing a shirt about wanting to be picked up by his mother because he is scared. This is to make a light joke at my own and the reader's expense about the overwhelming aspects of the bootstrap process"/>
-
 - Boot into the installer environment
 - Format and mount your disks inside /mnt
-- execute this
+- execute the following in terminal:
 
 ```sh
 # Jump into a root shell head first
@@ -61,9 +59,10 @@ nixos-install --flake '.#hp-laptop-amd' --impure
 
 - Reboot, login as root, and change the password for your user using `passwd`
 - Log-in in to the display manager.
-- Then do this:
+- Then:
 
 ```sh
+# changes ownership, will still build but now complains less when syncing with Git
 doas chown -R $USER /etc/nixos
 ```
 
@@ -82,7 +81,7 @@ nixos-rebuild switch --impure --flake '/etc/nixos#hp-laptop-amd'
 
 ```
 
----
+## <img src="./assets/patrick-meme.jpg" width="400px" alt="Patrick Star wearing a shirt about wanting to be picked up by his mother because he is scared. This is to make a light joke at my own and the reader's expense about the overwhelming aspects of the bootstrap process"/>
 
 ## Enjoy
 
@@ -103,7 +102,6 @@ This configuration, like many if not most others, owes a huge debt of gratitude 
 - [chadcat7's fuyu](https://github.com/chadcat7/fuyu)
 - [AlphaTechnolog's nixdots](https://github.com/AlphaTechnolog/nixdots)
 - [MCotocel's nixdots](https://github.com/MCotocel/nixdots)
-- [rxyhn's yuki](https://github.com/rxyhn/yuki)
 - [nuxshed's dotfiles](https://github.com/nuxshed/dotfiles)
 - [hlissner's dotfiles](https://github.com/hlissner/dotfiles)
 

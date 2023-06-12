@@ -1,210 +1,160 @@
 {pkgs, ...}:
 with pkgs; [
-  appimage-run
-  appimagekit
-  gnome.file-roller
-  pantheon.file-roller-contract
-  xarchiver
-  archiver
-  aspell
-  aspellDicts.de
-  aspellDicts.en
-  aspellDicts.en-computers
-  aspellDicts.en-science
-  aspellDicts.hi
-  codespell
-  gspell
-  gtkspell3
-  gtkspellmm
-  hunspell
-  hunspellDicts.de_DE
-  hunspellDicts.en_US-large
-  hunspellDicts.es_MX
-  mythes
-  nuspell
-  typos
-  libusb
-  gusb
-  ibus-with-plugins
-  pdf-parser
-  poppler_utils
-  leela
-  ebook_tools
-  pdfmm
-  pdftag
-  pdftk
-  pdfstudio2022
-  ocrmypdf
-  termpdfpy
-  updfparser
-  python311Packages.pdftotext
-  appstream-glib
-  bitwarden
-  bitwarden-cli
-  bleachbit
-  brave
-  discord
-  font-manager
-  fuseiso
-  gnome.gnome-disk-utility
-  google-chrome
-  gpick
-  epiphany
-  hunspell
-  luakit
-  networkmanagerapplet
-  phinger-cursors
-  tdesktop
-  themechanger
-  thunderbird
-  tor-browser-bundle-bin
-  vlc
-  blueman
-  galculator
-  gparted
-  xarchiver
-  avidemux
-  cairo
-  cairomm
-  dbus-broker
-  xcolor
-  epick
-  eyedropper
-  gpick
-  xmcp
-  dconf
-  fbida
-  feh
-  geocode-glib_2
-  glib
-  glib-networking
-  glibc
-  glibc_memusage
-  glibmm
-  gnome.file-roller
-  gnome.gnome-themes-extra
-  gnome.gvfs
-  gnome2.gtkglext
-  gob2
-  gobject-introspection-unwrapped
-  goocanvas
-  goocanvas3
-  gthumb
-  gtk-sharp-2_0
-  gtk2-x11
-  gtk3
-  gtk3-x11
-  gtk4
-  gtk_engines
-  gusb
-  i3lock-color
-  inotify-tools
-  libcanberra-gtk3
-  libdbusmenu
-  libdbusmenu-gtk3
-  libfm
-  libfm-extra
-  libgee
-  libglibutil
-  libgudev
-  libinput
-  libnotify
-  libsForQt5.qt5ct
-  libsForQt5.qtstyleplugin-kvantum
-  libxdg_basedir
-  lightlocker
-  maim
-  menu-cache
-  mesa
-  mesa-demos
-  networkmanagerapplet
-  pango
-  pangomm
-  papirus-folders
-  papirus-icon-theme
-  perl536Packages.CairoGObject
-  perl536Packages.GooCanvas2CairoTypes
-  pixcat
-  polkit_gnome
-  poppler_utils
-  ranger
-  rofi
-  template-glib
-  unrar
-  unscd
-  ventoy-full
-  wirelesstools
-  wmctrl
-  wpa_supplicant
-  xclip
-  xdg-desktop-portal-gtk
-  xdg-utils
-  xdotool
-  xfce.exo
-  xfce.garcon
-  xfce.libxfce4ui
-  xfce.libxfce4util
-  xfce.tumbler
-  xfce.xfce4-dev-tools
-  xfce.xfce4-settings
-  xfce.xfconf
-  xlsfonts
-  acpi
-  brightnessctl
-  firefox
-  fluent-icon-theme
-  glibmm
-  jpegoptim
-  librsvg
-  mozjpeg
-  olive-editor
-  openshot-qt
-  pasystray
-  picom
-  python311Packages.pyxdg
-  shotcut
-  terminus-nerdfont
-  terminus_font
-  xorg.fontalias
-  xorg.fonttosfnt
-  xorg.fontutil
-  xorg.libxcb
-  xorg.mkfontdir
-  xorg.xbacklight
-  xorg.xcbutil
-  xorg.xcbutilerrors
-  xorg.xcbutilimage
-  xorg.xcbutilrenderutil
-  xorg.xcbutilwm
-  xorg.xconsole
-  xorg.xev
-  xorg.xfontsel
-  xorg.xinit
-  xorg.xkill
-  xorg.xorgproto
-  xorg.xprop
-  xorg.xwininfo
-  xscreensaver
-  xsecurelock
-  xsuspender
-  bitwarden
-  discord
-  epiphany
-  font-manager
-  giflib
-  gifsicle
-  gifski
-  google-chrome
-  inkscape-with-extensions
-  librewolf
-  meme
-  pdfarranger
-  signal-desktop
-  tdesktop
-  themechanger
-  thunderbird-bin
-  xcftools
-  xorg.xhost
-  xterm
-  zathura
+ acpi
+appimage-run
+appimagekit
+appstream-glib
+archiver
+aspell
+aspellDicts.de
+aspellDicts.en
+aspellDicts.en-computers
+aspellDicts.en-science
+aspellDicts.hi
+avidemux
+bitwarden
+bitwarden-cli
+bleachbit
+blueman
+brightnessctl
+cairo
+cairomm
+codespell
+dbus-broker
+dconf
+discord
+ebook_tools
+epick
+eyedropper
+fbida
+feh
+firefox
+fluent-icon-theme
+font-manager
+fuseiso
+galculator
+geocode-glib_2
+gnome.file-roller
+gnome.gnome-disk-utility
+gnome.gnome-themes-extra
+gnome.gvfs
+gnome2.gtkglext
+gob2
+gobject-introspection-unwrapped
+goocanvas
+goocanvas3
+google-chrome
+gparted
+gpick
+gspell
+gthumb
+gtk_engines
+gtk-sharp-2_0
+gtk2-x11
+gtk3
+gtk3-x11
+gtk4
+gtkspell3
+gtkspellmm
+gusb
+hunspell
+hunspellDicts.de_DE
+hunspellDicts.en_US-large
+hunspellDicts.es_MX
+i3lock-color
+ibus-with-plugins
+inkscape-with-extensions
+inotify-tools
+leela
+libcanberra-gtk3
+libdbusmenu
+libdbusmenu-gtk3
+libfm
+libfm-extra
+libgee
+libglibutil
+libgudev
+libinput
+libnotify
+librewolf
+libsForQt5.qt5ct
+libsForQt5.qtstyleplugin-kvantum
+libusb
+libxdg_basedir
+lightlocker
+luakit
+maim
+meme
+menu-cache
+mesa
+mesa-demos
+mythes
+networkmanagerapplet
+nuspell
+ocrmypdf
+pango
+pangomm
+pantheon.file-roller-contract
+papirus-folders
+papirus-icon-theme
+pasystray
+pdf-parser
+pdfarranger
+pdfmm
+pdfstudio2022
+pdftag
+pdftk
+perl536Packages.CairoGObject
+perl536Packages.GooCanvas2CairoTypes
+phinger-cursors
+picom
+pixcat
+polkit_gnome
+poppler_utils
+python311Packages.pdftotext
+python311Packages.pyxdg
+ranger
+rofi
+tangram
+tdesktop
+template-glib
+terminus_font
+terminus-nerdfont
+termpdfpy
+themechanger
+thunderbird
+thunderbird-bin
+typos
+unrar
+unscd
+updfparser
+ventoy-full
+vlc
+wirelesstools
+wmctrl
+wpa_supplicant
+xarchiver
+xcftools
+xclip
+xcolor
+xdg-desktop-portal-gtk
+xdg-utils
+xdotool
+xfce.exo
+xfce.garcon
+xfce.libxfce4ui
+xfce.libxfce4util
+xfce.tumbler
+xfce.xfce4-dev-tools
+xfce.xfce4-settings
+xfce.xfconf
+xlsfonts
+openshot-qt
+
+xmcp
+xscreensaver
+xsecurelock
+xsuspender
+xterm
+zathura
 ]

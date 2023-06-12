@@ -12,7 +12,7 @@
     ./bin/default.nix
     ./zsh.nix
   ];
-  
+
   home = {
     sessionPath = [
       "${config.home.homeDirectory}/.local/bin"
@@ -22,6 +22,7 @@
     sessionVariables = {
       GOPATH = "${config.home.homeDirectory}/Workspace/go";
       GOBIN = "${config.home.homeDirectory}/Workspace/go/bin";
+      SHELL = "${pkgs.zsh}";
     };
 
     #file = { };

@@ -4,7 +4,6 @@ with pkgs; [
   android-tools
   aria
   slop
-  bash
   bat
   binutils
   brightnessctl

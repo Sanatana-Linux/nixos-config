@@ -7,27 +7,36 @@
 in {
   # just until implementing the impermanence module
   users.mutableUsers = true;
+  programs.zsh.enable = true;
   users.users.tlh = {
     description = "Thomas Leon Highbaugh";
     initialPassword = "nixos";
     isNormalUser = true;
     uid = 1000;
+    shell = pkgs.zsh;
     extraGroups =
       [
         "wheel"
         "video"
+        "nix"
         "audio"
         "input"
       ]
       ++ ifTheyExist [
-        "network"
-        "networkmanager"
-        "wireshark"
-        "mysql"
         "docker"
-        "podman"
         "git"
         "libvirtd"
+        "lp"
+        "mysql"
+        "network"
+        "networkmanager"
+        "plugdev"
+        "podman"
+        "power"
+        "systemd-journal"
+        "tss"
+        "video"
+        "wireshark"
       ];
 
     packages = [pkgs.home-manager];

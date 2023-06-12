@@ -94,7 +94,7 @@ with lib; let
   luaModules = with pkgs.luajitPackages; [
     lgi
     ldbus
-    luadbi-mysql
+    #luadbi-mysql
     luaposix
 
     # custom modules
@@ -112,11 +112,14 @@ in {
   config = mkIf cfg.enable {
     programs.thunar = {
       enable = true;
-      plugins = with pkgs.xfce; [
-        thunar-archive-plugin
-        thunar-volman
-        thunar-dropbox-plugin
-        thunar-media-tags-plugin
+      plugins = with pkgs; [
+        xfce.thunar-archive-plugin
+        xfce.thunar-volman
+        xfce.thunar-dropbox-plugin
+        xfce.thunar-media-tags-plugin
+        xarchiver
+        archiver
+        gnome.file-roller
       ];
     };
     services.xserver = {

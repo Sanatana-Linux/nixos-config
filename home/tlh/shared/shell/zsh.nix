@@ -30,8 +30,20 @@
     sessionVariables = {
       SSH_AUTH_SOCK = "/run/user/1000/keyring/ssh";
     };
+    completionInit = ''      set -k
+            autoload -U compinit
+            zstyle ':completion:*' menu select
+            zmodload zsh/complist
+            compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-"$ZSH_VERSION"
+            _comp_options+=(globdots)
+
+    '';
 
     profileExtra = ''
+      zmodload zsh/zle
+      zmodload zsh/zpty
+      zmodload zsh/complist
+
       while read -r option
       do
       setopt $option
@@ -94,13 +106,13 @@
         zstyle ':completion:*' cache-path "${config.xdg.cacheHome}/zsh/completion-cache"
         zstyle ':completion:*' menu select
         WORDCHARS=''${WORDCHARS//\/[&.;]}
-
-
     '';
 
     initExtraFirst = ''
+      any-nix-shell zsh --info-right | source /dev/stdin
       source ${config.xdg.configHome}/zsh/zplug/**/*.zsh
-      enable-fzf-tab
+
+
     '';
 
     shellAliases = with pkgs; {
@@ -155,6 +167,8 @@
         {name = "marlonrichert/zsh-hist";}
         {name = "marlonrichert/zsh-edit";}
         {name = "marlonrichert/zsh-autocomplete";}
+        {name = "chisui/zsh-nix-shell";}
+        {name = "lincheney/fzf-tab-completion";}
       ];
     };
   };

@@ -1,8 +1,5 @@
 {pkgs, ...}:
 with pkgs; [
-  anbox
-  appvm
-  arion
   conmon
   containerd
   containerpilot
@@ -18,6 +15,5 @@ with pkgs; [
   kvmtool
   qemu_full
   virt-manager
-  waydroid
   x11docker
 ]

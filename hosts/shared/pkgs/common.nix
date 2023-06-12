@@ -51,6 +51,8 @@ with pkgs; [
   cmake
   testdisk
   ntfs3g
+  mozlz4a
+  
   fuse3
   pcre-cpp
   cpio

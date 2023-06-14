@@ -74,6 +74,34 @@
         luajitPackages.stdlib
         luajitPackages.vicious
         luajitPackages.wrapLua
+        lua51Packages.cqueues
+        lua51Packages.dkjson
+        lua51Packages.ldbus
+        lua51Packages.ldoc
+        lua51Packages.lgi
+        lua51Packages.libluv
+        lua51Packages.lpeg
+        lua51Packages.lpeg_patterns
+        lua51Packages.lpeglabel
+        lua51Packages.lua
+        lua51Packages.lua-curl
+        lua51Packages.lua-lsp
+        lua51Packages.lua-messagepack
+        lua51Packages.lua-protobuf
+        lua51Packages.lua-subprocess
+        lua51Packages.luacheck
+        lua51Packages.luarocks
+        lua51Packages.luarocks-nix
+        lua51Packages.luasocket
+        lua51Packages.luasql-sqlite3
+        lua51Packages.mediator_lua
+        lua51Packages.mpack
+        lua51Packages.sqlite
+        lua51Packages.std-_debug
+        lua51Packages.std-normalize
+        lua51Packages.stdlib
+        lua51Packages.vicious
+        lua51Packages.wrapLua
         openssl
         sassc
         stdenv.cc.cc

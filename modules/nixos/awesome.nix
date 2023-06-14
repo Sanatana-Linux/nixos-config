@@ -96,13 +96,17 @@ with lib; let
     ldbus
     #luadbi-mysql
     luaposix
-
+    cjson
     # custom modules
     dbus_proxy
     async-lua
     lgi-async-extra
   ];
+   nur = import (fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {};
 in {
+    imports = [
+    nur.repos.kira-bruneau.modules.lightdm-webkit2-greeter
+  ];
   options = {
     services.xserver.windowManager.awesome = {
       enable = mkEnableOption (lib.mdDoc "Awesome Window Manager Luajit");
@@ -133,22 +137,29 @@ in {
           enable = true;
           background = ../../hosts/shared/wallpaper/wallpaper.png;
           # TODO use lightdm-webkit2 greeter from NUR, or maybe
-          greeters.gtk = {
-            enable = true;
-            theme = {
-              package = pkgs.colloid-gtk-theme;
-              name = "Colloid-Dark";
-            };
-            cursorTheme = {
-              package = pkgs.phinger-cursors;
-              name = "Phinger Cursors (light)";
-            };
-            iconTheme = {
-              package = pkgs.qogir-icon-theme;
-              name = "Qogir-dark";
-            };
-            indicators = ["~session" "~spacer"];
-          };
+           greeters.webkit2 = {
+      enable = true;
+      webkitTheme = fetchTarball {
+        url = "https://github.com/Litarvan/lightdm-webkit-theme-litarvan/releases/download/v3.0.0/lightdm-webkit-theme-litarvan-3.0.0.tar.gz";
+        sha256 = "0q0r040vxg1nl51wb3z3r0pl7ymhyhp1lbn2ggg7v3pa563m4rrv";
+      };
+    };
+#          greeters.gtk = {
+ #           enable = true;
+ #           theme = {
+  #            package = pkgs.colloid-gtk-theme;
+   #           name = "Colloid-Dark";
+   #         };
+    #        cursorTheme = {
+    #          package = pkgs.phinger-cursors;
+     #         name = "Phinger Cursors (light)";
+      #      };
+       #     iconTheme = {
+        #      package = pkgs.qogir-icon-theme;
+         #     name = "Qogir-dark";
+          #  };
+           # indicators = ["~session" "~spacer"];
+         # };
         };
       };
 

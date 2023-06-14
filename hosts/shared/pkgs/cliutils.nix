@@ -2,6 +2,9 @@
 with pkgs; [
   acpi
   android-tools
+        lua51Packages.cjson
+        python311Packages.venvShellHook  
+        libgccjit
   aria
   slop
   bat
@@ -11,7 +14,11 @@ with pkgs; [
   chatgpt-cli
   comma
   conda
+  mdbook
+  mdbook-admonish 
+  mdbook-linkcheck 
   cookiecutter
+  emacs
   copier
   curl
   deer

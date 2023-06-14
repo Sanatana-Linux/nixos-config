@@ -10,6 +10,14 @@ aspellDicts.de
 aspellDicts.en
 aspellDicts.en-computers
 aspellDicts.en-science
+gnome-menus
+xdgmenumaker
+xdg-desktop-portal-gnome
+xdg-user-dirs
+xdg_utils
+xdg-utils
+peek
+
 aspellDicts.hi
 avidemux
 bitwarden

@@ -1,84 +1,84 @@
 {pkgs, ...}:
 with pkgs; [
-  ascii-image-converter
-  byzanz
-  ciano
-  delve
-  ebook_tools
-  emacsPackages.svgo
-  exiftool
-  feh
-  figlet
-  giflib
-  gifsicle
-  gifski
-  gimp-with-plugins
-  gimpPlugins.exposureBlend
-  gimpPlugins.fourier
-  gimpPlugins.gap
-  gimpPlugins.gimplensfun
-  gimpPlugins.lightning
-  gimpPlugins.lqrPlugin
-  gimpPlugins.resynthesizer
-  gimpPlugins.texturize
-  gimpPlugins.waveletSharpen
-  giph
-  graphicsmagick
-  image_optim
-  imagemagick
-  img-cat
-  imgcat
-  imgpatchtools
-  imv
-  inkscape
-  inkscape-with-extensions
-  jhead
-  jp2a
-  jpegexiforient
-  jpeginfo
-  jpegoptim
-  jpegrescan
-  krita
-  labelImg
-  libexif
-  libjpeg
-  libpng
-  librsvg
-  libspng
-  libungif
-  libwebp
-  meme
-  menyoki
-  metadata-cleaner
-  mjpegtoolsFull
-  mnamer
-  mozjpeg
-  nodePackages_latest.svgo
-  optipng
-  oxipng
-  pinsel
-  pixcat
-  pngcheck
-  pngcrush
-  pngloss
-  pngnq
-  pngout
-  pngpp
-  pngquant
-  pngtoico
-  pngtools
-  python311Packages.image-go-nord
-  python311Packages.pyfiglet
-  resvg
-  rubyPackages.gdk_pixbuf2
-  shotcut
-  svgcleaner
-  toilet
-  updfparser
-  vlc
-  webp-pixbuf-loader
-  xcftools
-  giflib
-  gifsicle
-  gifski
+ascii-image-converter
+byzanz
+ciano
+delve
+ebook_tools
+emacsPackages.svgo
+exiftool
+feh
+figlet
+giflib
+gifsicle
+gifski
+gimp-with-plugins
+gimpPlugins.exposureBlend
+gimpPlugins.fourier
+gimpPlugins.gap
+gimpPlugins.gimplensfun
+gimpPlugins.lightning
+gimpPlugins.lqrPlugin
+gimpPlugins.resynthesizer
+gimpPlugins.texturize
+gimpPlugins.waveletSharpen
+giph
+graphicsmagick
+image_optim
+imagemagick
+img-cat
+imgcat
+imgpatchtools
+imv
+inkscape
+inkscape-with-extensions
+jhead
+jp2a
+jpegexiforient
+jpeginfo
+jpegoptim
+jpegrescan
+krita
+labelImg
+libexif
+libjpeg
+libpng
+librsvg
+libspng
+libungif
+libwebp
+meme
+menyoki
+metadata-cleaner
+mjpegtoolsFull
+mnamer
+mozjpeg
+nodePackages_latest.svgo
+optipng
+oxipng
+pinsel
+pixcat
+pngcheck
+pngcrush
+pngloss
+pngnq
+pngout
+pngpp
+pngquant
+pngtoico
+pngtools
+python311Packages.image-go-nord
+python311Packages.pyfiglet
+resvg
+rubyPackages.gdk_pixbuf2
+shotcut
+svgcleaner
+toilet
+updfparser
+vlc
+webp-pixbuf-loader
+xcftools
+giflib
+gifsicle
+gifski
 ]

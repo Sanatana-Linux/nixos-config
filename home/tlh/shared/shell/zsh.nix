@@ -158,9 +158,15 @@
       zplugHome = "${config.xdg.configHome}/zsh/zplug";
       plugins = [
         {name = "Aloxaf/fzf-tab";}
+        {name = "zdharma-continuum/fast-syntax-highlighting";}
+        {name = "zsh-users/zsh-completions";}
         {name = "zsh-users/zsh-history-substring-search";}
         {name = "hlissner/zsh-autopair";}
+        {name = "zsh-users/zsh-autosuggestions";}
         {name = "chisui/zsh-nix-shell";}
+        {name = "marlonrichert/zsh-hist";}
+        {name = "marlonrichert/zsh-edit";}
+        {name = "marlonrichert/zsh-autocomplete";}
         {name = "chisui/zsh-nix-shell";}
         {name = "lincheney/fzf-tab-completion";}
       ];

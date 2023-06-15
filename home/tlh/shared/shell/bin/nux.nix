@@ -15,6 +15,7 @@ with pkgs;
 
         clean        clean and garabge collect store
         rebuild      rebuild configuration for host
+        repair       repair the nix store if corrupted
         rollback     rollback to previous generation
         search       search packages available
         sync         pull config from git repo, then commit and push
@@ -56,6 +57,11 @@ with pkgs;
         doas nix flake update $dots
     }
 
+    function repair() {
+        doas nix-store --verify --check-contents --repair --verbose 
+      }
+
+
     function clean() {
         echo "Clearing store"
         doas nix-store --gc
@@ -77,6 +83,7 @@ with pkgs;
         vm)        vm "$@";;
         rollback)  rollback ;;
         update)    update ;;
+        repair)    repair ;;
         clean)     clean ;;
         search)    search "$@" ;;
         help)    help ;;

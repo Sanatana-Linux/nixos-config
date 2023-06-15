@@ -1,160 +1,160 @@
 {pkgs, ...}:
 with pkgs; [
- acpi
-appimage-run
-appimagekit
-appstream-glib
-archiver
-aspell
-aspellDicts.de
-aspellDicts.en
-aspellDicts.en-computers
-aspellDicts.en-science
-aspellDicts.hi
-avidemux
-bitwarden
-bitwarden-cli
-bleachbit
-blueman
-brightnessctl
-cairo
-cairomm
-codespell
-dbus-broker
-dconf
-discord
-ebook_tools
-epick
-eyedropper
-fbida
-feh
-firefox
-fluent-icon-theme
-font-manager
-fuseiso
-galculator
-geocode-glib_2
-gnome.file-roller
-gnome.gnome-disk-utility
-gnome.gnome-themes-extra
-gnome.gvfs
-gnome2.gtkglext
-gob2
-gobject-introspection-unwrapped
-goocanvas
-goocanvas3
-google-chrome
-gparted
-gpick
-gspell
-gthumb
-gtk_engines
-gtk-sharp-2_0
-gtk2-x11
-gtk3
-gtk3-x11
-gtk4
-gtkspell3
-gtkspellmm
-gusb
-hunspell
-hunspellDicts.de_DE
-hunspellDicts.en_US-large
-hunspellDicts.es_MX
-i3lock-color
-ibus-with-plugins
-inkscape-with-extensions
-inotify-tools
-leela
-libcanberra-gtk3
-libdbusmenu
-libdbusmenu-gtk3
-libfm
-libfm-extra
-libgee
-libglibutil
-libgudev
-libinput
-libnotify
-librewolf
-libsForQt5.qt5ct
-libsForQt5.qtstyleplugin-kvantum
-libusb
-libxdg_basedir
-lightlocker
-luakit
-maim
-meme
-menu-cache
-mesa
-mesa-demos
-mythes
-networkmanagerapplet
-nuspell
-ocrmypdf
-pango
-pangomm
-pantheon.file-roller-contract
-papirus-folders
-papirus-icon-theme
-pasystray
-pdf-parser
-pdfarranger
-pdfmm
-pdfstudio2022
-pdftag
-pdftk
-perl536Packages.CairoGObject
-perl536Packages.GooCanvas2CairoTypes
-phinger-cursors
-picom
-pixcat
-polkit_gnome
-poppler_utils
-python311Packages.pdftotext
-python311Packages.pyxdg
-ranger
-rofi
-tangram
-tdesktop
-template-glib
-terminus_font
-terminus-nerdfont
-termpdfpy
-themechanger
-thunderbird
-thunderbird-bin
-typos
-unrar
-unscd
-updfparser
-ventoy-full
-vlc
-wirelesstools
-wmctrl
-wpa_supplicant
-xarchiver
-xcftools
-xclip
-xcolor
-xdg-desktop-portal-gtk
-xdg-utils
-xdotool
-xfce.exo
-xfce.garcon
-xfce.libxfce4ui
-xfce.libxfce4util
-xfce.tumbler
-xfce.xfce4-dev-tools
-xfce.xfce4-settings
-xfce.xfconf
-xlsfonts
-openshot-qt
+  acpi
+  appimage-run
+  appimagekit
+  appstream-glib
+  archiver
+  aspell
+  aspellDicts.de
+  aspellDicts.en
+  aspellDicts.en-computers
+  aspellDicts.en-science
+  aspellDicts.hi
+  avidemux
+  bitwarden
+  bitwarden-cli
+  bleachbit
+  blueman
+  brightnessctl
+  cairo
+  cairomm
+  codespell
+  dbus-broker
+  dconf
+  discord
+  ebook_tools
+  epick
+  eyedropper
+  fbida
+  feh
+  firefox
+  fluent-icon-theme
+  font-manager
+  fuseiso
+  galculator
+  geocode-glib_2
+  gnome.file-roller
+  gnome.gnome-disk-utility
+  gnome.gnome-themes-extra
+  gnome.gvfs
+  gnome2.gtkglext
+  gob2
+  gobject-introspection-unwrapped
+  goocanvas
+  goocanvas3
+  google-chrome
+  gparted
+  gpick
+  gspell
+  gthumb
+  gtk_engines
+  gtk-sharp-2_0
+  gtk2-x11
+  gtk3
+  gtk3-x11
+  gtk4
+  gtkspell3
+  gtkspellmm
+  gusb
+  hunspell
+  hunspellDicts.de_DE
+  hunspellDicts.en_US-large
+  hunspellDicts.es_MX
+  i3lock-color
+  ibus-with-plugins
+  inkscape-with-extensions
+  inotify-tools
+  leela
+  libcanberra-gtk3
+  libdbusmenu
+  libdbusmenu-gtk3
+  libfm
+  libfm-extra
+  libgee
+  libglibutil
+  libgudev
+  libinput
+  libnotify
+  librewolf
+  libsForQt5.qt5ct
+  libsForQt5.qtstyleplugin-kvantum
+  libusb
+  libxdg_basedir
+  lightlocker
+  luakit
+  maim
+  meme
+  menu-cache
+  mesa
+  mesa-demos
+  mythes
+  networkmanagerapplet
+  nuspell
+  ocrmypdf
+  pango
+  pangomm
+  pantheon.file-roller-contract
+  papirus-folders
+  papirus-icon-theme
+  pasystray
+  pdf-parser
+  pdfarranger
+  pdfmm
+  pdfstudio2022
+  pdftag
+  pdftk
+  perl536Packages.CairoGObject
+  perl536Packages.GooCanvas2CairoTypes
+  phinger-cursors
+  picom
+  pixcat
+  polkit_gnome
+  poppler_utils
+  python311Packages.pdftotext
+  python311Packages.pyxdg
+  ranger
+  rofi
+  tangram
+  tdesktop
+  template-glib
+  terminus_font
+  terminus-nerdfont
+  termpdfpy
+  themechanger
+  thunderbird
+  thunderbird-bin
+  typos
+  unrar
+  unscd
+  updfparser
+  ventoy-full
+  vlc
+  wirelesstools
+  wmctrl
+  wpa_supplicant
+  xarchiver
+  xcftools
+  xclip
+  xcolor
+  xdg-desktop-portal-gtk
+  xdg-utils
+  xdotool
+  xfce.exo
+  xfce.garcon
+  xfce.libxfce4ui
+  xfce.libxfce4util
+  xfce.tumbler
+  xfce.xfce4-dev-tools
+  xfce.xfce4-settings
+  xfce.xfconf
+  xlsfonts
+  openshot-qt
 
-xmcp
-xscreensaver
-xsecurelock
-xsuspender
-xterm
-zathura
+  xmcp
+  xscreensaver
+  xsecurelock
+  xsuspender
+  xterm
+  zathura
 ]

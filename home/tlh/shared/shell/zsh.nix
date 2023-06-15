@@ -30,20 +30,29 @@
     sessionVariables = {
       SSH_AUTH_SOCK = "/run/user/1000/keyring/ssh";
     };
-    completionInit = ''      set -k
-            autoload -U compinit
-            zstyle ':completion:*' menu select
-            zmodload zsh/complist
-            compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-"$ZSH_VERSION"
-            _comp_options+=(globdots)
+    completionInit = ''
+      zmodload zsh/zle
+      zmodload zsh/zpty
+      zmodload zsh/complist
+      autoload -U compinit
+      zstyle ':completion:*' menu select
+      zmodload zsh/complist
+      compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-"$ZSH_VERSION"
+      _comp_options+=(globdots)
+      zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'       # Case insensitive tab completion
+      zstyle ':completion:*' list-colors "''${(s.:.)LS_COLORS}"       # Colored completion (different colors for dirs/files/etc)
+      zstyle ':completion:*' rehash true      # automatically find new executables in path
+      # Speed up completions
+      zstyle ':completion:*' accept-exact '*(N)'
+      zstyle ':completion:*' use-cache on
+      mkdir -p "$(dirname ${config.xdg.cacheHome}/zsh/completion-cache)"
+      zstyle ':completion:*' cache-path "${config.xdg.cacheHome}/zsh/completion-cache"
+      zstyle ':completion:*' menu select
+      WORDCHARS=''${WORDCHARS//\/[&.;]}
 
     '';
 
     profileExtra = ''
-      zmodload zsh/zle
-      zmodload zsh/zpty
-      zmodload zsh/complist
-
       while read -r option
       do
       setopt $option
@@ -84,70 +93,47 @@
         PUSHD_TO_HOME
         RCEXPANDPARAM
         SHARE_HISTORY
-        EOF
+      EOF
 
-        while read -r option
-        do
-          unsetopt $option
-        done <<-EOF
+      while read -r option
+      do
+       unsetopt $option
+      done <<-EOF
         BEEP
         CORRECT_ALL
         HIST_BEEP
         MENU_COMPLETE
-        EOF
+      EOF
 
-        zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'       # Case insensitive tab completion
-        zstyle ':completion:*' list-colors "''${(s.:.)LS_COLORS}"       # Colored completion (different colors for dirs/files/etc)
-        zstyle ':completion:*' rehash true      # automatically find new executables in path
-        # Speed up completions
-        zstyle ':completion:*' accept-exact '*(N)'
-        zstyle ':completion:*' use-cache on
-        mkdir -p "$(dirname ${config.xdg.cacheHome}/zsh/completion-cache)"
-        zstyle ':completion:*' cache-path "${config.xdg.cacheHome}/zsh/completion-cache"
-        zstyle ':completion:*' menu select
-        WORDCHARS=''${WORDCHARS//\/[&.;]}
+
     '';
 
     initExtraFirst = ''
       any-nix-shell zsh --info-right | source /dev/stdin
       source ${config.xdg.configHome}/zsh/zplug/**/*.zsh
-
-
     '';
 
     shellAliases = with pkgs; {
-      cleanup = "sudo nix-collect-garbage --delete-older-than 7d";
+      cleanup = "sudo nix-collect-garbage --delete-older-than 3d";
       bloat = "nix path-info -Sh /run/current-system";
       purge = "doas sync; echo 3 | doas tee /proc/sys/vm/drop_caches";
       g = "git";
       commit = "git add . && git commit -m";
       push = "git push";
-
       pull = "git pull";
-
       m = "mkdir -p";
-
       rm = "rm -rvf";
-
       vim = "nvim";
-
       fcd = "cd $(find -type d | fzf)";
-
       grep = lib.getExe ripgrep;
       du = lib.getExe du-dust;
       ps = lib.getExe procs;
       trm = lib.getExe trash-cli;
-
       cat = "${lib.getExe bat} --style=plain";
-
       l = "${lib.getExe exa} -lF --time-style=long-iso --icons";
-
       la = "${lib.getExe exa} -lah --tree";
-
       ls = "${lib.getExe exa} -h --git --icons --color=auto --group-directories-first -s extension";
-
       tree = "${lib.getExe exa} --tree --icons --tree";
-
       ytmp3 = ''
         ${lib.getExe yt-dlp} -x --continue --add-metadata --embed-thumbnail --audio-format mp3 --audio-quality 0 --metadata-from-title="%(artist)s - %(title)s" --prefer-ffmpeg -o "%(title)s.%(ext)s"
       '';
@@ -158,15 +144,8 @@
       zplugHome = "${config.xdg.configHome}/zsh/zplug";
       plugins = [
         {name = "Aloxaf/fzf-tab";}
-        {name = "zdharma-continuum/fast-syntax-highlighting";}
-        {name = "zsh-users/zsh-completions";}
-        {name = "zsh-users/zsh-history-substring-search";}
         {name = "hlissner/zsh-autopair";}
-        {name = "zsh-users/zsh-autosuggestions";}
         {name = "chisui/zsh-nix-shell";}
-        {name = "marlonrichert/zsh-hist";}
-        {name = "marlonrichert/zsh-edit";}
-        {name = "marlonrichert/zsh-autocomplete";}
         {name = "chisui/zsh-nix-shell";}
         {name = "lincheney/fzf-tab-completion";}
       ];

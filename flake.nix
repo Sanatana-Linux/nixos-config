@@ -70,7 +70,7 @@
     nixosConfigurations = {
       # Laptop
       hp-laptop-amd = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs bhairava-grub-theme;};
+        specialArgs = {inherit inputs outputs bhairava-grub-theme home-manager;};
         modules = [
           ./hosts/hp-laptop-amd
           bhairava-grub-theme.nixosModule
@@ -83,13 +83,13 @@
         ];
       };
     };
-    # # TODO is this necessary? We will see this way if nothing else
-     homeConfigurations = {
-       "tlh@hp-laptop-amd" = home-manager.lib.homeManagerConfiguration {
-         pkgs = nixpkgs.legacyPackages."x86_64-linux";
-         extraSpecialArgs = {inherit inputs outputs;};
-         modules = [./home/tlh/hp-laptop-amd];
-       };
-     };
+    # yes this is necessary
+    homeConfigurations = {
+      "tlh@hp-laptop-amd" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages."x86_64-linux";
+        extraSpecialArgs = {inherit inputs outputs;};
+        modules = [./home/tlh/hp-laptop-amd];
+      };
+    };
   };
 }

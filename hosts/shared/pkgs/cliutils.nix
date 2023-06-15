@@ -6,13 +6,13 @@ with pkgs; [
   slop
   bat
   binutils
-  python311Packages.aenum 
-  python311Packages.asyncstdlib 
+  python311Packages.aenum
+  python311Packages.asyncstdlib
   python311Packages.numpy
   python311Packages.wheel
-  python311Packages.installer 
-  python311Packages.pynvim 
-luajitPackages.libluv  
+  python311Packages.installer
+  python311Packages.pynvim
+  luajitPackages.libluv
   libuv
   lua51Packages.stdlib
   luajitPackages.stdlib
@@ -21,10 +21,11 @@ luajitPackages.libluv
   vimPlugins.nvim-treesitter-pyfold
   vimPlugins.nvim-treesitter-refactor
   libgccjit
-  xorg.gccmakedep  
+  xorg.gccmakedep
   gcc-unwrapped
-  gccStdenv    
+  gccStdenv
   libdbusmenu
+  clang
   vimPlugins.nvim-treesitter-textobjects
   brightnessctl
   btop

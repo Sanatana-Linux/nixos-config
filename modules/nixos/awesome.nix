@@ -119,6 +119,8 @@ in {
         xfce.thunar-media-tags-plugin
         xarchiver
         archiver
+        libfm
+        libfm-extra
         gnome.file-roller
       ];
     };

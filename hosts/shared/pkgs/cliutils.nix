@@ -6,6 +6,26 @@ with pkgs; [
   slop
   bat
   binutils
+  python311Packages.aenum 
+  python311Packages.asyncstdlib 
+  python311Packages.numpy
+  python311Packages.wheel
+  python311Packages.installer 
+  python311Packages.pynvim 
+luajitPackages.libluv  
+  libuv
+  lua51Packages.stdlib
+  luajitPackages.stdlib
+  vimPlugins.nvim-treesitter
+  vimPlugins.nvim-treesitter-context
+  vimPlugins.nvim-treesitter-pyfold
+  vimPlugins.nvim-treesitter-refactor
+  libgccjit
+  xorg.gccmakedep  
+  gcc-unwrapped
+  gccStdenv    
+  libdbusmenu
+  vimPlugins.nvim-treesitter-textobjects
   brightnessctl
   btop
   chatgpt-cli

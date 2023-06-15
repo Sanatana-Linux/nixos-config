@@ -84,12 +84,12 @@
       };
     };
     # # TODO is this necessary? We will see this way if nothing else
-    # homeConfigurations = {
-    #   "tlh@hp-laptop-amd" = home-manager.lib.homeManagerConfiguration {
-    #     pkgs = nixpkgs.legacyPackages."x86_64-linux";
-    #     extraSpecialArgs = {inherit inputs outputs;};
-    #     modules = [./home/tlh/hp-laptop-amd];
-    #   };
-    # };
+     homeConfigurations = {
+       "tlh@hp-laptop-amd" = home-manager.lib.homeManagerConfiguration {
+         pkgs = nixpkgs.legacyPackages."x86_64-linux";
+         extraSpecialArgs = {inherit inputs outputs;};
+         modules = [./home/tlh/hp-laptop-amd];
+       };
+     };
   };
 }

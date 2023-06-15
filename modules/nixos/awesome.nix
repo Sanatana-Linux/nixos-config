@@ -94,7 +94,7 @@ with lib; let
   luaModules = with pkgs.luajitPackages; [
     lgi
     ldbus
-    #luadbi-mysql
+    luadbi-mysql
     luaposix
 
     # custom modules
@@ -131,27 +131,29 @@ in {
       # lightdm configuration
       displayManager = {
         defaultSession = "none+awesome";
-        lightdm = {
-          enable = true;
-          background = ../../hosts/shared/wallpaper/wallpaper.png;
-          # TODO use lightdm-webkit2 greeter from NUR, or maybe
-          greeters.gtk = {
-            enable = true;
-            theme = {
-              package = pkgs.colloid-gtk-theme;
-              name = "Colloid-Dark";
-            };
-            cursorTheme = {
-              package = pkgs.phinger-cursors;
-              name = "Phinger Cursors (light)";
-            };
-            iconTheme = {
-              package = pkgs.qogir-icon-theme;
-              name = "Qogir-dark";
-            };
-            indicators = ["~session" "~spacer"];
-          };
-        };
+        ly.enable = true;
+        #       lightdm = {
+        #          enable = true;
+
+        #          background = ../../hosts/shared/wallpaper/wallpaper.png;
+        # TODO use lightdm-webkit2 greeter from NUR, or maybe
+        #          greeters.gtk = {
+        #            enable = true;
+        #            theme = {
+        #              package = pkgs.colloid-gtk-theme;
+        #              name = "Colloid-Dark";
+        #            };
+        #            cursorTheme = {
+        #              package = pkgs.phinger-cursors;
+        #              name = "Phinger Cursors (light)";
+        #            };
+        #            iconTheme = {
+        #              package = pkgs.qogir-icon-theme;
+        #              name = "Qogir-dark";
+        #            };
+        #            indicators = ["~session" "~spacer"];
+        #          };
+        #        };
       };
 
       windowManager.session =

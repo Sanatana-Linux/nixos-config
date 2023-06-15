@@ -182,10 +182,11 @@ in {
       inherit
         (pkgs.xfce)
         xfce4-clipman-plugin
-        # configured
-        
-        # thunar
-        
+        xfconf
+        xfce4-settings
+        exo
+        libxfce4ui
+        libxfce4util
         ;
 
       inherit

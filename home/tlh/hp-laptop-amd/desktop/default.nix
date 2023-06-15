@@ -19,7 +19,7 @@
     cursorTheme = {
       name = "Phinger Cursors (light)";
       package = pkgs.phinger-cursors;
-      size = 32;
+      size = 38;
     };
 
     gtk2 = {
@@ -70,4 +70,5 @@
       chmod -R +w "$HOME/.config/awesome"
     fi
   '';
+  home.file = {".icons/default".source = "${pkgs.phinger-cursors}/share/icons/phinger-cursors";};
 }

@@ -53,7 +53,6 @@
       tewi-font
       times-newer-roman
       tt2020
-      unstable.garamond-libre
       victor-mono
     ];
 

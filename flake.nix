@@ -7,7 +7,7 @@
     nixpkgs-f2k.url = "github:fortuneteller2k/nixpkgs-f2k";
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
     nur.url = "github:nix-community/NUR";
-
+    inputs.sops-nix.url = "github:Mic92/sops-nix";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -74,6 +74,7 @@
         modules = [
           ./hosts/hp-laptop-amd
           bhairava-grub-theme.nixosModule
+          sops-nix.nixosModules.sops
           home-manager.nixosModules.home-manager
           {
             home-manager.useUserPackages = true;

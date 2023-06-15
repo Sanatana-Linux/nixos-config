@@ -92,11 +92,31 @@ with lib; let
   # lua modules that Awesome requires
 
   luaModules = with pkgs.luajitPackages; [
-    lgi
-    ldbus
     #  luadbi-mysql
     luaposix
-
+    busted
+    cqueues
+    dkjson
+    cjson
+    ldbus
+    ldoc
+    lgi
+    libluv
+    lpeg
+    lpeg_patterns
+    lpeglabel
+    lua
+    lua-messagepack
+    luacheck
+    luarocks
+    luasocket
+    luasql-sqlite3
+    mpack
+    std-_debug
+    std-normalize
+    stdlib
+    vicious
+    wrapLua
     # custom modules
     dbus_proxy
     async-lua
@@ -187,6 +207,7 @@ in {
         xclip
         xdotool
         xsel
+        xsettingsd
         ;
 
       inherit

@@ -3,33 +3,12 @@ with pkgs; [
   acpi
   android-tools
   aria
-  slop
   bat
   binutils
-  python311Packages.aenum
-  python311Packages.asyncstdlib
-  python311Packages.numpy
-  python311Packages.wheel
-  python311Packages.installer
-  python311Packages.pynvim
-  luajitPackages.libluv
-  libuv
-  lua51Packages.stdlib
-  luajitPackages.stdlib
-  vimPlugins.nvim-treesitter
-  vimPlugins.nvim-treesitter-context
-  vimPlugins.nvim-treesitter-pyfold
-  vimPlugins.nvim-treesitter-refactor
-  libgccjit
-  xorg.gccmakedep
-  gcc-unwrapped
-  gccStdenv
-  libdbusmenu
-  clang
-  vimPlugins.nvim-treesitter-textobjects
   brightnessctl
   btop
   chatgpt-cli
+  clang
   comma
   conda
   cookiecutter
@@ -45,15 +24,23 @@ with pkgs; [
   fzf
   fzy
   gammastep
+  gcc-unwrapped
+  gccStdenv
   gh
   git
   htop
   imgurbash2
   iw
   jq
+  libdbusmenu
+  libgccjit
+  libuv
   linuxConsoleTools
   lm_sensors
   lshw
+  lua51Packages.stdlib
+  luajitPackages.libluv
+  luajitPackages.stdlib
   man-pages
   man-pages-posix
   manix
@@ -68,6 +55,12 @@ with pkgs; [
   playerctl
   ps_mem
   pure-prompt
+  python311Packages.aenum
+  python311Packages.asyncstdlib
+  python311Packages.installer
+  python311Packages.numpy
+  python311Packages.pynvim
+  python311Packages.wheel
   ranger
   rclone
   ripgrep
@@ -85,11 +78,17 @@ with pkgs; [
   unzip
   usbmuxd
   usbutils
+  vimPlugins.nvim-treesitter
+  vimPlugins.nvim-treesitter-context
+  vimPlugins.nvim-treesitter-pyfold
+  vimPlugins.nvim-treesitter-refactor
+  vimPlugins.nvim-treesitter-textobjects
   wget
   whois
   wirelesstools
   xarchiver
   xclip
+  xorg.gccmakedep
   xorg.xev
   yt-dlp
   zip

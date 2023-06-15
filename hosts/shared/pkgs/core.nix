@@ -3,8 +3,6 @@ with pkgs; [
   alejandra
   any-nix-shell
   as-tree
-  glibc
-  glib
   binutils
   bottom
   busybox
@@ -21,7 +19,6 @@ with pkgs; [
   deadnix
   dnsutils
   dosfstools
-
   ffmpeg-full
   firmwareLinuxNonfree
   gcc

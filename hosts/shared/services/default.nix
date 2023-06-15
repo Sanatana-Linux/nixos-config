@@ -8,7 +8,9 @@
   ];
   hardware.bluetooth.enable = true;
   services = {
+    # For Bluetooth
     blueman.enable = true;
+    # Mounting Removable Drives
     udisks2.enable = true;
     # monitor and control temparature
     thermald.enable = true;

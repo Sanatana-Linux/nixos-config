@@ -1,74 +1,48 @@
 {pkgs, ...}:
 with pkgs; [
+  _7zz
   acpi
   arandr
+  arj
   autorandr
   avidemux
   bitwarden
   brightnessctl
+  btar
   cairo
   cairomm
+  cmake
+  cpio
   dbus-broker
   dconf
   discord
+  dtrx
   epiphany
+  extra-cmake-modules
+  fastjar
   fbida
   feh
   firefox
   font-manager
+  fuse3
   geocode-glib_2
   giflib
   gifsicle
   gifski
   glib
   glib-networking
+  glib-testing
   glibc
   glibc_memusage
+  glibc_multi
   glibcInfo
   glibcLocalesUtf8
-  zip
-  zarchive
-  zziplib
-  unzip
-  rar
-  libarchive
-  libpar2
-  fastjar
-  pcre
-  pcre2
-  glib-networking
-  glib-testing
-  glibmm
-  glib
-  xcbutilxrm
-  xorg.xcbutilwm
-  xorg.xcbutilrenderutil
-  xorg.xcbutilerrors
-  xorg.xcbutil
-  cmake
-  xorg.gccmakedep
-  extra-cmake-modules
-  cmake
-  testdisk
-  ntfs3g
-  mozlz4a
-
-  fuse3
-  pcre-cpp
-  cpio
-  btar
-  arj
-  _7zz
-  dtrx
-  gnutar
-  tarlz
-  runzip
-  glibc_multi
   glibmm
   gnome.file-roller
   gnome.gnome-themes-extra
   gnome.gvfs
   gnome2.gtkglext
+  gnutar
   gob2
   gobject-introspection-unwrapped
   goocanvas
@@ -86,6 +60,7 @@ with pkgs; [
   inkscape-with-extensions
   inotify-tools
   jpegoptim
+  libarchive
   libcanberra-gtk3
   libdbusmenu
   libdbusmenu-gtk3
@@ -96,6 +71,7 @@ with pkgs; [
   libgudev
   libinput
   libnotify
+  libpar2
   librewolf
   librsvg
   libsForQt5.qt5ct
@@ -108,15 +84,19 @@ with pkgs; [
   mesa
   mesa-demos
   mozjpeg
+  mozlz4a
   networkmanagerapplet
+  ntfs3g
   olive-editor
   openshot-qt
   pango
   pangomm
-  qogir-icon-theme
   papirus-folders
   papirus-icon-theme
   pasystray
+  pcre
+  pcre-cpp
+  pcre2
   pdfarranger
   perl536Packages.CairoGObject
   perl536Packages.GooCanvas2CairoTypes
@@ -125,22 +105,29 @@ with pkgs; [
   polkit_gnome
   poppler_utils
   python311Packages.pyxdg
+  qogir-icon-theme
   ranger
+  rar
   rofi
+  runzip
   shotcut
   signal-desktop
+  tarlz
   tdesktop
   template-glib
   terminus_font
   terminus-nerdfont
+  testdisk
   themechanger
   thunderbird-bin
   unrar
   unscd
+  unzip
   ventoy-full
   wirelesstools
   wmctrl
   wpa_supplicant
+  xcbutilxrm
   xcftools
   xclip
   xdg-desktop-portal-gtk
@@ -158,6 +145,7 @@ with pkgs; [
   xorg.fontalias
   xorg.fonttosfnt
   xorg.fontutil
+  xorg.gccmakedep
   xorg.libxcb
   xorg.mkfontdir
   xorg.xbacklight
@@ -168,8 +156,8 @@ with pkgs; [
   xorg.xcbutilwm
   xorg.xconsole
   xorg.xev
-  xorg.xhost
   xorg.xfontsel
+  xorg.xhost
   xorg.xinit
   xorg.xkill
   xorg.xorgproto
@@ -179,5 +167,8 @@ with pkgs; [
   xsecurelock
   xsuspender
   xterm
+  zarchive
   zathura
+  zip
+  zziplib
 ]

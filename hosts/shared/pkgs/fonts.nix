@@ -27,8 +27,8 @@
       proggyfonts
       psftools
       roboto-slab
-      terminus-nerdfont
       terminus_font
+      terminus-nerdfont
     ];
 
     fontconfig = {

@@ -78,7 +78,4 @@ with pkgs; [
   vlc
   webp-pixbuf-loader
   xcftools
-  giflib
-  gifsicle
-  gifski
 ]

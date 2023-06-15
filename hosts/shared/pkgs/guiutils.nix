@@ -92,6 +92,7 @@ with pkgs; [
   networkmanagerapplet
   nuspell
   ocrmypdf
+  openshot-qt
   pango
   pangomm
   pantheon.file-roller-contract
@@ -149,8 +150,6 @@ with pkgs; [
   xfce.xfce4-settings
   xfce.xfconf
   xlsfonts
-  openshot-qt
-
   xmcp
   xscreensaver
   xsecurelock

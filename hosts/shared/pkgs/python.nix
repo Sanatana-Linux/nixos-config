@@ -3,7 +3,6 @@ with pkgs;
   [
     (python3.withPackages (p:
       with p; [
-        pygobject3
         huggingface-hub
         ipykernel
         ipython
@@ -11,6 +10,7 @@ with pkgs;
         notebook
         numpy
         pip
+        pygobject3
         pynvim
         python
         python-dotenv

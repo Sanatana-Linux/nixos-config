@@ -96,7 +96,7 @@ with lib; let
     ldbus
     #luadbi-mysql
     luaposix
-
+    cjson
     # custom modules
     dbus_proxy
     async-lua
@@ -172,6 +172,7 @@ in {
         xclip
         xdotool
         xsel
+
         ;
 
       inherit
@@ -182,10 +183,8 @@ in {
       inherit
         (pkgs.xfce)
         xfce4-clipman-plugin
-        # configured
-        
-        # thunar
-        
+    xfconf
+    xfce4-settings
         ;
 
       inherit

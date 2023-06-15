@@ -2,9 +2,9 @@
 with pkgs; [
   acpi
   android-tools
-        lua51Packages.cjson
-        python311Packages.venvShellHook  
-        libgccjit
+  lua51Packages.cjson
+  python311Packages.venvShellHook
+  libgccjit
   aria
   slop
   bat
@@ -15,8 +15,8 @@ with pkgs; [
   comma
   conda
   mdbook
-  mdbook-admonish 
-  mdbook-linkcheck 
+  mdbook-admonish
+  mdbook-linkcheck
   cookiecutter
   emacs
   copier

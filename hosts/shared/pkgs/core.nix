@@ -1,133 +1,133 @@
 {pkgs, ...}:
 with pkgs; [
-alejandra
-any-nix-shell
-as-tree
-binutils
-bottom
-busybox
-cached-nix-shell
-chatblade
-chatgpt-cli
-clang-ocl
-clang-tools
-clangStdenv
-cmake
-coreutils-full
-dbus
-dconf
-deadnix
-dnsutils
-dosfstools
+  alejandra
+  any-nix-shell
+  as-tree
+  binutils
+  bottom
+  busybox
+  cached-nix-shell
+  chatblade
+  chatgpt-cli
+  clang-ocl
+  clang-tools
+  clangStdenv
+  cmake
+  coreutils-full
+  dbus
+  dconf
+  deadnix
+  dnsutils
+  dosfstools
 
-ffmpeg-full
-firmwareLinuxNonfree
-gcc
-glib
-glib-networking
-glibc
-glibc_memusage
-glibmm
-gnome.dconf-editor
-gnumake
-gnuplot
-gnused
-gnutls
-gptfdisk
-grub2
-gsettings-desktop-schemas
-imagemagick
-inotify-tools
-iputils
-iw
-iwd
-libappindicator
-libcanberra-gtk3
-libfm
-libfm-extra
-libgudev
-libisoburn
-libnotify
-librsvg
-libsecret
-libstdcxx5
-libtool
-lynis
-man-pages
-man-pages-posix
-manix
-mesa
-mesa-demos
-moreutils
-networkmanager
-ngrok
-nix-binary-cache
-nix-direnv-flakes
-nix-plugins
-nix-prefetch
-nix-prefetch-scripts
-nix-template
-nix-universal-prefetch
-nixos-generators
-nmap
-nurl
-opencl-clang
-p7zip
-pciutils
-pfetch
-pmutils
-ps_mem
-pulseaudio
-pure-prompt
-python3
-python311
-ripgrep
-skim
-smartmontools
-sqlite
-sqlite-utils
-squashfs-tools-ng
-squashfsTools
-squashfuse
-sssd
-tbb
-tealdeer
-tor
-toybox
-trash-cli
-tree
-treefmt
-unrar
-unzip
-update-nix-fetchgit
-usbmuxd
-usbutils
-utillinux
-wirelesstools
-xarchiver
-xclip
-xfce.xfce4-settings
-xorg.fontalias
-xorg.fonttosfnt
-xorg.fontutil
-xorg.libxcb
-xorg.mkfontdir
-xorg.xbacklight
-xorg.xcbutil
-xorg.xcbutilerrors
-xorg.xcbutilimage
-xorg.xcbutilrenderutil
-xorg.xcbutilwm
-xorg.xconsole
-xorg.xev
-xorg.xfontsel
-xorg.xhost
-xorg.xinit
-xorg.xkill
-xorg.xorgproto
-xorg.xprop
-xorg.xwininfo
-xsettingsd
-zip
-zlib
+  ffmpeg-full
+  firmwareLinuxNonfree
+  gcc
+  glib
+  glib-networking
+  glibc
+  glibc_memusage
+  glibmm
+  gnome.dconf-editor
+  gnumake
+  gnuplot
+  gnused
+  gnutls
+  gptfdisk
+  grub2
+  gsettings-desktop-schemas
+  imagemagick
+  inotify-tools
+  iputils
+  iw
+  iwd
+  libappindicator
+  libcanberra-gtk3
+  libfm
+  libfm-extra
+  libgudev
+  libisoburn
+  libnotify
+  librsvg
+  libsecret
+  libstdcxx5
+  libtool
+  lynis
+  man-pages
+  man-pages-posix
+  manix
+  mesa
+  mesa-demos
+  moreutils
+  networkmanager
+  ngrok
+  nix-binary-cache
+  nix-direnv-flakes
+  nix-plugins
+  nix-prefetch
+  nix-prefetch-scripts
+  nix-template
+  nix-universal-prefetch
+  nixos-generators
+  nmap
+  nurl
+  opencl-clang
+  p7zip
+  pciutils
+  pfetch
+  pmutils
+  ps_mem
+  pulseaudio
+  pure-prompt
+  python3
+  python311
+  ripgrep
+  skim
+  smartmontools
+  sqlite
+  sqlite-utils
+  squashfs-tools-ng
+  squashfsTools
+  squashfuse
+  sssd
+  tbb
+  tealdeer
+  tor
+  toybox
+  trash-cli
+  tree
+  treefmt
+  unrar
+  unzip
+  update-nix-fetchgit
+  usbmuxd
+  usbutils
+  utillinux
+  wirelesstools
+  xarchiver
+  xclip
+  xfce.xfce4-settings
+  xorg.fontalias
+  xorg.fonttosfnt
+  xorg.fontutil
+  xorg.libxcb
+  xorg.mkfontdir
+  xorg.xbacklight
+  xorg.xcbutil
+  xorg.xcbutilerrors
+  xorg.xcbutilimage
+  xorg.xcbutilrenderutil
+  xorg.xcbutilwm
+  xorg.xconsole
+  xorg.xev
+  xorg.xfontsel
+  xorg.xhost
+  xorg.xinit
+  xorg.xkill
+  xorg.xorgproto
+  xorg.xprop
+  xorg.xwininfo
+  xsettingsd
+  zip
+  zlib
 ]

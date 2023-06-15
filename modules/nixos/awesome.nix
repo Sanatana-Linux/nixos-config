@@ -172,7 +172,6 @@ in {
         xclip
         xdotool
         xsel
-
         ;
 
       inherit
@@ -183,8 +182,12 @@ in {
       inherit
         (pkgs.xfce)
         xfce4-clipman-plugin
-    xfconf
-    xfce4-settings
+        xfconf
+        xfce4-settings
+        xfce4-dev-tools
+        libxfce4util
+        libxfce4ui
+        exo
         ;
 
       inherit

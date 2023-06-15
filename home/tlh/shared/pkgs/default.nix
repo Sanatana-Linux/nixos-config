@@ -19,26 +19,26 @@
       git-filter-repo
       go
       gopls
+      gpart
       grex
       java-language-server
+      kbfs
+      keybase
+      keybase-gui
       keychain
       lldb
-      shiori
       nb
-      kbfs
       nodejs
       parted
-      gpart
       pre-commit
       rust-analyzer
       rustfmt
       selene
       shellcheck
       shfmt
+      shiori
       sqlite
       stylua
-      keybase
-      keybase-gui
       subversion
       sumneko-lua-language-server
       texlab
@@ -51,10 +51,10 @@
       ;
     inherit
       (pkgs.gitAndTools)
-      git-absorb
-      gitui
-      git-machete
       gh
+      git-absorb
+      git-machete
+      gitui
       ;
     inherit
       (pkgs.luaPackages)
@@ -74,8 +74,8 @@
 
     pylsp = pkgs.python310.withPackages (p:
       with p; [
-        python-lsp-server
         flake8
+        python-lsp-server
       ]);
   };
 }

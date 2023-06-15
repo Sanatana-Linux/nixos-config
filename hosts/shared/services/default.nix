@@ -55,10 +55,6 @@
       enable = true;
       #      enableOnBoot = true;
     };
-    appvm = {
-      enable = true;
-      user = "tlh";
-    };
-    libvirtd.enable = true;
+    # libvirtd.enable = true;
   };
 }

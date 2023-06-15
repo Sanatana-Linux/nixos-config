@@ -9,7 +9,6 @@ with pkgs; [
   arduino
   awscli
   bash
-  bfg-repo-cleaner
   biber
   bibtex2html
   black
@@ -155,5 +154,4 @@ with pkgs; [
   wkhtmltopdf-bin
   yarn
   yarn2nix
-  zlib
 ]

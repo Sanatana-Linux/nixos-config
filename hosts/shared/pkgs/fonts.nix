@@ -1,20 +1,36 @@
 {pkgs, ...}: {
   fonts = {
     fonts = with pkgs; [
+      arkpandora_ttf
       cantarell-fonts
+      cascadia-code # microsoft ligatures font
+      comic-relief
+      courier-prime
+      cozette
+      creep
+      envypn-font
       fira
+      fira-code
+      fira-code-symbols
       font-awesome
       font-awesome_4
       font-awesome_5
+      gelasio
       google-fonts
       inter
       kreative-square-fonts
       lato
+      liberation_ttf
       line-awesome
       maple-mono
       maple-mono-NF
       maple-mono-SC-NF
+      martian-mono
       material-symbols
+      monocraft
+      monoid
+      mononoki
+      montserrat
       mplus-outline-fonts.githubRelease
       nerdfonts
       norwester-font
@@ -22,13 +38,23 @@
       noto-fonts-cjk
       noto-fonts-emoji
       noto-fonts-extra
+      ocr-a
       powerline-fonts
       profont
       proggyfonts
       psftools
+      recursive
       roboto-slab
+      scientifica
+      spleen
+      tamzen
       terminus_font
       terminus-nerdfont
+      tewi-font
+      times-newer-roman
+      tt2020
+      unstable.garamond-libre
+      victor-mono
     ];
 
     fontconfig = {

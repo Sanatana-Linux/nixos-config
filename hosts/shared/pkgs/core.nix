@@ -103,7 +103,6 @@ with pkgs; [
   usbutils
   utillinux
   wirelesstools
-  xarchiver
   xclip
   xfce.xfce4-settings
   xorg.fontalias
@@ -127,6 +126,5 @@ with pkgs; [
   xorg.xprop
   xorg.xwininfo
   xsettingsd
-  zip
   zlib
 ]

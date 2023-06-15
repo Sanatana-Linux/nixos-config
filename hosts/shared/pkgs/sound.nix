@@ -21,17 +21,14 @@ with pkgs; [
   ncmpcpp
   pamixer
   pavucontrol
-  picard
   playerctl
   psmisc
   pulseaudio-ctl
   pulseaudioFull
   pulseeffects-legacy
   pulsemixer
-  python310Packages.deemix
   scdl
   soundfont-fluid
   spotify
   vlc
-  zyn-fusion
 ]

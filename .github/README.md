@@ -37,7 +37,7 @@ nix-shell -p git nixUnstable neovim
 mkdir -p /mnt/etc/
 
 # clone the repo
-git clone https://github.com/the-Electric-Tantra-Linux/nixos-config /mnt/etc/nixos --recurse-submodules
+git clone https://github.com/Sanatana-Linux/nixos-config /mnt/etc/nixos
 
 # Remove my hardware-configuration file
 rm /mnt/etc/nixos/hosts/hp-laptop-amd/hardware-configuration.nix

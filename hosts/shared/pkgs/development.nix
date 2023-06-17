@@ -1,11 +1,11 @@
 {pkgs, ...}:
 with pkgs; [
   abootimg
-  android-backup-extractor
   android-file-transfer
+  android-backup-extractor
   android-tools
-  android-udev-rules
   apksigcopier
+  android-udev-rules
   arduino
   awscli
   bash
@@ -53,11 +53,11 @@ with pkgs; [
   lightningcss
   lua
   lua-language-server
-  lua5_3_compat
-  lua5_4_compat
   lua51Packages.lgi
   lua54Packages.lua
   lua54Packages.luarocks-nix
+  lua5_3_compat
+  lua5_4_compat
   luabind
   luaformatter
   luajitPackages.busted
@@ -97,20 +97,20 @@ with pkgs; [
   ncdu
   neovim-unwrapped
   nil
+  nimPackages.nim
   nimble-unwrapped
   nimlsp
-  nimPackages.nim
   nix-init
   nix-tree
   nixfmt
   nixpkgs-fmt
-  nodejs
+  nodePackages.prettier
   nodePackages_latest.diagnostic-languageserver
   nodePackages_latest.eslint
   nodePackages_latest.gulp
   nodePackages_latest.neovim
   nodePackages_latest.vscode-json-languageserver-bin
-  nodePackages.prettier
+  nodejs
   nps
   nss
   nvd
@@ -124,6 +124,8 @@ with pkgs; [
   postman
   prisma-engines
   puppeteer-cli
+  python310Packages.openai
+  python310Packages.pandas
   python311Packages.pynvim
   rnix-lsp
   ruby

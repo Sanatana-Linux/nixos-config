@@ -91,8 +91,6 @@ with pkgs; [
   openshot-qt
   pango
   pangomm
-  papirus-folders
-  papirus-icon-theme
   pasystray
   pcre
   pcre-cpp

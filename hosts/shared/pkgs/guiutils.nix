@@ -29,7 +29,6 @@ with pkgs; [
   fbida
   feh
   firefox
-  fluent-icon-theme
   font-manager
   fuseiso
   galculator
@@ -96,8 +95,6 @@ with pkgs; [
   pango
   pangomm
   pantheon.file-roller-contract
-  papirus-folders
-  papirus-icon-theme
   pasystray
   pdf-parser
   pdfarranger

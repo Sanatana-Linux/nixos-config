@@ -7,6 +7,7 @@ with pkgs; [
   binutils
   brightnessctl
   btop
+  calibre
   chatgpt-cli
   clang
   comma
@@ -15,6 +16,7 @@ with pkgs; [
   copier
   curl
   deer
+  ebook_tools
   efibootmgr
   efitools
   exa
@@ -52,6 +54,7 @@ with pkgs; [
   ocl-icd
   patchelf
   pciutils
+  platinum-searcher
   playerctl
   ps_mem
   pure-prompt
@@ -64,6 +67,7 @@ with pkgs; [
   ranger
   rclone
   ripgrep
+  silver-searcher
   slop
   smartmontools
   speedtest-cli
@@ -71,6 +75,7 @@ with pkgs; [
   squashfsTools
   squashfuse
   sysz
+  termpdfpy
   trash-cli
   tree
   ueberzug

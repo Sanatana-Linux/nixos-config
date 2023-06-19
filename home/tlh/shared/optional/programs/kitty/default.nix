@@ -25,6 +25,7 @@
       tab_bar_margin_width = "3";
       tab_bar_margin_height = "3";
       tab_bar_edge = "top";
+      enable_audio_bell = "no";
     };
     font = {
       size = 10;

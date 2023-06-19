@@ -1,11 +1,5 @@
 {pkgs, ...}:
 with pkgs; [
-  abootimg
-  android-file-transfer
-  android-backup-extractor
-  android-tools
-  apksigcopier
-  android-udev-rules
   arduino
   awscli
   bash
@@ -13,14 +7,12 @@ with pkgs; [
   bibtex2html
   black
   cargo
-  cava
   chruby
   cmake
   cpp-hocon
   cpp-utilities
   cppclean
   cppdb
-  curl
   deadnix
   dejsonlz4
   direnv
@@ -32,7 +24,6 @@ with pkgs; [
   gcc
   gdk-pixbuf
   gdk-pixbuf-xlib
-  git-trim
   glib
   gnumake
   gnutls
@@ -124,9 +115,6 @@ with pkgs; [
   postman
   prisma-engines
   puppeteer-cli
-  python310Packages.openai
-  python310Packages.pandas
-  python311Packages.pynvim
   rnix-lsp
   ruby
   rustc
@@ -135,7 +123,6 @@ with pkgs; [
   sassc
   shellcheck
   shfmt
-  shutter
   skim
   sqlite
   sqlite-utils
@@ -147,12 +134,11 @@ with pkgs; [
   terraform
   tokei
   tree-sitter
-  ueberzug
   vim
   vim-vint
   vimPlugins.rust-tools-nvim
   vscode
-  wget
+  
   wkhtmltopdf-bin
   yarn
   yarn2nix

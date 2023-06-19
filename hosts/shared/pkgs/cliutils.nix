@@ -1,12 +1,25 @@
 {pkgs, ...}:
 with pkgs; [
+  abootimg
   acpi
+  adbfs-rootless
+  android-backup-extractor
+  android-file-transfer
   android-tools
+  android-udev-rules
+  apkeep  
+  apkg
+  apkid 
+  apko 
+  apksigcopier
+  apksigner 
+  apktool
   aria
   bat
   binutils
   brightnessctl
   btop
+  bundletool
   calibre
   chatgpt-cli
   clang
@@ -16,6 +29,7 @@ with pkgs; [
   copier
   curl
   deer
+  dex2jar
   ebook_tools
   efibootmgr
   efitools
@@ -29,8 +43,11 @@ with pkgs; [
   gcc-unwrapped
   gccStdenv
   gh
+  ghost
   git
+  git-trim
   htop
+  imgpatchtools
   imgurbash2
   iw
   jq
@@ -55,19 +72,14 @@ with pkgs; [
   patchelf
   pciutils
   platinum-searcher
-  playerctl
   ps_mem
   pure-prompt
-  python311Packages.aenum
-  python311Packages.asyncstdlib
-  python311Packages.installer
-  python311Packages.numpy
-  python311Packages.pynvim
-  python311Packages.wheel
+  quark-engine
   ranger
   rclone
   ripgrep
   silver-searcher
+  simg2img 
   slop
   smartmontools
   speedtest-cli
@@ -78,6 +90,7 @@ with pkgs; [
   termpdfpy
   trash-cli
   tree
+  ueberzug
   ueberzug
   unrar
   unzip
@@ -102,4 +115,5 @@ with pkgs; [
   zsh-edit
   zsh-navigation-tools
   zsh-you-should-use
+ wget
 ]

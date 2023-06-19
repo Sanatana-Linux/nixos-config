@@ -96,6 +96,7 @@ with pkgs; [
   pangomm
   pantheon.file-roller-contract
   pasystray
+  gmime3
   pdf-parser
   pdfarranger
   pdfmm

@@ -12,16 +12,18 @@
   programs = {
     # bash.promptInit = ''eval "$(${lib.getExhosts/shared/programs/default.nixe pkgs.starship} init bash)"'';
     dconf.enable = true;
-
+  # Things, mostly libraries, that need to be available for other packages on the system 
     nix-ld = {
       enable = true;
       libraries = with pkgs; [
         android-tools
         android-udev-rules
+        bash
         binutils
         curl
         glib
         glibc
+        gmime3
         icu
         libcanberra-gtk3
         libdbusmenu
@@ -37,9 +39,9 @@
         libnotify
         librewolf
         librsvg
-        libsecret
         libsForQt5.qt5ct
         libsForQt5.qtstyleplugin-kvantum
+        libsecret
         libtiff
         libtool
         libunwind
@@ -47,6 +49,7 @@
         libxdg_basedir
         lightlocker
         luajitPackages.cqueues
+        luajitPackages.cjson
         luajitPackages.dkjson
         luajitPackages.ldbus
         luajitPackages.ldoc
@@ -80,6 +83,7 @@
         util-linux
         xsettingsd
         zlib
+        zsh
       ];
     };
 

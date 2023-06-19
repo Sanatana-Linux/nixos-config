@@ -117,6 +117,9 @@
       cleanup = "sudo nix-collect-garbage --delete-older-than 3d";
       bloat = "nix path-info -Sh /run/current-system";
       purge = "doas sync; echo 3 | doas tee /proc/sys/vm/drop_caches";
+      "cd.." = "cd ../";
+      "cd..." = "cd ../../";
+      c="clear";
       g = "git";
       commit = "git add . && git commit -m";
       push = "git push";

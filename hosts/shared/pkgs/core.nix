@@ -91,7 +91,6 @@ with pkgs; [
   pure-prompt
   python3
   python311
-  ripgrep
   skim
   smartmontools
   sqlite

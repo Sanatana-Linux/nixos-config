@@ -38,6 +38,13 @@ with pkgs; [
   imagemagick
   inotify-tools
   iputils
+  logitech-udev-rules
+  solaar
+  git-branchless
+  star-history
+  reposurgeon
+  git-filter-repo
+  rcshist
   iw
   iwd
   libappindicator

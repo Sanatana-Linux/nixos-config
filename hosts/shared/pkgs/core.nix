@@ -12,6 +12,10 @@ with pkgs; [
   clang-ocl
   clang-tools
   clangStdenv
+  libclang
+  ccls
+  bear
+  opencl-clang
   cmake
   coreutils-full
   dbus

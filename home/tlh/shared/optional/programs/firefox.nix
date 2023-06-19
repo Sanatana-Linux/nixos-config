@@ -18,7 +18,6 @@
           ublock-origin
           bitwarden
           buster-captcha-solver
-          floccus
           greasemonkey
           keybase
           link-gopher

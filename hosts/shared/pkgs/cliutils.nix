@@ -116,4 +116,7 @@ with pkgs; [
   zsh-navigation-tools
   zsh-you-should-use
  wget
+ libgig
+ libgit2
+ libgit2-glib
 ]

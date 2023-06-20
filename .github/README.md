@@ -8,8 +8,9 @@
 >
 > [UChicago's DSAL Online Sanskrit Dictionary](https://dsal.uchicago.edu/cgi-bin/app/apte_query.py?qs=Sanatana&matchtype=default)
 
+<p align="center">
 <img width="750px" align="center"  src="./assets/om.gif" alt="Om Puurnnam-Adah Puurnnam-Idam Puurnnaat-Puurnnam-Udacyate | Puurnnasya Puurnnam-Aadaaya Puurnnam-Eva-Avashissyate || Om Shaantih Shaantih Shaantih "  />
-
+</p>
 ---
 
 > **Warning**

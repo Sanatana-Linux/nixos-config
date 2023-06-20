@@ -13,8 +13,8 @@
       size = 10;
     };
     iconTheme = {
-      name = "Qogir-dark";
-      package = pkgs.qogir-icon-theme;
+      name = "Papirus-Dark";
+      package = pkgs.papirus-icon-theme;
     };
     cursorTheme = {
       name = "Phinger Cursors (light)";

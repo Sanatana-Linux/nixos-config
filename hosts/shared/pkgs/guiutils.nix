@@ -102,6 +102,8 @@ with pkgs; [
   pdfmm
   pdfstudio2022
   pdftag
+  papirus-icon-theme
+  papirus-folders
   pdftk
   perl536Packages.CairoGObject
   perl536Packages.GooCanvas2CairoTypes

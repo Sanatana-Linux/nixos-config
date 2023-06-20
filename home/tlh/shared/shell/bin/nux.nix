@@ -11,16 +11,21 @@ with pkgs;
     Usage: nas [OPTION] [OPTION]
 
     Options:
-        help         show this text
-
-        clean        clean and garabge collect store
-        rebuild      rebuild configuration for host
-        rollback     rollback to previous generation
-        search       search packages available
-        sync         pull config from git repo, then commit and push
-        update       update flake
-        vm           build a vm
+        help               show this text
+        repair             repair the Nix Store 
+        clean              clean and garabge collect store
+        rebuild            rebuild configuration for host
+        rollback           rollback to previous generation
+        search             search packages available
+        sync               pull config from git repo, then commit and push
+        update             update flake
+        vm                 build a vm
     EOF
+    }
+
+    function repair(){
+      sudo nix-collect-garbage -d
+      doas nix-store --verify --repair
     }
 
     function sync() {
@@ -63,7 +68,7 @@ with pkgs;
         doas nix-env --delete-generations old
         echo "Collecting system garbage"
         doas nix-collect-garbage -d
-        echo "Collecting system garbage"
+        echo "Collecting user garbage"
         nix-collect-garbage -d
     }
 
@@ -72,15 +77,16 @@ with pkgs;
     }
 
     case "$1" in
-        sync)      sync ;;
-        rebuild)   rebuild "$@";;
-        vm)        vm "$@";;
-        rollback)  rollback ;;
-        update)    update ;;
-        clean)     clean ;;
-        search)    search "$@" ;;
-        help)    help ;;
-        *)       help ;;
+        sync)       sync ;;
+        repair)     repair ;;
+        rebuild)    rebuild "$@";;
+        vm)         vm "$@";;
+        rollback)   rollback ;;
+        update)     update ;;
+        clean)      clean ;;
+        search)     search "$@" ;;
+        help)       help ;;
+        *)          help ;;
     esac
 
   ''

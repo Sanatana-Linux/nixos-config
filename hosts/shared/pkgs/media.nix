@@ -8,7 +8,9 @@ with pkgs; [
   emacsPackages.svgo
   exiftool
   feh
+  ffcast
   figlet
+  gst_all_1.gst-libav
   giflib
   gifsicle
   gifski

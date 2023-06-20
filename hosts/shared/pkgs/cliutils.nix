@@ -119,4 +119,5 @@ with pkgs; [
  libgig
  libgit2
  libgit2-glib
+ yad
 ]

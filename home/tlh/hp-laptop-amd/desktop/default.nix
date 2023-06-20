@@ -70,5 +70,5 @@
       chmod -R +w "$HOME/.config/awesome"
     fi
   '';
-  home.file = {".icons/default".source = "${pkgs.phinger-cursors}/share/icons/phinger-cursors";};
+  home.file = {".icons/default".source = "${pkgs.phinger-cursors}/share/icons/phinger-cursors-light";};
 }

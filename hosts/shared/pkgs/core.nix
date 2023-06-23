@@ -115,6 +115,11 @@ with pkgs; [
   wirelesstools
   xclip
   xfce.xfce4-settings
+  xorg.xf86videoamdgpu
+
+  xorg.libXxf86dga
+  xorg.libXxf86misc
+  xorg.libXxf86vm
   xorg.fontalias
   xorg.fonttosfnt
   xorg.fontutil

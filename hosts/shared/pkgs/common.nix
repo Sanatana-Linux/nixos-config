@@ -2,6 +2,10 @@
 with pkgs; [
   _7zz
   acpi
+  xdg-utils
+  xdg-user-dirs
+  shared-mime-info
+  desktop-file-utils
   arandr
   arj
   autorandr

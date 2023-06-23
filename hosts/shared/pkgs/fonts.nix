@@ -7,7 +7,12 @@
       comic-relief
       courier-prime
       cozette
-      creep
+      corefonts
+      d2coding
+      ankacoder-condensed
+      ankacoder
+      dina-font
+      eunomia
       envypn-font
       fira
       fira-code
@@ -21,6 +26,11 @@
       kreative-square-fonts
       lato
       liberation_ttf
+      jost
+      kanit-font
+      ocr-a
+      sudo-font
+      recursive
       line-awesome
       maple-mono
       maple-mono-NF
@@ -51,6 +61,7 @@
       terminus_font
       terminus-nerdfont
       tewi-font
+      theano
       times-newer-roman
       tt2020
       victor-mono

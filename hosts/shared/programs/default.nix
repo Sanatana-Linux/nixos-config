@@ -3,8 +3,7 @@
   pkgs,
   ...
 }: {
-  imports =
-  [./nix-ld.nix];
+  imports = [./nix-ld.nix];
 
   hardware = {
     logitech.wireless = {

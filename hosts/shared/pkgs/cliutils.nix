@@ -7,12 +7,12 @@ with pkgs; [
   android-file-transfer
   android-tools
   android-udev-rules
-  apkeep  
+  apkeep
   apkg
-  apkid 
-  apko 
+  apkid
+  apko
   apksigcopier
-  apksigner 
+  apksigner
   apktool
   aria
   bat
@@ -79,7 +79,7 @@ with pkgs; [
   rclone
   ripgrep
   silver-searcher
-  simg2img 
+  simg2img
   slop
   smartmontools
   speedtest-cli
@@ -115,9 +115,12 @@ with pkgs; [
   zsh-edit
   zsh-navigation-tools
   zsh-you-should-use
- wget
- libgig
- libgit2
- libgit2-glib
- yad
+  wget
+  libgig
+  libgit2
+  libgit2-glib
+  yad
+  parcellite
+  clipster
+  beep
 ]

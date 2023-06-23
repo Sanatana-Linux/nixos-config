@@ -12,6 +12,9 @@ The notes contained in this `.notes` directory are related to the overarching Ni
 
 ## Index of Notes
 
+- [Credits](./credits.md)
 - [Errors](./errors/index.md)
+- [Installation](./installation.md
+- [ISO](./iso.md)
 - [TODOs](./todo/index.md)
-- [Notes on Flakes](./flakes/index.md)
+- [Working Notes](./working-notes.md)

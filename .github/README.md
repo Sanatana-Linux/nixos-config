@@ -17,9 +17,5 @@
 >
 > While I hope you can gain from my configuration and have attempted, for my own sake at least, to document what is going on in the configuration as thoroughly as possible, this is my configuration that I use personally and as such it is reasonable to assume it is unstable and a work in progress.
 
-<div align="center">
-<img width="200px"  src="./assets/Pin.gif" alt="Om" />
-<img width="200px"  src="./assets/Pin.gif" alt="Om" />
-<img width="200px"  src="./assets/Pin.gif" alt="Om" />
-<img width="200px"  src="./assets/Pin.gif" alt="Om" />
-</div>
+- [Installation Notes](./.notes/installation.md)
+- [Inspiration and Credits](./.notes/credits.md)

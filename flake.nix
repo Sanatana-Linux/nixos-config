@@ -54,7 +54,6 @@
     nixpkgs,
     home-manager,
     bhairava-grub-theme,
-    
     ...
   } @ inputs: let
     inherit (self) outputs;

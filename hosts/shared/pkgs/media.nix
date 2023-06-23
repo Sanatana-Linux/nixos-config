@@ -43,6 +43,8 @@ with pkgs; [
   krita
   labelImg
   libexif
+  gsettings-desktop-schemas
+  gnome.nixos-gsettings-overrides
   libjpeg
   libpng
   librsvg

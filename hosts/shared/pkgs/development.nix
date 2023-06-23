@@ -27,6 +27,10 @@ with pkgs; [
   glib
   gnumake
   gnutls
+  pkg-config
+  pkg-configUpstream
+  pkgconfig
+  libpkgconf
   go
   gofumpt
   gource
@@ -138,7 +142,7 @@ with pkgs; [
   vim-vint
   vimPlugins.rust-tools-nvim
   vscode
-  
+
   wkhtmltopdf-bin
   yarn
   yarn2nix

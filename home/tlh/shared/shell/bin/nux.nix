@@ -3,18 +3,21 @@ with pkgs;
   writeScriptBin "nux" ''
      #!/usr/bin/env bash
      dots="/etc/nixos"
+     awesomewm="$HOME/.config/awesome"
+     nvim="$HOME/.config/nvim"
 
 
 
     function help() {
         cat <<EOF
-    Usage: nas [OPTION] [OPTION]
+    Usage: nux [OPTION] [OPTION]
 
     Options:
         help               show this text
-        repair             repair the Nix Store 
+        repair             repair the Nix Store
         clean              clean and garabge collect store
         rebuild            rebuild configuration for host
+        optimize           clean then optimize the Nix Store
         rollback           rollback to previous generation
         search             search packages available
         sync               pull config from git repo, then commit and push
@@ -24,7 +27,7 @@ with pkgs;
     }
 
     function repair(){
-      sudo nix-collect-garbage -d
+      doas nix-collect-garbage -d
       doas nix-store --verify --repair
     }
 
@@ -49,6 +52,12 @@ with pkgs;
         doas nixos-rebuild --flake $dots#"$2" --impure build-vm
     }
 
+     function optimize() {
+        doas nix-collect-garbage -d
+        doas nix-store --optimize --verbose 
+     }
+
+
 
 
     function rollback() {
@@ -72,6 +81,9 @@ with pkgs;
         nix-collect-garbage -d
     }
 
+
+
+
     function search() {
        nps -C=description --separator=true "$2"
     }
@@ -80,13 +92,13 @@ with pkgs;
         sync)       sync ;;
         repair)     repair ;;
         rebuild)    rebuild "$@";;
+        optimize)    optimize;;
         vm)         vm "$@";;
         rollback)   rollback ;;
         update)     update ;;
         clean)      clean ;;
-        search)     search "$@" ;;
+        search)     search "$@";;
         help)       help ;;
         *)          help ;;
     esac
-
   ''

@@ -6,8 +6,6 @@ with pkgs;
      awesomewm="$HOME/.config/awesome"
      nvim="$HOME/.config/nvim"
 
-
-
     function help() {
         cat <<EOF
     Usage: nux [OPTION] [OPTION]
@@ -26,7 +24,7 @@ with pkgs;
     EOF
     }
 
-    function repair(){
+    function repair() {
       doas nix-collect-garbage -d
       doas nix-store --verify --repair
     }
@@ -39,8 +37,8 @@ with pkgs;
         &&  git commit \
         &&  git push \
         || echo "Error with location of Nix Configuration" \
-        && exit
-    }
+        && exit   
+      }
 
     function rebuild() {
         echo "Rebuilding config"
@@ -57,9 +55,6 @@ with pkgs;
         doas nix-store --optimize --verbose 
      }
 
-
-
-
     function rollback() {
         echo "Rolling back"
         doas nixos-rebuild --rollback switch
@@ -68,6 +63,7 @@ with pkgs;
     function update() {
         echo "Updating flake"
         doas nix flake update $dots
+
     }
 
     function clean() {
@@ -97,7 +93,7 @@ with pkgs;
         rollback)   rollback ;;
         update)     update ;;
         clean)      clean ;;
-        search)     search "$@";;
+        search)     search "$@" ;;
         help)       help ;;
         *)          help ;;
     esac

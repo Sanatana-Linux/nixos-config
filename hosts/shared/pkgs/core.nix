@@ -3,20 +3,22 @@ with pkgs; [
   alejandra
   any-nix-shell
   as-tree
+  automake
+  bear
   binutils
   bottom
   busybox
+  bzip2
+  bzip3
   cached-nix-shell
+  ccls
   chatblade
   chatgpt-cli
   clang-ocl
   clang-tools
   clangStdenv
-  libclang
-  ccls
-  bear
-  opencl-clang
   cmake
+  commonsCompress
   coreutils-full
   dbus
   dconf
@@ -26,6 +28,8 @@ with pkgs; [
   ffmpeg-full
   firmwareLinuxNonfree
   gcc
+  git-branchless
+  git-filter-repo
   glib
   glib-networking
   glibc
@@ -42,17 +46,12 @@ with pkgs; [
   imagemagick
   inotify-tools
   iputils
-  logitech-udev-rules
-  solaar
-  git-branchless
-  star-history
-  reposurgeon
-  git-filter-repo
-  rcshist
   iw
   iwd
+  lbzip2
   libappindicator
   libcanberra-gtk3
+  libclang
   libfm
   libfm-extra
   libgudev
@@ -62,7 +61,9 @@ with pkgs; [
   libsecret
   libstdcxx5
   libtool
+  logitech-udev-rules
   lynis
+  lzma
   man-pages
   man-pages-posix
   manix
@@ -82,23 +83,31 @@ with pkgs; [
   nmap
   nurl
   opencl-clang
+  opencl-clang
   p7zip
+  pbzip2
   pciutils
   pfetch
+  pigz
   pmutils
+  premake
   ps_mem
   pulseaudio
   pure-prompt
   python3
   python311
+  rcshist
+  reposurgeon
   skim
   smartmontools
+  solaar
   sqlite
   sqlite-utils
   squashfs-tools-ng
   squashfsTools
   squashfuse
   sssd
+  star-history
   tbb
   tealdeer
   tor
@@ -115,14 +124,12 @@ with pkgs; [
   wirelesstools
   xclip
   xfce.xfce4-settings
-  xorg.xf86videoamdgpu
-
-  xorg.libXxf86dga
-  xorg.libXxf86misc
-  xorg.libXxf86vm
   xorg.fontalias
   xorg.fonttosfnt
   xorg.fontutil
+  xorg.libXxf86dga
+  xorg.libXxf86misc
+  xorg.libXxf86vm
   xorg.libxcb
   xorg.mkfontdir
   xorg.xbacklight
@@ -133,6 +140,7 @@ with pkgs; [
   xorg.xcbutilwm
   xorg.xconsole
   xorg.xev
+  xorg.xf86videoamdgpu
   xorg.xfontsel
   xorg.xhost
   xorg.xinit
@@ -141,5 +149,8 @@ with pkgs; [
   xorg.xprop
   xorg.xwininfo
   xsettingsd
+  xz
   zlib
+  zlib-ng
+  zstd
 ]

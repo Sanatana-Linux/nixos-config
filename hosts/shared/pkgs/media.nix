@@ -3,6 +3,8 @@ with pkgs; [
   ascii-image-converter
   byzanz
   ciano
+  crabz
+  curtail 
   delve
   ebook_tools
   emacsPackages.svgo
@@ -10,10 +12,8 @@ with pkgs; [
   feh
   ffcast
   figlet
-  gst_all_1.gst-libav
   giflib
   gifsicle
-  gifski
   gimp-with-plugins
   gimpPlugins.exposureBlend
   gimpPlugins.fourier
@@ -25,7 +25,17 @@ with pkgs; [
   gimpPlugins.texturize
   gimpPlugins.waveletSharpen
   giph
+  git-ignore
+  git-extras
+  git-chglog
+  git-backup
+  git-branchless
+  git-repo-updater
+  gnome.gnome-autoar
+  gnome.nixos-gsettings-overrides
   graphicsmagick
+  gsettings-desktop-schemas
+  gst_all_1.gst-libav
   image_optim
   imagemagick
   img-cat
@@ -43,14 +53,14 @@ with pkgs; [
   krita
   labelImg
   libexif
-  gsettings-desktop-schemas
-  gnome.nixos-gsettings-overrides
   libjpeg
   libpng
   librsvg
   libspng
   libungif
   libwebp
+  lrzip 
+  lz4
   meme
   menyoki
   metadata-cleaner
@@ -60,8 +70,11 @@ with pkgs; [
   nodePackages_latest.svgo
   optipng
   oxipng
+  p7zip
   pinsel
   pixcat
+  pixz
+  plzip
   pngcheck
   pngcrush
   pngloss
@@ -71,9 +84,12 @@ with pkgs; [
   pngquant
   pngtoico
   pngtools
+  pxz 
   python311Packages.image-go-nord
   python311Packages.pyfiglet
+  rarcrack 
   resvg
+  ripgrep
   rubyPackages.gdk_pixbuf2
   shotcut
   svgcleaner

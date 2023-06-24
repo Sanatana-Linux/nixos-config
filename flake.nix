@@ -29,17 +29,17 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nvim-forge = {
-      type = "git";
-      flake = false;
-      url = "https://github.com/Thomashighbaugh/nvim-forge.git";
-    };
+ #   nvim-forge = {
+ #     type = "git";
+ #     flake = false;
+ #     url = "github:Thomashighbaugh/nvim-forge";
+ #   };
 
-    awesome-config = {
-      type = "git";
-      flake = false;
-      url = "https://github.com/Sanatana-Linux/nixos-awesomewm.git";
-    };
+ #  awesome-config = {
+ #    type = "git";
+ #    flake = false;
+ #    url = "github:Sanatana-Linux/nixos-awesomewm";
+ #  };
 
     bhairava-grub-theme = {
       #type = "git";

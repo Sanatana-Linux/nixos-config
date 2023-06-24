@@ -9,7 +9,7 @@
   gtk = {
     enable = true;
     font = {
-      name = "Asap Condensed, Semi-Bold Condensed";
+      name = "Oxanium Semi-Bold";
       size = 10;
     };
     iconTheme = {

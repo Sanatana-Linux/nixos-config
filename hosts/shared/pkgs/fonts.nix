@@ -81,8 +81,8 @@
       defaultFonts = {
         emoji = ["Noto Color Emoji"];
         monospace = ["Agave Nerd Font Mono Bold"];
-        sansSerif = ["Asap Condensed, Semi-Bold Condensed"];
-        serif = ["Asap VF Beta Bold Italic"];
+        sansSerif = ["Oxanium Semi-Bold"];
+        serif = ["Oxaniun Semi-Bold"];
       };
     };
   };

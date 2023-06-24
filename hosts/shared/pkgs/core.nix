@@ -117,7 +117,6 @@ with pkgs; [
   treefmt
   unrar
   unzip
-  update-nix-fetchgit
   usbmuxd
   usbutils
   utillinux

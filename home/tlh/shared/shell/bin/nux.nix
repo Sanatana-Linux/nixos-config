@@ -75,6 +75,7 @@ with pkgs;
         doas nix-collect-garbage -d
         echo "Collecting user garbage"
         nix-collect-garbage -d
+        nix profile wipe-history
     }
 
 

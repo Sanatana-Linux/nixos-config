@@ -32,7 +32,6 @@ with pkgs; [
   geocode-glib_2
   giflib
   gifsicle
-  gifski
   glib
   glib-networking
   glib-testing

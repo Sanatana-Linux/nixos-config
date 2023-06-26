@@ -130,31 +130,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    programs.thunar = {
-      enable = true;
-      plugins = with pkgs; [
-        xfce.thunar-archive-plugin
-        xfce.thunar-volman
-        xfce.thunar-dropbox-plugin
-        xfce.thunar-media-tags-plugin
-        xarchiver
-        archiver
-        _7zz
-        mozlz4a
-        arj
-        zip
-        runzip
-        tarlz
-        unzip
-        ranger
-        dejsonlz4
-        gnutar
-        zziplib
-        libfm
-        libfm-extra
-        gnome.file-roller
-      ];
-    };
+  
     services.xserver = {
       enable = true;
       exportConfiguration = true;

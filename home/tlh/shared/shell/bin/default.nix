@@ -11,5 +11,5 @@
   shrooms = import ./shrooms.nix {inherit pkgs;};
   updoot = import ./updoot.nix {inherit pkgs;};
 in {
-  home.packages = with pkgs; [extract nux run gita nixfetch updoot panes];
+  home.packages = with pkgs; [extract nux run shrooms gita nixfetch updoot panes];
 }

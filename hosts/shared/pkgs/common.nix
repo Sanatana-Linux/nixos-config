@@ -1,6 +1,22 @@
 {pkgs, ...}:
 with pkgs; [
   _7zz
+    xarchiver
+        archiver
+        _7zz
+        mozlz4a
+        arj
+        zip
+        runzip
+        tarlz
+        unzip
+        ranger
+        dejsonlz4
+        gnutar
+        zziplib
+        libfm
+        libfm-extra
+        gnome.file-roller
   acpi
   xdg-utils
   xdg-user-dirs

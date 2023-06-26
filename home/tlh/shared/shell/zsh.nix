@@ -8,6 +8,7 @@
     enable = true;
     enableSyntaxHighlighting = true;
     enableCompletion = true;
+    autocd = true;
     enableAutosuggestions = true;
     dotDir = ".config/zsh";
     defaultKeymap = "viins";

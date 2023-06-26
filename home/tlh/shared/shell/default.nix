@@ -17,6 +17,7 @@
     sessionPath = [
       "${config.home.homeDirectory}/.local/bin"
       "${config.home.homeDirectory}/Workspace/go/bin"
+      "${config.home.homeDirectory}/.cargo/bin"
     ];
 
     sessionVariables = {

@@ -70,6 +70,11 @@ with pkgs; [
   mesa
   mesa-demos
   moreutils
+  wmutils-core
+  wmutils-libwm
+  wmutils-opt 
+  pmutils
+  pciutils
   networkmanager
   ngrok
   nix-binary-cache
@@ -85,6 +90,22 @@ with pkgs; [
   opencl-clang
   opencl-clang
   p7zip
+  xarchiver
+  archiver
+  _7zz
+  mozlz4a
+  arj
+  zip
+  runzip
+  tarlz
+  unzip
+  ranger
+  dejsonlz4
+  gnutar
+  zziplib
+  libfm
+  libfm-extra
+  gnome.file-roller
   pbzip2
   pciutils
   pfetch

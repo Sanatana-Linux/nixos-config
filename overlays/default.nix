@@ -23,7 +23,16 @@
       preConfigure = "./autogen.sh";
     });
 
-    picom = inputs.nixpkgs-f2k.packages.${prev.system}.picom-git;
+    thunar = prev.thunar.overrideAttrs (old: rec {
+      thunarPlugins = [
+        inputs.nixpkgs.xfce.thunar-archive-plugin
+        inputs.nixpkgs.xfce.thunar-volman
+        inputs.nixpkgs.xfce.thunar-dropbox-plugin
+        inputs.nixpkgs.xfce.thunar-media-tags-plugin
+      ];
+    });
+
+    picom = inputs.nixpkgs-f2k.packages.${prev.system}.picom-pijulius;
   };
 in {
   default = final: prev: (additions final prev) // (modifications final prev);

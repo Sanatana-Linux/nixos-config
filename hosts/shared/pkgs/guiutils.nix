@@ -39,6 +39,13 @@ with pkgs; [
   gnome.gvfs
   gnome2.gtkglext
   gob2
+  xcolor
+xorg-rgb 
+gcolor3 
+colorz 
+xfce.xfce4-power-manager
+  amarena-theme
+  termcolor 
   gobject-introspection-unwrapped
   goocanvas
   goocanvas3

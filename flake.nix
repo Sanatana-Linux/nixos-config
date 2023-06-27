@@ -29,17 +29,17 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
- #   nvim-forge = {
- #     type = "git";
- #     flake = false;
- #     url = "github:Thomashighbaugh/nvim-forge";
- #   };
+    #   nvim-forge = {
+    #     type = "git";
+    #     flake = false;
+    #     url = "github:Thomashighbaugh/nvim-forge";
+    #   };
 
- #  awesome-config = {
- #    type = "git";
- #    flake = false;
- #    url = "github:Sanatana-Linux/nixos-awesomewm";
- #  };
+    #  awesome-config = {
+    #    type = "git";
+    #    flake = false;
+    #    url = "github:Sanatana-Linux/nixos-awesomewm";
+    #  };
 
     bhairava-grub-theme = {
       #type = "git";
@@ -54,6 +54,7 @@
     nixpkgs,
     home-manager,
     bhairava-grub-theme,
+    nur,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -70,10 +71,16 @@
       # Laptop
       hp-laptop-amd = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs bhairava-grub-theme home-manager;};
-        modules = [
+        modules = let
+          nur-modules = import nur {
+            nurpkgs = nixpkgs.legacyPackages.x86_64-linux;
+            pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          };
+        in [
+          {imports = [nur-modules.repos.kira-bruneau.modules.lightdm-webkit2-greeter];}
           ./hosts/hp-laptop-amd
           bhairava-grub-theme.nixosModule
-          home-manager.nixosModules.home-manager
+git          home-manager.nixosModules.home-manager
           {
             home-manager.useUserPackages = true;
             home-manager.backupFileExtension = "bak";

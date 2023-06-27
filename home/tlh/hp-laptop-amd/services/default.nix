@@ -63,32 +63,6 @@
     };
 
     settings = {
-           animations = true;
-      #change animation speed of windows in current tag e.g open window in current tag
-      animation-stiffness-in-tag = 125;
-      #change animation speed of windows when tag changes
-      animation-stiffness-tag-change = 90.0;
-      animation-window-mass = 0.4;
-      animation-dampening = 15;
-      animation-clamping = true;
-      #open windows
-      animation-for-open-window = "zoom";
-      #minimize or close windows
-      animation-for-unmap-window = "squeeze";
-      #popup windows
-      animation-for-transient-window = "slide-up"; #available options: slide-up, slide-down, slide-left, slide-right, squeeze, squeeze-bottom, zoom
-      #set animation for windows being transitioned out while changings tags
-      animation-for-prev-tag = "minimize";
-      #enables fading for windows being transitioned out while changings tags
-      enable-fading-prev-tag = true;
-      #set animation for windows being transitioned in while changings tags
-      animation-for-next-tag = "slide-in-center";
-      #enables fading for windows being transitioned in while changings tags
-      enable-fading-next-tag = true;
-
-
-
-
       shadow-radius = 40;
       shadow-color = "#000000";
       shadow-ignore-shaped = false;
@@ -121,7 +95,7 @@
 
       blur-method = "dual_kawase";
       blur-kernel = "15x15gaussian";
-      blur-deviation = 2.0;
+      blur-deviation = 2.5;
       blur-strength = 12;
       blur-background = true;
       blur-background-frame = true;
@@ -144,11 +118,10 @@
       detect-client-opacity = true;
       detect-transient = true;
       detect-client-leader = true;
-      glx-no-rebind-pixmap = true;
-      unredir-if-possible = true;       
       glx-no-stencil = true;
       use-damage = true;
       transparent-clipping = false;
+      unredir-if-possible = false;
       log-level = "warn";
     };
   };

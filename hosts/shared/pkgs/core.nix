@@ -18,6 +18,8 @@ with pkgs; [
   clang-tools
   clangStdenv
   cmake
+  power-profiles-daemon
+
   commonsCompress
   coreutils-full
   dbus

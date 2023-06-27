@@ -32,7 +32,7 @@
       ];
     });
 
-    picom = inputs.nixpkgs-f2k.packages.${prev.system}.picom-pijulius;
+    picom = inputs.nixpkgs-f2k.packages.${prev.system}.picom-git;
   };
 in {
   default = final: prev: (additions final prev) // (modifications final prev);

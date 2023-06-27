@@ -130,7 +130,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-  
     services.xserver = {
       enable = true;
       exportConfiguration = true;
@@ -141,25 +140,35 @@ in {
         # ly.enable = true;
         lightdm = {
           enable = true;
-
-          background = ../../hosts/shared/wallpaper/wallpaper.png;
-          # TODO use lightdm-webkit2 greeter from NUR, or maybe
-          greeters.gtk = {
+          services.xserver.displayManager.lightdm = {
             enable = true;
-            theme = {
-              package = pkgs.colloid-gtk-theme;
-              name = "Colloid-Dark";
+            greeters.webkit2 = {
+              package = pkgs.lightdm-webkit2-greeter;
+              enable = true;
+              webkitTheme = fetchTarball {
+                url = "https://github.com/Sanatana-Linux/mahakali-webkit2-theme/archive/refs/tags/0.0.1.tar.gz";
+                sha256 = "0jkw26yd464fmjsgwv5hpavm67nksv3zi2cli8rcpbiqnw2hm8xx";
+              };
             };
-            cursorTheme = {
-              package = pkgs.phinger-cursors;
-              name = "Phinger Cursors (light)";
-            };
-            iconTheme = {
-              package = pkgs.papirus-icon-theme;
-              name = "Papirus-Dark";
-            };
-            indicators = ["~session" "~spacer"];
           };
+          #background = ../../hosts/shared/wallpaper/wallpaper.png;
+          # TODO use lightdm-webkit2 greeter from NUR, or maybe
+          # greeters.gtk = {
+          #   enable = true;
+          #   theme = {
+          #     package = pkgs.colloid-gtk-theme;
+          #     name = "Colloid-Dark";
+          #   };
+          #   cursorTheme = {
+          #     package = pkgs.phinger-cursors;
+          #     name = "Phinger Cursors (light)";
+          #   };
+          #   iconTheme = {
+          #     package = pkgs.papirus-icon-theme;
+          #     name = "Papirus-Dark";
+          #   };
+          #   indicators = ["~session" "~spacer"];
+          # };
         };
       };
 
@@ -179,6 +188,7 @@ in {
       inherit
         (pkgs)
         awesome-git-luajit
+        lightdm-webkit2-greeter
         maim
         xclip
         xdotool

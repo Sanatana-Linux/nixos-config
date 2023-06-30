@@ -6,7 +6,7 @@
 }: {
   programs.zsh = {
     enable = true;
-    enableSyntaxHighlighting = true;
+    syntaxHighlighting.enable = true;
     enableCompletion = true;
     autocd = true;
     enableAutosuggestions = true;
@@ -14,7 +14,7 @@
     defaultKeymap = "viins";
     history = {
       extended = true;
-      ignoreDups = true;
+      ignoreDups = false; # sometimes the subtle variants are useful to have in the history
       expireDuplicatesFirst = true;
       path = "${config.xdg.dataHome}/zsh/history";
       save = 9000000; # number of lines to save
@@ -147,7 +147,6 @@
       enable = true;
       zplugHome = "${config.xdg.configHome}/zsh/zplug";
       plugins = [
-        {name = "Aloxaf/fzf-tab";}
         {name = "hlissner/zsh-autopair";}
         {name = "chisui/zsh-nix-shell";}
         {name = "chisui/zsh-nix-shell";}

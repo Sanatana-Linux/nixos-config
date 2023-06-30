@@ -17,6 +17,8 @@ with pkgs; [
   clang-ocl
   clang-tools
   tpm-tools
+  i2c-tools
+  gnome.gnome-characters
   tpm-quote-tools 
   tpm2-abrmd
   tpm2-pkcs11

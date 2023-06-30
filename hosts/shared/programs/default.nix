@@ -36,22 +36,22 @@
         xfce.thunar-volman
         xfce.thunar-dropbox-plugin
         xfce.thunar-media-tags-plugin
-        xarchiver
-        archiver
-        _7zz
-        mozlz4a
-        arj
-        zip
-        runzip
-        tarlz
-        unzip
-        ranger
-        dejsonlz4
-        gnutar
-        zziplib
-        libfm
-        libfm-extra
-        gnome.file-roller
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       ];
     };
     # ------------------------------------------------- #

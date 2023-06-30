@@ -10,7 +10,7 @@
     enable = true;
     font = {
       name = "Oxanium Semi-Bold";
-      size = 10;
+      size = 11;
     };
     iconTheme = {
       name = "Papirus-Dark";
@@ -19,7 +19,7 @@
     cursorTheme = {
       name = "Phinger Cursors (light)";
       package = pkgs.phinger-cursors;
-      size = 38;
+      size = 48;
     };
 
     gtk2 = {

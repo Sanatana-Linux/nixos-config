@@ -10,6 +10,7 @@ with pkgs; [
   emacsPackages.svgo
   exiftool
   feh
+  feh
   ffcast
   figlet
   giflib
@@ -25,17 +26,12 @@ with pkgs; [
   gimpPlugins.texturize
   gimpPlugins.waveletSharpen
   giph
-  git-ignore
-  git-extras
-  git-chglog
-  git-backup
-  git-branchless
-  git-repo-updater
-  gnome.gnome-autoar
+
   gnome.nixos-gsettings-overrides
   graphicsmagick
   gsettings-desktop-schemas
   gst_all_1.gst-libav
+  gthumb
   image_optim
   imagemagick
   img-cat
@@ -44,10 +40,12 @@ with pkgs; [
   imv
   inkscape
   inkscape-with-extensions
+  inkscape-with-extensions
   jhead
   jp2a
   jpegexiforient
   jpeginfo
+  jpegoptim
   jpegoptim
   jpegrescan
   krita
@@ -56,11 +54,13 @@ with pkgs; [
   libjpeg
   libpng
   librsvg
+  librsvg
   libspng
   libungif
   libwebp
   lrzip 
   lz4
+  meme
   meme
   menyoki
   metadata-cleaner
@@ -68,10 +68,13 @@ with pkgs; [
   mnamer
   mozjpeg
   nodePackages_latest.svgo
+  olive-editor
+  openshot-qt
   optipng
   oxipng
   p7zip
   pinsel
+  pixcat
   pixcat
   pixz
   plzip

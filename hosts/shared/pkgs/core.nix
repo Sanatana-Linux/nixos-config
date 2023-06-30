@@ -16,6 +16,17 @@ with pkgs; [
   chatgpt-cli
   clang-ocl
   clang-tools
+  tpm-tools
+  tpm-quote-tools 
+  tpm2-abrmd
+  tpm2-pkcs11
+  tpm2-tools 
+  tpm2-tss 
+  tpmmanager
+  libtpms
+  swtpm 
+  swtpm-tpm2
+  simpleTpmPk11
   clangStdenv
   cmake
   power-profiles-daemon

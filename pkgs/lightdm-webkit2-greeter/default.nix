@@ -1,17 +1,17 @@
-{ lib
-, stdenv
-, fetchFromGitHub
-, meson
-, ninja
-, pkg-config
-, wrapGAppsHook
-, dbus-glib
-, gtk3
-, lightdm
-, webkitgtk
-, linkFarm
+{
+  lib,
+  stdenv,
+  fetchFromGitHub,
+  meson,
+  ninja,
+  pkg-config,
+  wrapGAppsHook,
+  dbus-glib,
+  gtk3,
+  lightdm,
+  webkitgtk,
+  linkFarm,
 }:
-
 stdenv.mkDerivation rec {
   pname = "lightdm-webkit2-greeter";
   version = "2.2.5";
@@ -48,12 +48,12 @@ stdenv.mkDerivation rec {
 
   postPatch = "patchShebangs build/utils.sh";
 
-  nativeBuildInputs = [ meson ninja pkg-config wrapGAppsHook ];
-  buildInputs = [ dbus-glib gtk3 lightdm webkitgtk ];
+  nativeBuildInputs = [meson ninja pkg-config wrapGAppsHook];
+  buildInputs = [dbus-glib gtk3 lightdm webkitgtk];
 
   mesonFlags = [
     "-Dwith-theme-dir=${placeholder "out"}/share/lightdm-webkit/themes"
-    "-Dwith-desktop-dir=${placeholder "out"}/share/xgreeters"
+#    "-Dwith-desktop-dir=${placeholder "out"}/share/xgreeters"
     "-Dwith-webext-dir=${placeholder "out"}/lib/lightdm-webkit2-greeter"
     "-Dwith-locale-dir=${placeholder "out"}/share/locale"
   ];
@@ -64,16 +64,18 @@ stdenv.mkDerivation rec {
   '';
 
   # $out is not replaced with the correct placeholder
-  # passthru.xgreeters = linkFarm "lightdm-webkit2-greeter-xgreeters" [{
-  #   path = "$out/share/xgreeters/lightdm-webkit2-greeter.desktop";
-  #   name = "lightdm-webkit2-greeter.desktop";
-  # }];
+  passthru.xgreeters = linkFarm "lightdm-webkit2-greeter-xgreeters" [
+    {
+      path = "$out/share/xgreeters/lightdm-webkit2-greeter.desktop";
+      name = "lightdm-webkit2-greeter.desktop";
+    }
+  ];
 
   meta = with lib; {
     description = "A modern, visually appealing greeter for LightDM";
     homepage = "https://github.com/Antergos/web-greeter";
     license = licenses.gpl3;
-    maintainers = with maintainers; [ metadark ];
+    maintainers = with maintainers; [metadark];
     platforms = platforms.linux;
   };
 }

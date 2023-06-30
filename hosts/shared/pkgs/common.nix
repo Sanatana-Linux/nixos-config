@@ -1,28 +1,9 @@
 {pkgs, ...}:
 with pkgs; [
   _7zz
-    xarchiver
-        archiver
-        _7zz
-        mozlz4a
-        arj
-        zip
-        runzip
-        tarlz
-        unzip
-        ranger
-        dejsonlz4
-        gnutar
-        zziplib
-        libfm
-        libfm-extra
-        gnome.file-roller
   acpi
-  xdg-utils
-  xdg-user-dirs
-  shared-mime-info
-  desktop-file-utils
   arandr
+  archiver
   arj
   autorandr
   avidemux
@@ -35,27 +16,26 @@ with pkgs; [
   cpio
   dbus-broker
   dconf
+  dejsonlz4
+  desktop-file-utils
   discord
   dtrx
   epiphany
   extra-cmake-modules
   fastjar
   fbida
-  feh
   firefox
   font-manager
   fuse3
   geocode-glib_2
-  giflib
-  gifsicle
   glib
   glib-networking
   glib-testing
   glibc
-  glibc_memusage
-  glibc_multi
   glibcInfo
   glibcLocalesUtf8
+  glibc_memusage
+  glibc_multi
   glibmm
   gnome.file-roller
   gnome.gnome-themes-extra
@@ -67,18 +47,14 @@ with pkgs; [
   goocanvas
   goocanvas3
   google-chrome
-  gthumb
-  gtk_engines
   gtk-sharp-2_0
   gtk2-x11
   gtk3
   gtk3-x11
   gtk4
+  gtk_engines
   gusb
-  i3lock-color
-  inkscape-with-extensions
   inotify-tools
-  jpegoptim
   libarchive
   libcanberra-gtk3
   libdbusmenu
@@ -92,13 +68,11 @@ with pkgs; [
   libnotify
   libpar2
   librewolf
-  librsvg
   libsForQt5.qt5ct
   libsForQt5.qtstyleplugin-kvantum
   libxdg_basedir
   lightlocker
   maim
-  meme
   menu-cache
   mesa
   mesa-demos
@@ -106,8 +80,6 @@ with pkgs; [
   mozlz4a
   networkmanagerapplet
   ntfs3g
-  olive-editor
-  openshot-qt
   pango
   pangomm
   pasystray
@@ -118,22 +90,23 @@ with pkgs; [
   perl536Packages.CairoGObject
   perl536Packages.GooCanvas2CairoTypes
   picom
-  pixcat
   polkit_gnome
   poppler_utils
   python311Packages.pyxdg
-  qogir-icon-theme
-  ranger
   rar
   rofi
   runzip
+  shared-mime-info
+  gnome.gnome-autoar
   shotcut
-  signal-desktop
   tarlz
+
+  calibre
+  ueberzug
   tdesktop
   template-glib
-  terminus_font
   terminus-nerdfont
+  terminus_font
   testdisk
   themechanger
   thunderbird-bin
@@ -144,10 +117,12 @@ with pkgs; [
   wirelesstools
   wmctrl
   wpa_supplicant
+  xarchiver
   xcbutilxrm
   xcftools
   xclip
   xdg-desktop-portal-gtk
+  xdg-user-dirs
   xdg-utils
   xdotool
   xfce.exo
@@ -157,6 +132,7 @@ with pkgs; [
   xfce.tumbler
   xfce.xfce4-dev-tools
   xfce.xfce4-settings
+  xfce.xfce4-power-manager
   xfce.xfconf
   xlsfonts
   xorg.fontalias

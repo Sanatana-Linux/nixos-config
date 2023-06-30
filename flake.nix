@@ -71,16 +71,10 @@
       # Laptop
       hp-laptop-amd = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs bhairava-grub-theme home-manager;};
-        modules = let
-          nur-modules = import nur {
-            nurpkgs = nixpkgs.legacyPackages.x86_64-linux;
-            pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          };
-        in [
-          {imports = [nur-modules.repos.kira-bruneau.modules.lightdm-webkit2-greeter];}
+        modules =[ 
           ./hosts/hp-laptop-amd
           bhairava-grub-theme.nixosModule
-git          home-manager.nixosModules.home-manager
+          home-manager.nixosModules.home-manager
           {
             home-manager.useUserPackages = true;
             home-manager.backupFileExtension = "bak";

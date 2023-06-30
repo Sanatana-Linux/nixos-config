@@ -3,9 +3,14 @@
   inputs,
   lib,
   pkgs,
+  nur,
   ...
 }:
 with lib; let
+ nur-modules = import nur {
+   nurpkgs = nixpkgs.legacyPackages.x86_64-linux;
+   pkgs = nixpkgs.legacyPackages.x86_64-linux;
+ };
   cfg = config.services.xserver.windowManager.awesome;
   # ------------------------------------------------- #
   dbus_proxy = pkgs.callPackage ({
@@ -123,7 +128,7 @@ with lib; let
     lgi-async-extra
   ];
 in {
-  options = {
+options = {
     services.xserver.windowManager.awesome = {
       enable = mkEnableOption (lib.mdDoc "Awesome Window Manager Luajit");
     };
@@ -140,35 +145,33 @@ in {
         # ly.enable = true;
         lightdm = {
           enable = true;
-          services.xserver.displayManager.lightdm = {
-            enable = true;
-            greeters.webkit2 = {
-              package = pkgs.lightdm-webkit2-greeter;
-              enable = true;
-              webkitTheme = fetchTarball {
-                url = "https://github.com/Sanatana-Linux/mahakali-webkit2-theme/archive/refs/tags/0.0.1.tar.gz";
-                sha256 = "0jkw26yd464fmjsgwv5hpavm67nksv3zi2cli8rcpbiqnw2hm8xx";
-              };
-            };
-          };
-          #background = ../../hosts/shared/wallpaper/wallpaper.png;
-          # TODO use lightdm-webkit2 greeter from NUR, or maybe
-          # greeters.gtk = {
+# TODO make this work
+          #  greeters.webkit2 = {
           #   enable = true;
-          #   theme = {
-          #     package = pkgs.colloid-gtk-theme;
-          #     name = "Colloid-Dark";
+          #   webkitTheme = fetchTarball {
+          #     url = "https://github.com/Sanatana-Linux/mahakali-webkit2-theme/archive/refs/tags/0.0.1.tar.gz";
+          #     sha256 = "0jkw26yd464fmjsgwv5hpavm67nksv3zi2cli8rcpbiqnw2hm8xx";
           #   };
-          #   cursorTheme = {
-          #     package = pkgs.phinger-cursors;
-          #     name = "Phinger Cursors (light)";
-          #   };
-          #   iconTheme = {
-          #     package = pkgs.papirus-icon-theme;
-          #     name = "Papirus-Dark";
-          #   };
-          #   indicators = ["~session" "~spacer"];
           # };
+
+          background = ../../hosts/shared/wallpaper/wallpaper.png;
+           greeters.gtk = {
+             enable = true;
+             theme = {
+               package = pkgs.colloid-gtk-theme;
+               name = "Colloid-Dark";
+             };
+             cursorTheme = {
+               package = pkgs.phinger-cursors;
+               name = "Phinger Cursors (light)";
+               size = 48;
+             };
+             iconTheme = {
+               package = pkgs.papirus-icon-theme;
+               name = "Papirus-Dark";
+             };
+             indicators = ["~session" "~spacer"];
+           };
         };
       };
 
@@ -188,7 +191,6 @@ in {
       inherit
         (pkgs)
         awesome-git-luajit
-        lightdm-webkit2-greeter
         maim
         xclip
         xdotool

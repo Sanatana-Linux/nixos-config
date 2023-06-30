@@ -16,13 +16,13 @@ with pkgs; [
   apktool
   aria
   bat
+  beep
   binutils
   brightnessctl
   btop
   bundletool
-  calibre
-  chatgpt-cli
   clang
+  clipster
   comma
   conda
   cookiecutter
@@ -30,7 +30,6 @@ with pkgs; [
   curl
   deer
   dex2jar
-  ebook_tools
   efibootmgr
   efitools
   exa
@@ -44,8 +43,8 @@ with pkgs; [
   gccStdenv
   gh
   ghost
-  git
-  git-trim
+
+
   htop
   imgpatchtools
   imgurbash2
@@ -53,6 +52,9 @@ with pkgs; [
   jq
   libdbusmenu
   libgccjit
+  libgig
+  libgit2
+  libgit2-glib
   libuv
   linuxConsoleTools
   lm_sensors
@@ -69,6 +71,7 @@ with pkgs; [
   nixos-generators
   ntfs3g
   ocl-icd
+  parcellite
   patchelf
   pciutils
   platinum-searcher
@@ -90,10 +93,6 @@ with pkgs; [
   termpdfpy
   trash-cli
   tree
-  ueberzug
-  ueberzug
-  unrar
-  unzip
   usbmuxd
   usbutils
   vimPlugins.nvim-treesitter
@@ -102,12 +101,14 @@ with pkgs; [
   vimPlugins.nvim-treesitter-refactor
   vimPlugins.nvim-treesitter-textobjects
   wget
+  wget
   whois
   wirelesstools
   xarchiver
   xclip
   xorg.gccmakedep
   xorg.xev
+  yad
   yt-dlp
   zip
   zsh
@@ -115,12 +116,4 @@ with pkgs; [
   zsh-edit
   zsh-navigation-tools
   zsh-you-should-use
-  wget
-  libgig
-  libgit2
-  libgit2-glib
-  yad
-  parcellite
-  clipster
-  beep
 ]

@@ -2,6 +2,8 @@
 with pkgs; [
   arduino
   awscli
+  git
+  git-trim  
   bash
   biber
   bibtex2html
@@ -24,13 +26,15 @@ with pkgs; [
   gcc
   gdk-pixbuf
   gdk-pixbuf-xlib
+  git-backup
+  git-branchless
+  git-chglog
+  git-extras
+  git-ignore
+  git-repo-updater
   glib
   gnumake
   gnutls
-  pkg-config
-  pkg-configUpstream
-  pkgconfig
-  libpkgconf
   go
   gofumpt
   gource
@@ -43,6 +47,7 @@ with pkgs; [
   ktlint
   libffi
   libimobiledevice
+  libpkgconf
   libtiff
   libtool
   lightningcss
@@ -115,7 +120,10 @@ with pkgs; [
   pandoc-lua-filters
   pciutils
   pet
+  pkg-config
   pkg-config-unwrapped
+  pkg-configUpstream
+  pkgconfig
   postman
   prisma-engines
   puppeteer-cli
@@ -142,7 +150,6 @@ with pkgs; [
   vim-vint
   vimPlugins.rust-tools-nvim
   vscode
-
   wkhtmltopdf-bin
   yarn
   yarn2nix

@@ -27,6 +27,8 @@ with pkgs; [
   swtpm 
   swtpm-tpm2
   simpleTpmPk11
+  ddcutil
+  ddcui
   clangStdenv
   cmake
   power-profiles-daemon

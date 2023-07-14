@@ -136,6 +136,7 @@
       cat = "${lib.getExe bat} --style=plain";
       l = "${lib.getExe exa} -lF --time-style=long-iso --icons";
       la = "${lib.getExe exa} -lah --tree";
+      lx="${lib.getExe exa} -alh --color=auto --group-directories-first --icons --git";
       ls = "${lib.getExe exa} -h --git --icons --color=auto --group-directories-first -s extension";
       tree = "${lib.getExe exa} --tree --icons --tree";
       ytmp3 = ''

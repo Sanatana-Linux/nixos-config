@@ -26,7 +26,7 @@ with pkgs; [
   gimpPlugins.texturize
   gimpPlugins.waveletSharpen
   giph
-
+  ascii-image-converter  
   gnome.nixos-gsettings-overrides
   graphicsmagick
   gsettings-desktop-schemas

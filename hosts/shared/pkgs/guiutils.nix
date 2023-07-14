@@ -44,6 +44,7 @@ xorg-rgb
 gcolor3 
 colorz 
 xfce.xfce4-power-manager
+dupeguru
   amarena-theme
   termcolor 
   gobject-introspection-unwrapped

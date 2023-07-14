@@ -19,4 +19,7 @@
 
 ## Documentation
 
-All of the documentation is in the `.notes` directory, which serves as a project-based note-taking system I have developed organically to keep project notebooks with their associated projects. Below are pages of this projects _notebook_ which may be of interest to third parties: 1. [Installation Notes](./.notes/installation.md) 1. [Inspiration and Credits](./.notes/credits.md)
+All of the documentation is in the `.notes` directory, which serves as a project-based note-taking system I have developed organically to keep project notebooks with their associated projects. Below are pages of this projects _notebook_ which may be of interest to third parties:
+
+1. [Installation Notes](./.notes/installation.md)
+1. [Inspiration and Credits](./.notes/credits.md)

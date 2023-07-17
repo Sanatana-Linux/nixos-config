@@ -43,7 +43,6 @@ with pkgs; [
   gccStdenv
   gh
   ghost
-findimagedupes
 jdupes
 
   htop

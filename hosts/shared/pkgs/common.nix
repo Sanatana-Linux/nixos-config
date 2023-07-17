@@ -12,6 +12,7 @@ with pkgs; [
   btar
   cairo
   cairomm
+  calibre
   cmake
   cpio
   dbus-broker
@@ -38,6 +39,7 @@ with pkgs; [
   glibc_multi
   glibmm
   gnome.file-roller
+  gnome.gnome-autoar
   gnome.gnome-themes-extra
   gnome.gvfs
   gnome2.gtkglext
@@ -97,12 +99,8 @@ with pkgs; [
   rofi
   runzip
   shared-mime-info
-  gnome.gnome-autoar
   shotcut
   tarlz
-
-  calibre
-  ueberzug
   tdesktop
   template-glib
   terminus-nerdfont
@@ -110,6 +108,7 @@ with pkgs; [
   testdisk
   themechanger
   thunderbird-bin
+  ueberzug
   unrar
   unscd
   unzip
@@ -131,8 +130,8 @@ with pkgs; [
   xfce.libxfce4util
   xfce.tumbler
   xfce.xfce4-dev-tools
-  xfce.xfce4-settings
   xfce.xfce4-power-manager
+  xfce.xfce4-settings
   xfce.xfconf
   xlsfonts
   xorg.fontalias

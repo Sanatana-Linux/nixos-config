@@ -1,6 +1,7 @@
 {pkgs, ...}:
 with pkgs; [
   acpi
+  amarena-theme
   appimage-run
   appimagekit
   appstream-glib
@@ -20,9 +21,11 @@ with pkgs; [
   cairo
   cairomm
   codespell
+  colorz 
   dbus-broker
   dconf
   discord
+  dupeguru
   ebook_tools
   epick
   eyedropper
@@ -32,21 +35,15 @@ with pkgs; [
   font-manager
   fuseiso
   galculator
+  gcolor3 
   geocode-glib_2
+  gmime3
   gnome.file-roller
   gnome.gnome-disk-utility
   gnome.gnome-themes-extra
   gnome.gvfs
   gnome2.gtkglext
   gob2
-  xcolor
-xorg-rgb 
-gcolor3 
-colorz 
-xfce.xfce4-power-manager
-dupeguru
-  amarena-theme
-  termcolor 
   gobject-introspection-unwrapped
   goocanvas
   goocanvas3
@@ -55,12 +52,12 @@ dupeguru
   gpick
   gspell
   gthumb
-  gtk_engines
   gtk-sharp-2_0
   gtk2-x11
   gtk3
   gtk3-x11
   gtk4
+  gtk_engines
   gtkspell3
   gtkspellmm
   gusb
@@ -103,15 +100,14 @@ dupeguru
   pango
   pangomm
   pantheon.file-roller-contract
+  papirus-folders
+  papirus-icon-theme
   pasystray
-  gmime3
   pdf-parser
   pdfarranger
   pdfmm
   pdfstudio2022
   pdftag
-  papirus-icon-theme
-  papirus-folders
   pdftk
   perl536Packages.CairoGObject
   perl536Packages.GooCanvas2CairoTypes
@@ -127,8 +123,9 @@ dupeguru
   tangram
   tdesktop
   template-glib
-  terminus_font
+  termcolor 
   terminus-nerdfont
+  terminus_font
   termpdfpy
   themechanger
   thunderbird
@@ -146,6 +143,7 @@ dupeguru
   xcftools
   xclip
   xcolor
+  xcolor
   xdg-desktop-portal-gtk
   xdg-utils
   xdotool
@@ -155,10 +153,12 @@ dupeguru
   xfce.libxfce4util
   xfce.tumbler
   xfce.xfce4-dev-tools
+  xfce.xfce4-power-manager
   xfce.xfce4-settings
   xfce.xfconf
   xlsfonts
   xmcp
+  xorg-rgb 
   xscreensaver
   xsecurelock
   xsuspender

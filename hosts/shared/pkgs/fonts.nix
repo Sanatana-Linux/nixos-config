@@ -6,6 +6,13 @@
       cascadia-code # microsoft ligatures font
       comic-relief
       courier-prime
+      hyperscrypt-font
+      hubot-sans
+      hackgen-font
+      hackgen-nf-font
+      alegreya  
+      alice
+      fontpreview
       cozette
       corefonts
       d2coding

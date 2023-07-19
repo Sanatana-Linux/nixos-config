@@ -19,6 +19,7 @@ with pkgs; [
   tpm-tools
   i2c-tools
   gnome.gnome-characters
+  xbrightness
   tpm-quote-tools 
   tpm2-abrmd
   tpm2-pkcs11
@@ -151,6 +152,7 @@ with pkgs; [
   tor
   toybox
   trash-cli
+  xorg.xf86videoamdgpu
   tree
   treefmt
   unrar

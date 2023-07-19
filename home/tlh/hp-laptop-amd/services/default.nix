@@ -56,8 +56,8 @@
       };
       dock = {shadow = false;};
       dnd = {shadow = false;};
-      popup_menu = {opacity = 1;};
-      dropdown_menu = {opacity = 1;};
+      popup_menu = {opacity = 0.95;};
+      dropdown_menu = {opacity = 0.95;};
       desktop = {full-shadow = false;};
       normal = {full-shadow = false;};
     };
@@ -67,7 +67,7 @@
       shadow-color = "#000000";
       shadow-ignore-shaped = false;
 
-      frame-opacity = 1.0;
+      frame-opacity = 0.95;
       inactive-opacity-override = false;
       focus-exclude = [
         "class_g = 'Cairo-clock'"

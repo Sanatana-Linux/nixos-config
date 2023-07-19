@@ -29,31 +29,6 @@
 
     # allow users to mount fuse filesystems with allow_other
     fuse.userAllowOther = true;
-    thunar = {
-      enable = true;
-      plugins = with pkgs; [
-        xfce.thunar-archive-plugin
-        xfce.thunar-volman
-        xfce.thunar-dropbox-plugin
-        xfce.thunar-media-tags-plugin
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ];
-    };
     # ------------------------------------------------- #
   };
 }

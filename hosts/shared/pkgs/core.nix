@@ -20,9 +20,6 @@ with pkgs; [
   i2c-tools
   gnome.gnome-characters
   xbrightness
-  tpm-quote-tools 
-  tpm2-abrmd
-  tpm2-pkcs11
   tpm2-tools 
   tpm2-tss 
   tpmmanager

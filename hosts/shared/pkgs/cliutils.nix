@@ -43,8 +43,7 @@ with pkgs; [
   gccStdenv
   gh
   ghost
-jdupes
-
+  jdupes
   htop
   imgpatchtools
   imgurbash2

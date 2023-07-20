@@ -122,6 +122,7 @@ with pkgs; [
   rofi
   tangram
   tdesktop
+  xfce.thunar
   template-glib
   termcolor 
   terminus-nerdfont

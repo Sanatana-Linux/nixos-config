@@ -117,7 +117,6 @@
       acpid
       acpilight
       acpitool
-      mesa
       mesa-demos
       libva
     xorg.xf86videoamdgpu 
@@ -133,7 +132,7 @@
       libva-utils
     ];
   };
-
+ chaotic.mesa-git.enable = true;
   hardware = {
     enableRedistributableFirmware = true;
     bluetooth = {

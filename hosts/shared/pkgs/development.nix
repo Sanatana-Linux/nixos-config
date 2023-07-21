@@ -152,5 +152,6 @@ with pkgs; [
   vscode
   wkhtmltopdf-bin
   yarn
+  rustscan
   yarn2nix
 ]

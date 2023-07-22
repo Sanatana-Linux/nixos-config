@@ -4,7 +4,7 @@ with pkgs; [
   byzanz
   ciano
   crabz
-  curtail 
+  curtail
   delve
   ebook_tools
   emacsPackages.svgo
@@ -26,7 +26,7 @@ with pkgs; [
   gimpPlugins.texturize
   gimpPlugins.waveletSharpen
   giph
-  ascii-image-converter  
+  ascii-image-converter
   gnome.nixos-gsettings-overrides
   graphicsmagick
   gsettings-desktop-schemas
@@ -58,7 +58,7 @@ with pkgs; [
   libspng
   libungif
   libwebp
-  lrzip 
+  lrzip
   lz4
   meme
   meme
@@ -87,10 +87,10 @@ with pkgs; [
   pngquant
   pngtoico
   pngtools
-  pxz 
+  pxz
   python311Packages.image-go-nord
   python311Packages.pyfiglet
-  rarcrack 
+  rarcrack
   resvg
   ripgrep
   rubyPackages.gdk_pixbuf2

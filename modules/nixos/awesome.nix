@@ -7,10 +7,10 @@
   ...
 }:
 with lib; let
- nur-modules = import nur {
-   nurpkgs = nixpkgs.legacyPackages.x86_64-linux;
-   pkgs = nixpkgs.legacyPackages.x86_64-linux;
- };
+  nur-modules = import nur {
+    nurpkgs = nixpkgs.legacyPackages.x86_64-linux;
+    pkgs = nixpkgs.legacyPackages.x86_64-linux;
+  };
   cfg = config.services.xserver.windowManager.awesome;
   # ------------------------------------------------- #
   dbus_proxy = pkgs.callPackage ({
@@ -128,7 +128,7 @@ with lib; let
     lgi-async-extra
   ];
 in {
-options = {
+  options = {
     services.xserver.windowManager.awesome = {
       enable = mkEnableOption (lib.mdDoc "Awesome Window Manager Luajit");
     };
@@ -145,7 +145,7 @@ options = {
         # ly.enable = true;
         lightdm = {
           enable = true;
-# TODO make this work
+          # TODO make this work
           #  greeters.webkit2 = {
           #   enable = true;
           #   webkitTheme = fetchTarball {
@@ -155,23 +155,23 @@ options = {
           # };
 
           background = ../../hosts/shared/wallpaper/wallpaper.png;
-           greeters.gtk = {
-             enable = true;
-             theme = {
-               package = pkgs.colloid-gtk-theme;
-               name = "Colloid-Dark";
-             };
-             cursorTheme = {
-               package = pkgs.phinger-cursors;
-               name = "Phinger Cursors (light)";
-               size = 48;
-             };
-             iconTheme = {
-               package = pkgs.papirus-icon-theme;
-               name = "Papirus-Dark";
-             };
-             indicators = ["~session" "~spacer"];
-           };
+          greeters.gtk = {
+            enable = true;
+            theme = {
+              package = pkgs.colloid-gtk-theme;
+              name = "Colloid-Dark";
+            };
+            cursorTheme = {
+              package = pkgs.phinger-cursors;
+              name = "Phinger Cursors (light)";
+              size = 48;
+            };
+            iconTheme = {
+              package = pkgs.papirus-icon-theme;
+              name = "Papirus-Dark";
+            };
+            indicators = ["~session" "~spacer"];
+          };
         };
       };
 

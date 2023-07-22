@@ -37,7 +37,7 @@ with pkgs;
         &&  git commit \
         &&  git push \
         || echo "Error with location of Nix Configuration" \
-        && exit   
+        && exit
       }
 
     function rebuild() {
@@ -52,7 +52,7 @@ with pkgs;
 
      function optimize() {
         doas nix-collect-garbage -d
-        doas nix-store --optimize --verbose 
+        doas nix-store --optimize --verbose
      }
 
     function rollback() {

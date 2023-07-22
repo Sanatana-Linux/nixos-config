@@ -61,30 +61,15 @@
         ALWAYS_TO_END
         APPEND_HISTORY
         APPENDHISTORY
-        AUTO_CD
         AUTO_LIST
         AUTO_MENU
         AUTO_PARAM_SLASH
         AUTO_PUSHD
         COMPLETE_IN_WORD
         CORRECT
-        EXTENDED_HISTORY
         EXTENDEDGLOB
-        HIST_EXPIRE_DUPS_FIRST
-        HIST_FCNTL_LOCK
-        HIST_IGNORE_ALL_DUPS
-        HIST_IGNORE_DUPS
-        HIST_IGNORE_SPACE
-        HIST_REDUCE_BLANKS
-        HIST_SAVE_NO_DUPS
-        HIST_VERIFY
-        HISTFINDNODUPS
-        HISTREDUCEBLANKS
-        HISTVERIFY
         INC_APPEND_HISTORY
-        INCAPPENDHISTORY
         INTERACTIVE_COMMENTS
-        INTERACTIVECOMMENTS
         MENU_COMPLETE
         NO_NOMATCH
         NOCASEGLOB
@@ -110,8 +95,8 @@
     '';
 
     initExtraFirst = ''
-      any-nix-shell zsh --info-right | source /dev/stdin
       source ${config.xdg.configHome}/zsh/zplug/**/*.zsh
+      any-nix-shell zsh --info-right | source /dev/stdin
     '';
 
     shellAliases = with pkgs; {
@@ -136,7 +121,7 @@
       cat = "${lib.getExe bat} --style=plain";
       l = "${lib.getExe exa} -lF --time-style=long-iso --icons";
       la = "${lib.getExe exa} -lah --tree";
-      lx="${lib.getExe exa} -alh --color=auto --group-directories-first --icons --git";
+      lx = "${lib.getExe exa} -alh --color=auto --group-directories-first --icons --git";
       ls = "${lib.getExe exa} -h --git --icons --color=auto --group-directories-first -s extension";
       tree = "${lib.getExe exa} --tree --icons --tree";
       ytmp3 = ''
@@ -149,7 +134,6 @@
       zplugHome = "${config.xdg.configHome}/zsh/zplug";
       plugins = [
         {name = "hlissner/zsh-autopair";}
-        {name = "chisui/zsh-nix-shell";}
         {name = "chisui/zsh-nix-shell";}
         {name = "lincheney/fzf-tab-completion";}
       ];

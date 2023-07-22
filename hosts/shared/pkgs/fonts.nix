@@ -10,12 +10,27 @@
       hubot-sans
       hackgen-font
       hackgen-nf-font
-      alegreya  
+      alegreya
       alice
       fontpreview
       cozette
       corefonts
       d2coding
+      undefined-medium
+      u001-font
+      scheherazade-new
+      oldstandard
+      agave
+      zilla-slab
+      xlsfonts
+      ucs-fonts
+      unfonts-core
+      lalezar-fonts
+      gyre-fonts
+      dosemu_fonts
+      cm_unicode
+      kreative-square-fonts
+
       ankacoder-condensed
       ankacoder
       dina-font

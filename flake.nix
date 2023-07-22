@@ -81,8 +81,8 @@
         in [
           {imports = [nur-modules.repos.kira-bruneau.modules.lightdm-webkit2-greeter];}
           ./hosts/hp-laptop-amd
-    chaotic.nixosModules.default # OUR DEFAULT MODULE
-        bhairava-grub-theme.nixosModule
+          chaotic.nixosModules.default # OUR DEFAULT MODULE
+          bhairava-grub-theme.nixosModule
           home-manager.nixosModules.home-manager
           {
             home-manager.useUserPackages = true;

@@ -60,7 +60,7 @@
       # https://gist.github.com/wmealing/2dd2b543c4d3cff6cab7
       "processor.max_cstate=5"
       # disable the intel_idle driver and use acpi_idle instead
- #     "idle=nomwait"
+      #     "idle=nomwait"
       # ignore access time (atime) updates on files, except when they coincide with updates to the ctime or mtime
       "rootflags=noatime"
       # enable IOMMU for devices used in passthrough and provide better host performance
@@ -74,7 +74,7 @@
       # isables resume and restores original swap space
       "noresume"
       # allows systemd to set and save the backlight state
-#      "acpi_backlight=none"
+      #      "acpi_backlight=none"
       # prevent the kernel from blanking plymouth out of the fb
       "fbcon=nodefer"
       # disable boot logo if any
@@ -117,10 +117,11 @@
       acpid
       acpilight
       acpitool
+      mesa
       mesa-demos
       libva
-    xorg.xf86videoamdgpu 
-    libdbusmenu
+      xorg.xf86videoamdgpu
+      libdbusmenu
       libdbusmenu-gtk3
       dbus-broker
       dbus-glib
@@ -132,7 +133,6 @@
       libva-utils
     ];
   };
- chaotic.mesa-git.enable = true;
   hardware = {
     enableRedistributableFirmware = true;
     bluetooth = {
@@ -186,8 +186,6 @@
 
   # Use custom Awesome WM module
   services.xserver.windowManager.awesome.enable = true;
-
-
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.05";

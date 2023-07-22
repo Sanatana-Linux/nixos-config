@@ -60,7 +60,6 @@
       package = pkgs.adwaita-qt;
     };
   };
-  
 
   # maybe the below is more elegant, but it doesn't include the necessary `.git` directory so I can't do any work on the repo, that's useless
   # xdg.configFile."awesome".source = "${inputs.awesome-config}";

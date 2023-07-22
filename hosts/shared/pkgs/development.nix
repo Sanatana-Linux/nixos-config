@@ -3,7 +3,7 @@ with pkgs; [
   arduino
   awscli
   git
-  git-trim  
+  git-trim
   bash
   biber
   bibtex2html
@@ -153,5 +153,7 @@ with pkgs; [
   wkhtmltopdf-bin
   yarn
   rustscan
+  anytype
+  typescript
   yarn2nix
 ]

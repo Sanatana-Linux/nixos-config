@@ -36,9 +36,9 @@
       glib-networking.enable = true;
       gnome-keyring.enable = true;
     };
-    # thumbnails 
+    # thumbnails
     tumbler.enable = true;
-    # drive mounting 
+    # drive mounting
     gvfs.enable = true;
 
     #   openssh = {

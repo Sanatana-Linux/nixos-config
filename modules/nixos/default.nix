@@ -1,6 +1,3 @@
 {
- awesome = import ./awesome.nix;
-imports = [
-./firefox
-];  
+  awesome = import ./awesome.nix;
 }

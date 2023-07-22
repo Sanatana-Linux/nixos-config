@@ -20,11 +20,11 @@ with pkgs; [
   i2c-tools
   gnome.gnome-characters
   xbrightness
-  tpm2-tools 
-  tpm2-tss 
+  tpm2-tools
+  tpm2-tss
   tpmmanager
   libtpms
-  swtpm 
+  swtpm
   swtpm-tpm2
   simpleTpmPk11
   ddcutil
@@ -87,7 +87,7 @@ with pkgs; [
   moreutils
   wmutils-core
   wmutils-libwm
-  wmutils-opt 
+  wmutils-opt
   pmutils
   pciutils
   networkmanager

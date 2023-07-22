@@ -53,7 +53,7 @@ stdenv.mkDerivation rec {
 
   mesonFlags = [
     "-Dwith-theme-dir=${placeholder "out"}/share/lightdm-webkit/themes"
-#    "-Dwith-desktop-dir=${placeholder "out"}/share/xgreeters"
+    #    "-Dwith-desktop-dir=${placeholder "out"}/share/xgreeters"
     "-Dwith-webext-dir=${placeholder "out"}/lib/lightdm-webkit2-greeter"
     "-Dwith-locale-dir=${placeholder "out"}/share/locale"
   ];

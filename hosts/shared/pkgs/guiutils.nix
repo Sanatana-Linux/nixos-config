@@ -21,7 +21,7 @@ with pkgs; [
   cairo
   cairomm
   codespell
-  colorz 
+  colorz
   dbus-broker
   dconf
   discord
@@ -35,7 +35,7 @@ with pkgs; [
   font-manager
   fuseiso
   galculator
-  gcolor3 
+  gcolor3
   geocode-glib_2
   gmime3
   gnome.file-roller
@@ -124,7 +124,7 @@ with pkgs; [
   tdesktop
   xfce.thunar
   template-glib
-  termcolor 
+  termcolor
   terminus-nerdfont
   terminus_font
   termpdfpy
@@ -159,7 +159,7 @@ with pkgs; [
   xfce.xfconf
   xlsfonts
   xmcp
-  xorg-rgb 
+  xorg-rgb
   xscreensaver
   xsecurelock
   xsuspender

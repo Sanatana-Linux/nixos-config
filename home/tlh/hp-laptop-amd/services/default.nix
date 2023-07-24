@@ -28,7 +28,7 @@
       animation-dampening = 22.0;
       animation-clamping = true;
       animation-mass = 1;
-      animation-for-open-window = "zoom";
+      animation-for-open-window = "slide-up";
       animation-for-menu-window = "slide-down";
       animation-for-transient-window = "slide-down";
       animation-for-prev-tag = "zoom";
@@ -52,6 +52,8 @@
       ];
       blur-background-exclude = [
         "class_g ~= 'slop'"
+        "class_g ~= 'maim'"
+        "class_g ~= 'Shutter'"
         "window_type = 'desktop'"
         "class_g ~= 'discord'"
         "class_g ~= 'firefox'"
@@ -59,6 +61,8 @@
         "class_g ~= 'firefox'"
         "class_i ~= 'Spotify'"
         "name ~= 'slop'"
+        "name ~= 'Shutter'"
+        "name ~= 'maim'"
       ];
       blur = {
         method = "dual_kawase";

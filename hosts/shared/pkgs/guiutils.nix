@@ -123,6 +123,7 @@ with pkgs; [
   tangram
   tdesktop
   xfce.thunar
+  transmission-gtk
   template-glib
   termcolor
   terminus-nerdfont

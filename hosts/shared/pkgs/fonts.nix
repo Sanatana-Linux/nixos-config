@@ -1,58 +1,45 @@
 {pkgs, ...}: {
   fonts = {
-    fonts = with pkgs; [
+    packages = with pkgs; [
+      agave
+      alegreya
+      alice
+      ankacoder
+      ankacoder-condensed
       arkpandora_ttf
       cantarell-fonts
       cascadia-code # microsoft ligatures font
-      comic-relief
-      courier-prime
-      hyperscrypt-font
-      hubot-sans
-      hackgen-font
-      hackgen-nf-font
-      alegreya
-      alice
-      fontpreview
-      cozette
-      corefonts
-      d2coding
-      undefined-medium
-      u001-font
-      scheherazade-new
-      oldstandard
-      agave
-      zilla-slab
-      xlsfonts
-      ucs-fonts
-      unfonts-core
-      lalezar-fonts
-      gyre-fonts
-      dosemu_fonts
       cm_unicode
-      kreative-square-fonts
-
-      ankacoder-condensed
-      ankacoder
+      comic-relief
+      corefonts
+      courier-prime
+      cozette
+      d2coding
       dina-font
-      eunomia
+      dosemu_fonts
       envypn-font
+      eunomia
       fira
       fira-code
       fira-code-symbols
       font-awesome
       font-awesome_4
       font-awesome_5
+      fontpreview
       gelasio
       google-fonts
+      gyre-fonts
+      hackgen-font
+      hackgen-nf-font
+      hubot-sans
+      hyperscrypt-font
       inter
-      kreative-square-fonts
-      lato
-      liberation_ttf
       jost
       kanit-font
-      ocr-a
-      sudo-font
-      recursive
+      kreative-square-fonts
+      lalezar-fonts
+      lato
+      liberation_ttf
       line-awesome
       maple-mono
       maple-mono-NF
@@ -66,27 +53,37 @@
       mplus-outline-fonts.githubRelease
       nerdfonts
       norwester-font
-      noto-fonts
-      noto-fonts-cjk
-      noto-fonts-emoji
+      noto-fonts # I really hate these fonts
+      noto-fonts-cjk # but its better than scripts not rendering
+      noto-fonts-emoji # I guess...
       noto-fonts-extra
       ocr-a
+      oldstandard
       powerline-fonts
       profont
       proggyfonts
       psftools
       recursive
+      recursive
       roboto-slab
+      scheherazade-new
       scientifica
       spleen
+      sudo-font
       tamzen
-      terminus_font
       terminus-nerdfont
+      terminus_font
       tewi-font
       theano
       times-newer-roman
       tt2020
+      u001-font
+      ucs-fonts
+      undefined-medium
+      unfonts-core
       victor-mono
+      xlsfonts
+      zilla-slab
     ];
 
     fontconfig = {

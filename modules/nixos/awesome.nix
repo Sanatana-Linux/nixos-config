@@ -192,7 +192,6 @@ in {
         (pkgs)
         awesome-git-luajit
         maim
-        aawmtt
         xclip
         xdotool
         xsel

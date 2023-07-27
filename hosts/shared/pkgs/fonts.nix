@@ -64,13 +64,45 @@
       proggyfonts
       psftools
       recursive
-      recursive
       roboto-slab
       scheherazade-new
       scientifica
       spleen
       sudo-font
       tamzen
+      termsyn
+      tenderness
+      siji
+      xkcd-font 
+      rictydiminished-with-firacode
+      oxygenfonts
+      paratype-pt-mono
+      paratype-pt-sans
+      paratype-pt-serif
+      penna
+      poly
+      pretendard
+      mro-unicode 
+      mona-sans
+      montserrat
+      manrope 
+      medio
+      luculent
+      junicode
+      julia-mono
+      hermit 
+      hubot-sans
+      bront_fonts
+      b612
+      just
+      f5_6
+      efont-unicode
+      clearlyU
+      carlito 
+      ultimate-oldschool-pc-font-pack
+      cardo
+      caladea
+      annapurna-sil 
       terminus-nerdfont
       terminus_font
       tewi-font
@@ -78,6 +110,12 @@
       times-newer-roman
       tt2020
       u001-font
+      uni-vga
+      unifont
+      unifont_upper
+      unscii
+      vistafonts
+      textfonts
       ucs-fonts
       undefined-medium
       unfonts-core
@@ -99,9 +137,9 @@
 
       defaultFonts = {
         emoji = ["Noto Color Emoji"];
-        monospace = ["Agave Nerd Font Mono Bold"];
-        sansSerif = ["Oxanium Semi-Bold"];
-        serif = ["Oxaniun Semi-Bold"];
+        monospace = ["Lilex Nerd Font Mono"];
+        sansSerif = ["Genos Semi-Bold"];
+        serif = ["Genos Semi-Bold"];
       };
     };
   };

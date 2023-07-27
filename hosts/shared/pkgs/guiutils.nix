@@ -124,6 +124,23 @@ with pkgs; [
   tdesktop
   xfce.thunar
   transmission-gtk
+  fontpreview
+  xfontsel
+  xorg.xfontsel 
+  woff2
+  ttfautohint 
+  t1utils 
+  t1lib
+  psftools
+  nerd-font-patcher
+  lcdf-typetools
+  gtk2fontsel
+  graphite2
+  gnome.gnome-font-viewer 
+  fntsample 
+  fcft
+  convfont
+  bdfresize
   template-glib
   termcolor
   terminus-nerdfont

@@ -137,9 +137,9 @@
 
       defaultFonts = {
         emoji = ["Noto Color Emoji"];
-        monospace = ["Lilex Nerd Font Mono"];
-        sansSerif = ["Genos Semi-Bold"];
-        serif = ["Genos Semi-Bold"];
+        monospace = ["M+1 Nerd Font Mono Black"];
+        sansSerif = ["M+1 Nerd Font Propo Black"];
+        serif = ["M+1 Nerd Font Propo Black"];
       };
     };
   };

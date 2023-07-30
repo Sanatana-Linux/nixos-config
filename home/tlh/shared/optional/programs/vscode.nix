@@ -64,7 +64,7 @@ in {
       security.workspace.trust.enabled = false;
       black-formatter.path = lib.getExe pkgs.black;
       stylua.styluaPath = lib.getExe pkgs.stylua;
-      nix.serverPath = lib.getExe inputs.nil.packages.${pkgs.system}.default;
+    #  nix.serverPath = lib.getExe inputs.nil.packages.${pkgs.system}.default;
       Lua.misc.executablePath = "${pkgs.sumneko-lua-language-server}/bin/lua-language-server";
 
       "[c]".editor.defaultFormatter = "xaver.clang-format";

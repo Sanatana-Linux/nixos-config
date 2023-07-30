@@ -18,11 +18,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nil = {
-      url = "github:oxalica/nil";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.rust-overlay.follows = "rust-overlay";
-    };
+  #  nil = {
+  #    url = "github:oxalica/nil";
+  #    inputs.nixpkgs.follows = "nixpkgs";
+  #    inputs.rust-overlay.follows = "rust-overlay";
+  #  };
 
     nps = {
       url = "github:OleMussmann/Nix-Package-Search";

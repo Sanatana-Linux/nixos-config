@@ -17,6 +17,18 @@ with pkgs; [
   clang-ocl
   clang-tools
   tpm-tools
+  fuse-overlayfs
+  archivemount
+  kio-fuse
+  ntfs3g
+  google-drive-ocamlfuse
+  squashfuse
+  fuse-common
+  fuse2fs
+  fuse3
+  fuse-emulator 
+  fusee-interfacee-tk
+  fusee-launcher
   i2c-tools
   gnome.gnome-characters
   xbrightness

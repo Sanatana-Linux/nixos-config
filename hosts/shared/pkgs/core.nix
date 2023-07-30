@@ -134,7 +134,6 @@ with pkgs; [
   zziplib
   libfm
   libfm-extra
-  gnome.file-roller
   pbzip2
   pciutils
   pfetch

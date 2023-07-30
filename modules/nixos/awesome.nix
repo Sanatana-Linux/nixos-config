@@ -3,14 +3,10 @@
   inputs,
   lib,
   pkgs,
-  nur,
+
   ...
 }:
 with lib; let
-  nur-modules = import nur {
-    nurpkgs = nixpkgs.legacyPackages.x86_64-linux;
-    pkgs = nixpkgs.legacyPackages.x86_64-linux;
-  };
   cfg = config.services.xserver.windowManager.awesome;
   # ------------------------------------------------- #
   dbus_proxy = pkgs.callPackage ({
@@ -199,7 +195,7 @@ in {
         ;
 
       inherit
-        (pkgs.gnome3)
+        (pkgs.gnome)
         dconf-editor
         ;
 

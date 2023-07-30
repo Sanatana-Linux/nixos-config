@@ -38,7 +38,6 @@ with pkgs; [
   glibc_memusage
   glibc_multi
   glibmm
-  gnome.file-roller
   gnome.gnome-autoar
   gnome.gnome-themes-extra
   gnome.gvfs

@@ -38,7 +38,6 @@ with pkgs; [
   gcolor3
   geocode-glib_2
   gmime3
-  gnome.file-roller
   gnome.gnome-disk-utility
   gnome.gnome-themes-extra
   gnome.gvfs
@@ -99,7 +98,6 @@ with pkgs; [
   openshot-qt
   pango
   pangomm
-  pantheon.file-roller-contract
   papirus-folders
   papirus-icon-theme
   pasystray

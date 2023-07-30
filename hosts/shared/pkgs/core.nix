@@ -30,6 +30,9 @@ with pkgs; [
   fusee-interfacee-tk
   fusee-launcher
   i2c-tools
+  squashfuse
+  squashfsTools
+  squashfs-tools-ng
   gnome.gnome-characters
   xbrightness
   tpm2-tools
@@ -44,7 +47,6 @@ with pkgs; [
   clangStdenv
   cmake
   power-profiles-daemon
-
   commonsCompress
   coreutils-full
   dbus

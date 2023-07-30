@@ -65,7 +65,7 @@
     forEachSystem = nixpkgs.lib.genAttrs ["x86_64-linux" "aarch64-linux"];
     forEachPkgs = f: forEachSystem (sys: f nixpkgs.legacyPackages.${sys});
     config = {
-      system = system;
+     #system = system;
       allowUnfree = true;
       allowUnsupportedSystem = true;
       allowBroken = true;
@@ -73,7 +73,7 @@
     lib = nixpkgs.lib;
     nur-modules = import nur {
       nurpkgs = nixpkgs.legacyPackages.x86_64-linux;
-      pkgs = nixpkgs.legacyPackages.x86_64-linux {inherit system;};
+      pkgs = nixpkgs.legacyPackages.x86_64-linux;
     };
   in {
     nixosModules = import ./modules/nixos;
@@ -84,25 +84,22 @@
 
     nixosConfigurations = {
       # Laptop
-      hp-laptop-amd = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs bhairava-grub-theme home-manager;};
-        modules = let
-          nur-modules = import nur {
-            nurpkgs = nixpkgs.legacyPackages.x86_64-linux;
-            pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          };
-        in [
-          {imports = [nur-modules.repos.kira-bruneau.modules.lightdm-webkit2-greeter];}
-          ./hosts/hp-laptop-amd
-          bhairava-grub-theme.nixosModule
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useUserPackages = true;
-            home-manager.backupFileExtension = "bak";
-            home-manager.users.tlh = {imports = [./home/tlh/hp-laptop-amd];};
-          }
-        ];
+      hp-laptop-amd = import ./hosts/hp-laptop-amd {
+        inherit
+          config
+          nixpkgs
+          overlays
+          lib
+          inputs
+          system
+          home-manager
+          nur
+          bhairava-grub-theme
+          nixos-hardware
+          ;
       };
+     
+     
     };
     # yes this is necessary
     homeConfigurations = {

@@ -1,0 +1,192 @@
+{
+  inputs,
+  outputs,
+  lib,
+  config,
+  pkgs,
+  bhairava-grub-theme,
+  ...
+}: {
+  disabledModules = [
+    # Disable the default Awesome WM module
+    "services/x11/window-managers/awesome.nix"
+  ];
+
+  imports = [
+    # Shared configuration across all machines
+    ../shared
+
+    # Select the user configuration
+    ../shared/users/tlh.nix
+
+    # Specific configuration
+    ./hardware-configuration.nix
+  ];
+
+  boot = {
+    initrd = {
+      systemd.enable = true;
+      verbose = false;
+    };
+
+    kernelPackages = pkgs.linuxPackages_latest;
+    extraModulePackages = with config.boot.kernelPackages; [acpi_call];
+
+    kernelParams = [
+      "acpi_call"
+      # https://en.wikipedia.org/wiki/Kernel_page-table_isolation
+      "pti=on"
+      # make stack-based attacks on the kernel harder
+      "randomize_kstack_offset=on"
+      # this has been defaulted to none back in 2016 - break really old binaries for security
+      "vsyscall=none"
+      # https://tails.boum.org/contribute/design/kernel_hardening/
+      "slab_nomerge"
+      # needs to be on for powertop
+      "debugfs=on"
+      # only allow signed modules
+      "module.sig_enforce=1"
+      # blocks access to all kernel memory, even preventing administrators from being able to inspect and probe the kernel
+      "lockdown=confidentiality"
+      # enable buddy allocator free poisoning
+      "page_poison=1"
+      # performance improvement for direct-mapped memory-side-cache utilization, reduces the predictability of page allocations
+      "page_alloc.shuffle=1"
+      # for debugging kernel-level slab issues
+      "slub_debug=FZP"
+      #  always-enable sysrq keys. Useful for debugging
+      "sysrq_always_enabled=1"
+      # save power on idle by limiting c-states
+      # https://gist.github.com/wmealing/2dd2b543c4d3cff6cab7
+      "processor.max_cstate=5"
+      # disable the intel_idle driver and use acpi_idle instead
+      #     "idle=nomwait"
+      # ignore access time (atime) updates on files, except when they coincide with updates to the ctime or mtime
+      "rootflags=noatime"
+      # enable IOMMU for devices used in passthrough and provide better host performance
+      "iommu=pt"
+      # disable usb autosuspend
+      "usbcore.autosuspend=-1"
+      # linux security modules
+      "lsm=landlock,lockdown,yama,apparmor,bpf"
+      # KERN_DEBUG for debugging
+      "loglevel=7"
+      # isables resume and restores original swap space
+      "noresume"
+      # allows systemd to set and save the backlight state
+      #      "acpi_backlight=none"
+      # prevent the kernel from blanking plymouth out of the fb
+      "fbcon=nodefer"
+      # disable boot logo if any
+      "logo.nologo"
+      # tell the kernel to not be verbose
+      "quiet"
+      # disable systemd status messages
+      # rd prefix means systemd-udev will be used instead of initrd
+      "rd.systemd.show_status=auto"
+      # lower the udev log level to show only errors or worse
+      "rd.udev.log_level=3"
+    ];
+
+    loader = {
+      systemd-boot.enable = false;
+      efi = {
+        canTouchEfiVariables = true;
+        efiSysMountPoint = "/boot/";
+      };
+
+      grub = {
+        enable = true;
+        device = "nodev";
+        efiSupport = true;
+        useOSProber = true;
+        bhairava-grub-theme = {enable = true;};
+      };
+    };
+  };
+
+  environment = {
+    variables = {
+      GDK_SCALE = "1";
+      GDK_DPI_SCALE = "1";
+      QT_AUTO_SCREEN_SCALE_FACTOR = "1";
+    };
+
+    systemPackages = with pkgs; [
+      acpi
+      acpid
+      acpilight
+      acpitool
+      mesa
+      mesa-demos
+      libva
+      xorg.xf86videoamdgpu
+      libdbusmenu
+      libdbusmenu-gtk3
+      dbus-broker
+      dbus-glib
+      dbus
+      lua53Packages.ldbus
+      lua54Packages.ldbus
+      luajitPackages.ldbus
+      polkit_gnome
+      libva-utils
+    ];
+  };
+  hardware = {
+    enableRedistributableFirmware = true;
+    bluetooth = {
+      enable = true;
+      package = pkgs.bluezFull;
+    };
+
+    opengl = {
+      enable = true;
+      driSupport = true;
+      driSupport32Bit = true;
+      extraPackages = with pkgs; [
+        mesa
+        mesa-demos
+        glfw
+      ];
+    };
+  };
+
+  networking = {
+    hostName = "hp-laptop-amd";
+    networkmanager.enable = true;
+    useDHCP = false;
+  };
+
+  services = {
+    acpid.enable = true;
+    logind.lidSwitch = "suspend";
+    thermald.enable = true;
+    tlp = {
+      enable = true;
+      settings = {
+        START_CHARGE_THRESH_BAT0 = 0; # dummy value
+        STOP_CHARGE_THRESH_BAT0 = 1; # battery conservation mode
+        CPU_BOOST_ON_AC = 1;
+        CPU_BOOST_ON_BAT = 0;
+        CPU_SCALING_GOVERNOR_ON_AC = "performance";
+        CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+      };
+    };
+
+    upower.enable = true;
+
+    xserver = {
+      libinput = {
+        enable = true;
+        touchpad = {naturalScrolling = false;};
+      };
+    };
+  };
+
+  # Use custom Awesome WM module
+  services.xserver.windowManager.awesome.enable = true;
+
+  # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
+  system.stateVersion = "23.05";
+}

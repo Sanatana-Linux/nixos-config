@@ -2,11 +2,14 @@
   description = "The Sanatana Linux NixOS Configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-master.url = "github:nixos/nixpkgs/master";
-    nixpkgs-f2k.url = "github:fortuneteller2k/nixpkgs-f2k";
+    devshell.url = "github:numtide/devshell";
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+    nixpkgs-f2k.url = "github:fortuneteller2k/nixpkgs-f2k";
+    nixos-generators.url = "github:nix-community/nixos-generators";
+    nixpkgs-master.url = "github:nixos/nixpkgs/master";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nur.url = "github:nix-community/NUR";
+    utils.url = "github:numtide/flake-utils";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -58,8 +61,20 @@
     ...
   } @ inputs: let
     inherit (self) outputs;
+    forSystems = nixpkgs.lib.genAttrs nixpkgs.lib.systems.flakeExposed;
     forEachSystem = nixpkgs.lib.genAttrs ["x86_64-linux" "aarch64-linux"];
     forEachPkgs = f: forEachSystem (sys: f nixpkgs.legacyPackages.${sys});
+    config = {
+      system = system;
+      allowUnfree = true;
+      allowUnsupportedSystem = true;
+      allowBroken = true;
+     };
+    lib = nixpkgs.lib;
+    nur-modules = import nur {
+      nurpkgs = nixpkgs.legacyPackages.x86_64-linux;
+      pkgs = nixpkgs.legacyPackages.x86_64-linux {inherit system;};
+    };
   in {
     nixosModules = import ./modules/nixos;
     homeManagerModules = import ./modules/home-manager;

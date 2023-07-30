@@ -141,6 +141,7 @@ with pkgs; [
   fcft
   convfont
   bdfresize
+  mupdf
   template-glib
   termcolor
   terminus-nerdfont

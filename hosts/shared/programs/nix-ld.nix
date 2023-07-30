@@ -16,6 +16,9 @@
       gmime3
       icu
       libcanberra-gtk3
+      libgig
+      libgit2
+      libgit2-glib 
       libdbusmenu
       libdbusmenu-gtk3
       libfm

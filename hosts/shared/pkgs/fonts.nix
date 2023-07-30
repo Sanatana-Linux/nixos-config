@@ -73,7 +73,7 @@
       termsyn
       tenderness
       siji
-      xkcd-font 
+      xkcd-font
       rictydiminished-with-firacode
       oxygenfonts
       paratype-pt-mono
@@ -82,15 +82,15 @@
       penna
       poly
       pretendard
-      mro-unicode 
+      mro-unicode
       mona-sans
       montserrat
-      manrope 
+      manrope
       medio
       luculent
       junicode
       julia-mono
-      hermit 
+      hermit
       hubot-sans
       bront_fonts
       b612
@@ -98,11 +98,11 @@
       f5_6
       efont-unicode
       clearlyU
-      carlito 
+      carlito
       ultimate-oldschool-pc-font-pack
       cardo
       caladea
-      annapurna-sil 
+      annapurna-sil
       terminus-nerdfont
       terminus_font
       tewi-font

@@ -26,7 +26,7 @@ with pkgs; [
   fuse-common
   fuse2fs
   fuse3
-  fuse-emulator 
+  fuse-emulator
   fusee-interfacee-tk
   fusee-launcher
   i2c-tools

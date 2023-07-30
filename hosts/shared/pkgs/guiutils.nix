@@ -126,18 +126,18 @@ with pkgs; [
   transmission-gtk
   fontpreview
   xfontsel
-  xorg.xfontsel 
+  xorg.xfontsel
   woff2
-  ttfautohint 
-  t1utils 
+  ttfautohint
+  t1utils
   t1lib
   psftools
   nerd-font-patcher
   lcdf-typetools
   gtk2fontsel
   graphite2
-  gnome.gnome-font-viewer 
-  fntsample 
+  gnome.gnome-font-viewer
+  fntsample
   fcft
   convfont
   bdfresize

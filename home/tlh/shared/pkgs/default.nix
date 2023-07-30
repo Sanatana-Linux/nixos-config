@@ -21,7 +21,6 @@
       gopls
       gpart
       grex
-      java-language-server
       kbfs
       keybase
       keybase-gui

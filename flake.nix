@@ -28,7 +28,6 @@
       url = "github:OleMussmann/Nix-Package-Search";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
     #   nvim-forge = {
     #     type = "git";
@@ -54,7 +53,6 @@
     self,
     nixpkgs,
     home-manager,
-    chaotic,
     bhairava-grub-theme,
     nur,
     ...
@@ -81,7 +79,6 @@
         in [
           {imports = [nur-modules.repos.kira-bruneau.modules.lightdm-webkit2-greeter];}
           ./hosts/hp-laptop-amd
-          chaotic.nixosModules.default # OUR DEFAULT MODULE
           bhairava-grub-theme.nixosModule
           home-manager.nixosModules.home-manager
           {

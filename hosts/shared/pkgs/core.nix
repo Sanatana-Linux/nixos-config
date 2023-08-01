@@ -48,6 +48,14 @@ with pkgs; [
   cmake
   power-profiles-daemon
   commonsCompress
+  zsync
+  appstream-glib
+  appstream
+  light
+  libglibutil
+  appstream-glib 
+  poppler_gi 
+  template-glib  
   coreutils-full
   dbus
   dconf

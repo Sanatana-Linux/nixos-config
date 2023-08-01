@@ -29,7 +29,7 @@
     };
     font = {
       size = 10;
-      name = "Agave Nerd Font Mono Bold ";
+      name = "M+1 Nerd Font Mono Black ";
     };
   };
 }

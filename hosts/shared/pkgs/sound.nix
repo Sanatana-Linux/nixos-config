@@ -31,4 +31,12 @@ with pkgs; [
   soundfont-fluid
   spotify
   vlc
+  svox 
+  gspeech 
+  speech-tools
+  speechd 
+  espeak
+  flite 
+  freetts 
+  codec2
 ]

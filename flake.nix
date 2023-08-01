@@ -12,7 +12,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-hardware.url = "github:nixos/nixos-hardware";
-
+    nixos-generators.url = "github:nix-community/nixos-generators";
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -53,6 +53,7 @@
     self,
     nixpkgs,
     home-manager,
+    nixos-hardware,
     bhairava-grub-theme,
     nur,
     ...
@@ -70,7 +71,7 @@
     nixosConfigurations = {
       # Laptop
       hp-laptop-amd = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs bhairava-grub-theme home-manager;};
+        specialArgs = {inherit inputs outputs nixos-hardware bhairava-grub-theme home-manager;};
         modules = let
           nur-modules = import nur {
             nurpkgs = nixpkgs.legacyPackages.x86_64-linux;
@@ -79,6 +80,8 @@
         in [
           {imports = [nur-modules.repos.kira-bruneau.modules.lightdm-webkit2-greeter];}
           ./hosts/hp-laptop-amd
+          nixos-hardware.nixosModules.common-cpu-amd
+          nixos-hardware.nixosModules.common-pc-laptop-ssd
           bhairava-grub-theme.nixosModule
           home-manager.nixosModules.home-manager
           {

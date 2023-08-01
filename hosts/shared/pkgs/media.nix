@@ -13,6 +13,7 @@ with pkgs; [
   feh
   ffcast
   figlet
+  gif-for-cli
   giflib
   gifsicle
   gimp-with-plugins
@@ -26,7 +27,6 @@ with pkgs; [
   gimpPlugins.texturize
   gimpPlugins.waveletSharpen
   giph
-  ascii-image-converter
   gnome.nixos-gsettings-overrides
   graphicsmagick
   gsettings-desktop-schemas
@@ -39,7 +39,6 @@ with pkgs; [
   imgpatchtools
   imv
   inkscape
-  inkscape-with-extensions
   inkscape-with-extensions
   jhead
   jp2a
@@ -60,7 +59,6 @@ with pkgs; [
   libwebp
   lrzip
   lz4
-  meme
   meme
   menyoki
   metadata-cleaner
@@ -101,4 +99,5 @@ with pkgs; [
   vlc
   webp-pixbuf-loader
   xcftools
+  yeetgif
 ]

@@ -56,6 +56,7 @@ with pkgs; [
   libgit2-glib
   libuv
   linuxConsoleTools
+  cheat
   lm_sensors
   lshw
   lua51Packages.stdlib

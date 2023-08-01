@@ -9,7 +9,7 @@
   gtk = {
     enable = true;
     font = {
-      name = "Oxanium Semi-Bold";
+      name = "Rounded Mplus 1c ExtraBold";
       size = 11;
     };
     iconTheme = {

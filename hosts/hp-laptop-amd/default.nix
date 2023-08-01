@@ -38,16 +38,12 @@
       "pti=on"
       # make stack-based attacks on the kernel harder
       "randomize_kstack_offset=on"
-      # this has been defaulted to none back in 2016 - break really old binaries for security
-      "vsyscall=none"
       # https://tails.boum.org/contribute/design/kernel_hardening/
       "slab_nomerge"
       # needs to be on for powertop
       "debugfs=on"
       # only allow signed modules
       "module.sig_enforce=1"
-      # blocks access to all kernel memory, even preventing administrators from being able to inspect and probe the kernel
-      "lockdown=confidentiality"
       # enable buddy allocator free poisoning
       "page_poison=1"
       # performance improvement for direct-mapped memory-side-cache utilization, reduces the predictability of page allocations
@@ -60,7 +56,7 @@
       # https://gist.github.com/wmealing/2dd2b543c4d3cff6cab7
       "processor.max_cstate=5"
       # disable the intel_idle driver and use acpi_idle instead
-      #     "idle=nomwait"
+      "idle=nomwait"
       # ignore access time (atime) updates on files, except when they coincide with updates to the ctime or mtime
       "rootflags=noatime"
       # enable IOMMU for devices used in passthrough and provide better host performance
@@ -71,19 +67,17 @@
       "lsm=landlock,lockdown,yama,apparmor,bpf"
       # KERN_DEBUG for debugging
       "loglevel=7"
-      # isables resume and restores original swap space
+      # disables resume and restores original swap space
       "noresume"
-      # allows systemd to set and save the backlight state
-      #      "acpi_backlight=none"
       # prevent the kernel from blanking plymouth out of the fb
       "fbcon=nodefer"
       # disable boot logo if any
       "logo.nologo"
       # tell the kernel to not be verbose
-      "quiet"
+      #"quiet"
       # disable systemd status messages
       # rd prefix means systemd-udev will be used instead of initrd
-      "rd.systemd.show_status=auto"
+      #"rd.systemd.show_status=auto"
       # lower the udev log level to show only errors or worse
       "rd.udev.log_level=3"
     ];
@@ -117,8 +111,6 @@
       acpid
       acpilight
       acpitool
-      mesa
-      mesa-demos
       libva
       xorg.xf86videoamdgpu
       libdbusmenu

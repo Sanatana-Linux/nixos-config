@@ -55,6 +55,9 @@ with pkgs; [
   gtk2-x11
   gtk3
   gtk3-x11
+  libsForQt5.qtstyleplugins
+  libsForQt5.qtstyleplugin-kvantum
+  qtstyleplugin-kvantum-qt4
   gtk4
   gtk_engines
   gtkspell3
@@ -96,6 +99,7 @@ with pkgs; [
   nuspell
   ocrmypdf
   openshot-qt
+  qt5ct
   pango
   pangomm
   papirus-folders

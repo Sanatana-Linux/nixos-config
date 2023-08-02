@@ -14,6 +14,11 @@ with pkgs; [
 video2midi       
 soundconverter
 gsound
+sox
+soxr
+nanotts 
+picotts
+freetts
 mediainfo
   mpc_cli
   mpd

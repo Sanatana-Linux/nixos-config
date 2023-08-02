@@ -29,7 +29,7 @@
     };
     font = {
       size = 10;
-      name = "M+1 Nerd Font Mono Black ";
+      name = "M+CodeLat Nerd Font Bold";
     };
   };
 }

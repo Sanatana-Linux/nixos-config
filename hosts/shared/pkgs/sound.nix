@@ -11,7 +11,10 @@ with pkgs; [
   cava
   libpulseaudio
   lmms
-  mediainfo
+video2midi       
+soundconverter
+gsound
+mediainfo
   mpc_cli
   mpd
   mpd-discord-rpc
@@ -39,4 +42,6 @@ with pkgs; [
   flite 
   freetts 
   codec2
+    gnaural
+
 ]

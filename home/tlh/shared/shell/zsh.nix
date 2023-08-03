@@ -60,7 +60,6 @@
       done <<-EOF
         ALWAYS_TO_END
         APPEND_HISTORY
-        APPENDHISTORY
         AUTO_LIST
         AUTO_MENU
         AUTO_PARAM_SLASH
@@ -74,11 +73,9 @@
         NO_NOMATCH
         NOCASEGLOB
         NUMERICGLOBSORT
-        PUSHD_IGNORE_DUPS
         PUSHD_SILENT
         PUSHD_TO_HOME
         RCEXPANDPARAM
-        SHARE_HISTORY
       EOF
 
       while read -r option
@@ -86,7 +83,6 @@
        unsetopt $option
       done <<-EOF
         BEEP
-        CORRECT_ALL
         HIST_BEEP
         MENU_COMPLETE
       EOF
@@ -114,18 +110,18 @@
       rm = "rm -rvf";
       vim = "nvim";
       fcd = "cd $(find -type d | fzf)";
-      grep = lib.getExe ripgrep;
-      du = lib.getExe du-dust;
-      ps = lib.getExe procs;
-      trm = lib.getExe trash-cli;
-      cat = "${lib.getExe bat} --style=plain";
-      l = "${lib.getExe exa} -lF --time-style=long-iso --icons";
-      la = "${lib.getExe exa} -lah --tree";
-      lx = "${lib.getExe exa} -alh --color=auto --group-directories-first --icons --git";
-      ls = "${lib.getExe exa} -h --git --icons --color=auto --group-directories-first -s extension";
-      tree = "${lib.getExe exa} --tree --icons --tree";
+      grep = "${lib.getBin ripgrep}/bin/ripgrep";
+      du = "${lib.getBin du-dust}/bin/du-dust";
+      ps = "${lib.getBin procs}/bin/procs";
+      trm = "${lib.getBin trash-cli}/bin/trash-cli";
+      cat = "${lib.getBin bat}/bin/bat --style=plain";
+      l = "${lib.getBin exa}/bin/exa -lF --time-style=long-iso --icons";
+      la = "${lib.getBin exa}/bin/exa -lah --tree";
+      lx = "${lib.getBin exa}/bin/exa -alh --color=auto --group-directories-first --icons --git";
+      ls = "${lib.getBin exa}/bin/exa -h --git --icons --color=auto --group-directories-first -s extension";
+      tree = "${lib.getBin exa}/bin/exa --tree --icons --tree";
       ytmp3 = ''
-        ${lib.getExe yt-dlp} -x --continue --add-metadata --embed-thumbnail --audio-format mp3 --audio-quality 0 --metadata-from-title="%(artist)s - %(title)s" --prefer-ffmpeg -o "%(title)s.%(ext)s"
+        ${lib.getBin yt-dlp}/bin/yt-dlp -x --continue --add-metadata --embed-thumbnail --audio-format mp3 --audio-quality 0 --metadata-from-title="%(artist)s - %(title)s" --prefer-ffmpeg -o "%(title)s.%(ext)s"
       '';
     };
 
@@ -136,6 +132,10 @@
         {name = "hlissner/zsh-autopair";}
         {name = "chisui/zsh-nix-shell";}
         {name = "lincheney/fzf-tab-completion";}
+        {name = "Aloxaf/fzf-tab";}
+        {name = "molovo/tipz";}
+        {name = "zimfw/archive";}
+        {name = "nix-community/nix-zsh-completions";}
       ];
     };
   };

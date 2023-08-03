@@ -62,9 +62,8 @@ in {
       breadcrumbs.enabled = true;
       emmet.useInlineCompletions = true;
       security.workspace.trust.enabled = false;
-      black-formatter.path = lib.getExe pkgs.black;
-      stylua.styluaPath = lib.getExe pkgs.stylua;
-    #  nix.serverPath = lib.getExe inputs.nil.packages.${pkgs.system}.default;
+      black-formatter.path = "${pkgs.black}/bin/black";
+      stylua.styluaPath = "${pkgs.stylua}/bin/stylua";
       Lua.misc.executablePath = "${pkgs.sumneko-lua-language-server}/bin/lua-language-server";
 
       "[c]".editor.defaultFormatter = "xaver.clang-format";

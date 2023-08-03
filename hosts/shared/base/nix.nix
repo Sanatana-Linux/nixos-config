@@ -13,6 +13,7 @@
   };
   nixpkgs.config.permittedInsecurePackages = [
     "openssl-1.1.1t"
+    "openssl-1.1.1v"
   ];
 
   nix = {

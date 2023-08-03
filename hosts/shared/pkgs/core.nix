@@ -56,6 +56,7 @@ with pkgs; [
   appstream-glib 
   poppler_gi 
   template-glib  
+  epiphany
   coreutils-full
   dbus
   dconf

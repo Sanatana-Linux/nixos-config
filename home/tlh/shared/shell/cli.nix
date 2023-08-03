@@ -7,7 +7,7 @@
     bc
     btop
     catimg
-
+    bat
     curl
     direnv
     nix-direnv
@@ -52,15 +52,6 @@
     gpg.enable = true;
     man.enable = true;
     ssh.enable = true;
-
-    bat = {
-      enable = true;
-      config = {
-        pager = "never";
-        style = "plain";
-        theme = "base16";
-      };
-    };
 
     fzf = {
       enable = true;

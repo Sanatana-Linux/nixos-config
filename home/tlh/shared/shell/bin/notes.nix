@@ -2,7 +2,7 @@
 with pkgs;
   writeScriptBin "notes" ''
        #!/usr/bin/env bash
-NOTES_DIR=".notes"
+NOTES_DIR="./.notes"
 
 # Create the .notes directory if it doesn't exist
 mkdir -p "$NOTES_DIR"
@@ -31,7 +31,7 @@ create_or_open_note() {
 list_notes() {
     printf "List of existing notes:\n"
     for note in "$NOTES_DIR"/*.md; do
-        printf "- %s\n" "$(basename "$note" .md)"
+        echo -e "$(basename "$note" .md)"
     done
 }
 

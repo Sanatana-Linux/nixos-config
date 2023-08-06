@@ -56,8 +56,6 @@ with pkgs; [
   gtk3
   gtk3-x11
   libsForQt5.qtstyleplugins
-  libsForQt5.qtstyleplugin-kvantum
-  qtstyleplugin-kvantum-qt4
   eggdbus
   gtk4
   gtk_engines
@@ -85,7 +83,6 @@ with pkgs; [
   libnotify
   librewolf
   libsForQt5.qt5ct
-  libsForQt5.qtstyleplugin-kvantum
   libusb
   libxdg_basedir
   lightlocker
@@ -108,6 +105,15 @@ with pkgs; [
   pasystray
   pdf-parser
   pdfarranger
+  vte-gtk4
+  qtcurve
+  rep-gtk
+  libdbusmenu-gtk3   
+  libappindicator
+  qt6.full
+  gtkextra
+qt6.qt5compat 
+libsForQt5.qt5ct
   pdfmm
   pdfstudio2022
   pdftag

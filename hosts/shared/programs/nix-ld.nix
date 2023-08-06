@@ -33,7 +33,6 @@
       librewolf
       librsvg
       libsForQt5.qt5ct
-      libsForQt5.qtstyleplugin-kvantum
       libsecret
       libtiff
       libtool

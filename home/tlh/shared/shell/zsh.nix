@@ -93,6 +93,7 @@
     initExtraFirst = ''
       source ${config.xdg.configHome}/zsh/zplug/**/*.zsh
       any-nix-shell zsh --info-right | source /dev/stdin
+      export QT_QPA_PLATFORMTHEME="qt5ct"
     '';
 
     shellAliases = with pkgs; {

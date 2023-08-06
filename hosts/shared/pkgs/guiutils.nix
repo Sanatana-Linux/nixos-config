@@ -58,6 +58,7 @@ with pkgs; [
   libsForQt5.qtstyleplugins
   libsForQt5.qtstyleplugin-kvantum
   qtstyleplugin-kvantum-qt4
+  eggdbus
   gtk4
   gtk_engines
   gtkspell3

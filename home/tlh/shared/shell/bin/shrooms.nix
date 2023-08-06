@@ -1,6 +1,7 @@
 {pkgs}:
 with pkgs;
   writeScriptBin "shrooms" ''
+     #!/usr/bin/env bash
     #made by toru
     #irc.unixhub.net
     bkf=$'\e[30m';   rf=$'\e[31m';    gf=$'\e[32m'

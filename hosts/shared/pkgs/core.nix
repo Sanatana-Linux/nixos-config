@@ -56,8 +56,9 @@ with pkgs; [
   appstream-glib 
   poppler_gi 
   template-glib  
-  epiphany
   coreutils-full
+  surf
+  ephemeral
   dbus
   dconf
   deadnix

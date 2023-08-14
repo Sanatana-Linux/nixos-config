@@ -153,7 +153,6 @@ with pkgs; [
   ps_mem
   pulseaudio
   pure-prompt
-  python3
   python311
   rcshist
   reposurgeon

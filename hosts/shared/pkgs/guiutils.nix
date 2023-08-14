@@ -84,6 +84,9 @@ with pkgs; [
   librewolf
   libsForQt5.qt5ct
   libusb
+  luajitPackages.inspect  
+  lua51Packages.inspect  
+  lua52Packages.inspect  
   libxdg_basedir
   lightlocker
   luakit
@@ -108,12 +111,12 @@ with pkgs; [
   vte-gtk4
   qtcurve
   rep-gtk
-  libdbusmenu-gtk3   
+  libdbusmenu-gtk3
   libappindicator
   qt6.full
   gtkextra
-qt6.qt5compat 
-libsForQt5.qt5ct
+  qt6.qt5compat
+  libsForQt5.qt5ct
   pdfmm
   pdfstudio2022
   pdftag

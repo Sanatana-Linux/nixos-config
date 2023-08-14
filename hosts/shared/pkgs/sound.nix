@@ -11,15 +11,15 @@ with pkgs; [
   cava
   libpulseaudio
   lmms
-video2midi       
-soundconverter
-gsound
-sox
-soxr
-nanotts 
-picotts
-freetts
-mediainfo
+  video2midi
+  soundconverter
+  gsound
+  sox
+  soxr
+  nanotts
+  picotts
+  freetts
+  mediainfo
   mpc_cli
   mpd
   mpd-discord-rpc
@@ -39,14 +39,13 @@ mediainfo
   soundfont-fluid
   spotify
   vlc
-  svox 
-  gspeech 
+  svox
+  gspeech
   speech-tools
-  speechd 
+  speechd
   espeak
-  flite 
-  freetts 
+  flite
+  freetts
   codec2
-    gnaural
-
+  gnaural
 ]

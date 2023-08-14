@@ -53,9 +53,9 @@ with pkgs; [
   appstream
   light
   libglibutil
-  appstream-glib 
-  poppler_gi 
-  template-glib  
+  appstream-glib
+  poppler_gi
+  template-glib
   coreutils-full
   surf
   ephemeral

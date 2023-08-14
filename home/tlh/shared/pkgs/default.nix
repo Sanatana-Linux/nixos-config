@@ -71,7 +71,7 @@
       yarn
       ;
 
-    pylsp = pkgs.python310.withPackages (p:
+    pylsp = pkgs.python311.withPackages (p:
       with p; [
         flake8
         python-lsp-server

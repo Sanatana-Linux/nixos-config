@@ -18,7 +18,7 @@
       libcanberra-gtk3
       libgig
       libgit2
-      libgit2-glib 
+      libgit2-glib
       libdbusmenu
       libdbusmenu-gtk3
       libfm
@@ -48,6 +48,7 @@
       luajitPackages.lgi
       luajitPackages.libluv
       luajitPackages.lpeg
+      luajitPackages.inspect
       luajitPackages.lpeg_patterns
       luajitPackages.lpeglabel
       luajitPackages.lua

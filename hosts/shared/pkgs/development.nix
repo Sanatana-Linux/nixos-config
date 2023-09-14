@@ -2,6 +2,7 @@
 with pkgs; [
   arduino
   awscli
+  logseq
   git
   git-trim
   bash

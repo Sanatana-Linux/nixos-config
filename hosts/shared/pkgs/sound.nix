@@ -2,6 +2,10 @@
 with pkgs; [
   alsa-firmware
   alsa-lib
+  soundfont-generaluser
+  soundfont-fluid
+  ardour
+  qtractor
   alsa-oss
   alsa-plugins
   alsa-tools

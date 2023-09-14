@@ -113,8 +113,10 @@ with pkgs; [
   rep-gtk
   libdbusmenu-gtk3
   libappindicator
-  qt6.full
   gtkextra
+  qpaeq
+  alsaequal
+  pulseeffects-legacy
   qt6.qt5compat
   libsForQt5.qt5ct
   pdfmm

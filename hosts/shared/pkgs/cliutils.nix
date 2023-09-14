@@ -52,6 +52,10 @@ with pkgs; [
   libdbusmenu
   libgccjit
   libgig
+  massren
+  renameutils
+  vimv
+  file-rename
   libgit2
   libgit2-glib
   libuv

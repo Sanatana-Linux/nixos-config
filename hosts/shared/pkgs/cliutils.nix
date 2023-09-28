@@ -32,7 +32,7 @@ with pkgs; [
   dex2jar
   efibootmgr
   efitools
-  exa
+  eza
   exfatprogs
   fd
   file

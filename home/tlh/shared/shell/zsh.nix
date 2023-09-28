@@ -116,11 +116,11 @@
       ps = "${lib.getBin procs}/bin/procs";
       trm = "${lib.getBin trash-cli}/bin/trash-cli";
       cat = "${lib.getBin bat}/bin/bat --style=plain";
-      l = "${lib.getBin exa}/bin/exa -lF --time-style=long-iso --icons";
-      la = "${lib.getBin exa}/bin/exa -lah --tree";
-      lx = "${lib.getBin exa}/bin/exa -alh --color=auto --group-directories-first --icons --git";
-      ls = "${lib.getBin exa}/bin/exa -h --git --icons --color=auto --group-directories-first -s extension";
-      tree = "${lib.getBin exa}/bin/exa --tree --icons --tree";
+      l = "${lib.getBin eza}/bin/eza -lF --time-style=long-iso --icons";
+      la = "${lib.getBin eza}/bin/eza -lah --tree";
+      lx = "${lib.getBin eza}/bin/eza -alh --color=auto --group-directories-first --icons --git";
+      ls = "${lib.getBin eza}/bin/eza -h --git --icons --color=auto --group-directories-first -s extension";
+      tree = "${lib.getBin eza}/bin/eza --tree --icons --tree";
       ytmp3 = ''
         ${lib.getBin yt-dlp}/bin/yt-dlp -x --continue --add-metadata --embed-thumbnail --audio-format mp3 --audio-quality 0 --metadata-from-title="%(artist)s - %(title)s" --prefer-ffmpeg -o "%(title)s.%(ext)s"
       '';

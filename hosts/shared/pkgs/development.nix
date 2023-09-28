@@ -2,7 +2,6 @@
 with pkgs; [
   arduino
   awscli
-  logseq
   git
   git-trim
   bash
@@ -124,13 +123,14 @@ with pkgs; [
   pkg-config
   pkg-config-unwrapped
   pkg-configUpstream
-  pkgconfig
   postman
+  node2nix
   prisma-engines
   puppeteer-cli
   rnix-lsp
   ruby
   rustc
+  rustup
   rustfmt
   sass
   sassc
@@ -153,6 +153,7 @@ with pkgs; [
   vscode
   wkhtmltopdf-bin
   yarn
+  hoard
   rustscan
   anytype
   typescript

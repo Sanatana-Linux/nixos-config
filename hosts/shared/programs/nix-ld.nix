@@ -71,6 +71,7 @@
       luajitPackages.vicious
       luajitPackages.wrapLua
       openssl
+      speechd
       sassc
       stdenv.cc.cc
       util-linux

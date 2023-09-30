@@ -13,9 +13,14 @@
   };
   nixpkgs.config.permittedInsecurePackages = [
     "openssl-1.1.1t"
+    "openssl-1.1.1w"
     "openssl-1.1.1v"
   ];
-
+  nix.registry."node".to = {
+    type = "github";
+    owner = "andyrichardson";
+    repo = "nix-node";
+  };
   nix = {
     settings = {
       substituters = [
@@ -27,6 +32,7 @@
         "https://nix-community.cachix.org"
         "https://nixpkgs-unfree.cachix.org"
         "https://nixpkgs-wayland.cachix.org"
+        "https://nix-node.cachix.org/"
       ];
 
       trusted-public-keys = [

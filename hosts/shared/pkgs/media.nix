@@ -3,6 +3,8 @@ with pkgs; [
   ascii-image-converter
   byzanz
   ciano
+  libdevil-nox
+  imlib2-nox
   crabz
   curtail
   delve

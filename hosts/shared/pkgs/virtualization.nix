@@ -13,7 +13,7 @@ with pkgs; [
   docker-distribution
   docker-gc
   kvmtool
-#  qemu_full
+  #  qemu_full
   virt-manager
   x11docker
 ]

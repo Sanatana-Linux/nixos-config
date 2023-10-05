@@ -76,6 +76,8 @@ with pkgs; [
   menu-cache
   mesa
   mesa-demos
+  nox
+  ttfautohint-nox
   mozjpeg
   mozlz4a
   networkmanagerapplet

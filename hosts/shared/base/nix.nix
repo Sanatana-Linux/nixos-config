@@ -16,11 +16,6 @@
     "openssl-1.1.1w"
     "openssl-1.1.1v"
   ];
-  nix.registry."node".to = {
-    type = "github";
-    owner = "andyrichardson";
-    repo = "nix-node";
-  };
   nix = {
     settings = {
       substituters = [

@@ -97,9 +97,6 @@ with pkgs; [
   ncdu
   neovim-unwrapped
   nil
-  nimPackages.nim
-  nimble-unwrapped
-  nimlsp
   nix-init
   nix-tree
   nixfmt

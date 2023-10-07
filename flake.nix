@@ -7,27 +7,18 @@
     nixpkgs-f2k.url = "github:fortuneteller2k/nixpkgs-f2k";
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
     nur.url = "github:nix-community/NUR";
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    home-manager.url = "github:nix-community/home-manager";
     nixos-hardware.url = "github:nixos/nixos-hardware";
     nixos-generators.url = "github:nix-community/nixos-generators";
-    rust-overlay = {
-      url = "github:oxalica/rust-overlay";
+    rust-overlay.url = "github:oxalica/rust-overlay";
+
+    nil = {
+      url = "github:oxalica/nil";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.rust-overlay.follows = "rust-overlay";
     };
 
-    #  nil = {
-    #    url = "github:oxalica/nil";
-    #    inputs.nixpkgs.follows = "nixpkgs";
-    #    inputs.rust-overlay.follows = "rust-overlay";
-    #  };
-
-    nps = {
-      url = "github:OleMussmann/Nix-Package-Search";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nps.url = "github:OleMussmann/Nix-Package-Search";
 
     #   nvim-forge = {
     #     type = "git";
@@ -85,9 +76,11 @@
           bhairava-grub-theme.nixosModule
           home-manager.nixosModules.home-manager
           {
-            home-manager.useUserPackages = true;
-            home-manager.backupFileExtension = "bak";
-            home-manager.users.tlh = {imports = [./home/tlh/hp-laptop-amd];};
+            home-manager = {
+              useUserPackages = true;
+              backupFileExtension = "bak";
+              users.tlh = {imports = [./home/tlh/hp-laptop-amd];};
+            };
           }
         ];
       };

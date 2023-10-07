@@ -98,7 +98,6 @@
 
     shellAliases = with pkgs; {
       cleanup = "sudo nix-collect-garbage --delete-older-than 3d";
-      bloat = "nix path-info -Sh /run/current-system";
       purge = "doas sync; echo 3 | doas tee /proc/sys/vm/drop_caches";
       "cd.." = "cd ../";
       "cd..." = "cd ../../";
@@ -121,6 +120,7 @@
       lx = "${lib.getBin eza}/bin/eza -alh --color=auto --group-directories-first --icons --git";
       ls = "${lib.getBin eza}/bin/eza -h --git --icons --color=auto --group-directories-first -s extension";
       tree = "${lib.getBin eza}/bin/eza --tree --icons --tree";
+      take = "mkdir $1 && cd $1 ";
       ytmp3 = ''
         ${lib.getBin yt-dlp}/bin/yt-dlp -x --continue --add-metadata --embed-thumbnail --audio-format mp3 --audio-quality 0 --metadata-from-title="%(artist)s - %(title)s" --prefer-ffmpeg -o "%(title)s.%(ext)s"
       '';

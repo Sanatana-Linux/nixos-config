@@ -16,6 +16,7 @@ with pkgs;
         clean              clean and garabge collect store
         rebuild            rebuild configuration for host
         optimize           clean then optimize the Nix Store
+        weight             determine the size of the system's configuration
         rollback           rollback to previous generation
         search             search packages available
         sync               pull config from git repo, then commit and push
@@ -29,6 +30,9 @@ with pkgs;
       doas nix-store --verify --repair
     }
 
+    function weight(){
+        nix path-info -Sh /run/current-system
+    }
     function sync() {
         echo "Syncing nix config"
         cd $dots \
@@ -92,6 +96,7 @@ with pkgs;
         optimize)    optimize;;
         vm)         vm "$@";;
         rollback)   rollback ;;
+        weight)     weight ;;
         update)     update ;;
         clean)      clean ;;
         search)     search "$@" ;;

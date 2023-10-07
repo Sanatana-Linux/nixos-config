@@ -30,7 +30,6 @@ with pkgs; [
   mpd-mpris
   mpdevil
   mpv
-  ncmpcpp
   pamixer
   pavucontrol
   playerctl

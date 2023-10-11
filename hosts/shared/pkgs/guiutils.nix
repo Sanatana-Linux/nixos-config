@@ -17,6 +17,7 @@ with pkgs; [
   bitwarden-cli
   bleachbit
   blueman
+  figma-linux
   brightnessctl
   cairo
   cairomm

@@ -60,5 +60,7 @@ git commit -m 'steep learning curves bruh'
 nixos-rebuild switch --impure --flake '/etc/nixos#hp-laptop-amd'
 
 ```
+<p align="center">
+<img src="../.github/assets/patrick-meme.jpg" width="400px" alt="Patrick Star wearing a shirt about wanting to be picked up by his mother because he is scared. This is to make a light joke at my own and the reader's expense about the overwhelming aspects of the bootstrap process"/>
 
-<img src="../.github/assets/patrick-meme.jpg" width="400px" align="center" alt="Patrick Star wearing a shirt about wanting to be picked up by his mother because he is scared. This is to make a light joke at my own and the reader's expense about the overwhelming aspects of the bootstrap process"/>
+</p>

@@ -97,15 +97,21 @@
         };
 
         userChrome = ''
-                      @import "${pkgs.firefox-gnome-theme}/share/firefox-gnome-theme/userChrome.css";
-           ::-moz-selection { /* Code for Firefox */
-            color: #202020 !important;
-            background: #00caff !important;
-            }
-            ::selection {
-          color: #202020 !important;
-            background: #00caff !important;
-            }
+                                @import "${pkgs.firefox-gnome-theme}/share/firefox-gnome-theme/userChrome.css";
+                     ::-moz-selection { /* Code for Firefox */
+                      color: #202020 !important;
+                      background: #00caff !important;
+                      }
+                      ::selection {
+                    color: #202020 !important;
+                      background: #00caff !important;
+                      }
+
+          /* remove maximum/minimum width restriction of sidebar to create tab tiling... sort of */
+          #sidebar-box {
+          max-width: none !important;
+          min-width: 30% !important;
+          }
         '';
 
         userContent = ''

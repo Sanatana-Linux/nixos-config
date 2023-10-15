@@ -7,6 +7,10 @@ with pkgs; [
   imlib2-nox
   crabz
   curtail
+  audio-recorder
+  kooha
+  gnome.gnome-sound-recorder
+  peek
   delve
   ebook_tools
   emacsPackages.svgo

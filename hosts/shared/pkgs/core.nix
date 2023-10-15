@@ -14,7 +14,7 @@ with pkgs; [
   ccls
   chatblade
   chatgpt-cli
-  clang-ocl
+  rocmPackages.clang-ocl
   clang-tools
   tpm-tools
   fuse-overlayfs

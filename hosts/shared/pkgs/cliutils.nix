@@ -112,11 +112,15 @@ with pkgs; [
   xclip
   xorg.gccmakedep
   xorg.xev
+  electron
   yad
   yt-dlp
   zip
   zsh
   zsh-autocomplete
+  zplug
+  tree-sitter
+
   zsh-edit
   zsh-navigation-tools
   zsh-you-should-use

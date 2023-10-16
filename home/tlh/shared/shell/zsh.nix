@@ -54,44 +54,44 @@
     '';
 
     profileExtra = ''
-      while read -r option
-      do
-      setopt $option
-      done <<-EOF
-        ALWAYS_TO_END
-        APPEND_HISTORY
-        AUTO_LIST
-        AUTO_MENU
-        AUTO_PARAM_SLASH
-        AUTO_PUSHD
-        COMPLETE_IN_WORD
-        CORRECT
-        EXTENDEDGLOB
-        INC_APPEND_HISTORY
-        INTERACTIVE_COMMENTS
-        MENU_COMPLETE
-        NO_NOMATCH
-        NOCASEGLOB
-        NUMERICGLOBSORT
-        PUSHD_SILENT
-        PUSHD_TO_HOME
-        RCEXPANDPARAM
-      EOF
+           while read -r option
+           do
+           setopt $option
+           done <<-EOF
+             ALWAYS_TO_END
+             APPEND_HISTORY
+             AUTO_LIST
+             AUTO_MENU
+             AUTO_PARAM_SLASH
+             AUTO_PUSHD
+             COMPLETE_IN_WORD
+             CORRECT
+             EXTENDEDGLOB
+             INC_APPEND_HISTORY
+             INTERACTIVE_COMMENTS
+             MENU_COMPLETE
+             NO_NOMATCH
+             NOCASEGLOB
+             NUMERICGLOBSORT
+             PUSHD_SILENT
+             PUSHD_TO_HOME
+             RCEXPANDPARAM
+           EOF
 
-      while read -r option
-      do
-       unsetopt $option
-      done <<-EOF
-        BEEP
-        HIST_BEEP
-        MENU_COMPLETE
-      EOF
-
+           while read -r option
+           do
+            unsetopt $option
+           done <<-EOF
+             BEEP
+             HIST_BEEP
+             MENU_COMPLETE
+           EOF
+      source $HOME/.config/zsh/zplug/**/*.zsh
 
     '';
 
     initExtraFirst = ''
-      source ${config.xdg.configHome}/zsh/zplug/**/*.zsh
+
       any-nix-shell zsh --info-right | source /dev/stdin
       export QT_QPA_PLATFORMTHEME="qt5ct"
     '';
@@ -119,6 +119,7 @@
       la = "${lib.getBin eza}/bin/eza -lah --tree";
       lx = "${lib.getBin eza}/bin/eza -alh --color=auto --group-directories-first --icons --git";
       ls = "${lib.getBin eza}/bin/eza -h --git --icons --color=auto --group-directories-first -s extension";
+      ll = "${lib.getBin eza}/bin/eza -alh ";
       tree = "${lib.getBin eza}/bin/eza --tree --icons --tree";
       take = "mkdir $1 && cd $1 ";
       ytmp3 = ''

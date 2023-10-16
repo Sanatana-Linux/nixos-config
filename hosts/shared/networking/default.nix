@@ -11,6 +11,17 @@
 
     firewall = {
       enable = true;
+      allowedTCPPorts = [80 443 1087];
+      allowedUDPPortRanges = [
+        {
+          from = 4000;
+          to = 4007;
+        }
+        {
+          from = 8000;
+          to = 8010;
+        }
+      ];
       allowPing = false;
       logReversePathDrops = true;
     };

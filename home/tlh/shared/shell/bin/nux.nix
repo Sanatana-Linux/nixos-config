@@ -28,6 +28,7 @@ with pkgs;
     function repair() {
       doas nix-collect-garbage -d
       doas nix-store --verify --repair
+      doas nix-store --verify --check-contents --repair
     }
 
     function weight(){
@@ -56,6 +57,7 @@ with pkgs;
 
      function optimize() {
         doas nix-collect-garbage -d
+        doas nix-store --verify --check-contents --repair
         doas nix-store --optimize --verbose
      }
 

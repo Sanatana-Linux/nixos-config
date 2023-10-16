@@ -2,6 +2,7 @@
 with pkgs; [
   _7zz
   acpi
+  xssproxy
   arandr
   archiver
   arj

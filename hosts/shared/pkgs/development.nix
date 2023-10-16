@@ -120,7 +120,6 @@ with pkgs; [
   pkg-config
   pkg-config-unwrapped
   pkg-configUpstream
-  postman
   node2nix
   prisma-engines
   puppeteer-cli

@@ -45,6 +45,8 @@
     xarchiver
     zip
     yt-dlp
+    zsh
+    zplug
   ];
 
   programs = {

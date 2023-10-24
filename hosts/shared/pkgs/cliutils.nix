@@ -113,6 +113,7 @@ with pkgs; [
   xorg.gccmakedep
   xorg.xev
   electron
+  ghostscript
   yad
   yt-dlp
   zip

@@ -8,6 +8,10 @@ with pkgs;
 
     function help() {
         cat <<EOF
+
+    The Nux script is a wrapper around various functions that ease the use
+    of the Nix package manager within the context of a NixOS system.
+
     Usage: nux [OPTION] [OPTION]
 
     Options:
@@ -26,12 +30,15 @@ with pkgs;
     }
 
     function repair() {
+      echo "Repairing the Nix Store Now!"
       doas nix-collect-garbage -d
       doas nix-store --verify --repair
       doas nix-store --verify --check-contents --repair
+      echo "Repair Process Finished"
     }
 
     function weight(){
+      echo "You Current System Size is:"
         nix path-info -Sh /run/current-system
     }
     function sync() {
@@ -43,11 +50,12 @@ with pkgs;
         &&  git push \
         || echo "Error with location of Nix Configuration" \
         && exit
+        echo "Sync Completed!"
       }
 
     function rebuild() {
         echo "Rebuilding config"
-        doas nixos-rebuild --flake $dots#"$2" --impure switch
+        doas nixos-rebuild switch --impure --flake $dots#"$2" && echo "Done Rebuilding NixOS Configuration"
     }
 
     function vm() {

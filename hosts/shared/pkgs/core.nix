@@ -173,7 +173,6 @@ with pkgs; [
   trash-cli
   xorg.xf86videoamdgpu
   tree
-  treefmt
   unrar
   unzip
   usbmuxd

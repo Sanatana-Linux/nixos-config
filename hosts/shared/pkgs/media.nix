@@ -100,7 +100,6 @@ with pkgs; [
   shotcut
   svgcleaner
   toilet
-  updfparser
   vlc
   webp-pixbuf-loader
   xcftools

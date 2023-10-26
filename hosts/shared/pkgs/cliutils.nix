@@ -97,7 +97,6 @@ with pkgs; [
   squashfsTools
   squashfuse
   sysz
-  termpdfpy
   trash-cli
   tree
   usbmuxd

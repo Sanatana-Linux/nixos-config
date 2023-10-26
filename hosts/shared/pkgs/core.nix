@@ -179,6 +179,8 @@ with pkgs; [
   usbutils
   utillinux
   wirelesstools
+  bun
+  cbfmt
   xclip
   xfce.xfce4-settings
   xorg.fontalias

@@ -92,7 +92,6 @@ with pkgs; [
   pngtoico
   pngtools
   pxz
-  python311Packages.image-go-nord
   python311Packages.pyfiglet
   rarcrack
   resvg

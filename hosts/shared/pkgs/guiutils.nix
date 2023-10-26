@@ -7,6 +7,7 @@ with pkgs; [
   appstream-glib
   archiver
   aspell
+  tor-browser-bundle-bin
   aspellDicts.de
   aspellDicts.en
   aspellDicts.en-computers
@@ -85,9 +86,9 @@ with pkgs; [
   librewolf
   libsForQt5.qt5ct
   libusb
-  luajitPackages.inspect  
-  lua51Packages.inspect  
-  lua52Packages.inspect  
+  luajitPackages.inspect
+  lua51Packages.inspect
+  lua52Packages.inspect
   libxdg_basedir
   lightlocker
   luakit

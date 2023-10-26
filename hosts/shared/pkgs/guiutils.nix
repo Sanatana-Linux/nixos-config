@@ -122,7 +122,6 @@ with pkgs; [
   qt6.qt5compat
   libsForQt5.qt5ct
   pdfmm
-  pdfstudio2022
   pdftag
   pdftk
   perl536Packages.CairoGObject
@@ -162,7 +161,6 @@ with pkgs; [
   termcolor
   terminus-nerdfont
   terminus_font
-  termpdfpy
   themechanger
   thunderbird
   thunderbird-bin

@@ -151,7 +151,10 @@ with pkgs; [
   yarn
   hoard
   rustscan
-  anytype
   typescript
+  loqseq
+  joplin-desktop
+  zim
+  yamlfix
   yarn2nix
 ]

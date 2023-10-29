@@ -152,7 +152,7 @@ with pkgs; [
   hoard
   rustscan
   typescript
-  loqseq
+  logseq
   joplin-desktop
   zim
   yamlfix

@@ -33,7 +33,6 @@ with pkgs; [
   eyedropper
   fbida
   feh
-  firefox
   font-manager
   fuseiso
   galculator
@@ -198,4 +197,5 @@ with pkgs; [
   xsuspender
   xterm
   zathura
+  floorp
 ]

@@ -181,6 +181,7 @@ with pkgs; [
   wirelesstools
   bun
   cbfmt
+  nix-bundle
   xclip
   xfce.xfce4-settings
   xorg.fontalias

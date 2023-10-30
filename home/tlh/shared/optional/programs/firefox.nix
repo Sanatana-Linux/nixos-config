@@ -18,14 +18,12 @@
           ublock-origin
           bitwarden
           buster-captcha-solver
-          greasemonkey
           keybase
           link-gopher
           metamask
           search-by-image
           tab-stash
           undoclosetabbutton
-          unpaywall
           view-image
         ];
 
@@ -73,7 +71,7 @@
           "browser.shell.checkDefaultBrowser" = false;
 
           # download location
-          "browser.download.dir" = "/home/nix/downloads";
+          "browser.download.dir" = "/home/tlh/Downloads";
           "browser.download.folderList" = 2;
 
           # Rendering
@@ -97,21 +95,21 @@
         };
 
         userChrome = ''
-                                @import "${pkgs.firefox-gnome-theme}/share/firefox-gnome-theme/userChrome.css";
-                     ::-moz-selection { /* Code for Firefox */
-                      color: #202020 !important;
-                      background: #00caff !important;
-                      }
-                      ::selection {
-                    color: #202020 !important;
-                      background: #00caff !important;
-                      }
+                      @import "${pkgs.firefox-gnome-theme}/share/firefox-gnome-theme/userChrome.css";
+           ::-moz-selection { /* Code for Firefox */
+            color: #202020 !important;
+            background: #00caff !important;
+            }
+            ::selection {
+          color: #202020 !important;
+            background: #00caff !important;
+            }
 
-          /* remove maximum/minimum width restriction of sidebar to create tab tiling... sort of */
-          #sidebar-box {
-          max-width: none !important;
-          min-width: 30% !important;
-          }
+            /* remove maximum/minimum width restriction of sidebar to create tab tiling... sort of */
+            #sidebar-box {
+            max-width: none !important;
+            min-width: 30% !important;
+            }
         '';
 
         userContent = ''

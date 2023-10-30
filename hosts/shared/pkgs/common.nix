@@ -26,7 +26,6 @@ with pkgs; [
   extra-cmake-modules
   fastjar
   fbida
-  firefox
   font-manager
   fuse3
   geocode-glib_2

@@ -7,9 +7,7 @@
 
   # Modifies existing packages
   modifications = final: prev: {
-    pkgs-master-overlay = self: super: {
-      master-pkgs = inputs.nixpkgs-master.legacyPackages.${prev.system};
-    };
+    master-pkgs = inputs.nixpkgs-master.legacyPackages.${prev.system};
     awesome-git-luajit = inputs.nixpkgs-f2k.packages.${prev.system}.awesome-luajit-git;
 
     nps = inputs.nps.defaultPackage.${prev.system};

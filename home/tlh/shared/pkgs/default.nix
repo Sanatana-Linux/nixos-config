@@ -65,7 +65,6 @@
       jsonlint
       prettier
       typescript-language-server
-      vls
       vscode-langservers-extracted
       yaml-language-server
       yarn

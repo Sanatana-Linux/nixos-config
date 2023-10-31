@@ -2,7 +2,6 @@
 with pkgs; [
   _7zz
   acpi
-  xssproxy
   arandr
   archiver
   arj
@@ -16,7 +15,9 @@ with pkgs; [
   calibre
   cmake
   cpio
+  dbus
   dbus-broker
+  dbus-glib
   dconf
   dejsonlz4
   desktop-file-utils
@@ -59,6 +60,7 @@ with pkgs; [
   libarchive
   libcanberra-gtk3
   libdbusmenu
+  libdbusmenu
   libdbusmenu-gtk3
   libfm
   libfm-extra
@@ -76,11 +78,10 @@ with pkgs; [
   menu-cache
   mesa
   mesa-demos
-  nox
-  ttfautohint-nox
   mozjpeg
   mozlz4a
   networkmanagerapplet
+  nox
   ntfs3g
   pango
   pangomm
@@ -98,6 +99,7 @@ with pkgs; [
   rar
   rofi
   runzip
+  sdbus-cpp
   shared-mime-info
   shotcut
   tarlz
@@ -108,6 +110,7 @@ with pkgs; [
   testdisk
   themechanger
   thunderbird-bin
+  ttfautohint-nox
   ueberzug
   unrar
   unscd
@@ -120,6 +123,7 @@ with pkgs; [
   xcbutilxrm
   xcftools
   xclip
+  xdg-dbus-proxy
   xdg-desktop-portal-gtk
   xdg-user-dirs
   xdg-utils
@@ -157,6 +161,7 @@ with pkgs; [
   xorg.xwininfo
   xscreensaver
   xsecurelock
+  xssproxy
   xsuspender
   xterm
   zarchive

@@ -1,45 +1,52 @@
 {pkgs, ...}:
 with pkgs; [
   acpi
+  alsaequal
   amarena-theme
   appimage-run
   appimagekit
   appstream-glib
   archiver
   aspell
-  tor-browser-bundle-bin
   aspellDicts.de
   aspellDicts.en
   aspellDicts.en-computers
   aspellDicts.en-science
   aspellDicts.hi
   avidemux
+  bdfresize
   bitwarden
   bitwarden-cli
   bleachbit
   blueman
-  figma-linux
   brightnessctl
   cairo
   cairomm
   codespell
   colorz
+  convfont
   dbus-broker
   dconf
   discord
   dupeguru
   ebook_tools
+  eggdbus
   epick
   eyedropper
   fbida
+  fcft
   feh
+  master-pkgs.floorp
+  fntsample
   font-manager
+  fontpreview
   fuseiso
   galculator
   gcolor3
   geocode-glib_2
   gmime3
   gnome.gnome-disk-utility
+  gnome.gnome-font-viewer
   gnome.gnome-themes-extra
   gnome.gvfs
   gnome2.gtkglext
@@ -50,16 +57,17 @@ with pkgs; [
   google-chrome
   gparted
   gpick
+  graphite2
   gspell
   gthumb
   gtk-sharp-2_0
   gtk2-x11
+  gtk2fontsel
   gtk3
   gtk3-x11
-  libsForQt5.qtstyleplugins
-  eggdbus
   gtk4
   gtk_engines
+  gtkextra
   gtkspell3
   gtkspellmm
   gusb
@@ -71,9 +79,12 @@ with pkgs; [
   ibus-with-plugins
   inkscape-with-extensions
   inotify-tools
+  lcdf-typetools
   leela
+  libappindicator
   libcanberra-gtk3
   libdbusmenu
+  libdbusmenu-gtk3
   libdbusmenu-gtk3
   libfm
   libfm-extra
@@ -84,24 +95,27 @@ with pkgs; [
   libnotify
   librewolf
   libsForQt5.qt5ct
+  libsForQt5.qt5ct
+  libsForQt5.qtstyleplugins
   libusb
-  luajitPackages.inspect
-  lua51Packages.inspect
-  lua52Packages.inspect
   libxdg_basedir
   lightlocker
+  lua51Packages.inspect
+  lua52Packages.inspect
+  luajitPackages.inspect
   luakit
   maim
   meme
   menu-cache
   mesa
   mesa-demos
+  mupdf
   mythes
+  nerd-font-patcher
   networkmanagerapplet
   nuspell
   ocrmypdf
   openshot-qt
-  qt5ct
   pango
   pangomm
   papirus-folders
@@ -109,17 +123,6 @@ with pkgs; [
   pasystray
   pdf-parser
   pdfarranger
-  vte-gtk4
-  qtcurve
-  rep-gtk
-  libdbusmenu-gtk3
-  libappindicator
-  gtkextra
-  qpaeq
-  alsaequal
-  pulseeffects-legacy
-  qt6.qt5compat
-  libsForQt5.qt5ct
   pdfmm
   pdftag
   pdftk
@@ -130,32 +133,21 @@ with pkgs; [
   pixcat
   polkit_gnome
   poppler_utils
+  psftools
+  pulseeffects-legacy
   python311Packages.pdftotext
   python311Packages.pyxdg
+  qpaeq
+  qt5ct
+  qt6.qt5compat
+  qtcurve
   ranger
+  rep-gtk
   rofi
+  t1lib
+  t1utils
   tangram
   tdesktop
-  xfce.thunar
-  transmission-gtk
-  fontpreview
-  xfontsel
-  xorg.xfontsel
-  woff2
-  ttfautohint
-  t1utils
-  t1lib
-  psftools
-  nerd-font-patcher
-  lcdf-typetools
-  gtk2fontsel
-  graphite2
-  gnome.gnome-font-viewer
-  fntsample
-  fcft
-  convfont
-  bdfresize
-  mupdf
   template-glib
   termcolor
   terminus-nerdfont
@@ -163,20 +155,39 @@ with pkgs; [
   themechanger
   thunderbird
   thunderbird-bin
+  tor-browser-bundle-bin
+  transmission-gtk
+  ttfautohint
   typos
   unrar
   unscd
   updfparser
   ventoy-full
   vlc
+  vte-gtk4
   wirelesstools
   wmctrl
+  woff2
   wpa_supplicant
   xarchiver
   xcftools
   xclip
   xcolor
   xcolor
+  xdg-user-dirs
+  xdgmenumaker
+  xdg-launch
+  xdg-desktop-portal
+  xdg-dbus-proxy
+  handlr
+  mime-types
+  mimetic
+  gmime
+  libdbusmenu-gtk3
+  libcanberra-gtk3
+  libappindicator-gtk3
+  gtk2fontsel
+
   xdg-desktop-portal-gtk
   xdg-utils
   xdotool
@@ -184,18 +195,20 @@ with pkgs; [
   xfce.garcon
   xfce.libxfce4ui
   xfce.libxfce4util
+  xfce.thunar
   xfce.tumbler
   xfce.xfce4-dev-tools
   xfce.xfce4-power-manager
   xfce.xfce4-settings
   xfce.xfconf
+  xfontsel
   xlsfonts
   xmcp
   xorg-rgb
+  xorg.xfontsel
   xscreensaver
   xsecurelock
   xsuspender
   xterm
   zathura
-  floorp
 ]

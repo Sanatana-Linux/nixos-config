@@ -1,16 +1,11 @@
 {pkgs, ...}:
 with pkgs; [
   ascii-image-converter
+  audio-recorder
   byzanz
   ciano
-  libdevil-nox
-  imlib2-nox
   crabz
   curtail
-  audio-recorder
-  kooha
-  gnome.gnome-sound-recorder
-  peek
   delve
   ebook_tools
   emacsPackages.svgo
@@ -32,7 +27,7 @@ with pkgs; [
   gimpPlugins.resynthesizer
   gimpPlugins.texturize
   gimpPlugins.waveletSharpen
-  giph
+  gnome.gnome-sound-recorder
   gnome.nixos-gsettings-overrides
   graphicsmagick
   gsettings-desktop-schemas
@@ -43,8 +38,8 @@ with pkgs; [
   img-cat
   imgcat
   imgpatchtools
+  imlib2-nox
   imv
-  inkscape
   inkscape-with-extensions
   jhead
   jp2a
@@ -53,8 +48,10 @@ with pkgs; [
   jpegoptim
   jpegoptim
   jpegrescan
+  kooha
   krita
   labelImg
+  libdevil-nox
   libexif
   libjpeg
   libpng
@@ -72,12 +69,10 @@ with pkgs; [
   mnamer
   mozjpeg
   nodePackages_latest.svgo
-  olive-editor
-  openshot-qt
   optipng
   oxipng
   p7zip
-  pinsel
+  peek
   pixcat
   pixcat
   pixz
@@ -97,7 +92,6 @@ with pkgs; [
   resvg
   ripgrep
   rubyPackages.gdk_pixbuf2
-  shotcut
   svgcleaner
   toilet
   vlc

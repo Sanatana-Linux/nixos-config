@@ -1,71 +1,47 @@
 {pkgs, ...}:
 with pkgs; [
+  _7zz
   alejandra
   any-nix-shell
+  appstream
+  appstream-glib
+  appstream-glib
+  archivemount
+  archiver
+  arj
   as-tree
   automake
-  bear
   binutils
   bottom
+  bun
   busybox
   bzip2
   bzip3
   cached-nix-shell
+  cbfmt
   ccls
-  chatblade
-  chatgpt-cli
-  rocmPackages.clang-ocl
   clang-tools
-  tpm-tools
-  fuse-overlayfs
-  archivemount
-  kio-fuse
-  ntfs3g
-  google-drive-ocamlfuse
-  squashfuse
-  fuse-common
-  fuse2fs
-  fuse3
-  fuse-emulator
-  fusee-interfacee-tk
-  fusee-launcher
-  i2c-tools
-  squashfuse
-  squashfsTools
-  squashfs-tools-ng
-  gnome.gnome-characters
-  xbrightness
-  tpm2-tools
-  tpm2-tss
-  tpmmanager
-  libtpms
-  swtpm
-  swtpm-tpm2
-  simpleTpmPk11
-  ddcutil
-  ddcui
   clangStdenv
   cmake
-  power-profiles-daemon
   commonsCompress
-  zsync
-  appstream-glib
-  appstream
-  light
-  libglibutil
-  appstream-glib
-  poppler_gi
-  template-glib
   coreutils-full
-  surf
-  ephemeral
   dbus
   dconf
+  ddcui
+  ddcutil
   deadnix
+  dejsonlz4
   dnsutils
   dosfstools
   ffmpeg-full
   firmwareLinuxNonfree
+  fuse-common
+  fuse-emulator
+  fuse-overlayfs
+  fuse2fs
+  fuse3
+  fusee-interfacee-tk
+  fusee-launcher
   gcc
   git-branchless
   git-filter-repo
@@ -75,24 +51,31 @@ with pkgs; [
   glibc_memusage
   glibmm
   gnome.dconf-editor
+  gnome.gnome-characters
   gnumake
   gnuplot
   gnused
+  gnutar
   gnutls
   gptfdisk
   grub2
   gsettings-desktop-schemas
+  i2c-tools
   imagemagick
   inotify-tools
   iputils
   iw
   iwd
+  kio-fuse
   lbzip2
   libappindicator
   libcanberra-gtk3
   libclang
   libfm
+  libfm
   libfm-extra
+  libfm-extra
+  libglibutil
   libgudev
   libisoburn
   libnotify
@@ -100,6 +83,8 @@ with pkgs; [
   libsecret
   libstdcxx5
   libtool
+  libtpms
+  light
   logitech-udev-rules
   lynis
   lzma
@@ -109,14 +94,11 @@ with pkgs; [
   mesa
   mesa-demos
   moreutils
-  wmutils-core
-  wmutils-libwm
-  wmutils-opt
-  pmutils
-  pciutils
+  mozlz4a
   networkmanager
   ngrok
   nix-binary-cache
+  nix-bundle
   nix-direnv-flakes
   nix-plugins
   nix-prefetch
@@ -125,37 +107,29 @@ with pkgs; [
   nix-universal-prefetch
   nixos-generators
   nmap
+  ntfs3g
   nurl
   opencl-clang
-  opencl-clang
   p7zip
-  xarchiver
-  archiver
-  _7zz
-  mozlz4a
-  arj
-  zip
-  runzip
-  tarlz
-  unzip
-  ranger
-  dejsonlz4
-  gnutar
-  zziplib
-  libfm
-  libfm-extra
   pbzip2
+  pciutils
   pciutils
   pfetch
   pigz
   pmutils
+  poppler_gi
+  power-profiles-daemon
   premake
   ps_mem
   pulseaudio
   pure-prompt
   python311
+  ranger
   rcshist
   reposurgeon
+  rocmPackages.clang-ocl
+  runzip
+  simpleTpmPk11
   skim
   smartmontools
   solaar
@@ -166,22 +140,32 @@ with pkgs; [
   squashfuse
   sssd
   star-history
+  swtpm
+  swtpm-tpm2
+  tarlz
   tbb
   tealdeer
+  template-glib
   tor
   toybox
+  tpm-tools
+  tpm2-tools
+  tpm2-tss
+  tpmmanager
   trash-cli
-  xorg.xf86videoamdgpu
   tree
   unrar
+  unzip
   unzip
   usbmuxd
   usbutils
   utillinux
   wirelesstools
-  bun
-  cbfmt
-  nix-bundle
+  wmutils-core
+  wmutils-libwm
+  wmutils-opt
+  xarchiver
+  xbrightness
   xclip
   xfce.xfce4-settings
   xorg.fontalias
@@ -201,6 +185,7 @@ with pkgs; [
   xorg.xconsole
   xorg.xev
   xorg.xf86videoamdgpu
+  xorg.xf86videoamdgpu
   xorg.xfontsel
   xorg.xhost
   xorg.xinit
@@ -210,7 +195,10 @@ with pkgs; [
   xorg.xwininfo
   xsettingsd
   xz
+  zip
   zlib
   zlib-ng
   zstd
+  zsync
+  zziplib
 ]

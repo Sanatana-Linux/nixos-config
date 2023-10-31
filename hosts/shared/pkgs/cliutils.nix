@@ -5,9 +5,6 @@ with pkgs; [
   adbfs-rootless
   android-backup-extractor
   android-file-transfer
-  latex2html
-  latexrun
-  csv2latex
   android-tools
   android-udev-rules
   apkeep
@@ -20,25 +17,28 @@ with pkgs; [
   aria
   bat
   beep
-  binutils
   brightnessctl
   btop
   bundletool
+  cheat
   clang
   clipster
   comma
   conda
   cookiecutter
   copier
+  csv2latex
   curl
   deer
   dex2jar
   efibootmgr
   efitools
-  eza
+  electron
   exfatprogs
+  eza
   fd
   file
+  file-rename
   fzf
   fzy
   gammastep
@@ -46,24 +46,22 @@ with pkgs; [
   gccStdenv
   gh
   ghost
-  jdupes
+  ghostscript
   htop
   imgpatchtools
   imgurbash2
   iw
+  jdupes
   jq
+  latex2html
+  latexrun
   libdbusmenu
   libgccjit
   libgig
-  massren
-  renameutils
-  vimv
-  file-rename
   libgit2
   libgit2-glib
   libuv
   linuxConsoleTools
-  cheat
   lm_sensors
   lshw
   lua51Packages.stdlib
@@ -72,6 +70,7 @@ with pkgs; [
   man-pages
   man-pages-posix
   manix
+  massren
   neofetch
   nix-index
   nix-zsh-completions
@@ -87,6 +86,7 @@ with pkgs; [
   quark-engine
   ranger
   rclone
+  renameutils
   ripgrep
   silver-searcher
   simg2img
@@ -99,32 +99,7 @@ with pkgs; [
   sysz
   trash-cli
   tree
-  usbmuxd
-  usbutils
-  vimPlugins.nvim-treesitter
-  vimPlugins.nvim-treesitter-context
-  vimPlugins.nvim-treesitter-pyfold
-  vimPlugins.nvim-treesitter-refactor
-  vimPlugins.nvim-treesitter-textobjects
-  wget
-  wget
-  whois
-  wirelesstools
-  xarchiver
-  xclip
-  xorg.gccmakedep
-  xorg.xev
-  electron
-  ghostscript
-  yad
-  yt-dlp
-  zip
-  zsh
-  zsh-autocomplete
-  zplug
   tree-sitter
-  tree-sitter-grammars.tree-sitter-markdown-inline
-  tree-sitter-grammars.tree-sitter-org-nvim
   tree-sitter-grammars.tree-sitter-bash
   tree-sitter-grammars.tree-sitter-bibtex
   tree-sitter-grammars.tree-sitter-c
@@ -163,9 +138,11 @@ with pkgs; [
   tree-sitter-grammars.tree-sitter-lua
   tree-sitter-grammars.tree-sitter-make
   tree-sitter-grammars.tree-sitter-markdown
+  tree-sitter-grammars.tree-sitter-markdown-inline
   tree-sitter-grammars.tree-sitter-nix
   tree-sitter-grammars.tree-sitter-ocaml
   tree-sitter-grammars.tree-sitter-ocaml-interface
+  tree-sitter-grammars.tree-sitter-org-nvim
   tree-sitter-grammars.tree-sitter-perl
   tree-sitter-grammars.tree-sitter-php
   tree-sitter-grammars.tree-sitter-python
@@ -182,6 +159,27 @@ with pkgs; [
   tree-sitter-grammars.tree-sitter-vim
   tree-sitter-grammars.tree-sitter-vue
   tree-sitter-grammars.tree-sitter-yaml
+  usbmuxd
+  usbutils
+  vimPlugins.nvim-treesitter
+  vimPlugins.nvim-treesitter-context
+  vimPlugins.nvim-treesitter-pyfold
+  vimPlugins.nvim-treesitter-refactor
+  vimPlugins.nvim-treesitter-textobjects
+  vimv
+  wget
+  whois
+  wirelesstools
+  xarchiver
+  xclip
+  xorg.gccmakedep
+  xorg.xev
+  yad
+  yt-dlp
+  zip
+  zplug
+  zsh
+  zsh-autocomplete
   zsh-edit
   zsh-navigation-tools
   zsh-you-should-use

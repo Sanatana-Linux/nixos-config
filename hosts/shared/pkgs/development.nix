@@ -2,8 +2,6 @@
 with pkgs; [
   arduino
   awscli
-  git
-  git-trim
   bash
   biber
   bibtex2html
@@ -26,23 +24,27 @@ with pkgs; [
   gcc
   gdk-pixbuf
   gdk-pixbuf-xlib
+  git
   git-backup
   git-branchless
   git-chglog
   git-extras
   git-ignore
   git-repo-updater
+  git-trim
   glib
   gnumake
   gnutls
   go
   gofumpt
   gource
+  hoard
   icu
   imlib2Full
   ipfs
   ispell
   isync
+  joplin-desktop
   just
   ktlint
   libffi
@@ -51,6 +53,7 @@ with pkgs; [
   libtiff
   libtool
   lightningcss
+  logseq
   lua
   lua-language-server
   lua51Packages.lgi
@@ -101,6 +104,7 @@ with pkgs; [
   nix-tree
   nixfmt
   nixpkgs-fmt
+  node2nix
   nodePackages.prettier
   nodePackages_latest.diagnostic-languageserver
   nodePackages_latest.eslint
@@ -120,14 +124,14 @@ with pkgs; [
   pkg-config
   pkg-config-unwrapped
   pkg-configUpstream
-  node2nix
   prisma-engines
   puppeteer-cli
   rnix-lsp
   ruby
   rustc
-  rustup
   rustfmt
+  rustscan
+  rustup
   sass
   sassc
   shellcheck
@@ -143,18 +147,13 @@ with pkgs; [
   terraform
   tokei
   tree-sitter
+  typescript
   vim
   vim-vint
   vimPlugins.rust-tools-nvim
-  vscode
   wkhtmltopdf-bin
-  yarn
-  hoard
-  rustscan
-  typescript
-  logseq
-  joplin-desktop
-  zim
   yamlfix
+  yarn
   yarn2nix
+  zim
 ]

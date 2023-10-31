@@ -7,6 +7,9 @@
 
   # Modifies existing packages
   modifications = final: prev: {
+    pkgs-master-overlay = self: super: {
+      master-pkgs = inputs.nixpkgs-master.legacyPackages.${prev.system};
+    };
     awesome-git-luajit = inputs.nixpkgs-f2k.packages.${prev.system}.awesome-luajit-git;
 
     nps = inputs.nps.defaultPackage.${prev.system};
@@ -23,14 +26,14 @@
       preConfigure = "./autogen.sh";
     });
 
-    thunar = prev.thunar.overrideAttrs (old: rec {
+    thunar = prev.thunar.overrideAttrs rec {
       thunarPlugins = [
         inputs.nixpkgs.xfce.thunar-archive-plugin
         inputs.nixpkgs.xfce.thunar-volman
         inputs.nixpkgs.xfce.thunar-dropbox-plugin
         inputs.nixpkgs.xfce.thunar-media-tags-plugin
       ];
-    });
+    };
 
     picom = inputs.nixpkgs-f2k.packages.${prev.system}.picom-ft-labs;
   };

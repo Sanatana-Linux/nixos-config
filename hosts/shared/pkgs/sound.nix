@@ -2,27 +2,23 @@
 with pkgs; [
   alsa-firmware
   alsa-lib
-  soundfont-generaluser
-  soundfont-fluid
-  ardour
-  qtractor
   alsa-oss
   alsa-plugins
   alsa-tools
   alsa-utils
   alsaequal
+  ardour
   audacity
   cava
+  codec2
+  espeak
+  flite
+  freetts
+  freetts
+  gsound
+  gspeech
   libpulseaudio
   lmms
-  video2midi
-  soundconverter
-  gsound
-  sox
-  soxr
-  nanotts
-  picotts
-  freetts
   mediainfo
   mpc_cli
   mpd
@@ -30,25 +26,29 @@ with pkgs; [
   mpd-mpris
   mpdevil
   mpv
+  nanotts
   pamixer
   pavucontrol
+  picotts
   playerctl
   psmisc
   pulseaudio-ctl
   pulseaudioFull
   pulseeffects-legacy
   pulsemixer
+  qtractor
   scdl
+  soundconverter
   soundfont-fluid
-  spotify
-  vlc
-  svox
-  gspeech
+  soundfont-fluid
+  soundfont-generaluser
+  sox
+  soxr
   speech-tools
   speechd
-  espeak
-  flite
-  freetts
-  codec2
+  spotify
+  svox
+  video2midi
+  vlc
   gnaural
 ]

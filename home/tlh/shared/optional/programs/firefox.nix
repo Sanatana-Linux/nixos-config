@@ -25,6 +25,7 @@
           tab-stash
           undoclosetabbutton
           view-image
+          form-history-control
         ];
 
         settings = {
@@ -116,7 +117,7 @@
           @import "${pkgs.firefox-gnome-theme}/share/firefox-gnome-theme/userContent.css";
         '';
 
-        extraConfig = builtins.readFile "${pkgs.firefox-gnome-theme}/share/firefox-gnome-theme/configuration/user.js";
+        extraConfig = builtins.readFile "${pkgs.higgs-boson}/share/higgs-boson/user.js";
       };
     };
   };

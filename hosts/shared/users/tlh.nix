@@ -8,7 +8,6 @@ in {
   # just until implementing the impermanence module
   users.mutableUsers = true;
   programs.zsh.enable = true;
-  options.  
   users.users.tlh = {
     description = "Thomas Leon Highbaugh";
     initialPassword = "nixos";

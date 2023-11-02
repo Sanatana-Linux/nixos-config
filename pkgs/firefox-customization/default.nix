@@ -1,6 +1,5 @@
 {
   lib,
-  pkgs,
   stdenv,
   fetchFromGitHub,
 }:
@@ -19,14 +18,14 @@ stdenv.mkDerivation rec {
   doCheck = false;
 
   installPhase = ''
-     mkdir -p $out/share/higgs-boson
-     cp -r $src/* $out/share/higgs-boson
+    mkdir -p $out/share/higgs-boson
+    cp -r $src/* $out/share/higgs-boson
     cp -r $src/patches/root/* ${pkgs.firefox}/share/firefox
   '';
 
   meta = with lib; {
     description = "A personalized Firefox modification featuring userchrome.js";
     homepage = "https://github.com/Thomashighbaugh/firefox";
-    license = licenses.mit;
+    license = licenses.unlicense;
   };
 }

@@ -2,6 +2,7 @@
 with pkgs; [
   arduino
   awscli
+  xcftools
   bash
   biber
   bibtex2html

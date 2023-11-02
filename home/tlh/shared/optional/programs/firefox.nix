@@ -1,5 +1,6 @@
 {
   config,
+  lib,
   pkgs,
   ...
 }: {
@@ -12,6 +13,7 @@
     enable = true;
     profiles = {
       tlh = {
+        isDefault = true;
         id = 0;
         extensions = with pkgs.nur.repos.rycee.firefox-addons; [
           refined-github
@@ -117,8 +119,23 @@
           @import "${pkgs.firefox-gnome-theme}/share/firefox-gnome-theme/userContent.css";
         '';
 
-        extraConfig = builtins.readFile "${pkgs.higgs-boson}/share/higgs-boson/user.js";
+        #    extraConfig = builtins.readFile "${pkgs.firefox-gnome-theme}/share/firefox-gnome-theme/user.js";
       };
     };
   };
+  home.activation.firefox-scripts = lib.hm.dag.entryAfter ["writeBoundary"] ''
+      cd $HOME/.mozilla/firefox/tlh/chrome
+    if [ ! -d $HOME/.mozilla/firefox/tlh/chrome/firefox-scripts ]; then
+      ${pkgs.git}/bin/git clone https://github.com/Thomashighbaugh/firefox $HOME/.mozilla/firefox/tlh/chrome/firefox-scripts
+      else
+       rm -rvf $HOME/.mozilla/firefox/tlh/chrome/firefox-scripts
+       ${pkgs.git}/bin/git clone https://github.com/Thomashighbaugh/firefox $HOME/.mozilla/firefox/tlh/chrome/firefox-scripts
+      fi
+        cd firefox-scripts
+       cp -rvf  $HOME/.mozilla/firefox/tlh/chrome/firefox-scripts/user.js $HOME/.mozilla/firefox/tlh
+      cp -rvf  $HOME/.mozilla/firefox/tlh/chrome/firefox-scripts/* $HOME/.mozilla/firefox/tlh/chrome
+  '';
 }
+#      chmod -Rv 777 ${pkgs.firefox}/lib/firefox/
+#      ln -svf $HOME/.mozilla/firefox/tlh/chrome/firefox-scripts/patches/root/* ${pkgs.firefox}/lib/firefox/
+

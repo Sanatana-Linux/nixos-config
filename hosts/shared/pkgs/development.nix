@@ -3,6 +3,9 @@ with pkgs; [
   arduino
   awscli
   bash
+  python311Packages.pynvim  
+  php81Packages.composer
+  php
   biber
   bibtex2html
   black

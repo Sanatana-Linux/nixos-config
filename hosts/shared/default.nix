@@ -25,11 +25,10 @@
     enableRootSlice = true;
     enableUserServices = true;
   };
-
-  home-manager = {
-    useUserPackages = true;
-    extraSpecialArgs = {inherit inputs outputs;};
-  };
+ 
+ 
+ 
+ 
 
   nixpkgs = {
     overlays = [
@@ -52,6 +51,11 @@
       firefox = {
         enableLegacyUserProfileCustomizations = true;
       };
+ home-manager = {
+   useUserPackages = true;
+   extraSpecialArgs = {inherit inputs outputs;};
+ };
+
     };
   };
 }

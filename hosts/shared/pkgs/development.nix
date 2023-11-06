@@ -4,11 +4,13 @@ with pkgs; [
   awscli
   xcftools
   bash
+  flutter
   biber
   bibtex2html
   black
   cargo
   chruby
+  python311Packages.wheel      
   cmake
   cpp-hocon
   cpp-utilities
@@ -145,6 +147,7 @@ with pkgs; [
   sublime4
   sumneko-lua-language-server
   tectonic
+  python311Packages.websockets     
   terraform
   tokei
   tree-sitter

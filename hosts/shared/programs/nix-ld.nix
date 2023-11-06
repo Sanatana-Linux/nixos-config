@@ -71,6 +71,7 @@
       luajitPackages.vicious
       luajitPackages.wrapLua
       openssl
+      ranger
       speechd
       sassc
       stdenv.cc.cc

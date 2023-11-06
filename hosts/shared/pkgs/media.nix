@@ -2,6 +2,7 @@
 with pkgs; [
   ascii-image-converter
   audio-recorder
+  potrace
   byzanz
   ciano
   crabz

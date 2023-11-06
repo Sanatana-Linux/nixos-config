@@ -53,6 +53,7 @@ with pkgs; [
   iw
   jdupes
   jq
+  jrnl
   latex2html
   latexrun
   libdbusmenu

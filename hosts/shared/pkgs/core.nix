@@ -1,16 +1,18 @@
 {pkgs, ...}:
 with pkgs; [
   _7zz
+  advancecomp
   alejandra
   any-nix-shell
   appstream
   appstream-glib
-  appstream-glib
   archivemount
   archiver
   arj
+  ark
   as-tree
   automake
+  avfs
   binutils
   bottom
   bun
@@ -24,77 +26,30 @@ with pkgs; [
   clangStdenv
   cmake
   commonsCompress
-  coreutils-full
-  dbus
+  crabz
+  curtail
   dconf
   ddcui
   ddcutil
   deadnix
   dejsonlz4
+  dmg2img
   dnsutils
   dosfstools
+  efficient-compression-tool
   ffmpeg-full
-  firmwareLinuxNonfree
-  fuse-common
-  fuse-emulator
-  fuse-overlayfs
-  fuse2fs
-  fuse3
-  fusee-interfacee-tk
-  fusee-launcher
-  gcc
-  git-branchless
-  git-filter-repo
-  glib
-  glib-networking
-  glibc
-  glibc_memusage
-  glibmm
-  gnome.dconf-editor
-  gnome.gnome-characters
-  gnumake
-  gnuplot
-  gnused
-  gnutar
-  gnutls
-  gptfdisk
-  grub2
-  gsettings-desktop-schemas
-  i2c-tools
-  imagemagick
-  inotify-tools
-  iputils
-  iw
-  iwd
-  kio-fuse
-  lbzip2
-  libappindicator
-  libcanberra-gtk3
-  libclang
-  libfm
-  libfm
-  libfm-extra
-  libfm-extra
-  libglibutil
-  libgudev
-  libisoburn
-  libnotify
-  librsvg
-  libsecret
-  libstdcxx5
-  libtool
-  libtpms
-  light
-  logitech-udev-rules
-  lynis
   lzma
   man-pages
   man-pages-posix
   manix
+  mdds
   mesa
   mesa-demos
+  minizip2
   moreutils
   mozlz4a
+  msieve
+  ncompress
   networkmanager
   ngrok
   nix-binary-cache
@@ -110,12 +65,15 @@ with pkgs; [
   ntfs3g
   nurl
   opencl-clang
+  ouch
   p7zip
   pbzip2
   pciutils
   pciutils
   pfetch
   pigz
+  pixz
+  plzip
   pmutils
   poppler_gi
   power-profiles-daemon
@@ -123,7 +81,9 @@ with pkgs; [
   ps_mem
   pulseaudio
   pure-prompt
+  pxz
   python311
+
   ranger
   rcshist
   reposurgeon
@@ -132,6 +92,8 @@ with pkgs; [
   simpleTpmPk11
   skim
   smartmontools
+  snappy
+  snzip
   solaar
   sqlite
   sqlite-utils
@@ -140,6 +102,7 @@ with pkgs; [
   squashfuse
   sssd
   star-history
+  suitesparse 
   swtpm
   swtpm-tpm2
   tarlz
@@ -154,6 +117,7 @@ with pkgs; [
   tpmmanager
   trash-cli
   tree
+  ucl
   unrar
   unzip
   unzip
@@ -194,6 +158,7 @@ with pkgs; [
   xorg.xprop
   xorg.xwininfo
   xsettingsd
+  xxHash 
   xz
   zip
   zlib

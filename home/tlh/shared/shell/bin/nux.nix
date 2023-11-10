@@ -30,7 +30,7 @@ with pkgs;
     }
 
     function repair() {
-      echo "Repairing the Nix Store Now!"
+      echo "Repairing the Nix Store Now"
       doas nix-collect-garbage -d
       doas nix-store --verify --repair
       doas nix-store --verify --check-contents --repair
@@ -42,7 +42,7 @@ with pkgs;
         nix path-info -Sh /run/current-system
     }
     function sync() {
-        echo "Syncing nix config"
+        echo "Syncing Nix Configuration Now"
         cd $dots \
         &&  git pull \
         &&  git add . \
@@ -54,34 +54,37 @@ with pkgs;
       }
 
     function rebuild() {
-        echo "Rebuilding config"
+        echo "Rebuilding Configuration Now"
+        rm -rf $HOME/.config/*.bak 
+        rm -rf $HOME/.config/**/*.bak 
         doas nixos-rebuild switch --impure --flake $dots#"$2" && echo "Done Rebuilding NixOS Configuration"
     }
 
     function vm() {
-        echo "Creating VM"
+        echo "Creating Virtual Machine Now"
         doas nixos-rebuild --flake $dots#"$2" --impure build-vm
     }
 
      function optimize() {
+       echo "Optimizing the Nix Store Now"
         doas nix-collect-garbage -d
         doas nix-store --verify --check-contents --repair
         doas nix-store --optimize --verbose
      }
 
     function rollback() {
-        echo "Rolling back"
+        echo "Rolling Back Configuration Now"
         doas nixos-rebuild --rollback switch
     }
 
     function update() {
-        echo "Updating flake"
+        echo "Updating Flake Lock File Now"
         doas nix flake update $dots
 
     }
 
     function clean() {
-        echo "Clearing store"
+        echo "Cleaning the Nix Store"
         doas nix-store --gc
         echo "Removing old generations"
         doas nix-env --delete-generations old

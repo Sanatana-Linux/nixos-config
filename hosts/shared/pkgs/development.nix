@@ -2,6 +2,7 @@
 with pkgs; [
   arduino
   awscli
+  python311Packages.PyICU   
   xcftools
   bash
   flutter

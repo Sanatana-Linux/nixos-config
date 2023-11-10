@@ -3,6 +3,30 @@ with pkgs; [
   ascii-image-converter
   audio-recorder
   potrace
+  libgee
+  pantheon.granite 
+  gdk-pixbuf     
+  gi-docgen 
+  gibo
+  webp-pixbuf-loader      
+  gio-sharp
+  git-revise 
+  gitleaks
+  book-summary
+  darling-dmg
+  zrythm
+  yeetgif
+  colorz
+  python311Packages.pygobject3
+  python311Packages.pystache 
+ python311Packages.colorthief 
+ resvg 
+ librsvg 
+  rubyPackages.cairo-gobject
+  rubyPackages.gobject-introspection
+  appindicator-sharp
+  gobject-introspection
+  rubyPackages.gdk_pixbuf2
   byzanz
   ciano
   crabz

@@ -2,6 +2,10 @@
 with pkgs; [
   _7zz
   advancecomp
+  meson
+  parallel
+  ripgrep-all
+  sassc
   alejandra
   any-nix-shell
   appstream

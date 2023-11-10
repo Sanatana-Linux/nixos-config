@@ -6,40 +6,40 @@
     Xft.autohint: false
     Xft.hintstyle: hintslight
     Xft.lcdfilter: lcddefault
-
-    *background: #1c1c1c
-    *foreground: #d1d1d1
+! Now featuring Monokai Pro Spectrum
+    *background: #222222
+    *foreground:#fbf8ff
 
     ! black
-    *color0: #282828
-    *color8: #4f4f4f
+    *color0:#363537 
+    *color8: #525053
 
     ! red
-    *color1: #F83D80
-    *color9: #FF3d81
+    *color1: #fc618d
+    *color9: #f92672
 
     ! green
-    *color2: #85FF94
-    *color10: #4DD564
+    *color2: #7bd88f 
+    *color10: #a6e22e 
 
     ! yellow
-    *color3: #F0FFAA
-    *color11: #FFFF73
+    *color3: #fce566
+    *color11: #e6db74
 
     ! blue
-    *color4: #00caff
-    *color12: #0badff
+    *color4: #5ad4e6
+    *color12: #66d9ef
 
     ! magenta
-    *color5: #8265ff
-    *color13: #660ed0
+    *color5: #948ae3
+    *color13: #ae81ff
 
-    ! cyan
-    *color6: #00eaff
-    *color14: #00f6d9
+    ! misc/cyan 
+    *color6: #fc618d
+    *color14: #fd5ff0
 
     ! white
-    *color7: #d1d1d1
-    *color15: #f4f4f4
+    *color7: #bab6bf
+    *color15: #f7f1ff
   '';
 }

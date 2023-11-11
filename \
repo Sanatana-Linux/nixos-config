@@ -1,0 +1,30 @@
+migrate to .quicknote notes for NeoVim integration purposes
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch main
+# Your branch is up to date with 'origin/main'.
+#
+# Changes to be committed:
+#	modified:   .github/README.md
+#	renamed:    .quicknote/credits.md -> .quicknote/3a52ce780950d4d969792a2559cd519d7ee8c727/credits.md
+#	renamed:    .quicknote/errors/display-manager.md -> .quicknote/3a52ce780950d4d969792a2559cd519d7ee8c727/error-display-manager.md
+#	new file:   .quicknote/3a52ce780950d4d969792a2559cd519d7ee8c727/error-index.md
+#	renamed:    .quicknote/errors/nix-store-issues.md -> .quicknote/3a52ce780950d4d969792a2559cd519d7ee8c727/error-nix-store-issues.md
+#	renamed:    .quicknote/errors/nvim-error.md -> .quicknote/3a52ce780950d4d969792a2559cd519d7ee8c727/error-nvim-error.md
+#	renamed:    .quicknote/errors/systemd-vconsole-setup-font.md -> .quicknote/3a52ce780950d4d969792a2559cd519d7ee8c727/error-systemd-vconsole-setup-font.md
+#	renamed:    .quicknote/errors/template.md -> .quicknote/3a52ce780950d4d969792a2559cd519d7ee8c727/error-template.md
+#	renamed:    .quicknote/errors/zsh-slowdown.md -> .quicknote/3a52ce780950d4d969792a2559cd519d7ee8c727/error-zsh-slowdown.md
+#	renamed:    .quicknote/installation.md -> .quicknote/3a52ce780950d4d969792a2559cd519d7ee8c727/installation.md
+#	renamed:    .quicknote/iso.md -> .quicknote/3a52ce780950d4d969792a2559cd519d7ee8c727/iso.md
+#	renamed:    .quicknote/nix-commands.md -> .quicknote/3a52ce780950d4d969792a2559cd519d7ee8c727/nix-commands.md
+#	renamed:    .quicknote/todo/firefox.md -> .quicknote/3a52ce780950d4d969792a2559cd519d7ee8c727/todo-firefox.md
+#	new file:   .quicknote/3a52ce780950d4d969792a2559cd519d7ee8c727/todo-index.md
+#	renamed:    .quicknote/todo/rebase.md -> .quicknote/3a52ce780950d4d969792a2559cd519d7ee8c727/todo-rebase.md
+#	deleted:    .quicknote/errors/index.md
+#	deleted:    .quicknote/index.md
+#	deleted:    .quicknote/todo/index.md
+#	deleted:    .quicknote/working-notes.md
+#	modified:   pkgs/default.nix
+#	deleted:    temp
+#

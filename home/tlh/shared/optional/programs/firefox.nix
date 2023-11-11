@@ -96,7 +96,7 @@
         };
 
         userChrome = ''
-                      @import "${pkgs.firefox-alpha-theme}/share/firefox-alpha-theme/userChrome.css";
+                      @import "${pkgs.firefox-gnome-theme}/share/firefox-alpha-theme/chrome/userChrome.css";
            ::-moz-selection { /* Code for Firefox */
             color: #202020 !important;
             background: #00caff !important;
@@ -114,7 +114,7 @@
         '';
 
         userContent = ''
-          @import "${pkgs.firefox-alpha-theme}/share/firefox-alpha-theme/userContent.css";
+          @import "${pkgs.firefox-gnome-theme}/share/firefox-alpha-theme/chrome/userContent.css";
         '';
   extraConfig = builtins.readFile "${pkgs.firefox-gnome-theme}/share/firefox-gnome-theme/configuration/user.js";
       };

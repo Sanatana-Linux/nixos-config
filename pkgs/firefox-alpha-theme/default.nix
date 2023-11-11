@@ -8,7 +8,7 @@ stdenv.mkDerivation rec {
   version = "1.1.0";
 
   src = fetchFromGitHub {
-    repo = pname;
+    repo = "Firefox-Alpha";
     owner = "Tagggar";
     rev = "v${version}";
     sha256 = "sha256-rya++c5XcejAbXJLLd5WM0vnv8Kq8zuhCXPK/+/QxcA=";

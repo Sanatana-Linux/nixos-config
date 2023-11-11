@@ -21,5 +21,8 @@
 
 All of the documentation is in the `.notes` directory, which serves as a project-based note-taking system I have developed organically to keep project notebooks with their associated projects. Below are pages of this projects _notebook_ which may be of interest to third parties:
 
-1. [Installation Notes](./.notes/installation.md)
-1. [Inspiration and Credits](./.notes/credits.md)
+1. [Installation Notes](../.quicknote/3a52ce780950d4d969792a2559cd519d7ee8c727/installation.md)
+1. [Useful Nix Commands](../.quicknote/3a52ce780950d4d969792a2559cd519d7ee8c727/nix-commands.md)
+1. [TODOs](../.quicknote/3a52ce780950d4d969792a2559cd519d7ee8c727/todo-index.md)
+1. [Inspiration and Credits](../.quicknote/3a52ce780950d4d969792a2559cd519d7ee8c727/credits.md)
+1. [Error Log](../.quicknote/3a52ce780950d4d969792a2559cd519d7ee8c727/error-index.md)

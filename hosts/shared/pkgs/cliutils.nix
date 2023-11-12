@@ -42,7 +42,6 @@ with pkgs; [
   fzf
   fzy
   gammastep
-  gcc-unwrapped
   gccStdenv
   gh
   ghost
@@ -84,6 +83,7 @@ with pkgs; [
   platinum-searcher
   ps_mem
   pure-prompt
+  python311Packages.pygccxml
   quark-engine
   ranger
   rclone
@@ -173,6 +173,7 @@ with pkgs; [
   wirelesstools
   xarchiver
   xclip
+  xorg.gccmakedep
   xorg.gccmakedep
   xorg.xev
   yad

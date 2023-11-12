@@ -2,16 +2,13 @@
 with pkgs; [
   arduino
   awscli
-  python311Packages.PyICU   
-  xcftools
   bash
-  flutter
   biber
   bibtex2html
   black
   cargo
+  cargo-binutils
   chruby
-  python311Packages.wheel      
   cmake
   cpp-hocon
   cpp-utilities
@@ -24,8 +21,8 @@ with pkgs; [
   expat
   fclones
   fcppt
+  flutter
   fuse3
-  gcc
   gdk-pixbuf
   gdk-pixbuf-xlib
   git
@@ -130,6 +127,9 @@ with pkgs; [
   pkg-configUpstream
   prisma-engines
   puppeteer-cli
+  python311Packages.PyICU   
+  python311Packages.websockets     
+  python311Packages.wheel      
   rnix-lsp
   ruby
   rustc
@@ -148,7 +148,6 @@ with pkgs; [
   sublime4
   sumneko-lua-language-server
   tectonic
-  python311Packages.websockets     
   terraform
   tokei
   tree-sitter
@@ -157,6 +156,7 @@ with pkgs; [
   vim-vint
   vimPlugins.rust-tools-nvim
   wkhtmltopdf-bin
+  xcftools
   yamlfix
   yarn
   yarn2nix

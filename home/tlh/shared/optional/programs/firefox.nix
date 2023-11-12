@@ -43,7 +43,8 @@
           "browser.safebrowsing.downloads.remote.url" = false;
           "browser.safebrowsing.downloads.remote.enabled" = false;
           "browser.safebrowsing.downloads.enabled" = false;
-
+          "browser.safebrowsing.enabled" = false;
+          "browser.safebrowsing.malware.enabled" = false;
           # telemetry
           "toolkit.telemetry.enabled" = false;
           "toolkit.telemetry.unified" = false;

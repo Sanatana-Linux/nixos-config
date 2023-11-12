@@ -2,10 +2,6 @@
 with pkgs; [
   _7zz
   advancecomp
-  meson
-  parallel
-  ripgrep-all
-  sassc
   alejandra
   any-nix-shell
   appstream
@@ -17,6 +13,7 @@ with pkgs; [
   as-tree
   automake
   avfs
+  bintools
   binutils
   bottom
   bun
@@ -49,6 +46,7 @@ with pkgs; [
   mdds
   mesa
   mesa-demos
+  meson
   minizip2
   moreutils
   mozlz4a
@@ -71,6 +69,7 @@ with pkgs; [
   opencl-clang
   ouch
   p7zip
+  parallel
   pbzip2
   pciutils
   pciutils
@@ -87,12 +86,13 @@ with pkgs; [
   pure-prompt
   pxz
   python311
-
   ranger
   rcshist
   reposurgeon
+  ripgrep-all
   rocmPackages.clang-ocl
   runzip
+  sassc
   simpleTpmPk11
   skim
   smartmontools

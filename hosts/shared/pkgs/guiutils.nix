@@ -36,7 +36,6 @@ with pkgs; [
   fbida
   fcft
   feh
-  master-pkgs.floorp
   fntsample
   font-manager
   fontpreview

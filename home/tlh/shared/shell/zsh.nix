@@ -1,8 +1,7 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
+{ config
+, lib
+, pkgs
+, ...
 }: {
   programs.zsh = {
     enable = true;
@@ -131,13 +130,14 @@
       enable = true;
       zplugHome = "${config.xdg.configHome}/zsh/zplug";
       plugins = [
-        {name = "hlissner/zsh-autopair";}
-        {name = "chisui/zsh-nix-shell";}
-        {name = "lincheney/fzf-tab-completion";}
-        {name = "Aloxaf/fzf-tab";}
-        {name = "molovo/tipz";}
-        {name = "zimfw/archive";}
-        {name = "nix-community/nix-zsh-completions";}
+        { name = "hlissner/zsh-autopair"; }
+        { name = "chisui/zsh-nix-shell"; }
+        { name = "lincheney/fzf-tab-completion"; }
+        { name = "Aloxaf/fzf-tab"; }
+        { name = "https://github.com/chrisgrieser/zsh-magic-dashboard"; }
+        { name = "molovo/tipz"; }
+        { name = "zimfw/archive"; }
+        { name = "nix-community/nix-zsh-completions"; }
       ];
     };
   };

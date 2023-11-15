@@ -1,5 +1,6 @@
 {pkgs, ...}:
 with pkgs; [
+  appvm 
   conmon
   containerd
   containerpilot

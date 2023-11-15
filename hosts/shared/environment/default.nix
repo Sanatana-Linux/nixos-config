@@ -6,7 +6,8 @@
   imports = [./variables.nix];
 
   environment = with pkgs; {
-    shells = [zsh];
-    pathsToLink = ["/share/zsh"];
+    shells = [bash zsh];
+    pathsToLink = ["/share/bash" "/share/zsh"];
   };
+   users.defaultUserShell = pkgs.zsh;
 }

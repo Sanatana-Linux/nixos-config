@@ -2,6 +2,7 @@
 with pkgs; [
   abootimg
   acpi
+  openssl
   adbfs-rootless
   android-backup-extractor
   android-file-transfer

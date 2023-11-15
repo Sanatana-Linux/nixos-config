@@ -1,37 +1,17 @@
-{pkgs, ...}:
+{ pkgs, ... }:
 with pkgs; [
+  appindicator-sharp
   ascii-image-converter
   audio-recorder
-  potrace
-  libgee
-  pantheon.granite 
-  gdk-pixbuf     
-  gi-docgen 
-  gibo
-  webp-pixbuf-loader      
-  gio-sharp
-  git-revise 
-  gitleaks
   book-summary
-  darling-dmg
-  zrythm
-  yeetgif
-  colorz
-  python311Packages.pygobject3
-  python311Packages.pystache 
- python311Packages.colorthief 
- resvg 
- librsvg 
-  rubyPackages.cairo-gobject
-  rubyPackages.gobject-introspection
-  appindicator-sharp
-  gobject-introspection
-  rubyPackages.gdk_pixbuf2
   byzanz
   ciano
+  colorz
   crabz
   curtail
+  darling-dmg
   delve
+  easyeffects
   ebook_tools
   emacsPackages.svgo
   exiftool
@@ -39,6 +19,9 @@ with pkgs; [
   feh
   ffcast
   figlet
+  gdk-pixbuf
+  gi-docgen
+  gibo
   gif-for-cli
   giflib
   gifsicle
@@ -52,8 +35,12 @@ with pkgs; [
   gimpPlugins.resynthesizer
   gimpPlugins.texturize
   gimpPlugins.waveletSharpen
+  gio-sharp
+  git-revise
+  gitleaks
   gnome.gnome-sound-recorder
   gnome.nixos-gsettings-overrides
+  gobject-introspection
   graphicsmagick
   gsettings-desktop-schemas
   gst_all_1.gst-libav
@@ -78,6 +65,7 @@ with pkgs; [
   labelImg
   libdevil-nox
   libexif
+  libgee
   libjpeg
   libpng
   librsvg
@@ -94,9 +82,18 @@ with pkgs; [
   mnamer
   mozjpeg
   nodePackages_latest.svgo
+  obs-studio
+  obs-studio-plugins.obs-pipewire-audio-capture
+  obs-studio-plugins.obs-source-record
+  obs-studio-plugins.obs-move-transition
+  obs-studio-plugins.obs-gstreamer
+  obs-studio-plugins.input-overlay
+  obs-studio-plugins.looking-glass-obs
+  obs-studio-plugins.obs-backgroundremoval
   optipng
   oxipng
   p7zip
+  pantheon.granite
   peek
   pixcat
   pixcat
@@ -111,16 +108,28 @@ with pkgs; [
   pngquant
   pngtoico
   pngtools
+  potrace
   pxz
   python311Packages.pyfiglet
+  python311Packages.pygobject3
+  python311Packages.pystache
   rarcrack
   resvg
   ripgrep
+  rubyPackages.cairo-gobject
   rubyPackages.gdk_pixbuf2
+  rubyPackages.gdk_pixbuf2
+  rubyPackages.gobject-introspection
   svgcleaner
   toilet
   vlc
   webp-pixbuf-loader
+  webp-pixbuf-loader
   xcftools
   yeetgif
+  yeetgif
+  zrythm
+  librsvg
+  python311Packages.colorthief
+  resvg
 ]

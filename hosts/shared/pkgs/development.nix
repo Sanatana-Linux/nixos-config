@@ -139,6 +139,11 @@ with pkgs; [
   sass
   sassc
   shellcheck
+  shellharden
+  any-nix-shell
+  cached-nix-shell
+  getopt
+  getoptions
   shfmt
   skim
   sqlite

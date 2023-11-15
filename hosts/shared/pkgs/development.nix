@@ -28,6 +28,7 @@ with pkgs; [
   git
   git-backup
   git-branchless
+  git-filter-repo
   git-chglog
   git-extras
   git-ignore

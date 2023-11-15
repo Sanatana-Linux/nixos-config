@@ -134,7 +134,7 @@
         { name = "chisui/zsh-nix-shell"; }
         { name = "lincheney/fzf-tab-completion"; }
         { name = "Aloxaf/fzf-tab"; }
-        { name = "https://github.com/chrisgrieser/zsh-magic-dashboard"; }
+        { name = "chrisgrieser/zsh-magic-dashboard"; }
         { name = "molovo/tipz"; }
         { name = "zimfw/archive"; }
         { name = "nix-community/nix-zsh-completions"; }

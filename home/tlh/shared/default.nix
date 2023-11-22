@@ -1,9 +1,10 @@
-{ lib
-, pkgs
-, config
-, inputs
-, outputs
-, ...
+{
+  lib,
+  pkgs,
+  config,
+  inputs,
+  outputs,
+  ...
 }: {
   imports =
     [
@@ -24,15 +25,7 @@
   nix = {
     package = lib.mkForce pkgs.nixUnstable;
     settings = {
-      experimental-features = [
-        "ca-derivations"
-        "dynamic-derivations"
-        "flakes"
-        "impure-derivations"
-        "nix-command"
-        "recursive-nix"
-        "repl-flake"
-      ];
+      experimental-features = ["nix-command" "flakes" "repl-flake"];
       warn-dirty = false;
     };
   };

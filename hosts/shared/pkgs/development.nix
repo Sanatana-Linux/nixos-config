@@ -1,8 +1,9 @@
-{pkgs, ...}:
+{ pkgs, ... }:
 with pkgs; [
   arduino
   awscli
   bash
+  xorg.libX11
   biber
   bibtex2html
   black
@@ -26,6 +27,9 @@ with pkgs; [
   gdk-pixbuf
   gdk-pixbuf-xlib
   git
+  apkleaks
+  ejson
+  ejson2env
   git-backup
   git-branchless
   git-filter-repo
@@ -128,9 +132,9 @@ with pkgs; [
   pkg-configUpstream
   prisma-engines
   puppeteer-cli
-  python311Packages.PyICU   
-  python311Packages.websockets     
-  python311Packages.wheel      
+  python311Packages.PyICU
+  python311Packages.websockets
+  python311Packages.wheel
   rnix-lsp
   ruby
   rustc

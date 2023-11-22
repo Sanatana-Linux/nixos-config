@@ -1,8 +1,7 @@
-{pkgs, ...}:
+{ pkgs, ... }:
 with pkgs; [
   abootimg
   acpi
-  openssl
   adbfs-rootless
   android-backup-extractor
   android-file-transfer
@@ -78,6 +77,7 @@ with pkgs; [
   nixos-generators
   ntfs3g
   ocl-icd
+  openssl
   parcellite
   patchelf
   pciutils
@@ -174,7 +174,6 @@ with pkgs; [
   wirelesstools
   xarchiver
   xclip
-  xorg.gccmakedep
   xorg.gccmakedep
   xorg.xev
   yad

@@ -11,21 +11,21 @@
       bash
       binutils
       curl
+      gcc
       glib
       glibc
-      gcc
       gmime3
       icu
       libcanberra-gtk3
-      libgig
-      libgit2
-      libgit2-glib
       libdbusmenu
       libdbusmenu-gtk3
       libfm
       libfm-extra
       libgccjit
       libgee
+      libgig
+      libgit2
+      libgit2-glib
       libglibutil
       libgudev
       libimobiledevice
@@ -42,15 +42,15 @@
       libuuid
       libxdg_basedir
       lightlocker
-      luajitPackages.cqueues
       luajitPackages.cjson
+      luajitPackages.cqueues
       luajitPackages.dkjson
+      luajitPackages.inspect
       luajitPackages.ldbus
       luajitPackages.ldoc
       luajitPackages.lgi
       luajitPackages.libluv
       luajitPackages.lpeg
-      luajitPackages.inspect
       luajitPackages.lpeg_patterns
       luajitPackages.lpeglabel
       luajitPackages.lua
@@ -74,10 +74,11 @@
       luajitPackages.wrapLua
       openssl
       ranger
-      speechd
       sassc
+      speechd
       stdenv.cc.cc
       util-linux
+      xorg.libX11
       xsettingsd
       zlib
       zsh

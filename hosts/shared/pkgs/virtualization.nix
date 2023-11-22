@@ -1,6 +1,6 @@
-{pkgs, ...}:
+{ pkgs, ... }:
 with pkgs; [
-  appvm 
+  appvm
   conmon
   containerd
   containerpilot
@@ -13,6 +13,9 @@ with pkgs; [
   docker-compose
   docker-distribution
   docker-gc
+  docker-slim
+  oxker
+  docker-credential-helpers
   kvmtool
   #  qemu_full
   virt-manager

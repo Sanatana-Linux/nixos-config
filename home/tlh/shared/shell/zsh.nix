@@ -90,7 +90,7 @@
     '';
 
     initExtraFirst = ''
-
+      source $HOME/.config/zsh/zplug/**/*.zsh
       any-nix-shell zsh --info-right | source /dev/stdin
       export QT_QPA_PLATFORMTHEME="qt5ct"
     '';
@@ -134,7 +134,6 @@
         { name = "chisui/zsh-nix-shell"; }
         { name = "lincheney/fzf-tab-completion"; }
         { name = "Aloxaf/fzf-tab"; }
-        { name = "chrisgrieser/zsh-magic-dashboard"; }
         { name = "molovo/tipz"; }
         { name = "zimfw/archive"; }
         { name = "nix-community/nix-zsh-completions"; }

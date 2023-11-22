@@ -122,7 +122,6 @@ with pkgs; [
   pasystray
   pdf-parser
   pdfarranger
-  pdfmm
   pdftag
   pdftk
   perl536Packages.CairoGObject

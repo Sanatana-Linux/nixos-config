@@ -1,7 +1,6 @@
-{
-  config,
-  pkgs,
-  ...
+{ config
+, pkgs
+, ...
 }: {
   home.sessionVariables = {
     MOZ_USE_XINPUT2 = "1";
@@ -100,11 +99,11 @@
                       @import "${pkgs.firefox-gnome-theme}/share/firefox-gnome-theme/userChrome.css";
            ::-moz-selection { /* Code for Firefox */
             color: #202020 !important;
-            background: #00caff !important;
+            background: #a8a8a8 !important;
             }
             ::selection {
           color: #202020 !important;
-            background: #00caff !important;
+            background: #a8a8a8 !important;
             }
 
             /* remove maximum/minimum width restriction of sidebar to create tab tiling... sort of */
@@ -117,7 +116,12 @@
         userContent = ''
           @import "${pkgs.firefox-gnome-theme}/share/firefox-gnome-theme/userContent.css";
         '';
-  extraConfig = builtins.readFile "${pkgs.firefox-gnome-theme}/share/firefox-gnome-theme/configuration/user.js";
+        # Remove those extra empty spaces in both sides
+        "browser.uiCustomization.state" = ''
+          {"placements":{"widget-overflow-fixed-list":[],"nav-bar":["back-button","forward-button","stop-reload-button","urlbar-container","downloads-button","fxa-toolbar-menu-button"],"toolbar-menubar":["menubar-items"],"TabsToolbar":["tabbrowser-tabs","new-tab-button","alltabs-button"],"PersonalToolbar":["import-button","personal-bookmarks"]},"seen":["developer-button"],"dirtyAreaCache":["nav-bar","PersonalToolbar"],"currentVersion":17,"newElementCount":4}
+        '';
+
+        extraConfig = builtins.readFile "${pkgs.firefox-gnome-theme}/share/firefox-gnome-theme/configuration/user.js";
       };
     };
   };

@@ -54,7 +54,22 @@
       # Useful Features to Have Enabled
       system-features = ["kvm" "recursive-nix" "big-parallel"];
       # Necessary Experimental Nix Features for Flakes and Friends
-      experimental-features = ["recursive-nix" "nix-command" "flakes" "repl-flake"];
+      experimental-features = [
+        "auto-allocate-uids"
+        "ca-derivations"
+        "cgroups"
+        "daemon-trust-override"
+        "dynamic-derivations"
+        "fetch-closure"
+        "flakes"
+        "impure-derivations"
+        "nix-command"
+        "no-url-literals"
+        "parse-toml-timestamps"
+        "read-only-local-store"
+        "recursive-nix"
+        "repl-flake"
+      ];
       flake-registry = "/etc/nix/registry.json";
       # show more log lines for failed builds
       log-lines = 20;

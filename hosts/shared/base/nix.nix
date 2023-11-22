@@ -64,9 +64,7 @@
         "flakes"
         "impure-derivations"
         "nix-command"
-        "no-url-literals"
         "parse-toml-timestamps"
-        "read-only-local-store"
         "recursive-nix"
         "repl-flake"
       ];

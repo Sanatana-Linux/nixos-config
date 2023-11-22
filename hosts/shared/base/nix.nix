@@ -55,16 +55,11 @@
       system-features = ["kvm" "recursive-nix" "big-parallel"];
       # Necessary Experimental Nix Features for Flakes and Friends
       experimental-features = [
-        "auto-allocate-uids"
         "ca-derivations"
-        "cgroups"
-        "daemon-trust-override"
         "dynamic-derivations"
-        "fetch-closure"
         "flakes"
         "impure-derivations"
         "nix-command"
-        "parse-toml-timestamps"
         "recursive-nix"
         "repl-flake"
       ];

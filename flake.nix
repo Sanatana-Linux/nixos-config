@@ -11,6 +11,7 @@
     nixos-hardware.url = "github:nixos/nixos-hardware";
     nixos-generators.url = "github:nix-community/nixos-generators";
     rust-overlay.url = "github:oxalica/rust-overlay";
+
     nil = {
       url = "github:oxalica/nil";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -84,6 +85,11 @@
                   useUserPackages = true;
                   backupFileExtension = "bak";
                   users.tlh = { imports = [ ./home/tlh/hp-laptop-amd ]; };
+                  "tlh@hp-laptop-amd" = home-manager.lib.homeManagerConfiguration {
+                    pkgs = nixpkgs.legacyPackages."x86_64-linux";
+                    extraSpecialArgs = { inherit inputs outputs; };
+                    modules = [ ./home/tlh/hp-laptop-amd ];
+                  };
                 };
               }
             ];

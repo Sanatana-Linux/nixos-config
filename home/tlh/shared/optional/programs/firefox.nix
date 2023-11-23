@@ -99,11 +99,11 @@
                       @import "${pkgs.firefox-gnome-theme}/share/firefox-gnome-theme/userChrome.css";
            ::-moz-selection { /* Code for Firefox */
             color: #202020 !important;
-            background: #a8a8a8 !important;
+            background: #00caff !important;
             }
             ::selection {
           color: #202020 !important;
-            background: #a8a8a8 !important;
+            background: #00caff !important;
             }
 
             /* remove maximum/minimum width restriction of sidebar to create tab tiling... sort of */
@@ -111,16 +111,20 @@
             max-width: none !important;
             min-width: 30% !important;
             }
+
+            /*Restore the All Tabs Button that is disabled */
+            #alltabs-button {
+          visibility: visible !important;
+           }
+          #tabbrowser-tabs[overflow] ~ #alltabs-button {
+           visibility: visible !important;
+           }
+
         '';
 
         userContent = ''
           @import "${pkgs.firefox-gnome-theme}/share/firefox-gnome-theme/userContent.css";
         '';
-        # Remove those extra empty spaces in both sides
-        "browser.uiCustomization.state" = ''
-          {"placements":{"widget-overflow-fixed-list":[],"nav-bar":["back-button","forward-button","stop-reload-button","urlbar-container","downloads-button","fxa-toolbar-menu-button"],"toolbar-menubar":["menubar-items"],"TabsToolbar":["tabbrowser-tabs","new-tab-button","alltabs-button"],"PersonalToolbar":["import-button","personal-bookmarks"]},"seen":["developer-button"],"dirtyAreaCache":["nav-bar","PersonalToolbar"],"currentVersion":17,"newElementCount":4}
-        '';
-
         extraConfig = builtins.readFile "${pkgs.firefox-gnome-theme}/share/firefox-gnome-theme/configuration/user.js";
       };
     };

@@ -1,6 +1,7 @@
-{ config
-, pkgs
-, ...
+{
+  config,
+  pkgs,
+  ...
 }: {
   home.sessionVariables = {
     MOZ_USE_XINPUT2 = "1";
@@ -111,21 +112,12 @@
             max-width: none !important;
             min-width: 30% !important;
             }
-
-            /*Restore the All Tabs Button that is disabled */
-            #alltabs-button {
-          visibility: visible !important;
-           }
-          #tabbrowser-tabs[overflow] ~ #alltabs-button {
-           visibility: visible !important;
-           }
-
         '';
 
         userContent = ''
           @import "${pkgs.firefox-gnome-theme}/share/firefox-gnome-theme/userContent.css";
         '';
-        extraConfig = builtins.readFile "${pkgs.firefox-gnome-theme}/share/firefox-gnome-theme/configuration/user.js";
+  extraConfig = builtins.readFile "${pkgs.firefox-gnome-theme}/share/firefox-gnome-theme/configuration/user.js";
       };
     };
   };

@@ -19,6 +19,7 @@ with pkgs; [
   feh
   ffcast
   figlet
+  gallery-dl
   gdk-pixbuf
   gi-docgen
   gibo
@@ -70,11 +71,13 @@ with pkgs; [
   libpng
   librsvg
   librsvg
+  librsvg
   libspng
   libungif
   libwebp
   lrzip
   lz4
+  manuskript
   meme
   menyoki
   metadata-cleaner
@@ -83,13 +86,13 @@ with pkgs; [
   mozjpeg
   nodePackages_latest.svgo
   obs-studio
-  obs-studio-plugins.obs-pipewire-audio-capture
-  obs-studio-plugins.obs-source-record
-  obs-studio-plugins.obs-move-transition
-  obs-studio-plugins.obs-gstreamer
   obs-studio-plugins.input-overlay
   obs-studio-plugins.looking-glass-obs
   obs-studio-plugins.obs-backgroundremoval
+  obs-studio-plugins.obs-gstreamer
+  obs-studio-plugins.obs-move-transition
+  obs-studio-plugins.obs-pipewire-audio-capture
+  obs-studio-plugins.obs-source-record
   optipng
   oxipng
   p7zip
@@ -110,10 +113,12 @@ with pkgs; [
   pngtools
   potrace
   pxz
+  python311Packages.colorthief
   python311Packages.pyfiglet
   python311Packages.pygobject3
   python311Packages.pystache
   rarcrack
+  resvg
   resvg
   ripgrep
   rubyPackages.cairo-gobject
@@ -129,7 +134,4 @@ with pkgs; [
   yeetgif
   yeetgif
   zrythm
-  librsvg
-  python311Packages.colorthief
-  resvg
 ]

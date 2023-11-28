@@ -20,6 +20,7 @@
           buster-captcha-solver
           keybase
           link-gopher
+          tampermonkey
           metamask
           search-by-image
           tab-stash

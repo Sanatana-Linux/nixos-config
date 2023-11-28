@@ -3,7 +3,6 @@ with pkgs; [
   arduino
   awscli
   bash
-  xorg.libX11
   biber
   bibtex2html
   black
@@ -14,6 +13,8 @@ with pkgs; [
   cpp-hocon
   cpp-utilities
   cppclean
+  scribus
+  xorg.libX11
   cppdb
   deadnix
   dejsonlz4
@@ -171,4 +172,7 @@ with pkgs; [
   yarn
   yarn2nix
   zim
+  libzim
+  zimlib
+  zim-tools
 ]

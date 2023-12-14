@@ -109,7 +109,7 @@
       rm = "rm -rvf";
       vim = "nvim";
       fcd = "cd $(find -type d | fzf)";
-      grep = "${lib.getBin ripgrep}/bin/ripgrep";
+      grep = "${lib.getBin ripgrep-all}/bin/rga";
       du = "${lib.getBin du-dust}/bin/du-dust";
       ps = "${lib.getBin procs}/bin/procs";
       trm = "${lib.getBin trash-cli}/bin/trash-cli";

@@ -113,12 +113,17 @@
             max-width: none !important;
             min-width: 30% !important;
             }
+            #alltabs-button{
+              display: inline !important;
+              position: relative !important;
+                visibility: visible !important;
+            }
         '';
 
         userContent = ''
           @import "${pkgs.firefox-gnome-theme}/share/firefox-gnome-theme/userContent.css";
         '';
-  extraConfig = builtins.readFile "${pkgs.firefox-gnome-theme}/share/firefox-gnome-theme/configuration/user.js";
+        extraConfig = builtins.readFile "${pkgs.firefox-gnome-theme}/share/firefox-gnome-theme/configuration/user.js";
       };
     };
   };

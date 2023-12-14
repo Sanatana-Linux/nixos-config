@@ -2,6 +2,7 @@
 with pkgs; [
   appindicator-sharp
   ascii-image-converter
+  beautysh
   audio-recorder
   book-summary
   byzanz

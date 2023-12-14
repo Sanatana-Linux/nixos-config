@@ -8,6 +8,7 @@ with pkgs;
         pynvim
         python-dotenv
         setuptoolsBuildHook
+        beautifulsoup4
         wheelUnpackHook
         youtube-transcript-api
       ]))

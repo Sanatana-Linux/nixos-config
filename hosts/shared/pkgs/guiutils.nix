@@ -55,6 +55,7 @@ with pkgs; [
   goocanvas3
   google-chrome
   gparted
+  termpdfpy
   gpick
   graphite2
   gspell

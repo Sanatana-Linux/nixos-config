@@ -1,0 +1,24 @@
+{
+    "hosts": [
+        {
+            "arch": "amd64",
+            "machines": [
+                {
+                    "name": "X1-Yoga"
+                },
+                {
+                    "name": "Netcup-x86"
+                }
+            ]
+        },
+        {
+            "arch": "arm64",
+            "machines": [
+                {
+                    "name": "phelps"
+                }
+            ]
+        }
+    ],
+    "packages": []
+}

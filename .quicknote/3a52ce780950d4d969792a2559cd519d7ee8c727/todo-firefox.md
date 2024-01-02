@@ -1,3 +1,0 @@
-# Firefox Customization 
-
-While no longer necessary to customize Firefox with `userchrome.js` to the same extent due to Firefox simplifying the placement of extensions in a manner close to how Google Chrome, there are still some elements of my Firefox configuration I would prefer to modify. Being mostly related to `userchrome.css` modifications, I have opted to keep the configuration internal to the NixOS configuration instead of how I was handling it prior in its own repository. 

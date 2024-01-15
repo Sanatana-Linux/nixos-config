@@ -1,4 +1,5 @@
 {
+  outputs,
   inputs,
 }: let
   # Adds my custom packages

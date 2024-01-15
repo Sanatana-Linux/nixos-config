@@ -90,7 +90,11 @@ with pkgs; [
   ranger
   rclone
   renameutils
-  ripgrep
+  ripgrep-all
+  vgrep
+  rnr
+  please
+
   silver-searcher
   simg2img
   slop

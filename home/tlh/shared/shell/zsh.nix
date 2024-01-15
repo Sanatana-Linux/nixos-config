@@ -96,7 +96,7 @@
 
     shellAliases = with pkgs; {
       cleanup = "sudo nix-collect-garbage --delete-older-than 3d";
-      purge = "doas sync; echo 3 | doas tee /proc/sys/vm/drop_caches"; # cleans up drop caches 
+      purge = "doas sync; echo 3 | doas tee /proc/sys/vm/drop_caches"; # cleans up drop caches
       "dtrx-zip-all" = "for i in ./**/*.zip; do dtrx $i; done"; # unzips all zip archives in a directory
       "cd.." = "cd ../"; # shortens the go back command
       "cd..." = "cd ../../"; # shortens go back twice command

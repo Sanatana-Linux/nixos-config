@@ -1,7 +1,6 @@
-{
-  config,
-  pkgs,
-  ...
+{ config
+, pkgs
+, ...
 }: {
   home.sessionVariables = {
     MOZ_USE_XINPUT2 = "1";
@@ -30,7 +29,6 @@
           form-history-control
           foxytab
           stylus
-
         ];
 
         settings = {
@@ -116,11 +114,12 @@
                       @import "${pkgs.firefox-gnome-theme}/share/firefox-gnome-theme/userChrome.css";
            ::-moz-selection { /* Code for Firefox */
             color: #202020 !important;
-            background: #00caff !important;
+            background: #5ad4e6
+!important;
             }
             ::selection {
           color: #202020 !important;
-            background: #00caff !important;
+            background:#5ad4e6 !important;
             }
 
             /* remove maximum/minimum width restriction of sidebar to create tab tiling... sort of */
@@ -151,9 +150,9 @@
                 grid-template-areas: "hd hd" "cd cd";
                 grid-auto-columns: 1fr;
                 column-gap: 1em;
-                height: 6rem;
-                minimum-height:6rem;
-                maxmium-height: 6rem;
+                height: 6rem !important
+                minimum-height:6rem !important
+                maxmium-height: 6rem !important
 
               }
 
@@ -165,9 +164,9 @@
                 padding-bottom: 0px !important;
                 padding-top: 0px !important;
                 grid-area: auto;
-                                height: 6rem;
-                minimum-height:6rem;
-                maxmium-height: 6rem;
+                height: 6rem !important;
+                minimum-height:6rem !important;
+                maxmium-height: 6rem !important;
 
               }
               addon-card .addon-description{ max-height: 3em; scrollbar-width: thin; }
@@ -235,6 +234,8 @@
 
               addon-card .addon-description{
                 max-height: 3em;
+                height: 3em;
+                min-height: 3em;
                 scrollbar-width: thin;
               }
 

@@ -8,6 +8,7 @@
       (pkgs)
       bfg-repo-cleaner
       black
+      anytype
       cargo
       ccls
       clang
@@ -26,7 +27,6 @@
       keybase-gui
       keychain
       lldb
-      nb
       nodejs
       parted
       pre-commit

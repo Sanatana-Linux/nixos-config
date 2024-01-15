@@ -19,7 +19,6 @@
       "${config.home.homeDirectory}/Workspace/go/bin"
       "${config.home.homeDirectory}/.cargo/bin"
       "${config.home.homeDirectory}/.yarn/bin"
-      "${config.home.homeDirectory}/.config/.foundry/bin"
     ];
 
     sessionVariables = {

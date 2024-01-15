@@ -1,8 +1,8 @@
-{pkgs, ...}:
+{ pkgs, ... }:
 with pkgs; [
   acpi
   alsaequal
-  amarena-theme
+  fluent-gtk-theme
   appimage-run
   appimagekit
   appstream-glib

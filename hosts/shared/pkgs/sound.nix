@@ -12,7 +12,11 @@ with pkgs; [
   cava
   codec2
   espeak
+  espeak-classic
+  espeakup
   flite
+  mimic 
+  piper-tts
   freetts
   freetts
   gsound

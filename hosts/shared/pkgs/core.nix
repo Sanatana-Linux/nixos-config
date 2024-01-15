@@ -1,9 +1,12 @@
-{pkgs, ...}:
+{ pkgs, ... }:
 with pkgs; [
   _7zz
   advancecomp
   alejandra
   any-nix-shell
+  nixdoc
+  nixd
+  nix-health
   appstream
   appstream-glib
   archivemount
@@ -106,7 +109,7 @@ with pkgs; [
   squashfuse
   sssd
   star-history
-  suitesparse 
+  suitesparse
   swtpm
   swtpm-tpm2
   tarlz
@@ -128,6 +131,7 @@ with pkgs; [
   usbmuxd
   usbutils
   utillinux
+  uutils-coreutils
   wirelesstools
   wmutils-core
   wmutils-libwm
@@ -162,7 +166,7 @@ with pkgs; [
   xorg.xprop
   xorg.xwininfo
   xsettingsd
-  xxHash 
+  xxHash
   xz
   zip
   zlib

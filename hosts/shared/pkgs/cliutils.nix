@@ -3,6 +3,7 @@ with pkgs; [
   abootimg
   acpi
   adbfs-rootless
+  trash-cli
   android-backup-extractor
   android-file-transfer
   android-tools

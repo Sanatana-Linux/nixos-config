@@ -7,11 +7,12 @@
       sha256 = lock.narHash;
     };
   in
-  import nixpkgs { overlays = [ ]; }
+  import nixpkgs { overlays = import ./overlays { }; }
 , ...
 }: {
   default = pkgs.mkShell {
-    NIX_CONFIG = "extra-experimental-features = nix-command flakes repl-flake";
+    NIX_CONFIG = "extra-experimental-features = nix-command auto-allocate-uids configurable-impure-env recursive-nix flakes repl-flake";
+
     nativeBuildInputs = with pkgs; [
       nix
       home-manager
@@ -19,20 +20,20 @@
       vim
       zsh
     ];
-    #     shellHook = "" "
-    # echo '   _______                     __                          ' && \
-    # echo '   |     __|.---.-.-----.---.-.|  |_.---.-.-----.---.-.    ' && \
-    # echo '   |__     ||  _  |     |  _  ||   _|  _  |     |  _  |    ' && \
-    # echo '   |_______||___._|__|__|___._||____|___._|__|__|___._|    ' && \
-    # echo '    _____   __                                             ' && \
-    # echo '   |     |_|__|.-----.--.--.--.--.                         ' && \
-    # echo '   |       |  ||     |  |  |_   _|                         ' && \
-    # echo '   |_______|__||__|__|_____|__.__|                         '  && \
-    # echo '    _______ __         __                                  ' && \
-    # echo '   |    ___|  |.---.-.|  |--.-----.                        ' && \
-    # echo '   |    ___|  ||  _  ||    <|  -__|                        ' && \
-    # echo '   |___|   |__||___._||__|__|_____|                        ' && \
-    # echo
-    #" "";
+    # shellHook = "" "bash echo && \
+    #  echo '   _______                     __                          ' && \
+    #  echo '   |     __|.---.-.-----.---.-.|  |_.---.-.-----.---.-.    ' && \
+    #  echo '   |__     ||  _  |     |  _  ||   _|  _  |     |  _  |    ' && \
+    #  echo '   |_______||___._|__|__|___._||____|___._|__|__|___._|    ' && \
+    #  echo '    _____   __                                             ' && \
+    #  echo '   |     |_|__|.-----.--.--.--.--.                         ' && \
+    #  echo '   |       |  ||     |  |  |_   _|                         ' && \
+    #  echo '   |_______|__||__|__|_____|__.__|                         '  && \
+    #  echo '    _______ __         __                                  ' && \
+    #  echo '   |    ___|  |.---.-.|  |--.-----.                        ' && \
+    #  echo '   |    ___|  ||  _  ||    <|  -__|                        ' && \
+    #  echo '   |___|   |__||___._||__|__|_____|                        ' && \
+    #  echo
+    # " "";
   };
 }

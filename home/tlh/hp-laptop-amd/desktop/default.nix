@@ -1,8 +1,7 @@
-{
-  inputs,
-  lib,
-  pkgs,
-  ...
+{ inputs
+, lib
+, pkgs
+, ...
 }: {
   fonts.fontconfig.enable = true;
 
@@ -13,13 +12,13 @@
       size = 11;
     };
     iconTheme = {
-      name = "Papirus-Dark";
-      package = pkgs.papirus-icon-theme;
+      name = "Fluent-Dark";
+      package = pkgs.fluent-icon-theme;
     };
     cursorTheme = {
       name = "Phinger Cursors (light)";
       package = pkgs.phinger-cursors;
-      size = 48;
+      size = 24;
     };
 
     gtk2 = {
@@ -47,8 +46,8 @@
       gtk-decoration-layout = "menu:";
     };
     theme = {
-      name = "Colloid-Dark";
-      package = pkgs.colloid-gtk-theme;
+      name = "Fluent-Dark-compact";
+      package = pkgs.fluent-gtk-theme;
     };
   };
 
@@ -60,16 +59,24 @@
       package = pkgs.adwaita-qt;
     };
   };
+  home = {
+    # maybe the below is more elegant, but it doesn't include the necessary `.git` directory so I can't do any work on the repo, that's useless
+    # xdg.configFile."awesome".source = "${inputs.awesome-config}";
 
-  # maybe the below is more elegant, but it doesn't include the necessary `.git` directory so I can't do any work on the repo, that's useless
-  # xdg.configFile."awesome".source = "${inputs.awesome-config}";
+    # Enable AwesomeWM Configuration
+    activation.installAwesomeWMConfig = ''
+      if [ ! -d "$HOME/.config/awesome" ]; then
+       ${pkgs.git}/bin/git clone https://github.com/Sanatana-Linux/nixos-awesomewm "$HOME/.config/awesome"
+        chmod -R +w "$HOME/.config/awesome"
+      fi
+    '';
+    activation.installNvimConfig = ''
+      if [ ! -d "$HOME/.config/nvim" ]; then
+       ${pkgs.git}/bin/git clone https://github.com/Thomashighbaugh/nvim-forge "$HOME/.config/nvim"
+        chmod -R +w "$HOME/.config/nvim"
+      fi
+    '';
 
-  # Enable AwesomeWM Configuration
-  home.activation.installAwesomeWMConfig = ''
-    if [ ! -d "$HOME/.config/awesome" ]; then
-     ${pkgs.git}/bin/git clone https://github.com/Sanatana-Linux/nixos-awesomewm "$HOME/.config/awesome"
-      chmod -R +w "$HOME/.config/awesome"
-    fi
-  '';
-  home.file = {".icons/default".source = "${pkgs.phinger-cursors}/share/icons/phinger-cursors-light";};
+    file = { ".icons/default".source = "${pkgs.phinger-cursors}/share/icons/phinger-cursors-light"; };
+  };
 }

@@ -2,8 +2,10 @@
 with pkgs; [
   appindicator-sharp
   ascii-image-converter
-  beautysh
+  aseprite-unfree
   audio-recorder
+  babl
+  beautysh
   book-summary
   byzanz
   ciano
@@ -20,6 +22,7 @@ with pkgs; [
   feh
   ffcast
   figlet
+  freetts
   gallery-dl
   gdk-pixbuf
   gi-docgen
@@ -82,9 +85,11 @@ with pkgs; [
   meme
   menyoki
   metadata-cleaner
+  metapixel
   mjpegtoolsFull
   mnamer
   mozjpeg
+  nanotts
   nodePackages_latest.svgo
   obs-studio
   obs-studio-plugins.input-overlay
@@ -99,8 +104,11 @@ with pkgs; [
   p7zip
   pantheon.granite
   peek
+  picotts
+  pikopixel
   pixcat
   pixcat
+  pixel2svg
   pixz
   plzip
   pngcheck
@@ -114,10 +122,14 @@ with pkgs; [
   pngtools
   potrace
   pxz
+  python311Packages.cairosvg
   python311Packages.colorthief
   python311Packages.pyfiglet
   python311Packages.pygobject3
   python311Packages.pystache
+  python311Packages.pysvg-py3
+  python311Packages.svg-path
+  python311Packages.svgwrite
   rarcrack
   resvg
   resvg
@@ -126,6 +138,7 @@ with pkgs; [
   rubyPackages.gdk_pixbuf2
   rubyPackages.gdk_pixbuf2
   rubyPackages.gobject-introspection
+  rx
   svgcleaner
   toilet
   vlc

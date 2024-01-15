@@ -74,10 +74,10 @@
       # disable boot logo if any
       "logo.nologo"
       # tell the kernel to not be verbose
-      #"quiet"
+      "quiet"
       # disable systemd status messages
       # rd prefix means systemd-udev will be used instead of initrd
-      #"rd.systemd.show_status=auto"
+      "rd.systemd.show_status=auto"
       # lower the udev log level to show only errors or worse
       "rd.udev.log_level=3"
     ];

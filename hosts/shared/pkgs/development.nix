@@ -1,11 +1,24 @@
 { pkgs, ... }:
 with pkgs; [
+  any-nix-shell
+  apkleaks
+  brotli
+  python311Packages.mdformat
+  python311Packages.brotlipy 
+  python311Packages.brotlicffi 
+  cbfmt
+  glow
   arduino
   awscli
   bash
   biber
   bibtex2html
+  cutter 
+  glxinfo
+  xorg_sys_opengl
+  jadx
   black
+  cached-nix-shell
   cargo
   cargo-binutils
   chruby
@@ -13,13 +26,13 @@ with pkgs; [
   cpp-hocon
   cpp-utilities
   cppclean
-  scribus
-  xorg.libX11
   cppdb
   deadnix
   dejsonlz4
   direnv
   efm-langserver
+  ejson
+  ejson2env
   expat
   fclones
   fcppt
@@ -27,15 +40,14 @@ with pkgs; [
   fuse3
   gdk-pixbuf
   gdk-pixbuf-xlib
+  getopt
+  getoptions
   git
-  apkleaks
-  ejson
-  ejson2env
   git-backup
   git-branchless
-  git-filter-repo
   git-chglog
   git-extras
+  git-filter-repo
   git-ignore
   git-repo-updater
   git-trim
@@ -51,14 +63,19 @@ with pkgs; [
   ipfs
   ispell
   isync
+  jadx
   joplin-desktop
   just
+  kotlin 
+  kotlin-language-server
+  kotlin-native
   ktlint
   libffi
   libimobiledevice
   libpkgconf
   libtiff
   libtool
+  libzim
   lightningcss
   logseq
   lua
@@ -134,6 +151,8 @@ with pkgs; [
   prisma-engines
   puppeteer-cli
   python311Packages.PyICU
+  python311Packages.pylsp-mypy
+
   python311Packages.websockets
   python311Packages.wheel
   rnix-lsp
@@ -144,12 +163,9 @@ with pkgs; [
   rustup
   sass
   sassc
+  scribus
   shellcheck
   shellharden
-  any-nix-shell
-  cached-nix-shell
-  getopt
-  getoptions
   shfmt
   skim
   sqlite
@@ -168,11 +184,11 @@ with pkgs; [
   vimPlugins.rust-tools-nvim
   wkhtmltopdf-bin
   xcftools
+  xorg.libX11
   yamlfix
   yarn
   yarn2nix
   zim
-  libzim
-  zimlib
   zim-tools
+  zimlib
 ]

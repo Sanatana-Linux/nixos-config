@@ -1,9 +1,8 @@
-{
-  lib,
-  pkgs,
-  inputs,
-  outputs,
-  ...
+{ lib
+, pkgs
+, inputs
+, outputs
+, ...
 }: {
   imports =
     [
@@ -23,12 +22,12 @@
   # https://src.fedoraproject.org/rpms/systemd/tree/acb90c49c42276b06375a66c73673ac3510255
   systemd.oomd = {
     enableRootSlice = true;
-    enableUserServices = true;
+    enableUserSlices = true;
   };
 
   home-manager = {
     useUserPackages = true;
-    extraSpecialArgs = {inherit inputs outputs;};
+    extraSpecialArgs = { inherit inputs outputs; };
   };
 
   nixpkgs = {
@@ -48,6 +47,7 @@
         "openssl-1.1.1w"
         "openssl-1.1.1v"
         "electron-24.8.6"
+        "electron-25.9.0"
       ];
       firefox = {
         enableLegacyUserProfileCustomizations = true;

@@ -54,7 +54,7 @@
       # Useful Features to Have Enabled
       system-features = ["kvm" "recursive-nix" "big-parallel"];
       # Necessary Experimental Nix Features for Flakes and Friends
-      experimental-features = ["recursive-nix" "nix-command" "flakes" "repl-flake"];
+      experimental-features = ["recursive-nix" "auto-allocate-uids" "configurable-impure-env" "nix-command" "flakes" "repl-flake"];
       flake-registry = "/etc/nix/registry.json";
       # show more log lines for failed builds
       log-lines = 20;

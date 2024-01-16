@@ -207,7 +207,7 @@
               addon-list[type="extension"] .addon-name-container{
                 display: grid !important;
                 grid-template-areas: "name opt" "name toggle" "name badge";
-                grid-row-gap: 6px;
+                grid-row-gap: 1em;
                 grid-auto-columns: 1fr 24px;
               }
               .addon-icon{ align-self: center }

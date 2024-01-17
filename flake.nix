@@ -21,85 +21,67 @@
 
     nps.url = "github:OleMussmann/Nix-Package-Search";
 
-    #   nvim-forge = {
-    #     type = "git";
-    #     flake = false;
-    #     url = "github:Thomashighbaugh/nvim-forge";
-    #   };
-
-    #  awesome-config = {
-    #    type = "git";
-    #    flake = false;
-    #    url = "github:Sanatana-Linux/nixos-awesomewm";
-    #  };
-
     bhairava-grub-theme = {
-      #type = "git";
-      #url = "https://github.com/Sanatana-Linux/Bhairava-Grub-Theme";
       url = "github:Sanatana-Linux/Bhairava-Grub-Theme";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs =
-    { self
-    , nixpkgs
-    , nixpkgs-master
-    , home-manager
-    , nixos-hardware
-    , bhairava-grub-theme
-    , nur
-    , chaotic
-    , ...
-    } @ inputs:
-    let
-      inherit (self) outputs;
-      forEachSystem = nixpkgs.lib.genAttrs [ "x86_64-linux" "aarch64-linux" ];
-      forEachPkgs = f: forEachSystem (sys: f nixpkgs.legacyPackages.${sys});
-    in
-    {
-      nixosModules = import ./modules/nixos;
-      homeManagerModules = import ./modules/home-manager;
-      overlays = import ./overlays { inherit inputs outputs; };
-      packages = forEachPkgs (pkgs: import ./pkgs { inherit pkgs; });
-      devShells = forEachPkgs (pkgs: import ./shell.nix { inherit pkgs; });
+  outputs = {
+    self,
+    nixpkgs,
+    nixpkgs-master,
+    home-manager,
+    nixos-hardware,
+    bhairava-grub-theme,
+    nur,
+    chaotic,
+    ...
+  } @ inputs: let
+    inherit (self) outputs;
+    forEachSystem = nixpkgs.lib.genAttrs ["x86_64-linux" "aarch64-linux"];
+    forEachPkgs = f: forEachSystem (sys: f nixpkgs.legacyPackages.${sys});
+  in {
+    nixosModules = import ./modules/nixos;
+    homeManagerModules = import ./modules/home-manager;
+    overlays = import ./overlays {inherit inputs outputs;};
+    packages = forEachPkgs (pkgs: import ./pkgs {inherit pkgs;});
+    devShells = forEachPkgs (pkgs: import ./shell.nix {inherit pkgs;});
 
-      nixosConfigurations = {
-        # Laptop
-        hp-laptop-amd = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs outputs nixos-hardware bhairava-grub-theme home-manager; };
-          modules =
-            let
-              nur-modules = import nur {
-                nurpkgs = nixpkgs.legacyPackages.x86_64-linux;
-                pkgs = nixpkgs.legacyPackages.x86_64-linux;
-              };
-            in
-            [
-              { imports = [ nur-modules.repos.kira-bruneau.modules.lightdm-webkit2-greeter ]; }
-              ./hosts/hp-laptop-amd
-              nixos-hardware.nixosModules.common-cpu-amd
-              nixos-hardware.nixosModules.common-pc-laptop-ssd
-              bhairava-grub-theme.nixosModule
-              home-manager.nixosModules.home-manager
-              chaotic.nixosModules.default # OUR DEFAULT MODULE
-              {
-                home-manager = {
-                  useUserPackages = true;
-                  backupFileExtension = "bak";
-                  users.tlh = { imports = [ ./home/tlh/hp-laptop-amd ]; };
-                };
-              }
-            ];
-        };
-      };
-      # yes this is necessary
-      homeConfigurations = {
-        "tlh@hp-laptop-amd" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages."x86_64-linux";
-          extraSpecialArgs = { inherit inputs outputs; };
-          modules = [ ./home/tlh/hp-laptop-amd ];
-        };
+    nixosConfigurations = {
+      # Laptop
+      hp-laptop-amd = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs nixos-hardware bhairava-grub-theme home-manager;};
+        modules = let
+          nur-modules = import nur {
+            nurpkgs = nixpkgs.legacyPackages.x86_64-linux;
+            pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          };
+        in [
+          {imports = [nur-modules.repos.kira-bruneau.modules.lightdm-webkit2-greeter];}
+          ./hosts/hp-laptop-amd
+          nixos-hardware.nixosModules.common-cpu-amd
+          nixos-hardware.nixosModules.common-pc-laptop-ssd
+          bhairava-grub-theme.nixosModule
+          home-manager.nixosModules.home-manager
+          chaotic.nixosModules.default # OUR DEFAULT MODULE
+          {
+            home-manager = {
+              useUserPackages = true;
+              backupFileExtension = "bak";
+              users.tlh = {imports = [./home/tlh/hp-laptop-amd];};
+            };
+          }
+        ];
       };
     };
+    # yes this is necessary
+    homeConfigurations = {
+      "tlh@hp-laptop-amd" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages."x86_64-linux";
+        extraSpecialArgs = {inherit inputs outputs;};
+        modules = [./home/tlh/hp-laptop-amd];
+      };
+    };
+  };
 }

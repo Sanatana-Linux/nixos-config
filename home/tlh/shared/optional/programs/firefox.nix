@@ -150,9 +150,10 @@
                 grid-template-areas: "hd hd" "cd cd";
                 grid-auto-columns: 1fr;
                 column-gap: 1em;
-                height: 6rem !important
-                minimum-height:6rem !important
-                maxmium-height: 6rem !important
+                height: 8rem !important
+                minimum-height:8rem !important
+                maxmium-height: 8rem !important
+                overflow: hidden !important;
 
               }
 
@@ -164,12 +165,13 @@
                 padding-bottom: 0px !important;
                 padding-top: 0px !important;
                 grid-area: auto;
-                height: 6rem !important;
-                minimum-height:6rem !important;
-                maxmium-height: 6rem !important;
+                height: 8rem !important;
+                minimum-height:8rem !important;
+                maxmium-height: 8rem !important;
+                overflow: hidden !important;
 
               }
-              addon-card .addon-description{ max-height: 3em; scrollbar-width: thin; }
+              addon-card .addon-description{ max-height: 5em; scrollbar-width: thin; overflow: hidden !important;}
             }
 
             @media (min-width:1220px){
@@ -233,9 +235,10 @@
               }
 
               addon-card .addon-description{
-                max-height: 3em;
-                height: 3em;
-                min-height: 3em;
+                max-height: 5em;
+                height: 5em;
+                min-height: 5em;
+                overflow: hidden !important;
                 scrollbar-width: thin;
               }
 

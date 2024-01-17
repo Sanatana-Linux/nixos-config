@@ -16,8 +16,6 @@ with pkgs; [
   espeakup
   flite
   mimic 
-  piper-tts
-  freetts
   freetts
   gsound
   gspeech

@@ -65,7 +65,11 @@ in {
       black-formatter.path = "${pkgs.black}/bin/black";
       stylua.styluaPath = "${pkgs.stylua}/bin/stylua";
       Lua.misc.executablePath = "${pkgs.sumneko-lua-language-server}/bin/lua-language-server";
-
+      CodeGPT.Autocomplete.enabled = true;
+      github.copilot.enable.markdown = true;
+      github.copilot.enable.plaintext = true;
+      codeium.enableConfig."*" = true;
+      codeium.aggressiveShutdown = true;
       "[c]".editor.defaultFormatter = "xaver.clang-format";
       "[cpp]".editor.defaultFormatter = "xaver.clang-format";
       "[css]".editor.defaultFormatter = "esbenp.prettier-vscode";

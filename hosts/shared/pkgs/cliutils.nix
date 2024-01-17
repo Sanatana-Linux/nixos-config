@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{pkgs, ...}:
 with pkgs; [
   abootimg
   acpi
@@ -27,7 +27,6 @@ with pkgs; [
   comma
   conda
   cookiecutter
-  copier
   csv2latex
   curl
   deer

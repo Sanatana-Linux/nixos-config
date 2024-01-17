@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{pkgs, ...}:
 with pkgs; [
   acpi
   alsaequal
@@ -28,7 +28,6 @@ with pkgs; [
   dbus-broker
   dconf
   discord
-  dupeguru
   ebook_tools
   eggdbus
   epick

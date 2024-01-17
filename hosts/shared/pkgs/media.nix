@@ -1,8 +1,7 @@
-{ pkgs, ... }:
+{pkgs, ...}:
 with pkgs; [
   appindicator-sharp
   ascii-image-converter
-  aseprite-unfree
   audio-recorder
   babl
   beautysh
@@ -91,14 +90,6 @@ with pkgs; [
   mozjpeg
   nanotts
   nodePackages_latest.svgo
-  obs-studio
-  obs-studio-plugins.input-overlay
-  obs-studio-plugins.looking-glass-obs
-  obs-studio-plugins.obs-backgroundremoval
-  obs-studio-plugins.obs-gstreamer
-  obs-studio-plugins.obs-move-transition
-  obs-studio-plugins.obs-pipewire-audio-capture
-  obs-studio-plugins.obs-source-record
   optipng
   oxipng
   p7zip
@@ -147,5 +138,4 @@ with pkgs; [
   xcftools
   yeetgif
   yeetgif
-  zrythm
 ]

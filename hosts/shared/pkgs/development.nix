@@ -1,11 +1,11 @@
-{ pkgs, ... }:
+{pkgs, ...}:
 with pkgs; [
   any-nix-shell
   apkleaks
   brotli
   python311Packages.mdformat
-  python311Packages.brotlipy 
-  python311Packages.brotlicffi 
+  python311Packages.brotlipy
+  python311Packages.brotlicffi
   cbfmt
   glow
   arduino
@@ -13,7 +13,7 @@ with pkgs; [
   bash
   biber
   bibtex2html
-  cutter 
+  cutter
   glxinfo
   xorg_sys_opengl
   jadx
@@ -66,7 +66,7 @@ with pkgs; [
   jadx
   joplin-desktop
   just
-  kotlin 
+  kotlin
   kotlin-language-server
   kotlin-native
   ktlint
@@ -185,7 +185,6 @@ with pkgs; [
   wkhtmltopdf-bin
   xcftools
   xorg.libX11
-  yamlfix
   yarn
   yarn2nix
   zim

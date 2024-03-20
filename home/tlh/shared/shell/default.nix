@@ -16,9 +16,13 @@
   home = {
     sessionPath = [
       "${config.home.homeDirectory}/.local/bin"
+      "${config.home.homeDirectory}/.local/share/flatpak/exports/share"
+
       "${config.home.homeDirectory}/Workspace/go/bin"
       "${config.home.homeDirectory}/.cargo/bin"
       "${config.home.homeDirectory}/.yarn/bin"
+
+      "/var/lib/flatpak/exports/share"
     ];
 
     sessionVariables = {

@@ -65,7 +65,6 @@ with pkgs; [
   lm_sensors
   lshw
   lua51Packages.stdlib
-  luajitPackages.libluv
   luajitPackages.stdlib
   man-pages
   man-pages-posix

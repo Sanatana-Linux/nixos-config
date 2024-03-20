@@ -1,12 +1,13 @@
-{
-  lib,
-  pkgs,
-  ...
+{ lib
+, pkgs
+, ...
 }: {
   imports = [
     ./pipewire.nix
   ];
   hardware.bluetooth.enable = true;
+  xdg.portal.enable = true;
+  xdg.portal.config.common.default = "*";
   services = {
     # For Bluetooth
     blueman.enable = true;
@@ -16,6 +17,7 @@
     thermald.enable = true;
     # handle ACPI events
     acpid.enable = true;
+    flatpak.enable = true;
     # discard blocks that are not in use by the filesystem, good for SSDs
     fstrim.enable = true;
     # firmware updater for machine hardware
@@ -29,7 +31,7 @@
     '';
     dbus = {
       enable = true;
-      packages = with pkgs; [dconf gcr];
+      packages = with pkgs; [ dconf gcr ];
     };
 
     gnome = {
@@ -49,7 +51,7 @@
     #     };
     #   };
 
-    udev.packages = [pkgs.gnome.gnome-settings-daemon];
+    udev.packages = [ pkgs.gnome.gnome-settings-daemon ];
   };
 
   virtualisation = {

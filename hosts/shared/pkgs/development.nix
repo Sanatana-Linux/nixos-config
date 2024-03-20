@@ -93,7 +93,6 @@ with pkgs; [
   luajitPackages.ldbus
   luajitPackages.ldoc
   luajitPackages.lgi
-  luajitPackages.libluv
   luajitPackages.lpeg
   luajitPackages.lpeg_patterns
   luajitPackages.lpeglabel
@@ -155,7 +154,6 @@ with pkgs; [
 
   python311Packages.websockets
   python311Packages.wheel
-  rnix-lsp
   ruby
   rustc
   rustfmt

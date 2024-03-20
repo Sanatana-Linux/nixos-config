@@ -8,7 +8,7 @@
     syntaxHighlighting.enable = true;
     enableCompletion = true;
     autocd = true;
-    enableAutosuggestions = true;
+    autosuggestion.enable = true;
     dotDir = ".config/zsh";
     defaultKeymap = "viins";
     history = {

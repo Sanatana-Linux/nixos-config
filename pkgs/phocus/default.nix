@@ -26,7 +26,7 @@ stdenvNoCC.mkDerivation rec {
       --replace "@bg1@" "#222222" \
       --replace "@bg2@" "#2c2B2D"\
       --replace "@bg3@" "#313032" \
-      --replace "@bg4@" "#444547" \
+      --replace "@bg4@" "#58565A" \
       --replace "@red@" "#fcb18d" \
       --replace "@lred@" "#d8557b" \
       --replace "@orange@" "#fd9353" \

@@ -46,8 +46,8 @@
       gtk-decoration-layout = "menu:";
     };
     theme = {
-      name = "Fluent-Dark-compact";
-      package = pkgs.fluent-gtk-theme;
+      name = "Phocus";
+      package = pkgs.phocus;
     };
   };
 

@@ -101,7 +101,6 @@ with lib; let
     ldbus
     ldoc
     lgi
-    libluv
     lpeg
     lpeg_patterns
     lpeglabel

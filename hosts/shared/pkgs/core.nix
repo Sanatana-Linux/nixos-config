@@ -1,4 +1,4 @@
-{pkgs, ...}:
+{ pkgs, ... }:
 with pkgs; [
   _7zz
   advancecomp
@@ -41,6 +41,7 @@ with pkgs; [
   dnsutils
   dosfstools
   efficient-compression-tool
+  firmwareLinuxNonfree
   ffmpeg-full
   lzma
   man-pages

@@ -29,16 +29,18 @@ with pkgs; [
   gif-for-cli
   giflib
   gifsicle
-  gimp-with-plugins
+  gimp
+  gimpPlugins.bimp
   gimpPlugins.exposureBlend
+  gimpPlugins.farbfeld
   gimpPlugins.fourier
-  gimpPlugins.gap
   gimpPlugins.gimplensfun
   gimpPlugins.lightning
   gimpPlugins.lqrPlugin
   gimpPlugins.resynthesizer
   gimpPlugins.texturize
   gimpPlugins.waveletSharpen
+  gimpPlugins.gmic
   gio-sharp
   git-revise
   gitleaks

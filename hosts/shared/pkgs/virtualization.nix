@@ -4,7 +4,6 @@ with pkgs; [
   conmon
   containerd
   containerpilot
-  convoy
   devbox
   distrobox
   docker

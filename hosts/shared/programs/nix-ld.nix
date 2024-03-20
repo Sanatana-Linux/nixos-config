@@ -49,7 +49,6 @@
       luajitPackages.ldbus
       luajitPackages.ldoc
       luajitPackages.lgi
-      luajitPackages.libluv
       luajitPackages.lpeg
       luajitPackages.lpeg_patterns
       luajitPackages.lpeglabel

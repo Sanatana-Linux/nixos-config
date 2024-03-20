@@ -18,6 +18,7 @@
 > While I hope you can gain from my configuration and have attempted, for my own sake at least, to document what is going on in the configuration as thoroughly as possible, this is my configuration that I use personally and as such it is reasonable to assume it is unstable and a work in progress.
 
 ## Documentation
+<img src="./assets/nix.svg" alt="prettier nixos label" style="float:right" />
 
 All of the documentation is in the `.notes` directory, which serves as a project-based note-taking system I have developed organically to keep project notebooks with their associated projects. Below are pages of this projects _notebook_ which may be of interest to third parties:
 

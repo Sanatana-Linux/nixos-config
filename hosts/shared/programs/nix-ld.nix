@@ -65,7 +65,6 @@
       luajitPackages.luasql-sqlite3
       luajitPackages.mediator_lua
       luajitPackages.mpack
-      luajitPackages.sqlite
       luajitPackages.std-_debug
       luajitPackages.std-normalize
       luajitPackages.stdlib

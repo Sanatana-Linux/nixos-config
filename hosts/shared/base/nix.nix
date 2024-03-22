@@ -14,27 +14,28 @@
   nixpkgs.config.permittedInsecurePackages = [
     "openssl-1.1.1t"
     "openssl-1.1.1w"
-      "nix-2.16.2"
+    "nix-2.16.2"
     "openssl-1.1.1v"
   ];
   nix = {
     settings = {
       substituters = [
-        "https://cache.nixos.org?priority=10"
-        "https://nix-community.cachix.org?priority=5"
-        "https://fortuneteller2k.cachix.org"
         "https://cache.ngi0.nixos.org/"
-        "https://nrdxp.cachix.org"
+        "https://cache.nixos.org?priority=10"
+        "https://fortuneteller2k.cachix.org"
         "https://nix-community.cachix.org"
+        "https://emacs.cachix.org"
+        "https://nix-node.cachix.org/"
         "https://nixpkgs-unfree.cachix.org"
         "https://nixpkgs-wayland.cachix.org"
-        "https://nix-node.cachix.org/"
+        "https://nrdxp.cachix.org"
       ];
 
       trusted-public-keys = [
         "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         "fortuneteller2k.cachix.org-1:kXXNkMV5yheEQwT0I4XYh1MaCSz+qg72k8XAi2PthJI="
+        "emacs.cachix.org-1:b1SMJNLY/mZF6GxQE+eDBeps7WnkT0Po55TAyzwOxTY="
         "cache.ngi0.nixos.org-1:KqH5CBLNSyX184S9BKZJo1LxrxJ9ltnY2uAs5c/f1MA="
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         "nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
@@ -55,7 +56,7 @@
       # Useful Features to Have Enabled
       system-features = ["kvm" "recursive-nix" "big-parallel"];
       # Necessary Experimental Nix Features for Flakes and Friends
-      experimental-features = ["recursive-nix" "auto-allocate-uids" "nix-command" "flakes" "repl-flake"];
+      experimental-features = ["recursive-nix" "auto-allocate-uids" "nix-command" "flakes" "repl-flake" "configurable-impure-env"];
       flake-registry = "/etc/nix/registry.json";
       # show more log lines for failed builds
       log-lines = 20;

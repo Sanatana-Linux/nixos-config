@@ -4,6 +4,12 @@ with pkgs; [
   apkleaks
   brotli
   python311Packages.mdformat
+  glow
+  protobuf
+  protobufc 
+  go-protobuf
+  python311Packages.protobuf
+  python311Packages.googleapis-common-protos
   python311Packages.brotlipy
   python311Packages.brotlicffi
   cbfmt
@@ -109,7 +115,6 @@ with pkgs; [
   luajitPackages.luasql-sqlite3
   luajitPackages.mediator_lua
   luajitPackages.mpack
-  luajitPackages.sqlite
   luajitPackages.std-_debug
   luajitPackages.std-normalize
   luajitPackages.stdlib

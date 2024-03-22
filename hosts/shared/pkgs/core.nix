@@ -7,6 +7,14 @@ with pkgs; [
   nixdoc
   nixd
   nix-health
+  vulnix 
+  nix-zsh-completions
+  nix-bash-completions
+  node2nix
+  manix 
+  niv
+  buildkit-nix
+  cachix
   appstream
   appstream-glib
   archivemount

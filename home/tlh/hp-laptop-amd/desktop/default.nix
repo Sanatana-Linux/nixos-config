@@ -12,13 +12,13 @@
       size = 11;
     };
     iconTheme = {
-      name = "Fluent-Dark";
-      package = pkgs.fluent-icon-theme;
+      name = "Suru++";
+      package = pkgs.ubuntu-themes;
     };
     cursorTheme = {
       name = "Phinger Cursors (light)";
       package = pkgs.phinger-cursors;
-      size = 24;
+      size = 36;
     };
 
     gtk2 = {
@@ -46,8 +46,8 @@
       gtk-decoration-layout = "menu:";
     };
     theme = {
-      name = "Phocus";
-      package = pkgs.phocus;
+      name = "Colloid Dark";
+      package = pkgs.colloid-gtk-theme;
     };
   };
 

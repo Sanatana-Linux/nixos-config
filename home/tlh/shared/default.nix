@@ -24,7 +24,7 @@
   nix = {
     package = lib.mkForce pkgs.nixUnstable;
     settings = {
-      experimental-features = [ "recursive-nix" "auto-allocate-uids" "nix-command" "flakes" "repl-flake" ];
+      experimental-features = [ "recursive-nix" "auto-allocate-uids" "nix-command" "flakes" "repl-flake" "configurable-impure-env" ];
       warn-dirty = false;
     };
   };

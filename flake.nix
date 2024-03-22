@@ -1,17 +1,7 @@
 {
   description = "The Sanatana Linux NixOS Configuration";
 
-  nixConfig.extra-substituters = [
-    "https://nix-community.cachix.org"
-    "https://emacs.cachix.org"
-    "https://nrdxp.cachix.org"
-  ];
 
-  nixConfig.extra-trusted-public-keys = [
-    "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-    "emacs.cachix.org-1:b1SMJNLY/mZF6GxQE+eDBeps7WnkT0Po55TAyzwOxTY="
-    "nrdxp.cachix.org-1:Fc5PSqY2Jm1TrWfm88l6cvGWwz3s93c6IOifQWnhNW4="
-  ];
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -80,7 +70,7 @@
               nixos-hardware.nixosModules.common-pc-laptop-ssd
               bhairava-grub-theme.nixosModule
               home-manager.nixosModules.home-manager
-              chaotic.nixosModules.default # OUR DEFAULT MODULE
+              chaotic.nixosModules.default # OUR DEFAULT MODUL
               {
                 home-manager = {
                   useUserPackages = true;

@@ -2,22 +2,18 @@
 with pkgs; [
   appindicator-sharp
   ascii-image-converter
-  audio-recorder
   babl
   beautysh
   book-summary
   byzanz
   ciano
-  colorz
   crabz
   curtail
-  darling-dmg
   delve
   easyeffects
   ebook_tools
   emacsPackages.svgo
   exiftool
-  feh
   feh
   ffcast
   figlet
@@ -35,12 +31,12 @@ with pkgs; [
   gimpPlugins.farbfeld
   gimpPlugins.fourier
   gimpPlugins.gimplensfun
+  gimpPlugins.gmic
   gimpPlugins.lightning
   gimpPlugins.lqrPlugin
   gimpPlugins.resynthesizer
   gimpPlugins.texturize
   gimpPlugins.waveletSharpen
-  gimpPlugins.gmic
   gio-sharp
   git-revise
   gitleaks
@@ -67,15 +63,12 @@ with pkgs; [
   jpegoptim
   jpegrescan
   kooha
-  krita
   labelImg
   libdevil-nox
   libexif
   libgee
   libjpeg
   libpng
-  librsvg
-  librsvg
   librsvg
   libspng
   libungif
@@ -100,11 +93,9 @@ with pkgs; [
   picotts
   pikopixel
   pixcat
-  pixcat
   pixel2svg
   pixz
   plzip
-  pngcheck
   pngcrush
   pngloss
   pngnq
@@ -125,7 +116,6 @@ with pkgs; [
   python311Packages.svgwrite
   rarcrack
   resvg
-  resvg
   ripgrep
   rubyPackages.cairo-gobject
   rubyPackages.gdk_pixbuf2
@@ -138,6 +128,5 @@ with pkgs; [
   webp-pixbuf-loader
   webp-pixbuf-loader
   xcftools
-  yeetgif
   yeetgif
 ]

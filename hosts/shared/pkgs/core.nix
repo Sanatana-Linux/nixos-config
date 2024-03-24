@@ -4,17 +4,6 @@ with pkgs; [
   advancecomp
   alejandra
   any-nix-shell
-  nixdoc
-  nixd
-  nix-health
-  vulnix 
-  nix-zsh-completions
-  nix-bash-completions
-  node2nix
-  manix 
-  niv
-  buildkit-nix
-  cachix
   appstream
   appstream-glib
   archivemount
@@ -27,11 +16,13 @@ with pkgs; [
   bintools
   binutils
   bottom
+  buildkit-nix
   bun
   busybox
   bzip2
   bzip3
   cached-nix-shell
+  cachix
   cbfmt
   ccls
   clang-tools
@@ -49,11 +40,12 @@ with pkgs; [
   dnsutils
   dosfstools
   efficient-compression-tool
-  firmwareLinuxNonfree
   ffmpeg-full
+  firmwareLinuxNonfree
   lzma
   man-pages
   man-pages-posix
+  manix
   manix
   mdds
   mesa
@@ -66,16 +58,23 @@ with pkgs; [
   ncompress
   networkmanager
   ngrok
+  niv
+  nix-bash-completions
   nix-binary-cache
   nix-bundle
   nix-direnv-flakes
+  nix-health
   nix-plugins
   nix-prefetch
   nix-prefetch-scripts
   nix-template
   nix-universal-prefetch
+  nix-zsh-completions
+  nixd
+  nixdoc
   nixos-generators
   nmap
+  node2nix
   ntfs3g
   nurl
   opencl-clang
@@ -141,6 +140,7 @@ with pkgs; [
   usbutils
   utillinux
   uutils-coreutils
+  vulnix
   wirelesstools
   wmutils-core
   wmutils-libwm

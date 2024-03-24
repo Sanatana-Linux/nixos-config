@@ -1,9 +1,8 @@
-{pkgs, ...}:
+{ pkgs, ... }:
 with pkgs; [
   abootimg
   acpi
   adbfs-rootless
-  trash-cli
   android-backup-extractor
   android-file-transfer
   android-tools
@@ -81,6 +80,7 @@ with pkgs; [
   patchelf
   pciutils
   platinum-searcher
+  please
   ps_mem
   pure-prompt
   python311Packages.pygccxml
@@ -89,10 +89,7 @@ with pkgs; [
   rclone
   renameutils
   ripgrep-all
-  vgrep
   rnr
-  please
-
   silver-searcher
   simg2img
   slop
@@ -102,6 +99,7 @@ with pkgs; [
   squashfsTools
   squashfuse
   sysz
+  trash-cli
   trash-cli
   tree
   tree-sitter
@@ -166,6 +164,7 @@ with pkgs; [
   tree-sitter-grammars.tree-sitter-yaml
   usbmuxd
   usbutils
+  vgrep
   vimPlugins.nvim-treesitter
   vimPlugins.nvim-treesitter-context
   vimPlugins.nvim-treesitter-pyfold

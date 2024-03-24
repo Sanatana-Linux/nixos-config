@@ -6,9 +6,16 @@
       alice
       ankacoder
       ankacoder-condensed
+      annapurna-sil
       arkpandora_ttf
+      b612
+      bront_fonts
+      caladea
       cantarell-fonts
+      cardo
+      carlito
       cascadia-code # microsoft ligatures font
+      clearlyU
       cm_unicode
       comic-relief
       corefonts
@@ -16,9 +23,10 @@
       cozette
       d2coding
       dina-font
-      dosemu_fonts
+      efont-unicode
       envypn-font
       eunomia
+      f5_6
       fira
       fira-code
       fira-code-symbols
@@ -31,26 +39,37 @@
       gyre-fonts
       hackgen-font
       hackgen-nf-font
+      hermit
+      hubot-sans
       hubot-sans
       hyperscrypt-font
       inter
       jost
+      julia-mono
+      junicode
+      just
       kanit-font
       kreative-square-fonts
       lalezar-fonts
       lato
       liberation_ttf
       line-awesome
+      luculent
+      manrope
       maple-mono
       maple-mono-NF
       maple-mono-SC-NF
       martian-mono
       material-symbols
+      medio
+      mona-sans
       monocraft
       monoid
       mononoki
       montserrat
+      montserrat
       mplus-outline-fonts.githubRelease
+      mro-unicode
       nerdfonts
       norwester-font
       noto-fonts # I really hate these fonts
@@ -59,67 +78,45 @@
       noto-fonts-extra
       ocr-a
       oldstandard
-      powerline-fonts
-      profont
-      proggyfonts
-      psftools
-      recursive
-      roboto-slab
-      scheherazade-new
-      scientifica
-      spleen
-      sudo-font
-      tamzen
-      termsyn
-      tenderness
-      siji
-      xkcd-font
-      rictydiminished-with-firacode
       oxygenfonts
       paratype-pt-mono
       paratype-pt-sans
       paratype-pt-serif
       penna
       poly
+      powerline-fonts
       pretendard
-      mro-unicode
-      mona-sans
-      montserrat
-      manrope
-      medio
-      luculent
-      junicode
-      julia-mono
-      hermit
-      hubot-sans
-      bront_fonts
-      b612
-      just
-      f5_6
-      efont-unicode
-      clearlyU
-      carlito
-      ultimate-oldschool-pc-font-pack
-      cardo
-      caladea
-      annapurna-sil
+      profont
+      proggyfonts
+      psftools
+      recursive
+      rictydiminished-with-firacode
+      roboto-slab
+      scheherazade-new
+      scientifica
+      siji
+      spleen
+      sudo-font
+      tamzen
+      tenderness
       terminus-nerdfont
       terminus_font
+      termsyn
       tewi-font
       theano
       times-newer-roman
       tt2020
       u001-font
+      ucs-fonts
+      undefined-medium
+      unfonts-core
       uni-vga
       unifont
       unifont_upper
       unscii
-      vistafonts
-      textfonts
-      ucs-fonts
-      undefined-medium
-      unfonts-core
       victor-mono
+      vistafonts
+      xkcd-font
       xlsfonts
       zilla-slab
     ];

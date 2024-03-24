@@ -1,8 +1,7 @@
-{pkgs, ...}:
+{ pkgs, ... }:
 with pkgs; [
   acpi
   alsaequal
-  fluent-gtk-theme
   appimage-run
   appimagekit
   appstream-glib
@@ -35,6 +34,7 @@ with pkgs; [
   fbida
   fcft
   feh
+  fluent-gtk-theme
   fntsample
   font-manager
   fontpreview
@@ -42,6 +42,7 @@ with pkgs; [
   galculator
   gcolor3
   geocode-glib_2
+  gmime
   gmime3
   gnome.gnome-disk-utility
   gnome.gnome-font-viewer
@@ -54,13 +55,13 @@ with pkgs; [
   goocanvas3
   google-chrome
   gparted
-  termpdfpy
   gpick
   graphite2
   gspell
   gthumb
   gtk-sharp-2_0
   gtk2-x11
+  gtk2fontsel
   gtk2fontsel
   gtk3
   gtk3-x11
@@ -70,6 +71,7 @@ with pkgs; [
   gtkspell3
   gtkspellmm
   gusb
+  handlr
   hunspell
   hunspellDicts.de_DE
   hunspellDicts.en_US-large
@@ -81,8 +83,11 @@ with pkgs; [
   lcdf-typetools
   leela
   libappindicator
+  libappindicator-gtk3
+  libcanberra-gtk3
   libcanberra-gtk3
   libdbusmenu
+  libdbusmenu-gtk3
   libdbusmenu-gtk3
   libdbusmenu-gtk3
   libfm
@@ -108,6 +113,8 @@ with pkgs; [
   menu-cache
   mesa
   mesa-demos
+  mime-types
+  mimetic
   mupdf
   mythes
   nerd-font-patcher
@@ -172,22 +179,13 @@ with pkgs; [
   xclip
   xcolor
   xcolor
-  xdg-user-dirs
-  xdgmenumaker
-  xdg-launch
-  xdg-desktop-portal
   xdg-dbus-proxy
-  handlr
-  mime-types
-  mimetic
-  gmime
-  libdbusmenu-gtk3
-  libcanberra-gtk3
-  libappindicator-gtk3
-  gtk2fontsel
-
+  xdg-desktop-portal
   xdg-desktop-portal-gtk
+  xdg-launch
+  xdg-user-dirs
   xdg-utils
+  xdgmenumaker
   xdotool
   xfce.exo
   xfce.garcon

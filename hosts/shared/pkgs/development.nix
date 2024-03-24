@@ -2,37 +2,24 @@
 with pkgs; [
   any-nix-shell
   apkleaks
-  brotli
-  python311Packages.mdformat
-  glow
-  protobuf
-  protobufc 
-  go-protobuf
-  python311Packages.protobuf
-  python311Packages.googleapis-common-protos
-  python311Packages.brotlipy
-  python311Packages.brotlicffi
-  cbfmt
-  glow
   arduino
   awscli
   bash
   biber
   bibtex2html
-  cutter
-  glxinfo
-  xorg_sys_opengl
-  jadx
   black
+  brotli
   cached-nix-shell
   cargo
   cargo-binutils
+  cbfmt
   chruby
   cmake
   cpp-hocon
   cpp-utilities
   cppclean
   cppdb
+  cutter
   deadnix
   dejsonlz4
   direnv
@@ -50,17 +37,19 @@ with pkgs; [
   getoptions
   git
   git-backup
-  git-branchless
-  git-chglog
   git-extras
   git-filter-repo
   git-ignore
   git-repo-updater
   git-trim
   glib
+  glow
+  glow
+  glxinfo
   gnumake
   gnutls
   go
+  go-protobuf
   gofumpt
   gource
   hoard
@@ -69,6 +58,7 @@ with pkgs; [
   ipfs
   ispell
   isync
+  jadx
   jadx
   joplin-desktop
   just
@@ -153,10 +143,16 @@ with pkgs; [
   pkg-config-unwrapped
   pkg-configUpstream
   prisma-engines
+  protobuf
+  protobufc 
   puppeteer-cli
   python311Packages.PyICU
+  python311Packages.brotlicffi
+  python311Packages.brotlipy
+  python311Packages.googleapis-common-protos
+  python311Packages.mdformat
+  python311Packages.protobuf
   python311Packages.pylsp-mypy
-
   python311Packages.websockets
   python311Packages.wheel
   ruby
@@ -188,6 +184,7 @@ with pkgs; [
   wkhtmltopdf-bin
   xcftools
   xorg.libX11
+  xorg_sys_opengl
   yarn
   yarn2nix
   zim

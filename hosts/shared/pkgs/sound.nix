@@ -15,13 +15,14 @@ with pkgs; [
   espeak-classic
   espeakup
   flite
-  mimic 
   freetts
+  gnaural
   gsound
   gspeech
   libpulseaudio
   lmms
   mediainfo
+  mimic 
   mpc_cli
   mpd
   mpd-discord-rpc
@@ -42,7 +43,6 @@ with pkgs; [
   scdl
   soundconverter
   soundfont-fluid
-  soundfont-fluid
   soundfont-generaluser
   sox
   soxr
@@ -52,5 +52,4 @@ with pkgs; [
   svox
   video2midi
   vlc
-  gnaural
 ]

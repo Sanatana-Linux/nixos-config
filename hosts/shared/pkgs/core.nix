@@ -39,13 +39,14 @@ with pkgs; [
   dmg2img
   dnsutils
   dosfstools
+  exfatprogs
+
   efficient-compression-tool
   ffmpeg-full
   firmwareLinuxNonfree
   lzma
   man-pages
   man-pages-posix
-  manix
   manix
   mdds
   mesa
@@ -61,6 +62,9 @@ with pkgs; [
   niv
   nix-bash-completions
   nix-binary-cache
+  nix-zsh-completions
+  nix-index
+  nixos-genenrators
   nix-bundle
   nix-direnv-flakes
   nix-health
@@ -100,7 +104,6 @@ with pkgs; [
   ranger
   rcshist
   reposurgeon
-  ripgrep-all
   rocmPackages.clang-ocl
   runzip
   sassc
@@ -116,7 +119,6 @@ with pkgs; [
   squashfsTools
   squashfuse
   sssd
-  star-history
   suitesparse
   swtpm
   swtpm-tpm2
@@ -174,6 +176,8 @@ with pkgs; [
   xorg.xorgproto
   xorg.xprop
   xorg.xwininfo
+  smartmontools
+
   xsettingsd
   xxHash
   xz

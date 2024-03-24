@@ -1,7 +1,6 @@
 {pkgs, ...}:
 with pkgs; [
   _7zz
-  acpi
   arandr
   archiver
   arj

@@ -1,4 +1,4 @@
-{pkgs, ...}:
+{ pkgs, ... }:
 with pkgs; [
   appindicator-sharp
   ascii-image-converter
@@ -38,9 +38,6 @@ with pkgs; [
   gimpPlugins.texturize
   gimpPlugins.waveletSharpen
   gio-sharp
-  git-revise
-  gitleaks
-  gnome.gnome-sound-recorder
   gnome.nixos-gsettings-overrides
   gobject-introspection
   graphicsmagick

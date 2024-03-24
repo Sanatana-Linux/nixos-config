@@ -11,14 +11,6 @@ with pkgs; [
   audacity
   cava
   codec2
-  espeak
-  espeak-classic
-  espeakup
-  flite
-  freetts
-  gnaural
-  gsound
-  gspeech
   libpulseaudio
   lmms
   mediainfo
@@ -29,12 +21,9 @@ with pkgs; [
   mpd-mpris
   mpdevil
   mpv
-  nanotts
   pamixer
   pavucontrol
-  picotts
   playerctl
-  psmisc
   pulseaudio-ctl
   pulseaudioFull
   pulseeffects-legacy
@@ -44,10 +33,6 @@ with pkgs; [
   soundconverter
   soundfont-fluid
   soundfont-generaluser
-  sox
-  soxr
-  speech-tools
-  speechd
   spotify
   svox
   video2midi

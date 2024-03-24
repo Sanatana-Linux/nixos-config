@@ -1,39 +1,20 @@
 { pkgs, ... }:
 with pkgs; [
-  abootimg
   acpi
-  adbfs-rootless
-  android-backup-extractor
-  android-file-transfer
-  android-tools
-  android-udev-rules
-  apkeep
-  apkg
-  apkid
-  apko
-  apksigcopier
-  apksigner
-  apktool
   aria
   bat
   beep
   brightnessctl
   btop
-  bundletool
   cheat
   clang
-  clipster
   comma
-  conda
-  cookiecutter
   csv2latex
   curl
   deer
-  dex2jar
   efibootmgr
   efitools
   electron
-  exfatprogs
   eza
   fd
   file
@@ -46,7 +27,6 @@ with pkgs; [
   ghost
   ghostscript
   htop
-  imgpatchtools
   imgurbash2
   iw
   jdupes
@@ -65,15 +45,8 @@ with pkgs; [
   lshw
   lua51Packages.stdlib
   luajitPackages.stdlib
-  man-pages
-  man-pages-posix
-  manix
   massren
   neofetch
-  nix-index
-  nix-zsh-completions
-  nixos-generators
-  ntfs3g
   ocl-icd
   openssl
   parcellite
@@ -84,7 +57,6 @@ with pkgs; [
   ps_mem
   pure-prompt
   python311Packages.pygccxml
-  quark-engine
   ranger
   rclone
   renameutils
@@ -93,75 +65,13 @@ with pkgs; [
   silver-searcher
   simg2img
   slop
-  smartmontools
   speedtest-cli
   squashfs-tools-ng
   squashfsTools
   squashfuse
   sysz
-  trash-cli
-  trash-cli
   tree
-  tree-sitter
-  tree-sitter-grammars.tree-sitter-bash
-  tree-sitter-grammars.tree-sitter-bibtex
-  tree-sitter-grammars.tree-sitter-c
-  tree-sitter-grammars.tree-sitter-c-sharp
-  tree-sitter-grammars.tree-sitter-clojure
-  tree-sitter-grammars.tree-sitter-cmake
-  tree-sitter-grammars.tree-sitter-comment
-  tree-sitter-grammars.tree-sitter-commonlisp
-  tree-sitter-grammars.tree-sitter-cpp
-  tree-sitter-grammars.tree-sitter-css
-  tree-sitter-grammars.tree-sitter-cuda
-  tree-sitter-grammars.tree-sitter-dart
-  tree-sitter-grammars.tree-sitter-devicetree
-  tree-sitter-grammars.tree-sitter-dockerfile
-  tree-sitter-grammars.tree-sitter-dot
-  tree-sitter-grammars.tree-sitter-elisp
-  tree-sitter-grammars.tree-sitter-embedded-template
-  tree-sitter-grammars.tree-sitter-fennel
-  tree-sitter-grammars.tree-sitter-fortran
-  tree-sitter-grammars.tree-sitter-glsl
-  tree-sitter-grammars.tree-sitter-go
-  tree-sitter-grammars.tree-sitter-godot-resource
-  tree-sitter-grammars.tree-sitter-gomod
-  tree-sitter-grammars.tree-sitter-gowork
-  tree-sitter-grammars.tree-sitter-graphql
-  tree-sitter-grammars.tree-sitter-html
-  tree-sitter-grammars.tree-sitter-http
-  tree-sitter-grammars.tree-sitter-java
-  tree-sitter-grammars.tree-sitter-javascript
-  tree-sitter-grammars.tree-sitter-jsdoc
-  tree-sitter-grammars.tree-sitter-json
-  tree-sitter-grammars.tree-sitter-json5
-  tree-sitter-grammars.tree-sitter-kotlin
-  tree-sitter-grammars.tree-sitter-latex
-  tree-sitter-grammars.tree-sitter-llvm
-  tree-sitter-grammars.tree-sitter-lua
-  tree-sitter-grammars.tree-sitter-make
-  tree-sitter-grammars.tree-sitter-markdown
-  tree-sitter-grammars.tree-sitter-markdown-inline
-  tree-sitter-grammars.tree-sitter-nix
-  tree-sitter-grammars.tree-sitter-ocaml
-  tree-sitter-grammars.tree-sitter-ocaml-interface
-  tree-sitter-grammars.tree-sitter-org-nvim
-  tree-sitter-grammars.tree-sitter-perl
-  tree-sitter-grammars.tree-sitter-php
-  tree-sitter-grammars.tree-sitter-python
-  tree-sitter-grammars.tree-sitter-regex
-  tree-sitter-grammars.tree-sitter-ruby
-  tree-sitter-grammars.tree-sitter-rust
-  tree-sitter-grammars.tree-sitter-scheme
-  tree-sitter-grammars.tree-sitter-scss
-  tree-sitter-grammars.tree-sitter-sql
-  tree-sitter-grammars.tree-sitter-toml
-  tree-sitter-grammars.tree-sitter-tsq
-  tree-sitter-grammars.tree-sitter-tsx
-  tree-sitter-grammars.tree-sitter-typescript
-  tree-sitter-grammars.tree-sitter-vim
-  tree-sitter-grammars.tree-sitter-vue
-  tree-sitter-grammars.tree-sitter-yaml
+  ripgrep-all
   usbmuxd
   usbutils
   vgrep

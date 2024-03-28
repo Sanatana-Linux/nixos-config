@@ -14,6 +14,7 @@
       gcc
       glib
       glibc
+      gobject-introspection
       gmime3
       icu
       libcanberra-gtk3

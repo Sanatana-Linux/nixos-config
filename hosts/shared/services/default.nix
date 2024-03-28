@@ -15,6 +15,8 @@
     udisks2.enable = true;
     # monitor and control temparature
     thermald.enable = true;
+    # power manager 
+    power-profiles-daemon.enable = true;
     # handle ACPI events
     acpid.enable = true;
     flatpak.enable = true;

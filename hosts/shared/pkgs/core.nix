@@ -64,7 +64,6 @@ with pkgs; [
   nix-binary-cache
   nix-zsh-completions
   nix-index
-  nixos-genenrators
   nix-bundle
   nix-direnv-flakes
   nix-health

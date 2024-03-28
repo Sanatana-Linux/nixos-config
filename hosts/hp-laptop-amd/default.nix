@@ -1,11 +1,10 @@
-{
-  inputs,
-  outputs,
-  lib,
-  config,
-  pkgs,
-  bhairava-grub-theme,
-  ...
+{ inputs
+, outputs
+, lib
+, config
+, pkgs
+, bhairava-grub-theme
+, ...
 }: {
   disabledModules = [
     # Disable the default Awesome WM module
@@ -30,7 +29,7 @@
     };
 
     kernelPackages = pkgs.linuxPackages_latest;
-    extraModulePackages = with config.boot.kernelPackages; [acpi_call];
+    extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
 
     kernelParams = [
       "acpi_call"
@@ -94,7 +93,7 @@
         device = "nodev";
         efiSupport = true;
         useOSProber = true;
-        bhairava-grub-theme = {enable = true;};
+        bhairava-grub-theme = { enable = true; };
       };
     };
   };
@@ -154,31 +153,21 @@
     acpid.enable = true;
     logind.lidSwitch = "suspend";
     thermald.enable = true;
-    tlp = {
+    power-profiles-daemon.enable = true;
+
+  upower.enable = true;
+
+  xserver = {
+    libinput = {
       enable = true;
-      settings = {
-        START_CHARGE_THRESH_BAT0 = 0; # dummy value
-        STOP_CHARGE_THRESH_BAT0 = 1; # battery conservation mode
-        CPU_BOOST_ON_AC = 1;
-        CPU_BOOST_ON_BAT = 0;
-        CPU_SCALING_GOVERNOR_ON_AC = "performance";
-        CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-      };
-    };
-
-    upower.enable = true;
-
-    xserver = {
-      libinput = {
-        enable = true;
-        touchpad = {naturalScrolling = false;};
-      };
+      touchpad = { naturalScrolling = false; };
     };
   };
+};
 
-  # Use custom Awesome WM module
-  services.xserver.windowManager.awesome.enable = true;
+# Use custom Awesome WM module
+services.xserver.windowManager.awesome.enable = true;
 
-  # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  system.stateVersion = "23.05";
+# https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
+system.stateVersion = "23.05";
 }

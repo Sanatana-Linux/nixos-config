@@ -26,10 +26,10 @@
 
     thunar = prev.thunar.overrideAttrs rec {
       thunarPlugins = [
-        inputs.nixpkgs.xfce.thunar-archive-plugin
-        inputs.nixpkgs.xfce.thunar-volman
-        inputs.nixpkgs.xfce.thunar-dropbox-plugin
-        inputs.nixpkgs.xfce.thunar-media-tags-plugin
+        inputs.nixpkgs.${prev.system}.xfce.thunar-archive-plugin
+        inputs.nixpkgs.${prev.system}.xfce.thunar-volman
+        inputs.nixpkgs.${prev.system}.xfce.thunar-dropbox-plugin
+        inputs.nixpkgs.${prev.system}.xfce.thunar-media-tags-plugin
       ];
     };
 

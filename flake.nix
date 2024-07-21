@@ -54,7 +54,7 @@
 
       nixosConfigurations = {
         # Laptop
-        hp-laptop-amd = nixpkgs.lib.nixosSystem {
+        macbook-air = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs nixos-hardware bhairava-grub-theme home-manager; };
           modules =
             let
@@ -65,9 +65,9 @@
             in
             [
               { imports = [ nur-modules.repos.kira-bruneau.modules.lightdm-webkit2-greeter ]; }
-              ./hosts/hp-laptop-amd
-              nixos-hardware.nixosModules.common-cpu-amd
-              nixos-hardware.nixosModules.common-pc-laptop-ssd
+              ./hosts/macbook-air
+              nixos-hardware.nixosModules.apple-macbook-air-6
+              nixos-hardware.nixosModules.apple-macbook-air
               bhairava-grub-theme.nixosModule
               home-manager.nixosModules.home-manager
               chaotic.nixosModules.default # OUR DEFAULT MODUL
@@ -75,7 +75,7 @@
                 home-manager = {
                   useUserPackages = true;
                   backupFileExtension = "bak";
-                  users.tlh = { imports = [ ./home/tlh/hp-laptop-amd ]; };
+                  users.tlh = { imports = [ ./home/tlh/macbook-air ]; };
                 };
               }
             ];
@@ -83,10 +83,10 @@
       };
       # yes this is necessary
       homeConfigurations = {
-        "tlh@hp-laptop-amd" = home-manager.lib.homeManagerConfiguration {
+        "tlh@macbook-air" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages."x86_64-linux";
           extraSpecialArgs = { inherit inputs outputs; };
-          modules = [ ./home/tlh/hp-laptop-amd ];
+          modules = [ ./home/tlh/macbook-air ];
         };
       };
     };

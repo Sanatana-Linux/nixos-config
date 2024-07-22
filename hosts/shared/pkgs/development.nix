@@ -37,7 +37,7 @@ with pkgs; [
   git-revise
   gitleaks
 
-  git-backup
+  git-backup-go
   git-extras
   git-filter-repo
   git-ignore
@@ -124,7 +124,6 @@ with pkgs; [
   nodePackages_latest.eslint
   nodePackages_latest.gulp
   nodePackages_latest.neovim
-  nodePackages_latest.vscode-json-languageserver-bin
   nodejs
   nps
   nss

@@ -44,7 +44,7 @@ in {
         oderwat.indent-rainbow
         pkief.material-icon-theme
         pkief.material-product-icons
-        rioj7.commandOnAllFiles
+        rioj7.commandonallfiles
         spywhere.guides
         stkb.rewrap
         streetsidesoftware.code-spell-checker

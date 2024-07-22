@@ -135,13 +135,14 @@ in
   };
 
   config = mkIf cfg.enable {
+    services.displayManager.defaultSession = "none+awesome";
     services.xserver = {
       enable = true;
       exportConfiguration = true;
       # ------------------------------------------------- #
       # lightdm configuration
       displayManager = {
-        defaultSession = "none+awesome";
+      
         # ly.enable = true;
         lightdm = {
           enable = true;

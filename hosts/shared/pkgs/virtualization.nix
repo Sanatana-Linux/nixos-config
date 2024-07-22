@@ -3,7 +3,6 @@ with pkgs; [
   appvm
   conmon
   containerd
-  containerpilot
   devbox
   distrobox
   docker

@@ -64,7 +64,6 @@
       medio
       mona-sans
       monocraft
-      monoid
       mononoki
       montserrat
       montserrat

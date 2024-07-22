@@ -131,10 +131,8 @@
       package = pkgs.bluez;
     };
 
-    opengl = {
+    graphics = {
       enable = true;
-      driSupport = true;
-      driSupport32Bit = true;
       extraPackages = with pkgs; [
         mesa
         mesa-demos
@@ -144,7 +142,7 @@
   };
 
   networking = {
-    hostName = "hp-laptop-amd";
+    hostName = "macbook-air";
     networkmanager.enable = true;
     useDHCP = false;
   };

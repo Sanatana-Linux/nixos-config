@@ -16,6 +16,8 @@
     "openssl-1.1.1w"
     "nix-2.16.2"
     "openssl-1.1.1v"
+                "electron-27.3.11"
+
   ];
   nix = {
     settings = {
@@ -56,7 +58,7 @@
       # Useful Features to Have Enabled
       system-features = ["kvm" "recursive-nix" "big-parallel"];
       # Necessary Experimental Nix Features for Flakes and Friends
-      experimental-features = ["recursive-nix" "auto-allocate-uids" "nix-command" "flakes" "repl-flake" "configurable-impure-env"];
+      experimental-features = ["recursive-nix" "auto-allocate-uids" "nix-command" "flakes"  "configurable-impure-env"];
       flake-registry = "/etc/nix/registry.json";
       # show more log lines for failed builds
       log-lines = 20;

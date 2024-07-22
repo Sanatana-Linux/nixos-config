@@ -71,7 +71,6 @@ with pkgs; [
   nix-prefetch
   nix-prefetch-scripts
   nix-template
-  nix-universal-prefetch
   nix-zsh-completions
   nixd
   nixdoc

@@ -90,7 +90,7 @@
     '';
 
     initExtraFirst = ''
-      source $HOME/.config/zsh/zplug/**/*.zsh
+#   source $HOME/.config/zsh/zplug/**/*.zsh
       export QT_QPA_PLATFORMTHEME="qt5ct"
     '';
 

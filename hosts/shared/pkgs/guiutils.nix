@@ -44,6 +44,7 @@ with pkgs; [
   geocode-glib_2
   gmime
   gmime3
+  gnome.file-roller
   gnome.gnome-disk-utility
   gnome.gnome-font-viewer
   gnome.gnome-themes-extra

@@ -22,9 +22,9 @@
   };
 
   nix = {
-    package = lib.mkForce pkgs.nixUnstable;
+    package = lib.mkForce pkgs.nixVersions.latest;
     settings = {
-      experimental-features = [ "recursive-nix" "auto-allocate-uids" "nix-command" "flakes" "repl-flake" "configurable-impure-env" ];
+      experimental-features = [ "recursive-nix" "auto-allocate-uids" "nix-command" "flakes" "configurable-impure-env" ];
       warn-dirty = false;
     };
   };

@@ -64,10 +64,8 @@
               };
             in
             [
-              { imports = [ nur-modules.repos.kira-bruneau.modules.lightdm-webkit2-greeter ]; }
               ./hosts/macbook-air
               nixos-hardware.nixosModules.apple-macbook-air-6
-              nixos-hardware.nixosModules.apple-macbook-air
               bhairava-grub-theme.nixosModule
               home-manager.nixosModules.home-manager
               chaotic.nixosModules.default # OUR DEFAULT MODUL

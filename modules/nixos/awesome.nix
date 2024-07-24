@@ -168,8 +168,8 @@ in
               size = 48;
             };
             iconTheme = {
-              package = pkgs.papirus-icon-theme;
-              name = "Papirus-Dark";
+              package = pkgs.ubuntu-themes;
+              name = "Suru++";
             };
             indicators = [ "~session" "~spacer" ];
           };
@@ -196,13 +196,8 @@ in
         xdotool
         xsel
         xsettingsd
-        ;
-
-      inherit
-        (pkgs.gnome)
         dconf-editor
         ;
-
       inherit
         (pkgs.xfce)
         xfce4-clipman-plugin

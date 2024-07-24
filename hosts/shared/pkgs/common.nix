@@ -38,8 +38,8 @@ with pkgs; [
   glibc_memusage
   glibc_multi
   glibmm
-  gnome.gnome-autoar
-  gnome.gnome-themes-extra
+  gnome-autoar
+  gnome-themes-extra
   gnome.gvfs
   gnome2.gtkglext
   gnutar

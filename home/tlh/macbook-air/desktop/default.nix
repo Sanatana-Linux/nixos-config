@@ -37,7 +37,6 @@
     };
 
     gtk3.extraConfig = {
-      gtk-application-prefer-dark-theme = true;
       gtk-decoration-layout = "menu:";
     };
 
@@ -53,7 +52,7 @@
 
   qt = {
     enable = true;
-    platformTheme = "gnome";
+    platformTheme = "adwaita";
     style = {
       name = "adwaita-dark";
       package = pkgs.adwaita-qt;

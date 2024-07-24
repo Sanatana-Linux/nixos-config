@@ -3,6 +3,7 @@ with pkgs; [
   any-nix-shell
   awscli
   bash
+  ipfs
   biber
   bibtex2html
   black

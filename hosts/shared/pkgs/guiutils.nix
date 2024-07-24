@@ -27,6 +27,7 @@ with pkgs; [
   dbus-broker
   dconf
   discord
+  paper-plane
   ebook_tools
   eggdbus
   epick
@@ -44,10 +45,10 @@ with pkgs; [
   geocode-glib_2
   gmime
   gmime3
-  gnome.file-roller
-  gnome.gnome-disk-utility
-  gnome.gnome-font-viewer
-  gnome.gnome-themes-extra
+  file-roller
+  gnome-disk-utility
+  gnome-font-viewer
+  gnome-themes-extra
   gnome.gvfs
   gnome2.gtkglext
   gob2
@@ -162,7 +163,7 @@ with pkgs; [
   thunderbird
   thunderbird-bin
   tor-browser-bundle-bin
-  transmission-gtk
+  transmission_4-gtk
   ttfautohint
   typos
   unrar

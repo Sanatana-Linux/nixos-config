@@ -28,7 +28,7 @@
     sessionVariables = {
       GOPATH = "${config.home.homeDirectory}/Workspace/go";
       GOBIN = "${config.home.homeDirectory}/Workspace/go/bin";
-      SHELL = "${pkgs.zsh}";
+      SHELL = "${pkgs.zsh}/bin/zsh";
     };
 
     #file = { };

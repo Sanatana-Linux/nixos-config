@@ -18,7 +18,7 @@
     cursorTheme = {
       name = "Phinger Cursors (light)";
       package = pkgs.phinger-cursors;
-      size = 36;
+      size = 48;
     };
 
     gtk2 = {
@@ -37,6 +37,7 @@
     };
 
     gtk3.extraConfig = {
+      gtk-application-prefer-dark-theme = true;
       gtk-decoration-layout = "menu:";
     };
 
@@ -45,14 +46,14 @@
       gtk-decoration-layout = "menu:";
     };
     theme = {
-      name = "Colloid Dark";
+      name = "Colloid-Dark";
       package = pkgs.colloid-gtk-theme;
     };
   };
 
   qt = {
     enable = true;
-    platformTheme = "adwaita";
+    platformTheme.name = "adwaita-dark";
     style = {
       name = "adwaita-dark";
       package = pkgs.adwaita-qt;

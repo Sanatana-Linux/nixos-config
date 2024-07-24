@@ -41,12 +41,9 @@
       subversion
       sumneko-lua-language-server
       texlab
-      uncrustify
-      ;
-    inherit
-      (pkgs.gnome)
       gnome-keyring
       libgnome-keyring
+      uncrustify
       ;
     inherit
       (pkgs.gitAndTools)

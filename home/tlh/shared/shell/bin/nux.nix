@@ -34,6 +34,9 @@ with pkgs;
       doas nix-collect-garbage -d
       doas nix-store --verify --repair
       doas nix-store --verify --check-contents --repair
+      doas nix store verify --all
+      doas nix store repair --all
+      doas nix-collect-garbage -d      
       echo "Repair Process Finished"
     }
 
@@ -79,8 +82,8 @@ with pkgs;
 
     function update() {
         echo "Updating Flake Lock File Now"
-        doas nix flake update $dots
-
+        doas nix flake update
+        sudo nixos-rebuild switch --flake . --upgrade
     }
 
     function clean() {

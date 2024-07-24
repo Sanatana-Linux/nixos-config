@@ -52,9 +52,9 @@
         "electron-27.3.11"
 
       ];
-      firefox = {
-        enableLegacyUserProfileCustomizations = true;
-      };
+      # firefox = {
+      #   enableLegacyUserProfileCustomizations = true;
+      # };
     };
   };
 }

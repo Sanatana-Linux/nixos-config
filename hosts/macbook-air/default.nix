@@ -1,10 +1,11 @@
-{ inputs
-, outputs
-, lib
-, config
-, pkgs
-, bhairava-grub-theme
-, ...
+{
+  inputs,
+  outputs,
+  lib,
+  config,
+  pkgs,
+  bhairava-grub-theme,
+  ...
 }: {
   disabledModules = [
     # Disable the default Awesome WM module
@@ -29,7 +30,7 @@
     };
 
     kernelPackages = pkgs.linuxPackages_latest;
-    extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
+    extraModulePackages = with config.boot.kernelPackages; [acpi_call];
 
     kernelParams = [
       "acpi_call"
@@ -93,7 +94,7 @@
         device = "nodev";
         efiSupport = true;
         useOSProber = true;
-        bhairava-grub-theme = { enable = true; };
+        bhairava-grub-theme = {enable = true;};
       };
     };
   };
@@ -149,23 +150,20 @@
 
   services = {
     acpid.enable = true;
-    logind.lidSwitch = "suspend";
+    earlyoom.enable = true;
+    logind.lidSwitch = "lock";
     thermald.enable = true;
     power-profiles-daemon.enable = true;
-
-  upower.enable = true;
-
-  xserver = {
+    upower.enable = true;
     libinput = {
       enable = true;
-      touchpad = { naturalScrolling = false; };
+      touchpad = {naturalScrolling = false;};
     };
   };
-};
 
-# Use custom Awesome WM module
-services.xserver.windowManager.awesome.enable = true;
+  # Use custom Awesome WM module
+  services.xserver.windowManager.awesome.enable = true;
 
-# https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-system.stateVersion = "23.05";
+  # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
+  system.stateVersion = "23.05";
 }

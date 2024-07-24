@@ -117,7 +117,6 @@ with pkgs; [
   nil
   nix-init
   nix-tree
-  nixfmt
   nixpkgs-fmt
   node2nix
   nodePackages.prettier

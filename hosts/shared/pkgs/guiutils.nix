@@ -3,6 +3,7 @@ with pkgs; [
   acpi
   alsaequal
   appimage-run
+  fontforge
   appimagekit
   appstream-glib
   archiver

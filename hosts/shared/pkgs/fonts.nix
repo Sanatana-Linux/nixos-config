@@ -94,6 +94,7 @@
       scheherazade-new
       scientifica
       siji
+      sf-mono-liga-bin
       spleen
       sudo-font
       tamzen

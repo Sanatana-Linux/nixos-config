@@ -13,12 +13,12 @@ in {
 
   programs.firefox = {
     enable = true;
-    package = pkgs.firefox.override {
-      extraPrefsFiles = builtins.fetchurl {
-        url = "https:#raw.githubusercontent.com/MrOtherGuy/fx-autoconfig/master/program/config.js";
-        sha256 = "1mx679fbc4d9x4bnqajqx5a95y1lfasvf90pbqkh9sm3ch945p40";
-      };
-    };
+    
+    
+    
+    
+    
+    
 
     profiles.${profile} = {
       id = 0;
@@ -234,6 +234,13 @@ in {
                   user_pref("toolkit.tabbox.switchByScrolling", false);
       '';
     };
+    package = pkgs.firefox.override {
+  extraPrefsFiles = builtins.fetchurl {
+    url = "https:#raw.githubusercontent.com/MrOtherGuy/fx-autoconfig/master/program/config.js";
+    sha256 = "1mx679fbc4d9x4bnqajqx5a95y1lfasvf90pbqkh9sm3ch945p40";
+  };
+};
+
   };
   home.file.".mozilla/firefox/${profile}/chrome" = {
     source = "${inputs.higgs-boson}";

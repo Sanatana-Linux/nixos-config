@@ -159,8 +159,8 @@ in
           greeters.gtk = {
             enable = true;
             theme = {
-              package = pkgs.colloid-gtk-theme;
-              name = "Colloid-Dark";
+              package = pkgs.orchis-theme;
+              name = "Orchis-Grey-Dark-Compact";
             };
             cursorTheme = {
               package = pkgs.phinger-cursors;
@@ -168,8 +168,8 @@ in
               size = 48;
             };
             iconTheme = {
-              package = pkgs.ubuntu-themes;
-              name = "Suru++";
+              package = pkgs.whitesur-icon-theme;
+              name = "WhiteSur-dark";
             };
             indicators = [ "~session" "~spacer" ];
           };

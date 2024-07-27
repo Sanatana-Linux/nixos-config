@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }: {
   programs.zsh = {
     enable = true;
@@ -17,7 +18,7 @@
       expireDuplicatesFirst = true;
       path = "${config.xdg.dataHome}/zsh/history";
       save = 9000000; # number of lines to save
-      size = 9000000; # number of lines to keep
+      size = 9900000; # number of lines to keep
       share = true; # share between sessions
     };
 
@@ -63,12 +64,17 @@
              AUTO_MENU
              AUTO_PARAM_SLASH
              AUTO_PUSHD
+             BASH_AUTO_LIST
+             COMPLETE_ALIASES
              COMPLETE_IN_WORD
              CORRECT
              EXTENDEDGLOB
+             GLOB_COMPLETE
              INC_APPEND_HISTORY
+             HIST_REDUCE_BLANKS
+             CORRECT_ALL
              INTERACTIVE_COMMENTS
-             MENU_COMPLETE
+             LIST_AMBIGUOUS
              NO_NOMATCH
              NOCASEGLOB
              NUMERICGLOBSORT
@@ -90,8 +96,8 @@
     '';
 
     initExtraFirst = ''
-#   source $HOME/.config/zsh/zplug/**/*.zsh
-      export QT_QPA_PLATFORMTHEME="qt5ct"
+      #   source $HOME/.config/zsh/zplug/**/*.zsh
+            export QT_QPA_PLATFORMTHEME="qt5ct"
     '';
 
     shellAliases = with pkgs; {
@@ -107,11 +113,11 @@
       pull = "git pull"; # pull minus git
       m = "mkdir -p"; # mkdir with path in one keystroke
       rm = "rm -rvf"; # dangerous! remove with force, verbose and recursive as just remove
-      vim = "nvim"; # just use neovim for vim, since I only configure neovim 
+      vim = "nvim"; # just use neovim for vim, since I only configure neovim
       fcd = "cd $(find -type d | fzf)"; # find a directory then cd into it
-      grep = "${lib.getBin ripgrep-all}/bin/rga"; # fixes an annoyance with nix I had 
+      grep = "${lib.getBin ripgrep-all}/bin/rga"; # fixes an annoyance with nix I had
       du = "${lib.getBin du-dust}/bin/du-dust"; # same as above
-      ps = "${lib.getBin procs}/bin/procs"; # procs but shorter 
+      ps = "${lib.getBin procs}/bin/procs"; # procs but shorter
       trm = "${lib.getBin trash-cli}/bin/trash-cli"; # rm like trash command
       cat = "${lib.getBin bat}/bin/bat --style=plain"; # replace cat with bat
       l = "${lib.getBin eza}/bin/eza -lF --git --color=auto --group-directories-first --time-style=long-iso --icons -s extension "; # replace ls with eza
@@ -130,13 +136,15 @@
       enable = true;
       zplugHome = "${config.xdg.configHome}/zsh/zplug";
       plugins = [
-        { name = "hlissner/zsh-autopair"; }
-        { name = "chisui/zsh-nix-shell"; }
-        { name = "lincheney/fzf-tab-completion"; }
-        { name = "Aloxaf/fzf-tab"; }
-        { name = "molovo/tipz"; }
-        { name = "zimfw/archive"; }
-        { name = "nix-community/nix-zsh-completions"; }
+        {name = "hlissner/zsh-autopair";}
+        {name = "z-shell/F-Sy-H";}
+        {name = "z-shell/zsh-navigation-tools";}
+        {name = "chisui/zsh-nix-shell";}
+        {name = "lincheney/fzf-tab-completion";}
+        {name = "Aloxaf/fzf-tab";}
+        {name = "molovo/tipz";}
+        {name = "zimfw/archive";}
+        {name = "nix-community/nix-zsh-completions";}
       ];
     };
   };

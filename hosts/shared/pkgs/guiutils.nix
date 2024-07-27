@@ -154,7 +154,6 @@ with pkgs; [
   rofi
   t1lib
   t1utils
-  tangram
   tdesktop
   template-glib
   termcolor

@@ -7,7 +7,7 @@ with pkgs;
      nvim="$HOME/.config/nvim"
 
     function help() {
-        cat <<EOF
+    cat <<EOF
 
     The Nux script is a wrapper around various functions that ease the use
     of the Nix package manager within the context of a NixOS system.
@@ -36,7 +36,7 @@ with pkgs;
       doas nix-store --verify --check-contents --repair
       doas nix store verify --all
       doas nix store repair --all
-      doas nix-collect-garbage -d      
+     doas nix-collect-garbage -d
       echo "Repair Process Finished"
     }
 
@@ -58,8 +58,8 @@ with pkgs;
 
     function rebuild() {
         echo "Rebuilding Configuration Now"
-        rm -rf $HOME/.config/*.bak 
-        rm -rf $HOME/.config/**/*.bak 
+        rm -rf $HOME/.config/*.bak
+        rm -rf $HOME/.config/**/*.bak
         doas nixos-rebuild switch --impure --flake $dots#"$2" && echo "Done Rebuilding NixOS Configuration"
     }
 

@@ -12,8 +12,8 @@
       size = 11;
     };
     iconTheme = {
-      name = "Suru++";
-      package = pkgs.ubuntu-themes;
+      name = "WhiteSur-dark";
+      package = pkgs.whitesur-icon-theme;
     };
     cursorTheme = {
       name = "Phinger Cursors (light)";
@@ -46,8 +46,8 @@
       gtk-decoration-layout = "menu:";
     };
     theme = {
-      name = "Colloid-Dark";
-      package = pkgs.colloid-gtk-theme;
+      name = "Orchis-Grey-Dark-Compact";
+      package = pkgs.orchis-theme;
     };
   };
 

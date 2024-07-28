@@ -1,6 +1,7 @@
-{ pkgs, ... }:
+{pkgs, ...}:
 with pkgs; [
   _7zz
+  acpi
   advancecomp
   alejandra
   any-nix-shell
@@ -17,7 +18,6 @@ with pkgs; [
   binutils
   bottom
   buildkit-nix
-  bun
   busybox
   bzip2
   bzip3
@@ -30,6 +30,7 @@ with pkgs; [
   cmake
   commonsCompress
   crabz
+  crabz
   curtail
   dconf
   ddcui
@@ -39,11 +40,12 @@ with pkgs; [
   dmg2img
   dnsutils
   dosfstools
-  exfatprogs
-
   efficient-compression-tool
-  ffmpeg-full
+  exfatprogs
   firmwareLinuxNonfree
+  libgee
+  lrzip
+  lz4
   lzma
   man-pages
   man-pages-posix
@@ -62,15 +64,15 @@ with pkgs; [
   niv
   nix-bash-completions
   nix-binary-cache
-  nix-zsh-completions
-  nix-index
   nix-bundle
   nix-direnv-flakes
   nix-health
+  nix-index
   nix-plugins
   nix-prefetch
   nix-prefetch-scripts
   nix-template
+  nix-zsh-completions
   nix-zsh-completions
   nixd
   nixdoc
@@ -99,14 +101,18 @@ with pkgs; [
   pure-prompt
   pxz
   python311
+  python312
   ranger
+  rarcrack
   rcshist
   reposurgeon
+  ripgrep
   rocmPackages.clang-ocl
   runzip
   sassc
   simpleTpmPk11
   skim
+  smartmontools
   smartmontools
   snappy
   snzip
@@ -133,6 +139,7 @@ with pkgs; [
   trash-cli
   tree
   ucl
+  unrar
   unrar
   unzip
   unzip
@@ -174,8 +181,6 @@ with pkgs; [
   xorg.xorgproto
   xorg.xprop
   xorg.xwininfo
-  smartmontools
-
   xsettingsd
   xxHash
   xz

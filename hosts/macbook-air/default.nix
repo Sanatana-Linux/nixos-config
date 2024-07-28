@@ -157,7 +157,10 @@
     upower.enable = true;
     libinput = {
       enable = true;
-      touchpad = {naturalScrolling = false;};
+      touchpad = {
+        naturalScrolling = false;
+        disableWhileTyping = true;
+      };
     };
   };
 

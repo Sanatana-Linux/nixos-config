@@ -13,12 +13,6 @@ in {
 
   programs.firefox = {
     enable = true;
-    
-    
-    
-    
-    
-    
 
     profiles.${profile} = {
       id = 0;
@@ -50,7 +44,6 @@ in {
         "browser.startup.page" = "0";
         # config_prefs.js configurations
         "general.config.obscure_value" = 0;
-        "general.config.filename" = "config.js";
         "general.config.sandbox_enabled" = false;
         # enable proton
         "browser.proton.enabled" = true;
@@ -234,13 +227,12 @@ in {
                   user_pref("toolkit.tabbox.switchByScrolling", false);
       '';
     };
-    package = pkgs.firefox.override {
-  extraPrefsFiles = builtins.fetchurl {
-    url = "https:#raw.githubusercontent.com/MrOtherGuy/fx-autoconfig/master/program/config.js";
-    sha256 = "1mx679fbc4d9x4bnqajqx5a95y1lfasvf90pbqkh9sm3ch945p40";
-  };
-};
-
+    package = pkgs.firefox.overrideAttrs {
+      extraPrefsFiles = builtins.fetchurl {
+        url = "https://raw.githubusercontent.com/MrOtherGuy/fx-autoconfig/master/program/config.js";
+        sha256 = "1mx679fbc4d9x4bnqajqx5a95y1lfasvf90pbqkh9sm3ch945p40";
+      };
+    };
   };
   home.file.".mozilla/firefox/${profile}/chrome" = {
     source = "${inputs.higgs-boson}";

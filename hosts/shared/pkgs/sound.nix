@@ -7,34 +7,55 @@ with pkgs; [
   alsa-tools
   alsa-utils
   alsaequal
-  ardour
   audacity
+  bitwig-studio
   cava
   codec2
+  cozy
+  freetts
+  gspeech
   libpulseaudio
   lmms
   mediainfo
-  mimic 
+  mimic
   mpc_cli
   mpd
   mpd-discord-rpc
   mpd-mpris
   mpdevil
   mpv
+  nanotts
+  opusTools
+  pamix
   pamixer
   pavucontrol
+  picotts
+  piper-tts
   playerctl
   pulseaudio-ctl
   pulseaudioFull
   pulseeffects-legacy
   pulsemixer
+  python312Packages.gtts
+  python312Packages.gtts-token
+  python312Packages.pyttsx3
+  python312Packages.ttstokenizer
+  qpaeq
   qtractor
-  scdl
+  reaper
+  renoise
+  sonivox
+  soundconverter
   soundconverter
   soundfont-fluid
   soundfont-generaluser
   spotify
+  sunvox
   svox
+  traverso
+  tts
   video2midi
   vlc
+  zam-plugins
+  zrythm
 ]

@@ -9,6 +9,7 @@
     syntaxHighlighting.enable = true;
     enableCompletion = true;
     autocd = true;
+    enableVteIntegration = true;
     autosuggestion.enable = true;
     dotDir = ".config/zsh";
     defaultKeymap = "viins";
@@ -75,6 +76,7 @@
              CORRECT_ALL
              INTERACTIVE_COMMENTS
              LIST_AMBIGUOUS
+             MENU_COMPLETE
              NO_NOMATCH
              NOCASEGLOB
              NUMERICGLOBSORT
@@ -89,7 +91,6 @@
            done <<-EOF
              BEEP
              HIST_BEEP
-             MENU_COMPLETE
            EOF
       source $HOME/.config/zsh/zplug/**/*.zsh
 
@@ -98,6 +99,10 @@
     initExtraFirst = ''
       #   source $HOME/.config/zsh/zplug/**/*.zsh
             export QT_QPA_PLATFORMTHEME="qt5ct"
+    '';
+    initExtra = ''
+      bindkey '^f' autosuggest-accept
+      bindkey "''${key[Up]}" up-line-or-search
     '';
 
     shellAliases = with pkgs; {

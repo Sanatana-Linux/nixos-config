@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{pkgs, ...}:
 with pkgs; [
   acpi
   aria
@@ -61,6 +61,7 @@ with pkgs; [
   rclone
   renameutils
   ripgrep-all
+  ripgrep-all
   rnr
   silver-searcher
   simg2img
@@ -71,7 +72,6 @@ with pkgs; [
   squashfuse
   sysz
   tree
-  ripgrep-all
   usbmuxd
   usbutils
   vgrep

@@ -66,9 +66,9 @@
       monocraft
       mononoki
       montserrat
-      montserrat
       mplus-outline-fonts.githubRelease
       mro-unicode
+      national-park-typeface
       nerdfonts
       norwester-font
       noto-fonts # I really hate these fonts
@@ -76,7 +76,6 @@
       noto-fonts-emoji # I guess...
       noto-fonts-extra
       ocr-a
-      oldstandard
       oxygenfonts
       paratype-pt-mono
       paratype-pt-sans
@@ -93,8 +92,8 @@
       roboto-slab
       scheherazade-new
       scientifica
-      siji
       sf-mono-liga-bin
+      siji
       spleen
       sudo-font
       tamzen

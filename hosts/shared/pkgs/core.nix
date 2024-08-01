@@ -1,193 +1,186 @@
-{pkgs, ...}:
+{ pkgs, ... }:
 with pkgs; [
-  _7zz
-  acpi
-  advancecomp
-  alejandra
-  any-nix-shell
-  appstream
-  appstream-glib
-  archivemount
-  archiver
-  arj
-  ark
-  as-tree
-  automake
-  avfs
-  bintools
-  binutils
-  bottom
-  buildkit-nix
-  busybox
-  bzip2
-  bzip3
-  cached-nix-shell
-  cachix
-  cbfmt
-  ccls
-  clang-tools
-  clangStdenv
-  cmake
-  commonsCompress
-  crabz
-  crabz
-  curtail
-  dconf
-  ddcui
-  ddcutil
-  deadnix
-  dejsonlz4
-  dmg2img
-  dnsutils
-  dosfstools
-  efficient-compression-tool
-  exfatprogs
-  firmwareLinuxNonfree
-  libgee
-  lrzip
-  lz4
-  lzma
-  man-pages
-  man-pages-posix
-  manix
-  mdds
-  mesa
-  mesa-demos
-  meson
-  minizip2
-  moreutils
-  mozlz4a
-  msieve
-  ncompress
-  networkmanager
-  ngrok
-  niv
-  nix-bash-completions
-  nix-binary-cache
-  nix-bundle
-  nix-direnv-flakes
-  nix-health
-  nix-index
-  nix-plugins
-  nix-prefetch
-  nix-prefetch-scripts
-  nix-template
-  nix-zsh-completions
-  nix-zsh-completions
-  nixd
-  nixdoc
-  nixos-generators
-  nmap
-  node2nix
-  ntfs3g
-  nurl
-  opencl-clang
-  ouch
-  p7zip
-  parallel
-  pbzip2
-  pciutils
-  pciutils
-  pfetch
-  pigz
-  pixz
-  plzip
-  pmutils
-  poppler_gi
-  power-profiles-daemon
-  premake
-  ps_mem
-  pulseaudio
-  pure-prompt
-  pxz
-  python311
-  python312
-  ranger
-  rarcrack
-  rcshist
-  reposurgeon
-  ripgrep
-  rocmPackages.clang-ocl
-  runzip
-  sassc
-  simpleTpmPk11
-  skim
-  smartmontools
-  smartmontools
-  snappy
-  snzip
-  solaar
-  sqlite
-  sqlite-utils
-  squashfs-tools-ng
-  squashfsTools
-  squashfuse
-  sssd
-  suitesparse
-  swtpm
-  swtpm-tpm2
-  tarlz
-  tbb
-  tealdeer
-  template-glib
-  tor
-  toybox
-  tpm-tools
-  tpm2-tools
-  tpm2-tss
-  tpmmanager
-  trash-cli
-  tree
-  ucl
-  unrar
-  unrar
-  unzip
-  unzip
-  usbmuxd
-  usbutils
-  utillinux
-  uutils-coreutils
-  vulnix
-  wirelesstools
-  wmutils-core
-  wmutils-libwm
-  wmutils-opt
-  xarchiver
-  xbrightness
-  xclip
-  xfce.xfce4-settings
-  xorg.fontalias
-  xorg.fonttosfnt
-  xorg.fontutil
-  xorg.libXxf86dga
-  xorg.libXxf86misc
-  xorg.libXxf86vm
-  xorg.libxcb
-  xorg.mkfontdir
-  xorg.xbacklight
-  xorg.xcbutil
-  xorg.xcbutilerrors
-  xorg.xcbutilimage
-  xorg.xcbutilrenderutil
-  xorg.xcbutilwm
-  xorg.xconsole
-  xorg.xev
-  xorg.xf86videoamdgpu
-  xorg.xf86videoamdgpu
-  xorg.xfontsel
-  xorg.xhost
-  xorg.xinit
-  xorg.xkill
-  xorg.xorgproto
-  xorg.xprop
-  xorg.xwininfo
-  xsettingsd
-  xxHash
-  xz
-  zip
-  zlib
-  zlib-ng
-  zstd
-  zsync
-  zziplib
+_7zz
+advancecomp
+alejandra
+any-nix-shell
+appstream
+appstream-glib
+archivemount
+archiver
+arj
+ark
+as-tree
+automake
+avfs
+bintools
+binutils
+bottom
+buildkit-nix
+bun
+busybox
+bzip2
+bzip3
+cached-nix-shell
+cachix
+cbfmt
+ccls
+clang-tools
+clangStdenv
+cmake
+commonsCompress
+crabz
+curtail
+dconf
+ddcui
+ddcutil
+deadnix
+dejsonlz4
+dmg2img
+dnsutils
+dosfstools
+efficient-compression-tool
+exfatprogs
+ffmpeg-full
+firmwareLinuxNonfree
+lzma
+man-pages
+man-pages-posix
+manix
+mdds
+mesa
+mesa-demos
+meson
+minizip2
+moreutils
+mozlz4a
+msieve
+ncompress
+networkmanager
+ngrok
+niv
+nix-bash-completions
+nix-binary-cache
+nix-bundle
+nix-direnv-flakes
+nix-health
+nix-index
+nix-plugins
+nix-prefetch
+nix-prefetch-scripts
+nix-template
+nix-zsh-completions
+nix-zsh-completions
+nixd
+nixdoc
+nixos-generators
+nmap
+node2nix
+ntfs3g
+nurl
+opencl-clang
+ouch
+p7zip
+parallel
+pbzip2
+pciutils
+pciutils
+pfetch
+pigz
+pixz
+plzip
+pmutils
+poppler_gi
+power-profiles-daemon
+premake
+ps_mem
+pulseaudio
+pure-prompt
+pxz
+python311
+ranger
+rcshist
+reposurgeon
+rocmPackages.clang-ocl
+runzip
+sassc
+simpleTpmPk11
+skim
+smartmontools
+smartmontools
+snappy
+snzip
+solaar
+sqlite
+sqlite-utils
+squashfs-tools-ng
+squashfsTools
+squashfuse
+sssd
+suitesparse
+swtpm
+swtpm-tpm2
+tarlz
+tbb
+tealdeer
+template-glib
+tor
+toybox
+tpm-tools
+tpm2-tools
+tpm2-tss
+tpmmanager
+trash-cli
+tree
+ucl
+unrar
+unzip
+unzip
+usbmuxd
+usbutils
+utillinux
+uutils-coreutils
+vulnix
+wirelesstools
+wmutils-core
+wmutils-libwm
+wmutils-opt
+xarchiver
+xbrightness
+xclip
+xfce.xfce4-settings
+xorg.fontalias
+xorg.fonttosfnt
+xorg.fontutil
+xorg.libxcb
+xorg.libXxf86dga
+xorg.libXxf86misc
+xorg.libXxf86vm
+xorg.mkfontdir
+xorg.xbacklight
+xorg.xcbutil
+xorg.xcbutilerrors
+xorg.xcbutilimage
+xorg.xcbutilrenderutil
+xorg.xcbutilwm
+xorg.xconsole
+xorg.xev
+xorg.xf86videoamdgpu
+xorg.xf86videoamdgpu
+xorg.xfontsel
+xorg.xhost
+xorg.xinit
+xorg.xkill
+xorg.xorgproto
+xorg.xprop
+xorg.xwininfo
+xsettingsd
+xxHash
+xz
+zip
+zlib
+zlib-ng
+zstd
+zsync
+zziplib
 ]

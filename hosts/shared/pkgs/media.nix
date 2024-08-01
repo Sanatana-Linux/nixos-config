@@ -1,20 +1,23 @@
-{pkgs, ...}:
+{ pkgs, ... }:
 with pkgs; [
   appindicator-sharp
   ascii-image-converter
   babl
+  beautysh
   book-summary
   byzanz
   ciano
+  crabz
   curtail
   delve
   easyeffects
   ebook_tools
+  emacsPackages.svgo
   exiftool
   feh
   ffcast
-  ffmpeg-full
   figlet
+  freetts
   gallery-dl
   gdk-pixbuf
   gi-docgen
@@ -58,15 +61,17 @@ with pkgs; [
   jpegrescan
   kooha
   labelImg
-  leela
   libdevil-nox
   libexif
+  libgee
   libjpeg
   libpng
   librsvg
   libspng
   libungif
   libwebp
+  lrzip
+  lz4
   manuskript
   meme
   menyoki
@@ -75,18 +80,19 @@ with pkgs; [
   mjpegtoolsFull
   mnamer
   mozjpeg
-  mupdf
+  nanotts
   nodePackages_latest.svgo
-  ocrmypdf
   optipng
   oxipng
+  p7zip
   pantheon.granite
-  pdfgrep
-  pdfmm
   peek
+  picotts
   pikopixel
   pixcat
   pixel2svg
+  pixz
+  plzip
   pngcrush
   pngloss
   pngnq
@@ -96,23 +102,24 @@ with pkgs; [
   pngtoico
   pngtools
   potrace
-  python312Packages.cairosvg
-  python312Packages.colorthief
-  python312Packages.pyfiglet
-  python312Packages.pygobject3
-  python312Packages.pystache
-  python312Packages.pysvg-py3
-  python312Packages.svg-path
-  python312Packages.svgwrite
+  pxz
+  python311Packages.cairosvg
+  python311Packages.colorthief
+  python311Packages.pyfiglet
+  python311Packages.pygobject3
+  python311Packages.pystache
+  python311Packages.pysvg-py3
+  python311Packages.svg-path
+  python311Packages.svgwrite
+  rarcrack
   resvg
+  ripgrep
   rubyPackages.cairo-gobject
   rubyPackages.gdk_pixbuf2
   rubyPackages.gdk_pixbuf2
   rubyPackages.gobject-introspection
   rx
-  scribus
   svgcleaner
-  talkfilters
   toilet
   vlc
   webp-pixbuf-loader

@@ -7,43 +7,23 @@
     inherit
       (pkgs)
       bfg-repo-cleaner
-      black
-      anytype
-      cargo
-      ccls
-      clang
-      clang-tools
-      cmake
-      colordiff
-      delve
       gist
+      git
+      git-backup-go
+      git-extras
       git-filter-repo
-      go
-      gopls
-      gpart
+      git-repo-updater
+      git-revise
+      git-trim
+      gitleaks
+      gnome-keyring
       grex
       kbfs
       keybase
       keybase-gui
       keychain
-      lldb
-      nodejs
-      parted
-      pre-commit
-      rust-analyzer
-      rustfmt
-      selene
-      shellcheck
-      shfmt
-      shiori
-      sqlite
-      stylua
-      subversion
-      sumneko-lua-language-server
-      texlab
-      gnome-keyring
       libgnome-keyring
-      uncrustify
+      pre-commit
       ;
     inherit
       (pkgs.gitAndTools)
@@ -55,16 +35,6 @@
     inherit
       (pkgs.luaPackages)
       lua
-      ;
-
-    inherit
-      (pkgs.nodePackages_latest)
-      jsonlint
-      prettier
-      typescript-language-server
-      vscode-langservers-extracted
-      yaml-language-server
-      yarn
       ;
 
     pylsp = pkgs.python311.withPackages (p:

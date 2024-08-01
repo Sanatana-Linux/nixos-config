@@ -16,6 +16,7 @@
   home = {
     sessionPath = [
       "${config.home.homeDirectory}/.local/bin"
+      "${config.home.homeDirectory}/.local/share/gem/ruby/3.1.0/bin"
       "${config.home.homeDirectory}/.local/share/flatpak/exports/share"
 
       "${config.home.homeDirectory}/Workspace/go/bin"

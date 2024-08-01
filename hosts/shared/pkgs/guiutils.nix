@@ -1,6 +1,9 @@
-{pkgs, ...}:
+{ pkgs, ... }:
 with pkgs; [
+  acpi
+  alsaequal
   appimage-run
+  fontforge
   appimagekit
   appstream-glib
   archiver
@@ -10,6 +13,7 @@ with pkgs; [
   aspellDicts.en-computers
   aspellDicts.en-science
   aspellDicts.hi
+  avidemux
   bdfresize
   bitwarden
   bitwarden-cli
@@ -24,16 +28,17 @@ with pkgs; [
   dbus-broker
   dconf
   discord
+  paper-plane
+  ebook_tools
   eggdbus
   epick
   eyedropper
   fbida
   fcft
   feh
-  file-roller
+  fluent-gtk-theme
   fntsample
   font-manager
-  fontforge
   fontpreview
   fuseiso
   galculator
@@ -41,6 +46,7 @@ with pkgs; [
   geocode-glib_2
   gmime
   gmime3
+  file-roller
   gnome-disk-utility
   gnome-font-viewer
   gnome-themes-extra
@@ -68,16 +74,17 @@ with pkgs; [
   gtkspell3
   gtkspellmm
   gusb
-  handlr-regex
+  handlr
   hunspell
   hunspellDicts.de_DE
   hunspellDicts.en_US-large
   hunspellDicts.es_MX
   i3lock-color
   ibus-with-plugins
+  inkscape-with-extensions
   inotify-tools
   lcdf-typetools
-  libappimage
+  leela
   libappindicator
   libappindicator-gtk3
   libcanberra-gtk3
@@ -93,6 +100,7 @@ with pkgs; [
   libgudev
   libinput
   libnotify
+  librewolf
   libsForQt5.qt5ct
   libsForQt5.qt5ct
   libsForQt5.qtstyleplugins
@@ -104,21 +112,33 @@ with pkgs; [
   luajitPackages.inspect
   luakit
   maim
+  meme
   menu-cache
   mesa
   mesa-demos
   mime-types
   mimetic
+  mupdf
   mythes
   nerd-font-patcher
   networkmanagerapplet
   nuspell
+  ocrmypdf
+  openshot-qt
   pango
   pangomm
+  papirus-folders
+  papirus-icon-theme
+  pasystray
+  pdf-parser
+  pdfarranger
+  pdftag
+  pdftk
   perl536Packages.CairoGObject
   perl536Packages.GooCanvas2CairoTypes
   phinger-cursors
   picom
+  pixcat
   polkit_gnome
   poppler_utils
   psftools
@@ -129,21 +149,25 @@ with pkgs; [
   qt5ct
   qt6.qt5compat
   qtcurve
+  ranger
   rep-gtk
   rofi
   t1lib
   t1utils
+  tangram
   tdesktop
   template-glib
   termcolor
   terminus-nerdfont
   terminus_font
   themechanger
+  thunderbird
   thunderbird-bin
   tor-browser-bundle-bin
   transmission_4-gtk
   ttfautohint
   typos
+  unrar
   unscd
   updfparser
   ventoy-full
@@ -157,6 +181,7 @@ with pkgs; [
   xcftools
   xclip
   xcolor
+  xcolor
   xdg-dbus-proxy
   xdg-desktop-portal
   xdg-desktop-portal-gtk
@@ -169,6 +194,7 @@ with pkgs; [
   xfce.garcon
   xfce.libxfce4ui
   xfce.libxfce4util
+  xfce.thunar
   xfce.tumbler
   xfce.xfce4-dev-tools
   xfce.xfce4-power-manager

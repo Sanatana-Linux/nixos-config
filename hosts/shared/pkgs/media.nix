@@ -1,13 +1,12 @@
 { pkgs, ... }:
 with pkgs; [
   appindicator-sharp
-  ascii-image-converter
+  #  ascii-image-converter
   babl
   beautysh
   book-summary
   byzanz
   ciano
-  crabz
   curtail
   delve
   easyeffects
@@ -17,7 +16,7 @@ with pkgs; [
   feh
   ffcast
   figlet
-  freetts
+  # freetts
   gallery-dl
   gdk-pixbuf
   gi-docgen
@@ -43,7 +42,6 @@ with pkgs; [
   graphicsmagick
   gsettings-desktop-schemas
   gst_all_1.gst-libav
-  gthumb
   image_optim
   imagemagick
   img-cat
@@ -72,22 +70,21 @@ with pkgs; [
   libwebp
   lrzip
   lz4
-  manuskript
   meme
   menyoki
   metadata-cleaner
-  metapixel
+  # metapixel
   mjpegtoolsFull
   mnamer
   mozjpeg
-  nanotts
+  # nanotts
   nodePackages_latest.svgo
   optipng
   oxipng
   p7zip
   pantheon.granite
   peek
-  picotts
+  # picotts
   pikopixel
   pixcat
   pixel2svg
@@ -120,9 +117,7 @@ with pkgs; [
   rubyPackages.gobject-introspection
   rx
   svgcleaner
-  toilet
   vlc
-  webp-pixbuf-loader
   webp-pixbuf-loader
   xcftools
   yeetgif

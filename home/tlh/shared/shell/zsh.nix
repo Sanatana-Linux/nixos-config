@@ -11,8 +11,9 @@
     autocd = true;
     enableVteIntegration = true;
     autosuggestion.enable = true;
-    dotDir = ".config/zsh";
     defaultKeymap = "viins";
+
+    dotDir = ".config/zsh";
     history = {
       extended = true;
       ignoreDups = false; # sometimes the subtle variants are useful to have in the history
@@ -36,7 +37,7 @@
       zmodload zsh/zle
       zmodload zsh/zpty
       zmodload zsh/complist
-      autoload -U compinit
+      autoload -Uz compinit
       zstyle ':completion:*' menu select
       zmodload zsh/complist
       compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-"$ZSH_VERSION"
@@ -50,6 +51,7 @@
       mkdir -p "$(dirname ${config.xdg.cacheHome}/zsh/completion-cache)"
       zstyle ':completion:*' cache-path "${config.xdg.cacheHome}/zsh/completion-cache"
       zstyle ':completion:*' menu select
+      zstyle ':completion::complete:*' gain-privileges 1
       WORDCHARS=''${WORDCHARS//\/[&.;]}
 
     '';
@@ -66,19 +68,23 @@
              COMPLETE_IN_WORD
              CORRECT_ALL
              CORRECT_ALL
-             EXTENDEDGLOB
+             EXTENDED_GLOB
              GLOB_COMPLETE
+             GLOB_STAR_SHORT
              HIST_FCNTL_LOCK
              HIST_REDUCE_BLANKS
              INC_APPEND_HISTORY
              INTERACTIVE_COMMENTS
+             MENU_COMPLETE
              NOCASEGLOB
+             NO_CLOBBER
              NO_NOMATCH
-             NUMERICGLOBSORT
+             NUMERIC_GLOB_SORT
              PUSHD_SILENT
              PUSHD_TO_HOME
              RCEXPANDPARAM
              SHARE_HISTORY
+             TRANSIENT_RPROMPT
            EOF
 
            while read -r option

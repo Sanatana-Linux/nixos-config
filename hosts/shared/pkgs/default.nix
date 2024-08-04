@@ -13,6 +13,7 @@ let
   sound = import ./sound.nix { pkgs = pkgs; };
   virtualization = import ./virtualization.nix { pkgs = pkgs; };
   android = import ./android.nix { pkgs = pkgs; };
+  pentesting = import ./pentesting.nix { pkgs = pkgs; };
 in
 {
   imports = [ ./fonts.nix ];
@@ -31,5 +32,6 @@ in
     ++ media
     ++ pythonpackages
     ++ sound
+    ++ pentesting
     ++ virtualization;
 }

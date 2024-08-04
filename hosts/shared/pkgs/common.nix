@@ -6,7 +6,6 @@ with pkgs; [
   arj
   autorandr
   avidemux
-  bitwarden
   brightnessctl
   btar
   cairo
@@ -39,7 +38,6 @@ with pkgs; [
   glibc_multi
   glibmm
   gnome-autoar
-  gnome-themes-extra
   gnome.gvfs
   gnome2.gtkglext
   gnutar
@@ -72,14 +70,12 @@ with pkgs; [
   librewolf
   libsForQt5.qt5ct
   libxdg_basedir
-  lightlocker
   maim
   menu-cache
   mesa
   mesa-demos
   mozjpeg
   mozlz4a
-  networkmanagerapplet
   nox
   ntfs3g
   pango
@@ -109,7 +105,6 @@ with pkgs; [
   testdisk
   themechanger
   thunderbird-bin
-  ttfautohint-nox
   ueberzug
   unrar
   unscd
@@ -136,7 +131,6 @@ with pkgs; [
   xfce.xfce4-power-manager
   xfce.xfce4-settings
   xfce.xfconf
-  xlsfonts
   xorg.fontalias
   xorg.fonttosfnt
   xorg.fontutil
@@ -164,7 +158,6 @@ with pkgs; [
   xsuspender
   xterm
   zarchive
-  zathura
   zip
   zziplib
 ]

@@ -3,7 +3,7 @@ with pkgs; [
   acpi
   alsaequal
   appimage-run
-  fontforge
+  # fontforge
   appimagekit
   appstream-glib
   archiver
@@ -13,35 +13,32 @@ with pkgs; [
   aspellDicts.en-computers
   aspellDicts.en-science
   aspellDicts.hi
-  avidemux
+  # avidemux
   bdfresize
-  bitwarden
-  bitwarden-cli
+  # bitwarden
+  # bitwarden-cli
   bleachbit
   blueman
   brightnessctl
   cairo
   cairomm
   codespell
-  colorz
-  convfont
+  # colorz
+  # convfont
   dbus-broker
   dconf
-  discord
-  paper-plane
+  # discord
+  # paper-plane
   ebook_tools
   eggdbus
   epick
   eyedropper
   fbida
   fcft
-  feh
-  fluent-gtk-theme
+  # feh
   fntsample
-  font-manager
   fontpreview
   fuseiso
-  galculator
   gcolor3
   geocode-glib_2
   gmime
@@ -65,7 +62,6 @@ with pkgs; [
   gtk-sharp-2_0
   gtk2-x11
   gtk2fontsel
-  gtk2fontsel
   gtk3
   gtk3-x11
   gtk4
@@ -80,7 +76,6 @@ with pkgs; [
   hunspellDicts.en_US-large
   hunspellDicts.es_MX
   i3lock-color
-  ibus-with-plugins
   inkscape-with-extensions
   inotify-tools
   lcdf-typetools
@@ -91,8 +86,6 @@ with pkgs; [
   libcanberra-gtk3
   libdbusmenu
   libdbusmenu-gtk3
-  libdbusmenu-gtk3
-  libdbusmenu-gtk3
   libfm
   libfm-extra
   libgee
@@ -102,17 +95,14 @@ with pkgs; [
   libnotify
   librewolf
   libsForQt5.qt5ct
-  libsForQt5.qt5ct
   libsForQt5.qtstyleplugins
   libusb
   libxdg_basedir
-  lightlocker
   lua51Packages.inspect
   lua52Packages.inspect
   luajitPackages.inspect
   luakit
   maim
-  meme
   menu-cache
   mesa
   mesa-demos
@@ -123,13 +113,11 @@ with pkgs; [
   nerd-font-patcher
   networkmanagerapplet
   nuspell
-  ocrmypdf
-  openshot-qt
+  # ocrmypdf
+  # openshot-qt
   pango
   pangomm
-  papirus-folders
-  papirus-icon-theme
-  pasystray
+
   pdf-parser
   pdfarranger
   pdftag
@@ -145,28 +133,23 @@ with pkgs; [
   pulseeffects-legacy
   python311Packages.pdftotext
   python311Packages.pyxdg
-  qpaeq
+  # qpaeq
   qt5ct
   qt6.qt5compat
   qtcurve
-  ranger
   rep-gtk
   rofi
   t1lib
   t1utils
-  tangram
   tdesktop
   template-glib
   termcolor
   terminus-nerdfont
   terminus_font
   themechanger
-  thunderbird
   thunderbird-bin
-  tor-browser-bundle-bin
   transmission_4-gtk
   ttfautohint
-  typos
   unrar
   unscd
   updfparser
@@ -180,7 +163,6 @@ with pkgs; [
   xarchiver
   xcftools
   xclip
-  xcolor
   xcolor
   xdg-dbus-proxy
   xdg-desktop-portal
@@ -202,12 +184,10 @@ with pkgs; [
   xfce.xfconf
   xfontsel
   xlsfonts
-  xmcp
   xorg-rgb
   xorg.xfontsel
   xscreensaver
   xsecurelock
   xsuspender
   xterm
-  zathura
 ]

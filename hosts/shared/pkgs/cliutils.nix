@@ -57,7 +57,6 @@ with pkgs; [
   ps_mem
   pure-prompt
   python311Packages.pygccxml
-  ranger
   rclone
   renameutils
   ripgrep-all

@@ -1,7 +1,7 @@
-{ stdenvNoCC
-, fetchFromGitHub
-, nodePackages
-,
+{
+  stdenvNoCC,
+  fetchFromGitHub,
+  nodePackages,
 }:
 stdenvNoCC.mkDerivation rec {
   pname = "phocus";
@@ -22,13 +22,13 @@ stdenvNoCC.mkDerivation rec {
 
   postPatch = ''
     substituteInPlace scss/gtk-3.0/_colors.scss \
-      --replace "@bg0@" "#181818" \
+      --replace "@bg0@" "#15141a" \
       --replace "@bg1@" "#222222" \
       --replace "@bg2@" "#2c2B2D"\
       --replace "@bg3@" "#313032" \
-      --replace "@bg4@" "#58565A" \
-      --replace "@red@" "#fcb18d" \
-      --replace "@lred@" "#d8557b" \
+      --replace "@bg4@" "#525053" \
+      --replace "@red@" "#fc618d" \
+      --replace "@lred@" "#f92672" \
       --replace "@orange@" "#fd9353" \
       --replace "@lorange@" "#da804b" \
       --replace "@yellow@" "#fce566" \
@@ -47,6 +47,6 @@ stdenvNoCC.mkDerivation rec {
       --replace "@secondary@" "#dcd8e1"
   '';
 
-  nativeBuildInputs = [ nodePackages.sass ];
-  installFlags = [ "DESTDIR=$(out)" "PREFIX=" ];
+  nativeBuildInputs = [nodePackages.sass];
+  installFlags = ["DESTDIR=$(out)" "PREFIX="];
 }

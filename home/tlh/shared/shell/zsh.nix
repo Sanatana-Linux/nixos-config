@@ -109,6 +109,7 @@
       commit = "git add . && git commit -m"; # commit - git
       du = "${lib.getBin du-dust}/bin/du-dust"; # same as above
       fcd = "cd $(find -type d | fzf)"; # find a directory then cd into it
+      fzim="fzf | xargs nvim"; # fzf then open in neovim
       g = "git"; # git in one keystroke
       grep = "${lib.getBin ripgrep-all}/bin/rga"; # fixes an annoyance with nix I had
       gz = "gzip -l";

@@ -8,7 +8,7 @@
   gtk = {
     enable = true;
     font = {
-      name = "Rounded Mplus 1c ExtraBold";
+      name = "Terminus Nerd Font";
       size = 11;
     };
     iconTheme = {

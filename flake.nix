@@ -66,8 +66,8 @@
             pkgs = nixpkgs.legacyPackages.x86_64-linux;
           };
         in [
-          ./hosts/macbook-air
           nixos-hardware.nixosModules.apple-macbook-air-6
+          ./hosts/macbook-air
           bhairava-grub-theme.nixosModule
           home-manager.nixosModules.home-manager
           chaotic.nixosModules.default # OUR DEFAULT MODUL
@@ -81,7 +81,6 @@
         ];
       };
     };
-    # yes this is necessary
     homeConfigurations = {
       "tlh@macbook-air" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages."x86_64-linux";

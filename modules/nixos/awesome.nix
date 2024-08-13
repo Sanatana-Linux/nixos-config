@@ -101,7 +101,6 @@ with lib; let
     luaposix
     busted
     cqueues
-    dkjson
     cjson
     ldbus
     ldoc
@@ -212,7 +211,6 @@ in
         luaposix
         busted
         cqueues
-        dkjson
         cjson
         ldbus
         ldoc

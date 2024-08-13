@@ -45,7 +45,6 @@
       lightlocker
       luajitPackages.cjson
       luajitPackages.cqueues
-      luajitPackages.dkjson
       luajitPackages.inspect
       luajitPackages.ldbus
       luajitPackages.ldoc

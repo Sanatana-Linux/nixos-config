@@ -62,7 +62,6 @@ with pkgs; [
   luaformatter
   luajitPackages.busted
   luajitPackages.cqueues
-  luajitPackages.dkjson
   luajitPackages.ldbus
   luajitPackages.ldoc
   luajitPackages.lgi

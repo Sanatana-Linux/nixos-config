@@ -14,8 +14,8 @@
     ../shared
     ../shared/optional/programs/firefox.nix
     ../shared/optional/programs/thunar.nix
-    ../shared/optional/programs/yazi.nix
-    ../shared/optional/programs/joshuto.nix
+#    ../shared/optional/programs/yazi.nix
+ #   ../shared/optional/programs/joshuto.nix
     ../shared/optional/programs/ranger/default.nix
     ../shared/optional/programs/mpd.nix
     ../shared/optional/programs/mpv.nix

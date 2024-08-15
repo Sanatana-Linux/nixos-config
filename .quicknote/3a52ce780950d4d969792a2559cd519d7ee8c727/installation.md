@@ -20,18 +20,18 @@ mkdir -p /mnt/etc/
 git clone https://github.com/Sanatana-Linux/nixos-config /mnt/etc/nixos
 
 # Remove my hardware-configuration file
-rm /mnt/etc/nixos/hosts/hp-laptop-amd/hardware-configuration.nix
+rm /mnt/etc/nixos/hosts/macbook-air/hardware-configuration.nix
 
 # Generate the config, move it in place and remove the extraneous configuration file
 nixos-generate-config --root /mnt
 rm /mnt/etc/nixos/configuration.nix
-mv /mnt/etc/nixos/hardware-configuration.nix /mnt/etc/nixos/hosts/hp-laptop-amd
+mv /mnt/etc/nixos/hardware-configuration.nix /mnt/etc/nixos/hosts/macbook-air
 
 # Ensure you are in the correct directory
 cd /mnt/etc/nixos
 
 # to install the xorg version:
-nixos-install --flake '.#hp-laptop-amd' --impure
+nixos-install --flake '.#macbook-air' --impure
 
 ```
 
@@ -44,6 +44,10 @@ nixos-install --flake '.#hp-laptop-amd' --impure
 ```sh
 # changes ownership, will still build but now complains less when syncing with Git
 doas chown -R $USER /etc/nixos
+
+# Prevent nix-rebuild from whining about ownership
+
+doas git config --global --add safe.directory /etc/nixos 
 ```
 
 - Since you will probably want to change things, that is done with the following commands:
@@ -57,7 +61,7 @@ git add .
 git commit -m 'steep learning curves bruh'
 
 # then you can rebuild your configuration as normal with the changes available to the nix store
-nixos-rebuild switch --impure --flake '/etc/nixos#hp-laptop-amd'
+nixos-rebuild switch --impure --flake '/etc/nixos#macbook-air'
 
 ```
 <p align="center">

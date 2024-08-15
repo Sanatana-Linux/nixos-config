@@ -7,6 +7,5 @@
     keybase.enable = true;
     playerctld.enable = true;
     lorri.enable = true;
-
   };
 }

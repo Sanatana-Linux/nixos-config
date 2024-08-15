@@ -9,5 +9,5 @@
     shells = [bash zsh];
     pathsToLink = ["/share/bash" "/share/zsh"];
   };
-   users.defaultUserShell = pkgs.zsh;
+  users.defaultUserShell = pkgs.zsh;
 }

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{pkgs, ...}:
 with pkgs; [
   appindicator-sharp
   #  ascii-image-converter

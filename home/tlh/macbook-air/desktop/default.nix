@@ -1,7 +1,8 @@
-{ inputs
-, lib
-, pkgs
-, ...
+{
+  inputs,
+  lib,
+  pkgs,
+  ...
 }: {
   fonts.fontconfig.enable = true;
 
@@ -77,6 +78,6 @@
       fi
     '';
 
-    file = { ".icons/default".source = "${pkgs.phinger-cursors}/share/icons/phinger-cursors-light"; };
+    file = {".icons/default".source = "${pkgs.phinger-cursors}/share/icons/phinger-cursors-light";};
   };
 }

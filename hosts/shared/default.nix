@@ -1,8 +1,9 @@
-{ lib
-, pkgs
-, inputs
-, outputs
-, ...
+{
+  lib,
+  pkgs,
+  inputs,
+  outputs,
+  ...
 }: {
   imports =
     [
@@ -27,7 +28,7 @@
 
   home-manager = {
     useUserPackages = true;
-    extraSpecialArgs = { inherit inputs outputs; };
+    extraSpecialArgs = {inherit inputs outputs;};
     backupFileExtension = "bak";
   };
 
@@ -52,7 +53,6 @@
         "electron-25.9.0"
         "electron-27.3.11"
         "xpdf-4.03"
-
       ];
       # firefox = {
       #   enableLegacyUserProfileCustomizations = true;

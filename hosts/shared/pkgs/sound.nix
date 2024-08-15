@@ -14,7 +14,7 @@ with pkgs; [
   libpulseaudio
   # lmms
   mediainfo
-  mimic 
+  mimic
   mpc_cli
   mpd
   mpd-discord-rpc

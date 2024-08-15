@@ -15,14 +15,13 @@
         show_borders = false;
         show_icons = false;
       };
-
     };
 
     mimetype = {
       class = {
         audio_default = [
           {
-            command = "mpv";
+            command = "vlc";
             args = ["--"];
           }
           {
@@ -50,12 +49,6 @@
         ];
         video_default = [
           {
-            command = "mpv";
-            args = ["--"];
-            fork = true;
-            silent = true;
-          }
-          {
             command = "vlc";
             args = ["--"];
             fork = true;
@@ -64,12 +57,6 @@
           {
             command = "mediainfo";
             confirm_exit = true;
-          }
-          {
-            command = "mpv";
-            args = ["--mute" "on" "--"];
-            fork = true;
-            silent = true;
           }
         ];
         text_default = [
@@ -250,7 +237,7 @@
           {
             command = "firefox";
 
-          fork = true;
+            fork = true;
             silent = true;
           }
           {
@@ -402,7 +389,6 @@
             fork = true;
             silent = true;
           }
-
           {
             command = "unzip";
             confirm_exit = true;

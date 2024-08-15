@@ -1,18 +1,20 @@
-{ config
-, inputs
-, lib
-, pkgs
-, ...
+{
+  config,
+  inputs,
+  lib,
+  pkgs,
+  ...
 }:
 with lib; let
   cfg = config.services.xserver.windowManager.awesome;
   # ------------------------------------------------- #
-  dbus_proxy = pkgs.callPackage
-    ({ luajit
-     , luajitPackages
-     , fetchFromGitHub
-     ,
-     }:
+  dbus_proxy =
+    pkgs.callPackage
+    ({
+      luajit,
+      luajitPackages,
+      fetchFromGitHub,
+    }:
       luajit.pkgs.buildLuaPackage rec {
         pname = "dbus_proxy";
         version = "0.10.3";
@@ -25,7 +27,7 @@ with lib; let
           sha256 = "sha256-Yd8TN/vKiqX7NOZyy8OwOnreWS5gdyVMTAjFqoAuces=";
         };
 
-        propagatedBuildInputs = [ luajitPackages.lgi ];
+        propagatedBuildInputs = [luajitPackages.lgi];
         buildPhase = ":";
 
         installPhase = ''
@@ -33,13 +35,14 @@ with lib; let
           cp -r src/${pname} "$out/share/lua/${luajit.luaversion}/"
         '';
       })
-    { };
+    {};
   # ------------------ajit     ------------------------------- #
-  async-lua = pkgs.callPackage
-    ({ luajit
-     , fetchFromGitHub
-     ,
-     }:
+  async-lua =
+    pkgs.callPackage
+    ({
+      luajit,
+      fetchFromGitHub,
+    }:
       luajit.pkgs.buildLuarocksPackage rec {
         pname = "async.lua";
         version = "scm-1";
@@ -55,16 +58,17 @@ with lib; let
           ln -s rocks/${pname}-${version}.rockspec .
         '';
 
-        propagatedBuildInputs = [ luajit ];
+        propagatedBuildInputs = [luajit];
       })
-    { };
+    {};
   # ------------------------------------------------- #
-  lgi-async-extra = pkgs.callPackage
-    ({ luajit
-     , luajitPackages
-     , fetchFromGitHub
-     ,
-     }:
+  lgi-async-extra =
+    pkgs.callPackage
+    ({
+      luajit,
+      luajitPackages,
+      fetchFromGitHub,
+    }:
       luajit.pkgs.buildLuarocksPackage rec {
         pname = "lgi-async-extra";
         version = "scm-1";
@@ -80,18 +84,18 @@ with lib; let
           ln -s rocks/${pname}-${version}.rockspec .
         '';
 
-        propagatedBuildInputs = [ async-lua luajit luajitPackages.lgi ];
+        propagatedBuildInputs = [async-lua luajit luajitPackages.lgi];
       })
-    { };
+    {};
   # ------------------------------------------------- #
   # Insure Awesome can access lgi
   getLuaPath = lib: dir: "${lib}/${dir}/lua/${pkgs.luajit.luaversion}";
   makeSearchPath = lib.concatMapStrings (
     path:
-    " --search "
-    + (getLuaPath path "share")
-    + " --search "
-    + (getLuaPath path "lib")
+      " --search "
+      + (getLuaPath path "share")
+      + " --search "
+      + (getLuaPath path "lib")
   );
   # ------------------------------------------------- #
   # lua modules that Awesome requires
@@ -123,8 +127,7 @@ with lib; let
     async-lua
     lgi-async-extra
   ];
-in
-{
+in {
   options = {
     services.xserver.windowManager.awesome = {
       enable = mkEnableOption (lib.mdDoc "Awesome Window Manager Luajit");
@@ -139,7 +142,6 @@ in
       # ------------------------------------------------- #
       # lightdm configuration
       displayManager = {
-      
         # ly.enable = true;
         lightdm = {
           enable = true;
@@ -168,20 +170,20 @@ in
               package = pkgs.whitesur-icon-theme;
               name = "WhiteSur-dark";
             };
-            indicators = [ "~session" "~spacer" ];
+            indicators = ["~session" "~spacer"];
           };
         };
       };
 
       windowManager.session =
         singleton
-          {
-            name = "awesome";
-            start = ''
-              ${pkgs.awesome-git-luajit}/bin/awesome ${makeSearchPath luaModules} &
-              waitPID=$!
-            '';
-          };
+        {
+          name = "awesome";
+          start = ''
+            ${pkgs.awesome-git-luajit}/bin/awesome ${makeSearchPath luaModules} &
+            waitPID=$!
+          '';
+        };
     };
     # ------------------------------------------------- #
     environment.systemPackages = lib.attrValues {

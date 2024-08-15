@@ -1,9 +1,10 @@
-{ lib
-, pkgs
-, config
-, inputs
-, outputs
-, ...
+{
+  lib,
+  pkgs,
+  config,
+  inputs,
+  outputs,
+  ...
 }: {
   imports =
     [
@@ -21,11 +22,10 @@
     manpages.enable = false;
   };
 
-
   nix = {
     package = lib.mkForce pkgs.nixVersions.latest;
     settings = {
-      experimental-features = [ "recursive-nix" "auto-allocate-uids" "nix-command" "flakes" "configurable-impure-env" ];
+      experimental-features = ["recursive-nix" "auto-allocate-uids" "nix-command" "flakes" "configurable-impure-env"];
       warn-dirty = false;
     };
   };

@@ -1,6 +1,7 @@
-{ lib
-, pkgs
-, ...
+{
+  lib,
+  pkgs,
+  ...
 }: {
   imports = [
     ./pipewire.nix
@@ -15,7 +16,7 @@
     udisks2.enable = true;
     # monitor and control temparature
     thermald.enable = true;
-    # power manager 
+    # power manager
     power-profiles-daemon.enable = true;
     # handle ACPI events
     acpid.enable = true;
@@ -33,7 +34,7 @@
     '';
     dbus = {
       enable = true;
-      packages = with pkgs; [ dconf gcr ];
+      packages = with pkgs; [dconf gcr];
     };
 
     gnome = {
@@ -53,7 +54,7 @@
     #     };
     #   };
 
-    udev.packages = [ pkgs.gnome.gnome-settings-daemon ];
+    udev.packages = [pkgs.gnome.gnome-settings-daemon];
   };
 
   virtualisation = {

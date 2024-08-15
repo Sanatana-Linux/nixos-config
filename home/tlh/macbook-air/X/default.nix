@@ -28,15 +28,15 @@
 
         ! blue
         *color4: #5ad4e6
-        *color12: #66d9ef
+        *color12:#46A0AE
 
         ! magenta
         *color5: #948ae3
         *color13: #ae81ff
 
         ! misc/cyan
-        *color6: #fc618d
-        *color14: #fd5ff0
+        *color6: #5affe6
+        *color14: #00D4BE
 
         ! white
         *color7: #bab6bf

@@ -12,7 +12,6 @@
     enableVteIntegration = true;
     autosuggestion.enable = true;
     defaultKeymap = "viins";
-
     dotDir = ".config/zsh";
     history = {
       extended = true;
@@ -28,10 +27,6 @@
       enable = true;
       searchDownKey = "^[[B"; # DOWN Arrow key
       searchUpKey = "^[[A"; # UP Arrow key
-    };
-
-    sessionVariables = {
-      SSH_AUTH_SOCK = "/run/user/1000/keyring/ssh";
     };
     completionInit = ''
       zmodload zsh/zle
@@ -53,7 +48,6 @@
       zstyle ':completion:*' menu select
       zstyle ':completion::complete:*' gain-privileges 1
       WORDCHARS=''${WORDCHARS//\/[&.;]}
-
     '';
 
     profileExtra = ''
@@ -65,8 +59,6 @@
              AUTO_LIST
              AUTO_PUSHD
              COMPLETE_ALIASES
-             COMPLETE_IN_WORD
-             CORRECT_ALL
              CORRECT_ALL
              EXTENDED_GLOB
              GLOB_COMPLETE
@@ -78,7 +70,6 @@
              MENU_COMPLETE
              NOCASEGLOB
              NO_CLOBBER
-             NO_NOMATCH
              NUMERIC_GLOB_SORT
              PUSHD_SILENT
              PUSHD_TO_HOME
@@ -93,9 +84,10 @@
            done <<-EOF
              BEEP
              FLOW_CONTROL
+             NO_MATCH
              HIST_BEEP
            EOF
-      source $HOME/.config/zsh/zplug/**/*.zsh
+      source $HOME/.config/zsh/**/*.zsh
 
     '';
 
@@ -139,14 +131,13 @@
       plugins = [
         {name = "hlissner/zsh-autopair";}
         {name = "z-shell/F-Sy-H";}
-        {name = "z-shell/zsh-navigation-tools";}
         {name = "chisui/zsh-nix-shell";}
         {name = "lincheney/fzf-tab-completion";}
         {name = "Aloxaf/fzf-tab";}
         {name = "molovo/tipz";}
         {name = "zimfw/archive";}
         {name = "nix-community/nix-zsh-completions";}
-        {name = "marlonrichert/zsh-autocomplete";}
+        #     {name = "marlonrichert/zsh-autocomplete";}
       ];
     };
   };

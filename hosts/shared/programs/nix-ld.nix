@@ -54,11 +54,9 @@
       luajitPackages.lpeglabel
       luajitPackages.lua
       luajitPackages.lua-curl
-      luajitPackages.lua-lsp
       luajitPackages.lua-messagepack
       luajitPackages.lua-protobuf
       luajitPackages.lua-subprocess
-      luajitPackages.luacheck
       luajitPackages.luarocks
       luajitPackages.luarocks-nix
       luajitPackages.luasocket

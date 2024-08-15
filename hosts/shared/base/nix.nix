@@ -23,6 +23,7 @@
     settings = {
       substituters = [
         "https://cache.ngi0.nixos.org/"
+	"https://aseipp-nix.cache.global.ssl.fastly.net"
         "https://cache.nixos.org?priority=10"
         "https://emacs.cachix.org"
         "https://fortuneteller2k.cachix.org"
@@ -64,7 +65,7 @@
       # Useful Features to Have Enabled
       system-features = ["nixos-test" "kvm" "recursive-nix" "big-parallel"];
       # Necessary Experimental Nix Features for Flakes and Friends
-      experimental-features = ["recursive-nix" "auto-allocate-uids" "repl-flake" "ca-derivations" "nix-command" "flakes" "configurable-impure-env"];
+      experimental-features = ["recursive-nix" "auto-allocate-uids"  "ca-derivations" "nix-command" "flakes" "configurable-impure-env"];
       flake-registry = "/etc/nix/registry.json";
       # show more log lines for failed builds
       log-lines = 20;

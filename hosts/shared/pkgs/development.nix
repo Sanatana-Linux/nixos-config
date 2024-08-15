@@ -60,7 +60,6 @@ with pkgs; [
   lua5_4_compat
   luabind
   luaformatter
-  luajitPackages.busted
   luajitPackages.cqueues
   luajitPackages.ldbus
   luajitPackages.ldoc
@@ -70,12 +69,9 @@ with pkgs; [
   luajitPackages.lpeglabel
   luajitPackages.lua
   luajitPackages.lua-curl
-  luajitPackages.lua-lsp
   luajitPackages.lua-messagepack
   luajitPackages.lua-protobuf
   luajitPackages.lua-subprocess
-  luajitPackages.luacheck
-  luajitPackages.luarocks
   luajitPackages.luarocks-nix
   luajitPackages.luasocket
   luajitPackages.luasql-sqlite3
@@ -85,7 +81,6 @@ with pkgs; [
   luajitPackages.std-normalize
   luajitPackages.stdlib
   luajitPackages.vicious
-  luajitPackages.vusted
   luajitPackages.wrapLua
   lynis
   marksman
@@ -149,7 +144,6 @@ with pkgs; [
   sqlite-utils
   stdenv.cc.cc
   stylua
-  sublime4
   sumneko-lua-language-server
   tectonic
   terraform

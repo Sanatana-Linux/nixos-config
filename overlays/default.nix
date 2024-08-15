@@ -12,14 +12,6 @@
 
     nps = inputs.nps.defaultPackage.${prev.system};
 
-    thunar = prev.thunar.overrideAttrs rec {
-      thunarPlugins = [
-        inputs.nixpkgs.${prev.system}.xfce.thunar-archive-plugin
-        inputs.nixpkgs.${prev.system}.xfce.thunar-volman
-        inputs.nixpkgs.${prev.system}.xfce.thunar-dropbox-plugin
-        inputs.nixpkgs.${prev.system}.xfce.thunar-media-tags-plugin
-      ];
-    };
     sf-mono-liga-bin = prev.stdenvNoCC.mkDerivation rec {
       pname = "sf-mono-liga-bin";
       version = "dev";
@@ -30,7 +22,7 @@
         cp -R $src/*.otf $out/share/fonts/opentype/
       '';
     };
-    picom = inputs.nixpkgs-f2k.packages.${prev.system}.picom-ft-labs;
+    picom = inputs.nixpkgs-f2k.packages.${prev.system}.picom-pijulius;
   };
 in {
   default = final: prev: (additions final prev) // (modifications final prev);

@@ -11,7 +11,7 @@
 , ...
 }: {
   default = pkgs.mkShell {
-    NIX_CONFIG = "extra-experimental-features = nix-command auto-allocate-uids recursive-nix flakes repl-flake";
+    NIX_CONFIG = "extra-experimental-features = nix-command auto-allocate-uids recursive-nix flakes ";
 
     nativeBuildInputs = with pkgs; [
       nix

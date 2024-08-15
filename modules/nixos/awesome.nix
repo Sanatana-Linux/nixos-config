@@ -99,7 +99,6 @@ with lib; let
   luaModules = with pkgs.luajitPackages; [
     #  luadbi-mysql
     luaposix
-    busted
     cqueues
     cjson
     ldbus
@@ -110,7 +109,6 @@ with lib; let
     lpeglabel
     lua
     lua-messagepack
-    luacheck
     luarocks
     luasocket
     luasql-sqlite3
@@ -209,7 +207,6 @@ in
       inherit
         (pkgs.luajitPackages)
         luaposix
-        busted
         cqueues
         cjson
         ldbus
@@ -220,7 +217,6 @@ in
         lpeglabel
         lua
         lua-messagepack
-        luacheck
         luarocks
         luasocket
         luasql-sqlite3

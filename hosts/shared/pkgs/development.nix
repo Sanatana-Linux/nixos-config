@@ -92,7 +92,6 @@ with pkgs; [
   node2nix
   nodePackages.prettier
   nodePackages_latest.diagnostic-languageserver
-  nodePackages_latest.eslint
   nodePackages_latest.gulp
   nodePackages_latest.neovim
   nodejs

@@ -9,7 +9,6 @@ with pkgs; [
   ciano
   curtail
   delve
-  easyeffects
   ebook_tools
   emacsPackages.svgo
   exiftool
@@ -120,5 +119,4 @@ with pkgs; [
   vlc
   webp-pixbuf-loader
   xcftools
-  yeetgif
 ]

@@ -116,6 +116,7 @@ with pkgs; [
   suitesparse
   swtpm
   swtpm-tpm2
+  sysfsutils
   tarlz
   tbb
   tealdeer

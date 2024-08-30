@@ -3,6 +3,8 @@ with pkgs;
   [
     (python3.withPackages (p:
       with p; [
+        gitdb
+        GitPython
         pip
         pygobject3
         pynvim
@@ -10,6 +12,7 @@ with pkgs;
         pylint-venv
         venvShellHook
         python-dotenv
+        smmap
         setuptoolsBuildHook
         beautifulsoup4
         wheelUnpackHook

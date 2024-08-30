@@ -33,7 +33,7 @@
       libinput
       libisoburn
       libnotify
-      librewolf
+      #librewolf
       librsvg
       libsForQt5.qt5ct
       libsecret

@@ -111,7 +111,6 @@ with pkgs; [
   pkg-config
   pkg-config-unwrapped
   pkg-configUpstream
-  prisma-engines
   protobuf
   protobufc
   puppeteer-cli
@@ -145,7 +144,6 @@ with pkgs; [
   stylua
   sumneko-lua-language-server
   tectonic
-  terraform
   tokei
   tree-sitter
   typescript

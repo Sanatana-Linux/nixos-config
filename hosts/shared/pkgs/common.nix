@@ -67,7 +67,7 @@ with pkgs; [
   libinput
   libnotify
   libpar2
-  librewolf
+  # librewolf
   libsForQt5.qt5ct
   libxdg_basedir
   maim

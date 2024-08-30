@@ -111,8 +111,19 @@
       acpid
       acpilight
       acpitool
+      intel-compute-runtime
+      intel-gmmlib
+      intel-gpu-tools
+      intel-graphics-compiler
+      intel-media-driver
+      intel-media-sdk
+      intel-ocl
+      intel-vaapi-driver
+      inteltool
       libva
-      xorg.xf86videoamdgpu
+      b43Firmware_5_1_138
+      wirelesstools
+      networkmanagerapplet
       libdbusmenu
       libdbusmenu-gtk3
       dbus-broker
@@ -138,6 +149,7 @@
         mesa
         mesa-demos
         glfw
+        xorg.xf86videointel
       ];
     };
   };
@@ -145,13 +157,19 @@
   networking = {
     hostName = "macbook-air";
     networkmanager.enable = true;
-    useDHCP = false;
+    # useDHCP = false;
   };
 
   services = {
     acpid.enable = true;
     earlyoom.enable = true;
-    logind.lidSwitch = "lock";
+    logind = {
+      extraConfig = ''
+        # don’t shutdown when power button is short-pressed
+        HandlePowerKey=ignore
+      '';
+      lidSwitch = "ignore";
+    };
     thermald.enable = true;
     power-profiles-daemon.enable = true;
     upower.enable = true;

@@ -69,7 +69,7 @@
           ./hosts/macbook-air
           bhairava-grub-theme.nixosModule
           home-manager.nixosModules.home-manager
-          chaotic.nixosModules.default # OUR DEFAULT MODUL
+          chaotic.nixosModules.default 
           {
             home-manager = {
               useUserPackages = true;

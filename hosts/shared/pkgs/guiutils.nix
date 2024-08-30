@@ -93,7 +93,7 @@ with pkgs; [
   libgudev
   libinput
   libnotify
-  librewolf
+#  librewolf
   libsForQt5.qt5ct
   libsForQt5.qtstyleplugins
   libusb

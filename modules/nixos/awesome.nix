@@ -197,6 +197,10 @@ in {
         xsettingsd
         dconf-editor
         ;
+      inherit (pkgs.gnome2)
+      pango
+      pangomm
+        ;
       inherit
         (pkgs.xfce)
         xfce4-clipman-plugin

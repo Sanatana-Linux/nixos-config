@@ -6,7 +6,7 @@
       extraRules = [
         {
           users = ["tlh"];
-          groups = ["wheel"];
+          groups = ["wheel" "networkmanager"];
           noPass = true;
           keepEnv = true;
           persist = false;
@@ -18,6 +18,15 @@
       enable = true;
       wheelNeedsPassword = false;
     };
+    # solve open file limits
+    pam.loginLimits = [
+      {
+        domain = "*";
+        type = "soft";
+        item = "nofile";
+        value = "81920";
+      }
+    ];
 
     polkit.enable = true;
     rtkit.enable = true;

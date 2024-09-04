@@ -6,24 +6,54 @@
   home.packages = lib.attrValues {
     inherit
       (pkgs)
+      authy
+      bc
       bfg-repo-cleaner
+      feh
+      ffmpeg_5-full
+      fzf
       gist
       git
       git-backup-go
       git-extras
       git-filter-repo
+      git-lfs
       git-repo-updater
       git-revise
       git-trim
       gitleaks
       gnome-keyring
+      go
+      gopls
       grex
+      i3lock-color
+      imagemagick
       kbfs
       keybase
       keybase-gui
       keychain
+      killall
+      libdbusmenu-gtk3
       libgnome-keyring
+      moreutils
+      mpc-cli
+      mpdris2
+      neovim
+      obsidian
+      pavucontrol
+      playerctl
       pre-commit
+      procps
+      pywal
+      rust-analyzer
+      sassc
+      slurp
+      socat
+      swww
+      trash-cli
+      wf-recorder
+      xdg-desktop-portal
+      xss-lock
       ;
     inherit
       (pkgs.gitAndTools)
@@ -36,7 +66,10 @@
       (pkgs.luaPackages)
       lua
       ;
-
+    inherit
+      (pkgs.xorg)
+      xev
+      ;
     pylsp = pkgs.python311.withPackages (p:
       with p; [
         flake8

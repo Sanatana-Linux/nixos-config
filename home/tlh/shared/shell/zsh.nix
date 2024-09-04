@@ -51,42 +51,31 @@
     '';
 
     profileExtra = ''
-           while read -r option
-           do
-           setopt $option
-           done <<-EOF
-             APPEND_HISTORY
-             AUTO_LIST
-             AUTO_PUSHD
-             COMPLETE_ALIASES
-             CORRECT_ALL
-             EXTENDED_GLOB
-             GLOB_COMPLETE
-             GLOB_STAR_SHORT
-             HIST_FCNTL_LOCK
-             HIST_REDUCE_BLANKS
-             INC_APPEND_HISTORY
-             INTERACTIVE_COMMENTS
-             MENU_COMPLETE
-             NOCASEGLOB
-             NO_CLOBBER
-             NUMERIC_GLOB_SORT
-             PUSHD_SILENT
-             PUSHD_TO_HOME
-             RCEXPANDPARAM
-             SHARE_HISTORY
-             TRANSIENT_RPROMPT
-           EOF
-
-           while read -r option
-           do
-            unsetopt $option
-           done <<-EOF
-             BEEP
-             FLOW_CONTROL
-             NO_MATCH
-             HIST_BEEP
-           EOF
+           setopt  APPEND_HISTORY
+           setopt  AUTO_LIST
+           setopt  AUTO_PUSHD
+           setopt  COMPLETE_ALIASES
+           setopt  CORRECT_ALL
+           setopt  EXTENDED_GLOB
+           setopt  GLOB_COMPLETE
+           setopt  GLOB_STAR_SHORT
+           setopt  HIST_FCNTL_LOCK
+           setopt  HIST_REDUCE_BLANKS
+           setopt  INC_APPEND_HISTORY
+           setopt  INTERACTIVE_COMMENTS
+           setopt  MENU_COMPLETE
+           setopt  NOCASEGLOB
+           setopt  NO_CLOBBER
+           setopt  NUMERIC_GLOB_SORT
+           setopt  PUSHD_SILENT
+           setopt  PUSHD_TO_HOME
+           setopt  RCEXPANDPARAM
+           setopt  SHARE_HISTORY
+           setopt  TRANSIENT_RPROMPT
+           unsetopt  BEEP
+           unsetopt  FLOW_CONTROL
+           unsetopt  NO_MATCH
+           unsetopt  HIST_BEEP
       source $HOME/.config/zsh/**/*.zsh
 
     '';

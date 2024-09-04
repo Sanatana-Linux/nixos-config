@@ -30,7 +30,7 @@
     };
 
     kernelPackages = pkgs.linuxPackages_latest;
-    extraModulePackages = with config.boot.kernelPackages; [acpi_call];
+    extraModulePackages = with config.boot.kernelPackages; [broadcom-sta acpi_call];
 
     kernelParams = [
       "acpi_call"

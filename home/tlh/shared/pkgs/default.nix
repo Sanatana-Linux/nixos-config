@@ -6,11 +6,9 @@
   home.packages = lib.attrValues {
     inherit
       (pkgs)
-      authy
       bc
       bfg-repo-cleaner
       feh
-      ffmpeg_5-full
       fzf
       gist
       git
@@ -38,7 +36,6 @@
       moreutils
       mpc-cli
       mpdris2
-      neovim
       obsidian
       pavucontrol
       playerctl

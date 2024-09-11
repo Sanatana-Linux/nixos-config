@@ -2,123 +2,72 @@
   fonts = {
     packages = with pkgs; [
       agave
-      alegreya
-      alice
-      # ankacoder
-      # ankacoder-condensed
-      # annapurna-sil
-      # arkpandora_ttf
-      # b612
-      # bront_fonts
-      # caladea
-      # cantarell-fonts
-      # cardo
-      # carlito
-      # cascadia-code # microsoft ligatures font
-      # clearlyU
-      # cm_unicode
-      # comic-relief
+      ankacoder
+      ankacoder-condensed
+      annapurna-sil
+      arkpandora_ttf
+      b612
+      cascadia-code # microsoft ligatures font
+      cm_unicode
       corefonts
-      # courier-prime
-      # cozette
-      # d2coding
-      # dina-font
-      # efont-unicode
-      # envypn-font
-      # eunomia
-      # f5_6
-      # fira
-      # fira-code
-      # fira-code-symbols
+      d2coding
+      dina-font
+      envypn-font
+      f5_6
       font-awesome
       font-awesome_4
       font-awesome_5
       fontpreview
-      # gelasio
-      # google-fonts
-      # gyre-fonts
-      # hackgen-font
-      # hackgen-nf-font
-      # hermit
-      # hubot-sans
-      # hubot-sans
-      # hyperscrypt-font
-      # inter
+      google-fonts
+      hackgen-font
+      hackgen-nf-font
+      hermit
+      hyperscrypt-font
+      inter
       jost
-      # julia-mono
-      # junicode
-      # just
       kanit-font
-      # kreative-square-fonts
-      # lalezar-fonts
-      # lato
-      # liberation_ttf
+      kreative-square-fonts
+      lato
       line-awesome
-      # luculent
-      # manrope
-      # maple-mono
-      # maple-mono-NF
-      # maple-mono-SC-NF
-      # martian-mono
+      manrope
       material-symbols
-      # medio
-      # mona-sans
-      # monocraft
-      # mononoki
-      # montserrat
-      # montserrat
+      monocraft
+      mononoki
       mplus-outline-fonts.githubRelease
-      # mro-unicode
-      # nerdfonts
+      nerdfonts
       norwester-font
-      # noto-fonts # I really hate these fonts
-      # noto-fonts-cjk # but its better than scripts not rendering
-      # noto-fonts-emoji # I guess...
-      # noto-fonts-extra
-      # ocr-a
-      # oldstandard
-      # oxygenfonts
-      # paratype-pt-mono
-      # paratype-pt-sans
-      # paratype-pt-serif
-      # penna
-      # poly
+      noto-fonts # I really hate these fonts
+      noto-fonts-cjk # but its better than scripts not rendering
+      noto-fonts-emoji # I guess...
+      noto-fonts-extra
+      ocr-a
+      oldstandard
+      paratype-pt-mono
+      paratype-pt-sans
+      paratype-pt-serif
       powerline-fonts
-      # pretendard
-      # profont
       proggyfonts
-      # psftools
-      # recursive
-      # rictydiminished-with-firacode
-      # roboto-slab
-      # scheherazade-new
-      # scientifica
+      scheherazade-new
+      scientifica
       siji
       sf-mono-liga-bin
-      # spleen
-      # sudo-font
-      # tamzen
-      # tenderness
+      spleen
+      sudo-font
+      tamzen
       terminus-nerdfont
       terminus_font
-      # termsyn
-      # tewi-font
-      # theano
-      # times-newer-roman
-      # tt2020
-      # u001-font
-      # ucs-fonts
-      # undefined-medium
-      # unfonts-core
-      # uni-vga
-      # unifont
-      # unifont_upper
-      # unscii
-      # victor-mono
+      termsyn
+      tewi-font
+      times-newer-roman
+      tt2020
+      u001-font
+      undefined-medium
+      uni-vga
+      unifont
+      unifont_upper
       vistafonts
-      # xkcd-font
+      xkcd-font
       xlsfonts
-      # zilla-slab
     ];
 
     fontconfig = {

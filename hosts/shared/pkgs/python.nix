@@ -1,7 +1,7 @@
 {pkgs, ...}:
 with pkgs;
   [
-    (python3.withPackages (p:
+    (python311.withPackages (p:
       with p; [
         gitdb
         GitPython

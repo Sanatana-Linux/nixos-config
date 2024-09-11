@@ -30,7 +30,7 @@
     };
 
     kernelPackages = pkgs.linuxPackages_latest;
-    extraModulePackages = with config.boot.kernelPackages; [broadcom-sta acpi_call];
+    extraModulePackages = with config.boot.kernelPackages; [acpi_call];
 
     kernelParams = [
       "acpi_call"
@@ -72,7 +72,7 @@
       # prevent the kernel from blanking plymouth out of the fb
       "fbcon=nodefer"
       # disable boot logo if any
-      "logo.nologo"
+      # "logo.nologo"
       # tell the kernel to not be verbose
       "quiet"
       # disable systemd status messages
@@ -94,7 +94,7 @@
         device = "nodev";
         efiSupport = true;
         useOSProber = true;
-        bhairava-grub-theme = {enable = true;};
+        bhairava-grub-theme.enable = true;
       };
     };
   };
@@ -168,7 +168,7 @@
         # don’t shutdown when power button is short-pressed
         HandlePowerKey=ignore
       '';
-      lidSwitch = "ignore";
+      lidSwitch = "lock";
     };
     thermald.enable = true;
     power-profiles-daemon.enable = true;

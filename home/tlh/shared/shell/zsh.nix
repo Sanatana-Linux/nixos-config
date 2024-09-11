@@ -63,7 +63,6 @@
            setopt  HIST_REDUCE_BLANKS
            setopt  INC_APPEND_HISTORY
            setopt  INTERACTIVE_COMMENTS
-           setopt  MENU_COMPLETE
            setopt  NOCASEGLOB
            setopt  NO_CLOBBER
            setopt  NUMERIC_GLOB_SORT
@@ -74,7 +73,6 @@
            setopt  TRANSIENT_RPROMPT
            unsetopt  BEEP
            unsetopt  FLOW_CONTROL
-           unsetopt  NO_MATCH
            unsetopt  HIST_BEEP
       source $HOME/.config/zsh/**/*.zsh
 

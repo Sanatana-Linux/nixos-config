@@ -13,7 +13,6 @@ with pkgs; [
   cpp-utilities
   cutter
   deadnix
-  dejsonlz4
   direnv
   fcppt
   fuse3
@@ -50,12 +49,14 @@ with pkgs; [
   libpkgconf
   libtiff
   libtool
-  logseq
   lua
   lua-language-server
-  lua51Packages.lgi
-  lua51Packages.lua
-  lua51Packages.luarocks-nix
+  lua52Packages.lgi
+  lua51Packages.inspect
+  lua52Packages.inspect
+  lua52Packages.lua
+  luajitPackages.inspect
+  lua52Packages.luarocks-nix
   lua5_3_compat
   lua5_4_compat
   luabind

@@ -3,19 +3,16 @@ with pkgs; [
   acpi
   alsaequal
   appimage-run
-  # fontforge
   appimagekit
   appstream-glib
-  archiver
   aspell
   aspellDicts.de
   aspellDicts.en
   aspellDicts.en-computers
   aspellDicts.en-science
   aspellDicts.hi
-  # avidemux
   bdfresize
-  # bitwarden
+  bitwarden
   # bitwarden-cli
   bleachbit
   blueman
@@ -23,19 +20,16 @@ with pkgs; [
   cairo
   cairomm
   codespell
-  # colorz
   # convfont
   dbus-broker
   dconf
-  # discord
-  # paper-plane
+  discord
   ebook_tools
   eggdbus
   epick
   eyedropper
   fbida
   fcft
-  # feh
   fntsample
   fontpreview
   fuseiso
@@ -93,14 +87,10 @@ with pkgs; [
   libgudev
   libinput
   libnotify
-#  librewolf
   libsForQt5.qt5ct
   libsForQt5.qtstyleplugins
   libusb
   libxdg_basedir
-  lua51Packages.inspect
-  lua52Packages.inspect
-  luajitPackages.inspect
   luakit
   maim
   menu-cache
@@ -113,11 +103,9 @@ with pkgs; [
   nerd-font-patcher
   networkmanagerapplet
   nuspell
-  # ocrmypdf
-  # openshot-qt
+  ocrmypdf
   pango
   pangomm
-
   pdf-parser
   pdfarranger
   pdftag
@@ -133,7 +121,6 @@ with pkgs; [
   pulseeffects-legacy
   python311Packages.pdftotext
   python311Packages.pyxdg
-  # qpaeq
   qt5ct
   qt6.qt5compat
   qtcurve
@@ -176,7 +163,6 @@ with pkgs; [
   xfce.garcon
   xfce.libxfce4ui
   xfce.libxfce4util
-  xfce.thunar
   xfce.tumbler
   xfce.xfce4-dev-tools
   xfce.xfce4-power-manager

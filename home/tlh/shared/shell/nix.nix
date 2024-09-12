@@ -7,6 +7,17 @@
       deadnix
       nix-index
       statix
+      nix-bash-completions
+      nix-binary-cache
+      nix-bundle
+      nix-direnv-flakes
+      nix-health
+      nix-janitor
+      nix-plugins
+      nix-prefetch
+      nix-prefetch-scripts
+      nix-template
+      nix-zsh-completions
     ];
 
     sessionVariables = {

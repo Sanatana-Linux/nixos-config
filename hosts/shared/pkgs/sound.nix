@@ -34,7 +34,7 @@ with pkgs; [
   soundfont-fluid
   soundfont-generaluser
   # spotify
-  # svox
+  svox
   video2midi
   vlc
 ]

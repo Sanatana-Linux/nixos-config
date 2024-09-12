@@ -10,7 +10,7 @@ in {
   programs.zsh.enable = true;
   users.users.tlh = {
     description = "Thomas Leon Highbaugh";
-    initialPassword = "nixos";
+    initialPassword = "password";
     isNormalUser = true;
     uid = 1000;
     shell = pkgs.zsh;

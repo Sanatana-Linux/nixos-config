@@ -1,29 +1,20 @@
 {pkgs, ...}:
 with pkgs; [
-  _7zz
   arandr
-  archiver
-  arj
   autorandr
-  avidemux
   brightnessctl
-  btar
   cairo
   cairomm
   calibre
   cmake
-  cpio
   dbus
   dbus-broker
   dbus-glib
   dconf
-  dejsonlz4
   desktop-file-utils
   discord
-  dtrx
   epiphany
   extra-cmake-modules
-  fastjar
   fbida
   font-manager
   fuse3
@@ -37,10 +28,8 @@ with pkgs; [
   glibc_memusage
   glibc_multi
   glibmm
-  gnome-autoar
   gnome.gvfs
   gnome2.gtkglext
-  gnutar
   gob2
   gobject-introspection-unwrapped
   goocanvas
@@ -54,7 +43,6 @@ with pkgs; [
   gtk_engines
   gusb
   inotify-tools
-  libarchive
   libcanberra-gtk3
   libdbusmenu
   libdbusmenu
@@ -67,7 +55,6 @@ with pkgs; [
   libinput
   libnotify
   libpar2
-  # librewolf
   libsForQt5.qt5ct
   libxdg_basedir
   maim
@@ -75,7 +62,6 @@ with pkgs; [
   mesa
   mesa-demos
   mozjpeg
-  mozlz4a
   nox
   ntfs3g
   pango
@@ -87,17 +73,12 @@ with pkgs; [
   pdfarranger
   perl536Packages.CairoGObject
   perl536Packages.GooCanvas2CairoTypes
-  picom
   polkit_gnome
   poppler_utils
   python311Packages.pyxdg
-  rar
   rofi
-  runzip
   sdbus-cpp
   shared-mime-info
-  shotcut
-  tarlz
   tdesktop
   template-glib
   terminus-nerdfont
@@ -106,14 +87,11 @@ with pkgs; [
   themechanger
   thunderbird-bin
   ueberzug
-  unrar
   unscd
-  unzip
   ventoy-full
   wirelesstools
   wmctrl
   wpa_supplicant
-  xarchiver
   xcbutilxrm
   xcftools
   xclip
@@ -157,7 +135,4 @@ with pkgs; [
   xssproxy
   xsuspender
   xterm
-  zarchive
-  zip
-  zziplib
 ]

@@ -1,7 +1,6 @@
 {pkgs, ...}:
 with pkgs; [
   appindicator-sharp
-  #  ascii-image-converter
   babl
   beautysh
   book-summary
@@ -68,27 +67,24 @@ with pkgs; [
   libungif
   libwebp
   lrzip
-  lz4
   meme
   menyoki
   metadata-cleaner
-  # metapixel
+  metapixel
   mjpegtoolsFull
   mnamer
   mozjpeg
-  # nanotts
+  nanotts
   nodePackages_latest.svgo
   optipng
   oxipng
   p7zip
   pantheon.granite
   peek
-  # picotts
+  picotts
   pikopixel
   pixcat
   pixel2svg
-  pixz
-  plzip
   pngcrush
   pngloss
   pngnq
@@ -98,7 +94,6 @@ with pkgs; [
   pngtoico
   pngtools
   potrace
-  pxz
   python311Packages.cairosvg
   python311Packages.colorthief
   python311Packages.pyfiglet
@@ -107,7 +102,6 @@ with pkgs; [
   python311Packages.pysvg-py3
   python311Packages.svg-path
   python311Packages.svgwrite
-  rarcrack
   resvg
   ripgrep
   rubyPackages.cairo-gobject

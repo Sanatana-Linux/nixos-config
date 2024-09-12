@@ -83,13 +83,11 @@ with pkgs; [
   wget
   whois
   wirelesstools
-  xarchiver
   xclip
   xorg.gccmakedep
   xorg.xev
   yad
   yt-dlp
-  zip
   zplug
   zsh
   zsh-autocomplete

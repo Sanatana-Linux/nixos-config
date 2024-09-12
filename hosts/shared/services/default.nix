@@ -54,7 +54,9 @@
     #     };
     #   };
 
-    udev.packages = [pkgs.gnome.gnome-settings-daemon];
+    udev.packages = [pkgs.gnome.gnome-settings-daemon
+    pkgs.xsettingsd
+    pkgs.xfce.xfce4-settings];
   };
 
   virtualisation = {

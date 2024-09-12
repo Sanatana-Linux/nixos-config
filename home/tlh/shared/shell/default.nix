@@ -30,7 +30,5 @@
       GOBIN = "${config.home.homeDirectory}/Workspace/go/bin";
       SHELL = "${pkgs.zsh}/bin/zsh";
     };
-
-    #file = { };
   };
 }

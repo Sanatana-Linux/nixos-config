@@ -25,6 +25,7 @@
     enableRootSlice = true;
     enableUserSlices = true;
   };
+  earlyoom.enable = true;
 
   home-manager = {
     useUserPackages = true;
@@ -54,9 +55,6 @@
         "electron-27.3.11"
         "xpdf-4.03"
       ];
-      # firefox = {
-      #   enableLegacyUserProfileCustomizations = true;
-      # };
     };
   };
 }

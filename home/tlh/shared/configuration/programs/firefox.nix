@@ -167,13 +167,6 @@ in {
         "browser.urlbar.suggest.quicksuggest.sponsored" = false;
       };
 
-      #               /* remove maximum/minimum width restriction of sidebar to create tab tiling... sort of */
-
-      # '';
-
-      # userContent = ''
-
-      # '';
       extraConfig = ''
         //     ─────────────────────────────── tabs ───────────────────────────────
                   user_pref("ultima.tabs.size.xs", false);
@@ -229,7 +222,7 @@ in {
     };
     package = pkgs.firefox.overrideAttrs {
       extraPrefsFiles = builtins.fetchurl {
-        url = "https://raw.githubusercontent.com/MrOtherGuy/fx-autoconfig/master/program/config.js";
+        url = "https:#raw.githubusercontent.com/MrOtherGuy/fx-autoconfig/master/program/config.js";
         sha256 = "1mx679fbc4d9x4bnqajqx5a95y1lfasvf90pbqkh9sm3ch945p40";
       };
     };

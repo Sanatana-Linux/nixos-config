@@ -162,7 +162,6 @@
 
   services = {
     acpid.enable = true;
-    earlyoom.enable = true;
     logind = {
       extraConfig = ''
         # don’t shutdown when power button is short-pressed

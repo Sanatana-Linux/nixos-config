@@ -63,7 +63,7 @@
            setopt  HIST_REDUCE_BLANKS
            setopt  INC_APPEND_HISTORY
            setopt  INTERACTIVE_COMMENTS
-           setopt  NOCASEGLOB
+           ,setopt  NOCASEGLOB
            setopt  NO_CLOBBER
            setopt  NUMERIC_GLOB_SORT
            setopt  PUSHD_SILENT

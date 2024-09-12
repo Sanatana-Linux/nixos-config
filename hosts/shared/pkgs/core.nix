@@ -1,15 +1,10 @@
 {pkgs, ...}:
 with pkgs; [
   _7zz
-  advancecomp
   alejandra
   any-nix-shell
   appstream
   appstream-glib
-  archivemount
-  archiver
-  arj
-  ark
   as-tree
   automake
   avfs
@@ -18,8 +13,6 @@ with pkgs; [
   bottom
   buildkit-nix
   busybox
-  bzip2
-  bzip3
   cached-nix-shell
   cachix
   cbfmt
@@ -28,20 +21,16 @@ with pkgs; [
   clangStdenv
   cmake
   commonsCompress
-  crabz
   curtail
   dconf
   ddcui
   ddcutil
   deadnix
-  dejsonlz4
   dnsutils
   dosfstools
-  efficient-compression-tool
   exfatprogs
   ffmpeg-full
   firmwareLinuxNonfree
-  lzma
   man-pages
   man-pages-posix
   manix
@@ -49,9 +38,7 @@ with pkgs; [
   meson
   minizip2
   moreutils
-  mozlz4a
   msieve
-  ncompress
   networkmanager
   ngrok
   niv
@@ -77,15 +64,10 @@ with pkgs; [
   nurl
   opencl-clang
   ouch
-  p7zip
   parallel
-  pbzip2
   pciutils
   pciutils
   pfetch
-  pigz
-  pixz
-  plzip
   pmutils
   poppler_gi
   power-profiles-daemon
@@ -93,31 +75,24 @@ with pkgs; [
   ps_mem
   pulseaudio
   pure-prompt
-  pxz
   python311
   ranger
   rcshist
   reposurgeon
   rocmPackages.clang-ocl
-  runzip
   sassc
   simpleTpmPk11
   skim
   smartmontools
   snappy
-  snzip
   solaar
   sqlite
   sqlite-utils
-  squashfs-tools-ng
-  squashfsTools
-  squashfuse
   sssd
   suitesparse
   swtpm
   swtpm-tpm2
   sysfsutils
-  tarlz
   tbb
   tealdeer
   template-glib
@@ -130,9 +105,6 @@ with pkgs; [
   trash-cli
   tree
   ucl
-  unrar
-  unzip
-  unzip
   usbmuxd
   usbutils
   utillinux
@@ -142,7 +114,6 @@ with pkgs; [
   wmutils-core
   wmutils-libwm
   wmutils-opt
-  xarchiver
   xbrightness
   xclip
   xfce.xfce4-settings
@@ -173,11 +144,5 @@ with pkgs; [
   xorg.xwininfo
   xsettingsd
   xxHash
-  xz
-  zip
-  zlib
-  zlib-ng
-  zstd
   zsync
-  zziplib
 ]

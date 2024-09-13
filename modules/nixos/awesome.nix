@@ -154,7 +154,7 @@ in {
           #   };
           # };
 
-          background = ../../hosts/shared/wallpaper/wallpaper.png;
+          background = ../../hosts/shared/wallpaper/monokaiprospectrum.png;
           greeters.gtk = {
             enable = true;
             theme = {
@@ -197,9 +197,10 @@ in {
         xsettingsd
         dconf-editor
         ;
-      inherit (pkgs.gnome2)
-      pango
-      pangomm
+      inherit
+        (pkgs.gnome2)
+        pango
+        pangomm
         ;
       inherit
         (pkgs.xfce)

@@ -79,7 +79,6 @@ with pkgs; [
   ranger
   rcshist
   reposurgeon
-  rocmPackages.clang-ocl
   sassc
   simpleTpmPk11
   skim
@@ -133,8 +132,6 @@ with pkgs; [
   xorg.xcbutilwm
   xorg.xconsole
   xorg.xev
-  xorg.xf86videoamdgpu
-  xorg.xf86videoamdgpu
   xorg.xfontsel
   xorg.xhost
   xorg.xinit

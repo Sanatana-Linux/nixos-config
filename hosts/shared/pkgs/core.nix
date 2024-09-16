@@ -25,6 +25,7 @@ with pkgs; [
   dconf
   ddcui
   ddcutil
+  pinentry-tty
   deadnix
   dnsutils
   dosfstools

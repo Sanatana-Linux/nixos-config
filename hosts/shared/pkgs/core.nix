@@ -32,6 +32,12 @@ with pkgs; [
   exfatprogs
   ffmpeg-full
   firmwareLinuxNonfree
+  intel-media-driver
+  intel-ocl
+  microcodeIntel
+  xorg.xf86videointel
+  cpufrequtils
+  auto-cpufreq
   man-pages
   man-pages-posix
   manix

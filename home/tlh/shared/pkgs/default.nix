@@ -6,6 +6,8 @@
   home.packages = lib.attrValues {
     inherit
       (pkgs)
+      dbus-broker
+      eggdbus
       bc
       bfg-repo-cleaner
       feh
@@ -31,7 +33,6 @@
       keybase-gui
       keychain
       killall
-      libdbusmenu-gtk3
       libgnome-keyring
       moreutils
       mpc-cli

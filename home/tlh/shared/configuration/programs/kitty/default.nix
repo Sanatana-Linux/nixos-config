@@ -31,5 +31,9 @@
       size = 10;
       name = "Agave Nerd Font Mono Bold";
     };
+    shellIntegration = {
+      enableZshIntegration = true;
+      enableBashIntegration = true;
+    };
   };
 }

@@ -25,7 +25,8 @@
     enableRootSlice = true;
     enableUserSlices = true;
   };
-services.earlyoom.enable = true;
+  services.irqbalance.enable = true;
+  services.earlyoom.enable = true;
   home-manager = {
     useUserPackages = true;
     extraSpecialArgs = {inherit inputs outputs;};

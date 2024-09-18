@@ -2,6 +2,7 @@
 with pkgs; [
   acpi
   alsaequal
+  pastel
   appimage-run
   appimagekit
   appstream-glib

@@ -51,29 +51,32 @@
     '';
 
     profileExtra = ''
-           setopt  APPEND_HISTORY
-           setopt  AUTO_LIST
-           setopt  AUTO_PUSHD
-           setopt  COMPLETE_ALIASES
-           setopt  CORRECT_ALL
-           setopt  EXTENDED_GLOB
-           setopt  GLOB_COMPLETE
-           setopt  GLOB_STAR_SHORT
-           setopt  HIST_FCNTL_LOCK
-           setopt  HIST_REDUCE_BLANKS
-           setopt  INC_APPEND_HISTORY
-           setopt  INTERACTIVE_COMMENTS
-           setopt  NOCASEGLOB
-           setopt  NO_CLOBBER
-           setopt  NUMERIC_GLOB_SORT
-           setopt  PUSHD_SILENT
-           setopt  PUSHD_TO_HOME
-           setopt  RCEXPANDPARAM
-           setopt  SHARE_HISTORY
-           setopt  TRANSIENT_RPROMPT
-           unsetopt  BEEP
-           unsetopt  FLOW_CONTROL
-           unsetopt  HIST_BEEP
+      setopt  APPEND_HISTORY
+      setopt  AUTO_LIST
+      setopt  AUTO_MENU
+      setopt  AUTO_PARAM_SLASH
+      setopt  AUTO_PUSHD
+      setopt  COMPLETE_ALIASES
+      setopt  CORRECT_ALL
+      setopt  EXTENDED_GLOB
+      setopt  EXTENDED_HISTORY
+      setopt  GLOB_COMPLETE
+      setopt  GLOB_STAR_SHORT
+      setopt  HIST_FCNTL_LOCK
+      setopt  HIST_REDUCE_BLANKS
+      setopt  INC_APPEND_HISTORY
+      setopt  INTERACTIVE_COMMENTS
+      setopt  NOCASEGLOB
+      setopt  NO_CLOBBER
+      setopt  NUMERIC_GLOB_SORT
+      setopt  PUSHD_SILENT
+      setopt  PUSHD_TO_HOME
+      setopt  RCEXPANDPARAM
+      setopt  SHARE_HISTORY
+      setopt  TRANSIENT_RPROMPT
+      unsetopt  BEEP
+      unsetopt  FLOW_CONTROL
+      unsetopt  HIST_BEEP
       source $HOME/.config/zsh/**/*.zsh
 
     '';
@@ -119,12 +122,17 @@
         {name = "hlissner/zsh-autopair";}
         {name = "z-shell/F-Sy-H";}
         {name = "chisui/zsh-nix-shell";}
-        {name = "lincheney/fzf-tab-completion";}
         {name = "Aloxaf/fzf-tab";}
+        {name = "b0o/zfzf";}
+        {name = "joshskidmore/zsh-fzf-history-search";}
+        {name = "lincheney/fzf-tab-completion";}
+        {name = "marlonrichert/zsh-autocomplete";}
         {name = "molovo/tipz";}
-        {name = "zimfw/archive";}
         {name = "nix-community/nix-zsh-completions";}
-        #     {name = "marlonrichert/zsh-autocomplete";}
+        {name = "redxtech/zsh-fzf-utils";}
+        {name = "tom-power/fzf-tab-widgets";}
+        {name = "ytet5uy4/fzf-widgets";}
+        {name = "zimfw/archive";}
       ];
     };
   };

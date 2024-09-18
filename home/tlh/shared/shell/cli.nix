@@ -15,6 +15,8 @@
     duf
     editorconfig-core-c
     fd
+    fzf-obc
+    fzf
     findutils
     file
     imv
@@ -59,7 +61,18 @@
       enable = true;
       enableZshIntegration = true;
     };
-
+    pyenv = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+    rbenv = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+    carapace = {
+      enable = true;
+      enableZshIntegration = true;
+    };
     zoxide = {
       enable = true;
       enableZshIntegration = true;

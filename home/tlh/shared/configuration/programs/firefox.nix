@@ -1,9 +1,41 @@
 {
-  inputs,
-  config,
   pkgs,
+  config,
+  inputs,
   ...
 }: let
+  # Firefox Nightly with https://github.com/MrOtherGuy/fx-autoconfig
+  firefox-nightly =
+    (
+      inputs.firefox-nightly.packages.${pkgs.system}.firefox-nightly-bin.override {
+        extraPrefsFiles = [
+          (builtins.fetchurl {
+            url = "https://raw.githubusercontent.com/MrOtherGuy/fx-autoconfig/master/program/config.js";
+            sha256 = "1mx679fbc4d9x4bnqajqx5a95y1lfasvf90pbqkh9sm3ch945p40";
+          })
+        ];
+      }
+    )
+    .overrideAttrs (oldAttrs: {
+      buildCommand =
+        (oldAttrs.buildCommand or "")
+        + ''
+          # Find firefox dir
+          firefoxDir=$(find "$out/lib/" -type d -name 'firefox*' -print -quit)
+
+          # Function to replace symlink with destination file
+          replaceSymlink() {
+            local symlink_path="$firefoxDir/$1"
+            local target_path=$(readlink -f "$symlink_path")
+            rm "$symlink_path"
+            cp "$target_path" "$symlink_path"
+          }
+
+          # Copy firefox binaries
+          replaceSymlink "firefox"
+          replaceSymlink "firefox-bin"
+        '';
+    });
   profile = "tlh";
 in {
   home.sessionVariables = {
@@ -13,7 +45,7 @@ in {
 
   programs.firefox = {
     enable = true;
-
+    package = firefox-nightly;
     profiles.${profile} = {
       id = 0;
       extensions = with pkgs.nur.repos.rycee.firefox-addons; [
@@ -29,7 +61,6 @@ in {
         tab-stash
         undoclosetabbutton
         view-image
-        form-history-control
         form-history-control
         foxytab
         stylus
@@ -219,12 +250,6 @@ in {
                   user_pref("svg.context-properties.content.enabled", true);
                   user_pref("toolkit.tabbox.switchByScrolling", false);
       '';
-    };
-    package = pkgs.firefox.overrideAttrs {
-      extraPrefsFiles = builtins.fetchurl {
-        url = "https:#raw.githubusercontent.com/MrOtherGuy/fx-autoconfig/master/program/config.js";
-        sha256 = "1mx679fbc4d9x4bnqajqx5a95y1lfasvf90pbqkh9sm3ch945p40";
-      };
     };
   };
   home.file.".mozilla/firefox/${profile}/chrome" = {

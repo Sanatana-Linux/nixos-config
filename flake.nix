@@ -26,7 +26,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.rust-overlay.follows = "rust-overlay";
     };
-
+    firefox-nightly.url = "github:nix-community/flake-firefox-nightly";
     nps.url = "github:OleMussmann/Nix-Package-Search";
 
     bhairava-grub-theme = {
@@ -69,7 +69,7 @@
           ./hosts/macbook-air
           bhairava-grub-theme.nixosModule
           home-manager.nixosModules.home-manager
-          chaotic.nixosModules.default 
+          chaotic.nixosModules.default
           {
             home-manager = {
               useUserPackages = true;

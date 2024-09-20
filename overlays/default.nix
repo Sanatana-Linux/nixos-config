@@ -9,7 +9,7 @@
   modifications = final: prev: {
     master-pkgs = inputs.nixpkgs-master.legacyPackages.${prev.system};
     awesome-git-luajit = inputs.nixpkgs-f2k.packages.${prev.system}.awesome-luajit-git;
-
+    neovim = inputs.neovim-nightly-overlay.packages.${prev.system}.default;
     nps = inputs.nps.defaultPackage.${prev.system};
 
     sf-mono-liga-bin = prev.stdenvNoCC.mkDerivation rec {

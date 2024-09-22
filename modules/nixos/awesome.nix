@@ -167,8 +167,8 @@ in {
               size = 48;
             };
             iconTheme = {
-              package = pkgs.whitesur-icon-theme;
-              name = "WhiteSur-dark";
+              package = pkgs.reversal-icon-theme;
+              name = "Reversal";
             };
             indicators = ["~session" "~spacer"];
           };

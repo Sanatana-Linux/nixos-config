@@ -13,8 +13,9 @@
       size = 11;
     };
     iconTheme = {
-      name = "WhiteSur-dark";
-      package = pkgs.whitesur-icon-theme;
+      name = "Reversal";
+      package = pkgs.reversal-icon-theme;
+
     };
     cursorTheme = {
       name = "Phinger Cursors (light)";

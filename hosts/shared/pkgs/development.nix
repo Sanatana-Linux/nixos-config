@@ -2,6 +2,7 @@
 with pkgs; [
   any-nix-shell
   bash
+  poetry
   black
   brotli
   cached-nix-shell
@@ -11,7 +12,6 @@ with pkgs; [
   cmake
   cpp-hocon
   cpp-utilities
-  cutter
   deadnix
   direnv
   fcppt
@@ -85,7 +85,6 @@ with pkgs; [
   luajitPackages.wrapLua
   lynis
   marksman
-  neovim-unwrapped
   nil
   nix-init
   nix-tree

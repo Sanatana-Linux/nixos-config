@@ -41,6 +41,7 @@ with pkgs; [
   gsettings-desktop-schemas
   gst_all_1.gst-libav
   image_optim
+  lutgen
   imagemagick
   img-cat
   imgcat
@@ -64,10 +65,9 @@ with pkgs; [
   libpng
   librsvg
   libspng
-  libungif
   libwebp
   lrzip
-  meme
+  meme-image-generator
   menyoki
   metadata-cleaner
   metapixel

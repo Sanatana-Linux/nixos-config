@@ -73,8 +73,6 @@
       blur-background = false;
       blur-background-frame = true;
       blur-background-fixed = true;
-      glx-no-stencil = true;
-      glx-no-rebind-pixmap = true;
       xrender-sync-fence = true;
       use-damage = true;
     };

@@ -71,8 +71,8 @@ with pkgs; [
   pcre-cpp
   pcre2
   pdfarranger
-  perl536Packages.CairoGObject
-  perl536Packages.GooCanvas2CairoTypes
+  perl538Packages.CairoGObject
+  perl538Packages.GooCanvas2CairoTypes
   polkit_gnome
   poppler_utils
   python311Packages.pyxdg
@@ -132,7 +132,6 @@ with pkgs; [
   xorg.xwininfo
   xscreensaver
   xsecurelock
-  xssproxy
   xsuspender
   xterm
 ]

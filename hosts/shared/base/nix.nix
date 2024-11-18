@@ -11,14 +11,7 @@
     man.enable = false;
     dev.enable = false;
   };
-  nixpkgs.config.permittedInsecurePackages = [
-    "openssl-1.1.1t"
-    "openssl-1.1.1w"
-    "nix-2.16.2"
-    "openssl-1.1.1v"
-    "electron-27.3.11"
-    "xpdf-4.05"
-  ];
+  # Package Manager Settings 
   nix = {
     settings = {
       substituters = [
@@ -61,10 +54,10 @@
       min-free = "${toString (5 * 1024 * 1024 * 1024)}";
       max-free = "${toString (10 * 1024 * 1024 * 1024)}";
 
-      # Useful Features to Have Enabled
+      # Useful/Necessary Features to Have Enabled
       system-features = ["nixos-test" "kvm" "recursive-nix" "big-parallel"];
       # Necessary Experimental Nix Features for Flakes and Friends
-      experimental-features = ["recursive-nix" "auto-allocate-uids" "ca-derivations" "nix-command" "flakes" ];
+      experimental-features = ["recursive-nix" "auto-allocate-uids" "ca-derivations" "nix-command" "flakes"];
       flake-registry = "/etc/nix/registry.json";
       # show more log lines for failed builds
       log-lines = 20;

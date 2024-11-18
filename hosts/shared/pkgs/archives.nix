@@ -19,7 +19,6 @@ with pkgs; [
   gnutar
   libarchive
   lz4
-  lzma
   mozlz4a
 
   ncompress

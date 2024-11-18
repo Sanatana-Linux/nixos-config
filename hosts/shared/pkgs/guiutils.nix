@@ -1,6 +1,5 @@
 {pkgs, ...}:
 with pkgs; [
-  acpi
   alsaequal
   pastel
   appimage-run
@@ -56,7 +55,6 @@ with pkgs; [
   gthumb
   gtk-sharp-2_0
   gtk2-x11
-  gtk2fontsel
   gtk3
   gtk3-x11
   gtk4
@@ -90,7 +88,7 @@ with pkgs; [
   libnotify
   libsForQt5.qt5ct
   libsForQt5.qtstyleplugins
-  libusb
+  libusb1
   libxdg_basedir
   luakit
   maim
@@ -111,10 +109,9 @@ with pkgs; [
   pdfarranger
   pdftag
   pdftk
-  perl536Packages.CairoGObject
-  perl536Packages.GooCanvas2CairoTypes
+  perl538Packages.CairoGObject
+  perl538Packages.GooCanvas2CairoTypes
   phinger-cursors
-  picom
   pixcat
   polkit_gnome
   poppler_utils
@@ -122,11 +119,11 @@ with pkgs; [
   pulseeffects-legacy
   python311Packages.pdftotext
   python311Packages.pyxdg
-  qt5ct
   qt6.qt5compat
-  qtcurve
+  libsForQt5.qtcurve
   rep-gtk
   rofi
+  shutter
   t1lib
   t1utils
   tdesktop

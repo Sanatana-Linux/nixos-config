@@ -8,6 +8,7 @@
       (pkgs)
       dbus-broker
       eggdbus
+    midori
       bc
       bfg-repo-cleaner
       feh
@@ -51,7 +52,6 @@
       trash-cli
       wf-recorder
       xdg-desktop-portal
-      xss-lock
       ;
     inherit
       (pkgs.gitAndTools)

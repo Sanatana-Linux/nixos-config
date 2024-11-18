@@ -1,6 +1,5 @@
 {pkgs, ...}:
 with pkgs; [
-  acpi
   aria
   bat
   beep

@@ -37,7 +37,7 @@
       nerdfonts
       norwester-font
       noto-fonts # I really hate these fonts
-      noto-fonts-cjk # but its better than scripts not rendering
+      noto-fonts-cjk-sans # but its better than scripts not rendering
       noto-fonts-emoji # I guess...
       noto-fonts-extra
       ocr-a

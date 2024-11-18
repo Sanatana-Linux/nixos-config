@@ -97,7 +97,6 @@ with pkgs; [
   sssd
   suitesparse
   swtpm
-  swtpm-tpm2
   sysfsutils
   tbb
   tealdeer

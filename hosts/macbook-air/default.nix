@@ -134,6 +134,8 @@
       luajitPackages.ldbus
       polkit_gnome
       libva-utils
+      xssproxy
+      xss-lock
     ];
   };
   hardware = {
@@ -157,21 +159,38 @@
   networking = {
     hostName = "macbook-air";
     networkmanager.enable = true;
-    # useDHCP = false;
   };
 
   services = {
-    acpid.enable = true;
     logind = {
       extraConfig = ''
         # don’t shutdown when power button is short-pressed
-        HandlePowerKey=ignore
+        IdleAction=lock
+        IdleActionSec=1m
       '';
-      lidSwitch = "lock";
+      lidSwitch = "suspend";
+      powerKeyLongPress = "suspend";
+      powerKey = "ignore";
     };
     thermald.enable = true;
+
+    # CPU Mode manager
     power-profiles-daemon.enable = true;
-    upower.enable = true;
+
+    # Power Management
+    tlp.enable = true;
+    upower = {
+      enable = true;
+      # Adjusts the action taken at the point of the battery being critical and adjusts when that is
+      criticalPowerAction = "Hibernate";
+      percentageLow = 15;
+      percentageCritical = 8;
+      percentageAction = 5;
+      usePercentageForPolicy = true;
+    };
+    # handle ACPI events
+    acpid.enable = true;
+
     libinput = {
       enable = true;
       touchpad = {

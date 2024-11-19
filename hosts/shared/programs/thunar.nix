@@ -17,6 +17,8 @@
       libgsf # odf files
       ffmpegthumbnailer
       kdePackages.ark # GUI archiver for thunar archive plugin
+      file-roller # GUI archiver for thunar archive plugin
+      xarchiver # GUI archiver
     ];
   };
 

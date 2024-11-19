@@ -6,6 +6,11 @@
 }:
 with lib; let
   browser = ["firefox.desktop"];
+  fileRoller = ["file-roller.desktop"]; # Define file-roller application
+  zathura = ["org.pwmt.zathura.desktop"]; # Define zathura application
+  vlc = ["vlc.desktop"]; # VLC application
+  imv = ["imv-dir.desktop"];
+
   associations = {
     "application/x-extension-htm" = browser;
     "application/x-extension-html" = browser;
@@ -21,14 +26,42 @@ with lib; let
     "x-scheme-handler/https" = browser;
     "x-scheme-handler/unknown" = browser;
 
-    "audio/*" = ["mpv.desktop"];
-    "video/*" = ["mpv.dekstop"];
-    "image/*" = ["imv.desktop"];
+    "audio/*" = vlc;
+    "video/*" = vlc;
+    "image/*" = imv;
+
     "application/json" = browser;
-    "application/pdf" = ["org.pwmt.zathura.desktop.desktop"];
+
     "x-scheme-handler/discord" = ["discord.desktop"];
     "x-scheme-handler/spotify" = ["spotify.desktop"];
     "x-scheme-handler/tg" = ["telegramdesktop.desktop"];
+
+    # Archive Files
+    "application/x-7z-compressed" = fileRoller;
+    "application/x-ar" = fileRoller;
+    "application/x-bzip" = fileRoller;
+    "application/x-bzip2" = fileRoller;
+    "application/gzip" = fileRoller;
+    "application/x-lzip" = fileRoller;
+    "application/x-lzma" = fileRoller;
+    "application/x-lzma-compressed-tar" = fileRoller;
+    "application/x-rar" = fileRoller;
+    "application/x-rar-compressed" = fileRoller;
+    "application/x-tar" = fileRoller;
+    "application/x-tarz" = fileRoller;
+    "application/x-xz" = fileRoller;
+    "application/zip" = fileRoller;
+    "application/x-zip-compressed" = fileRoller;
+
+    # Ebook formats
+    "application/epub+zip" = zathura;
+    "application/x-cbz" = zathura; # Comic book archive
+    "application/pdf" = zathura;
+    "application/x-cbr" = zathura; # Comic book archive
+    "application/x-pdf" = zathura; # Although you already have a PDF rule, using zathura here is consistent.
+    "application/djvu" = zathura;
+    "application/fb2" = zathura;
+    "application/mobipocket-ebook" = zathura; # .mobi
   };
 in {
   home.packages = [pkgs.xdg-utils];

@@ -178,7 +178,6 @@
     power-profiles-daemon.enable = true;
 
     # Power Management
-    tlp.enable = true;
     upower = {
       enable = true;
       # Adjusts the action taken at the point of the battery being critical and adjusts when that is

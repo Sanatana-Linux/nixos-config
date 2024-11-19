@@ -38,31 +38,70 @@
 
     # Completion system initialization
     completionInit = ''
-      zmodload -i zsh/zle # Load the zle module
+      zmodload -i zsh/zle
       autoload -Uz compinit
-      compinit -d "${config.xdg.cacheHome}/zsh/zcompdump-${pkgs.zsh.version}"
+      compinit
 
-      _comp_options+=(globdots)
+      _comp_options+=(globdots) # Include hidden files in completion
 
-      zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
-      zstyle ':completion:*' list-colors "${s.:.LS_COLORS}"
-      zstyle ':completion:*' rehash true
+      zstyle ':completion:*' file-patterns '%p:executable files *(-/):directories'  # Prioritize executables and include directories
+      zstyle ':completion:*' group-name "" # Prevent directory grouping in fzf-tab
+      zstyle ':completion:*' menu select # select completions with arrow keys
+       zstyle ':completion:*:default' menu select=2  # Use menu even if only one match
 
-      # Combine executable and Directory Completions
-      zstyle ':completion:*' file-patterns '%p:executable files *(-/):directories'
+      zstyle ':completion:::::' completer _expand _complete _ignored _approximate # enable approximate matches for completion
 
-      zstyle ':completion:*' accept-exact '*(N)' use-cache on
+      zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' # Case-insensitive matching
+      zstyle ':completion:*' list-colors "${s.:.LS_COLORS}" # Use LS_COLORS for completion coloring
+      zstyle ':completion:*' rehash true # Rehash completion cache when needed
 
-      zstyle ':completion:*' cache-path "${config.xdg.cacheHome}/zsh/completion-cache" # Use xdg directory for cache
+      zstyle ':completion:*' accept-exact '*(N)' use-cache on # Cache exact matches
 
-      # Menu-driven completion settings
-      zstyle ':completion:*' menu select
-      zstyle ':completion:*:default' menu select=2  # Use menu even if only one match
+      zstyle ':completion:*' cache-path "${config.xdg.cacheHome}/zsh/completion-cache" # Completion cache location
+
+
     '';
 
     # Create the completion cache directory
     initExtra = ''
-      mkdir -p "${config.xdg.cacheHome}/zsh/completion-cache" # Use xdg directory for cache
+            mkdir -p "${config.xdg.cacheHome}/zsh/completion-cache" # Use xdg directory for cache
+            if zplug check 'ytet5uy4/fzf-widgets'; then
+        # Map widgets to key
+        bindkey '^@'  fzf-select-widget
+        bindkey '^@.' fzf-edit-dotfiles
+        bindkey '^@c' fzf-change-directory
+        bindkey '^@n' fzf-change-named-directory
+        bindkey '^@f' fzf-edit-files
+        bindkey '^@k' fzf-kill-processes
+        bindkey '^@s' fzf-exec-ssh
+        bindkey '^\'  fzf-change-recent-directory
+        bindkey '^r'  fzf-insert-history
+        bindkey '^xf' fzf-insert-files
+        bindkey '^xd' fzf-insert-directory
+        bindkey '^xn' fzf-insert-named-directory
+
+        ## Git
+        bindkey '^@g'  fzf-select-git-widget
+        bindkey '^@ga' fzf-git-add-files
+        bindkey '^@gc' fzf-git-change-repository
+
+        # GitHub
+        bindkey '^@h'  fzf-select-github-widget
+        bindkey '^@hs' fzf-github-show-issue
+        bindkey '^@hc' fzf-github-close-issue
+
+        ## Docker
+        bindkey '^@d'  fzf-select-docker-widget
+        bindkey '^@dc' fzf-docker-remove-containers
+        bindkey '^@di' fzf-docker-remove-images
+        bindkey '^@dv' fzf-docker-remove-volumes
+
+        # Enable Exact-match by fzf-insert-history
+        FZF_WIDGET_OPTS[insert-history]='--exact'
+
+        # Start fzf in a tmux pane
+        FZF_WIDGET_TMUX=1
+      fi
     '';
 
     # ZSH options
@@ -74,14 +113,13 @@
 
       unsetopt BEEP FLOW_CONTROL HIST_BEEP
 
-      for file in $HOME/.config/zsh/**/*.zsh; do source "$file"; done
+
     '';
 
     # Local ZSH variables
     localVariables = with pkgs; {
       ZSH_AUTOSUGGEST_USE_ASYNC = "true"; # Use asynchronous autosuggestions.
       ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE = 40; # Maximum buffer size for autosuggestions.
-      ZSH_AUTOSUGGEST_STRATEGY = ["history" "completion"]; # Autosuggestion strategies.
       KEYTIMEOUT = 1;
       VISUAL = "${pkgs.neovim}/bin/nvim";
       EDITOR = "${pkgs.neovim}/bin/nvim";
@@ -91,10 +129,9 @@
 
     shellAliases = with pkgs; {
       # Navigation
-      cd = "${pkgs.zoxide}/bin/zoxide";
-      "cd.." = "${pkgs.zoxide}/bin/zoxide ../";
-      "cd..." = "${pkgs.zoxide}/bin/zoxide ../../";
-      fcd = "${pkgs.zoxide}/bin/zoxide $(find -type d | fzf)"; # Fuzzy find a directory and change to it
+      "cd.." = "cd ../";
+      "cd..." = "cd ../../";
+      fcd = "cd $(find -type d | fzf)"; # Fuzzy find a directory and change to it
       mkcd = "mkdir $1 && cd $1 "; # Create a directory and change to it.
 
       # File Management and Viewing
@@ -119,12 +156,6 @@
       purge = "doas sync; echo 3 | doas tee /proc/sys/vm/drop_caches"; # Purge disk caches (requires doas).
       ps = "${lib.getBin procs}/bin/procs"; # Improved process viewer.
 
-      # Git
-      g = "git";
-      commit = "git add . && git commit -m"; # Simplified Git commit.
-      pull = "git pull";
-      push = "git push";
-
       # Searching and File Opening
       grep = "${lib.getBin ripgrep-all}/bin/rga"; # Use ripgrep for fast searching
       fzim = "fzf | xargs nvim"; # Fuzzy find a file and open it with Neovim.
@@ -143,18 +174,10 @@
       zplugHome = "${config.xdg.configHome}/zsh/zplug";
       plugins = [
         {name = "hlissner/zsh-autopair";}
-        {name = "z-shell/F-Sy-H";}
         {name = "chisui/zsh-nix-shell";}
-        {name = "Aloxaf/fzf-tab";}
-        {name = "b0o/zfzf";}
-        {name = "joshskidmore/zsh-fzf-history-search";}
-        {name = "lincheney/fzf-tab-completion";}
         {name = "molovo/tipz";}
         {name = "nix-community/nix-zsh-completions";}
-        {name = "redxtech/zsh-fzf-utils";}
-        {name = "tom-power/fzf-tab-widgets";}
         {name = "ytet5uy4/fzf-widgets";}
-        {name = "zimfw/archive";}
       ];
     };
   };

@@ -1,7 +1,7 @@
 {pkgs}:
 with pkgs;
   writeScriptBin "notes" ''
-           #!/usr/bin/env bash
+    #!/usr/bin/env bash
     NOTES_DIR="./.notes"
 
     # Create the .notes directory if it doesn't exist
@@ -35,7 +35,7 @@ with pkgs;
         done
     }
 
-    # Function to view a specific note
+    # Function to view a specific notehome/tlh/shared/shell/bin/notes.nix
     view_note() {
         echo -n "Enter the title of the note you want to view: "
         read title

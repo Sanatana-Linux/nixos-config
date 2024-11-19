@@ -15,7 +15,6 @@
     iconTheme = {
       name = "Reversal";
       package = pkgs.reversal-icon-theme;
-
     };
     cursorTheme = {
       name = "Phinger Cursors (light)";

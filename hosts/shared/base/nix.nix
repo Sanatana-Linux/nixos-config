@@ -11,7 +11,7 @@
     man.enable = false;
     dev.enable = false;
   };
-  # Package Manager Settings 
+  # Package Manager Settings
   nix = {
     settings = {
       substituters = [

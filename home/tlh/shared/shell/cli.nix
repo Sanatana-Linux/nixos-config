@@ -49,6 +49,9 @@
     yt-dlp
     zsh
     zplug
+    zsh-autosuggestions
+zsh-fzf-tab 
+
   ];
 
   programs = {
@@ -59,6 +62,7 @@
 
     fzf = {
       enable = true;
+      enableBashIntegration = true;
       enableZshIntegration = true;
     };
     pyenv = {

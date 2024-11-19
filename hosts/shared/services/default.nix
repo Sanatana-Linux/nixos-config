@@ -44,13 +44,13 @@
     # drive mounting
     gvfs.enable = true;
 
-       openssh = {
-         enable = true;
-         settings = {
-           PasswordAuthentication = lib.mkForce false;
-           PermitRootLogin = lib.mkForce "no";
-         };
-       };
+    openssh = {
+      enable = true;
+      settings = {
+        PasswordAuthentication = lib.mkForce false;
+        PermitRootLogin = lib.mkForce "no";
+      };
+    };
 
     udev.packages = [
       pkgs.gnome-settings-daemon

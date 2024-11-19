@@ -1,5 +1,10 @@
-{ lib, buildPythonPackage, fetchFromGitHub, pkgs, ... }:
-
+{
+  lib,
+  buildPythonPackage,
+  fetchFromGitHub,
+  pkgs,
+  ...
+}:
 buildPythonPackage rec {
   pname = "imagecolorizer";
   version = "git";
@@ -16,7 +21,7 @@ buildPythonPackage rec {
     )
     EOF
   '';
-  propagatedBuildInputs = with pkgs;[
+  propagatedBuildInputs = with pkgs; [
     python310Packages.pillow
   ];
   src = fetchFromGitHub {
@@ -32,4 +37,3 @@ buildPythonPackage rec {
     platforms = lib.platforms.unix;
   };
 }
-

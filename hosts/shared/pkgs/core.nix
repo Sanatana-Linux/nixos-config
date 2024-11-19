@@ -98,6 +98,9 @@ with pkgs; [
   suitesparse
   swtpm
   sysfsutils
+  systemdgenie
+  systemctl-tui
+  service-wrapper
   tbb
   tealdeer
   template-glib

@@ -102,6 +102,7 @@ with pkgs; [
   python311Packages.pysvg-py3
   python311Packages.svg-path
   python311Packages.svgwrite
+  pywal
   resvg
   ripgrep
   rubyPackages.cairo-gobject
@@ -113,4 +114,5 @@ with pkgs; [
   vlc
   webp-pixbuf-loader
   xcftools
+  ytfzf
 ]

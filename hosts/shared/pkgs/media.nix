@@ -13,7 +13,9 @@ with pkgs; [
   exiftool
   feh
   ffcast
+  fswebcam
   figlet
+  cheese
   # freetts
   gallery-dl
   gdk-pixbuf
@@ -21,6 +23,7 @@ with pkgs; [
   gibo
   gif-for-cli
   giflib
+  libwebcam
   gifsicle
   gimp
   gimpPlugins.bimp

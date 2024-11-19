@@ -59,7 +59,7 @@
 
       zstyle ':completion:*' cache-path "${config.xdg.cacheHome}/zsh/completion-cache" # Completion cache location
 
-
+      WORDCHARS="$WORDCHARS//[\/[&.;]"
     '';
 
     # Create the completion cache directory

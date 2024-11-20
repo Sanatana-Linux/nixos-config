@@ -12,18 +12,14 @@ with pkgs; [
   aspellDicts.en-science
   aspellDicts.hi
   bdfresize
-  bitwarden
-  # bitwarden-cli
   bleachbit
   blueman
   brightnessctl
   cairo
   cairomm
   codespell
-  # convfont
   dbus-broker
   dconf
-  discord
   ebook_tools
   eggdbus
   epick
@@ -63,7 +59,6 @@ with pkgs; [
   gtkspell3
   gtkspellmm
   gusb
-  handlr
   hunspell
   hunspellDicts.de_DE
   hunspellDicts.en_US-large
@@ -126,8 +121,10 @@ with pkgs; [
   shutter
   t1lib
   t1utils
-  tdesktop
   template-glib
+  tpnote 
+  treedome 
+  hmm 
   termcolor
   terminus-nerdfont
   terminus_font

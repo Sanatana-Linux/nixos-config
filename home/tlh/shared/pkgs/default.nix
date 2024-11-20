@@ -42,6 +42,7 @@
       pavucontrol
       playerctl
       pre-commit
+    pcre2
       procps
       pywal
       rust-analyzer

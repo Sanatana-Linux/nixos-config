@@ -39,6 +39,7 @@
   outputs = {
     self,
     nixpkgs,
+    nixpkgs-f2k,
     home-manager,
     nixos-hardware,
     bhairava-grub-theme,

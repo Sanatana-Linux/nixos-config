@@ -18,7 +18,6 @@
       font-awesome_4
       font-awesome_5
       fontpreview
-      google-fonts
       hackgen-font
       hackgen-nf-font
       hermit
@@ -34,7 +33,6 @@
       monocraft
       mononoki
       mplus-outline-fonts.githubRelease
-      nerdfonts
       norwester-font
       noto-fonts # I really hate these fonts
       noto-fonts-cjk-sans # but its better than scripts not rendering

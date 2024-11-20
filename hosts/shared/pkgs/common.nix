@@ -5,14 +5,12 @@ with pkgs; [
   brightnessctl
   cairo
   cairomm
-  calibre
   cmake
   dbus
   dbus-broker
   dbus-glib
   dconf
   desktop-file-utils
-  discord
   epiphany
   extra-cmake-modules
   fbida
@@ -25,6 +23,9 @@ with pkgs; [
   glibc
   glibcInfo
   glibcLocalesUtf8
+  i3lock-fancy-rapid
+  xss-lock
+  corrupter
   glibc_memusage
   glibc_multi
   glibmm
@@ -76,10 +77,10 @@ with pkgs; [
   polkit_gnome
   poppler_utils
   python311Packages.pyxdg
-  rofi
   sdbus-cpp
   shared-mime-info
-  tdesktop
+  shutter
+  satty
   template-glib
   terminus-nerdfont
   terminus_font

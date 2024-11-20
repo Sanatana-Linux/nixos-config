@@ -33,7 +33,7 @@
   nixpkgs = {
     overlays = [
       outputs.overlays.default
-      inputs.nixpkgs-f2k.overlays.stdenvs
+      inputs.nixpkgs-f2k.overlays.default
       inputs.nur.overlay
     ];
 

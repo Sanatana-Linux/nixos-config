@@ -15,6 +15,7 @@
       ./programs
       ./security
       ./services
+      ../../cachix.nix
     ]
     ++ (builtins.attrValues outputs.nixosModules);
 
@@ -40,9 +41,7 @@
   nixpkgs = {
     overlays = [
       outputs.overlays.default
-      inputs.nixpkgs-f2k.overlays.stdenvs
-      inputs.nixpkgs-f2k.overlays.compositors
-      inputs.nur.overlay
+      inputs.nixpkgs-f2k.overlays.default
     ];
 
     config = {

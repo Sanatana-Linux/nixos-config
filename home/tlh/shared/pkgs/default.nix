@@ -24,7 +24,10 @@
       git-trim
       gitleaks
       gnome-keyring
-      go
+    meson-tools
+    meson
+
+    go
       gopls
       grex
       i3lock-color

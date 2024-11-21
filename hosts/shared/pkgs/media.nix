@@ -44,7 +44,6 @@ with pkgs; [
   gsettings-desktop-schemas
   gst_all_1.gst-libav
   image_optim
-  lutgen
   imagemagick
   img-cat
   imgcat

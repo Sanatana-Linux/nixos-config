@@ -1,6 +1,7 @@
 {
   colors,
   pkgs,
+outputs,
   ...
 }: {
   services.picom = {

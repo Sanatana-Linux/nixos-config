@@ -24,10 +24,9 @@
       git-trim
       gitleaks
       gnome-keyring
-    meson-tools
-    meson
-
-    go
+      meson-tools
+      meson
+      go
       gopls
       grex
       i3lock-color
@@ -45,7 +44,7 @@
       pavucontrol
       playerctl
       pre-commit
-    pcre2
+      pcre2
       procps
       pywal
       rust-analyzer

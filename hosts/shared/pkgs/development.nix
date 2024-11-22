@@ -41,10 +41,13 @@ with pkgs; [
   icu
   imlib2Full
   isync
+  asmjit
   julia
   just
   leptosfmt
   libffi
+  libclang
+  libcxxStdenv
   libimobiledevice
   libpkgconf
   libtiff
@@ -93,7 +96,7 @@ with pkgs; [
   nodePackages.prettier
   nodePackages_latest.diagnostic-languageserver
   nodePackages_latest.gulp
-  nodePackages_latest.neovim
+  # nodePackages_latest.neovim
   nodejs
   nodenv
   nps

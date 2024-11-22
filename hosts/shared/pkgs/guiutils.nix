@@ -122,9 +122,9 @@ with pkgs; [
   t1lib
   t1utils
   template-glib
-  tpnote 
-  treedome 
-  hmm 
+  tpnote
+  treedome
+  hmm
   termcolor
   terminus-nerdfont
   terminus_font

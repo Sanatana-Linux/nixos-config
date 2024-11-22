@@ -15,7 +15,6 @@
       ./programs
       ./security
       ./services
-      ../../cachix.nix
     ]
     ++ (builtins.attrValues outputs.nixosModules);
 

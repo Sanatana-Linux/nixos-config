@@ -30,7 +30,7 @@
     };
 
     kernelPackages = pkgs.linuxPackages_latest;
-    extraModulePackages = with config.boot.kernelPackages; [acpi_call];
+    extraModulePackages = with config.boot.kernelPackages; [acpi_call broadcom_sta];
 
     kernelParams = [
       "acpi_call"
@@ -111,6 +111,7 @@
       acpid
       acpilight
       acpitool
+      broadcom-bt-firmware
       intel-compute-runtime
       intel-gmmlib
       intel-gpu-tools
@@ -139,6 +140,7 @@
     ];
   };
   hardware = {
+enableAllFirmware = true;
     enableRedistributableFirmware = true;
     bluetooth = {
       enable = true;

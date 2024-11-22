@@ -9,7 +9,7 @@
   modifications = final: prev: {
     master-pkgs = inputs.nixpkgs-master.legacyPackages.${prev.system};
     awesome-git-luajit = inputs.nixpkgs-f2k.packages.${prev.system}.awesome-luajit-git;
-    neovim-latest = inputs.neovim-nightly-overlay.packages.${prev.system}.default;
+    neovim = inputs.neovim-nightly-overlay.packages.${prev.system}.default;
     nps = inputs.nps.defaultPackage.${prev.system};
 
     sf-mono-liga-bin = prev.stdenvNoCC.mkDerivation rec {
@@ -23,6 +23,7 @@
       '';
     };
     picom = inputs.nixpkgs-f2k.packages.${prev.system}.picom-git;
+  nur = inputs.nur.overlay;
   };
 in {
   default = final: prev: (additions final prev) // (modifications final prev);

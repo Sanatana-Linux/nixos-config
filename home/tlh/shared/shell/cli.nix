@@ -50,8 +50,7 @@
     zsh
     zplug
     zsh-autosuggestions
-zsh-fzf-tab 
-
+    zsh-fzf-tab
   ];
 
   programs = {

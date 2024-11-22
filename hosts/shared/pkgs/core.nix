@@ -7,6 +7,7 @@ with pkgs; [
   appstream-glib
   as-tree
   automake
+  gccStdenv
   avfs
   bintools
   binutils
@@ -18,7 +19,6 @@ with pkgs; [
   cbfmt
   ccls
   clang-tools
-  clangStdenv
   cmake
   commonsCompress
   curtail

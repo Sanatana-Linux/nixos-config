@@ -8,12 +8,15 @@
       flake = false;
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    #   nixpkgs-master.url = "github:nixos/nixpkgs/master";
+    nixpkgs-master.url = "github:nixos/nixpkgs/master";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     nixpkgs-f2k.url = "github:moni-dz/nixpkgs-f2k";
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
     nur.url = "github:nix-community/NUR";
-    home-manager.url = "github:nix-community/home-manager";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixos-hardware.url = "github:nixos/nixos-hardware";
     nixos-generators.url = "github:nix-community/nixos-generators";
     rust-overlay.url = "github:oxalica/rust-overlay";
@@ -39,7 +42,6 @@
   outputs = {
     self,
     nixpkgs,
-    nixpkgs-f2k,
     home-manager,
     nixos-hardware,
     bhairava-grub-theme,
@@ -48,7 +50,7 @@
     ...
   } @ inputs: let
     inherit (self) outputs;
-    forEachSystem = nixpkgs.lib.genAttrs ["x86_64-linux" "aarch64-linux"];
+    forEachSystem = nixpkgs.lib.genAttrs ["x86_64-linux"]; # when needed add "aarch64-linux"
     forEachPkgs = f: forEachSystem (sys: f nixpkgs.legacyPackages.${sys});
   in {
     nixosModules = import ./modules/nixos;

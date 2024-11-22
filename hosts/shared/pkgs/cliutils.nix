@@ -21,7 +21,6 @@ with pkgs; [
   fzf
   fzy
   gammastep
-  gccStdenv
   gh
   ghost
   ghostscript

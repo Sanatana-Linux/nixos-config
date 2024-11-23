@@ -1,7 +1,6 @@
 {
   outputs,
   inputs,
-pkgs,
 }: let
   # Adds my custom packages
   additions = final: _: import ../pkgs {pkgs = final;};
@@ -20,6 +19,7 @@ pkgs,
           (old.buildInputs or [])
           ++ [
             final.pcre
+            final.asciidoc-full
             final.xorg.xcbutil
           ];
       });

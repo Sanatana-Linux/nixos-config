@@ -38,10 +38,7 @@
     };
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
 
-    picom-sdhand-src = {
-      url = "github:sdhand/picom";
-      flake = false;
-    };
+    picom.url = "github:yshui/picom";
   };
 
   outputs = {

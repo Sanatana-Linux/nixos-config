@@ -28,7 +28,7 @@
       systemd.enable = true;
       verbose = false;
     };
-    blacklistedKernelModules = [ "b43" "bcma" ];
+    blacklistedKernelModules = ["b43" "bcma"];
 
     kernelPackages = pkgs.linuxPackages_xanmod_latest;
     extraModulePackages = with config.boot.kernelPackages; [acpi_call broadcom_sta];
@@ -140,9 +140,9 @@
     ];
   };
 
-powerManagement.enable = true;
+  powerManagement.enable = true;
   hardware = {
-enableAllFirmware = true;
+    enableAllFirmware = true;
     enableRedistributableFirmware = true;
     bluetooth = {
       enable = true;
@@ -178,18 +178,19 @@ enableAllFirmware = true;
     };
     thermald.enable = true;
 
-auto-cpufreq={enable = true;
-settings = {
-  battery = {
-     governor = "powersave";
-     turbo = "never";
-  };
-  charger = {
-     governor = "performance";
-     turbo = "auto";
-  };
-};
-}; 
+    auto-cpufreq = {
+      enable = true;
+      settings = {
+        battery = {
+          governor = "powersave";
+          turbo = "never";
+        };
+        charger = {
+          governor = "performance";
+          turbo = "auto";
+        };
+      };
+    };
     # Power Management
     upower = {
       enable = true;

@@ -1,6 +1,7 @@
 {
   outputs,
   inputs,
+pkgs,
 }: let
   # Adds my custom packages
   additions = final: _: import ../pkgs {pkgs = final;};
@@ -12,14 +13,14 @@
     neovim = inputs.neovim-nightly-overlay.packages.${prev.system}.default;
     nps = inputs.nps.defaultPackage.${prev.system};
 
-    picom-git = prev.picom.overrideAttrs (old: {
+    picom = prev.picom.overrideAttrs (old: {
         src = inputs.picom-sdhand-src;
         version = "sdhand-git";
         buildInputs =
           (old.buildInputs or [])
           ++ [
-            inputs.nixpkgs.pcre
-            inputs.nixpkgs.xorg.xcbutil
+            final.pcre
+            final.xorg.xcbutil
           ];
       });
 

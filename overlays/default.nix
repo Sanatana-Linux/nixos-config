@@ -12,6 +12,26 @@
     neovim = inputs.neovim-nightly-overlay.packages.${prev.system}.default;
     nps = inputs.nps.defaultPackage.${prev.system};
 
+
+    picom = prev.picom.overrideAttrs (old: {
+      src = prev.fetchFromGitHub {
+        owner = "yshui";
+        repo = "picom";
+        rev = "982bb43e5d4116f1a37a0bde01c9bda0b88705b9";
+        sha256 = "YiuLScDV9UfgI1MiYRtjgRkJ0VuA1TExATA2nJSJMhM=";
+      };
+      nativeBuildInputs = old.nativeBuildInputs ++ [final.pcre final.asciidoc final.xorg.xcbutil final.gnugrep.pcre2];
+      buildInputs =
+        (old.buildInputs or [])
+        ++ [
+          final.pcre
+          final.asciidoc-full
+
+          final.xorg.xcbutil
+        ];
+    });
+
+
     sf-mono-liga-bin = prev.stdenvNoCC.mkDerivation rec {
       pname = "sf-mono-liga-bin";
       version = "dev";

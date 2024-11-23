@@ -12,6 +12,19 @@
     neovim = inputs.neovim-nightly-overlay.packages.${prev.system}.default;
     nps = inputs.nps.defaultPackage.${prev.system};
 
+    picom-git = prev.picom.overrideAttrs (old: {
+        src = inputs.picom-sdhand-src;
+        version = "sdhand-git";
+        buildInputs =
+          (old.buildInputs or [])
+          ++ [
+            inputs.nixpkgs.pcre
+            inputs.nixpkgs.xorg.xcbutil
+          ];
+      });
+
+
+
     sf-mono-liga-bin = prev.stdenvNoCC.mkDerivation rec {
       pname = "sf-mono-liga-bin";
       version = "dev";
@@ -22,7 +35,7 @@
         cp -R $src/*.otf $out/share/fonts/opentype/
       '';
     };
-    picom = inputs.nixpkgs-f2k.packages.${prev.system}.picom-git;
+    nixpkgs-f2k = inputs.nixpkgs-f2k.packages.${prev.system};
   nur = inputs.nur.overlay;
   };
 in {

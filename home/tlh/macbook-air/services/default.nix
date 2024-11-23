@@ -6,7 +6,7 @@
 }: {
   services.picom = {
     enable = true;
-    package = pkgs.picom;
+    package = pkgs.picom-git;
     activeOpacity = 1.0;
     backend = "glx";
     fade = true;

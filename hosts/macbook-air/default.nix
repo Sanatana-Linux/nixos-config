@@ -28,8 +28,9 @@
       systemd.enable = true;
       verbose = false;
     };
+    blacklistedKernelModules = [ "b43" "bcma" ];
 
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_xanmod_latest;
     extraModulePackages = with config.boot.kernelPackages; [acpi_call broadcom_sta];
 
     kernelParams = [
@@ -122,7 +123,6 @@
       intel-vaapi-driver
       inteltool
       libva
-      b43Firmware_5_1_138
       wirelesstools
       networkmanagerapplet
       libdbusmenu
@@ -139,6 +139,8 @@
       xss-lock
     ];
   };
+
+powerManagement.enable = true;
   hardware = {
 enableAllFirmware = true;
     enableRedistributableFirmware = true;
@@ -176,9 +178,18 @@ enableAllFirmware = true;
     };
     thermald.enable = true;
 
-    # CPU Mode manager
-    power-profiles-daemon.enable = true;
-
+auto-cpufreq={enable = true;
+settings = {
+  battery = {
+     governor = "powersave";
+     turbo = "never";
+  };
+  charger = {
+     governor = "performance";
+     turbo = "auto";
+  };
+};
+}; 
     # Power Management
     upower = {
       enable = true;

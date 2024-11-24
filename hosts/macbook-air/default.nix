@@ -182,7 +182,7 @@
       enable = true;
       settings = {
         battery = {
-          governor = "powersave";
+          governor = "balanced";
           turbo = "never";
         };
         charger = {

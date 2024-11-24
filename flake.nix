@@ -36,9 +36,10 @@
       url = "github:Sanatana-Linux/Bhairava-Grub-Theme";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-
-    picom.url = "github:yshui/picom";
+    neovim-nightly-overlay = {
+      url = "github:nix-community/neovim-nightly-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -65,12 +66,9 @@
       # Laptop
       macbook-air = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs nixos-hardware bhairava-grub-theme home-manager;};
-        modules = let
-          nur-modules = import nur {
-            nurpkgs = nixpkgs.legacyPackages.x86_64-linux;
-            pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          };
-        in [
+        modules = [
+          nur.nixosModules.nur
+
           nixos-hardware.nixosModules.apple-macbook-air-6
           ./hosts/macbook-air
           bhairava-grub-theme.nixosModule

@@ -72,11 +72,6 @@ with pkgs; [
   usbmuxd
   usbutils
   vgrep
-  vimPlugins.nvim-treesitter
-  vimPlugins.nvim-treesitter-context
-  vimPlugins.nvim-treesitter-pyfold
-  vimPlugins.nvim-treesitter-refactor
-  vimPlugins.nvim-treesitter-textobjects
   vimv
   wget
   whois

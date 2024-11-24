@@ -150,7 +150,6 @@ with pkgs; [
   tokei
   tree-sitter
   typescript
-  vim
   vim-vint
   wkhtmltopdf-bin
   xcftools

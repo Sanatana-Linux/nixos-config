@@ -82,8 +82,6 @@ in {
         # required for author sheets
         "layout.css.xul-box-display-values.content.enabled" = true;
         "layout.css.xul-display-values.content.enabled" = true;
-        # required for icons with data URLs
-        "svg.context-properties.content.enabled" = true;
         # required for acrylic gaussian blur
         "layout.css.backdrop-filter.enabled" = true;
         # prevent bugs that would otherwise be caused by the custom scrollbars in the user-agent sheet
@@ -125,8 +123,6 @@ in {
 
         "layout.css.moz-document.content.enabled" = true;
 
-        # enable custom userchrome
-        "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
         # xul tabfocus
         "accessibility.tabfocus_applies_to_xul" = true;
 
@@ -192,77 +188,57 @@ in {
         # Mozilla Annoyances
         "app.normandy.enabled" = false;
         "app.normandy.first_run" = false;
-        "browser.aboutConfig.showWarning" = false;
         "browser.bookmarks.restore_default_bookmarks" = false;
         "browser.uitour.enabled" = false;
         "browser.urlbar.suggest.quicksuggest.sponsored" = false;
+        # Theme Related
+        "user.theme.dark.a" = true;
+        "user.theme.light.a" = false;
+        "user.theme.dark.catppuccin" = false;
+        "user.theme.dark.catppuccin-mocha" = false;
+        /*
+        by Draff
+        */
+        "user.theme.dark.gruvbox" = false;
+        "user.theme.light.gruvbox" = false;
+        "user.theme.dark.midnight" = false;
+        "ultima.disable.windowcontrols.button" = true;
+        "ultima.tabs.autohide" = true;
+        "ultima.sidebar.autohide" = true;
+        "ultima.sidebery.autohide" = true;
+        "ultima.sidebar.hidden" = false;
+
+        "ultima.theme.extensions" = true;
+        "ultima.theme.color.swap" = true;
+        "ultima.theme.icons" = true;
+        "ultima.theme.menubar" = true;
+        "ultima.urlbar.suggestions" = true;
+        "ultima.urlbar.centered" = true;
+        "ultima.urlbar.hidebuttons" = false;
+        "ultima.xstyle.urlbar" = true;
+        "ultima.xstyle.containertabs.i" = false;
+        "ultima.xstyle.containertabs.ii" = false;
+        "ultima.xstyle.containertabs.iii" = true;
+        "ultima.xstyle.pinnedtabs.i" = true;
+        "ultima.xstyle.private" = true;
+        "ultima.OS.gnome" = true;
+        "ultima.OS.gnome.wds" = true;
+        "ultima.OS.gnome.wdl" = true;
+        "ultima.OS.notitlebar" = true;
+        "browser.aboutConfig.showWarning" = false;
+        "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+        "devtools.debugger.remote-enabled" = true;
+        "devtools.chrome.enabled" = true;
+        "devtools.debugger.prompt-connection" = false;
+        "svg.context-properties.content.enabled" = true;
+        "toolkit.tabbox.switchByScrolling" = false;
+
+        "sidebar.revamp" = true;
+        "sidebar.verticalTabs" = false;
+        "browser.tabs.hoverPreview.enabled" = true;
+        "browser.newtabpage.activity-stream.newtabWallpapers.v2.enabled" = false;
+        "media.videocontrols.picture-in-picture.enable-when-switching-tabs.enabled" = false;
       };
-
-      extraConfig = ''
-        /*color schemes*/
-        user_pref("user.theme.dark.a", true); /*default dark mode*/
-        user_pref("user.theme.light.a", true); /*default light mode*/
-        user_pref("user.theme.dark.catppuccin", false);
-        user_pref("user.theme.dark.catppuccin-mocha", false); /*by Draff*/
-        user_pref("user.theme.dark.gruvbox", false);
-        user_pref("user.theme.light.gruvbox", false);
-        user_pref("user.theme.dark.midnight", false);
-
-        /*titlebar and tabs*/
-        user_pref("ultima.disable.alltabs.button", true);
-        user_pref("ultima.disable.windowcontrols.button", false);
-        user_pref("ultima.disable.verticaltab.bar", false);
-        user_pref("ultima.tabs.autohide", true);
-
-        /*sidebar*/
-        user_pref("ultima.sidebar.autohide", false);
-        user_pref("ultima.sidebery.autohide", true);
-        user_pref("ultima.sidebar.hidden", false);
-        user_pref("ultima.sidebar.longer", true);
-
-        /*extra theming*/
-        user_pref("ultima.theme.extensions", true);
-        user_pref("ultima.theme.color.swap", true);
-        user_pref("ultima.theme.icons", true);
-        user_pref("ultima.theme.menubar", true);
-
-        /*url bar*/
-        user_pref("ultima.urlbar.suggestions", true);
-        user_pref("ultima.urlbar.centered", true);
-        user_pref("ultima.urlbar.hidebuttons", false);
-        user_pref("ultima.xstyle.urlbar", false);
-
-        /*alternate styles*/
-        user_pref("ultima.xstyle.containertabs.i", false);
-        user_pref("ultima.xstyle.containertabs.ii", false);
-        user_pref("ultima.xstyle.containertabs.iii", true);
-        user_pref("ultima.xstyle.pinnedtabs.i", false);
-        user_pref("ultima.xstyle.private", false);
-
-        /*specific OS overrides (like titlebar buttons)*/
-        /*user_pref("ultima.OS.kde", true);
-        user_pref("ultima.OS.gnome", false);
-        user_pref("ultima.OS.mac", false);
-        user_pref("ultima.OS.kde.wds", false);
-        user_pref("ultima.OS.gnome.wds", false);
-        user_pref("ultima.OS.gnome.wdl", false);
-        user_pref("ultima.OS.notitlebar", false);*/
-
-        /*other*/
-        user_pref("browser.aboutConfig.showWarning", false);
-        user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
-        user_pref("devtools.debugger.remote-enabled", true);
-        user_pref("devtools.chrome.enabled", true);
-        user_pref("devtools.debugger.prompt-connection", false);
-        user_pref("svg.context-properties.content.enabled", true);
-        user_pref("toolkit.tabbox.switchByScrolling", false);
-
-        user_pref("sidebar.revamp", true);
-        user_pref("sidebar.verticalTabs", true);
-        user_pref("browser.tabs.hoverPreview.enabled", true);
-        user_pref("browser.newtabpage.activity-stream.newtabWallpapers.v2.enabled", false);
-        user_pref("media.videocontrols.picture-in-picture.enable-when-switching-tabs.enabled", false);
-      '';
     };
   };
   home.file.".mozilla/firefox/${profile}/chrome" = {

@@ -17,14 +17,10 @@
     # monitor and control temparature
     thermald.enable = true;
 
-    flatpak.enable = true;
-
     # discard blocks that are not in use by the filesystem, good for SSDs
     fstrim.enable = true;
     # firmware updater for machine hardware
     fwupd.enable = true;
-    # "nix-shell replacement for project development"
-    lorri.enable = true;
     # limit systemd journal size
     journald.extraConfig = ''
       SystemMaxUse=50M
@@ -32,7 +28,8 @@
     '';
     dbus = {
       enable = true;
-      packages = with pkgs; [dconf gcr];
+      packages = with pkgs; [dconf gcr dbus-broker polkit_gnome];
+      implementation = "broker"; # lock dbus impl to dbus-broker
     };
 
     gnome = {
@@ -56,6 +53,8 @@
       pkgs.gnome-settings-daemon
       pkgs.xsettingsd
       pkgs.xfce.xfce4-settings
+      pkgs.logitech-udev-rules # for logitech
+      pkgs.android-udev-rules
     ];
   };
 

@@ -33,6 +33,7 @@
       monocraft
       mononoki
       mplus-outline-fonts.githubRelease
+      nerdfonts
       norwester-font
       noto-fonts # I really hate these fonts
       noto-fonts-cjk-sans # but its better than scripts not rendering

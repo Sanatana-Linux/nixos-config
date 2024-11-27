@@ -20,9 +20,11 @@
 
     # History configuration
     history = {
+append = true;
       extended = true; # Use extended history format.
       ignoreDups = false; # Do not ignore duplicate history entries.
       expireDuplicatesFirst = true; # Expire duplicate entries first.
+ignoreSpace = false; # Do not ignore entries with leading spaces.
       path = "${config.xdg.dataHome}/zsh/history"; # Path to the history file.
       save = 9000000; # Number of history lines to save.
       size = 9900000; # Maximum number of history lines.
@@ -39,69 +41,39 @@
     # Completion system initialization
     completionInit = ''
       zmodload -i zsh/zle
-      autoload -Uz compinit
-      compinit
-
-      _comp_options+=(globdots) # Include hidden files in completion
-
-      zstyle ':completion:*' file-patterns '%p:executable files *(-/):directories'  # Prioritize executables and include directories
-      zstyle ':completion:*' group-name "" # Prevent directory grouping in fzf-tab
-      zstyle ':completion:*' menu select # select completions with arrow keys
-       zstyle ':completion:*:default' menu select=2  # Use menu even if only one match
-
-      zstyle ':completion:::::' completer _expand _complete _ignored _approximate # enable approximate matches for completion
-
-      zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' # Case-insensitive matching
-      zstyle ':completion:*' list-colors "${s.:.LS_COLORS}" # Use LS_COLORS for completion coloring
-      zstyle ':completion:*' rehash true # Rehash completion cache when needed
-
-      zstyle ':completion:*' accept-exact '*(N)' use-cache on # Cache exact matches
-
-      zstyle ':completion:*' cache-path "${config.xdg.cacheHome}/zsh/completion-cache" # Completion cache location
-
+      zmodload zsh/complist
+      autoload -U compinit; compinit
+      _comp_options+=(globdots)
       WORDCHARS="$WORDCHARS//[\/[&.;]"
     '';
 
     # Create the completion cache directory
     initExtra = ''
             mkdir -p "${config.xdg.cacheHome}/zsh/completion-cache" # Use xdg directory for cache
-            if zplug check 'ytet5uy4/fzf-widgets'; then
-        # Map widgets to key
-        bindkey '^@'  fzf-select-widget
-        bindkey '^@.' fzf-edit-dotfiles
-        bindkey '^@c' fzf-change-directory
-        bindkey '^@n' fzf-change-named-directory
-        bindkey '^@f' fzf-edit-files
-        bindkey '^@k' fzf-kill-processes
-        bindkey '^@s' fzf-exec-ssh
-        bindkey '^\'  fzf-change-recent-directory
-        bindkey '^r'  fzf-insert-history
-        bindkey '^xf' fzf-insert-files
-        bindkey '^xd' fzf-insert-directory
-        bindkey '^xn' fzf-insert-named-directory
 
-        ## Git
-        bindkey '^@g'  fzf-select-git-widget
-        bindkey '^@ga' fzf-git-add-files
-        bindkey '^@gc' fzf-git-change-repository
+      # Completion & Completion Menu Oprions 
+      # :completion:<function>:<completer>:<command>:<argument>:<tag>
 
-        # GitHub
-        bindkey '^@h'  fzf-select-github-widget
-        bindkey '^@hs' fzf-github-show-issue
-        bindkey '^@hc' fzf-github-close-issue
+      zstyle ':completion:*' completer _complete _ignored _approximate
+      zstyle ':completion:*' complete true
+      zstyle ':completion:*' complete-options true
+      zstyle ':completion:*' file-sort modification
+      zstyle ':completion:*' group-name '''
+      zstyle ':completion:*' keep-prefix true
+      zstyle ':completion:*' list-colors ''${(s.:.)LS_COLORS}
+      zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+      zstyle ':completion:*' menu select
+      zstyle ':completion:*' verbose true
 
-        ## Docker
-        bindkey '^@d'  fzf-select-docker-widget
-        bindkey '^@dc' fzf-docker-remove-containers
-        bindkey '^@di' fzf-docker-remove-images
-        bindkey '^@dv' fzf-docker-remove-volumes
+      zstyle ':completion:*:default' list-prompt '%S%M matches%s'
+      zstyle ':completion:*:corrections' format '%F{yellow}!- %d (errors: %e) -!%f'
+      zstyle ':completion:*:descriptions' format '%F{blue}-- %D %d --%f'
+      zstyle ':completion:*:messages' format ' %F{purple} -- %d --%f'
+      zstyle ':completion:*:warnings' format ' %F{red}-- no matches found --%f'
+      zstyle ':completion:*:*:-command-:*:*' group-order aliases builtins functions commands
 
-        # Enable Exact-match by fzf-insert-history
-        FZF_WIDGET_OPTS[insert-history]='--exact'
-
-        # Start fzf in a tmux pane
-        FZF_WIDGET_TMUX=1
-      fi
+      zstyle ':completion:*' use-cache on
+      zstyle ':completion:*' cache-path "${config.xdg.cacheHome}/zsh/completion-cache" # Use xdg directory for cache
     '';
 
     # ZSH options

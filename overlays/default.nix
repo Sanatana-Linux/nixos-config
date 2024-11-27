@@ -23,7 +23,7 @@
     };
     nixpkgs-f2k = inputs.nixpkgs-f2k.packages.${prev.system};
     nur = inputs.nur.overlay;
-    neovim = builtins.getFlake "github:neovim/neovim?dir=contrib";
+    neovim-src = inputs.neovim-nightly-overlay.packages.${prev.system}.default; 
   };
 in {
   default = final: prev: (additions final prev) // (modifications final prev);

@@ -8,6 +8,7 @@
     colors = normal ++ bright;
     font = "${pkgs.terminus_font}/share/consolefonts/ter-c14b.psf.gz";
     useXkbConfig = true;
+    earlySetup = true;
   };
 
   i18n = {

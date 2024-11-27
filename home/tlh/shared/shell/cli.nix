@@ -50,11 +50,17 @@
     zsh
     zplug
     zsh-autosuggestions
-    zsh-fzf-tab
   ];
 
   programs = {
-    eza.enable = true;
+    eza = {
+enable = true;
+   extraOptions = ["--group-directories-first" "--header"];
+    colors = "always";
+    icons = "always";
+    git = true;
+ enableZshIntegration = true;
+};
     gpg.enable = true;
     man.enable = true;
     ssh.enable = true;
@@ -79,6 +85,9 @@
     zoxide = {
       enable = true;
       enableZshIntegration = true;
+  options = [
+      "--cmd cd"
+    ];
     };
 
     dircolors = {

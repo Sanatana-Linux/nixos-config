@@ -11,6 +11,7 @@ with pkgs; [
   aspellDicts.en-computers
   aspellDicts.en-science
   aspellDicts.hi
+tdesktop
   bdfresize
   bleachbit
   blueman

@@ -82,7 +82,7 @@
             home-manager = {
               useUserPackages = true;
               backupFileExtension = "bak";
-              users.tlh = {imports = [./home/tlh/macbook-air];};
+              users.tlh = {imports = [./home/tlh/default.nix];};
             };
           }
         ];
@@ -107,7 +107,7 @@
             home-manager = {
               useUserPackages = true;
               backupFileExtension = "bak";
-              users.tlh = {imports = [./home/tlh/imperator];};
+              users.tlh = {imports = [./home/tlh/default.nix];};
             };
           }
         ];

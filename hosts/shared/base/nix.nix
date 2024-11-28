@@ -75,7 +75,7 @@
       use-xdg-base-directories = true;
     };
 
-    package = pkgs.nixVersions.latest;
+    package = pkgs.nixVersions.git;
 
     gc = {
       automatic = true;

@@ -28,18 +28,14 @@
       systemd.enable = true;
       verbose = false;
 
-    kernelModules = [ "nvidia" ];
+      kernelModules = ["nvidia"];
     };
-    blacklistedKernelModules = [ "nouveau" ];
+    blacklistedKernelModules = ["nouveau"];
 
     kernelPackages = pkgs.linuxPackages_latest;
-extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
-
+    extraModulePackages = [config.boot.kernelPackages.nvidia_x11];
 
     kernelParams = [
-      # Pending further investigation 
-      # 
-      #   "acpi_call"
       # # https://en.wikipedia.org/wiki/Kernel_page-table_isolation
       # "pti=on"
       # # make stack-based attacks on the kernel harder
@@ -58,31 +54,33 @@ extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
       # "slub_debug=FZP"
       # #  always-enable sysrq keys. Useful for debugging
       # "sysrq_always_enabled=1"
-      # # ignore access time (atime) updates on files, except when they coincide with updates to the ctime or mtime
-      # "rootflags=noatime"
-      # # enable IOMMU for devices used in passthrough and provide better host performance
-      # "iommu=pt"
-      # # disable usb autosuspend
-      # "usbcore.autosuspend=-1"
+
+      # ignore access time (atime) updates on files, except when they coincide with updates to the ctime or mtime
+      "rootflags=noatime"
+
+      # enable IOMMU for devices used in passthrough and provide better host performance
+      "iommu=pt"
+
+      # disable usb autosuspend
+      "usbcore.autosuspend=-1"
+
       # # linux security modules
       # "lsm=landlock,lockdown,yama,apparmor,bpf"
-      # # KERN_DEBUG for debugging
-      # "loglevel=7"
-      # # disables resume and restores original swap space
-      # "noresume"
-      # # prevent the kernel from blanking plymouth out of the fb
-      # "fbcon=nodefer"
-      # # tell the kernel to not be verbose
-      # "quiet"
-      # # disable systemd status messages
-      # # rd prefix means systemd-udev will be used instead of initrd
-      # "rd.systemd.show_status=auto"
-      # lower the udev log level to show only errors or worse
-      #"rd.udev.log_level=3"
-      
 
-      "i915.force_probe=7d55" 
+      # prevent the kernel from blanking plymouth out of the fb
+      "fbcon=nodefer"
 
+      # tell the kernel to not be verbose
+      "quiet"
+
+      # disable systemd status messages
+      # rd prefix means systemd-udev will be used instead of initrd
+      "rd.systemd.show_status=auto"
+
+      # Intel iGPU settings
+      "i915.force_probe=7d55"
+
+      # Nvidia dGPU settings
       "nvidia_drm.fbdev=1"
     ];
 
@@ -103,27 +101,19 @@ extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
     };
   };
 
-  # environment = {
-  #   variables = {
-  #     GDK_SCALE = "1";
-  #     GDK_DPI_SCALE = "1";
-  #     QT_AUTO_SCREEN_SCALE_FACTOR = "1";
-  #   };
+  environment = {
+    #   variables = {
+    #     GDK_SCALE = "1";
+    #     GDK_DPI_SCALE = "1";
+    #     QT_AUTO_SCREEN_SCALE_FACTOR = "1";
+    #   };
 
     systemPackages = with pkgs; [
       acpi
       acpid
       acpilight
       acpitool
-      broadcom-bt-firmware
-      intel-compute-runtime
-      intel-gmmlib
-      intel-gpu-tools
-      intel-graphics-compiler
-      intel-media-driver
-      intel-media-sdk
-      intel-ocl
-      intel-vaapi-driver
+      intel-undervolt
       inteltool
       libva
       wirelesstools
@@ -137,13 +127,11 @@ extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
       lua54Packages.ldbus
       luajitPackages.ldbus
       polkit_gnome
-      libva-utils
       xssproxy
       xss-lock
     ];
   };
 
-  powerManagement.enable = true;
   hardware = {
     enableAllFirmware = true;
     enableRedistributableFirmware = true;
@@ -151,37 +139,39 @@ extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
       enable = true;
       package = pkgs.bluez;
     };
-nvidia = {
-    modesetting.enable = true;
-    nvidiaSettings = true;
+    nvidia = {
+      modesetting.enable = true;
+      nvidiaSettings = true;
       powerManagement.enable = true;
-  powerManagement.finegrained = false;
-  open = false;
-    package = config.boot.kernelPackages.nvidiaPackages.beta;
-    powerManagement.enable = true;
-    prime = {
-       reverseSync.enable = true;
-    # sync.enable = true;
-	  #        offload = {
-	  #   enable = true;
-	  #   enableOffloadCmd = true;
-	  # };
-      # Multiple uses are available, check the NVIDIA NixOS wiki
-      # Use "lspci | grep -E 'VGA|3D'" to get PCI-bus IDs
-      intelBusId = "PCI:0:2:0";
-      nvidiaBusId = "PCI:1:0:0";
+      powerManagement.finegrained = false;
+      open = false;
+      package = config.boot.kernelPackages.nvidiaPackages.beta;
+      powerManagement.enable = true;
+      prime = {
+        reverseSync.enable = true;
+        # sync.enable = true;
+        #        offload = {
+        #   enable = true;
+        #   enableOffloadCmd = true;
+        # };
+        # Multiple uses are available, check the NVIDIA NixOS wiki
+        # Use "lspci | grep -E 'VGA|3D'" to get PCI-bus IDs
+        intelBusId = "PCI:0:2:0";
+        nvidiaBusId = "PCI:1:0:0";
+      };
     };
-  };
     graphics = {
       enable = true;
       extraPackages = with pkgs; [
-config.boot.kernelPackages.nvidiaPackages.beta
-          vaapiVdpau 
-    libvdpau-va-gl
-    intel-media-driver
-      vpl-gpu-rt
-    # intel-vaapi-driver
-    nvidia-vaapi-driver
+        config.boot.kernelPackages.nvidiaPackages.beta
+        vaapiVdpau
+        libvdpau-va-gl
+        libva-utils
+        libva1
+        intel-media-driver
+        vpl-gpu-rt
+        # intel-vaapi-driver
+        nvidia-vaapi-driver
       ];
     };
   };
@@ -233,12 +223,11 @@ config.boot.kernelPackages.nvidiaPackages.beta
     };
   };
 
-
-  services.xserver.videoDrivers = [ "nvidia" ]; # got problems with nouveau, would give it another try
+  services.xserver.videoDrivers = ["nvidia"]; # got problems with nouveau, would give it another try
   services.xserver.enable = true;
   # Use custom Awesome WM module
   services.xserver.windowManager.awesome.enable = true;
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  system.stateVersion = "23.05";
+  system.stateVersion = "24.11";
 }

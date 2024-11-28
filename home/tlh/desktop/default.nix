@@ -53,10 +53,6 @@
       gtk-application-prefer-dark-theme = true;
       gtk-decoration-layout = "menu:";
     };
-    theme = {
-      name = "Orchis-Grey-Dark-Compact";
-      package = pkgs.orchis-theme;
-    };
   };
 
   qt = {

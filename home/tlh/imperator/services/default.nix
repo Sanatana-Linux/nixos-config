@@ -68,6 +68,7 @@
         method = "dual_kawase";
         strength = 5.0;
         deviation = 1.0;
+
         kernel = "11x11gaussian";
       };
 
@@ -76,6 +77,8 @@
       blur-background-fixed = true;
       xrender-sync-fence = true;
       use-damage = true;
+      unredir-if-possible = false;
+      vsync = true;
     };
   };
 }

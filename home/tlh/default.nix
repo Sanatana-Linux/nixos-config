@@ -62,7 +62,7 @@
 
   home = {
     username = "tlh";
-    homeDirectory = "/home/${config.home.username}";
+    homeDirectory = "/home/${username}";
     stateVersion = "24.11";
   };
 }

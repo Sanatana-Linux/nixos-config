@@ -5,21 +5,25 @@
   ...
 }: {
   imports = [
-    # Specific configuration
-    ./desktop
-    ./services
-    ./X
+    inputs.nixos-hardware.nixosModules.common-cpu-intel
+    inputs.nixos-hardware.nixosModules.common-gpu-nvidia
+    inputs.nixos-hardware.nixosModules.common-pc-laptop
+    inputs.nixos-hardware.nixosModules.common-pc-laptop-ssd
+    inputs.nixos-hardware.nixosModules.common-hidpi
+    inputs.nixos-hardware.nixosModules.lenovo-legion-16irx9h
 
-    # Shared configuration
-    ../shared
-    ../shared/configuration/programs/firefox.nix
-    ../shared/configuration/programs/yazi.nix
-    #   ../shared/configuration/programs/joshuto.nix
-    ../shared/configuration/programs/ranger/default.nix
-    #    ../shared/configuration/programs/obs-studio.nix
-    ../shared/configuration/programs/vscode.nix
-    ../shared/configuration/programs/neovim/default.nix
-    ../shared/configuration/programs/kitty/default.nix
-    ../shared/configuration/programs/zathura/default.nix
+    ../shared/desktop/default.nix
+    ../shared/services/picom.nix
+    ../shared/X/default.nix
+    ../shared/default.nix
+    ../shared/programs/firefox.nix
+    ../shared/programs/yazi.nix
+    #   ../shared/programs/joshuto.nix
+    ../shared/programs/ranger/default.nix
+  ../shared/programs/gpg/default.nix
+    ../shared/programs/vscode.nix
+    ../shared/programs/neovim/default.nix
+    ../shared/programs/kitty/default.nix
+    ../shared/programs/zathura/default.nix
   ];
 }

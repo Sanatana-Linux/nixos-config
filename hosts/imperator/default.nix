@@ -146,7 +146,6 @@
       powerManagement.finegrained = false;
       open = false;
       package = config.boot.kernelPackages.nvidiaPackages.beta;
-      powerManagement.enable = true;
       prime = {
         reverseSync.enable = true;
         # sync.enable = true;

@@ -4,14 +4,17 @@
   pkgs,
   ...
 }: {
-  #fonts.fontconfig.enable = true;
-
   gtk = {
     enable = true;
     font = {
       name = "Terminus Nerd Font";
       size = 11;
     };
+    theme = {
+      name = "Orchis-Grey-Dark-Compact";
+      package = pkgs.orchis-theme;
+    };
+
     iconTheme = {
       name = "Reversal";
       package = pkgs.reversal-icon-theme;
@@ -40,6 +43,10 @@
     gtk3.extraConfig = {
       gtk-application-prefer-dark-theme = true;
       gtk-decoration-layout = "menu:";
+      gtk-xft-antialias = 1;
+      gtk-xft-hinting = 1;
+      gtk-xft-hintstyle = "hintslight";
+      gtk-xft-rgba = "rgba";
     };
 
     gtk4.extraConfig = {
@@ -54,13 +61,22 @@
 
   qt = {
     enable = true;
-    platformTheme.name = "adwaita-dark";
-    style = {
-      name = "adwaita-dark";
-      package = pkgs.adwaita-qt;
-    };
+    platformTheme.name = "gtk3";
   };
+
+  # ─────────────────────────────────────────────────────────────────
+
   home = {
+    sessionVariables = {
+      GTK_THEME = "Orchis-Grey-Dark-Compact";
+      QT_QPA_PLATFORMTHEME = "gtk3";
+    };
+    pointerCursor = {
+      package = pkgs.phinger-cursors;
+      name = "Phinger Cursors (light)";
+      size = 48;
+      gtk.enable = true;
+    };
     # maybe the below is more elegant, but it doesn't include the necessary `.git` directory so I can't do any work on the repo, that's useless
     # xdg.configFile."awesome".source = "${inputs.awesome-config}";
 

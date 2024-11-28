@@ -7,7 +7,6 @@
       };
       manager = {
         ratio = [1 5 2];
-        show_hidden = true;
         sort_by = "alphabetical";
         linemode = "size";
         sort_dir_first = true;

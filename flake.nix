@@ -17,7 +17,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixos-hardware.url = "github:nixos/nixos-hardware";
+    nixos-hardware.url = "github:Thomashighbaugh/nixos-hardware";
     nixos-generators.url = "github:nix-community/nixos-generators";
     rust-overlay.url = "github:oxalica/rust-overlay";
     higgs-boson = {
@@ -63,7 +63,7 @@
     devShells = forEachPkgs (pkgs: import ./shell.nix {inherit pkgs;});
 
     nixosConfigurations = {
-      # Laptop
+      # Dinosaur Laptop
       macbook-air = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs nixos-hardware bhairava-grub-theme home-manager;};
         modules = [
@@ -83,12 +83,36 @@
           }
         ];
       };
+      # Lenovo Legion Pro
+      imperator = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs nixos-hardware bhairava-grub-theme home-manager;};
+        modules = [
+          nur.nixosModules.nur
+          nixos-hardware.nixosModules.lenovo-legion-16irx9h
+          ./hosts/imperator
+          bhairava-grub-theme.nixosModule
+          home-manager.nixosModules.home-manager
+          chaotic.nixosModules.default
+          {
+            home-manager = {
+              useUserPackages = true;
+              backupFileExtension = "bak";
+              users.tlh = {imports = [./home/tlh/imperator];};
+            };
+          }
+        ];
+      };
     };
     homeConfigurations = {
       "tlh@macbook-air" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages."x86_64-linux";
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [./home/tlh/macbook-air];
+      };
+      "tlh@imperator" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages."x86_64-linux";
+        extraSpecialArgs = {inherit inputs outputs;};
+        modules = [./home/tlh/imperator];
       };
     };
   };

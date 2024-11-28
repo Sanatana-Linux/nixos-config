@@ -122,7 +122,7 @@
             ./home/tlh/default.nix
           ];
         };
-    };imperator = self.nixosConfigurations.imperator.config.system.build.toplevel;
+    };
 
   };
 }

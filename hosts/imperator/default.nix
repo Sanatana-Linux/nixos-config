@@ -24,8 +24,11 @@ in {
     # Ollama's configuration
     ../shared/services/ollama.nix
 
+    # Virtualization configuration
+    ../shared/virtualization/default.nix
+
     # Llama-Cpp configuration
-i#    ../shared/services/llama-cpp.nix
+    #    ../shared/services/llama-cpp.nix
 
     # Specific configuration
     ./hardware-configuration.nix
@@ -98,6 +101,7 @@ i#    ../shared/services/llama-cpp.nix
 
     systemPackages = with pkgs; [
       intel-undervolt
+      linuxHeaders
       intel-ocl
       inteltool
       cudatoolkit

@@ -61,4 +61,11 @@
     };
   };
 
+  virtualisation = {
+    docker = {
+      enable = true;
+      enableOnBoot = true;
+    };
+    libvirtd.enable = true;
+  };
 }

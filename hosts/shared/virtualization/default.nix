@@ -3,7 +3,7 @@
   pkgs,
   ...
 }: {
-  services.  virtualisation = {
+  virtualisation = {
     docker = {
       enable = true;
       enableOnBoot = true;

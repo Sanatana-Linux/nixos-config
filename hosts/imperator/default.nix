@@ -24,6 +24,9 @@ in {
     # Ollama's configuration
     ../shared/services/ollama.nix
 
+    # Llama-Cpp configuration
+    ../shared/services/llama-cpp.nix
+
     # Specific configuration
     ./hardware-configuration.nix
 

@@ -11,7 +11,6 @@
       ./base
       ./environment
       ./networking
-      ./pkgs
       ./programs
       ./security
       ./services

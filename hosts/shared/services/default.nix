@@ -5,7 +5,6 @@
 }: {
   imports = [
     ./pipewire.nix
-    ./ollama.nix
   ];
   hardware.bluetooth.enable = true;
   xdg.portal.enable = true;

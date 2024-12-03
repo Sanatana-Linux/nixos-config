@@ -19,6 +19,8 @@
     # Select the user configuration
     ../shared/users/tlh.nix
 
+    # Packages to install
+    ./pkgs.nix
     # Specific configuration
     ./hardware-configuration.nix
   ];

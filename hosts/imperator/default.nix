@@ -21,8 +21,14 @@ in {
     # Select the user configuration
     ../shared/users/tlh.nix
 
+    # Ollama's configuration
+    ../shared/services/ollama.nix
+
     # Specific configuration
     ./hardware-configuration.nix
+
+    # Packages
+    ./pkgs.nix
   ];
 
   boot = {

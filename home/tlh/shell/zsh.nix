@@ -20,11 +20,11 @@
 
     # History configuration
     history = {
-append = true;
+      append = true;
       extended = true; # Use extended history format.
       ignoreDups = false; # Do not ignore duplicate history entries.
       expireDuplicatesFirst = true; # Expire duplicate entries first.
-ignoreSpace = false; # Do not ignore entries with leading spaces.
+      ignoreSpace = false; # Do not ignore entries with leading spaces.
       path = "${config.xdg.dataHome}/zsh/history"; # Path to the history file.
       save = 9000000; # Number of history lines to save.
       size = 9900000; # Maximum number of history lines.
@@ -51,7 +51,7 @@ ignoreSpace = false; # Do not ignore entries with leading spaces.
     initExtra = ''
             mkdir -p "${config.xdg.cacheHome}/zsh/completion-cache" # Use xdg directory for cache
 
-      # Completion & Completion Menu Oprions 
+      # Completion & Completion Menu Oprions
       # :completion:<function>:<completer>:<command>:<argument>:<tag>
 
       zstyle ':completion:*' completer _complete _ignored _approximate
@@ -93,8 +93,8 @@ ignoreSpace = false; # Do not ignore entries with leading spaces.
       ZSH_AUTOSUGGEST_USE_ASYNC = "true"; # Use asynchronous autosuggestions.
       ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE = 40; # Maximum buffer size for autosuggestions.
       KEYTIMEOUT = 1;
-      VISUAL = "${pkgs.neovim}/bin/nvim";
-      EDITOR = "${pkgs.neovim}/bin/nvim";
+      VISUAL = "${lib.getBin neovim-src}";
+      EDITOR = "${lib.getBin neovim-src}";
     };
 
     # Shell aliases, grouped by category

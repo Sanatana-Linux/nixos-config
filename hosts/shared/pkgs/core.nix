@@ -2,6 +2,7 @@
 with pkgs; [
   _7zz
   alejandra
+  linuxHeaders
   any-nix-shell
   appstream
   appstream-glib
@@ -32,7 +33,7 @@ with pkgs; [
   exfatprogs
   ffmpeg-full
   firmwareLinuxNonfree
-  intel-media-driver
+  linux-firmware
   intel-ocl
   microcodeIntel
   xorg.xf86videointel

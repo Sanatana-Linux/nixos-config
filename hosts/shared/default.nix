@@ -28,7 +28,6 @@
   # Keeping these below their buddy in systemd
   services.irqbalance.enable = true;
   services.earlyoom.enable = true;
-
   # Set up everything home-manager related for my user
   home-manager = {
     useUserPackages = true;
@@ -52,8 +51,10 @@
       allowBroken = true;
       permittedInsecurePackages = [
         "openssl-1.1.1w"
+        "imagemagick-6.9.13-10"
         "nix-2.16.2"
         "openssl-1.1.1v"
+        "python3.12-youtube-dl-2021.12.17"
         "electron-24.8.6"
         "electron-25.9.0"
         "electron-27.3.11"

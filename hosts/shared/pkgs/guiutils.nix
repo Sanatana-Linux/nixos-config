@@ -124,7 +124,6 @@ tdesktop
   t1utils
   template-glib
   termcolor
-  terminus-nerdfont
   terminus_font
   themechanger
   thunderbird-bin

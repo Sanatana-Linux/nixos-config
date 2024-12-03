@@ -36,8 +36,6 @@ with pkgs; [
   intel-ocl
   microcodeIntel
   xorg.xf86videointel
-  cpufrequtils
-  auto-cpufreq
   man-pages
   man-pages-posix
   manix

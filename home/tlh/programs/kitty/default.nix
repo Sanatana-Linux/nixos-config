@@ -28,7 +28,7 @@
       enable_audio_bell = "no";
     };
     font = {
-      size = 10;
+      size = 12;
       name = "Agave Nerd Font Mono Bold";
     };
     shellIntegration = {

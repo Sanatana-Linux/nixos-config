@@ -102,7 +102,7 @@ with pkgs;
 
 
     function search() {
-       nps -C=description --separator=true "$2"
+       nix-search "$2"
     }
 
     case "$1" in

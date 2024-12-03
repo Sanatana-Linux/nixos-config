@@ -1,11 +1,5 @@
 {
   xresources.extraConfig = ''
-        Xft.antialias: true
-        Xft.hinting: true
-        Xft.rgba: rgba
-        Xft.autohint: false
-        Xft.hintstyle: hintslight
-        Xft.lcdfilter: lcddefault
     ! Now featuring Monokai Pro Spectrum
         *background: #222222
         *foreground:#fbf8ff

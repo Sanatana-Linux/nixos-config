@@ -6,7 +6,7 @@
 }: {
   services.picom = {
     enable = true;
-    package = pkgs.picom-next;
+    package = pkgs.picom-git;
     activeOpacity = 1.0;
     backend = "glx";
     fade = true;
@@ -20,7 +20,7 @@
       "93:class_g = 'ncmpcpppad' && focused"
       "85:class_g = 'neofetchpad' && !focused"
       "93:class_g = 'neofetchpad' && focused"
-      "93:class_g = 'awesome'"
+      "99:class_g = 'awesome'"
     ];
     settings = {
       animations = true;

@@ -5,6 +5,7 @@
 }: {
   imports = [
     ./pipewire.nix
+    ./ollama.nix
   ];
   hardware.bluetooth.enable = true;
   xdg.portal.enable = true;
@@ -49,13 +50,16 @@
       };
     };
 
-    udev.packages = [
-      pkgs.gnome-settings-daemon
-      pkgs.xsettingsd
-      pkgs.xfce.xfce4-settings
-      pkgs.logitech-udev-rules # for logitech
-      pkgs.android-udev-rules
-    ];
+    udev = {
+      enable = true;
+      packages = [
+        pkgs.gnome-settings-daemon
+        pkgs.xsettingsd
+        pkgs.xfce.xfce4-settings
+        pkgs.logitech-udev-rules # for logitech
+        pkgs.android-udev-rules
+      ];
+    };
   };
 
   virtualisation = {

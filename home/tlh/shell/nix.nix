@@ -16,6 +16,7 @@
       nix-plugins
       nix-prefetch
       nix-prefetch-scripts
+      nix-search-cli
       nix-template
       nix-zsh-completions
     ];

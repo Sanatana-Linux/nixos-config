@@ -35,7 +35,6 @@
   };
 
   nix = {
-    package = lib.mkForce pkgs.nixVersions.git;
     settings = {
       experimental-features = ["recursive-nix" "auto-allocate-uids" "nix-command" "flakes"];
       warn-dirty = false;
@@ -62,7 +61,7 @@
 
   home = {
     username = "tlh";
-    homeDirectory = "/home/${username}";
+    homeDirectory = "/home/tlh";
     stateVersion = "24.11";
   };
 }

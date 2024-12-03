@@ -71,9 +71,6 @@ in {
     userDirs = {
       enable = true;
       createDirectories = true;
-      extraConfig = {
-        XDG_DEVELOPMENT_DIR = "${config.xdg.userDirs.documents}/Projects";
-      };
     };
 
     mimeApps = {

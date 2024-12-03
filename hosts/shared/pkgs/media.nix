@@ -8,6 +8,8 @@ with pkgs; [
   ciano
   curtail
   delve
+  viu
+
   ebook_tools
   emacsPackages.svgo
   exiftool
@@ -16,7 +18,6 @@ with pkgs; [
   fswebcam
   figlet
   cheese
-  # freetts
   gallery-dl
   gdk-pixbuf
   gi-docgen
@@ -25,18 +26,9 @@ with pkgs; [
   giflib
   libwebcam
   gifsicle
-  gimp
-  gimpPlugins.bimp
-  gimpPlugins.exposureBlend
-  gimpPlugins.farbfeld
-  gimpPlugins.fourier
-  gimpPlugins.gimplensfun
-  gimpPlugins.gmic
-  gimpPlugins.lightning
-  gimpPlugins.lqrPlugin
-  gimpPlugins.resynthesizer
-  gimpPlugins.texturize
-  gimpPlugins.waveletSharpen
+  krita
+  krita-plugin-gmic
+  gimp-with-plugins
   gio-sharp
   gnome.nixos-gsettings-overrides
   gobject-introspection
@@ -71,20 +63,19 @@ with pkgs; [
   lrzip
   meme-image-generator
   menyoki
+  pixeluvo
   metadata-cleaner
   metapixel
   mjpegtoolsFull
   mnamer
   mozjpeg
-  nanotts
   nodePackages_latest.svgo
   optipng
   oxipng
   p7zip
   pantheon.granite
   peek
-  picotts
-  pikopixel
+  megapixels
   pixcat
   pixel2svg
   pngcrush
@@ -113,8 +104,15 @@ with pkgs; [
   rubyPackages.gobject-introspection
   rx
   svgcleaner
+  switcheroo
+  gmic
+  flaca
+  fim
+  dipc
+  fgallery
   vlc
   webp-pixbuf-loader
   xcftools
   ytfzf
+  yt-dlp
 ]

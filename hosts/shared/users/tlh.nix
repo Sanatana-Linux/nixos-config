@@ -42,5 +42,5 @@ in {
     packages = [pkgs.home-manager];
   };
 
-  home-manager.users.tlh = import ../../../home/tlh/${config.networking.hostName};
+  home-manager.users.tlh = import ../../../home/tlh/default.nix;
 }

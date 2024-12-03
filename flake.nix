@@ -65,15 +65,10 @@
     nixosConfigurations = {
       # Dinosaur Laptop
       macbook-air = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs nixos-hardware bhairava-grub-theme home-manager;};
+        specialArgs = {inherit inputs outputs;};
         modules = [
           nur.nixosModules.nur
           nixos-hardware.nixosModules.apple-macbook-air-6
-          nixos-hardware.nixosModules.common-pc-laptop-ssd
-          nixos-hardware.nixosModules.common-pc-laptop
-          nixos-hardware.nixosModules.common-pc-laptop-acpi_call
-          nixos-hardware.nixosModules.common-cpu-intel
-          nixos-hardware.nixosModules.common-gpu-intel
           ./hosts/macbook-air
           bhairava-grub-theme.nixosModule
           home-manager.nixosModules.home-manager
@@ -87,17 +82,12 @@
           }
         ];
       };
-        
+
       # Lenovo Legion Pro
       imperator = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [
           nur.nixosModules.nur
-          nixos-hardware.nixosModules.common-cpu-intel
-          nixos-hardware.nixosModules.common-gpu-nvidia
-          nixos-hardware.nixosModules.common-pc-laptop
-          nixos-hardware.nixosModules.common-pc-laptop-ssd
-          nixos-hardware.nixosModules.common-hidpi
           nixos-hardware.nixosModules.lenovo-legion-16irx9h
           ./hosts/imperator
           bhairava-grub-theme.nixosModule
@@ -114,15 +104,15 @@
       };
     };
     homeConfigurations = {
-
-  tlh = inputs.home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
-          extraSpecialArgs = { inherit inputs outputs self; };
-          modules = [
-            ./home/tlh/default.nix
-          ];
-        };
+      tlh = inputs.home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
+        extraSpecialArgs = {inherit inputs outputs self;};
+        modules = [
+          ./home/tlh/default.nix
+        ];
+      };
     };
-
+    macbook-air = self.nixosConfigurations.macbook-air.config.system.build.toplevel;
+    imperator = self.nixosConfigurations.imperator.config.system.build.toplevel;
   };
 }

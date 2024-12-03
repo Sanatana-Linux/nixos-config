@@ -41,6 +41,7 @@ with pkgs; [
   gtk3
   gtk3-x11
   gtk4
+  nerd-font-patcher
   gtk_engines
   gusb
   inotify-tools
@@ -82,7 +83,6 @@ with pkgs; [
   shutter
   satty
   template-glib
-  terminus-nerdfont
   terminus_font
   testdisk
   themechanger

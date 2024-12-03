@@ -14,22 +14,22 @@
 
   boot.initrd.availableKernelModules = ["xhci_pci" "nvme" "usb_storage" "usbhid" "sd_mod"];
   boot.initrd.kernelModules = [];
-  boot.kernelModules = ["kvm-intel"];
-  boot.extraModulePackages = [];
+  boot.kernelModules = ["kvm-intel" "lenovo-legion-module"];
+  boot.extraModulePackages = with config.boot.kernelPackages; [lenovo-legion-module];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/06eae6ec-936d-4e7c-8fc8-18d8ce2b3147";
+    device = "/dev/disk/by-uuid/10bad730-865b-42c3-8915-fedeecc9e395";
     fsType = "ext4";
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/8F6C-D91A";
+    device = "/dev/disk/by-uuid/F03E-F622";
     fsType = "vfat";
-    options = ["fmask=0022" "dmask=0022"];
+    options = ["fmask=0077" "dmask=0077"];
   };
 
   swapDevices = [
-    {device = "/dev/disk/by-uuid/3082bac0-e36f-4495-9444-b9043f599ea1";}
+    {device = "/dev/disk/by-uuid/0caa5c1d-5afe-4ec5-b866-55a3663b5c99";}
   ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking

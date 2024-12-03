@@ -6,7 +6,9 @@
   pkgs,
   bhairava-grub-theme,
   ...
-}: {
+}: let
+  nvidiaDriverChannel = config.boot.kernelPackages.nvidiaPackages.latest; # stable, beta, etc.
+in {
   disabledModules = [
     # Disable the default Awesome WM module
     "services/x11/window-managers/awesome.nix"
@@ -32,29 +34,10 @@
     };
     blacklistedKernelModules = ["nouveau"];
 
-    kernelPackages = pkgs.linuxPackages_latest;
-    extraModulePackages = [config.boot.kernelPackages.nvidia_x11];
+    kernelPackages = pkgs.linuxKernel.packages.linux_6_11;
+    extraModulePackages = [config.boot.kernelPackages.nvidia_x11 config.boot.kernelPackages.acpi_call config.boot.kernelPackages.lenovo-legion-module];
 
     kernelParams = [
-      # # https://en.wikipedia.org/wiki/Kernel_page-table_isolation
-      # "pti=on"
-      # # make stack-based attacks on the kernel harder
-      # "randomize_kstack_offset=on"
-      # # https://tails.boum.org/contribute/design/kernel_hardening/
-      # "slab_nomerge"
-      # # needs to be on for powertop
-      # "debugfs=on"
-      # # only allow signed modules
-      # "module.sig_enforce=1"
-      # # enable buddy allocator free poisoning
-      # "page_poison=1"
-      # # performance improvement for direct-mapped memory-side-cache utilization, reduces the predictability of page allocations
-      # "page_alloc.shuffle=1"
-      # # for debugging kernel-level slab issues
-      # "slub_debug=FZP"
-      # #  always-enable sysrq keys. Useful for debugging
-      # "sysrq_always_enabled=1"
-
       # ignore access time (atime) updates on files, except when they coincide with updates to the ctime or mtime
       "rootflags=noatime"
 
@@ -64,12 +47,6 @@
       # disable usb autosuspend
       "usbcore.autosuspend=-1"
 
-      # # linux security modules
-      # "lsm=landlock,lockdown,yama,apparmor,bpf"
-
-      # prevent the kernel from blanking plymouth out of the fb
-      "fbcon=nodefer"
-
       # tell the kernel to not be verbose
       "quiet"
 
@@ -77,11 +54,9 @@
       # rd prefix means systemd-udev will be used instead of initrd
       "rd.systemd.show_status=auto"
 
-      # Intel iGPU settings
-      "i915.force_probe=7d55"
-
       # Nvidia dGPU settings
       "nvidia_drm.fbdev=1"
+      "nvidia-drm.modeset=1"
     ];
 
     loader = {
@@ -95,6 +70,7 @@
         enable = true;
         device = "nodev";
         efiSupport = true;
+        configurationLimit = 4;
         useOSProber = true;
         bhairava-grub-theme.enable = true;
       };
@@ -102,24 +78,28 @@
   };
 
   environment = {
-    #   variables = {
-    #     GDK_SCALE = "1";
-    #     GDK_DPI_SCALE = "1";
-    #     QT_AUTO_SCREEN_SCALE_FACTOR = "1";
-    #   };
+    variables = {
+      GDK_SCALE = "1";
+      GDK_DPI_SCALE = "0.5";
+      _JAVA_OPTIONS = "-Dsun.java2d.uiScale=1";
+      GBM_BACKEND = "nvidia-drm";
+      # LIBVA_DRIVER_NAME = "nvidia"; # hardware acceleration
+      #__GLX_VENDOR_LIBRARY_NAME = "nvidia";
+    };
 
     systemPackages = with pkgs; [
-      acpi
-      acpid
-      acpilight
-      acpitool
       intel-undervolt
+      intel-ocl
       inteltool
+      cudatoolkit
+      linuxPackages.nvidia_x11
+      linuxPackages.lenovo-legion-module
+      linuxPackages.acpi_call
       libva
       wirelesstools
-      networkmanagerapplet
       libdbusmenu
       libdbusmenu-gtk3
+      lenovo-legion
       dbus-broker
       dbus-glib
       dbus
@@ -131,10 +111,20 @@
       xss-lock
     ];
   };
-
+  nixpkgs.config = {
+    nvidia.acceptLicense = true;
+    allowUnfreePredicate = pkg:
+      builtins.elem (lib.getName pkg) [
+        "cudatoolkit"
+        "nvidia-persistenced"
+        "nvidia-settings"
+        "nvidia-x11"
+      ];
+  };
   hardware = {
     enableAllFirmware = true;
     enableRedistributableFirmware = true;
+
     bluetooth = {
       enable = true;
       package = pkgs.bluez;
@@ -142,41 +132,46 @@
     nvidia = {
       modesetting.enable = true;
       nvidiaSettings = true;
-      powerManagement.enable = true;
-      powerManagement.finegrained = false;
+      powerManagement = {
+        enable = true;
+        finegrained = true;
+      };
+      nvidiaPersistenced = true;
       open = false;
-      package = config.boot.kernelPackages.nvidiaPackages.beta;
+      package = nvidiaDriverChannel;
       prime = {
         reverseSync.enable = true;
+        allowExternalGpu = false;
         # sync.enable = true;
-        #        offload = {
+        # offload = {
         #   enable = true;
         #   enableOffloadCmd = true;
         # };
         # Multiple uses are available, check the NVIDIA NixOS wiki
         # Use "lspci | grep -E 'VGA|3D'" to get PCI-bus IDs
-        intelBusId = "PCI:0:2:0";
-        nvidiaBusId = "PCI:1:0:0";
+        intelBusId = "PCI:00:02:0";
+        nvidiaBusId = "PCI:01:00:0";
       };
     };
     graphics = {
       enable = true;
+      enable32Bit = true;
       extraPackages = with pkgs; [
-        config.boot.kernelPackages.nvidiaPackages.beta
+        nvidiaDriverChannel
+        intel-vaapi-driver
+        xorg_sys_opengl
+        mlx42
+        glfw
         vaapiVdpau
+        mesa
         libvdpau-va-gl
-        libva-utils
-        libva1
-        intel-media-driver
-        vpl-gpu-rt
-        # intel-vaapi-driver
         nvidia-vaapi-driver
       ];
     };
   };
 
   networking = {
-    hostName = "macbook-air";
+    hostName = "imperator";
     networkmanager.enable = true;
   };
 
@@ -186,30 +181,17 @@
       powerKeyLongPress = "suspend";
     };
     thermald.enable = true;
-
-    auto-cpufreq = {
-      enable = true;
-      settings = {
-        battery = {
-          governor = "balanced";
-          turbo = "never";
-        };
-        charger = {
-          governor = "performance";
-          turbo = "auto";
-        };
-      };
-    };
+    tlp.enable = true;
     # Power Management
-    upower = {
-      enable = true;
-      # Adjusts the action taken at the point of the battery being critical and adjusts when that is
-      criticalPowerAction = "Hibernate";
-      percentageLow = 15;
-      percentageCritical = 8;
-      percentageAction = 5;
-      usePercentageForPolicy = true;
-    };
+    # upower = {
+    #   enable = true;
+    #   # Adjusts the action taken at the point of the battery being critical and adjusts when that is
+    #   criticalPowerAction = "HybridSleep";
+    #   percentageLow = 15;
+    #   percentageCritical = 8;
+    #   percentageAction = 5;
+    #   usePercentageForPolicy = true;
+    # };
     # handle ACPI events
     acpid.enable = true;
 
@@ -224,6 +206,7 @@
 
   services.xserver.videoDrivers = ["nvidia"]; # got problems with nouveau, would give it another try
   services.xserver.enable = true;
+  services.xserver.dpi = 189;
   # Use custom Awesome WM module
   services.xserver.windowManager.awesome.enable = true;
 

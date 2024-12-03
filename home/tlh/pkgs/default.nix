@@ -8,7 +8,6 @@
       (pkgs)
       dbus-broker
       eggdbus
-      midori
       bc
       bfg-repo-cleaner
       feh

@@ -1,6 +1,6 @@
 {pkgs, ...}:
 with pkgs; [
-  # appvm
+   appvm
   conmon
   containerd
   # devbox
@@ -14,8 +14,8 @@ with pkgs; [
   docker-slim
   oxker
   docker-credential-helpers
-  #  kvmtool
-  #  qemu_full
-  # virt-manager
+    kvmtool
+    qemu_full
+   virt-manager
   x11docker
 ]

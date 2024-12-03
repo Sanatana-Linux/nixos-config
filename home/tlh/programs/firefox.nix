@@ -172,7 +172,6 @@ in {
         "higgs-boson.sidebar.hidden" = false;
         "higgs-boson.sidebar.longer" = true;
 
-        "higgs-boson.sidebery.autohide" = true;
         "higgs-boson.tabs.autohide" = true;
         "higgs-boson.theme.color.swap" = true;
         "higgs-boson.theme.extensions" = true;

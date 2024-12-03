@@ -11,6 +11,8 @@
     man.enable = false;
     dev.enable = false;
   };
+
+  boot.tmp.cleanOnBoot = true;
   # Package Manager Settings
   nix = {
     settings = {
@@ -55,7 +57,7 @@
       max-free = "${toString (10 * 1024 * 1024 * 1024)}";
 
       # Useful/Necessary Features to Have Enabled
-      system-features = ["nixos-test" "kvm" "recursive-nix" "big-parallel"];
+      system-features = ["nixos-test" "kvm" "recursive-nix" "big-parallel" "cuda"];
       # Necessary Experimental Nix Features for Flakes and Friends
       experimental-features = ["recursive-nix" "auto-allocate-uids" "ca-derivations" "nix-command" "flakes"];
       flake-registry = "/etc/nix/registry.json";

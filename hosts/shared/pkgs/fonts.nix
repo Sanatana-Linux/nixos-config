@@ -18,6 +18,7 @@
       font-awesome_4
       font-awesome_5
       fontpreview
+      google-fonts
       hackgen-font
       hackgen-nf-font
       hermit
@@ -33,8 +34,14 @@
       monocraft
       mononoki
       mplus-outline-fonts.githubRelease
-      nerdfonts
+      nerd-fonts.mplus
+      nerd-fonts.lilex
+      nerd-fonts.agave
+      nerd-fonts.zed-mono
+      nerd-fonts.overpass
+      nerd-fonts.ubuntu
       norwester-font
+      nerd-fonts._3270
       noto-fonts # I really hate these fonts
       noto-fonts-cjk-sans # but its better than scripts not rendering
       noto-fonts-emoji # I guess...
@@ -53,7 +60,6 @@
       spleen
       sudo-font
       tamzen
-      terminus-nerdfont
       terminus_font
       termsyn
       tewi-font
@@ -66,6 +72,12 @@
       unifont_upper
       vistafonts
       xkcd-font
+      zpix-pixel-font
+      undefined-medium
+      creep #
+      departure-mono
+      pixel-code
+      serious-sans
       xlsfonts
     ];
 

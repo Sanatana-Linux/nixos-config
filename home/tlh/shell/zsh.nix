@@ -119,6 +119,7 @@
       gz = "gzip -l"; # list contents of gzipped files
       rm = "rm -rvf"; # remove files and directories recursively and forcefully
       trm = "${lib.getBin trash-cli}/bin/trash-cli"; # Move files to trash
+      firefox="firefox-nightly";
 
       # Archiving
       "dtrx-zip-all" = "for i in ./**/*.zip; do dtrx $i; done"; # Extract all zip files recursively. Make sure `dtrx` is available

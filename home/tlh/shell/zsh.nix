@@ -93,8 +93,8 @@
       ZSH_AUTOSUGGEST_USE_ASYNC = "true"; # Use asynchronous autosuggestions.
       ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE = 40; # Maximum buffer size for autosuggestions.
       KEYTIMEOUT = 1;
-      VISUAL = "${lib.getBin neovim-src}";
-      EDITOR = "${lib.getBin neovim-src}";
+      # VISUAL = "${lib.getBin neovim-unwrapped}";
+      # EDITOR = "${lib.getBin neovim-unwrapped}";
     };
 
     # Shell aliases, grouped by category

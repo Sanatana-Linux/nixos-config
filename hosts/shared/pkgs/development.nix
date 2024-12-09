@@ -2,12 +2,14 @@
 with pkgs; [
   any-nix-shell
   bash
+  terraform 
   poetry
   black
   brotli
   cached-nix-shell
   cargo
   cargo-binutils
+  conda
   cbfmt
   cmake
   cpp-hocon
@@ -54,12 +56,7 @@ with pkgs; [
   libtool
   lua
   lua-language-server
-  lua52Packages.lgi
-  lua51Packages.inspect
-  lua52Packages.inspect
-  lua52Packages.lua
   luajitPackages.inspect
-  lua52Packages.luarocks-nix
   lua5_3_compat
   lua5_4_compat
   luabind

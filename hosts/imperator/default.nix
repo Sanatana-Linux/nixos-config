@@ -46,8 +46,7 @@ in {
     };
     blacklistedKernelModules = ["nouveau"];
 
-    kernelPackages = pkgs.linuxPackages_xanmod_latest;
-
+    kernelPackages = pkgs.linuxKernel.packages.linux_6_11;
     extraModulePackages = [config.boot.kernelPackages.nvidia_x11 config.boot.kernelPackages.acpi_call config.boot.kernelPackages.lenovo-legion-module];
 
     kernelParams = [

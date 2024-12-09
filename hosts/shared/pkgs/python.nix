@@ -26,7 +26,7 @@ with pkgs;
     ruff
     virtualenv-clone
     pipenv
-    python311Packages.pynvim
+    python312Packages.pynvim
     python311Packages.sortedcontainers
     python311Packages.wheel
   ]

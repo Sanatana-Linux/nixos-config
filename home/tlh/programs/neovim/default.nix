@@ -3,7 +3,7 @@
     enable = true;
     viAlias = true;
     vimAlias = true;
-    package = pkgs.neovim-src;
+    # package = pkgs.neovim-unwrapped;
   };
 
   home.activation.installNeoVimConfig = ''

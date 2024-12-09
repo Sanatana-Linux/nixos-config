@@ -14,8 +14,8 @@
 
   boot.initrd.availableKernelModules = ["xhci_pci" "nvme" "usb_storage" "usbhid" "sd_mod"];
   boot.initrd.kernelModules = [];
-  boot.kernelModules = ["kvm-intel" "lenovo-legion-module"];
-  boot.extraModulePackages = with config.boot.kernelPackages; [lenovo-legion-module];
+  boot.kernelModules = ["kvm-intel" "lenovo-legion-module" "acpi_call"];
+  boot.extraModulePackages = with config.boot.kernelPackages; [acpi_call lenovo-legion-module];
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/10bad730-865b-42c3-8915-fedeecc9e395";

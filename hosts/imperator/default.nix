@@ -101,8 +101,6 @@ in {
 
     systemPackages = with pkgs; [
       intel-undervolt
-      kmod-debian-aliases
-      kmod-blacklist-ubuntu
       linuxHeaders
       intel-ocl
       inteltool

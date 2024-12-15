@@ -45,7 +45,7 @@
     overlays = [
       outputs.overlays.default
       inputs.nixpkgs-f2k.overlays.default
-      inputs.nur.overlay
+      inputs.nur.overlay.default
     ];
 
     config = {

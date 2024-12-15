@@ -22,7 +22,7 @@
       '';
     };
     nixpkgs-f2k = inputs.nixpkgs-f2k.packages.${prev.system};
-    nur = inputs.nur.overlay;
+    nur = inputs.nur.overlay.default;
   };
 in {
   default = final: prev: (additions final prev) // (modifications final prev);

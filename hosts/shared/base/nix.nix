@@ -53,8 +53,8 @@
       auto-optimise-store = true;
       # Free up to 10GiB whenever there is less than 5GB left.
       # this setting is in bytes, so we multiply with 1024 by 3
-      min-free = "${toString (5 * 1024 * 1024 * 1024)}";
-      max-free = "${toString (10 * 1024 * 1024 * 1024)}";
+      # min-free = "${toString (5 * 1024 * 1024 * 1024)}";
+      # max-free = "${toString (10 * 1024 * 1024 * 1024)}";
 
       # Useful/Necessary Features to Have Enabled
       system-features = ["nixos-test" "kvm" "recursive-nix" "big-parallel" "cuda"];
@@ -82,7 +82,7 @@
     gc = {
       automatic = true;
       dates = "daily";
-      options = "--delete-older-than 1d";
+      options = "--delete-older-than 3d";
     };
 
     registry = lib.mapAttrs (_: value: {flake = value;}) inputs;

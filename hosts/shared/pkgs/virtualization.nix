@@ -1,21 +1,19 @@
 {pkgs, ...}:
 with pkgs; [
-   appvm
+  appvm
   conmon
   containerd
-  # devbox
-  # distrobox
   docker
   docker-buildx
   docker-client
   docker-compose
+  docker-credential-helpers
   docker-distribution
   docker-gc
   docker-slim
+  kvmtool
   oxker
-  docker-credential-helpers
-    kvmtool
-    qemu_full
-   virt-manager
+  qemu_full
+  virt-manager
   x11docker
 ]

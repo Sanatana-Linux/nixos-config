@@ -102,6 +102,8 @@ in {
     systemPackages = with pkgs; [
       intel-undervolt
       kmod-debian-aliases
+      pkgconfig 
+      libpkgconfig
       kmod-blacklist-ubuntu
       linuxHeaders
       intel-ocl
@@ -118,6 +120,8 @@ in {
       dbus-broker
       dbus-glib
       dbus
+      lua53Packages.ldbus
+      lua54Packages.ldbus
       luajitPackages.ldbus
       polkit_gnome
       xssproxy

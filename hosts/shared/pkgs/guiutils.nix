@@ -1,7 +1,6 @@
 {pkgs, ...}:
 with pkgs; [
   alsaequal
-  pastel
   appimage-run
   appimagekit
   appstream-glib
@@ -11,7 +10,6 @@ with pkgs; [
   aspellDicts.en-computers
   aspellDicts.en-science
   aspellDicts.hi
-tdesktop
   bdfresize
   bleachbit
   blueman
@@ -27,6 +25,7 @@ tdesktop
   eyedropper
   fbida
   fcft
+  file-roller
   fntsample
   fontpreview
   fuseiso
@@ -34,7 +33,6 @@ tdesktop
   geocode-glib_2
   gmime
   gmime3
-  file-roller
   gnome-disk-utility
   gnome-font-viewer
   gnome-themes-extra
@@ -48,6 +46,7 @@ tdesktop
   gparted
   gpick
   graphite2
+  gspell
   gspell
   gthumb
   gtk-sharp-2_0
@@ -67,6 +66,7 @@ tdesktop
   i3lock-color
   inkscape-with-extensions
   inotify-tools
+  ispell
   lcdf-typetools
   leela
   libappindicator
@@ -83,6 +83,7 @@ tdesktop
   libinput
   libnotify
   libsForQt5.qt5ct
+  libsForQt5.qtcurve
   libsForQt5.qtstyleplugins
   libusb1
   libxdg_basedir
@@ -98,9 +99,11 @@ tdesktop
   nerd-font-patcher
   networkmanagerapplet
   nuspell
+  nuspell
   ocrmypdf
   pango
   pangomm
+  pastel
   pdf-parser
   pdfarranger
   pdftag
@@ -116,12 +119,12 @@ tdesktop
   python311Packages.pdftotext
   python311Packages.pyxdg
   qt6.qt5compat
-  libsForQt5.qtcurve
   rep-gtk
   rofi
   shutter
   t1lib
   t1utils
+  tdesktop
   template-glib
   termcolor
   terminus_font
@@ -129,6 +132,7 @@ tdesktop
   thunderbird-bin
   transmission_4-gtk
   ttfautohint
+  typos
   unrar
   unscd
   updfparser
@@ -151,6 +155,7 @@ tdesktop
   xdg-utils
   xdgmenumaker
   xdotool
+  xdragon
   xfce.exo
   xfce.garcon
   xfce.libxfce4ui

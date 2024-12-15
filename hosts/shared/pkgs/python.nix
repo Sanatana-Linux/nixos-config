@@ -1,32 +1,32 @@
 {pkgs, ...}:
 with pkgs;
   [
-    (python311.withPackages (p:
+    (python312.withPackages (p:
       with p; [
-        gitdb
         GitPython
+        beautifulsoup4
+        gitdb
+        levenshtein
         pip
         pygobject3
-        pynvim
+        pylev
         pylint
         pylint-venv
-        venvShellHook
         python-dotenv
-        smmap
         setuptoolsBuildHook
-        beautifulsoup4
+        smmap
+        venvShellHook
         wheelUnpackHook
         youtube-transcript-api
       ]))
   ]
   ++ [
     gobject-introspection
-    virtualenv
-    pew
-    ruff
-    virtualenv-clone
     pipenv
-    python312Packages.pynvim
     python311Packages.sortedcontainers
     python311Packages.wheel
+    python312Packages.pynvim
+    ruff
+    virtualenv
+    virtualenv-clone
   ]

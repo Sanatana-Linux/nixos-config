@@ -52,6 +52,8 @@
       socat
       swww
       trash-cli
+      walk
+      xplorer
       wf-recorder
       xdg-desktop-portal
       ;
@@ -63,7 +65,7 @@
       gitui
       ;
     inherit
-      (pkgs.luaPackages)
+      (pkgs.luajitPackages)
       lua
       ;
     inherit

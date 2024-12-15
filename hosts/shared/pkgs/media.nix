@@ -5,31 +5,31 @@ with pkgs; [
   beautysh
   book-summary
   byzanz
+  cheese
   ciano
   curtail
   delve
-  viu
-
+  dipc
   ebook_tools
   emacsPackages.svgo
   exiftool
   feh
   ffcast
-  fswebcam
+  fgallery
   figlet
-  cheese
+  fim
+  flaca
+  fswebcam
   gallery-dl
   gdk-pixbuf
   gi-docgen
   gibo
   gif-for-cli
   giflib
-  libwebcam
   gifsicle
-  krita
-  krita-plugin-gmic
   gimp-with-plugins
   gio-sharp
+  gmic
   gnome.nixos-gsettings-overrides
   gobject-introspection
   graphicsmagick
@@ -51,6 +51,8 @@ with pkgs; [
   jpegoptim
   jpegrescan
   kooha
+  krita
+  krita-plugin-gmic
   labelImg
   libdevil-nox
   libexif
@@ -59,11 +61,12 @@ with pkgs; [
   libpng
   librsvg
   libspng
+  libwebcam
   libwebp
   lrzip
+  megapixels
   meme-image-generator
   menyoki
-  pixeluvo
   metadata-cleaner
   metapixel
   mjpegtoolsFull
@@ -75,9 +78,9 @@ with pkgs; [
   p7zip
   pantheon.granite
   peek
-  megapixels
   pixcat
   pixel2svg
+  pixeluvo
   pngcrush
   pngloss
   pngnq
@@ -105,14 +108,10 @@ with pkgs; [
   rx
   svgcleaner
   switcheroo
-  gmic
-  flaca
-  fim
-  dipc
-  fgallery
+  viu
   vlc
   webp-pixbuf-loader
   xcftools
-  ytfzf
   yt-dlp
+  ytfzf
 ]

@@ -54,13 +54,13 @@
 
   programs = {
     eza = {
-enable = true;
-   extraOptions = ["--group-directories-first" "--header"];
-    colors = "always";
-    icons = "always";
-    git = true;
- enableZshIntegration = true;
-};
+      enable = true;
+      extraOptions = ["--group-directories-first" "--header"];
+      colors = "always";
+      icons = "always";
+      git = true;
+      enableZshIntegration = true;
+    };
     gpg.enable = true;
     man.enable = true;
     ssh.enable = true;
@@ -85,9 +85,9 @@ enable = true;
     zoxide = {
       enable = true;
       enableZshIntegration = true;
-  options = [
-      "--cmd cd"
-    ];
+      options = [
+        "--cmd cd"
+      ];
     };
 
     dircolors = {

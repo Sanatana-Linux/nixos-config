@@ -11,6 +11,7 @@ with pkgs; [
   csv2latex
   curl
   deer
+  didyoumean
   efibootmgr
   efitools
   electron

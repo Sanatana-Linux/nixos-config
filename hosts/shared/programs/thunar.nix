@@ -22,6 +22,9 @@
     ];
   };
 
+  # Mount, trash, and other functionalities
+  services.gvfs.enable = true;
+
   # thumbnail support on thunar
   services.tumbler.enable = true;
 }

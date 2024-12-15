@@ -10,7 +10,9 @@
       cascadia-code # microsoft ligatures font
       cm_unicode
       corefonts
+      creep #
       d2coding
+      departure-mono
       dina-font
       envypn-font
       f5_6
@@ -34,14 +36,14 @@
       monocraft
       mononoki
       mplus-outline-fonts.githubRelease
-      nerd-fonts.mplus
-      nerd-fonts.lilex
+      nerd-fonts._3270
       nerd-fonts.agave
-      nerd-fonts.zed-mono
+      nerd-fonts.lilex
+      nerd-fonts.mplus
       nerd-fonts.overpass
       nerd-fonts.ubuntu
+      nerd-fonts.zed-mono
       norwester-font
-      nerd-fonts._3270
       noto-fonts # I really hate these fonts
       noto-fonts-cjk-sans # but its better than scripts not rendering
       noto-fonts-emoji # I guess...
@@ -51,12 +53,14 @@
       paratype-pt-mono
       paratype-pt-sans
       paratype-pt-serif
+      pixel-code
       powerline-fonts
       proggyfonts
       scheherazade-new
       scientifica
-      siji
+      serious-sans
       sf-mono-liga-bin
+      siji
       spleen
       sudo-font
       tamzen
@@ -67,18 +71,14 @@
       tt2020
       u001-font
       undefined-medium
+      undefined-medium
       uni-vga
       unifont
       unifont_upper
       vistafonts
       xkcd-font
-      zpix-pixel-font
-      undefined-medium
-      creep #
-      departure-mono
-      pixel-code
-      serious-sans
       xlsfonts
+      zpix-pixel-font
     ];
 
     fontconfig = {
@@ -94,9 +94,9 @@
 
       defaultFonts = {
         emoji = ["Noto Color Emoji"];
-        monospace = ["M+1 Nerd Font Black"];
-        sansSerif = ["Rounded Mplus 1c ExtraBold"];
-        serif = ["Rounded Mplus 1c ExtraBold"];
+        monospace = ["M+1 Nerd Font Medium"];
+        sansSerif = ["Rounded Mplus 1c Medium"];
+        serif = ["Rounded Mplus 1c Medium"];
       };
     };
   };

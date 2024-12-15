@@ -37,8 +37,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # neovim-nightly-overlay = {
-      # url = "github:nix-community/neovim-nightly-overlay";
-      # inputs.nixpkgs.follows = "nixpkgs";
+    # url = "github:nix-community/neovim-nightly-overlay";
+    # inputs.nixpkgs.follows = "nixpkgs";
     # };
   };
 
@@ -67,7 +67,8 @@
       macbook-air = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [
-          nur.nixosModules.nur
+          nur.modules.nixos.default
+
           nixos-hardware.nixosModules.apple-macbook-air-6
           ./hosts/macbook-air
           bhairava-grub-theme.nixosModule
@@ -87,7 +88,7 @@
       imperator = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [
-          nur.nixosModules.nur
+          nur.modules.nixos.default
           nixos-hardware.nixosModules.lenovo-legion-16irx9h
           ./hosts/imperator
           bhairava-grub-theme.nixosModule

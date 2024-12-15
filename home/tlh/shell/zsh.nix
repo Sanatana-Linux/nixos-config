@@ -49,31 +49,43 @@
 
     # Create the completion cache directory
     initExtra = ''
+
             mkdir -p "${config.xdg.cacheHome}/zsh/completion-cache" # Use xdg directory for cache
 
-      # Completion & Completion Menu Oprions
-      # :completion:<function>:<completer>:<command>:<argument>:<tag>
+            # Completion & Completion Menu Oprions
+            # :completion:<function>:<completer>:<command>:<argument>:<tag>
 
-      zstyle ':completion:*' completer _complete _ignored _approximate
-      zstyle ':completion:*' complete true
-      zstyle ':completion:*' complete-options true
-      zstyle ':completion:*' file-sort modification
-      zstyle ':completion:*' group-name '''
-      zstyle ':completion:*' keep-prefix true
-      zstyle ':completion:*' list-colors ''${(s.:.)LS_COLORS}
-      zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-      zstyle ':completion:*' menu select
-      zstyle ':completion:*' verbose true
+            zstyle ':completion:*' completer _complete _ignored _approximate
+            zstyle ':completion:*' complete true
+            zstyle ':completion:*' complete-options true
+            zstyle ':completion:*' file-sort modification
+            zstyle ':completion:*' group-name '''
+            zstyle ':completion:*' keep-prefix true
+            zstyle ':completion:*' list-colors ''${(s.:.)LS_COLORS}
+            zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+            zstyle ':completion:*' menu select
+            zstyle ':completion:*' verbose true
 
-      zstyle ':completion:*:default' list-prompt '%S%M matches%s'
-      zstyle ':completion:*:corrections' format '%F{yellow}!- %d (errors: %e) -!%f'
-      zstyle ':completion:*:descriptions' format '%F{blue}-- %D %d --%f'
-      zstyle ':completion:*:messages' format ' %F{purple} -- %d --%f'
-      zstyle ':completion:*:warnings' format ' %F{red}-- no matches found --%f'
-      zstyle ':completion:*:*:-command-:*:*' group-order aliases builtins functions commands
+            zstyle ':completion:*:default' list-prompt '%S%M matches%s'
+            zstyle ':completion:*:corrections' format '%F{yellow}!- %d (errors: %e) -!%f'
+            zstyle ':completion:*:descriptions' format '%F{blue}-- %D %d --%f'
+            zstyle ':completion:*:messages' format ' %F{purple} -- %d --%f'
+            zstyle ':completion:*:warnings' format ' %F{red}-- no matches found --%f'
+            zstyle ':completion:*:*:-command-:*:*' group-order aliases builtins functions commands
 
-      zstyle ':completion:*' use-cache on
-      zstyle ':completion:*' cache-path "${config.xdg.cacheHome}/zsh/completion-cache" # Use xdg directory for cache
+            zstyle ':completion:*' use-cache on
+            zstyle ':completion:*' cache-path "${config.xdg.cacheHome}/zsh/completion-cache" # Use xdg directory for cache
+
+
+      # ┣━━━━━━━━━━━━━━━━━━━━━━━━━┫ Functions ┣━━━━━━━━━━━━━━━━━━━━━━━━━┫
+
+      # walk tui file management and navigation
+
+      function lk {
+        cd "$(walk --icons  "$@")"
+      }
+
+
     '';
 
     # ZSH options
@@ -93,8 +105,8 @@
       ZSH_AUTOSUGGEST_USE_ASYNC = "true"; # Use asynchronous autosuggestions.
       ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE = 40; # Maximum buffer size for autosuggestions.
       KEYTIMEOUT = 1;
-      # VISUAL = "${lib.getBin neovim-unwrapped}";
-      # EDITOR = "${lib.getBin neovim-unwrapped}";
+      VISUAL = "${lib.getBin neovim}/bin/nvim";
+      EDITOR = "${lib.getBin neovim}/bin/nvim";
     };
 
     # Shell aliases, grouped by category
@@ -119,7 +131,7 @@
       gz = "gzip -l"; # list contents of gzipped files
       rm = "rm -rvf"; # remove files and directories recursively and forcefully
       trm = "${lib.getBin trash-cli}/bin/trash-cli"; # Move files to trash
-      firefox="firefox-nightly";
+      firefox = "firefox-nightly";
 
       # Archiving
       "dtrx-zip-all" = "for i in ./**/*.zip; do dtrx $i; done"; # Extract all zip files recursively. Make sure `dtrx` is available

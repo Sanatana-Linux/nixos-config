@@ -7,12 +7,13 @@ with pkgs; [
   alsa-tools
   alsa-utils
   alsaequal
-  # ardour
-  # audacity
-  # cava
+  ardour
+  audacity
+  cava
   codec2
+  downonspot
   libpulseaudio
-  # lmms
+  lmms
   mediainfo
   mimic
   mpc_cli
@@ -21,6 +22,7 @@ with pkgs; [
   mpd-mpris
   mpdevil
   mpv
+  onthespot
   pamixer
   pavucontrol
   playerctl
@@ -33,7 +35,7 @@ with pkgs; [
   soundconverter
   soundfont-fluid
   soundfont-generaluser
-  # spotify
+  spotify-cli-linux
   svox
   video2midi
   vlc

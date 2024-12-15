@@ -8,18 +8,18 @@
 }: {
   imports =
     [
-./X
+      ./X
       ./desktop
       ./pkgs
-./programs/yazi/default.nix
-./programs/vscode.nix
-./programs/firefox.nix
-./programs/gpg/default.nix
-./programs/zathura/default.nix
-./programs/kitty/default.nix
-./programs/neovim/default.nix
-./programs/ranger/default.nix
-./programs/zathura/default.nix
+      ./programs/yazi/default.nix
+      ./programs/vscode.nix
+      ./programs/firefox.nix
+      ./programs/gpg/default.nix
+      ./programs/zathura/default.nix
+      ./programs/kitty/default.nix
+      ./programs/neovim/default.nix
+      ./programs/ranger/default.nix
+      ./programs/zathura/default.nix
 
       ./services
       ./shell

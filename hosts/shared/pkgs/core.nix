@@ -1,14 +1,11 @@
 {pkgs, ...}:
 with pkgs; [
-  _7zz
   alejandra
-  linuxHeaders
   any-nix-shell
   appstream
   appstream-glib
   as-tree
   automake
-  gccStdenv
   avfs
   bintools
   binutils
@@ -26,22 +23,22 @@ with pkgs; [
   dconf
   ddcui
   ddcutil
-  pinentry-tty
   deadnix
   dnsutils
   dosfstools
   exfatprogs
   ffmpeg-full
   firmwareLinuxNonfree
-  linux-firmware
+  gccStdenv
   intel-ocl
-  microcodeIntel
-  xorg.xf86videointel
+  linux-firmware
+  linuxHeaders
   man-pages
   man-pages-posix
   manix
   mdds
   meson
+  microcodeIntel
   minizip2
   moreutils
   msieve
@@ -74,6 +71,7 @@ with pkgs; [
   pciutils
   pciutils
   pfetch
+  pinentry-tty
   pmutils
   poppler_gi
   power-profiles-daemon
@@ -86,6 +84,7 @@ with pkgs; [
   rcshist
   reposurgeon
   sassc
+  service-wrapper
   simpleTpmPk11
   skim
   smartmontools
@@ -97,9 +96,8 @@ with pkgs; [
   suitesparse
   swtpm
   sysfsutils
-  systemdgenie
   systemctl-tui
-  service-wrapper
+  systemdgenie
   tbb
   tealdeer
   template-glib
@@ -127,10 +125,10 @@ with pkgs; [
   xorg.fontalias
   xorg.fonttosfnt
   xorg.fontutil
-  xorg.libxcb
   xorg.libXxf86dga
   xorg.libXxf86misc
   xorg.libXxf86vm
+  xorg.libxcb
   xorg.mkfontdir
   xorg.xbacklight
   xorg.xcbutil
@@ -140,6 +138,7 @@ with pkgs; [
   xorg.xcbutilwm
   xorg.xconsole
   xorg.xev
+  xorg.xf86videointel
   xorg.xfontsel
   xorg.xhost
   xorg.xinit

@@ -6,9 +6,9 @@ with pkgs; [
   archiver
   arj
   ark
+  btar
   bzip2
   bzip3
-  btar
   cpio
   crabz
   dejsonlz4
@@ -20,7 +20,6 @@ with pkgs; [
   libarchive
   lz4
   mozlz4a
-
   ncompress
   p7zip
   pbzip2

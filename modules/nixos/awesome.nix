@@ -191,16 +191,13 @@ in {
         (pkgs)
         awesome-git-luajit
         maim
+        pango
+        pangomm
         xclip
         xdotool
         xsel
         xsettingsd
         dconf-editor
-        ;
-      inherit
-        (pkgs.gnome2)
-        pango
-        pangomm
         ;
       inherit
         (pkgs.xfce)

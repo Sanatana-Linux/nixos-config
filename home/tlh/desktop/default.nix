@@ -62,7 +62,7 @@
 
     # GTK4 specific configurations
     gtk4.extraConfig = {
-      gtk-application-prefer-dark-theme = true;
+      # gtk-application-prefer-dark-theme = true;
       gtk-decoration-layout = "menu:";
     };
   };

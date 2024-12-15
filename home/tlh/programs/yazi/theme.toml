@@ -1,6 +1,3 @@
-[flavor]
-use = "kanagawa"
-
 [tab]
 active = { fg = "#1E2031", bg = "#80AEFA" }
 inactive = { fg = "#C8D3F8", bg = "#484D66" }
@@ -49,7 +46,7 @@ rules = [
   { mime = "application/x-tar", fg = "#CD9EFC" },
   { mime = "application/x-bzip", fg = "#CD9EFC" },
   { mime = "application/x-bzip2", fg = "#CD9EFC" },
-  { mime = "application/x-7z-compressed", fg = "#CD9EFC" },
+  { mime = "application/x-home/tlh/programs/yazi/default.nix7z-compressed", fg = "#CD9EFC" },
   { mime = "application/x-rar", fg = "#CD9EFC" },
 
   # Fallback
@@ -100,7 +97,6 @@ rules = [
 "*.mp3" = ""
 "*.flac" = ""
 "*.wav" = ""
-
 # Movies
 "*.mp4" = ""
 "*.mkv" = ""

@@ -6,6 +6,7 @@ with pkgs; [
   cairo
   cairomm
   cmake
+  corrupter
   dbus
   dbus-broker
   dbus-glib
@@ -23,9 +24,6 @@ with pkgs; [
   glibc
   glibcInfo
   glibcLocalesUtf8
-  i3lock-fancy-rapid
-  xss-lock
-  corrupter
   glibc_memusage
   glibc_multi
   glibmm
@@ -41,9 +39,9 @@ with pkgs; [
   gtk3
   gtk3-x11
   gtk4
-  nerd-font-patcher
   gtk_engines
   gusb
+  i3lock-fancy-rapid
   inotify-tools
   libcanberra-gtk3
   libdbusmenu
@@ -64,6 +62,7 @@ with pkgs; [
   mesa
   mesa-demos
   mozjpeg
+  nerd-font-patcher
   nox
   ntfs3g
   pango
@@ -78,10 +77,10 @@ with pkgs; [
   polkit_gnome
   poppler_utils
   python311Packages.pyxdg
+  satty
   sdbus-cpp
   shared-mime-info
   shutter
-  satty
   template-glib
   terminus_font
   testdisk
@@ -133,6 +132,7 @@ with pkgs; [
   xorg.xwininfo
   xscreensaver
   xsecurelock
+  xss-lock
   xsuspender
   xterm
 ]

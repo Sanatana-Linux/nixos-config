@@ -1,17 +1,19 @@
 {pkgs, ...}:
 with pkgs; [
   any-nix-shell
+  asmjit
+  jetbrains-toolbox
   bash
-  terraform 
-  poetry
   black
   brotli
   cached-nix-shell
   cargo
   cargo-binutils
-  conda
   cbfmt
   cmake
+  conda
+  inetutils
+  filezilla
   cpp-hocon
   cpp-utilities
   deadnix
@@ -43,25 +45,24 @@ with pkgs; [
   icu
   imlib2Full
   isync
-  asmjit
   julia
   just
   leptosfmt
-  libffi
   libclang
   libcxxStdenv
+  libffi
   libimobiledevice
   libpkgconf
   libtiff
   libtool
   lua
   lua-language-server
-  luajitPackages.inspect
   lua5_3_compat
   lua5_4_compat
   luabind
   luaformatter
   luajitPackages.cqueues
+  luajitPackages.inspect
   luajitPackages.ldbus
   luajitPackages.ldoc
   luajitPackages.lgi
@@ -90,10 +91,10 @@ with pkgs; [
   nix-tree
   nixpkgs-fmt
   node2nix
+  #nodePackages_latest.neovim
   nodePackages.prettier
   nodePackages_latest.diagnostic-languageserver
   nodePackages_latest.gulp
-  # nodePackages_latest.neovim
   nodejs
   nodenv
   nps
@@ -111,6 +112,7 @@ with pkgs; [
   pkg-config
   pkg-config-unwrapped
   pkg-configUpstream
+  poetry
   protobuf
   protobufc
   puppeteer-cli
@@ -144,6 +146,7 @@ with pkgs; [
   stylua
   sumneko-lua-language-server
   tectonic
+  terraform
   tokei
   tree-sitter
   typescript

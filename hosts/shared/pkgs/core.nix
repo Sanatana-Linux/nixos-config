@@ -1,7 +1,17 @@
 {pkgs, ...}:
 with pkgs; [
   alejandra
+  keyutils
+  gettext
+xgeometry-select 
+  wmic-bin
+  kmsxx
+  out-of-tree
   any-nix-shell
+  udisks
+  udiskie
+  udevil
+  kconfig-frontends
   appstream
   appstream-glib
   as-tree
@@ -14,7 +24,7 @@ with pkgs; [
   busybox
   cached-nix-shell
   cachix
-  cbfmt
+  cbfmt 
   ccls
   clang-tools
   cmake
@@ -46,7 +56,12 @@ with pkgs; [
   ngrok
   niv
   nix-bash-completions
+  nixdoc 
+  nix-doc
   nix-binary-cache
+  nixel
+  nil
+  nixt
   nix-bundle
   nix-direnv-flakes
   nix-health
@@ -56,7 +71,6 @@ with pkgs; [
   nix-prefetch
   nix-prefetch-scripts
   nix-template
-  nix-zsh-completions
   nix-zsh-completions
   nixd
   nixdoc

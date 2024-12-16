@@ -16,4 +16,6 @@ with pkgs; [
   bundletool
   dex2jar
   imgpatchtools
+  jadx
+  androguard
 ]

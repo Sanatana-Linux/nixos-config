@@ -42,12 +42,12 @@ in {
       systemd.enable = true;
       verbose = false;
 
-      kernelModules = ["nvidia"];
+      kernelModules = ["nvidia"  ];
     };
     blacklistedKernelModules = ["nouveau"];
 
     kernelPackages = pkgs.linuxKernel.packages.linux_6_11;
-    extraModulePackages = [config.boot.kernelPackages.nvidia_x11 config.boot.kernelPackages.acpi_call config.boot.kernelPackages.lenovo-legion-module];
+    extraModulePackages = [config.boot.kernelPackages.nvidia_x11 config.boot.kernelPackages.acpi_call config.boot.kernelPackages.lenovo-legion-module config.boot.kernelPackages.acpi_call];
 
     kernelParams = [
       # ignore access time (atime) updates on files, except when they coincide with updates to the ctime or mtime
@@ -109,6 +109,10 @@ in {
       linuxPackages.lenovo-legion-module
       linuxPackages.acpi_call
       libva
+      libva-utils
+      libGL 
+      mesa 
+          libvdpau
       wirelesstools
       libdbusmenu
       libdbusmenu-gtk3
@@ -147,7 +151,7 @@ in {
         enable = true;
         finegrained = true;
       };
-      nvidiaPersistenced = true;
+      #  nvidiaPersistenced = true;
       open = false;
       package = nvidiaDriverChannel;
       prime = {

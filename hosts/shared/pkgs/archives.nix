@@ -2,6 +2,7 @@
 with pkgs; [
   _7zz
   advancecomp
+  ouch
   archivemount
   archiver
   arj

@@ -12,7 +12,10 @@
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     nixpkgs-f2k.url = "github:moni-dz/nixpkgs-f2k";
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
-    nur.url = "github:nix-community/NUR";
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -31,7 +34,6 @@
     };
     firefox-nightly.url = "github:nix-community/flake-firefox-nightly";
     nps.url = "github:OleMussmann/Nix-Package-Search";
-
     bhairava-grub-theme = {
       url = "github:Sanatana-Linux/Bhairava-Grub-Theme";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -63,7 +65,8 @@
     devShells = forEachPkgs (pkgs: import ./shell.nix {inherit pkgs;});
 
     nixosConfigurations = {
-      # Dinosaur Laptop
+      # ┣━━━━━━━━━━━━━━━━━━━━━━━┫ Dinosaur Laptop ┣━━━━━━━━━━━━━━━━━━━━━━━┫
+
       macbook-air = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [
@@ -84,7 +87,8 @@
         ];
       };
 
-      # Lenovo Legion Pro
+      # ┣━━━━━━━━━━━━━━━━━━━━━━┫ Lenovo Legion Pro ┣━━━━━━━━━━━━━━━━━━━━━━┫
+
       imperator = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [
@@ -113,6 +117,9 @@
         ];
       };
     };
+
+    # ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
+
     macbook-air = self.nixosConfigurations.macbook-air.config.system.build.toplevel;
     imperator = self.nixosConfigurations.imperator.config.system.build.toplevel;
   };

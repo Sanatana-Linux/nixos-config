@@ -29,7 +29,7 @@
     };
     font = {
       size = 12;
-      name = "Agave Nerd Font Mono Bold";
+      name = "Liga SFMono Nerd Font Semibold";
     };
     shellIntegration = {
       enableZshIntegration = true;

@@ -11,7 +11,7 @@
 
     # Font settings for GTK
     font = {
-      name = "Terminus Nerd Font";
+      name = "Liga SFMono Nerd Font Semibold";
       size = 11;
     };
 

@@ -34,18 +34,11 @@
     manpages.enable = false;
   };
 
-  nix = {
-    settings = {
-      experimental-features = ["recursive-nix" "auto-allocate-uids" "nix-command" "flakes"];
-      warn-dirty = false;
-    };
-  };
-
   nixpkgs = {
     overlays = [
       outputs.overlays.default
       inputs.nixpkgs-f2k.overlays.default
-      inputs.nur.overlay.default
+      inputs.nur.overlays.default
     ];
 
     config = {

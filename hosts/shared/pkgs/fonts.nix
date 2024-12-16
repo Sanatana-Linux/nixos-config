@@ -15,7 +15,6 @@
       departure-mono
       dina-font
       envypn-font
-      f5_6
       font-awesome
       font-awesome_4
       font-awesome_5
@@ -25,10 +24,10 @@
       hackgen-nf-font
       hermit
       hyperscrypt-font
+      icomoon-feather
       inter
       jost
       kanit-font
-      kreative-square-fonts
       lato
       line-awesome
       manrope
@@ -50,12 +49,10 @@
       noto-fonts-extra
       ocr-a
       oldstandard
-      paratype-pt-mono
-      paratype-pt-sans
-      paratype-pt-serif
       pixel-code
       powerline-fonts
       proggyfonts
+      rounded-mgenplus
       scheherazade-new
       scientifica
       serious-sans
@@ -63,10 +60,7 @@
       siji
       spleen
       sudo-font
-      tamzen
       terminus_font
-      termsyn
-      tewi-font
       times-newer-roman
       tt2020
       u001-font
@@ -78,7 +72,6 @@
       vistafonts
       xkcd-font
       xlsfonts
-      zpix-pixel-font
     ];
 
     fontconfig = {

@@ -3,8 +3,6 @@ with pkgs;
   writeScriptBin "nux" ''
      #!/usr/bin/env bash
      dots="/etc/nixos"
-     awesomewm="$HOME/.config/awesome"
-     nvim="$HOME/.config/nvim"
 
     function help() {
     cat <<EOF
@@ -83,6 +81,8 @@ with pkgs;
     function update() {
         echo "Updating Flake Lock File Now"
         doas nix flake update
+        rm -rf $HOME/.config/*.bak
+        rm -rf $HOME/.config/**/*.bak
         sudo nixos-rebuild switch --flake . --upgrade
     }
 
@@ -96,13 +96,14 @@ with pkgs;
         echo "Collecting user garbage"
         nix-collect-garbage -d
         nix profile wipe-history
+        doas janitor --gc
     }
 
 
 
 
     function search() {
-       nix-search "$2"
+       nix-search  "$2" --details
     }
 
     case "$1" in

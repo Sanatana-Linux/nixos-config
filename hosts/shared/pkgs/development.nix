@@ -2,7 +2,13 @@
 with pkgs; [
   any-nix-shell
   asmjit
+  black
   jetbrains-toolbox
+  jetbrains.jdk
+  jetbrains.webstorm
+  jetbrains.rust-rover
+  jetbrains.pycharm-professional
+  jetbrains.idea-ultimate
   bash
   black
   brotli

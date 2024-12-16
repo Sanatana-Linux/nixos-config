@@ -1,6 +1,7 @@
 {pkgs, ...}:
 with pkgs; [
   appindicator-sharp
+  image-roll
   babl
   beautysh
   book-summary
@@ -28,6 +29,18 @@ with pkgs; [
   giflib
   gifsicle
   gimp-with-plugins
+  gimpPlugins.gap 
+  gimpPlugins.gmic 
+  gimpPlugins.bimp
+  gimpPlugins.fourier 
+  gimpPlugins.farbfeld 
+  gimpPlugins.texturize 
+  gimpPlugins.lqrPlugin 
+  gimpPlugins.lightning 
+  gimpPlugins.gimplensfun 
+  gimpPlugins.resynthesizer 
+  gimpPlugins.exposureBlend 
+  gimpPlugins.waveletSharpen
   gio-sharp
   gmic
   gnome.nixos-gsettings-overrides
@@ -108,6 +121,8 @@ with pkgs; [
   rx
   svgcleaner
   switcheroo
+  upscayl 
+  upscayl-ncnn
   viu
   vlc
   webp-pixbuf-loader

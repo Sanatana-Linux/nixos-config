@@ -146,8 +146,6 @@
       fzim = "fzf | xargs nvim"; # Fuzzy find a file and open it with Neovim.
       vim = "nvim";
 
-      #tgpt 
-      tgpt="tgpt --provider ollama --url http://localhost:11434 --model starcoder2:15b --interactive";
 
       # Miscellaneous
       c = "clear";

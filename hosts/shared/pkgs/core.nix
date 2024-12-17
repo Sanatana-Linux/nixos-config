@@ -2,6 +2,8 @@
 with pkgs; [
   alejandra
   keyutils
+  dmidecode
+  python312Packages.py-dmidecode
   gettext
 xgeometry-select 
   wmic-bin

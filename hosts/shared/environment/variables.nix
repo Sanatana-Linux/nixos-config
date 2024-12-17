@@ -1,6 +1,6 @@
 {
   environment.variables = {
-    AI_PROVIDER = "ollama";
+    #    AI_PROVIDER = "ollama";
     EDITOR = "nvim";
     BROWSER = "firefox";
     _JAVA_AWT_WM_NONREPARENTING = "1";

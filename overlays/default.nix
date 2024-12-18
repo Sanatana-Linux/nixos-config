@@ -23,6 +23,7 @@
     };
     nixpkgs-f2k = inputs.nixpkgs-f2k.packages.${prev.system};
     nur = inputs.nur.overlays.default;
+      neovim-nightly-overlay = inputs.neovim-nightly-overlay.overlay;
   };
 in {
   default = final: prev: (additions final prev) // (modifications final prev);

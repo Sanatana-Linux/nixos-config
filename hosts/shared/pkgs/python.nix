@@ -18,14 +18,26 @@ with pkgs;
         venvShellHook
         wheelUnpackHook
         youtube-transcript-api
+brotlipy
+brotlicffi
+PyICU
+googleapis-common-protos
+mdformat
+pip-tools
+pipx
+protobuf
+pylsp-mypy
+websockets
+wheel
+sortedcontainers
+pynvim
+
+
       ]))
   ]
   ++ [
     gobject-introspection
     pipenv
-    python311Packages.sortedcontainers
-    python311Packages.wheel
-    python312Packages.pynvim
     ruff
     virtualenv
     virtualenv-clone

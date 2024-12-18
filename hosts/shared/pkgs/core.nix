@@ -1,6 +1,13 @@
 {pkgs, ...}:
 with pkgs; [
   alejandra
+  sysctl 
+  sysstat
+  sysvinit 
+  sysvtools
+  sysfsutils
+  sysprof
+  systeroid
   keyutils
   dmidecode
   python312Packages.py-dmidecode

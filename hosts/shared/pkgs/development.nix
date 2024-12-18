@@ -98,10 +98,10 @@ with pkgs; [
   nixpkgs-fmt
   node2nix
   #nodePackages_latest.neovim
-  nodePackages.prettier
+  nodePackages_latest.prettier
   nodePackages_latest.diagnostic-languageserver
   nodePackages_latest.gulp
-  nodejs
+  nodePackages_latest.nodejs
   nodenv
   nps
   nss
@@ -122,17 +122,6 @@ with pkgs; [
   protobuf
   protobufc
   puppeteer-cli
-  python311Packages.PyICU
-  python311Packages.brotlicffi
-  python311Packages.brotlipy
-  python311Packages.googleapis-common-protos
-  python311Packages.mdformat
-  python311Packages.pip-tools
-  python311Packages.pipx
-  python311Packages.protobuf
-  python311Packages.pylsp-mypy
-  python311Packages.websockets
-  python311Packages.wheel
   ruby
   rubyfmt
   rustc

@@ -46,25 +46,18 @@ in {
     };
     blacklistedKernelModules = ["nouveau"];
 
-    kernelPackages = pkgs.linuxKernel.packages.linux_6_11;
+    kernelPackages = pkgs.linuxPackages_latest;
     extraModulePackages = [config.boot.kernelPackages.nvidia_x11 config.boot.kernelPackages.acpi_call config.boot.kernelPackages.lenovo-legion-module config.boot.kernelPackages.acpi_call];
 
     kernelParams = [
       # ignore access time (atime) updates on files, except when they coincide with updates to the ctime or mtime
       "rootflags=noatime"
-
-      # enable IOMMU for devices used in passthrough and provide better host performance
-      "iommu=pt"
+      # ACPI Bakclight 
+      "acpi_osi=linux" 
+      "acpi_backlight=video"
 
       # disable usb autosuspend
       "usbcore.autosuspend=-1"
-
-      # tell the kernel to not be verbose
-      "quiet"
-
-      # disable systemd status messages
-      # rd prefix means systemd-udev will be used instead of initrd
-      "rd.systemd.show_status=auto"
 
       # Nvidia dGPU settings
       "nvidia_drm.fbdev=1"
@@ -92,11 +85,11 @@ in {
   environment = {
     variables = {
       GDK_SCALE = "1";
-      GDK_DPI_SCALE = "0.5";
+      GDK_DPI_SCALE = "0.75";
       _JAVA_OPTIONS = "-Dsun.java2d.uiScale=1";
       GBM_BACKEND = "nvidia-drm";
-      # LIBVA_DRIVER_NAME = "nvidia"; # hardware acceleration
-      #__GLX_VENDOR_LIBRARY_NAME = "nvidia";
+      LIBVA_DRIVER_NAME = "nvidia"; # hardware acceleration
+      #   __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     };
 
     systemPackages = with pkgs; [
@@ -110,6 +103,7 @@ in {
       linuxPackages.acpi_call
       libva
       libva-utils
+      inxi
       libGL 
       mesa 
           libvdpau
@@ -139,13 +133,14 @@ in {
   hardware = {
     enableAllFirmware = true;
     enableRedistributableFirmware = true;
-
+acpilight.enable = true;
     bluetooth = {
       enable = true;
       package = pkgs.bluez;
     };
     nvidia = {
       modesetting.enable = true;
+      dynamicBoost.enable = true;
       nvidiaSettings = true;
       powerManagement = {
         enable = true;
@@ -190,26 +185,32 @@ in {
     networkmanager.enable = true;
   };
 
+    powerManagement = {
+    enable = true;
+    powertop.enable = true;
+  };
+
   services = {
     logind = {
       lidSwitch = "suspend";
       powerKeyLongPress = "suspend";
     };
     thermald.enable = true;
-    tlp.enable = true;
+
     # Power Management
-    upower = {
-      enable = true;
-      # Adjusts the action taken at the point of the battery being critical and adjusts when that is
-      criticalPowerAction = "HybridSleep";
-      percentageLow = 15;
-      percentageCritical = 8;
-      percentageAction = 5;
-      usePercentageForPolicy = true;
-    };
+    #     tlp.enable = true;
+    # upower = {
+    #   enable = true;
+    #   # Adjusts the action taken at the point of the battery being critical and adjusts when that is
+    #   criticalPowerAction = "HybridSleep";
+    #   percentageLow = 15;
+    #   percentageCritical = 8;
+    #   percentageAction = 5;
+    #   usePercentageForPolicy = true;
+    # };
     # handle ACPI events
     acpid.enable = true;
-
+    power-profiles-daemon.enable = true;
     libinput = {
       enable = true;
       touchpad = {

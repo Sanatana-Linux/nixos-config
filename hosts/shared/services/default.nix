@@ -58,6 +58,7 @@
         pkgs.logitech-udev-rules # for logitech
         pkgs.android-udev-rules
       ];
+      
     };
   };
 

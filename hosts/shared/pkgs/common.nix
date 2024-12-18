@@ -109,7 +109,6 @@ with pkgs; [
   xfce.xfce4-power-manager
   xfce.xfce4-settings
   xfce.xfconf
-  xorg.fontalias
   xorg.fonttosfnt
   xorg.fontutil
   xorg.gccmakedep

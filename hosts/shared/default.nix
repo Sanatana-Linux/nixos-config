@@ -49,6 +49,7 @@
       allowBroken = true;
       permittedInsecurePackages = [
         "openssl-1.1.1w"
+        "dcraw-9.28.0"
         "imagemagick-6.9.13-10"
         "nix-2.16.2"
         "openssl-1.1.1v"

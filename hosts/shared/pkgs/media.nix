@@ -2,6 +2,44 @@
 with pkgs; [
   appindicator-sharp
   image-roll
+  olive-editor
+  openshot-qt
+  libsForQt5.libopenshot-audio
+  libsForQt5.libopenshot
+  shotcut
+  vid-stab
+  vvenc
+  libvpl
+  deface
+  oggvideotools
+  xvidcore
+  flowblade
+  vidmerger
+  pipeline
+  mjpegtoolsFull
+  frei0r
+  snapshot
+  pitivi
+  losslesscut-bin
+  libtheora
+  libplacebo
+  cheese
+  davinci-resolve-studio
+  gnome-video-effects
+  mp4v2
+  flac
+  flaca
+  audiofile
+  traverso
+  lv2
+  librem
+
+  aaxtomp3
+  redoflacs
+  flac2all
+  flacon
+  audiofile
+  ffmpeg
   babl
   beautysh
   book-summary
@@ -29,17 +67,17 @@ with pkgs; [
   giflib
   gifsicle
   gimp-with-plugins
-  gimpPlugins.gap 
-  gimpPlugins.gmic 
+  gimpPlugins.gap
+  gimpPlugins.gmic
   gimpPlugins.bimp
-  gimpPlugins.fourier 
-  gimpPlugins.farbfeld 
-  gimpPlugins.texturize 
-  gimpPlugins.lqrPlugin 
-  gimpPlugins.lightning 
-  gimpPlugins.gimplensfun 
-  gimpPlugins.resynthesizer 
-  gimpPlugins.exposureBlend 
+  gimpPlugins.fourier
+  gimpPlugins.farbfeld
+  gimpPlugins.texturize
+  gimpPlugins.lqrPlugin
+  gimpPlugins.lightning
+  gimpPlugins.gimplensfun
+  gimpPlugins.resynthesizer
+  gimpPlugins.exposureBlend
   gimpPlugins.waveletSharpen
   gio-sharp
   gmic
@@ -64,8 +102,8 @@ with pkgs; [
   jpegoptim
   jpegrescan
   kooha
-  krita
-  krita-plugin-gmic
+  #krita
+  # krita-plugin-gmic
   labelImg
   libdevil-nox
   libexif
@@ -121,7 +159,7 @@ with pkgs; [
   rx
   svgcleaner
   switcheroo
-  upscayl 
+  upscayl
   upscayl-ncnn
   viu
   vlc

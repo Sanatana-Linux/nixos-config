@@ -39,6 +39,7 @@
       outputs.overlays.default
       inputs.nixpkgs-f2k.overlays.default
       inputs.nur.overlays.default
+      inputs.neovim-nightly-overlay.overlays.default
     ];
 
     config = {

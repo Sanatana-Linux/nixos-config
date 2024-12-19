@@ -1,6 +1,8 @@
 {pkgs, ...}:
 with pkgs; [
   aria
+  viu
+
   bat
   beep
   brightnessctl

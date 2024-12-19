@@ -146,7 +146,6 @@
       fzim = "fzf | xargs nvim"; # Fuzzy find a file and open it with Neovim.
       vim = "nvim";
 
-
       # Miscellaneous
       c = "clear";
       m = "mkdir -p"; # create directory if not exists

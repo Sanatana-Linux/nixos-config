@@ -11,6 +11,7 @@
     chaotic-pkgs = inputs.chaotic.packages.${prev.system};
     awesome-git-luajit = inputs.nixpkgs-f2k.packages.${prev.system}.awesome-luajit-git;
     nps = inputs.nps.defaultPackage.${prev.system};
+
     sf-mono-liga-bin = prev.stdenvNoCC.mkDerivation rec {
       pname = "sf-mono-liga-bin";
       version = "dev";
@@ -23,7 +24,7 @@
     };
     nixpkgs-f2k = inputs.nixpkgs-f2k.packages.${prev.system};
     nur = inputs.nur.overlays.default;
-      neovim-nightly-overlay = inputs.neovim-nightly-overlay.overlay;
+    neovim-nightly = inputs.neovim-nightly-overlay.overlay.default.neovim-src;
   };
 in {
   default = final: prev: (additions final prev) // (modifications final prev);

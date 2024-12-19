@@ -18,21 +18,19 @@ with pkgs;
         venvShellHook
         wheelUnpackHook
         youtube-transcript-api
-brotlipy
-brotlicffi
-PyICU
-googleapis-common-protos
-mdformat
-pip-tools
-pipx
-protobuf
-pylsp-mypy
-websockets
-wheel
-sortedcontainers
-pynvim
-
-
+        brotlipy
+        brotlicffi
+        PyICU
+        googleapis-common-protos
+        mdformat
+        pip-tools
+        pipx
+        protobuf
+        pylsp-mypy
+        websockets
+        wheel
+        sortedcontainers
+        pynvim
       ]))
   ]
   ++ [

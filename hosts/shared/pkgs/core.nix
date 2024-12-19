@@ -1,9 +1,9 @@
 {pkgs, ...}:
 with pkgs; [
   alejandra
-  sysctl 
+  sysctl
   sysstat
-  sysvinit 
+  sysvinit
   sysvtools
   sysfsutils
   sysprof
@@ -12,7 +12,7 @@ with pkgs; [
   dmidecode
   python312Packages.py-dmidecode
   gettext
-xgeometry-select 
+  xgeometry-select
   wmic-bin
   kmsxx
   out-of-tree
@@ -33,7 +33,7 @@ xgeometry-select
   busybox
   cached-nix-shell
   cachix
-  cbfmt 
+  cbfmt
   ccls
   clang-tools
   cmake
@@ -65,7 +65,7 @@ xgeometry-select
   ngrok
   niv
   nix-bash-completions
-  nixdoc 
+  nixdoc
   nix-doc
   nix-binary-cache
   nixel

@@ -53,12 +53,10 @@
       powerline-fonts
       proggyfonts
       rounded-mgenplus
-      scheherazade-new
       scientifica
       serious-sans
       sf-mono-liga-bin
       siji
-      spleen
       sudo-font
       terminus_font
       times-newer-roman
@@ -87,9 +85,9 @@
 
       defaultFonts = {
         emoji = ["Noto Color Emoji"];
-        monospace = ["M+1 Nerd Font Medium"];
-        sansSerif = ["Rounded Mplus 1c Medium"];
-        serif = ["Rounded Mplus 1c Medium"];
+        monospace = ["Liga SFMono Nerd Font Medium"];
+        sansSerif = ["Liga SFMono Nerd Font Semibold"];
+        serif = ["Liga SFMono Nerd Font Semibold"];
       };
     };
   };

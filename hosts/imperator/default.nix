@@ -41,21 +41,21 @@ in {
     initrd = {
       systemd.enable = true;
       verbose = false;
-
-      kernelModules = ["nvidia"  ];
+      compressor = "zstd";
+      compressorArgs = ["-19"];
+      kernelModules = ["nvidia"];
     };
     blacklistedKernelModules = ["nouveau"];
-
-    kernelPackages = pkgs.linuxPackages_latest;
+    tmp.cleanOnBoot = true;
+    kernelPackages = pkgs.linuxPackages_xanmod_latest;
     extraModulePackages = [config.boot.kernelPackages.nvidia_x11 config.boot.kernelPackages.acpi_call config.boot.kernelPackages.lenovo-legion-module config.boot.kernelPackages.acpi_call];
 
     kernelParams = [
       # ignore access time (atime) updates on files, except when they coincide with updates to the ctime or mtime
       "rootflags=noatime"
-      # ACPI Bakclight 
-      "acpi_osi=linux" 
-      "acpi_backlight=video"
 
+      # So we can see the kernel errors more clearly
+      "quiet"
       # disable usb autosuspend
       "usbcore.autosuspend=-1"
 
@@ -93,20 +93,24 @@ in {
     };
 
     systemPackages = with pkgs; [
-      intel-undervolt
       linuxHeaders
+      undervolt
+      intel-undervolt 
       intel-ocl
+      intel-gpu-tools
+intelmetool
+      intel-gmmlib
       inteltool
+intel-gpu-tools
+      intel-media-sdk
+      intel-compute-runtime
       cudatoolkit
-      linuxPackages.nvidia_x11
-      linuxPackages.lenovo-legion-module
-      linuxPackages.acpi_call
       libva
       libva-utils
       inxi
-      libGL 
-      mesa 
-          libvdpau
+      libGL
+      mesa
+      libvdpau
       wirelesstools
       libdbusmenu
       libdbusmenu-gtk3
@@ -121,6 +125,8 @@ in {
     ];
   };
   nixpkgs.config = {
+    allowUnfree = true;
+    cudaSupport = true;
     nvidia.acceptLicense = true;
     allowUnfreePredicate = pkg:
       builtins.elem (lib.getName pkg) [
@@ -133,14 +139,13 @@ in {
   hardware = {
     enableAllFirmware = true;
     enableRedistributableFirmware = true;
-acpilight.enable = true;
+    acpilight.enable = true;
     bluetooth = {
       enable = true;
       package = pkgs.bluez;
     };
     nvidia = {
       modesetting.enable = true;
-      dynamicBoost.enable = true;
       nvidiaSettings = true;
       powerManagement = {
         enable = true;
@@ -185,9 +190,10 @@ acpilight.enable = true;
     networkmanager.enable = true;
   };
 
-    powerManagement = {
+  powerManagement = {
     enable = true;
     powertop.enable = true;
+    cpuFreqGovernor = "performance";
   };
 
   services = {

@@ -11,6 +11,7 @@ with pkgs; [
   docker-distribution
   docker-gc
   docker-slim
+  nvidia-container-toolkit
   kvmtool
   oxker
   qemu_full

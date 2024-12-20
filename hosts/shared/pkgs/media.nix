@@ -24,7 +24,6 @@ with pkgs; [
   libtheora
   libplacebo
   cheese
-  davinci-resolve-studio
   gnome-video-effects
   mp4v2
   flac
@@ -166,5 +165,4 @@ with pkgs; [
   webp-pixbuf-loader
   xcftools
   yt-dlp
-  ytfzf
 ]

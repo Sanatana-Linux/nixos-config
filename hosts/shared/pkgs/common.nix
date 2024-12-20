@@ -86,7 +86,6 @@ with pkgs; [
   testdisk
   themechanger
   thunderbird-bin
-  ueberzug
   unscd
   ventoy-full
   wirelesstools

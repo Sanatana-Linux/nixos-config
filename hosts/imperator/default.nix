@@ -93,35 +93,36 @@ in {
     };
 
     systemPackages = with pkgs; [
-      linuxHeaders
-      undervolt
-      intel-undervolt 
-      intel-ocl
-      intel-gpu-tools
-intelmetool
-      intel-gmmlib
-      inteltool
-intel-gpu-tools
-      intel-media-sdk
-      intel-compute-runtime
       cudatoolkit
-      libva
-      libva-utils
-      inxi
-      libGL
-      mesa
-      libvdpau
-      wirelesstools
-      libdbusmenu
-      libdbusmenu-gtk3
-      lenovo-legion
+      nvme-cli
+      dbus
       dbus-broker
       dbus-glib
-      dbus
+      intel-compute-runtime
+      intel-gmmlib
+      intel-gpu-tools
+      intel-media-sdk
+      intel-ocl
+      intel-undervolt 
+      intelmetool
+      inteltool
+      inxi
+      lenovo-legion
+      libGL
+      libdbusmenu
+      libdbusmenu-gtk3
+      libva
+      libva-utils
+      libvdpau
+      linuxHeaders
       luajitPackages.ldbus
+      mesa
+      nvidia-texture-tools
       polkit_gnome
-      xssproxy
+      undervolt
+      wirelesstools
       xss-lock
+      xssproxy
     ];
   };
   nixpkgs.config = {
@@ -147,6 +148,7 @@ intel-gpu-tools
     nvidia = {
       modesetting.enable = true;
       nvidiaSettings = true;
+      nvidiaPersistenced = true;
       powerManagement = {
         enable = true;
         finegrained = true;
@@ -197,6 +199,14 @@ intel-gpu-tools
   };
 
   services = {
+    # Prefer doing this in advanced bios 
+  # undervolt={
+  #     enable = true;
+  #  coreOffset = -100;
+  #   };
+
+
+
     logind = {
       lidSwitch = "suspend";
       powerKeyLongPress = "suspend";

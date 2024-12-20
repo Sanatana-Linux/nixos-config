@@ -12,5 +12,4 @@ with pkgs; [
   cudaPackages.cudnn
   cudaPackages.cutensor
   cudaPackages.cuda_opencl
-
 ]

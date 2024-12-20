@@ -103,7 +103,7 @@ in {
       intel-gpu-tools
       intel-media-sdk
       intel-ocl
-      intel-undervolt 
+      intel-undervolt
       intelmetool
       inteltool
       inxi
@@ -113,6 +113,7 @@ in {
       libdbusmenu-gtk3
       libva
       libva-utils
+      lockscreen
       libvdpau
       linuxHeaders
       luajitPackages.ldbus
@@ -199,13 +200,11 @@ in {
   };
 
   services = {
-    # Prefer doing this in advanced bios 
-  # undervolt={
-  #     enable = true;
-  #  coreOffset = -100;
-  #   };
-
-
+    # Prefer doing this in advanced bios
+    # undervolt={
+    #     enable = true;
+    #  coreOffset = -100;
+    #   };
 
     logind = {
       lidSwitch = "suspend";

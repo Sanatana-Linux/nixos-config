@@ -4,4 +4,5 @@
   material-symbols = pkgs.callPackage ./material-symbols {};
   lutgen = pkgs.callPackage ./lutgen {};
   imagecolorizer = pkgs.callPackage ./imagecolorizer {};
+  lockscreen = pkgs.callPackage ./lockscreen {};
 }

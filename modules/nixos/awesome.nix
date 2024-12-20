@@ -142,18 +142,11 @@ in {
       # ------------------------------------------------- #
       # lightdm configuration
       displayManager = {
-        # ly.enable = true;
+        setupCommands = ''
+          ${pkgs.xss-lock}/bin/xss-lock -l ${pkgs.multilockscreen} --lock dimblur --span
+        '';
         lightdm = {
           enable = true;
-          # TODO make this work
-          #  greeters.webkit2 = {
-          #   enable = true;
-          #   webkitTheme = fetchTarball {
-          #     url = "https://github.com/Sanatana-Linux/mahakali-webkit2-theme/archive/refs/tags/0.0.1.tar.gz";
-          #     sha256 = "0jkw26yd464fmjsgwv5hpavm67nksv3zi2cli8rcpbiqnw2hm8xx";
-          #   };
-          # };
-
           background = ../../hosts/shared/wallpaper/monokaiprospectrum.png;
           greeters.gtk = {
             enable = true;

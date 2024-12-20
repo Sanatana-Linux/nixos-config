@@ -12,6 +12,7 @@ with pkgs; [
   libvpl
   deface
   oggvideotools
+  lutgen
   xvidcore
   flowblade
   vidmerger

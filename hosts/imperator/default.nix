@@ -27,8 +27,6 @@ in {
     # Virtualization configuration
     ../shared/virtualization/default.nix
 
-    # Llama-Cpp configuration
-    #    ../shared/services/llama-cpp.nix
 
     # Specific configuration
     ./hardware-configuration.nix
@@ -43,7 +41,7 @@ in {
       verbose = false;
       compressor = "zstd";
       compressorArgs = ["-19"];
-      kernelModules = ["nvidia"];
+      kernelModules = ["nvidia" "ideapad_laptop"];
     };
     blacklistedKernelModules = ["nouveau"];
     tmp.cleanOnBoot = true;
@@ -113,7 +111,6 @@ in {
       libdbusmenu-gtk3
       libva
       libva-utils
-      lockscreen
       libvdpau
       linuxHeaders
       luajitPackages.ldbus

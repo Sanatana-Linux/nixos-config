@@ -6,6 +6,7 @@
 }: {
   imports = [
     ./xdg.nix
+    ./aichat.nix
     ./starship.nix
     ./cli.nix
     ./nix.nix

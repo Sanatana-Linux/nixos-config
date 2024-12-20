@@ -11,6 +11,7 @@
   panes = import ./panes.nix {inherit pkgs;};
   shrooms = import ./shrooms.nix {inherit pkgs;};
   updoot = import ./updoot.nix {inherit pkgs;};
+  mountbox = import ./mountbox.nix {inherit pkgs;};
 in {
   home.packages = with pkgs; [extract nux notes run shrooms gita nixfetch updoot panes];
 }

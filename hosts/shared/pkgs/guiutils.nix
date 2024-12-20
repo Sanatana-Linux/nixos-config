@@ -1,6 +1,7 @@
 {pkgs, ...}:
 with pkgs; [
   alsaequal
+  nemo-with-extensions
   appimage-run
   appimagekit
   appstream-glib

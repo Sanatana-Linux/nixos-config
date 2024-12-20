@@ -7,6 +7,10 @@
   programs.neovim = {
     enable = true;
     withNodeJs = true;
+     defaultEditor = true;
+  withRuby = true;
+      withPython3 = true;
+
     extraPackages = with pkgs; [
       jq
       tree-sitter
@@ -60,12 +64,10 @@
         magick
       ];
 
-    package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.neovim;
-
+    package = pkgs.neovim-unwrapped;
     viAlias = true;
     vimAlias = true;
     vimdiffAlias = true;
-    # package = pkgs.neovim-unwrapped;
   };
 
   home.activation.installNeoVimConfig = ''

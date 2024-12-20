@@ -50,7 +50,7 @@
     # Create the completion cache directory
     initExtra = ''
 
-            mkdir -p "${config.xdg.cacheHome}/zsh/completion-cache" # Use xdg directory for cache
+            $(mkdir -p "${config.xdg.cacheHome}/zsh/completion-cache" # Use xdg directory for cache)
 
             # Completion & Completion Menu Oprions
             # :completion:<function>:<completer>:<command>:<argument>:<tag>
@@ -105,8 +105,6 @@
       ZSH_AUTOSUGGEST_USE_ASYNC = "true"; # Use asynchronous autosuggestions.
       ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE = 40; # Maximum buffer size for autosuggestions.
       KEYTIMEOUT = 1;
-      VISUAL = "${lib.getBin neovim}/bin/nvim";
-      EDITOR = "${lib.getBin neovim}/bin/nvim";
     };
 
     # Shell aliases, grouped by category

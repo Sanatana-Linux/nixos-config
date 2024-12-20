@@ -15,6 +15,9 @@ with lib; let
       luajitPackages,
       fetchFromGitHub,
     }:
+
+# ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
+
       luajit.pkgs.buildLuaPackage rec {
         pname = "dbus_proxy";
         version = "0.10.3";
@@ -36,7 +39,10 @@ with lib; let
         '';
       })
     {};
-  # ------------------ajit     ------------------------------- #
+
+
+# ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
+
   async-lua =
     pkgs.callPackage
     ({
@@ -61,7 +67,8 @@ with lib; let
         propagatedBuildInputs = [luajit];
       })
     {};
-  # ------------------------------------------------- #
+
+# ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
   lgi-async-extra =
     pkgs.callPackage
     ({
@@ -87,7 +94,8 @@ with lib; let
         propagatedBuildInputs = [async-lua luajit luajitPackages.lgi];
       })
     {};
-  # ------------------------------------------------- #
+
+# ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
   # Insure Awesome can access lgi
   getLuaPath = lib: dir: "${lib}/${dir}/lua/${pkgs.luajit.luaversion}";
   makeSearchPath = lib.concatMapStrings (
@@ -97,7 +105,8 @@ with lib; let
       + " --search "
       + (getLuaPath path "lib")
   );
-  # ------------------------------------------------- #
+
+# ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
   # lua modules that Awesome requires
 
   luaModules = with pkgs.luajitPackages; [

@@ -1,6 +1,7 @@
 {pkgs, ...}:
 with pkgs; [
   _7zz
+  p7zip-rar
   advancecomp
   ouch
   archivemount

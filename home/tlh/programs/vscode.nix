@@ -162,8 +162,7 @@ in {
       };
 
       workbench = {
-        # change this to something less vomit inducing
-        #        colorTheme = "Catppuccin Macchiato";
+settings.enableEdit = false;
         editor.tabCloseButton = "left";
         iconTheme = "material-icon-theme";
         list.smoothScrolling = true;

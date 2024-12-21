@@ -82,6 +82,7 @@ in {
       grub = {
         enable = true;
         device = "nodev";
+        memtest86.enable = true;
         efiSupport = true;
         configurationLimit = 4;
         useOSProber = true;
@@ -199,39 +200,11 @@ in {
     hostName = "imperator";
     networkmanager.enable = true;
   };
-
-
-
-
-
-
-
   services = {
-
-
-
-
-
-
     logind = {
       lidSwitch = "suspend";
       powerKeyLongPress = "suspend";
     };
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     libinput = {
       enable = true;
       touchpad = {
@@ -244,7 +217,6 @@ in {
   services.xserver.videoDrivers = ["nvidia"]; # got problems with nouveau, would give it another try
   services.xserver.enable = true;
   services.xserver.dpi = 189;
-  # Use custom Awesome WM module
   services.xserver.windowManager.awesome.enable = true;
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

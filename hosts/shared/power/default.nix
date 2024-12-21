@@ -11,7 +11,7 @@
      services.upower = {
        enable = true;
        # Adjusts the action taken at the point of the battery being critical and adjusts when that is
-       criticalPowerAction = "Suspend";
+    #criticalPowerAction = "Hibernate";
        percentageLow = 15;
        percentageCritical = 8;
        percentageAction = 5;

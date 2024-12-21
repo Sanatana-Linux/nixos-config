@@ -5,6 +5,7 @@
 }: {
   imports = [
     ./oomd.nix
+    ./undervolt.nix
     ./zram.nix
   ];
 

@@ -14,7 +14,6 @@
       ./programs
       ./security
       ./services
-      ./performance
     ]
     ++ (builtins.attrValues outputs.nixosModules);
 

@@ -7,10 +7,10 @@
   programs.neovim = {
     enable = true;
     withNodeJs = true;
-     defaultEditor = true;
-  withRuby = true;
-      withPython3 = true;
-
+    defaultEditor = true;
+    withRuby = true;
+    withPython3 = true;
+    package = pkgs.neovim;
     extraPackages = with pkgs; [
       jq
       tree-sitter
@@ -64,7 +64,6 @@
         magick
       ];
 
-    package = pkgs.neovim-unwrapped;
     viAlias = true;
     vimAlias = true;
     vimdiffAlias = true;

@@ -49,24 +49,37 @@ in {
     profiles.${profile} = {
       id = 0;
       extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-        refined-github
-        ublock-origin
+        add-custom-search-engine
         auto-sort-bookmarks
+        auto-tab-discard
+        bitwarden
+        buster-captcha-solver
+        consent-o-matic
+        cookie-quick-manager
+        copy-selection-as-markdown
+        don-t-fuck-with-paste
+        export-cookies-txt
         export-tabs-urls-and-titles
         firefox-translations
         form-history-control
-        bitwarden
-        buster-captcha-solver
-        keybase
-        link-gopher
-        tampermonkey
-        metamask
-        search-by-image
-        undoclosetabbutton
-        view-image
-        form-history-control
         foxytab
-        stylus
+        gaoptout
+        github-file-icons
+        ipfs-companion
+        istilldontcareaboutcookies
+        keybase
+        languagetool
+        lexicon
+        link-gopher
+        lovely-forks
+        raindropio
+        re-enable-right-click
+        refined-github
+        search-engines-helper
+        side-view
+        stylebot-web
+        ublock-origin
+        view-image
       ];
 
       settings = {

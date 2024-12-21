@@ -50,7 +50,7 @@
     # Create the completion cache directory
     initExtra = ''
 
-            $(mkdir -p "${config.xdg.cacheHome}/zsh/completion-cache" # Use xdg directory for cache)
+            mkdir -p "${config.xdg.cacheHome}/zsh/completion-cache" # Use xdg directory for cache
 
             # Completion & Completion Menu Oprions
             # :completion:<function>:<completer>:<command>:<argument>:<tag>

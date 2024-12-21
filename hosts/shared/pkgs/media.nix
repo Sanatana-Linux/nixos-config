@@ -2,6 +2,7 @@
 with pkgs; [
   appindicator-sharp
   image-roll
+  lsix
   olive-editor
   openshot-qt
   libsForQt5.libopenshot-audio

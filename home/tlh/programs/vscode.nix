@@ -130,7 +130,7 @@ in {
         eol = "\n";
         insertFinalNewline = true;
         trimTrailingWhitespace = true;
-
+        autoSaveDelay = 1000;
         exclude = {
           "**/.classpath" = true;
           "**/.direnv" = true;
@@ -138,6 +138,13 @@ in {
           "**/.git" = true;
           "**/.project" = true;
           "**/.settings" = true;
+          "**/.settings*" = true;
+        };
+        autoSaveExclude = {
+          "**/.settings.json" = true;
+        };
+        watcherExclude = {
+          "**/.settings.json" = true;
         };
       };
 
@@ -162,7 +169,8 @@ in {
       };
 
       workbench = {
-settings.enableEdit = false;
+        settings.enableEdit = false;
+        ignoreInvalidSettings = true;
         editor.tabCloseButton = "left";
         iconTheme = "material-icon-theme";
         list.smoothScrolling = true;

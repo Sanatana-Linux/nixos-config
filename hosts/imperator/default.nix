@@ -27,6 +27,12 @@ in {
     # Virtualization configuration
     ../shared/virtualization/default.nix
 
+    #  laptop power management
+    ../shared/power/default.nix
+
+    # performance tweaks
+    ../shared/performance/default.nix
+
 
     # Specific configuration
     ./hardware-configuration.nix
@@ -46,9 +52,13 @@ in {
     blacklistedKernelModules = ["nouveau"];
     tmp.cleanOnBoot = true;
     kernelPackages = pkgs.linuxPackages_xanmod_latest;
-    extraModulePackages = [config.boot.kernelPackages.nvidia_x11 config.boot.kernelPackages.acpi_call config.boot.kernelPackages.lenovo-legion-module config.boot.kernelPackages.acpi_call];
+    extraModulePackages = [config.boot.kernelPackages.nvidia_x11 config.boot.kernelPackages.acpi_call config.boot.kernelPackages.lenovo-legion-module config.boot.kernelPackages.acpi_call config.boot.kernelPackages.cpupower ];
 
     kernelParams = [
+
+      # I too enjoy living dangerously
+      # check if vulnerable with: grep . /sys/devices/system/cpu/vulnerabilities/*
+      "mitigations=off"
       # ignore access time (atime) updates on files, except when they coincide with updates to the ctime or mtime
       "rootflags=noatime"
 
@@ -92,6 +102,7 @@ in {
 
     systemPackages = with pkgs; [
       cudatoolkit
+      cpufrequtils
       nvme-cli
       dbus
       dbus-broker
@@ -149,9 +160,8 @@ in {
       nvidiaPersistenced = true;
       powerManagement = {
         enable = true;
-        finegrained = true;
+        # finegrained = true;
       };
-      #  nvidiaPersistenced = true;
       open = false;
       package = nvidiaDriverChannel;
       prime = {
@@ -190,39 +200,38 @@ in {
     networkmanager.enable = true;
   };
 
-  powerManagement = {
-    enable = true;
-    powertop.enable = true;
-    cpuFreqGovernor = "performance";
-  };
+
+
+
+
+
 
   services = {
-    # Prefer doing this in advanced bios
-    # undervolt={
-    #     enable = true;
-    #  coreOffset = -100;
-    #   };
+
+
+
+
+
 
     logind = {
       lidSwitch = "suspend";
       powerKeyLongPress = "suspend";
     };
-    thermald.enable = true;
+  
 
-    # Power Management
-    #     tlp.enable = true;
-    # upower = {
-    #   enable = true;
-    #   # Adjusts the action taken at the point of the battery being critical and adjusts when that is
-    #   criticalPowerAction = "HybridSleep";
-    #   percentageLow = 15;
-    #   percentageCritical = 8;
-    #   percentageAction = 5;
-    #   usePercentageForPolicy = true;
-    # };
-    # handle ACPI events
-    acpid.enable = true;
-    power-profiles-daemon.enable = true;
+
+
+
+
+
+
+
+
+
+
+
+
+
     libinput = {
       enable = true;
       touchpad = {

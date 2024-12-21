@@ -30,7 +30,7 @@ with pkgs;
         websockets
         wheel
         sortedcontainers
-        pynvim
+        
       ]))
   ]
   ++ [

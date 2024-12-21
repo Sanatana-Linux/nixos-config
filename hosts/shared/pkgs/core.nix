@@ -1,6 +1,7 @@
 {pkgs, ...}:
 with pkgs; [
   alejandra
+  glibc
   sysctl
   sysstat
   sysvinit
@@ -124,6 +125,7 @@ with pkgs; [
   tbb
   tealdeer
   template-glib
+  glib
   tor
   toybox
   tpm-tools

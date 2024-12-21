@@ -2,15 +2,16 @@
   pkgs,
   config,
   inputs,
+overlays,
   ...
 }: {
+  
   programs.neovim = {
     enable = true;
     withNodeJs = true;
     defaultEditor = true;
     withRuby = true;
     withPython3 = true;
-    package = pkgs.neovim;
     extraPackages = with pkgs; [
       jq
       tree-sitter
@@ -47,6 +48,7 @@
       tree-sitter-grammars.tree-sitter-typescript
       tree-sitter-grammars.tree-sitter-javascript
       tree-sitter-grammars.tree-sitter-dockerfile
+      python312Packages.pynvim
 
       yarn
 

@@ -1,1 +1,3 @@
 .direnv/*
+./.direnv/nix-profile*
+

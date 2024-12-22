@@ -6,6 +6,7 @@
   ifTheyExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
 in {
   # just until implementing the impermanence module
+  programs.zsh.enable = true;
   users.mutableUsers = true;
   users.users.smg = {
     description = "Sara Marie Guidotti";

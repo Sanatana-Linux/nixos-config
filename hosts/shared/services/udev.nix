@@ -14,12 +14,12 @@
         pkgs.android-udev-rules
       ];
     };
-    udiskie = {
-      enable = true;
-      automount = true;
-      tray = "never";
-      notify = true;
-    };
+    # udiskie = {
+    #   enable = true;
+    #   automount = true;
+    #   tray = "never";
+    #   notify = true;
+    # };
   };
   programs.udevil.enable = true;
 }

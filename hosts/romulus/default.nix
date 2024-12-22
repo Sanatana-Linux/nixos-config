@@ -50,11 +50,14 @@
       verbose = false;
       compressor = "zstd";
       compressorArgs = ["-19"];
+
+        kernelModules = ["nvidia" "ideapad_laptop" "legion_laptop"];
     };
 
+  blacklistedKernelModules = ["nouveau"];
     tmp.cleanOnBoot = true;
     kernelPackages = pkgs.linuxPackages_xanmod_latest;
-    extraModulePackages = [config.boot.kernelPackages.acpi_call config.boot.kernelPackages.lenovo-legion-module];
+    extraModulePackages = [config.boot.kernelPackages.acpi_call config.boot.kernelPackages.lenovo-legion-module config.boot.kernelPackages.nvidia_x11];
 
     kernelParams = [
       # I too enjoy living dangerously
@@ -67,6 +70,13 @@
       "quiet"
       # disable usb autosuspend
       "usbcore.autosuspend=-1"
+      
+          # Nvidia dGPU settings
+      "nvidia_drm.fbdev=1"
+
+      "nvidia-drm.modeset=1"
+
+
     ];
 
     loader = {
@@ -122,10 +132,6 @@
     enableAllFirmware = true;
     enableRedistributableFirmware = true;
     acpilight.enable = true;
-    bluetooth = {
-      enable = true;
-      package = pkgs.bluez;
-    };
   };
 
   networking = {

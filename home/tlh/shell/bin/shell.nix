@@ -18,7 +18,7 @@ for p in "$@"; do
 done
 
 # Construct the command
-cmd="SHELL=$(which zsh) IN_NIX_SHELL=\"impure\" nix shell ${os[*]} ${ps[*]}"
+cmd="SHELL=$(which zsh) IN_NIX_SHELL=\"impure\" nix shell $os[*] $ps[*]"
 echo "Executing \`$cmd\`..."
 
 # Execute the command

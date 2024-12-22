@@ -37,6 +37,9 @@
     # Nvidia Driver Support
     ../shared/hardware/nvidia.nix
 
+    # xfce4 
+    ../shared/desktop/xfce.nix
+
     # Specific configuration
     ./hardware-configuration.nix
 
@@ -50,11 +53,12 @@
       verbose = false;
       compressor = "zstd";
       compressorArgs = ["-19"];
+        kernelModules = ["nvidia" "ideapad_laptop" "lenovo_legion"];
     };
-
+  blacklistedKernelModules = ["nouveau"];
     tmp.cleanOnBoot = true;
     kernelPackages = pkgs.linuxPackages_xanmod_latest;
-    extraModulePackages = [config.boot.kernelPackages.acpi_call config.boot.kernelPackages.lenovo-legion-module];
+    extraModulePackages = [config.boot.kernelPackages.acpi_call  config.boot.kernelPackages.lenovo-legion-module config.boot.kernelPackages.nvidia_x11];
 
     kernelParams = [
       # I too enjoy living dangerously
@@ -67,6 +71,12 @@
       "quiet"
       # disable usb autosuspend
       "usbcore.autosuspend=-1"
+
+
+          # Nvidia dGPU settings
+      "nvidia_drm.fbdev=1"
+      "nvidia-drm.modeset=1"
+
     ];
 
     loader = {
@@ -122,10 +132,6 @@
     enableAllFirmware = true;
     enableRedistributableFirmware = true;
     acpilight.enable = true;
-    bluetooth = {
-      enable = true;
-      package = pkgs.bluez;
-    };
   };
 
   networking = {
@@ -147,7 +153,7 @@
   };
 
   services.xserver.dpi = 189;
-  services.xserver.windowManager.awesome.enable = true;
+  #  services.xserver.windowManager.awesome.enable = true;
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "24.11";

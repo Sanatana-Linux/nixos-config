@@ -20,7 +20,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixos-hardware.url = "github:Thomashighbaugh/nixos-hardware";
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixos-generators.url = "github:nix-community/nixos-generators";
     rust-overlay.url = "github:oxalica/rust-overlay";
     higgs-boson = {
@@ -53,6 +53,8 @@
     nixpkgs,
     home-manager,
     nixos-hardware,
+    nixos-generators,
+    neovim-nightly-overlay,
     bhairava-grub-theme,
     nur,
     chaotic,

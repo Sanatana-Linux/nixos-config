@@ -10,8 +10,8 @@
       inputs.home-manager.nixosModules.home-manager
       ./base
       ./environment
-      ./networking
       ./programs
+      ./hardware/networking.nix
       ./security
       ./services
     ]

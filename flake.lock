@@ -953,6 +953,26 @@
         "type": "github"
       }
     },
+    "nsearch": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1723245584,
+        "narHash": "sha256-7qZozlMclJZvVqIj2r1mw/FKVcEnE6DpGPGbm6ERsVI=",
+        "owner": "niksingh710",
+        "repo": "nsearch",
+        "rev": "38d01a89899b918e29a22dd6ff9ad283cf5f6e3f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "niksingh710",
+        "repo": "nsearch",
+        "type": "github"
+      }
+    },
     "nur": {
       "inputs": {
         "flake-parts": "flake-parts_3",
@@ -1009,6 +1029,7 @@
         "nixpkgs-f2k": "nixpkgs-f2k",
         "nixpkgs-master": "nixpkgs-master",
         "nps": "nps",
+        "nsearch": "nsearch",
         "nur": "nur",
         "rust-overlay": "rust-overlay",
         "sf-mono-liga-src": "sf-mono-liga-src"

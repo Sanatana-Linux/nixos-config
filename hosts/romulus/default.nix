@@ -6,9 +6,7 @@
   pkgs,
   bhairava-grub-theme,
   ...
-}: let
-  nvidiaDriverChannel = config.boot.kernelPackages.nvidiaPackages.latest; # stable, beta, etc.
-in {
+}: {
   disabledModules = [
     # Disable the default Awesome WM module
     "services/x11/window-managers/awesome.nix"
@@ -18,7 +16,7 @@ in {
     # Shared configuration across all machines
     ../shared
 
-    # Select the user configuration
+    # Select the user configuration inputs.nsearch.packages.${pkgs.system}.default
     ../shared/users/tlh.nix
 
     # Ollama's configuration
@@ -33,6 +31,11 @@ in {
     # performance tweaks
     ../shared/performance/default.nix
 
+    # bluetooth support
+    ../shared/hardware/bluetooth.nix
+
+    # Nvidia Driver Support
+    ../shared/hardware/nvidia.nix
 
     # Specific configuration
     ./hardware-configuration.nix
@@ -47,15 +50,13 @@ in {
       verbose = false;
       compressor = "zstd";
       compressorArgs = ["-19"];
-      kernelModules = ["nvidia" "ideapad_laptop"];
     };
-    blacklistedKernelModules = ["nouveau"];
+
     tmp.cleanOnBoot = true;
     kernelPackages = pkgs.linuxPackages_xanmod_latest;
-    extraModulePackages = [config.boot.kernelPackages.nvidia_x11 config.boot.kernelPackages.acpi_call config.boot.kernelPackages.lenovo-legion-module config.boot.kernelPackages.acpi_call config.boot.kernelPackages.cpupower ];
+    extraModulePackages = [config.boot.kernelPackages.acpi_call config.boot.kernelPackages.lenovo-legion-module];
 
     kernelParams = [
-
       # I too enjoy living dangerously
       # check if vulnerable with: grep . /sys/devices/system/cpu/vulnerabilities/*
       "mitigations=off"
@@ -66,10 +67,6 @@ in {
       "quiet"
       # disable usb autosuspend
       "usbcore.autosuspend=-1"
-
-      # Nvidia dGPU settings
-      "nvidia_drm.fbdev=1"
-      "nvidia-drm.modeset=1"
     ];
 
     loader = {
@@ -92,17 +89,7 @@ in {
   };
 
   environment = {
-    variables = {
-      GDK_SCALE = "1";
-      GDK_DPI_SCALE = "0.75";
-      _JAVA_OPTIONS = "-Dsun.java2d.uiScale=1";
-      GBM_BACKEND = "nvidia-drm";
-      LIBVA_DRIVER_NAME = "nvidia"; # hardware acceleration
-      #   __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-    };
-
     systemPackages = with pkgs; [
-      cudatoolkit
       cpufrequtils
       nvme-cli
       dbus
@@ -111,23 +98,16 @@ in {
       intel-compute-runtime
       intel-gmmlib
       intel-gpu-tools
-      intel-media-sdk
       intel-ocl
       intel-undervolt
       intelmetool
       inteltool
       inxi
       lenovo-legion
-      libGL
       libdbusmenu
       libdbusmenu-gtk3
-      libva
-      libva-utils
-      libvdpau
       linuxHeaders
       luajitPackages.ldbus
-      mesa
-      nvidia-texture-tools
       polkit_gnome
       undervolt
       wirelesstools
@@ -137,15 +117,6 @@ in {
   };
   nixpkgs.config = {
     allowUnfree = true;
-    cudaSupport = true;
-    nvidia.acceptLicense = true;
-    allowUnfreePredicate = pkg:
-      builtins.elem (lib.getName pkg) [
-        "cudatoolkit"
-        "nvidia-persistenced"
-        "nvidia-settings"
-        "nvidia-x11"
-      ];
   };
   hardware = {
     enableAllFirmware = true;
@@ -155,49 +126,10 @@ in {
       enable = true;
       package = pkgs.bluez;
     };
-    nvidia = {
-      modesetting.enable = true;
-      nvidiaSettings = true;
-      nvidiaPersistenced = true;
-      powerManagement = {
-        enable = true;
-        # finegrained = true;
-      };
-      open = false;
-      package = nvidiaDriverChannel;
-      prime = {
-        reverseSync.enable = true;
-        allowExternalGpu = false;
-        # sync.enable = true;
-        # offload = {
-        #   enable = true;
-        #   enableOffloadCmd = true;
-        # };
-        # Multiple uses are available, check the NVIDIA NixOS wiki
-        # Use "lspci | grep -E 'VGA|3D'" to get PCI-bus IDs
-        intelBusId = "PCI:00:02:0";
-        nvidiaBusId = "PCI:01:00:0";
-      };
-    };
-    graphics = {
-      enable = true;
-      enable32Bit = true;
-      extraPackages = with pkgs; [
-        nvidiaDriverChannel
-        intel-vaapi-driver
-        xorg_sys_opengl
-        mlx42
-        glfw
-        vaapiVdpau
-        mesa
-        libvdpau-va-gl
-        nvidia-vaapi-driver
-      ];
-    };
   };
 
   networking = {
-    hostName = "imperator";
+    hostName = "romulus";
     networkmanager.enable = true;
   };
   services = {
@@ -214,8 +146,6 @@ in {
     };
   };
 
-  services.xserver.videoDrivers = ["nvidia"]; # got problems with nouveau, would give it another try
-  services.xserver.enable = true;
   services.xserver.dpi = 189;
   services.xserver.windowManager.awesome.enable = true;
 

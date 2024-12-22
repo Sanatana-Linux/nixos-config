@@ -17,11 +17,6 @@
     ]
     ++ (builtins.attrValues outputs.nixosModules);
 
-
-  
-
-
-
   # Set up everything home-manager related for my user
   home-manager = {
     useUserPackages = true;

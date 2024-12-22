@@ -5,10 +5,7 @@ with pkgs; [
   llama-cpp
   nextjs-ollama-llm-ui
   tgpt
-  nvidia-container-toolkit
-  nvidia-docker
-  ollama
-  cudaPackages.cudnn
-  cudaPackages.cutensor
-  cudaPackages.cuda_opencl
+  ollama-cuda
+  python312Packages.ollama
+  gollama
 ]

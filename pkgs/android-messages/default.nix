@@ -1,4 +1,9 @@
-{ lib, appimageTools, fetchurl, makeDesktopItem }:
+{
+  lib,
+  appimageTools,
+  fetchurl,
+  makeDesktopItem,
+}:
 # Only available for x86_64-linux
 let
   version = "5.4.5";
@@ -15,27 +20,27 @@ let
     name = "Messages";
     exec = "${pname} --enable-features=UseOzonePlatform --ozone-platform=wayland";
     desktopName = "Android Messages";
-    categories = [ "Network" ];
-    keywords = [ "messages" "google messages" "sms" ];
+    categories = ["Network"];
+    keywords = ["messages" "google messages" "sms"];
   };
 
-  appimageContents = appimageTools.extractType1 { inherit name src; };
+  appimageContents = appimageTools.extractType1 {inherit name src;};
 in
-appimageTools.wrapType1 {
-  inherit name src;
+  appimageTools.wrapType1 {
+    inherit name src;
 
-  extraInstallCommands = ''
-    mv $out/bin/${name} $out/bin/${pname}
-    cp -r ${desktopItem}/share/* $out/share
-  '';
+    extraInstallCommands = ''
+      mv $out/bin/${name} $out/bin/${pname}
+      cp -r ${desktopItem}/share/* $out/share
+    '';
 
-  meta = {
-    description = "Google's Android Messages SMS client as a desktop app.";
-    homepage = "https://github.com/OrangeDrangon/android-messages-desktop";
-    downloadPage = "https://github.com/OrangeDrangon/android-messages-desktop/releases";
-    license = lib.licenses.asl20;
-    sourceProvenance = with lib.sourceTypes; [ binaryNativeCode ];
-    maintainers = with lib.maintainers; [ niksingh710 ];
-    platforms = [ "x86_64-linux" ];
-  };
-}
+    meta = {
+      description = "Google's Android Messages SMS client as a desktop app.";
+      homepage = "https://github.com/OrangeDrangon/android-messages-desktop";
+      downloadPage = "https://github.com/OrangeDrangon/android-messages-desktop/releases";
+      license = lib.licenses.asl20;
+      sourceProvenance = with lib.sourceTypes; [binaryNativeCode];
+      maintainers = with lib.maintainers; [niksingh710];
+      platforms = ["x86_64-linux"];
+    };
+  }

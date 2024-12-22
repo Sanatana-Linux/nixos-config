@@ -3,15 +3,15 @@
     networkmanager = {
       enable = true;
       unmanaged = ["docker0" "rndis0"];
-      #   wifi = {
-      #    macAddress = "random";
-      #   powersave = true;
-      # };
+         wifi = {
+          macAddress = "random";
+         powersave = true;
+       };
     };
 
     firewall = {
       enable = true;
-      allowedTCPPorts = [22 69 80 443 1087 3456];
+      allowedTCPPorts = [22 69 80 443 1087 3456 11434];
       allowedUDPPortRanges = [
         {
           from = 4000;

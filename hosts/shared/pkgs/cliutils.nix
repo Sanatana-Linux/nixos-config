@@ -2,7 +2,7 @@
 with pkgs; [
   aria
   viu
-terminal-parrot
+  terminal-parrot
   bat
   beep
   brightnessctl

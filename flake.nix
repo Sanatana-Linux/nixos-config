@@ -42,6 +42,10 @@
       url = "github:nix-community/neovim-nightly-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nsearch = {
+  url = "github:niksingh710/nsearch";
+  inputs.nixpkgs.follows = "nixpkgs";
+};
   };
 
   outputs = {
@@ -52,6 +56,7 @@
     bhairava-grub-theme,
     nur,
     chaotic,
+    nsearch,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -89,7 +94,7 @@
 
       # ┣━━━━━━━━━━━━━━━━━━━━━━┫ Lenovo Legion Pro ┣━━━━━━━━━━━━━━━━━━━━━━┫
 
-      imperator = nixpkgs.lib.nixosSystem {
+      romulus = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [
           nur.modules.nixos.default
@@ -102,7 +107,9 @@
             home-manager = {
               useUserPackages = true;
               backupFileExtension = "bak";
-              users.tlh = {imports = [./home/tlh/default.nix];};
+              users = {
+                  tlh = {imports = [./home/tlh/default.nix];};
+                };
             };
           }
         ];
@@ -116,8 +123,42 @@
           ./home/tlh/default.nix
         ];
       };
-    };
 
+
+
+
+# ┣━━━━━━━━━━━━━━━━━━┫ Sara's Lenovo Legion Pro ┣━━━━━━━━━━━━━━━━┫
+ remus = nixpkgs.lib.nixosSystem {
+       specialArgs = {inherit inputs outputs;};
+       modules = [
+         nur.modules.nixos.default
+         nixos-hardware.nixosModules.lenovo-legion-16irx9h
+         ./hosts/imperator
+         bhairava-grub-theme.nixosModule
+         home-manager.nixosModules.home-manager
+         chaotic.nixosModules.default
+         {
+           home-manager = {
+             useUserPackages = true;
+             backupFileExtension = "bak";
+             users = {
+                 smg = {imports = [./home/smg/default.nix];};
+               };
+           };
+         }
+       ];
+     };
+   };
+   homeConfigurations = {
+      smg = inputs.home-manager.lib.homeManagerConfiguration {
+       pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
+       extraSpecialArgs = {inherit inputs outputs self;};
+       modules = [
+         ./home/smg/default.nix
+     ];
+   };
+     };
+    
     # ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
 
     macbook-air = self.nixosConfigurations.macbook-air.config.system.build.toplevel;

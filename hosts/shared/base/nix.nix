@@ -48,6 +48,7 @@
         "root"
         "@wheel"
         "tlh"
+        "smg"
       ];
       # Allow the store to optimize itself
       auto-optimise-store = true;
@@ -77,7 +78,7 @@
       use-xdg-base-directories = true;
     };
 
-    package = pkgs.nixVersions.git;
+    # package = pkgs.nixVersions.git;
 
     gc = {
       automatic = true;

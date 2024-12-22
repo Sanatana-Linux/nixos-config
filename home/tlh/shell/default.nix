@@ -23,7 +23,6 @@
       "$GOBIN"
       "${config.home.homeDirectory}/.cargo/bin"
       "${config.home.homeDirectory}/.yarn/bin"
-      "/var/lib/flatpak/exports/share"
     ];
 
     sessionVariables = {

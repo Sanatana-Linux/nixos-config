@@ -99,7 +99,7 @@
         modules = [
           nur.modules.nixos.default
           nixos-hardware.nixosModules.lenovo-legion-16irx9h
-          ./hosts/imperator
+          ./hosts/romulus
           bhairava-grub-theme.nixosModule
           home-manager.nixosModules.home-manager
           chaotic.nixosModules.default
@@ -133,7 +133,7 @@
        modules = [
          nur.modules.nixos.default
          nixos-hardware.nixosModules.lenovo-legion-16irx9h
-         ./hosts/imperator
+         ./hosts/remus
          bhairava-grub-theme.nixosModule
          home-manager.nixosModules.home-manager
          chaotic.nixosModules.default
@@ -162,6 +162,7 @@
     # ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
 
     macbook-air = self.nixosConfigurations.macbook-air.config.system.build.toplevel;
-    imperator = self.nixosConfigurations.imperator.config.system.build.toplevel;
+    remus = self.nixosConfigurations.remus.config.system.build.toplevel;
+    romulus = self.nixosConfigurations.romulus.config.system.build.toplevel;
   };
 }

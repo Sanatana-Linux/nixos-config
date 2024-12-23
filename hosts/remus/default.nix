@@ -32,8 +32,6 @@
     # Nvidia Driver Support
     ../shared/hardware/nvidia.nix
 
-    # lightdm
-    ../shared/display-manager/lightdm.nix
     # xfce4
     ../shared/desktop/xfce.nix
 

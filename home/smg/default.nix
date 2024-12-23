@@ -53,7 +53,7 @@
 
   home = {
     username = "smg";
-    homeDirectory = "/home/tlh";
+    homeDirectory = "/home/smg";
     stateVersion = "24.11";
   };
 }

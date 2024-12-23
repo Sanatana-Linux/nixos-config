@@ -11,7 +11,7 @@
       evince
       foliate
       font-manager
-      gnome.file-roller
+      file-roller
       libqalculate
       libreoffice
       orca
@@ -96,5 +96,4 @@
     };
   };
 
-  sound.enable = true;
 }

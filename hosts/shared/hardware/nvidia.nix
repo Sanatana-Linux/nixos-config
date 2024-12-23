@@ -71,7 +71,6 @@ in {
       enable32Bit = true;
       extraPackages = with pkgs; [
         nvidiaDriverChannel
-        intel-vaapi-driver
         mlx42
         glfw
         vaapiVdpau

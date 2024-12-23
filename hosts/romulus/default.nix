@@ -51,8 +51,7 @@
       verbose = false;
       compressor = "zstd";
       compressorArgs = ["-19"];
-
-      kernelModules = ["nvidia" "ideapad_laptop" "legion_laptop"];
+      kernelModules = ["nvidia"  "legion_laptop"];
     };
 
     blacklistedKernelModules = ["nouveau"];
@@ -130,7 +129,6 @@
   hardware = {
     enableAllFirmware = true;
     enableRedistributableFirmware = true;
-    acpilight.enable = true;
   };
 
   networking = {

@@ -8,7 +8,6 @@
     cpufrequtils
     intel-compute-runtime
     intel-gmmlib
-    intel-ocl
     intelmetool
     inteltool
     inxi

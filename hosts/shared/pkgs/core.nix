@@ -163,7 +163,6 @@ with pkgs; [
   xorg.xcbutilwm
   xorg.xconsole
   xorg.xev
-  xorg.xf86videointel
   xorg.xfontsel
   xorg.xhost
   xorg.xinit

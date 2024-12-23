@@ -62,7 +62,7 @@
     ...
   } @ inputs: let
     inherit (self) outputs;
-    forEachSystem = nixpkgs.lib.genAttrs ["x86_64-linux"]; # when needed add "aarch64-linux"
+    forEachSystem = nixpkgs.lib.genAttrs ["x86_64-linux" "aarch64-linux"]; # when needed add "aarch64-linux"
     forEachPkgs = f: forEachSystem (sys: f nixpkgs.legacyPackages.${sys});
   in {
     nixosModules = import ./modules/nixos;
@@ -116,7 +116,12 @@
           }
         ];
       };
-    };
+    
+    
+
+
+
+
     homeConfigurations = {
       tlh = inputs.home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
@@ -125,13 +130,20 @@
           ./home/tlh/default.nix
         ];
       };
-
+      smg = inputs.home-manager.lib.homeManagerConfiguration {
+       pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
+       extraSpecialArgs = {inherit inputs outputs self ;};
+       modules = [
+         ./home/smg/default.nix
+	 ];
+	     };
+	};
 
 
 
 # ┣━━━━━━━━━━━━━━━━━━┫ Sara's Lenovo Legion Pro ┣━━━━━━━━━━━━━━━━┫
  remus = nixpkgs.lib.nixosSystem {
-       specialArgs = {inherit inputs outputs;};
+       specialArgs = {inherit inputs outputs self;};
        modules = [
          nur.modules.nixos.default
          nixos-hardware.nixosModules.lenovo-legion-16irx9h
@@ -151,15 +163,9 @@
        ];
      };
    };
-   homeConfigurations = {
-      smg = inputs.home-manager.lib.homeManagerConfiguration {
-       pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
-       extraSpecialArgs = {inherit inputs outputs self;};
-       modules = [
-         ./home/smg/default.nix
-     ];
-   };
-     };
+
+
+
     
     # ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
 

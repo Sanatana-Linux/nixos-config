@@ -17,7 +17,7 @@
     ../shared
 
     # Select the user configuration inputs.nsearch.packages.${pkgs.system}.default
-    ../shared/users/tlh.nix
+    ../shared/users/smg.nix
 
     # Ollama's configuration
     ../shared/services/ollama.nix

@@ -1,7 +1,7 @@
 {
   lib,
   pkgs,
-inputs,
+  inputs,
   ...
 }: {
   imports = [./nix-ld.nix ./thunar.nix];
@@ -35,8 +35,7 @@ inputs,
   };
 
   # for nux search
-environment.systemPackages = [
-  inputs.nsearch.packages.${pkgs.system}.default
-];
-
+  environment.systemPackages = [
+    inputs.nsearch.packages.${pkgs.system}.default
+  ];
 }

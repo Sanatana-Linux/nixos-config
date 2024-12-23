@@ -7,11 +7,6 @@
   bhairava-grub-theme,
   ...
 }: {
-  disabledModules = [
-    # Disable the default Awesome WM module
-    "services/x11/window-managers/awesome.nix"
-  ];
-
   imports = [
     # Shared configuration across all machines
     ../shared
@@ -31,7 +26,7 @@
     # performance tweaks
     ../shared/performance/default.nix
 
-# bluetooth support
+    # bluetooth support
     ../shared/hardware/bluetooth.nix
 
     # Nvidia Driver Support
@@ -43,8 +38,8 @@
     # LightDM
     ../shared/display-manager/lightdm.nix
 
-    # AwesomeWM 
-    ../shared/desktop/awesomewm.nix 
+    # AwesomeWM
+    ../shared/desktop/awesomewm.nix
 
     # Packages
     ./pkgs.nix
@@ -57,10 +52,10 @@
       compressor = "zstd";
       compressorArgs = ["-19"];
 
-        kernelModules = ["nvidia" "ideapad_laptop" "legion_laptop"];
+      kernelModules = ["nvidia" "ideapad_laptop" "legion_laptop"];
     };
 
-  blacklistedKernelModules = ["nouveau"];
+    blacklistedKernelModules = ["nouveau"];
     tmp.cleanOnBoot = true;
     kernelPackages = pkgs.linuxPackages_xanmod_latest;
     extraModulePackages = [config.boot.kernelPackages.acpi_call config.boot.kernelPackages.lenovo-legion-module config.boot.kernelPackages.nvidia_x11];
@@ -76,13 +71,11 @@
       "quiet"
       # disable usb autosuspend
       "usbcore.autosuspend=-1"
-      
-          # Nvidia dGPU settings
+
+      # Nvidia dGPU settings
       "nvidia_drm.fbdev=1"
 
       "nvidia-drm.modeset=1"
-
-
     ];
 
     loader = {
@@ -160,7 +153,6 @@
 
   services.xserver.dpi = 189;
 
-  
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "24.11";
-} 
+}

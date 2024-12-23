@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   environment = {
     systemPackages = with pkgs; [
       blueman
@@ -95,5 +93,4 @@
       desktopManager.xfce.enable = true;
     };
   };
-
 }

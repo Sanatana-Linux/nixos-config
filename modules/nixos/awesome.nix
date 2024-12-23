@@ -142,15 +142,15 @@ in {
 
   config = mkIf cfg.enable {
     services.displayManager.defaultSession = "none+awesome";
-      windowManager.session =
-        singleton
-        {
-          name = "awesome";
-          start = ''
-            ${pkgs.awesome-git-luajit}/bin/awesome ${makeSearchPath luaModules} &
-            waitPID=$!
-          '';
-        };
+    windowManager.session =
+      singleton
+      {
+        name = "awesome";
+        start = ''
+          ${pkgs.awesome-git-luajit}/bin/awesome ${makeSearchPath luaModules} &
+          waitPID=$!
+        '';
+      };
     # ------------------------------------------------- #
     environment.systemPackages = lib.attrValues {
       inherit

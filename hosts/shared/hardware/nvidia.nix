@@ -1,12 +1,11 @@
 {
   pkgs,
   config,
-lib,
+  lib,
   ...
 }: let
   nvidiaDriverChannel = config.boot.kernelPackages.nvidiaPackages.latest; # stable, beta, etc.
 in {
-
   environment = {
     variables = {
       GDK_SCALE = "1";
@@ -50,7 +49,7 @@ in {
     nvidia = {
       modesetting.enable = true;
       nvidiaSettings = true;
-       nvidiaPersistenced = true;
+      nvidiaPersistenced = true;
       dynamicBoost.enable = true;
       powerManagement = {
         enable = true;
@@ -58,8 +57,8 @@ in {
       open = false;
       package = nvidiaDriverChannel;
       prime = {
-        sync.enable =  lib.mkForce  true;
-        offload.enable =  lib.mkForce false;
+        sync.enable = lib.mkForce true;
+        offload.enable = lib.mkForce false;
         allowExternalGpu = true;
         # Multiple uses are available, check the NVIDIA NixOS wiki
         # Use "lspci | grep -E 'VGA|3D'" to get PCI-bus IDs
@@ -89,7 +88,6 @@ in {
         mesa
       ];
     };
-    
   };
   services.xserver.videoDrivers = ["nvidia"]; # got problems with nouveau, would give it another try
 }

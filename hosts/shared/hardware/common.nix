@@ -1,14 +1,15 @@
-{pkgs, config, ...}: {
-    hardware = {
-    
+{
+  pkgs,
+  config,
+  ...
+}: {
+  hardware = {
     enableAllFirmware = true;
     enableRedistributableFirmware = true;
 
     acpilight.enable = true;
-      firmware = with pkgs; [
+    firmware = with pkgs; [
       linux-firmware
     ];
-
   };
-
 }

@@ -1,8 +1,11 @@
-{pkgs, config, ...}:{
+{
+  pkgs,
+  config,
+  ...
+}: {
   services = {
-  xserver = {
+    xserver = {
       enable = true;
-
-  };
+    };
   };
 }

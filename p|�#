@@ -42,6 +42,10 @@
       url = "github:nix-community/neovim-nightly-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+
+
+
   };
 
   outputs = {
@@ -106,35 +110,35 @@
               useUserPackages = true;
               backupFileExtension = "bak";
               users = {
-                tlh = {imports = [./home/tlh/default.nix];};
-              };
+                  tlh = {imports = [./home/tlh/default.nix];};
+                };
             };
           }
         ];
       };
-      # ┣━━━━━━━━━━━━━━━━━━┫ Sara's Lenovo Legion Pro ┣━━━━━━━━━━━━━━━━┫
-      remus = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs self;};
-        modules = [
-          nur.modules.nixos.default
-          nixos-hardware.nixosModules.lenovo-legion-16irx9h
-          ./hosts/remus
-          bhairava-grub-theme.nixosModule
-          home-manager.nixosModules.home-manager
-          chaotic.nixosModules.default
-          {
-            home-manager = {
-              useUserPackages = true;
-              backupFileExtension = "bak";
-              users = {
-                smg = {imports = [./home/smg/default.nix];};
-              };
-            };
-          }
-        ];
-      };
-    };
-    # ┣━━━━━━━━━━━━━━━━━━━━━┫ Home Configurations ┣━━━━━━━━━━━━━━━━━━━━━┫
+# ┣━━━━━━━━━━━━━━━━━━┫ Sara's Lenovo Legion Pro ┣━━━━━━━━━━━━━━━━┫
+ remus = nixpkgs.lib.nixosSystem {
+       specialArgs = {inherit inputs outputs self;};
+       modules = [
+         nur.modules.nixos.default
+         nixos-hardware.nixosModules.lenovo-legion-16irx9h
+         ./hosts/remus
+         bhairava-grub-theme.nixosModule
+         home-manager.nixosModules.home-manager
+         chaotic.nixosModules.default
+         {
+           home-manager = {
+             useUserPackages = true;
+             backupFileExtension = "bak";
+             users = {
+                 smg = {imports = [./home/smg/default.nix];};
+               };
+           };
+         }
+       ];
+     };
+   };
+# ┣━━━━━━━━━━━━━━━━━━━━━┫ Home Configurations ┣━━━━━━━━━━━━━━━━━━━━━┫
     homeConfigurations = {
       tlh = inputs.home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
@@ -144,14 +148,14 @@
         ];
       };
       smg = inputs.home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
-        extraSpecialArgs = {inherit inputs outputs self;};
-        modules = [
-          ./home/smg/default.nix
-        ];
-      };
-    };
-
+       pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
+       extraSpecialArgs = {inherit inputs outputs self ;};
+       modules = [
+         ./home/smg/default.nix
+	 ];
+	     };
+	};
+    
     # ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
 
     macbook-air = self.nixosConfigurations.macbook-air.config.system.build.toplevel;

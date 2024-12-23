@@ -8,7 +8,7 @@
       nix-index
       statix
       nix-bash-completions
-          nix-direnv
+      nix-direnv
 
       nix-binary-cache
       nix-bundle

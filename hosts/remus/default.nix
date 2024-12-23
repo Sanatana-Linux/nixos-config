@@ -11,7 +11,7 @@
     # Shared configuration across all machines
     ../shared
 
-    # Select the user configuration inputs.nsearch.packages.${pkgs.system}.default
+    # Select the user configuration 
     ../shared/users/smg.nix
 
     # Ollama's configuration

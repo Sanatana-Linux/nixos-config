@@ -54,7 +54,6 @@
     bhairava-grub-theme,
     nur,
     chaotic,
-    nsearch,
     ...
   } @ inputs: let
     inherit (self) outputs;

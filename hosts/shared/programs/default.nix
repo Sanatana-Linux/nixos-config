@@ -35,7 +35,4 @@
   };
 
   # for nux search
-  environment.systemPackages = [
-    inputs.nsearch.packages.${pkgs.system}.default
-  ];
 }

@@ -7,6 +7,7 @@ with pkgs; [
   sysvinit
   sysvtools
   sysfsutils
+  ntfs3g 
   sysprof
   systeroid
   keyutils

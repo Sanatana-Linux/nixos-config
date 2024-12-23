@@ -22,7 +22,6 @@ in {
     [
       figlet
       toilet
-      pfetch
     ]
     ++ ai
     ++ android

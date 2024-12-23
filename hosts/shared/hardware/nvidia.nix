@@ -19,6 +19,7 @@ in {
       cudatoolkit
       cudaPackages.cutensor
       cudaPackages.cudnn
+      magma
       cudaPackages.cuda_opencl
       cudaPackages.saxpy
       cudaPackages.libnpp

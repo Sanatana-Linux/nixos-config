@@ -35,8 +35,6 @@
     # Specific configuration
     ./hardware-configuration.nix
 
-    # LightDM
-    ../shared/display-manager/lightdm.nix
 
     # AwesomeWM
     ../shared/desktop/awesomewm.nix
@@ -150,7 +148,7 @@
   };
 
   services.xserver.dpi = 189;
-
+  services.displayManager.defaultSession = "none+awesome";
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "24.11";
 }

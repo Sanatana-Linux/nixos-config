@@ -14,7 +14,6 @@
       ./programs/yazi/default.nix
       ./programs/vscode.nix
       ./programs/firefox.nix
-      ./programs/gpg/default.nix
       ./programs/zathura/default.nix
       ./programs/kitty/default.nix
       ./programs/neovim/default.nix
@@ -53,7 +52,7 @@
   programs.home-manager.enable = true;
 
   home = {
-    username = "tlh";
+    username = "smg";
     homeDirectory = "/home/tlh";
     stateVersion = "24.11";
   };

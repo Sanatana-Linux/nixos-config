@@ -31,7 +31,7 @@
     # performance tweaks
     ../shared/performance/default.nix
 
-    # bluetooth support
+# bluetooth support
     ../shared/hardware/bluetooth.nix
 
     # Nvidia Driver Support
@@ -43,6 +43,8 @@
     # LightDM
     ../shared/display-manager/lightdm.nix
 
+    # AwesomeWM 
+    ../shared/desktop/awesomewm.nix 
 
     # Packages
     ./pkgs.nix
@@ -157,8 +159,8 @@
   };
 
   services.xserver.dpi = 189;
-  services.xserver.windowManager.awesome.enable = true;
 
+  
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "24.11";
 } 

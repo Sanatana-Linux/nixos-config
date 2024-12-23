@@ -12,7 +12,6 @@
   shrooms = import ./shrooms.nix {inherit pkgs;};
   updoot = import ./updoot.nix {inherit pkgs;};
   mountbox = import ./mountbox.nix {inherit pkgs;};
-  shell = import ./shell.nix {inherit pkgs;};
 in {
-  home.packages = with pkgs; [extract nux shell mountbox notes run shrooms gita nixfetch updoot panes];
+  home.packages = with pkgs; [extract nux mountbox notes run shrooms gita nixfetch updoot panes];
 }

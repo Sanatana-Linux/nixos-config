@@ -37,6 +37,8 @@
     # Nvidia Driver Support
     ../shared/hardware/nvidia.nix
 
+    # lightdm 
+    ../shared/display-manager/lightdm.nix
     # xfce4 
     ../shared/desktop/xfce.nix
 
@@ -153,7 +155,7 @@
   };
 
   services.xserver.dpi = 189;
-  #  services.xserver.windowManager.awesome.enable = true;
+    services.xserver.windowManager.awesome.enable = true;
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "24.11";

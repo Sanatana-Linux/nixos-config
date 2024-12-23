@@ -50,9 +50,10 @@
       verbose = false;
       compressor = "zstd";
       compressorArgs = ["-19"];
-      kernelModules = ["nvidia" "ideapad_laptop" "lenovo_legion"];
+
     };
     blacklistedKernelModules = ["nouveau"];
+    kernelModules = ["nvidia" "lenovo_legion"];
     tmp.cleanOnBoot = true;
     kernelPackages = pkgs.linuxPackages_xanmod_latest;
     extraModulePackages = [config.boot.kernelPackages.acpi_call config.boot.kernelPackages.lenovo-legion-module config.boot.kernelPackages.nvidia_x11];

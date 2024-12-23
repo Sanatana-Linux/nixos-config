@@ -51,9 +51,9 @@
       verbose = false;
       compressor = "zstd";
       compressorArgs = ["-19"];
-      kernelModules = ["nvidia"  "legion_laptop"];
-    };
 
+    };
+    kernelModules = ["nvidia"  "legion_laptop"];
     blacklistedKernelModules = ["nouveau"];
     tmp.cleanOnBoot = true;
     kernelPackages = pkgs.linuxPackages_xanmod_latest;

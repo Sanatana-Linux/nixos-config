@@ -6,6 +6,7 @@
       deja-dup
       drawing
       elementary-xfce-icon-theme
+      firefox
       evince
       foliate
       font-manager

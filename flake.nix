@@ -94,7 +94,7 @@
         ];
       };
 
-      # ┣━━━━━━━━━━━━━━━━━━━━━━┫ Lenovo Legion Pro ┣━━━━━━━━━━━━━━━━━━━━━━┫
+      # ┣━━━━━━━━━━━━━━━━━━━━━━┫ My Lenovo Legion Pro ┣━━━━━━━━━━━━━━━━━━━━━━┫
 
       romulus = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
@@ -116,31 +116,6 @@
           }
         ];
       };
-    
-    
-
-
-
-
-    homeConfigurations = {
-      tlh = inputs.home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
-        extraSpecialArgs = {inherit inputs outputs self;};
-        modules = [
-          ./home/tlh/default.nix
-        ];
-      };
-      smg = inputs.home-manager.lib.homeManagerConfiguration {
-       pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
-       extraSpecialArgs = {inherit inputs outputs self ;};
-       modules = [
-         ./home/smg/default.nix
-	 ];
-	     };
-	};
-
-
-
 # ┣━━━━━━━━━━━━━━━━━━┫ Sara's Lenovo Legion Pro ┣━━━━━━━━━━━━━━━━┫
  remus = nixpkgs.lib.nixosSystem {
        specialArgs = {inherit inputs outputs self;};
@@ -163,9 +138,23 @@
        ];
      };
    };
-
-
-
+# ┣━━━━━━━━━━━━━━━━━━━━━┫ Home Configurations ┣━━━━━━━━━━━━━━━━━━━━━┫
+    homeConfigurations = {
+      tlh = inputs.home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
+        extraSpecialArgs = {inherit inputs outputs self;};
+        modules = [
+          ./home/tlh/default.nix
+        ];
+      };
+      smg = inputs.home-manager.lib.homeManagerConfiguration {
+       pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
+       extraSpecialArgs = {inherit inputs outputs self ;};
+       modules = [
+         ./home/smg/default.nix
+	 ];
+	     };
+	};
     
     # ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
 

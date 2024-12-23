@@ -43,7 +43,6 @@ with pkgs; [
   gobject-introspection-unwrapped
   goocanvas
   goocanvas3
-  google-chrome
   gparted
   gpick
   graphite2

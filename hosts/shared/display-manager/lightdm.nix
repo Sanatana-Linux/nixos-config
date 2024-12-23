@@ -7,7 +7,7 @@
     defaultSession = "none+awesome";
         lightdm = {
           enable = true;
-          background = ../../hosts/shared/wallpaper/monokaiprospectrum.png;
+          background = ../wallpaper/monokaiprospectrum.png;
           greeters.gtk = {
             enable = true;
             theme = {
@@ -26,15 +26,15 @@
             indicators = ["~session" "~spacer"];
 
       };
-            windowManager.session =
-        singleton
-        {
-          name = "awesome";
-          start = ''
-            ${pkgs.awesome-git-luajit}/bin/awesome ${makeSearchPath luaModules} &
-            waitPID=$!
-          '';
-        };
+        #     windowManager.session =
+        # singleton
+        # {
+        #   name = "awesome";
+        #   start = ''
+        #     ${pkgs.awesome-git-luajit}/bin/awesome ${makeSearchPath luaModules} &
+        #     waitPID=$!
+        #   '';
+        # };
 
         };
       };

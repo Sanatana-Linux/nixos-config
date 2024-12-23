@@ -1,27 +1,21 @@
 {pkgs}:
-with pkgs;
-  writeScriptBin "shell" ''
-#!/usr/bin/env bash
-# Initialize empty arrays for package names and options
-ps=()
-os=()
+let
+  bashScript = ''
+    #!/usr/bin/env bash
+    ps=()
+    os=()
 
-# Loop through all the arguments
-for p in "$@"; do
-    if [[ "$p" != --* ]]; then
-        # If not an option, add it to the package names array
+    for p in "$@"; do
+      if [[ "$p" != --* ]]; then
         ps+=("nixpkgs#$p")
-    else
-        # If it is an option, add it to the options array
+      else
         os+=("$p")
-    fi
-done
+      fi
+    done
 
-# Construct the command
-cmd="SHELL=$(which zsh) IN_NIX_SHELL=\"impure\" nix shell $os[*] $ps[*]"
-echo "Executing \`$cmd\`..."
-
-# Execute the command
-eval $cmd
-  ''
-
+    cmd=(SHELL="''${which zsh}''" IN_NIX_SHELL="impure" nix shell "''${os[@]}''" "''${ps[@]}''")
+    echo "Executing: ''${cmd[*]}''" # echo with extra single quotes for Nix
+    "''${cmd[@]}''" # Execute the command.  Double single quotes for Nix evaluation.
+  '';
+in
+writeScriptBin "nix-shell-wrapper" bashScript

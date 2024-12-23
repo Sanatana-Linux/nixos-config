@@ -809,22 +809,6 @@
         "type": "github"
       }
     },
-    "nixpkgs_10": {
-      "locked": {
-        "lastModified": 1728538411,
-        "narHash": "sha256-f0SBJz1eZ2yOuKUr5CA9BHULGXVSn6miBuUWdTyhUhU=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "b69de56fac8c2b6f8fd27f2eca01dcda8e0a4221",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixpkgs-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1734649271,
@@ -937,16 +921,16 @@
     },
     "nixpkgs_9": {
       "locked": {
-        "lastModified": 1734649271,
-        "narHash": "sha256-4EVBRhOjMDuGtMaofAIqzJbg4Ql7Ai0PSeuVZTHjyKQ=",
-        "owner": "nixos",
+        "lastModified": 1728538411,
+        "narHash": "sha256-f0SBJz1eZ2yOuKUr5CA9BHULGXVSn6miBuUWdTyhUhU=",
+        "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "d70bd19e0a38ad4790d3913bf08fcbfc9eeca507",
+        "rev": "b69de56fac8c2b6f8fd27f2eca01dcda8e0a4221",
         "type": "github"
       },
       "original": {
-        "owner": "nixos",
-        "ref": "nixos-unstable",
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -968,22 +952,6 @@
         "owner": "OleMussmann",
         "repo": "Nix-Package-Search",
         "type": "github"
-      }
-    },
-    "nsearch": {
-      "inputs": {
-        "nixpkgs": "nixpkgs_9"
-      },
-      "locked": {
-        "lastModified": 1723245584,
-        "narHash": "sha256-7qZozlMclJZvVqIj2r1mw/FKVcEnE6DpGPGbm6ERsVI=",
-        "path": "/nix/store/z9fckvyl8kc151zs6m018mgivmvnfalw-source",
-        "rev": "38d01a89899b918e29a22dd6ff9ad283cf5f6e3f",
-        "type": "path"
-      },
-      "original": {
-        "id": "nsearch",
-        "type": "indirect"
       }
     },
     "nur": {
@@ -1042,7 +1010,6 @@
         "nixpkgs-f2k": "nixpkgs-f2k",
         "nixpkgs-master": "nixpkgs-master",
         "nps": "nps",
-        "nsearch": "nsearch",
         "nur": "nur",
         "rust-overlay": "rust-overlay",
         "sf-mono-liga-src": "sf-mono-liga-src"
@@ -1067,7 +1034,7 @@
     },
     "rust-overlay": {
       "inputs": {
-        "nixpkgs": "nixpkgs_10"
+        "nixpkgs": "nixpkgs_9"
       },
       "locked": {
         "lastModified": 1734834660,

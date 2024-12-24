@@ -1,9 +1,11 @@
 {pkgs, ...}:
 with pkgs; [
   aichat
-  #  local-ai
+  # local-ai
   code2prompt
   nextjs-ollama-llm-ui
+  #  tabby
+  llm 
   tgpt
   ollama-cuda
   python312Packages.ollama

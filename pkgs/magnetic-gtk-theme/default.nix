@@ -23,7 +23,7 @@ lib.checkListOfEnum "${pname}: tweaks" [ "nord" "dark" "dracula" "outline" "gruv
 
 stdenvNoCC.mkDerivation rec {
   inherit pname;
-  version = "2024.12.18";
+  version = "a2f707e890770343789746d6e8d8bc7539e0f2ec";
 
   src = fetchFromGitHub {
     owner = "vinceliuice";

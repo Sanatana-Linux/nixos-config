@@ -13,23 +13,23 @@
 }:
 
 let
-  pname = "colloid-gtk-theme";
+  pname = "Magnetic-gtk-theme";
 
 in
 lib.checkListOfEnum "${pname}: theme variants" [ "default" "purple" "pink" "red" "orange" "yellow" "green" "teal" "grey" "all" ] themeVariants
 lib.checkListOfEnum "${pname}: color variants" [ "standard" "light" "dark" ] colorVariants
 lib.checkListOfEnum "${pname}: size variants" [ "standard" "compact" ] sizeVariants
-lib.checkListOfEnum "${pname}: tweaks" [ "nord" "dark" "dracula" "gruvbox" "light" "rimless" "normal" ] tweaks
+lib.checkListOfEnum "${pname}: tweaks" [ "nord" "dark" "dracula" "outline" "gruvbox" "light" "float" "normal" ] tweaks
 
 stdenvNoCC.mkDerivation rec {
   inherit pname;
-  version = "2023.04.11";
+  version = "2024.12.18";
 
   src = fetchFromGitHub {
     owner = "vinceliuice";
     repo = pname;
     rev = version;
-    hash = "sha256-lVHDQmu9GLesasmI2GQ0hx4f2NtgaM4IlJk/hXe2XzY=";
+    hash = "sha256-XwbIQuGaHZlOn13+fYTBSpx/h+QltbxjZwqOUyt21vY=";
   };
 
   nativeBuildInputs = [
@@ -52,7 +52,7 @@ stdenvNoCC.mkDerivation rec {
   installPhase = ''
     runHook preInstall
 
-    name= HOME="$TMPDIR" ./install.sh \
+    name= HOME="$TMPDIR" ./install.sh -l \
       ${lib.optionalString (themeVariants != []) "--theme " + builtins.toString themeVariants} \
       ${lib.optionalString (colorVariants != []) "--color " + builtins.toString colorVariants} \
       ${lib.optionalString (sizeVariants != []) "--size " + builtins.toString sizeVariants} \
@@ -68,7 +68,7 @@ stdenvNoCC.mkDerivation rec {
 
   meta = with lib; {
     description = "A modern and clean Gtk theme";
-    homepage = "https://github.com/vinceliuice/Colloid-gtk-theme";
+    homepage = "https://github.com/vinceliuice/Magnetic-gtk-theme";
     license = licenses.gpl3Only;
     platforms = platforms.unix;
     maintainers = [ maintainers.romildo ];

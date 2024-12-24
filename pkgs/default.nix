@@ -6,4 +6,5 @@
   dbus-proxy = pkgs.callPackage ./luajit/dbus-proxy {};
   async-lua = pkgs.callPackage ./luajit/async-lua {};
   lgi-async-extra = pkgs.callPackage ./luajit/lgi-async-extra {};
+  magnetic-gtk-theme = pkgs.callPackage ./magnetic-gtk-theme {};
 }

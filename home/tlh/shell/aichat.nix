@@ -1,9 +1,11 @@
 {...}: {
   xdg.configFile."aichat/config.yaml".text = ''
-    model: ollama
+    type: openai-compatible
+    name: ollama
     clients:
-    - type: ollama
-      api_base: http://localhost:11434
+    - type: openai-compatible
+      name: ollama
+      api_base:http://localhost:11434/v1 
       api_auth: null
       models:
       - name: llama3.2:3b

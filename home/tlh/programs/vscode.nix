@@ -39,7 +39,6 @@ in {
         mads-hartmann.bash-ide-vscode
         mkhl.direnv
         ms-python.vscode-pylance
-        ms-vscode.cpptools
         naumovs.color-highlight
         oderwat.indent-rainbow
         pkief.material-icon-theme

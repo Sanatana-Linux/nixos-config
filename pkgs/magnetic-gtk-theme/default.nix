@@ -13,23 +13,23 @@
 }:
 
 let
-  pname = "magnetic-gtk-theme";
+  pname = "colloid-gtk-theme";
 
 in
 lib.checkListOfEnum "${pname}: theme variants" [ "default" "purple" "pink" "red" "orange" "yellow" "green" "teal" "grey" "all" ] themeVariants
 lib.checkListOfEnum "${pname}: color variants" [ "standard" "light" "dark" ] colorVariants
 lib.checkListOfEnum "${pname}: size variants" [ "standard" "compact" ] sizeVariants
-lib.checkListOfEnum "${pname}: tweaks" [ "nord" "black" "dracula" "gruvbox" "float" "outline" "normal" ] tweaks
+lib.checkListOfEnum "${pname}: tweaks" [ "nord" "dark" "dracula" "gruvbox" "light" "rimless" "normal" ] tweaks
 
 stdenvNoCC.mkDerivation rec {
   inherit pname;
-  version = "2024.12.18";
+  version = "2023.04.11";
 
   src = fetchFromGitHub {
     owner = "vinceliuice";
     repo = pname;
     rev = version;
-    hash = "sha256-a2f707e890770343789746d6e8d8bc7539e0f2ec";
+    hash = "sha256-lVHDQmu9GLesasmI2GQ0hx4f2NtgaM4IlJk/hXe2XzY=";
   };
 
   nativeBuildInputs = [
@@ -67,10 +67,10 @@ stdenvNoCC.mkDerivation rec {
   passthru.updateScript = gitUpdater { };
 
   meta = with lib; {
-    description = "A modern, rounded Gtk theme.";
-    homepage = "https://github.com/vinceliuice/Magnetic-gtk-theme";
+    description = "A modern and clean Gtk theme";
+    homepage = "https://github.com/vinceliuice/Colloid-gtk-theme";
     license = licenses.gpl3Only;
     platforms = platforms.unix;
-    maintainers = [ "Thomas Leon Highbaugh" ];
+    maintainers = [ maintainers.romildo ];
   };
 }

@@ -1,7 +1,8 @@
 {pkgs, ...}:
 with pkgs; [
   aichat
-  llama-cpp
+  #  local-ai
+  code2prompt
   nextjs-ollama-llm-ui
   tgpt
   ollama-cuda

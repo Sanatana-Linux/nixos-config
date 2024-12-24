@@ -68,7 +68,6 @@ in {
         ipfs-companion
         istilldontcareaboutcookies
         keybase
-        languagetool
         lexicon
         link-gopher
         lovely-forks

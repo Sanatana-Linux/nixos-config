@@ -10,7 +10,7 @@
         enable = true;
         theme = {
      
-          name = "Magnetic-Grey-Dark-Compact";
+          name = "Orchis-Grey-Dark-Compact";
         };
         cursorTheme = {
        

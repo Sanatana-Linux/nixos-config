@@ -17,8 +17,8 @@
 
     # GTK theme configuration
     theme = {
-      name = "Magnetic-Grey-Dark-Compact";
-      package = pkgs.magnetic-gtk-theme;
+      name = "Orchis-Grey-Dark-Compact";
+      package = pkgs.orchis-theme;
     };
 
     # GTK icon theme configuration
@@ -81,7 +81,7 @@
   home = {
     # Environment variables for session
     sessionVariables = {
-      GTK_THEME = "Magnetic-Grey-Dark-Compact";
+      GTK_THEME = "Orchis-Grey-Dark-Compact";
       QT_QPA_PLATFORMTHEME = "gtk3";
     };
 

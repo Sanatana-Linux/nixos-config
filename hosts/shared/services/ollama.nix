@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   services.ollama = {
     enable = true;
-    package = pkgs.ollama;
+    package = pkgs.ollama-cuda;
 
     user = "ollama";
     group = "ollama";

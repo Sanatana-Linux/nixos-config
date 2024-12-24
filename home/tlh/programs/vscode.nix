@@ -178,4 +178,28 @@ in {
       };
     };
   };
+      home.activation.boforeCheckLinkTargets = {
+      after = [];
+      before = [ "checkLinkTargets" ];
+      data = ''
+        userDir=/home/tlh/.config/vscode/
+        rm -rf $userDir/settings.json
+        rm -rf /home/tlh/.config/**/*.bak
+      '';
+    };
+
+    home.activation.afterWriteBoundary = {
+      after = [ "writeBoundary" ];
+      before = [];
+      data = ''
+        userDir=/home/tlh/.config/vscode/User
+        rm -rf $userDir/settings.json
+        cat \
+          ${(pkgs.formats.json {}).generate "blabla"
+            config.programs.vscode.userSettings} \
+          > $userDir/settings.json
+      '';
+    };
+
+
 }

@@ -5,7 +5,9 @@ with pkgs; [
   code2prompt
   nextjs-ollama-llm-ui
   #  tabby
-  llm 
+mods
+  promptfoo
+
   tgpt
   ollama-cuda
   python312Packages.ollama

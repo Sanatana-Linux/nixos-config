@@ -1,8 +1,11 @@
 {pkgs, ...}:
 with pkgs; [
   aria
+  gotop
+  nmon
   viu
   terminal-parrot
+  bash-completion
   bat
   beep
   brightnessctl

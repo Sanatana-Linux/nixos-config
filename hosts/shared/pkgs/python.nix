@@ -19,6 +19,7 @@ with pkgs;
         wheelUnpackHook
         youtube-transcript-api
         brotlipy
+      numpy
         brotlicffi
         PyICU
         googleapis-common-protos

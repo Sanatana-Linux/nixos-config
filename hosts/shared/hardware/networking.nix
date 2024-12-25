@@ -8,7 +8,7 @@
       enable = true;
       unmanaged = ["docker0" "rndis0"];
       wifi = {
-        macAddress = "random";
+        #        macAddress = "random";
         powersave = true;
       };
     };

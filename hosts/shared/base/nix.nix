@@ -25,7 +25,6 @@
         "https://nix-community.cachix.org"
         "https://nix-node.cachix.org/"
         "https://nixpkgs-unfree.cachix.org"
-        "https://cuda-maintainrs.cachix.org"
         "https://nixpkgs-wayland.cachix.org"
         "https://nrdxp.cachix.org"
         "https://pre-commit-hooks.cachix.org" # pre commit hooks

@@ -84,26 +84,21 @@
       ];
       displayManager = {
         lightdm = {
-   enable = true;
-              greeters.gtk = {
-      enable = true;
-      theme = {
-   
-        name = "Orchis-Grey-Dark-Compact";
-      };
-      cursorTheme = {
-     
-        name = "Phinger Cursors (light)";
-        size = 48;
-      };
-      iconTheme = {
-     
-        name = "Reversal";
-      };
-      indicators = ["~session" "~spacer"];
-    };
-
-       
+          enable = true;
+          greeters.gtk = {
+            enable = true;
+            theme = {
+              name = "Orchis-Grey-Dark-Compact";
+            };
+            cursorTheme = {
+              name = "Phinger Cursors (light)";
+              size = 48;
+            };
+            iconTheme = {
+              name = "Reversal";
+            };
+            indicators = ["~session" "~spacer"];
+          };
         };
       };
       desktopManager.xfce.enable = true;

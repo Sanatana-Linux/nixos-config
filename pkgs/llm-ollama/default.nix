@@ -3,7 +3,6 @@
   python3,
   fetchFromGitHub,
 }:
-
 python3.pkgs.buildPythonApplication rec {
   pname = "llm-ollama";
   version = "0.8.1";
@@ -45,7 +44,7 @@ python3.pkgs.buildPythonApplication rec {
     description = "LLM plugin providing access to models running on an Ollama server";
     homepage = "https://github.com/taketwo/llm-ollama";
     license = lib.licenses.asl20;
-    maintainers = with lib.maintainers; [ ];
+    maintainers = with lib.maintainers; [];
     mainProgram = "llm-ollama";
   };
 }

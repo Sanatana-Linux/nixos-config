@@ -11,7 +11,7 @@
     # Shared configuration across all machines
     ../shared
 
-    # Select the user configuration 
+    # Select the user configuration
     ../shared/users/tlh.nix
 
     # Ollama's configuration
@@ -35,7 +35,6 @@
     # Specific configuration
     ./hardware-configuration.nix
 
-
     # AwesomeWM
     ../shared/desktop/awesomewm.nix
 
@@ -49,9 +48,15 @@
       verbose = false;
       compressor = "zstd";
       compressorArgs = ["-19"];
-
     };
-    kernelModules = ["nvidia"  "legion_laptop"];
+    kernelModules = ["nvidia" "ideapad_laptop" "coretemp" "legion_laptop"];
+    kernelPatches = [
+      {
+        name = "0001-Add-legion-laptop-v0.0.12";
+        patch = ./0001-Add-legion-laptop-v0.0.12.patch;
+      }
+    ];
+
     blacklistedKernelModules = ["nouveau"];
     tmp.cleanOnBoot = true;
     kernelPackages = pkgs.linuxPackages_xanmod_latest;
@@ -75,7 +80,6 @@
       "nvidia-drm.modeset=1"
       "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
       "nvidia.NVreg_UsePageAttributeTable=1"
-      "nvidia.NVreg_InitializeSystemMemoryAllocations=0"
       "nvidia.NVreg_DynamicPowerManagement=0x02"
     ];
 

@@ -57,31 +57,4 @@
     homeDirectory = "/home/tlh";
     stateVersion = "24.11";
   };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

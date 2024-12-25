@@ -11,7 +11,7 @@
     # Shared configuration across all machines
     ../shared
 
-    # Select the user configuration 
+    # Select the user configuration
     ../shared/users/smg.nix
 
     # Ollama's configuration
@@ -48,7 +48,6 @@
       verbose = false;
       compressor = "zstd";
       compressorArgs = ["-19"];
-
     };
     blacklistedKernelModules = ["nouveau"];
     kernelModules = ["nvidia" "lenovo_legion"];

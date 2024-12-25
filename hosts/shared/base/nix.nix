@@ -5,7 +5,7 @@
   config,
   ...
 }: {
-  imports = [ ../../../cachix.nix];
+  imports = [../../../cachix.nix];
   documentation = {
     enable = false;
     doc.enable = false;

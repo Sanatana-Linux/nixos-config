@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-    services.xserver.displayManager = {
+  services.xserver.displayManager = {
     setupCommands = ''
       ${pkgs.xss-lock}/bin/xss-lock -l ${pkgs.multilockscreen} --lock dimblur --span
     '';
@@ -9,16 +9,13 @@
       greeters.gtk = {
         enable = true;
         theme = {
-     
           name = "Orchis-Grey-Dark-Compact";
         };
         cursorTheme = {
-       
           name = "Phinger Cursors (light)";
           size = 48;
         };
         iconTheme = {
-       
           name = "Reversal";
         };
         indicators = ["~session" "~spacer"];

@@ -5,7 +5,7 @@ with pkgs; [
   code2prompt
   nextjs-ollama-llm-ui
   #  tabby
-mods
+  mods
   promptfoo
 
   tgpt

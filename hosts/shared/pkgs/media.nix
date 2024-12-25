@@ -1,6 +1,8 @@
 {pkgs, ...}:
 with pkgs; [
   appindicator-sharp
+  spotdl 
+
   image-roll
   lsix
   olive-editor

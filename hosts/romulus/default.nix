@@ -30,7 +30,7 @@
     ../shared/hardware/bluetooth.nix
 
     # Nvidia Driver Support
-    ../shared/hardware/nvidia.nix
+    ./nvidia.nix
 
     # Specific configuration
     ./hardware-configuration.nix
@@ -50,12 +50,12 @@
       compressorArgs = ["-19"];
     };
     kernelModules = ["nvidia" "ideapad_laptop" "coretemp" "legion_laptop"];
-    kernelPatches = [
-      {
-        name = "0001-Add-legion-laptop-v0.0.12";
-        patch = ./0001-Add-legion-laptop-v0.0.12.patch;
-      }
-    ];
+    # kernelPatches = [
+    #   {
+    #     name = "0001-Add-legion-laptop-v0.0.12";
+    #     patch = ./0001-Add-legion-laptop-v0.0.12.patch;
+    #   }
+    # ];
 
     blacklistedKernelModules = ["nouveau"];
     tmp.cleanOnBoot = true;

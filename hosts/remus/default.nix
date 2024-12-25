@@ -30,7 +30,7 @@
     ../shared/hardware/bluetooth.nix
 
     # Nvidia Driver Support
-    ../shared/hardware/nvidia.nix
+    ./nvidia.nix
 
     # xfce4
     ../shared/desktop/xfce.nix

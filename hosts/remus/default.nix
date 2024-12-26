@@ -52,7 +52,7 @@
     blacklistedKernelModules = ["nouveau"];
     kernelModules = ["nvidia" "lenovo_legion"];
     tmp.cleanOnBoot = true;
-    kernelPackages = pkgs.linuxPackages_xanmod_latest;
+    kernelPackages = pkgs.linuxPackages_lqx;
     extraModulePackages = [config.boot.kernelPackages.acpi_call config.boot.kernelPackages.lenovo-legion-module config.boot.kernelPackages.nvidia_x11];
 
     kernelParams = [
@@ -100,8 +100,6 @@
       dbus-glib
       intel-compute-runtime
       intel-gmmlib
-      intel-gpu-tools
-      intel-ocl
       intel-undervolt
       intelmetool
       inteltool

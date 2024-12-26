@@ -81,4 +81,5 @@ in {
       ];
     };
   };
-  services.xserver.videoDrivers = ["nvidia"]; # got problems with nouveau, would give it another try
+  services.xserver.videoDrivers = ["nvidia"]; # necessary evil I suppose
+}

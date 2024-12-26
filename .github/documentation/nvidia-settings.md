@@ -4,7 +4,8 @@
 
 Despite the widespread adoption of Wayland as the default display server on many Linux distributions, NVIDIA graphics card users often encounter compatibility issues. NVIDIA's proprietary drivers, while offering robust 3D acceleration, frequently struggle with Wayland, leading to visual artifacts, lag, and even system instability. This is primarily due to the differences in how Wayland and the traditional X11 system manage display outputs, with NVIDIA's drivers being optimized for the latter. To mitigate these issues, users often resort to using XWayland, a compatibility layer that runs X11 applications within a Wayland environment, or switch to using the open-source Nouveau driver, which provides basic 3D acceleration but may not offer the same level of performance as NVIDIA's proprietary drivers.
 
-For me, this is fine, as I will be using AwesomeWM until something comes along for Wayland that is a true "window manager framework" the way AwesomeWM is as X11 support will be around for the foreseeable future. If this changes, I would expect these notes to reflect as much as they are ultimately my working notes and mostly intended as my own point of reference, but if third parties find them useful, that's awesome too! I have benefitted from plenty of the same myself, so happy to learn in public to the benefit of all so inclined. 
+For me, this is fine, as I will be using AwesomeWM until something comes along for Wayland that is a true "window manager framework" the way AwesomeWM is as X11 shandle video memory allocation when
+ the system shuts down or reboots.upport will be around for the foreseeable future. If this changes, I would expect these notes to reflect as much as they are ultimately my working notes and mostly intended as my own point of reference, but if third parties find them useful, that's awesome too! I have benefitted from plenty of the same myself, so happy to learn in public to the benefit of all so inclined. 
 
 
 ## Hybrid Nividia Graphics 
@@ -16,8 +17,17 @@ Luckily setting up hybrid graphics and arranging how they render and compute tas
 let 
     nvidiaDriverChannel = config.boot.kernelPackages.nvidiaPackages.beta; # stable, beta, etc.
 in {
+  boot.kernelModules = ["nvidia"]
+  boot.blacklistedKernelModules = ["nouveau"];
+  boot.kernelParams = [
+      "nvidia_drm.fbdev=1" # Nvidia Framebuffer Support
+      "nvidia-drm.modeset=1" # Nvidia modesetting support
+      "nvidia.NVreg_UsePageAttributeTable=1" # Model Specific. Enables PAT
+      "nvidia.NVreg_DynamicPowerManagement=0x02" # Model specific. 0x00:off  0x01: performance 0x02: efficiency 
 
-    environment = {
+  ]
+
+  environment = {
     variables = {
       GDK_SCALE = "1";
       GDK_DPI_SCALE = "0.75";

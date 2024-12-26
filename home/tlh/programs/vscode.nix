@@ -58,17 +58,8 @@ in {
       ++ marketplace-extensions;
 
     userSettings = {
-      breadcrumbs.enabled = true;
-      emmet.useInlineCompletions = true;
-      security.workspace.trust.enabled = false;
-      black-formatter.path = "${pkgs.black}/bin/black";
-      stylua.styluaPath = "${pkgs.stylua}/bin/stylua";
-      Lua.misc.executablePath = "${pkgs.sumneko-lua-language-server}/bin/lua-language-server";
       CodeGPT.Autocomplete.enabled = true;
-      github.copilot.enable.markdown = true;
-      github.copilot.enable.plaintext = true;
-      codeium.enableConfig."*" = true;
-      codeium.aggressiveShutdown = true;
+      Lua.misc.executablePath = "${pkgs.lua-language-server}/bin/lua-language-server";
       "[c]".editor.defaultFormatter = "xaver.clang-format";
       "[cpp]".editor.defaultFormatter = "xaver.clang-format";
       "[css]".editor.defaultFormatter = "esbenp.prettier-vscode";
@@ -78,20 +69,37 @@ in {
       "[jsonc]".editor.defaultFormatter = "rvest.vs-code-prettier-eslint";
       "[lua]".editor.defaultFormatter = "johnnymorganz.stylua";
       "[nix]".editor.defaultFormatter = "kamadorueda.alejandra";
-      "[rust]".editor.defaultFormatter = "rust-lang.rust-analyzer";
-      "[scss]".editor.defaultFormatter = "sibiraj-s.vscode-scss-formatter";
-      "[typescript]".editor.defaultFormatter = "rvest.vs-code-prettier-eslint";
       "[python]".editor = {
         defaultFormatter = "ms-python.black-formatter";
         formatOnType = true;
       };
-
+      "[rust]".editor.defaultFormatter = "rust-lang.rust-analyzer";
+      "[scss]".editor.defaultFormatter = "sibiraj-s.vscode-scss-formatter";
+      "[typescript]".editor.defaultFormatter = "rvest.vs-code-prettier-eslint";
+      "black-formatter.path" = "${pkgs.black}/bin/black";
+      breadcrumbs.enabled = true;
+      codeium.aggressiveShutdown = true;
+      codeium.enableConfig."*" = true;
       editor = {
+        bracketPairColorization = {
+          enabled = true;
+          independentColorPoolPerBracketType = true;
+        };
+        codeActionsOnSave = {
+          source = {
+            fixAll.eslint = true;
+            organizeImports = true;
+          };
+        };
         cursorBlinking = "smooth";
         cursorSmoothCaretAnimation = "on";
         cursorWidth = 2;
         find.addExtraSpaceOnTop = false;
         formatOnSave = true;
+        guides = {
+          bracketPairs = true;
+          indentation = true;
+        };
         inlayHints.enabled = "off";
         inlineSuggest.enabled = true;
         largeFileOptimizations = false;
@@ -100,36 +108,21 @@ in {
         maxTokenizationLineLength = 60000;
         overviewRulerBorder = false;
         quickSuggestions.strings = true;
-        renderWhitespace = "none";
         renderLineHighlight = "all";
+        renderWhitespace = "none";
         smoothScrolling = true;
         suggest.showStatusBar = true;
         suggestSelection = "first";
-        bracketPairColorization = {
-          enabled = true;
-          independentColorPoolPerBracketType = true;
-        };
-        codeActionsOnSave.source = {
-          organizeImports = true;
-          fixAll.eslint = true;
-        };
-        guides = {
-          bracketPairs = true;
-          indentation = true;
-        };
       };
-
       explorer = {
-        confirmDragAndDrop = true;
         confirmDelete = true;
+        confirmDragAndDrop = true;
       };
-
       files = {
         autoSave = "afterDelay";
-        eol = "\n";
-        insertFinalNewline = true;
-        trimTrailingWhitespace = true;
         autoSaveDelay = 1000;
+        autoSaveExclude."**/.settings.json" = true;
+        eol = "\n";
         exclude = {
           "**/.classpath" = true;
           "**/.direnv" = true;
@@ -139,20 +132,15 @@ in {
           "**/.settings" = true;
           "**/.settings*" = true;
         };
-        autoSaveExclude = {
-          "**/.settings.json" = true;
-        };
-        watcherExclude = {
-          "**/.settings.json" = true;
-        };
+        insertFinalNewline = true;
+        trimTrailingWhitespace = true;
+        watcherExclude."**/.settings.json" = true;
       };
-
-      git = {
-        autofetch = true;
-        confirmSync = false;
-        enableSmartCommit = true;
-      };
-
+      git.autofetch = true;
+      git.confirmSync = false;
+      git.enableSmartCommit = true;
+      security.workspace.trust.enabled = false;
+      stylua.styluaPath = "${pkgs.stylua}/bin/stylua";
       terminal.integrated = {
         cursorBlinking = true;
         cursorStyle = "line";
@@ -161,43 +149,23 @@ in {
         fontSize = 11;
         smoothScrolling = true;
       };
-
-      window = {
-        menuBarVisibility = "toggle";
-        zoomLevel = 1;
-      };
-
+      window.menuBarVisibility = "toggle";
+      window.zoomLevel = 1;
       workbench = {
-        settings.enableEdit = false;
-        ignoreInvalidSettings = true;
         editor.tabCloseButton = "left";
         iconTheme = "material-icon-theme";
+        ignoreInvalidSettings = true;
         list.smoothScrolling = true;
         productIconTheme = "material-product-icons";
+        settings.enableEdit = false;
         smoothScrolling = true;
       };
+      "codeium.enableConfig.nix" = true;
+      github.copilot.chat.experimental.codeGeneration.instructions = [
+        {
+          file = ".vscode/copilot-instructions.md";
+        }
+      ];
     };
-  };
-  home.activation.boforeCheckLinkTargets = {
-    after = [];
-    before = ["checkLinkTargets"];
-    data = ''
-      userDir=/home/tlh/.config/vscode/
-      rm -rf $userDir/settings.json
-      rm -rf /home/tlh/.config/**/*.bak
-    '';
-  };
-
-  home.activation.afterWriteBoundary = {
-    after = ["writeBoundary"];
-    before = [];
-    data = ''
-      userDir=/home/tlh/.config/vscode/User
-      rm -rf $userDir/settings.json
-      cat \
-        ${(pkgs.formats.json {}).generate "blabla"
-        config.programs.vscode.userSettings} \
-        > $userDir/settings.json
-    '';
   };
 }

@@ -54,7 +54,6 @@ in {
         auto-tab-discard
         bitwarden
         buster-captcha-solver
-        consent-o-matic
         cookie-quick-manager
         copy-selection-as-markdown
         don-t-fuck-with-paste

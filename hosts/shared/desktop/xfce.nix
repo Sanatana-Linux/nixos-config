@@ -1,4 +1,11 @@
 {pkgs, ...}: {
+     xdg.portal = {
+    enable = true;
+    # wlr.enable = true;
+    # gtk portal needed to make gtk apps happy
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  };
+
   environment = {
     systemPackages = with pkgs; [
       blueman
@@ -12,7 +19,6 @@
       font-manager
       file-roller
       libqalculate
-      libreoffice
       orca
       pavucontrol
       qalculate-gtk
@@ -44,7 +50,9 @@
       xsel
       xtitle
       xwinmosaic
-      zuki-themes
+      orchis-theme
+      reversal-icon-theme
+      phinger-cursors
     ];
   };
 
@@ -85,17 +93,21 @@
       displayManager = {
         lightdm = {
           enable = true;
+          background = ../wallpaper/monokaiprospectrum.png;
           greeters.gtk = {
             enable = true;
             theme = {
               name = "Orchis-Grey-Dark-Compact";
+              package = pkgs.orchis-theme;
             };
             cursorTheme = {
               name = "Phinger Cursors (light)";
+              package = pkgs.phinger-cursors;
               size = 48;
             };
             iconTheme = {
               name = "Reversal";
+              package = pkgs.reversal-icon-theme;
             };
             indicators = ["~session" "~spacer"];
           };

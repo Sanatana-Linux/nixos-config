@@ -49,11 +49,11 @@
       compressor = "zstd";
       compressorArgs = ["-19"];
     };
-#     kernelPatches = [
-# {
-#   name = "0001-Add-legion-laptop-v0.0.12";
-#   patch = ./0001-Add-legion-laptop-v0.0.12.patch;
-# }
+    #     kernelPatches = [
+    # {
+    #   name = "0001-Add-legion-laptop-v0.0.12";
+    #   patch = ./0001-Add-legion-laptop-v0.0.12.patch;
+    # }
     # ];
 
     blacklistedKernelModules = ["nouveau"];
@@ -67,7 +67,6 @@
       "mitigations=off"
       # ignore access time (atime) updates on files, except when they coincide with updates to the ctime or mtime
       "rootflags=noatime"
-
 
       # So we can see the kernel errors more clearly
       "quiet"

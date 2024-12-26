@@ -13,7 +13,7 @@
           package = pkgs.orchis-theme;
         };
         cursorTheme = {
-          name = "Phinger Cursors (light)"; 
+          name = "Phinger Cursors (light)";
           package = pkgs.phinger-cursors;
           size = 48;
         };

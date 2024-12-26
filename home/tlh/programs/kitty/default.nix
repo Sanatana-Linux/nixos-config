@@ -10,7 +10,7 @@
     #extraConfig = import ./settings.nix;
     settings = {
       window_padding_width = 5;
-      confirm_os_window_close = 0;
+      confirm_os_window_close = -1;
       focus_follows_mouse = "yes";
       cursor_shape = "block";
       copy_on_select = "yes";

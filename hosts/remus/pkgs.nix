@@ -23,7 +23,7 @@ in {
       figlet
       toilet
     ]
-    ++ ai
+    #    ++ ai
     ++ android
     ++ archives
     ++ cliutils

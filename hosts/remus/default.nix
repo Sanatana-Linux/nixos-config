@@ -21,7 +21,7 @@
     ../shared/virtualization/default.nix
 
     #  laptop power management
-    ../shared/power/default.nix
+    ../shared/power/laptop.nix
 
     # performance tweaks
     ../shared/performance/default.nix

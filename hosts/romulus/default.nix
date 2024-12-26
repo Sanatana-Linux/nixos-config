@@ -21,7 +21,7 @@
     ../shared/virtualization/default.nix
 
     #  laptop power management
-    ../shared/power/default.nix
+    ../shared/power/laptop.nix
 
     # performance tweaks
     ../shared/performance/default.nix
@@ -49,17 +49,16 @@
       compressor = "zstd";
       compressorArgs = ["-19"];
     };
-    kernelModules = ["nvidia" "ideapad_laptop" "coretemp" "legion_laptop"];
-    # kernelPatches = [
-    #   {
-    #     name = "0001-Add-legion-laptop-v0.0.12";
-    #     patch = ./0001-Add-legion-laptop-v0.0.12.patch;
-    #   }
+#     kernelPatches = [
+# {
+#   name = "0001-Add-legion-laptop-v0.0.12";
+#   patch = ./0001-Add-legion-laptop-v0.0.12.patch;
+# }
     # ];
 
     blacklistedKernelModules = ["nouveau"];
     tmp.cleanOnBoot = true;
-    kernelPackages = pkgs.linuxPackages_xanmod_latest;
+    kernelPackages = pkgs.linuxPackages_lqx;
     extraModulePackages = [config.boot.kernelPackages.acpi_call config.boot.kernelPackages.lenovo-legion-module config.boot.kernelPackages.nvidia_x11];
 
     kernelParams = [
@@ -68,6 +67,7 @@
       "mitigations=off"
       # ignore access time (atime) updates on files, except when they coincide with updates to the ctime or mtime
       "rootflags=noatime"
+
 
       # So we can see the kernel errors more clearly
       "quiet"
@@ -78,7 +78,6 @@
       "nvidia_drm.fbdev=1"
 
       "nvidia-drm.modeset=1"
-      "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
       "nvidia.NVreg_UsePageAttributeTable=1"
       "nvidia.NVreg_DynamicPowerManagement=0x02"
     ];

@@ -10,13 +10,16 @@
         enable = true;
         theme = {
           name = "Orchis-Grey-Dark-Compact";
+          package = pkgs.orchis-theme;
         };
         cursorTheme = {
-          name = "Phinger Cursors (light)";
+          name = "Phinger Cursors (light)"; 
+          package = pkgs.phinger-cursors;
           size = 48;
         };
         iconTheme = {
           name = "Reversal";
+          package = pkgs.reversal-icon-theme;
         };
         indicators = ["~session" "~spacer"];
       };

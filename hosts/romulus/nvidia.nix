@@ -25,8 +25,8 @@ in {
       cudaPackages.libcufft
       cudaPackages.nvidia_fs
       nvidia-container-toolkit
-      nvidia-docker
-      nvc
+      nvidia_cg_toolkit
+      nv-codec-headers
       nvtopPackages.nvidia
       nvitop
     ];
@@ -59,7 +59,6 @@ in {
       prime = {
         sync.enable = lib.mkForce true;
         offload.enable = lib.mkForce false;
-        allowExternalGpu = true;
         # Multiple uses are available, check the NVIDIA NixOS wiki
         # Use "lspci | grep -E 'VGA|3D'" to get PCI-bus IDs
         intelBusId = "PCI:00:02:0";
@@ -71,16 +70,10 @@ in {
       enable32Bit = true;
       extraPackages = with pkgs; [
         nvidiaDriverChannel
-        mlx42
-        glfw
-        vaapiVdpau
-        mesa
+        intel-gmmlib
         libvdpau-va-gl
         nvidia-vaapi-driver
-        intel-media-sdk
         intel-media-driver
-        libGL
-        libva
         libva-utils
         libvdpau
         nvidia-texture-tools
@@ -89,4 +82,3 @@ in {
     };
   };
   services.xserver.videoDrivers = ["nvidia"]; # got problems with nouveau, would give it another try
-}

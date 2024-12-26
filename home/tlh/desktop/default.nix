@@ -54,6 +54,8 @@
     gtk3.extraConfig = {
       gtk-application-prefer-dark-theme = true;
       gtk-decoration-layout = "menu:";
+      gtk-button-images = "1";
+      gtk-menu-images = "1";
       gtk-xft-antialias = 1;
       gtk-xft-hinting = 1;
       gtk-xft-hintstyle = "hintslight";

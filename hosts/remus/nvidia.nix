@@ -16,8 +16,6 @@ in {
       #   __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     };
     systemPackages = with pkgs; [
-      cudatoolkit
-      cudaPackages.cudnn
       nvidia-container-toolkit
     ];
   };

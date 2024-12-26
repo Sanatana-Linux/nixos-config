@@ -57,9 +57,8 @@ in {
       open = false;
       package = nvidiaDriverChannel;
       prime = {
-        sync.enable = lib.mkForce true;
+
         offload.enable = lib.mkForce false;
-        allowExternalGpu = true;
         # Multiple uses are available, check the NVIDIA NixOS wiki
         # Use "lspci | grep -E 'VGA|3D'" to get PCI-bus IDs
         intelBusId = "PCI:00:02:0";

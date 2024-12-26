@@ -57,7 +57,10 @@ in {
       open = false;
       package = nvidiaDriverChannel;
       prime = {
-
+        reverseSync = {
+          enable = true;
+          setupCommands.enable = true;
+        };
         offload.enable = lib.mkForce false;
         # Multiple uses are available, check the NVIDIA NixOS wiki
         # Use "lspci | grep -E 'VGA|3D'" to get PCI-bus IDs

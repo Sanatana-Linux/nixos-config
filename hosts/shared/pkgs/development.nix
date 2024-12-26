@@ -13,7 +13,6 @@ with pkgs; [
   cmake
   conda
   inetutils
-  filezilla
   cpp-hocon
   cpp-utilities
   deadnix
@@ -45,7 +44,6 @@ with pkgs; [
   icu
   imlib2Full
   isync
-  julia
   just
   leptosfmt
   libclang
@@ -110,8 +108,6 @@ with pkgs; [
   php83Packages.composer
   pipx
   pkg-config
-  pkg-config-unwrapped
-  pkg-configUpstream
   poetry
   protobuf
   protobufc
@@ -135,13 +131,10 @@ with pkgs; [
   stylua
   sumneko-lua-language-server
   tectonic
-  terraform
   tokei
   tree-sitter
   typescript
-  vim-vint
   wkhtmltopdf-bin
-  xcftools
   xorg.libX11
   xorg_sys_opengl
   yamlfix

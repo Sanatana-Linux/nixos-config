@@ -162,6 +162,7 @@ with pkgs; [
   svgcleaner
   switcheroo
   upscayl
+  upscalerearthlng's loader
   upscayl-ncnn
   viu
   vlc

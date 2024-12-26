@@ -58,7 +58,7 @@ with pkgs;
         echo "Rebuilding Configuration Now"
         rm -rf $HOME/.config/*.bak
         rm -rf $HOME/.config/**/*.bak
-        doas nixos-rebuild switch --impure --flake $dots#"$2" && echo "Done Rebuilding NixOS Configuration"
+        doas nixos-rebuild switch --impure --flake $dots#"$2" -v && echo "Done Rebuilding NixOS Configuration"
     }
 
     function vm() {

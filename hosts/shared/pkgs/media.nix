@@ -1,54 +1,16 @@
 {pkgs, ...}:
 with pkgs; [
-  appindicator-sharp
-  spotdl
-  image-roll
-  lsix
-  olive-editor
-  openshot-qt
-  libsForQt5.libopenshot-audio
-  libsForQt5.libopenshot
-  shotcut
-  vid-stab
-  vvenc
-  libvpl
-  deface
-  oggvideotools
-  lutgen
-  xvidcore
-  flowblade
-  vidmerger
-  pipeline
-  mjpegtoolsFull
-  frei0r
-  snapshot
-  pitivi
-  losslesscut-bin
-  libtheora
-  libplacebo
-  cheese
-  gnome-video-effects
-  mp4v2
-  flac
-  flaca
-  audiofile
-  traverso
-  lv2
-  librem
-
   aaxtomp3
-  redoflacs
-  flac2all
-  flacon
   audiofile
-  ffmpeg
+  audiofile
   babl
   beautysh
-  book-summary
   byzanz
+  cheese
   cheese
   ciano
   curtail
+  deface
   delve
   dipc
   ebook_tools
@@ -56,10 +18,17 @@ with pkgs; [
   exiftool
   feh
   ffcast
+  ffmpeg
   fgallery
   figlet
   fim
+  flac
+  flac2all
   flaca
+  flaca
+  flacon
+  flowblade
+  frei0r
   fswebcam
   gallery-dl
   gdk-pixbuf
@@ -69,25 +38,27 @@ with pkgs; [
   giflib
   gifsicle
   gimp-with-plugins
-  gimpPlugins.gap
-  gimpPlugins.gmic
   gimpPlugins.bimp
-  gimpPlugins.fourier
-  gimpPlugins.farbfeld
-  gimpPlugins.texturize
-  gimpPlugins.lqrPlugin
-  gimpPlugins.lightning
-  gimpPlugins.gimplensfun
-  gimpPlugins.resynthesizer
   gimpPlugins.exposureBlend
+  gimpPlugins.farbfeld
+  gimpPlugins.fourier
+  gimpPlugins.gap
+  gimpPlugins.gimplensfun
+  gimpPlugins.gmic
+  gimpPlugins.lightning
+  gimpPlugins.lqrPlugin
+  gimpPlugins.resynthesizer
+  gimpPlugins.texturize
   gimpPlugins.waveletSharpen
   gio-sharp
   gmic
+  gnome-video-effects
   gnome.nixos-gsettings-overrides
   gobject-introspection
   graphicsmagick
   gsettings-desktop-schemas
   gst_all_1.gst-libav
+  image-roll
   image_optim
   imagemagick
   img-cat
@@ -104,33 +75,47 @@ with pkgs; [
   jpegoptim
   jpegrescan
   kooha
-  #krita
-  # krita-plugin-gmic
   labelImg
   libdevil-nox
   libexif
   libgee
   libjpeg
+  libplacebo
   libpng
+  librem
   librsvg
+  libsForQt5.libopenshot
+  libsForQt5.libopenshot-audio
   libspng
+  libtheora
+  libvpl
   libwebcam
   libwebp
+  losslesscut-bin
   lrzip
+  lsix
+  lv2
   megapixels
   meme-image-generator
   menyoki
   metadata-cleaner
   metapixel
   mjpegtoolsFull
+  mjpegtoolsFull
   mnamer
   mozjpeg
+  mp4v2
   nodePackages_latest.svgo
+  oggvideotools
+  olive-editor
+  openshot-qt
   optipng
   oxipng
   p7zip
   pantheon.granite
   peek
+  pipeline
+  pitivi
   pixcat
   pixel2svg
   pixeluvo
@@ -152,6 +137,7 @@ with pkgs; [
   python311Packages.svg-path
   python311Packages.svgwrite
   pywal
+  redoflacs
   resvg
   ripgrep
   rubyPackages.cairo-gobject
@@ -159,14 +145,22 @@ with pkgs; [
   rubyPackages.gdk_pixbuf2
   rubyPackages.gobject-introspection
   rx
+  shotcut
+  snapshot
+  spotdl
   svgcleaner
   switcheroo
-  upscayl
+  traverso
   upscaler
+  upscayl
   upscayl-ncnn
+  vid-stab
+  vidmerger
   viu
   vlc
+  vvenc
   webp-pixbuf-loader
   xcftools
+  xvidcore
   yt-dlp
 ]

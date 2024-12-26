@@ -22,7 +22,6 @@
       orca
       pavucontrol
       qalculate-gtk
-      thunderbird
       wmctrl
       xclip
       xcolor

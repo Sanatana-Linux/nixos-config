@@ -85,7 +85,6 @@ with pkgs; [
   terminus_font
   testdisk
   themechanger
-  thunderbird-bin
   unscd
   ventoy-full
   wirelesstools

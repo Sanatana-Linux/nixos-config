@@ -129,7 +129,6 @@ with pkgs; [
   termcolor
   terminus_font
   themechanger
-  thunderbird-bin
   transmission_4-gtk
   ttfautohint
   typos

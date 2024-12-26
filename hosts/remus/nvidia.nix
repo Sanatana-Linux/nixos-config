@@ -17,18 +17,8 @@ in {
     };
     systemPackages = with pkgs; [
       cudatoolkit
-      cudaPackages.cutensor
       cudaPackages.cudnn
-      cudaPackages.cuda_opencl
-      cudaPackages.saxpy
-      cudaPackages.libnpp
-      cudaPackages.libcufft
-      cudaPackages.nvidia_fs
       nvidia-container-toolkit
-      nvidia-docker
-      nvc
-      nvtopPackages.nvidia
-      nvitop
     ];
   };
 
@@ -73,20 +63,12 @@ in {
       enable32Bit = true;
       extraPackages = with pkgs; [
         nvidiaDriverChannel
-        mlx42
-        glfw
-        vaapiVdpau
         mesa
         libvdpau-va-gl
         nvidia-vaapi-driver
-        intel-media-sdk
         intel-media-driver
-        libGL
-        libva
         libva-utils
         libvdpau
-        nvidia-texture-tools
-        mesa
       ];
     };
   };

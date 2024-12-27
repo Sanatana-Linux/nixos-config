@@ -1,6 +1,8 @@
 {pkgs, ...}:
 with pkgs; [
   aria
+  pre-commit
+
   dropbox-cli
   gotop
   nmon

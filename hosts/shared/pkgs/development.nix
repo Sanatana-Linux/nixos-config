@@ -1,6 +1,8 @@
 {pkgs, ...}:
 with pkgs; [
   any-nix-shell
+  flatpak 
+  flatpak-builder
   asmjit
   black
   bash

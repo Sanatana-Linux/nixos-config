@@ -1,8 +1,7 @@
-{
-  pkgs,
-  lib,
-  config,
-  ...
+{ pkgs
+, lib
+, config
+, ...
 }: {
   imports = [
     ./xdg.nix
@@ -22,6 +21,8 @@
       "$GOBIN"
       "${config.home.homeDirectory}/.cargo/bin"
       "${config.home.homeDirectory}/.yarn/bin"
+      "${config.home.homeDirectory}/.local/share/flatpak/exports/share"
+      "/var/lib/flatpak/exports/share"
     ];
 
     sessionVariables = {

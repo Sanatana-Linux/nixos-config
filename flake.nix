@@ -1,5 +1,5 @@
 {
-  description = "The Sanatana Linux NixOS Configuration";
+  description = "The Sanatana Linux is the ShizNix";
 
   inputs = {
     # SFMono w/ patches

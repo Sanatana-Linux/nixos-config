@@ -1,6 +1,7 @@
 {pkgs, ...}:
 with pkgs; [
   aria
+  dropbox-cli
   gotop
   nmon
   viu

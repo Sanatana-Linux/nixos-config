@@ -55,7 +55,6 @@ with pkgs; [
   openssl
   parcellite
   patchelf
-  pciutils
   platinum-searcher
   please
   ps_mem
@@ -76,7 +75,6 @@ with pkgs; [
   sysz
   tree
   usbmuxd
-  usbutils
   vgrep
   vimv
   wget

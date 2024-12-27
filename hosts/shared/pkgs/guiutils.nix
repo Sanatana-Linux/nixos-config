@@ -3,6 +3,7 @@ with pkgs; [
   alsaequal
   nemo-with-extensions
   appimage-run
+  dropbox
   appimagekit
   appstream-glib
   aspell

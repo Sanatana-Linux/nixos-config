@@ -1,5 +1,7 @@
 {pkgs, ...}:
 with pkgs; [
+  colorz
+  colorstorm
   aaxtomp3
   audiofile
   audiofile

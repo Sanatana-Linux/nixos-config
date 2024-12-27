@@ -32,7 +32,6 @@ with pkgs; [
   binutils
   bottom
   buildkit-nix
-  busybox
   cached-nix-shell
   cachix
   cbfmt
@@ -61,7 +60,6 @@ with pkgs; [
   meson
   microcodeIntel
   minizip2
-  moreutils
   msieve
   networkmanager
   ngrok
@@ -120,7 +118,6 @@ with pkgs; [
   sssd
   suitesparse
   swtpm
-  sysfsutils
   systemctl-tui
   systemdgenie
   tbb
@@ -128,7 +125,6 @@ with pkgs; [
   template-glib
   glib
   tor
-  toybox
   tpm-tools
   tpm2-tools
   tpm2-tss
@@ -139,7 +135,6 @@ with pkgs; [
   usbmuxd
   usbutils
   utillinux
-  uutils-coreutils
   vulnix
   wirelesstools
   wmutils-core

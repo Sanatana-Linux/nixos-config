@@ -10,7 +10,6 @@
       cascadia-code # microsoft ligatures font
       cm_unicode
       corefonts
-      creep #
       d2coding
       departure-mono
       dina-font
@@ -19,36 +18,26 @@
       font-awesome_4
       font-awesome_5
       fontpreview
-      google-fonts
       hackgen-font
       hackgen-nf-font
       hermit
-      hyperscrypt-font
       icomoon-feather
       inter
       jost
       kanit-font
-      lato
       line-awesome
-      manrope
       material-symbols
-      monocraft
-      mononoki
       mplus-outline-fonts.githubRelease
       nerd-fonts._3270
       nerd-fonts.agave
-      nerd-fonts.lilex
       nerd-fonts.mplus
-      nerd-fonts.overpass
       nerd-fonts.ubuntu
-      nerd-fonts.zed-mono
       norwester-font
       noto-fonts # I really hate these fonts
       noto-fonts-cjk-sans # but its better than scripts not rendering
       noto-fonts-emoji # I guess...
       noto-fonts-extra
       ocr-a
-      oldstandard
       pixel-code
       powerline-fonts
       proggyfonts
@@ -59,10 +48,6 @@
       siji
       sudo-font
       terminus_font
-      times-newer-roman
-      tt2020
-      u001-font
-      undefined-medium
       undefined-medium
       uni-vga
       unifont

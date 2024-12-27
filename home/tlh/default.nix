@@ -20,8 +20,8 @@
       ./programs/neovim/default.nix
       ./programs/ranger/default.nix
       ./programs/zathura/default.nix
-
-      ./services
+      ./services/default.nix
+      ./services/picom.nix
       ./shell
     ]
     ++ (builtins.attrValues outputs.homeManagerModules);

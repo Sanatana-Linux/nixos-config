@@ -27,7 +27,7 @@
     upower = {
       enable = true;
       # Adjusts the action taken at the point of the battery being critical and adjusts when that is
-      #criticalPowerAction = "Hibernate";
+      criticalPowerAction = "HybridSleep";
       percentageLow = 15;
       percentageCritical = 6;
       percentageAction = 5;

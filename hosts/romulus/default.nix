@@ -49,14 +49,15 @@
       compressor = "zstd";
       compressorArgs = ["-19"];
     };
-    #     kernelPatches = [
-    # {
-    #   name = "0001-Add-legion-laptop-v0.0.12";
-    #   patch = ./0001-Add-legion-laptop-v0.0.12.patch;
-    # }
-    # ];
+         kernelPatches = [
+     {
+       name = "legion-laptop";
+       patch = ./0001-Add-legion-laptop-v0.0.11.patch;
+     }
+     ];
 
     blacklistedKernelModules = ["nouveau"];
+      kernelModules = ["nvidia" "lenovo_legion" "apci_call" ];
     tmp.cleanOnBoot = true;
     kernelPackages = pkgs.linuxPackages_lqx;
     extraModulePackages = [config.boot.kernelPackages.acpi_call config.boot.kernelPackages.lenovo-legion-module config.boot.kernelPackages.nvidia_x11];
@@ -65,20 +66,22 @@
       # I too enjoy living dangerously
       # check if vulnerable with: grep . /sys/devices/system/cpu/vulnerabilities/*
       "mitigations=off"
+
       # ignore access time (atime) updates on files, except when they coincide with updates to the ctime or mtime
       "rootflags=noatime"
 
       # So we can see the kernel errors more clearly
       "quiet"
+      
       # disable usb autosuspend
       "usbcore.autosuspend=-1"
 
       # Nvidia dGPU settings
-      "nvidia_drm.fbdev=1"
+     
+      "nvidia_drm.fbdev=1" # Framebuffer driver
+      "nvidia-drm.modeset=1" # Modesetting Kernel Module 
 
-      "nvidia-drm.modeset=1"
-      "nvidia.NVreg_UsePageAttributeTable=1"
-      "nvidia.NVreg_DynamicPowerManagement=0x02"
+
     ];
 
     loader = {

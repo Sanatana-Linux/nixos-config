@@ -1,168 +1,162 @@
 {pkgs, ...}:
 with pkgs; [
-  colorz
-  colorstorm
-  aaxtomp3
-  audiofile
-  audiofile
-  babl
-  beautysh
-  byzanz
-  cheese
-  cheese
-  ciano
-  curtail
-  deface
-  delve
-  dipc
-  ebook_tools
-  emacsPackages.svgo
-  exiftool
-  feh
-  ffcast
-  ffmpeg
-  fgallery
-  figlet
-  fim
-  flac
-  flac2all
-  flaca
-  flaca
-  flacon
-  flowblade
-  frei0r
-  fswebcam
-  gallery-dl
-  gdk-pixbuf
-  gi-docgen
-  gibo
-  gif-for-cli
-  giflib
-  gifsicle
-  gimp-with-plugins
-  gimpPlugins.bimp
-  gimpPlugins.exposureBlend
-  gimpPlugins.farbfeld
-  gimpPlugins.fourier
-  gimpPlugins.gap
-  gimpPlugins.gimplensfun
-  gimpPlugins.gmic
-  gimpPlugins.lightning
-  gimpPlugins.lqrPlugin
-  gimpPlugins.resynthesizer
-  gimpPlugins.texturize
-  gimpPlugins.waveletSharpen
-  gio-sharp
-  gmic
-  gnome-video-effects
-  gnome.nixos-gsettings-overrides
-  gobject-introspection
-  graphicsmagick
-  gsettings-desktop-schemas
-  gst_all_1.gst-libav
-  image-roll
-  image_optim
-  imagemagick
-  img-cat
-  imgcat
-  imgpatchtools
-  imlib2-nox
-  imv
-  inkscape-with-extensions
-  jhead
-  jp2a
-  jpegexiforient
-  jpeginfo
-  jpegoptim
-  jpegoptim
-  jpegrescan
-  kooha
-  labelImg
-  libdevil-nox
-  libexif
-  libgee
-  libjpeg
-  libplacebo
-  libpng
-  librem
-  librsvg
-  libsForQt5.libopenshot
-  libsForQt5.libopenshot-audio
-  libspng
-  libtheora
-  libvpl
-  libwebcam
-  libwebp
-  losslesscut-bin
-  lrzip
-  lsix
-  lv2
-  megapixels
-  meme-image-generator
-  menyoki
-  metadata-cleaner
-  metapixel
-  mjpegtoolsFull
-  mjpegtoolsFull
-  mnamer
-  mozjpeg
-  mp4v2
-  nodePackages_latest.svgo
-  oggvideotools
-  olive-editor
-  openshot-qt
-  optipng
-  oxipng
-  p7zip
-  pantheon.granite
-  peek
-  pipeline
-  pitivi
-  pixcat
-  pixel2svg
-  pixeluvo
-  pngcrush
-  pngloss
-  pngnq
-  pngout
-  pngpp
-  pngquant
-  pngtoico
-  pngtools
-  potrace
-  python311Packages.cairosvg
-  python311Packages.colorthief
-  python311Packages.pyfiglet
-  python311Packages.pygobject3
-  python311Packages.pystache
-  python311Packages.pysvg-py3
-  python311Packages.svg-path
-  python311Packages.svgwrite
-  pywal
-  redoflacs
-  resvg
-  ripgrep
-  rubyPackages.cairo-gobject
-  rubyPackages.gdk_pixbuf2
-  rubyPackages.gdk_pixbuf2
-  rubyPackages.gobject-introspection
-  rx
-  shotcut
-  snapshot
-  spotdl
-  svgcleaner
-  switcheroo
-  traverso
-  upscaler
-  upscayl
-  upscayl-ncnn
-  vid-stab
-  vidmerger
-  viu
-  vlc
-  vvenc
-  webp-pixbuf-loader
-  xcftools
-  xvidcore
-  yt-dlp
+ aaxtomp3
+audiofile
+babl
+beautysh
+byzanz
+cheese
+ciano
+colorstorm
+colorz
+curtail
+deface
+delve
+dipc
+ebook_tools
+emacsPackages.svgo
+exiftool
+feh
+ffcast
+ffmpeg
+fgallery
+figlet
+fim
+flac
+flac2all
+flaca
+flacon
+flowblade
+frei0r
+fswebcam
+gallery-dl
+gdk-pixbuf
+gi-docgen
+gibo
+gif-for-cli
+giflib
+gifsicle
+gimp-with-plugins
+gimpPlugins.bimp
+gimpPlugins.exposureBlend
+gimpPlugins.farbfeld
+gimpPlugins.fourier
+gimpPlugins.gap
+gimpPlugins.gimplensfun
+gimpPlugins.gmic
+gimpPlugins.lightning
+gimpPlugins.lqrPlugin
+gimpPlugins.resynthesizer
+gimpPlugins.texturize
+gimpPlugins.waveletSharpen
+gio-sharp
+gmic
+gnome-video-effects
+gnome.nixos-gsettings-overrides
+gobject-introspection
+graphicsmagick
+gsettings-desktop-schemas
+gst_all_1.gst-libav
+image_optim
+image-roll
+imagemagick
+img-cat
+imgcat
+imgpatchtools
+imlib2-nox
+imv
+inkscape-with-extensions
+jhead
+jp2a
+jpegexiforient
+jpeginfo
+jpegoptim
+jpegrescan
+kooha
+labelImg
+libdevil-nox
+libexif
+libgee
+libjpeg
+libplacebo
+libpng
+librem
+librsvg
+libsForQt5.libopenshot
+libsForQt5.libopenshot-audio
+libspng
+libtheora
+libvpl
+libwebcam
+libwebp
+losslesscut-bin
+lrzip
+lsix
+lv2
+megapixels
+meme-image-generator
+menyoki
+metadata-cleaner
+metapixel
+mjpegtoolsFull
+mnamer
+mozjpeg
+mp4v2
+nodePackages_latest.svgo
+oggvideotools
+olive-editor
+openshot-qt
+optipng
+oxipng
+p7zip
+pantheon.granite
+peek
+pipeline
+pitivi
+pixcat
+pixel2svg
+pixeluvo
+pngcrush
+pngloss
+pngnq
+pngout
+pngpp
+pngquant
+pngtoico
+pngtools
+potrace
+python311Packages.cairosvg
+python311Packages.colorthief
+python311Packages.pyfiglet
+python311Packages.pygobject3
+python311Packages.pystache
+python311Packages.pysvg-py3
+python311Packages.svg-path
+python311Packages.svgwrite
+pywal
+redoflacs
+resvg
+ripgrep
+rubyPackages.cairo-gobject
+rubyPackages.gdk_pixbuf2
+rubyPackages.gobject-introspection
+rx
+shotcut
+snapshot
+spotdl
+svgcleaner
+switcheroo
+traverso
+upscaler
+upscayl
+upscayl-ncnn
+vid-stab
+vidmerger
+viu
+vlc
+vvenc
+webp-pixbuf-loader
+xcftools
+xvidcore
+yt-dlp
 ]

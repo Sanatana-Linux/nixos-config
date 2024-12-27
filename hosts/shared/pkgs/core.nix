@@ -1,28 +1,7 @@
 {pkgs, ...}:
 with pkgs; [
   alejandra
-  glibc
-  sysctl
-  sysstat
-  sysvinit
-  sysvtools
-  sysfsutils
-  ntfs3g
-  sysprof
-  systeroid
-  keyutils
-  dmidecode
-  python312Packages.py-dmidecode
-  gettext
-  xgeometry-select
-  wmic-bin
-  kmsxx
-  out-of-tree
   any-nix-shell
-  udisks
-  udiskie
-  udevil
-  kconfig-frontends
   appstream
   appstream-glib
   as-tree
@@ -44,13 +23,20 @@ with pkgs; [
   ddcui
   ddcutil
   deadnix
+  dmidecode
   dnsutils
   dosfstools
   exfatprogs
   ffmpeg-full
   firmwareLinuxNonfree
   gccStdenv
+  gettext
+  glib
+  glibc
   intel-ocl
+  kconfig-frontends
+  keyutils
+  kmsxx
   linux-firmware
   linuxHeaders
   man-pages
@@ -63,16 +49,13 @@ with pkgs; [
   msieve
   networkmanager
   ngrok
+  nil
   niv
   nix-bash-completions
-  nixdoc
-  nix-doc
   nix-binary-cache
-  nixel
-  nil
-  nixt
   nix-bundle
   nix-direnv-flakes
+  nix-doc
   nix-health
   nix-index
   nix-janitor
@@ -83,15 +66,17 @@ with pkgs; [
   nix-zsh-completions
   nixd
   nixdoc
+  nixel
   nixos-generators
+  nixt
   nmap
   node2nix
   ntfs3g
   nurl
   opencl-clang
   ouch
+  out-of-tree
   parallel
-  pciutils
   pciutils
   pfetch
   pinentry-tty
@@ -103,6 +88,7 @@ with pkgs; [
   pulseaudio
   pure-prompt
   python311
+  python312Packages.py-dmidecode
   ranger
   rcshist
   reposurgeon
@@ -118,12 +104,18 @@ with pkgs; [
   sssd
   suitesparse
   swtpm
+  sysctl
+  sysfsutils
+  sysprof
+  sysstat
   systemctl-tui
   systemdgenie
+  systeroid
+  sysvinit
+  sysvtools
   tbb
   tealdeer
   template-glib
-  glib
   tor
   tpm-tools
   tpm2-tools
@@ -132,24 +124,29 @@ with pkgs; [
   trash-cli
   tree
   ucl
+  udevil
+  udiskie
+  udisks
   usbmuxd
   usbutils
   utillinux
   vulnix
   wirelesstools
+  wmic-bin
   wmutils-core
   wmutils-libwm
   wmutils-opt
   xbrightness
   xclip
   xfce.xfce4-settings
+  xgeometry-select
   xorg.fontalias
   xorg.fonttosfnt
   xorg.fontutil
+  xorg.libxcb
   xorg.libXxf86dga
   xorg.libXxf86misc
   xorg.libXxf86vm
-  xorg.libxcb
   xorg.mkfontdir
   xorg.xbacklight
   xorg.xcbutil

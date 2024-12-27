@@ -1,10 +1,12 @@
 {pkgs, ...}:
 with pkgs; [
   aichat
+  alpaca
   code2prompt
-  nextjs-ollama-llm-ui
-  tgpt
-  ollama-cuda
-  python312Packages.ollama
   gollama
+  nextjs-ollama-llm-ui
+  ollama-cuda
+  oterm 
+  python312Packages.ollama
+  tgpt
 ]

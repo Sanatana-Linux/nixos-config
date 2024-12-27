@@ -28,7 +28,6 @@ in {
       nvidia_cg_toolkit
       nv-codec-headers
       nvtopPackages.nvidia
-      nvitop
     ];
   };
 

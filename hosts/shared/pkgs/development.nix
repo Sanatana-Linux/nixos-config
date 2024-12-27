@@ -1,10 +1,8 @@
 {pkgs, ...}:
 with pkgs; [
+  #nodePackages_latest.neovim
   any-nix-shell
-  flatpak 
-  flatpak-builder
   asmjit
-  black
   bash
   black
   brotli
@@ -14,12 +12,13 @@ with pkgs; [
   cbfmt
   cmake
   conda
-  inetutils
   cpp-hocon
   cpp-utilities
   deadnix
   direnv
   fcppt
+  flatpak
+  flatpak-builder
   fuse3
   gdk-pixbuf
   gdk-pixbuf-xlib
@@ -45,6 +44,7 @@ with pkgs; [
   gource
   icu
   imlib2Full
+  inetutils
   isync
   just
   leptosfmt
@@ -91,12 +91,11 @@ with pkgs; [
   nix-tree
   nixpkgs-fmt
   node2nix
-  #nodePackages_latest.neovim
-  nodePackages_latest.prettier
+  nodenv
   nodePackages_latest.diagnostic-languageserver
   nodePackages_latest.gulp
   nodePackages_latest.nodejs
-  nodenv
+  nodePackages_latest.prettier
   nps
   nss
   nvd
@@ -137,8 +136,8 @@ with pkgs; [
   tree-sitter
   typescript
   wkhtmltopdf-bin
-  xorg.libX11
   xorg_sys_opengl
+  xorg.libX11
   yamlfix
   yarn
   yarn2nix

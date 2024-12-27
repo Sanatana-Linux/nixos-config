@@ -1,26 +1,32 @@
+{ colors, pkgs, inputs, ... }:
 {
-  colors,
-  pkgs,
-  outputs,
-  ...
-}: {
   services.picom = {
-    enable = true;
-    package = pkgs.picom;
+    enable = false;
+    #package = nixpkgs-f2k.packages.${pkgs.system}.picom-pijulius;
+    package = inputs.nixpkgs-f2k.packages.${pkgs.system}.picom-git.overrideAttrs (oldAttrs: {
+      src = pkgs.fetchFromGitHub {
+        owner = "fdev31";
+        repo = "picom";
+        rev = "7834dd3147ba605bba5cbe911bacfa8b217c37e0";
+        sha256 = "05cd3yj3lv8nk433v0j2k86mhg72pf5lijkshqwarr8hp3h00cvx";
+      };
+    });
     activeOpacity = 1.0;
     backend = "glx";
     fade = true;
     fadeDelta = 3;
-    fadeSteps = [0.03 0.03];
+    fadeSteps = [ 0.03 0.03 ];
 
     opacityRules = [
       "85:class_g = 'kitty' && !focused"
       "93:class_g = 'kitty' && focused"
-      "85:class_g = 'ncmpcpppad' && !focused"
-      "93:class_g = 'ncmpcpppad' && focused"
-      "85:class_g = 'neofetchpad' && !focused"
-      "93:class_g = 'neofetchpad' && focused"
-      "99:class_g = 'awesome'"
+      # "90:class_g = 'org.wezfurlong.wezterm' && !focused"
+      # "94:class_g = 'org.wezfurlong.wezterm' && focused"
+      # "90:class_g = 'ncmpcpppad' && !focused"
+      # "93:class_g = 'ncmpcpppad' && focused"
+      # "90:class_g = 'neofetchpad' && !focused"
+      # "93:class_g = 'neofetchpad' && focused"
+      "100:class_g = 'awesome'"
     ];
     settings = {
       animations = true;
@@ -28,18 +34,19 @@
       animation-dampening = 22.0;
       animation-clamping = true;
       animation-mass = 1;
-      animation-for-open-window = "slide-up";
+      animation-for-open-window = "slide-down";
       animation-for-menu-window = "slide-down";
-      animation-for-transient-window = "slide-down";
+      animation-for-transient-window = "slide-up";
       animation-for-prev-tag = "zoom";
       enable-fading-prev-tag = true;
       animation-for-next-tag = "zoom";
       enable-fading-next-tag = true;
-      corner-radius = 12;
+      corner-radius = 8;
       shadow = true;
-      shadow-radius = 15;
-      shadow-offset-x = -15;
-      shadow-offset-y = -15;
+      shadow-radius = 40;
+      shadow-offset-x = -38;
+      shadow-offset-y = -30;
+      shadow-opacity = 0.2;
       shadow-exclude = [
         "window_type = 'desktop'"
         "class_g ~= 'awesome'"
@@ -52,8 +59,6 @@
       ];
       blur-background-exclude = [
         "class_g ~= 'slop'"
-        "class_g ~= 'maim'"
-        "class_g ~= 'Shutter'"
         "window_type = 'desktop'"
         "class_g ~= 'discord'"
         "class_g ~= 'firefox'"
@@ -61,24 +66,16 @@
         "class_g ~= 'firefox'"
         "class_i ~= 'Spotify'"
         "name ~= 'slop'"
-        "name ~= 'Shutter'"
-        "name ~= 'maim'"
       ];
-      blur = {
-        method = "dual_kawase";
-        strength = 5.0;
-        deviation = 1.0;
 
-        kernel = "11x11gaussian";
-      };
-
-      blur-background = false;
-      blur-background-frame = true;
-      blur-background-fixed = true;
+      blur-background = true;
+      blur-background-frame = false;
+      blur-background-fixed = false;
+      glx-no-stencil = true;
+      glx-no-rebind-pixmap = true;
       xrender-sync-fence = true;
       use-damage = true;
-      unredir-if-possible = false;
-      vsync = true;
     };
+
   };
 }

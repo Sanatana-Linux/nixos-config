@@ -1,28 +1,27 @@
-{
-  lib,
-  pkgs,
-  config,
-  inputs,
-  outputs,
-  ...
+{ lib
+, pkgs
+, config
+, inputs
+, outputs
+, ...
 }: {
   imports =
     [
-      ./X
-      ./desktop
-      ./pkgs
-      ./programs/yazi/default.nix
-      ./programs/vscode.nix
-      ./programs/firefox.nix
-      ./programs/gpg/default.nix
-      ./programs/zathura/default.nix
-      ./programs/kitty/default.nix
-      ./programs/neovim/default.nix
-      ./programs/ranger/default.nix
-      ./programs/zathura/default.nix
-      ./services/default.nix
-      ./services/picom.nix
-      ./shell
+      ../shared/X
+      ../shared/desktop
+      ../shared/pkgs
+      ../shared/programs/yazi/default.nix
+      ../shared/programs/vscode.nix
+      ../shared/programs/firefox.nix
+      ../shared/programs/gpg/default.nix
+      ../shared/programs/zathura/default.nix
+      ../shared/programs/kitty/default.nix
+      ../shared/programs/neovim/default.nix
+      ../shared/programs/ranger/default.nix
+      ../shared/programs/zathura/default.nix
+      ../shared/services/default.nix
+      ../shared/services/picom.nix
+      ../shared/shell
     ]
     ++ (builtins.attrValues outputs.homeManagerModules);
 

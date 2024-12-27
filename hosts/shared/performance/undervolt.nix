@@ -7,6 +7,6 @@
   # as This is Also Set in Bios to limit CPU power draw to 1.35V
   services.undervolt = {
     enable = true;
-    coreOffset = -50;
+    coreOffset = -100;
   };
 }

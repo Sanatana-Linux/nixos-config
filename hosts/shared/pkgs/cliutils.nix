@@ -1,19 +1,10 @@
-{pkgs, ...}:
+{ pkgs, ... }:
 with pkgs; [
   aria
-  pre-commit
-
-  dropbox-cli
-  gotop
-  nmon
-  viu
-  terminal-parrot
   bash-completion
   bat
   beep
   brightnessctl
-  btop
-  cheat
   clang
   comma
   csv2latex
@@ -22,7 +13,6 @@ with pkgs; [
   didyoumean
   efibootmgr
   efitools
-  electron
   eza
   fd
   file
@@ -33,8 +23,9 @@ with pkgs; [
   gh
   ghost
   ghostscript
+  git-filter-repo
+  gotop
   htop
-  imgurbash2
   iw
   jdupes
   jq
@@ -54,18 +45,16 @@ with pkgs; [
   luajitPackages.stdlib
   massren
   neofetch
+  nmon
   ocl-icd
   openssl
   parcellite
   patchelf
-  platinum-searcher
-  please
   ps_mem
   pure-prompt
   python311Packages.pygccxml
   rclone
   renameutils
-  ripgrep-all
   ripgrep-all
   rnr
   silver-searcher
@@ -76,10 +65,12 @@ with pkgs; [
   squashfsTools
   squashfuse
   sysz
+  terminal-parrot
   tree
   usbmuxd
   vgrep
   vimv
+  viu
   wget
   whois
   wirelesstools

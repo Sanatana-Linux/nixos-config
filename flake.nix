@@ -57,7 +57,7 @@
     ...
   } @ inputs: let
     inherit (self) outputs;
-    forEachSystem = nixpkgs.lib.genAttrs ["x86_64-linux" ]; # when needed add "aarch64-linux"
+    forEachSystem = nixpkgs.lib.genAttrs ["x86_64-linux" "aarch64-linux"]; # when needed add "aarch64-linux"
     forEachPkgs = f: forEachSystem (sys: f nixpkgs.legacyPackages.${sys});
   in {
     nixosModules = import ./modules/nixos;

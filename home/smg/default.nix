@@ -8,15 +8,15 @@
 }: {
   imports =
     [
-      ../shared/X
-      ../share/desktop
-      ../shared/pkgs
-      ../shared/programs/yazi/default.nix
-      ../shared/programs/kitty/default.nix
-      ../shared/programs/zathura/default.nix
+      ./X
+      ./desktop
+      ./pkgs
+      ./programs/yazi/default.nix
+      ./programs/kitty/default.nix
+      ./programs/zathura/default.nix
 
-      ../shared/services
-      ../shared/shell
+      ./services
+      ./shell
     ]
     ++ (builtins.attrValues outputs.homeManagerModules);
 

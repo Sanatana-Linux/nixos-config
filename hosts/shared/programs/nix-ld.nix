@@ -13,7 +13,7 @@
       curl
       gcc
       glib
-      # glibc
+      glibc
       gobject-introspection
       gmime3
       icu

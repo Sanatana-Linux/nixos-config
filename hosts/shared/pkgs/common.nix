@@ -21,6 +21,11 @@ with pkgs; [
   glib
   glib-networking
   glib-testing
+  glibc
+  glibcInfo
+  glibcLocalesUtf8
+  glibc_memusage
+  glibc_multi
   glibmm
   gnome.gvfs
   gnome2.gtkglext
@@ -29,6 +34,7 @@ with pkgs; [
   goocanvas
   goocanvas3
   google-chrome
+  gtk-sharp-2_0
   gtk2-x11
   gtk3
   gtk3-x11

@@ -1,10 +1,11 @@
-{ inputs
-, outputs
-, lib
-, config
-, pkgs
-, bhairava-grub-theme
-, ...
+{
+  inputs,
+  outputs,
+  lib,
+  config,
+  pkgs,
+  bhairava-grub-theme,
+  ...
 }: {
   imports = [
     # Shared configuration across all machines
@@ -28,6 +29,12 @@
     # bluetooth support
     ../shared/hardware/bluetooth.nix
 
+    # common hardware support
+    ../shared/hardware/common.nix
+
+    # Intel CPU support
+    ../shared/hardware/intel.nix
+
     # Nvidia Driver Support
     ./nvidia.nix
 
@@ -46,40 +53,43 @@
       systemd.enable = true;
       verbose = false;
       compressor = "zstd";
-      compressorArgs = [ "-19" ];
+      compressorArgs = ["-19"];
     };
-    #     kernelPatches = [
-    # {
-    #   name = "legion-laptop";
-    #   patch = ./0001-Add-legion-laptop-v0.0.11.patch;
-    # }
-    # ];
+         kernelPatches = [
+     {
+       name = "legion-laptop";
+       patch = ./0001-Add-legion-laptop-v0.0.11.patch;
+     }
+     ];
 
-    blacklistedKernelModules = [ "nouveau" ];
-    kernelModules = [ "nvidia" "lenovo_legion" "apci_call" "ideapad" ];
+    blacklistedKernelModules = ["nouveau"];
+      kernelModules = ["nvidia" "lenovo_legion" "apci_call" ];
     tmp.cleanOnBoot = true;
-    kernelPackages = pkgs.linuxPackages;
-    extraModulePackages = [ config.boot.kernelPackages.acpi_call config.boot.kernelPackages.lenovo-legion-module config.boot.kernelPackages.nvidia_x11 ];
+    kernelPackages = pkgs.linuxPackages_lqx;
+    extraModulePackages = [config.boot.kernelPackages.acpi_call config.boot.kernelPackages.lenovo-legion-module config.boot.kernelPackages.nvidia_x11];
 
     kernelParams = [
       # I too enjoy living dangerously
       # check if vulnerable with: grep . /sys/devices/system/cpu/vulnerabilities/*
       "mitigations=off"
 
+       "preempt=full"
+
       # ignore access time (atime) updates on files, except when they coincide with updates to the ctime or mtime
       "rootflags=noatime"
 
       # So we can see the kernel errors more clearly
       "quiet"
-
+      
       # disable usb autosuspend
       "usbcore.autosuspend=-1"
 
       # Nvidia dGPU settings
-
+     
       "nvidia_drm.fbdev=1" # Framebuffer driver
       "nvidia-drm.modeset=1" # Modesetting Kernel Module 
-      "lenovo-legion.force=1" # Force the module to load
+
+
     ];
 
     loader = {
@@ -107,12 +117,6 @@
       nvme-cli
       dbus
       dbus-broker
-      coreutils-full 
-gcc
-      gccStdenv
-      gcc_debug
-      gcc_multi 
-glibc
       dbus-glib
       intel-compute-runtime
       intel-gmmlib

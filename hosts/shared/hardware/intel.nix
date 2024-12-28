@@ -3,8 +3,8 @@
   config,
   ...
 }: {
-  cpu.intel.updateMicrocode = true;
-  systemPackages = with pkgs; [
+  hardware.cpu.intel.updateMicrocode = true;
+  environment.systemPackages = with pkgs; [
     cpufrequtils
     intel-compute-runtime
     intel-gmmlib

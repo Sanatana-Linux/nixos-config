@@ -1,7 +1,6 @@
 {pkgs, ...}:
 with pkgs; [
   alejandra
-coreutils-full
   any-nix-shell
   appstream
   appstream-glib
@@ -33,6 +32,7 @@ coreutils-full
   gccStdenv
   gettext
   glib
+  glibc
   intel-ocl
   kconfig-frontends
   keyutils

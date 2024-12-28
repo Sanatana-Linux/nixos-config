@@ -16,13 +16,11 @@
     sessionPath = [
       "${config.home.homeDirectory}/.local/bin"
       "${config.home.homeDirectory}/.local/share/gem/ruby/3.1.0/bin"
-      "${config.home.homeDirectory}/.local/share/flatpak/exports/share"
+      #"${config.home.homeDirectory}/.local/share/flatpak/exports/share"
       "${config.home.homeDirectory}/Workspace/go/bin"
       "$GOBIN"
       "${config.home.homeDirectory}/.cargo/bin"
       "${config.home.homeDirectory}/.yarn/bin"
-      "${config.home.homeDirectory}/.local/share/flatpak/exports/share"
-      "/var/lib/flatpak/exports/share"
     ];
 
     sessionVariables = {

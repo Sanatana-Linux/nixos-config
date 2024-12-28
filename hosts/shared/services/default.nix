@@ -8,7 +8,7 @@
     ./udev.nix
     ./xserver.nix
   ];
-
+  services.logrotate.checkConfig = false; 
   xdg.portal.enable = true;
   xdg.portal.config.common.default = "*";
   services.flatpak.enable = true;

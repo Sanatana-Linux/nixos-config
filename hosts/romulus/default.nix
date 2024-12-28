@@ -58,7 +58,7 @@
     blacklistedKernelModules = [ "nouveau" ];
     kernelModules = [ "nvidia" "lenovo_legion" "apci_call" "ideapad" ];
     tmp.cleanOnBoot = true;
-    kernelPackages = pkgs.linuxPackages_lqx;
+    kernelPackages = pkgs.linuxPackages;
     extraModulePackages = [ config.boot.kernelPackages.acpi_call config.boot.kernelPackages.lenovo-legion-module config.boot.kernelPackages.nvidia_x11 ];
 
     kernelParams = [
@@ -107,6 +107,12 @@
       nvme-cli
       dbus
       dbus-broker
+      coreutils-full 
+gcc
+      gccStdenv
+      gcc_debug
+      gcc_multi 
+glibc
       dbus-glib
       intel-compute-runtime
       intel-gmmlib

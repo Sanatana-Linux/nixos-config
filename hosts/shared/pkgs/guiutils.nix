@@ -48,12 +48,10 @@ graphite2
 gspell
 gthumb
 gtk_engines
-gtk-sharp-2_0
 gtk2-x11
 gtk3
 gtk3-x11
 gtk4
-gtkextra
 gtkspell3
 gtkspellmm
 gusb

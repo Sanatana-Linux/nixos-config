@@ -23,6 +23,5 @@ All of the documentation is in the `.github/documentation` directory, which serv
 
 1. [Installation Notes](.github/documentation/installation.md)
 1. [Useful Nix Commands](.github/documentation/nix-commands.md)
-1. [TODOs](./documentation/todo-index.md)
 1. [Inspiration and Credits](.github/documentation/credits.md)
-1. [Error Log](.github/documentation/error-index.md)
+1. [Debugging Journal](.github/documentation/error-index.md)

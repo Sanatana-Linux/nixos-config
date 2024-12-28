@@ -8,4 +8,4 @@
   - So I packaged up the vital files and dropped them on Dropbox, in preparation for the present reinstallation 
 
  
-- **Solution or Verdict:** *(TENATIVE)* Reinstallation since none of the mitigation efforts were working, seemed best to start fresh and be done with the issue.
+- **Solution or Verdict:** Reinstallation since none of the mitigation efforts were working, seemed best to start fresh and be done with the issue.

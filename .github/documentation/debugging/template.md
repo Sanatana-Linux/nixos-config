@@ -1,4 +1,4 @@
-# Error or Issue Template 
+# Debugging Journal Template
 
 - **Date:** 
 - **Error or Issue Name:**

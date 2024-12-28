@@ -112,7 +112,6 @@ p7zip
 pantheon.granite
 peek
 pipeline
-pitivi
 pixcat
 pixel2svg
 pixeluvo

@@ -1,11 +1,10 @@
-{
-  pkgs,
-  inputs,
-  lib,
-  config,
-  ...
+{ pkgs
+, inputs
+, lib
+, config
+, ...
 }: {
-  imports = [../../../cachix.nix];
+  imports = [ ../../../cachix.nix ];
   documentation = {
     enable = false;
     doc.enable = false;
@@ -43,7 +42,7 @@
         "pre-commit-hooks.cachix.org-1:Pkk3Panw5AW24TOv6kz3PvLhlH8puAsJTBbOPmBo7Rc="
       ];
       # allow sudo users to mark the following values as trusted
-      allowed-users = ["@wheel" "root" "tlh"];
+      allowed-users = [ "@wheel" "root" "tlh" ];
       # only allow sudo users to manage the nix store
       trusted-users = [
         "root"
@@ -53,20 +52,27 @@
       ];
       # Allow the store to optimize itself
       auto-optimise-store = true;
+      # allow broken packages
+      allowBroken = true;
       # Free up to 10GiB whenever there is less than 5GB left.
       # this setting is in bytes, so we multiply with 1024 by 3
       # min-free = "${toString (5 * 1024 * 1024 * 1024)}";
       # max-free = "${toString (10 * 1024 * 1024 * 1024)}";
 
       # Useful/Necessary Features to Have Enabled
-      system-features = ["nixos-test" "kvm" "recursive-nix" "big-parallel" "cuda"];
+      system-features = [ "kvm" "recursive-nix" "big-parallel" "benchmark" "cuda" ];
       # Necessary Experimental Nix Features for Flakes and Friends
-      experimental-features = ["recursive-nix" "auto-allocate-uids" "ca-derivations" "nix-command" "flakes"];
+      experimental-features = [ "recursive-nix" "auto-allocate-uids" "ca-derivations" "nix-command" "flakes" ];
       flake-registry = "/etc/nix/registry.json";
       # show more log lines for failed builds
       log-lines = 20;
       # Use Binary Cache because we don't want to wait our lives away
       builders-use-substitutes = true;
+      # Just use the caches for God's sake
+      always-allow-substitutes = true;
+
+      # Relax sandboxing to enable builds outside of chroot
+      sandbox = "relaxed";
       # continue building derivations if one fails
       keep-going = true;
       # Garbage Collection will handle this later, but for now keep it around for rebuilds
@@ -79,7 +85,6 @@
       use-xdg-base-directories = true;
     };
 
-    # package = pkgs.nixVersions.git;
 
     gc = {
       automatic = true;
@@ -87,7 +92,7 @@
       options = "--delete-older-than 3d";
     };
 
-    registry = lib.mapAttrs (_: value: {flake = value;}) inputs;
+    registry = lib.mapAttrs (_: value: { flake = value; }) inputs;
 
     nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
   };

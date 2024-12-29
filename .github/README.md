@@ -1,15 +1,6 @@
-<div  align="right">
-<blockquote>
- सनातन SANĀTANA (adjective)
-
- 1.  Perpetual, constant, eternal, permanent
- 2.  Firm, fixed, settled;
- 3.  Primeval, ancient. ः
-</blockquote>
-
-  <figcaption> <cite>UChicago's</cite> <a href="https://dsal.uchicago.edu/cgi-bin/app/apte_query.py?qs=Sanatana&matchtype=default"> DSAL Online Sanskrit Dictionary </a>  <figcaption>
-</div>
-
+ **सनातन SANĀTANA**: 1.  Perpetual, constant, eternal, permanent;  2.  Firm, fixed, settled;  3.  Primeval, ancient. 
+ - [UChicago's DSAL Online Sanskrit Dictionary](https://dsal.uchicago.edu/cgi-bin/app/apte_query.py?qs=Sanatana&matchtype=default) 
+  
 <img width="250px" align="left"  src="./assets/om.gif" alt="Om Puurnnam-Adah Puurnnam-Idam Puurnnaat-Puurnnam-Udacyate | Puurnnasya Puurnnam-Aadaaya Puurnnam-Eva-Avashissyate || Om Shaantih Shaantih Shaantih "  />
 
 ---

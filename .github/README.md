@@ -1,4 +1,4 @@
-<figure width="300px" align="right">
+<div width="300px" align="right">
 <blockquote>
  सनातन SANĀTANA (adjective)
 
@@ -8,7 +8,7 @@
 </blockquote>
 
   <figcaption> <cite>UChicago's</cite> <a href="https://dsal.uchicago.edu/cgi-bin/app/apte_query.py?qs=Sanatana&matchtype=default"> DSAL Online Sanskrit Dictionary </a>  <figcaption>
-</figure>
+</div>
 
 <img width="150px" align="left"  src="./assets/om.gif" alt="Om Puurnnam-Adah Puurnnam-Idam Puurnnaat-Puurnnam-Udacyate | Puurnnasya Puurnnam-Aadaaya Puurnnam-Eva-Avashissyate || Om Shaantih Shaantih Shaantih "  />
 

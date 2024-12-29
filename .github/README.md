@@ -17,12 +17,12 @@
 
 ## Documentation
 
-<img src="./assets/nix.svg" alt="prettier nixos label" style="float:right" />
+
+<img width="150px" height="150px"  src="./assets/nix.svg" alt="prettier nixos label" float="right" />
 
 All of the documentation is in the `.github/documentation` directory, which serves as a project-based notebook. Below are pages of this project's _notebook_ which may be of interest to third parties:
 
 1. [Installation Notes](.github/documentation/installation.md)
 1. [Useful Nix Commands](.github/documentation/nix-commands.md)
-1. [TODOs](./documentation/todo-index.md)
 1. [Inspiration and Credits](.github/documentation/credits.md)
-1. [Error Log](.github/documentation/error-index.md)
+1. [Error Log](.github/documentation/errors.md)

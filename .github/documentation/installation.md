@@ -33,11 +33,15 @@ cd /mnt/etc/nixos
 # to install the xorg version:
 nixos-install --flake '.#macbook-air' --impure
 
+# Setup the User's Password 
+nixos-enter --root /mnt 
+passwd tlh 
+exit 
+
 ```
 
-> You could get some hashes errors, just change the bad hashes in the configuration file to the given ones by the Nix Output.
+> You could get some hashes errors during install, just change the bad hashes in the configuration file to the given ones by the Nix Output.
 
-- Reboot, login as root, and change the password for your user using `passwd`
 - Log-in in to the display manager.
 - Then:
 
@@ -46,7 +50,6 @@ nixos-install --flake '.#macbook-air' --impure
 doas chown -R $USER /etc/nixos
 
 # Prevent nix-rebuild from whining about ownership
-
 doas git config --global --add safe.directory /etc/nixos 
 ```
 
@@ -64,7 +67,6 @@ git commit -m 'steep learning curves bruh'
 nixos-rebuild switch --impure --flake '/etc/nixos#macbook-air'
 
 ```
-<p align="center">
-<img src="../.github/assets/patrick-meme.jpg" width="400px" alt="Patrick Star wearing a shirt about wanting to be picked up by his mother because he is scared. This is to make a light joke at my own and the reader's expense about the overwhelming aspects of the bootstrap process"/>
 
-</p>
+# All Done, See It Wasn't So Bad... 
+## Hopefully!

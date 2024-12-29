@@ -35,6 +35,5 @@ in {
     ++ media
     ++ pentesting
     ++ pythonpackages
-    ++ sound
-    ++ virtualization;
+    ++ sound;
 }

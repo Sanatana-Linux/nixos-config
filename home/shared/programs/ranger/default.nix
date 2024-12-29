@@ -1,10 +1,4 @@
-{
-  inputs,
-  lib,
-  config,
-  pkgs,
-  ...
-}: {
+{...}: {
   home.file.".config/ranger/commands.py".source = ./commands.py;
   home.file.".config/ranger/commands_full.py".source = ./commands_full.py;
   home.file.".config/ranger/rc.conf".source = ./rc.conf;

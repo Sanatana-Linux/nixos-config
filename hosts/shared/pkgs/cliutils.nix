@@ -15,8 +15,6 @@ with pkgs; [
   efitools
   eza
   fd
-  file
-  file-rename
   fzf
   fzy
   gammastep
@@ -29,7 +27,6 @@ with pkgs; [
   iw
   jdupes
   jq
-  jrnl
   latex2html
   latexrun
   libdbusmenu
@@ -60,7 +57,6 @@ with pkgs; [
   silver-searcher
   simg2img
   slop
-  speedtest-cli
   squashfs-tools-ng
   squashfsTools
   squashfuse

@@ -17,8 +17,6 @@ with pkgs; [
   deadnix
   direnv
   fcppt
-  flatpak
-  flatpak-builder
   fuse3
   gdk-pixbuf
   gdk-pixbuf-xlib
@@ -125,7 +123,6 @@ with pkgs; [
   shellcheck
   shellharden
   shfmt
-  skim
   sqlite
   sqlite-utils
   stdenv.cc.cc

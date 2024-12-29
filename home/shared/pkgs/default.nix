@@ -9,7 +9,7 @@
       dbus-broker
       eggdbus
       bc
-    thunderbird-bin
+      thunderbird-bin
       bfg-repo-cleaner
       feh
       fzf

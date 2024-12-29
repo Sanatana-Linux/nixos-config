@@ -6,7 +6,6 @@ with pkgs; [
   cairo
   cairomm
   cmake
-  corrupter
   dbus
   dbus-broker
   dbus-glib
@@ -76,8 +75,7 @@ with pkgs; [
   perl538Packages.GooCanvas2CairoTypes
   polkit_gnome
   poppler_utils
-  python311Packages.pyxdg
-  satty
+  python312Packages.pyxdg
   sdbus-cpp
   shared-mime-info
   shutter
@@ -103,9 +101,7 @@ with pkgs; [
   xfce.libxfce4ui
   xfce.libxfce4util
   xfce.tumbler
-  xfce.xfce4-dev-tools
   xfce.xfce4-power-manager
-  xfce.xfce4-settings
   xfce.xfconf
   xorg.fonttosfnt
   xorg.fontutil

@@ -1,172 +1,162 @@
 {pkgs, ...}:
 with pkgs; [
-alsaequal
-appimage-run
-appimagekit
-appstream-glib
-aspell
-aspellDicts.de
-aspellDicts.en
-aspellDicts.en-computers
-aspellDicts.en-science
-aspellDicts.hi
-bdfresize
-bleachbit
-blueman
-brightnessctl
-cairo
-cairomm
-codespell
-dbus-broker
-dconf
-ebook_tools
-eggdbus
-epick
-eyedropper
-fbida
-fcft
-file-roller
-fntsample
-fontpreview
-fuseiso
-gcolor3
-geocode-glib_2
-gmime
-gmime3
-gnome-disk-utility
-gnome-font-viewer
-gnome-themes-extra
-gnome.gvfs
-gnome2.gtkglext
-gob2
-gobject-introspection-unwrapped
-goocanvas
-goocanvas3
-gparted
-gpick
-graphite2
-gspell
-gthumb
-gtk_engines
-gtk-sharp-2_0
-gtk2-x11
-gtk3
-gtk3-x11
-gtk4
-gtkextra
-gtkspell3
-gtkspellmm
-gusb
-hunspell
-hunspellDicts.de_DE
-hunspellDicts.en_US-large
-hunspellDicts.es_MX
-i3lock-color
-inkscape-with-extensions
-inotify-tools
-ispell
-lcdf-typetools
-leela
-libappindicator
-libappindicator-gtk3
-libcanberra-gtk3
-libdbusmenu
-libdbusmenu-gtk3
-libfm
-libfm-extra
-libgee
-libglibutil
-libgudev
-libinput
-libnotify
-libsForQt5.qt5ct
-libsForQt5.qtcurve
-libsForQt5.qtstyleplugins
-libusb1
-libxdg_basedir
-luakit
-maim
-menu-cache
-mesa
-mesa-demos
-mime-types
-mimetic
-mupdf
-mythes
-nemo-with-extensions
-nerd-font-patcher
-networkmanagerapplet
-nuspell
-ocrmypdf
-pango
-pangomm
-pastel
-pdf-parser
-pdfarranger
-pdftag
-pdftk
-perl538Packages.CairoGObject
-perl538Packages.GooCanvas2CairoTypes
-phinger-cursors
-pixcat
-polkit_gnome
-poppler_utils
-psftools
-pulseeffects-legacy
-python311Packages.pdftotext
-python311Packages.pyxdg
-qt6.qt5compat
-rep-gtk
-rofi
-shutter
-t1lib
-t1utils
-tdesktop
-template-glib
-termcolor
-terminus_font
-themechanger
-transmission_4-gtk
-ttfautohint
-typos
-unrar
-unscd
-updfparser
-ventoy-full
-vlc
-vte-gtk4
-wirelesstools
-wmctrl
-woff2
-wpa_supplicant
-xarchiver
-xcftools
-xclip
-xcolor
-xdg-dbus-proxy
-xdg-desktop-portal
-xdg-desktop-portal-gtk
-xdg-launch
-xdg-user-dirs
-xdg-utils
-xdgmenumaker
-xdotool
-xdragon
-xfce.exo
-xfce.garcon
-xfce.libxfce4ui
-xfce.libxfce4util
-xfce.tumbler
-xfce.xfce4-dev-tools
-xfce.xfce4-power-manager
-xfce.xfce4-settings
-xfce.xfconf
-xfontsel
-xlsfonts
-xorg-rgb
-xorg.xfontsel
-xscreensaver
-xsecurelock
-xsuspender
-xterm
+  alsaequal
+  appimage-run
+  appimagekit
+  appstream-glib
+  aspell
+  aspellDicts.de
+  aspellDicts.en
+  aspellDicts.en-computers
+  aspellDicts.en-science
+  aspellDicts.hi
+  bleachbit
+  blueman
+  brightnessctl
+  cairo
+  cairomm
+  codespell
+  dbus-broker
+  dconf
+  ebook_tools
+  eggdbus
+  eyedropper
+  fbida
+  fcft
+  file-roller
+  fntsample
+  fontpreview
+  fuseiso
+  gcolor3
+  geocode-glib_2
+  gmime
+  gmime3
+  gnome-disk-utility
+  gnome-font-viewer
+  gnome-themes-extra
+  gnome.gvfs
+  gnome2.gtkglext
+  gob2
+  gobject-introspection-unwrapped
+  goocanvas
+  goocanvas3
+  gparted
+  gpick
+  graphite2
+  gspell
+  gthumb
+  gtk_engines
+  gtk-sharp-2_0
+  gtk2-x11
+  gtk3
+  gtk3-x11
+  gtk4
+  gtkextra
+  gtkspell3
+  gtkspellmm
+  gusb
+  hunspell
+  hunspellDicts.de_DE
+  hunspellDicts.en_US-large
+  hunspellDicts.es_MX
+  i3lock-color
+  inkscape-with-extensions
+  inotify-tools
+  lcdf-typetools
+  leela
+  libappindicator
+  libappindicator-gtk3
+  libcanberra-gtk3
+  libdbusmenu
+  libdbusmenu-gtk3
+  libfm
+  libfm-extra
+  libgee
+  libglibutil
+  libgudev
+  libinput
+  libnotify
+  libsForQt5.qt5ct
+  libsForQt5.qtcurve
+  libsForQt5.qtstyleplugins
+  libusb1
+  libxdg_basedir
+  luakit
+  maim
+  menu-cache
+  mime-types
+  mimetic
+  mupdf
+  mythes
+  nemo-with-extensions
+  nerd-font-patcher
+  networkmanagerapplet
+  ocrmypdf
+  pango
+  pangomm
+  pastel
+  pdf-parser
+  pdfarranger
+  pdftag
+  pdftk
+  perl538Packages.CairoGObject
+  perl538Packages.GooCanvas2CairoTypes
+  phinger-cursors
+  pixcat
+  polkit_gnome
+  poppler_utils
+  psftools
+  pulseeffects-legacy
+  python311Packages.pdftotext
+  python311Packages.pyxdg
+  qt6.qt5compat
+  rep-gtk
+  rofi
+  shutter
+  t1lib
+  t1utils
+  tdesktop
+  template-glib
+  termcolor
+  terminus_font
+  themechanger
+  transmission_4-gtk
+  ttfautohint
+  typos
+  unrar
+  unscd
+  updfparser
+  ventoy-full
+  vlc
+  vte-gtk4
+  wirelesstools
+  wmctrl
+  woff2
+  wpa_supplicant
+  xarchiver
+  xclip
+  xcolor
+  xdg-dbus-proxy
+  xdg-desktop-portal
+  xdg-desktop-portal-gtk
+  xdg-launch
+  xdg-user-dirs
+  xdg-utils
+  xdgmenumaker
+  xdotool
+  xdragon
+  xfce.exo
+  xfce.garcon
+  xfce.libxfce4ui
+  xfce.libxfce4util
+  xfce.xfce4-power-manager
+  xfce.xfce4-settings
+  xfce.xfconf
+  xlsfonts
+  xorg-rgb
+  xorg.xfontsel
+  xscreensaver
+  xsecurelock
+  xsuspender
+  xterm
 ]

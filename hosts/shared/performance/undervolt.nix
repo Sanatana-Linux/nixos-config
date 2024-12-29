@@ -3,8 +3,8 @@
   config,
   ...
 }: {
-  # Trivial Setting Here, Mostly an Extra Precautionary Step
-  # as This is Also Set in Bios to limit CPU power draw to 1.35V
+  # Done with the "advanced" BIOS setting to limit a
+  # amount of current that the CPU can request (default was no limit!)
   services.undervolt = {
     enable = true;
     coreOffset = -100;

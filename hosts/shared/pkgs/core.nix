@@ -9,8 +9,6 @@ with pkgs; [
   avfs
   bintools
   binutils
-  bottom
-  buildkit-nix
   cached-nix-shell
   cachix
   cbfmt
@@ -23,22 +21,16 @@ with pkgs; [
   ddcui
   ddcutil
   deadnix
-  dmidecode
   dnsutils
   dosfstools
   exfatprogs
   ffmpeg-full
-  firmwareLinuxNonfree
   gccStdenv
-  gettext
   glib
   glibc
-  intel-ocl
   kconfig-frontends
   keyutils
   kmsxx
-  linux-firmware
-  linuxHeaders
   man-pages
   man-pages-posix
   manix
@@ -49,8 +41,6 @@ with pkgs; [
   msieve
   networkmanager
   ngrok
-  nil
-  niv
   nix-bash-completions
   nix-binary-cache
   nix-bundle
@@ -64,11 +54,8 @@ with pkgs; [
   nix-prefetch-scripts
   nix-template
   nix-zsh-completions
-  nixd
   nixdoc
-  nixel
   nixos-generators
-  nixt
   nmap
   node2nix
   ntfs3g
@@ -77,7 +64,6 @@ with pkgs; [
   ouch
   out-of-tree
   parallel
-  pciutils
   pfetch
   pinentry-tty
   pmutils
@@ -86,23 +72,14 @@ with pkgs; [
   premake
   ps_mem
   pulseaudio
-  pure-prompt
-  python311
   python312Packages.py-dmidecode
-  ranger
   rcshist
-  reposurgeon
   sassc
   service-wrapper
   simpleTpmPk11
-  skim
   smartmontools
   snappy
-  solaar
-  sqlite
-  sqlite-utils
   sssd
-  suitesparse
   swtpm
   sysctl
   sysfsutils
@@ -111,34 +88,22 @@ with pkgs; [
   systemctl-tui
   systemdgenie
   systeroid
-  sysvinit
   sysvtools
   tbb
   tealdeer
   template-glib
   tor
-  tpm-tools
-  tpm2-tools
-  tpm2-tss
-  tpmmanager
   trash-cli
   tree
   ucl
-  udevil
-  udiskie
-  udisks
   usbmuxd
-  usbutils
   utillinux
-  vulnix
-  wirelesstools
   wmic-bin
   wmutils-core
   wmutils-libwm
   wmutils-opt
   xbrightness
   xclip
-  xfce.xfce4-settings
   xgeometry-select
   xorg.fontalias
   xorg.fonttosfnt
@@ -156,7 +121,6 @@ with pkgs; [
   xorg.xcbutilwm
   xorg.xconsole
   xorg.xev
-  xorg.xfontsel
   xorg.xhost
   xorg.xinit
   xorg.xkill

@@ -1,58 +1,58 @@
 {pkgs, ...}: {
-  services.xserver.displayManager = {
-    setupCommands = ''
-      ${pkgs.xss-lock}/bin/xss-lock -l ${pkgs.multilockscreen} --lock dimblur --span
-    '';
-    lightdm = {
+  services = {
+    displayManager = {
+      defaultSession = "none+awesome";
+   }; # ends display manager
+    xserver = {
       enable = true;
-      background = ../wallpaper/monokaiprospectrum.png;
-      greeters.gtk = {
+      displayManager ={
+      lightdm = {
         enable = true;
-        theme = {
-          name = "Orchis-Grey-Dark-Compact";
-          package = pkgs.orchis-theme;
+        background = ../wallpaper/monokaiprospectrum.png;
+        greeters.gtk = {
+          enable = true;
+          theme = {
+            name = "Orchis-Grey-Dark-Compact";
+          };
+          cursorTheme = {
+            name = "Phinger Cursors (light)";
+            size = 48;
+          };
+          iconTheme = {
+            name = "Reversal";
+          };
+          indicators = ["~session" "~spacer"];
         };
-        cursorTheme = {
-          name = "Phinger Cursors (light)";
-          package = pkgs.phinger-cursors;
-          size = 48;
-        };
-        iconTheme = {
-          name = "Reversal";
-          package = pkgs.reversal-icon-theme;
-        };
-        indicators = ["~session" "~spacer"];
       };
-    };
-  };
-  services.displayManager.defaultSession = "none+awesome";
-  services.xserver.windowManager.awesome = {
-    enable = true;
-    package = pkgs.awesome-git-luajit;
-    luaModules = with pkgs.luajitPackages; [
-      luaposix
-      cqueues
-      cjson
-      ldbus
-      ldoc
-      lgi
-      lpeg
-      lpeg_patterns
-      lpeglabel
-      lua
-      lua-messagepack
-      luarocks
-      luasocket
-      luasql-sqlite3
-      mpack
-      std-_debug
-      std-normalize
-      stdlib
-      vicious
-      wrapLua
-    ];
-  };
-
+      };
+      windowManager.awesome = {
+        enable = true;
+        package = pkgs.awesome-git-luajit;
+        luaModules = with pkgs.luajitPackages; [
+          luaposix
+          cqueues
+          cjson
+          ldbus
+          ldoc
+          lgi
+          lpeg
+          lpeg_patterns
+          lpeglabel
+          lua
+          lua-messagepack
+          luarocks
+          luasocket
+          luasql-sqlite3
+          mpack
+          std-_debug
+          std-normalize
+          stdlib
+          vicious
+          wrapLua
+        ];
+      };
+    }; # ends xserver
+  }; # ends services
   # ------------------------------------------------- #
   environment.systemPackages = with pkgs; [
     awesome-git-luajit

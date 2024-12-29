@@ -54,18 +54,13 @@
       verbose = false;
       compressor = "zstd";
       compressorArgs = ["-19"];
+      kernelModules = ["nvidia"  "i915" "nvidia_modeset" "nvidia_uvm" "nvidia_drm"  ];
     };
-         kernelPatches = [
-     {
-       name = "legion-laptop";
-       patch = ./0001-Add-legion-laptop-v0.0.11.patch;
-     }
-     ];
 
     blacklistedKernelModules = ["nouveau"];
-      kernelModules = ["nvidia" "lenovo_legion" "apci_call" ];
+    kernelModules = ["lenovo_legion" "ideapad" "apci_call"];
     tmp.cleanOnBoot = true;
-    kernelPackages = pkgs.linuxPackages_lqx;
+    kernelPackages = pkgs.linuxPackages_xanmod_latest;
     extraModulePackages = [config.boot.kernelPackages.acpi_call config.boot.kernelPackages.lenovo-legion-module config.boot.kernelPackages.nvidia_x11];
 
     kernelParams = [
@@ -73,23 +68,22 @@
       # check if vulnerable with: grep . /sys/devices/system/cpu/vulnerabilities/*
       "mitigations=off"
 
-       "preempt=full"
+      "preempt=full"
 
       # ignore access time (atime) updates on files, except when they coincide with updates to the ctime or mtime
       "rootflags=noatime"
 
       # So we can see the kernel errors more clearly
       "quiet"
-      
+
       # disable usb autosuspend
       "usbcore.autosuspend=-1"
 
       # Nvidia dGPU settings
-     
+
       "nvidia_drm.fbdev=1" # Framebuffer driver
-      "nvidia-drm.modeset=1" # Modesetting Kernel Module 
-
-
+      "nvidia-drm.modeset=1" # Modesetting Kernel Module
+      "lenovo-legion.force=1" # hopefully this works
     ];
 
     loader = {
@@ -102,15 +96,13 @@
       grub = {
         enable = true;
         device = "nodev";
-        memtest86.enable = true;
         efiSupport = true;
-        configurationLimit = 4;
+        configurationLimit = 3;
         useOSProber = true;
         bhairava-grub-theme.enable = true;
       };
     };
   };
-
   environment = {
     systemPackages = with pkgs; [
       cpufrequtils
@@ -118,21 +110,12 @@
       dbus
       dbus-broker
       dbus-glib
-      intel-compute-runtime
-      intel-gmmlib
-      intel-gpu-tools
-      intel-ocl
-      intel-undervolt
-      intelmetool
-      inteltool
-      inxi
       lenovo-legion
       libdbusmenu
       libdbusmenu-gtk3
       linuxHeaders
       luajitPackages.ldbus
       polkit_gnome
-      undervolt
       wirelesstools
       xss-lock
       xssproxy
@@ -163,9 +146,11 @@
       };
     };
   };
-
+  services.xserver.videoDrivers = ["nvidia"]; 
+  services.xserver.enable = true;
+  services.xserver.displayManager.lightdm.enable = true;
+  services.xserver.windowManager.awesome.enable = true;
   services.xserver.dpi = 189;
-  services.displayManager.defaultSession = "none+awesome";
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "24.11";
 }

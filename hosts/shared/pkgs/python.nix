@@ -7,6 +7,7 @@ with pkgs;
         brotlicffi
         brotlipy
         gitdb
+        pyxdg
         GitPython
         googleapis-common-protos
         levenshtein
@@ -36,6 +37,7 @@ with pkgs;
   ++ [
     gobject-introspection
     pipenv
+    black
     ruff
     virtualenv
     virtualenv-clone

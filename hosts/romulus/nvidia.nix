@@ -4,7 +4,7 @@
   lib,
   ...
 }: let
-  nvidiaDriverChannel = config.boot.kernelPackages.nvidiaPackages.beta; # stable, beta, etc.
+  nvidiaDriverChannel = config.boot.kernelPackages.nvidiaPackages.latest; # stable, beta, etc.
 in {
   environment = {
     variables = {
@@ -30,7 +30,7 @@ in {
       nvtopPackages.nvidia
     ];
   };
-
+  services.xserver.videoDrivers = ["nvidia"]; # necessary evil I suppose
   nixpkgs.config = {
     allowUnfree = true;
     cudaSupport = true;
@@ -45,6 +45,24 @@ in {
   };
 
   hardware = {
+   graphics = {
+     enable = true;
+     enable32Bit = true;
+     extraPackages = with pkgs; [
+       nvidiaDriverChannel
+       intel-gmmlib
+       libvdpau-va-gl
+       nvidia-vaapi-driver
+       intel-media-driver
+       libva-utils
+       libvdpau
+       nvidia-texture-tools
+       mesa
+     ];
+   };
+
+
+
     nvidia = {
       modesetting.enable = true;
       nvidiaSettings = true;
@@ -52,11 +70,15 @@ in {
       dynamicBoost.enable = true;
       powerManagement = {
         enable = true;
+        finegrained = false;
       };
       open = false;
       package = nvidiaDriverChannel;
       prime = {
-        sync.enable = lib.mkForce true;
+        reverseSync = {
+          enable = lib.mkForce true;
+          setupCommands.enable = true;
+        };
         offload.enable = lib.mkForce false;
         # Multiple uses are available, check the NVIDIA NixOS wiki
         # Use "lspci | grep -E 'VGA|3D'" to get PCI-bus IDs
@@ -64,21 +86,21 @@ in {
         nvidiaBusId = "PCI:01:00:0";
       };
     };
-    graphics = {
-      enable = true;
-      enable32Bit = true;
-      extraPackages = with pkgs; [
-        nvidiaDriverChannel
-        intel-gmmlib
-        libvdpau-va-gl
-        nvidia-vaapi-driver
-        intel-media-driver
-        libva-utils
-        libvdpau
-        nvidia-texture-tools
-        mesa
-      ];
-    };
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
   };
-  services.xserver.videoDrivers = ["nvidia"]; # necessary evil I suppose
+ 
 }

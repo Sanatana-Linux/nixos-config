@@ -25,7 +25,7 @@
 
 <img width="150px" height="150px"  src="./assets/nix.svg" alt="prettier nixos label" align="right" />
 
-All of the documentation is in the [.github/documentation](./.github/documentation) directory, which serves as a project-specific notebook of sorts for convenient reference. The contents are as follows:
+All of the documentation is in the [.github/documentation](https://github.com/Sanatana-Linux/nixos-config/tree/main/.github/documentation) directory, which serves as a project-specific notebook of sorts for convenient reference. The contents are as follows:
 
 1. [Installation Notes](.github/documentation/installation.md) - Personal reference notes for installation
 1. [Useful Nix Commands](.github/documentation/nix-commands.md) - A cheatsheet that informs my nix wrapper script

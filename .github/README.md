@@ -2,7 +2,7 @@
 <br>
 <br>
 <br>
-**सनातन SANĀTANA**: 1.  Perpetual, constant, eternal, permanent;  2.  Firm, fixed, settled;  3.  Primeval, ancient. 
+सनातन SANĀTANA: 1.  Perpetual, constant, eternal, permanent;  2.  Firm, fixed, settled;  3.  Primeval, ancient. 
   
 
 <br>

@@ -1,14 +1,17 @@
-> सनातन SANĀTANA (adjective)
->
-> 1.  Perpetual, constant, eternal, permanent
-> 2.  Firm, fixed, settled;
-> 3.  Primeval, ancient. ः
->
-> [UChicago's DSAL Online Sanskrit Dictionary](https://dsal.uchicago.edu/cgi-bin/app/apte_query.py?qs=Sanatana&matchtype=default)
+<figure width="60%" align="right">
+<blockquote>
+ सनातन SANĀTANA (adjective)
 
-<p align="center">
-<img width="450px" align="center"  src="./assets/om.gif" alt="Om Puurnnam-Adah Puurnnam-Idam Puurnnaat-Puurnnam-Udacyate | Puurnnasya Puurnnam-Aadaaya Puurnnam-Eva-Avashissyate || Om Shaantih Shaantih Shaantih "  />
-</p>
+ 1.  Perpetual, constant, eternal, permanent
+ 2.  Firm, fixed, settled;
+ 3.  Primeval, ancient. ः
+</blockquote>
+
+  <figcaption> <cite>UChicago's</cite> <a href="https://dsal.uchicago.edu/cgi-bin/app/apte_query.py?qs=Sanatana&matchtype=default" DSAL Online Sanskrit Dictionary </a>  <figcaption>
+</figure>
+
+<img width="450px" align="left"  src="./assets/om.gif" alt="Om Puurnnam-Adah Puurnnam-Idam Puurnnaat-Puurnnam-Udacyate | Puurnnasya Puurnnam-Aadaaya Puurnnam-Eva-Avashissyate || Om Shaantih Shaantih Shaantih "  />
+
 ---
 
 > **Warning**
@@ -19,12 +22,10 @@
 
 
 <img width="150px" height="150px"  src="./assets/nix.svg" alt="prettier nixos label" align="right" />
-<img width="150px" height="150px"  src="./assets/nix.svg" alt="prettier nixos label" align="right" />
-<img width="150px" height="150px"  src="./assets/nix.svg" alt="prettier nixos label" align="right" />
 
-All of the documentation is in the `.github/documentation` directory, which serves as a project-based notebook. Below are pages of this project's _notebook_ which may be of interest to third parties:
+All of the documentation is in the [.github/documentation](./.github/documentation) directory, which serves as a project-specific notebook of sorts for convenient reference. The contents are as follows:
 
-1. [Installation Notes](.github/documentation/installation.md)
-1. [Useful Nix Commands](.github/documentation/nix-commands.md)
-1. [Inspiration and Credits](.github/documentation/credits.md)
-1. [Error Log](.github/documentation/errors.md)
+1. [Installation Notes](.github/documentation/installation.md) - Personal reference notes for installation
+1. [Useful Nix Commands](.github/documentation/nix-commands.md) - A cheatsheet that informs my nix wrapper script
+1. [Inspiration and Credits](.github/documentation/credits.md) - Those giants we give shoulder aches to standing upon
+1. [Debugging Journal](.github/documentation/errors.md) - A sometimes kept up log of issues I run into and my hacky workarounds and/or fixes to solve them.

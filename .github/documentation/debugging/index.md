@@ -13,6 +13,7 @@ Hopefully, these notes can help others in similar positions or at least provide 
 - [Slow ZSH](./zsh-slowdown.md)
 - [Not Enough Memory on Device](./not-enough-memory.md)
 - [GCC Cannot Compile Executables](./gcc-cannot-compile-during-rebuild.md)
+- [CPU & Memory Overload During Install](./cpu-mem-overload-install.md)
 
 ### Resources
 

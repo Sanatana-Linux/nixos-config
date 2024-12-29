@@ -29,5 +29,5 @@ All of the documentation is in the [.github/documentation](https://github.com/Sa
 
 1. [Installation Notes](https://github.com/Sanatana-Linux/nixos-config/blob/main/.github/documentation/installation.md) - Personal reference notes for installation
 1. [Useful Nix Commands](https://github.com/Sanatana-Linux/nixos-config/blob/main/.github/documentation/nix-commands.md) - A cheatsheet that informs my nix wrapper script
-1. [Inspiration and Credits]([.github/documentation/credits.md](https://github.com/Sanatana-Linux/nixos-config/blob/main/.github/documentation/credits.md) - Those giants we give shoulder aches to standing upon
+1. [Inspiration and Credits](https://github.com/Sanatana-Linux/nixos-config/blob/main/.github/documentation/credits.md) - Those giants we give shoulder aches to standing upon
 1. [Debugging Journal](https://github.com/Sanatana-Linux/nixos-config/blob/main/.github/documentation/debugging/index.md) - A sometimes kept up log of issues I run into and my hacky workarounds and/or fixes to solve them.

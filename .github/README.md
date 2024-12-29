@@ -18,7 +18,9 @@
 ## Documentation
 
 
-<img width="150px" height="150px"  src="./assets/nix.svg" alt="prettier nixos label" float="right" />
+<img width="150px" height="150px"  src="./assets/nix.svg" alt="prettier nixos label" align="right" />
+<img width="150px" height="150px"  src="./assets/nix.svg" alt="prettier nixos label" align="right" />
+<img width="150px" height="150px"  src="./assets/nix.svg" alt="prettier nixos label" align="right" />
 
 All of the documentation is in the `.github/documentation` directory, which serves as a project-based notebook. Below are pages of this project's _notebook_ which may be of interest to third parties:
 

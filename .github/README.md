@@ -32,9 +32,7 @@
 
 <img width="150px" height="150px"  src="./assets/nix.svg" alt="prettier nixos label" align="right" />
 
-All of the documentation is in the [.github/documentation](https://github.com/Sanatana-Linux/nixos-config/tree/main/.github/documentation) directory, which serves as a project-specific notebook of sorts for convenient reference. The contents are as follows:
-
-- [Installation Notes](https://github.com/Sanatana-Linux/nixos-config/blob/main/.github/documentation/installation.md) - Personal reference notes for installation
-- [Useful Nix Commands](https://github.com/Sanatana-Linux/nixos-config/blob/main/.github/documentation/nix-commands.md) - A cheatsheet that informs my nix wrapper script
-- [Inspiration and Credits](https://github.com/Sanatana-Linux/nixos-config/blob/main/.github/documentation/credits.md) - Those giants we give shoulder aches to standing upon
-- [Debugging Journal](https://github.com/Sanatana-Linux/nixos-config/blob/main/.github/documentation/debugging/index.md) - A sometimes kept up log of issues I run into and my hacky workarounds and/or fixes to solve them.
+1. [Installation Notes](.github/documentation/installation.md) - A personal reference for bootstrapping a new system or when deciding to purge my own.
+1. [Useful Nix Commands](.github/documentation/nix-commands.md) - Informs the functions of my nix wrapper script 
+1. [Inspiration and Credits](.github/documentation/credits.md) - Just some of those who have inadvertently helped me along in this process either as inspiration or careful examination of their implementations.
+1. [Debugging Journal](.github/documentation/debugging/index.md) - Logs of problems and how I have mitigated or learned to cope with them, useful for insight into the process of adjusting to NixOS, maybe solely as an example of what not to do...

@@ -8,7 +8,7 @@
 <br>
 <br>
 <br> 
-<big><b>सनातन SANĀTANA</b></big>: Perpetual, constant, eternal, permanent; Firm, fixed, settled;Primeval, ancient.  - <a href="https://dsal.uchicago.edu/cgi-bin/app/apte_query.py?qs=Sanatana&matchtype=default">DSAL Online Sanskrit Dictionary</a>
+<big><b>सनातन SANĀTANA</b></big>: Perpetual, constant, eternal, permanent; Firm, fixed, settled;Primeval, ancient.  - <small><a href="https://dsal.uchicago.edu/cgi-bin/app/apte_query.py?qs=Sanatana&matchtype=default">DSAL Online Sanskrit Dictionary</a></small>
 
 
 <br>

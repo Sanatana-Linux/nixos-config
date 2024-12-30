@@ -6,7 +6,6 @@
 <img width="300px" align="left"  src="./assets/om-glitch.gif" alt="Om Puurnnam-Adah Puurnnam-Idam Puurnnaat-Puurnnam-Udacyate | Puurnnasya Puurnnam-Aadaaya Puurnnam-Eva-Avashissyate || Om Shaantih Shaantih Shaantih "/>
 
 <br>
-<br> 
 <br>
 <br> 
 <big><b>सनातन SANĀTANA</b></big>: Perpetual, constant, eternal, permanent; Firm, fixed, settled;Primeval, ancient.  - [UChicago's DSAL Online Sanskrit Dictionary](https://dsal.uchicago.edu/cgi-bin/app/apte_query.py?qs=Sanatana&matchtype=default)

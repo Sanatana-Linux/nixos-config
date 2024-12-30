@@ -186,7 +186,7 @@
   };
 
   networking = {
-    hostName = "romulus";
+    hostName = "bagalamukhi";
     networkmanager.enable = true;
   };
   services = {

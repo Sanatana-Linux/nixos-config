@@ -66,14 +66,14 @@
     # pass to it, with each system as an argument
     forAllSystems = nixpkgs.lib.genAttrs systems;
   in {
-    # Alejandra formatting 
+    # Alejandra formatting
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
     # The extra packages and replacements that make this configuration tick
     overlays = import ./overlays {inherit inputs;};
-    # 
-    packages = forEachPkgs (pkgs: import ./pkgs {inherit pkgs;});
-    
-    devShells = forEachPkgs (pkgs: import ./shell.nix {inherit pkgs;});
+    #
+    packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
+
+    devShells = forAllSystems (pkgs: import ./shell.nix {inherit pkgs;});
 
     nixosConfigurations = {
       # ┣━━━━━━━━━━━━━━━━━━━━━━━┫ Dinosaur Laptop ┣━━━━━━━━━━━━━━━━━━━━━━━┫
@@ -100,12 +100,12 @@
 
       # ┣━━━━━━━━━━━━━━━━━━━━━━┫ My Lenovo Legion Pro ┣━━━━━━━━━━━━━━━━━━━━━━┫
 
-      romulus = nixpkgs.lib.nixosSystem {
+      bagalamukhi = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [
           nur.modules.nixos.default
           nixos-hardware.nixosModules.lenovo-legion-16irx9h
-          ./hosts/romulus
+          ./hosts/bagalamukhi
           bhairava-grub-theme.nixosModule
           home-manager.nixosModules.home-manager
           chaotic.nixosModules.default
@@ -147,6 +147,6 @@
 
     macbook-air = self.nixosConfigurations.macbook-air.config.system.build.toplevel;
     remus = self.nixosConfigurations.remus.config.system.build.toplevel;
-    romulus = self.nixosConfigurations.romulus.config.system.build.toplevel;
+    bagalamukhi = self.nixosConfigurations.bagalamukhi.config.system.build.toplevel;
   };
 }

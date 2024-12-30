@@ -63,8 +63,6 @@
       flake-registry = "/etc/nix/registry.json";
       # Use C-Groups for builds(requires experimental setting above)
       use-cgroups = true;
-      # Allow some not-so-sandbox builds to occur
-      sandbox = "limited";
       # show more log lines for failed builds
       log-lines = 20;
       # Use Binary Cache because we don't want to wait our lives away

@@ -16,8 +16,6 @@
     };
   };
   programs = {
-    bash.promptInit = ''eval "$(${lib.getExhosts/shared/programs/default.nixe pkgs.starship} init bash)"'';
-
     java = {
       enable = true;
       package = pkgs.jre;

@@ -3,7 +3,6 @@ with pkgs; [
   bash-completion
   bat
   curl
-  exa
   eza
   fd
   fzf

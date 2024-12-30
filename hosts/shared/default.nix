@@ -5,17 +5,15 @@
   outputs,
   ...
 }: {
-  imports =
-    [
-      inputs.home-manager.nixosModules.home-manager
-      ./base
-      ./environment
-      ./programs
-      ./hardware/networking.nix
-      ./security
-      ./services
-    ]
-    ++ (builtins.attrValues outputs.nixosModules);
+  imports = [
+    inputs.home-manager.nixosModules.home-manager
+    ./base
+    ./environment
+    ./programs
+    ./hardware/networking.nix
+    ./security
+    ./services
+  ];
 
   # Set up everything home-manager related for my user
   home-manager = {

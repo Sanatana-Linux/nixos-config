@@ -10,7 +10,8 @@ with pkgs; [
   efitools
   fd
   ghostscript
-  ghtex2html
+  gh
+  
   htop
   inotify-tools
   jdupes
@@ -75,5 +76,5 @@ with pkgs; [
   xsecurelock
   xss-lock
   xsuspender
-  xsuspenderost
+  
 ]

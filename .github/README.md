@@ -22,7 +22,7 @@
 ---
 
 
-## ☢️ **Warning** ☢️
+>  [!Warning] 
 >
 > While I hope you can gain from my configuration and have attempted, for my own sake at least, to document what is going on in the configuration as thoroughly as possible, this is my configuration that I use personally and as such it is reasonable to assume it is unstable, subject to sudden radical changes after long periods of stagnation and a work in progress.
 

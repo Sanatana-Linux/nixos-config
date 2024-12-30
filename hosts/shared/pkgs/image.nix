@@ -66,7 +66,6 @@ with pkgs; [
   pixeluvo
   pngcrush
   pngloss
-  pngnq
   pngout
   pngpp
   pngquant

@@ -1,3 +1,3 @@
-{pkgs ? import <nixpkgs> {}}: {
+pkgs: {
   material-symbols = pkgs.callPackage ./material-symbols {};
 }

@@ -2,10 +2,13 @@
   lib,
   pkgs,
   inputs,
+  config,
   ...
 }: {
   imports = [./nix-ld.nix ./thunar.nix];
-
+  ## Terminfo for all!
+  environment.enableAllTerminfo = true;
+  # Logitech for My Trackball Mouse Cause Its Ergonomic
   hardware = {
     logitech.wireless = {
       enable = true;
@@ -13,7 +16,7 @@
     };
   };
   programs = {
-    # bash.promptInit = ''eval "$(${lib.getExhosts/shared/programs/default.nixe pkgs.starship} init bash)"'';
+    bash.promptInit = ''eval "$(${lib.getExhosts/shared/programs/default.nixe pkgs.starship} init bash)"'';
 
     java = {
       enable = true;
@@ -24,12 +27,8 @@
 
     # help manage android devices via command line
     adb.enable = true;
-
     # networkmanager tray uility
     nm-applet.enable = false;
-
-    # allow users to mount fuse filesystems with allow_other
-    fuse.userAllowOther = true;
 
     # ------------------------------------------------- #
   };

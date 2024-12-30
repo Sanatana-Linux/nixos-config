@@ -50,7 +50,6 @@ in {
       id = 0;
       extensions = with pkgs.nur.repos.rycee.firefox-addons; [
         add-custom-search-engine
-        auto-sort-bookmarks
         auto-tab-discard
         bitwarden
         buster-captcha-solver

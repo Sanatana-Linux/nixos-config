@@ -38,7 +38,6 @@ with pkgs; [
   meson
   microcodeIntel
   minizip2
-  msieve
   networkmanager
   ngrok
   nix-bash-completions

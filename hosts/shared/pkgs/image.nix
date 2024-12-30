@@ -1,36 +1,18 @@
 {pkgs, ...}:
 with pkgs; [
-  aaxtomp3
-  audiofile
   babl
-  beautysh
-  byzanz
-  cheese
   colorstorm
   colorz
   curtail
   deface
   delve
   dipc
-  ebook_tools
   emacsPackages.svgo
   exiftool
   feh
-  ffcast
-  ffmpeg
   figlet
   fim
-  flac
-  flac2all
-  flaca
-  flacon
-  flowblade
-  frei0r
-  fswebcam
-  gallery-dl
   gdk-pixbuf
-  gi-docgen
-  gibo
   gif-for-cli
   giflib
   gifsicle
@@ -47,69 +29,39 @@ with pkgs; [
   gimpPlugins.resynthesizer
   gimpPlugins.texturize
   gimpPlugins.waveletSharpen
-  gio-sharp
-  gmic
-  gnome-video-effects
-  gnome.nixos-gsettings-overrides
+  gobject-introspection
   gobject-introspection
   graphicsmagick
-  gsettings-desktop-schemas
-  gst_all_1.gst-libav
   image_optim
   image-roll
   imagemagick
   img-cat
   imgcat
-  imgpatchtools
   imlib2-nox
+  imlib2Full
+  imlib2Full
   imv
-  inkscape-with-extensions
   jhead
   jp2a
   jpegexiforient
   jpeginfo
   jpegoptim
   jpegrescan
-  kooha
   labelImg
   libdevil-nox
   libexif
-  libgee
   libjpeg
-  libplacebo
   libpng
-  librem
   librsvg
-  libsForQt5.libopenshot
-  libsForQt5.libopenshot-audio
+  librsvg
   libspng
-  libtheora
-  libvpl
-  libwebcam
   libwebp
-  losslesscut-bin
-  lrzip
-  lsix
-  lv2
-  megapixels
   meme-image-generator
-  menyoki
-  metadata-cleaner
   metapixel
-  mjpegtoolsFull
-  mnamer
   mozjpeg
-  mp4v2
   nodePackages_latest.svgo
-  oggvideotools
-  olive-editor
   optipng
   oxipng
-  p7zip
-  pantheon.granite
-  peek
-  pipeline
-  pixcat
   pixel2svg
   pixeluvo
   pngcrush
@@ -121,36 +73,37 @@ with pkgs; [
   pngtoico
   pngtools
   potrace
-  python311Packages.cairosvg
-  python311Packages.colorthief
-  python311Packages.pyfiglet
-  python311Packages.pygobject3
-  python311Packages.pystache
-  python311Packages.pysvg-py3
-  python311Packages.svg-path
-  python311Packages.svgwrite
+  python312Packages.cairosvg
+  python312Packages.colorthief
+  python312Packages.pyfiglet
+  python312Packages.pystache
+  python312Packages.pysvg-py3
+  python312Packages.svg-path
+  python312Packages.svgwrite
   pywal
-  redoflacs
   resvg
-  ripgrep
+  rubyPackages.cairo-gobject
   rubyPackages.cairo-gobject
   rubyPackages.gdk_pixbuf2
+  rubyPackages.gdk_pixbuf2
   rubyPackages.gobject-introspection
-  rx
-  shotcut
-  spotdl
+  rubyPackages.gobject-introspection
   svgcleaner
-  switcheroo
-  traverso
+  svgcleaner
+  t1lib
+  t1lib
+  t1utils
+  t1utils
+  termcolor
+  termcolor
+  upscaler
   upscaler
   upscayl
+  upscayl
   upscayl-ncnn
-  vid-stab
-  vidmerger
-  viu
-  vlc
-  vvenc
-  webp-pixbuf-loader
-  xvidcore
-  yt-dlp
+  upscayl-ncnn
+  xcolor
+  xcolor
+  xorg-rgb
+  xorg-rgb
 ]

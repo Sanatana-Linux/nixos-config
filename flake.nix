@@ -57,13 +57,22 @@
     ...
   } @ inputs: let
     inherit (self) outputs;
-    forEachSystem = nixpkgs.lib.genAttrs ["x86_64-linux" "aarch64-linux"]; # when needed add "aarch64-linux"
-    forEachPkgs = f: forEachSystem (sys: f nixpkgs.legacyPackages.${sys});
+    # Supported systems for your flake packages, shell, etc.
+    systems = [
+      "aarch64-linux"
+      "x86_64-linux"
+    ];
+    # This is a function that generates an attribute by calling a function you
+    # pass to it, with each system as an argument
+    forAllSystems = nixpkgs.lib.genAttrs systems;
   in {
-    nixosModules = import ./modules/nixos;
-    homeManagerModules = import ./modules/home-manager;
-    overlays = import ./overlays {inherit inputs outputs;};
+    # Alejandra formatting 
+    formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
+    # The extra packages and replacements that make this configuration tick
+    overlays = import ./overlays {inherit inputs;};
+    # 
     packages = forEachPkgs (pkgs: import ./pkgs {inherit pkgs;});
+    
     devShells = forEachPkgs (pkgs: import ./shell.nix {inherit pkgs;});
 
     nixosConfigurations = {
@@ -130,23 +139,6 @@
               };
             };
           }
-        ];
-      };
-    };
-    # ┣━━━━━━━━━━━━━━━━━━━━━┫ Home Configurations ┣━━━━━━━━━━━━━━━━━━━━━┫
-    homeConfigurations = {
-      tlh = inputs.home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
-        extraSpecialArgs = {inherit inputs outputs self;};
-        modules = [
-          ./home/tlh/default.nix
-        ];
-      };
-      smg = inputs.home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
-        extraSpecialArgs = {inherit inputs outputs self;};
-        modules = [
-          ./home/smg/default.nix
         ];
       };
     };

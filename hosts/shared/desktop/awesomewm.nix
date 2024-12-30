@@ -2,28 +2,32 @@
   services = {
     displayManager = {
       defaultSession = "none+awesome";
-   }; # ends display manager
+    }; # ends display manager
     xserver = {
       enable = true;
-      displayManager ={
-      lightdm = {
-        enable = true;
-        background = ../wallpaper/monokaiprospectrum.png;
-        greeters.gtk = {
+      exportConfiguration = true;
+      displayManager = {
+        lightdm = {
           enable = true;
-          theme = {
-            name = "Orchis-Grey-Dark-Compact";
+          background = ../wallpaper/monokaiprospectrum.png;
+          greeters.gtk = {
+            enable = true;
+            theme = {
+              package = pkgs.orchis-theme;
+              name = "Orchis-Grey-Dark-Compact";
+            };
+            cursorTheme = {
+              package = pkgs.phinger-cursors;
+              name = "Phinger Cursors (light)";
+              size = 48;
+            };
+            iconTheme = {
+              package = pkgs.reversal-icon-theme;
+              name = "Reversal";
+            };
+            indicators = ["~session" "~spacer"];
           };
-          cursorTheme = {
-            name = "Phinger Cursors (light)";
-            size = 48;
-          };
-          iconTheme = {
-            name = "Reversal";
-          };
-          indicators = ["~session" "~spacer"];
         };
-      };
       };
       windowManager.awesome = {
         enable = true;
@@ -55,6 +59,27 @@
   }; # ends services
   # ------------------------------------------------- #
   environment.systemPackages = with pkgs; [
+    dbus
+    dbus-broker
+    dbus-glib
+    gobject-introspection-unwrapped
+    maim
+    menu-cache
+    pango
+    pangomm
+    perl538Packages.CairoGObject
+    perl538Packages.GooCanvas2CairoTypes
+    polkit_gnome
+    xfce.exo
+    xfce.garcon
+    xfce.libxfce4ui
+    xfce.libxfce4util
+    xfce.tumbler
+    xfce.xfce4-power-manager
+    xfce.xfconf
+
+    cairo
+    cairomm
     awesome-git-luajit
     maim
     pango

@@ -14,6 +14,7 @@
     # https://github.com/pop-os/default-settings/blob/master_noble/etc/sysctl.d/10-pop-default-settings.conf
     # https://github.com/CachyOS/CachyOS-Settings/blob/master/usr/lib/sysctl.d/99-cachyos-settings.conf
     # The sysctl swappiness parameter determines the kernel's preference for pushing anonymous pages or page cache to disk in memory-starved situations.
+
     # A low value causes the kernel to prefer freeing up open files (page cache), a high value causes the kernel to try to use swap space,
     # and a value of 100 means IO cost is assumed to be equal.
     "vm.swappiness" = 150;
@@ -38,7 +39,6 @@
 
     # The kernel flusher threads will periodically wake up and write old data out to disk.  This
     # tunable expresses the interval between those wakeups, in 100'ths of a second (Default is 500).
-
     "vm.dirty_writeback_centisecs" = 1500;
 
     # This action will speed up your boot and shutdown, because one less module is loaded. Additionally disabling watchdog timers increases performance and lowers power consumption
@@ -47,12 +47,6 @@
 
     # Enable the sysctl setting kernel.unprivileged_userns_clone to allow normal users to run unprivileged containers.
     "kernel.unprivileged_userns_clone" = 1;
-
-    # Restricting access to kernel pointers in the proc filesystem
-    "kernel.kptr_restrict" = 2;
-
-    # Disable Kexec, which allows replacing the current running kernel.
-    "kernel.kexec_load_disabled" = 1;
 
     # TCP Enable ECN Negotiation for both outgoing and incoming connections
     "net.ipv4.tcp_ecn" = 1;
@@ -70,9 +64,6 @@
 
     # Set size of file handles and inode cache
     "fs.file-max" = 2097152;
-
-    # Increase writeback interval  for xfs
-    "fs.xfs.xfssyncd_centisecs" = 10000;
   };
   services.bpftune.enable = true;
 }

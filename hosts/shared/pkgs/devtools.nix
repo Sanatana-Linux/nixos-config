@@ -2,28 +2,69 @@
 with pkgs; [
   #nodePackages_latest.neovim
   any-nix-shell
-  asmjit
-  bash
-  black
   brotli
   cached-nix-shell
   cargo
   cargo-binutils
-  cbfmt
+  clang
   cmake
-  conda
-  cpp-hocon
-  cpp-utilities
   deadnix
   direnv
-  fcppt
   fuse3
+  _7zz
+  p7zip-rar
+  advancecomp
+  ouch
+  archivemount
+  archiver
+  arj
+  ark
+  btar
+  bzip2
+  bzip3
+  cpio
+  crabz
+  dejsonlz4
+  dtrx
+  efficient-compression-tool
+  fastjar
+  gnome-autoar
+  gnutar
+  libarchive
+  lz4
+  mozlz4a
+  ncompress
+  p7zip
+  pbzip2
+  pigz
+  pixz
+  plzip
+  pxz
+  rar
+  rarcrack
+  runzip
+  snzip
+  squashfs-tools-ng
+  squashfsTools
+  squashfuse
+  tarlz
+  tarlz
+  unrar
+  unzip
+  xarchiver
+  xz
+  zarchive
+  zip
+  zlib
+  zlib-ng
+  zstd
+  zziplib
   gdk-pixbuf
   gdk-pixbuf-xlib
   getopt
   getoptions
+  gettext
   git
-  git-backup-go
   git-extras
   git-filter-repo
   git-ignore
@@ -33,22 +74,18 @@ with pkgs; [
   gitleaks
   glib
   glow
-  glxinfo
   gnumake
   gnutls
   go
-  go-protobuf
-  gofumpt
   gource
-  icu
   imlib2Full
   inetutils
-  isync
   just
   leptosfmt
   libclang
   libcxxStdenv
   libffi
+  libglibutil
   libimobiledevice
   libpkgconf
   libtiff
@@ -83,7 +120,6 @@ with pkgs; [
   luajitPackages.vicious
   luajitPackages.wrapLua
   lynis
-  marksman
   nil
   nix-init
   nix-tree
@@ -110,7 +146,6 @@ with pkgs; [
   poetry
   protobuf
   protobufc
-  puppeteer-cli
   ruby
   rubyfmt
   rustc
@@ -128,7 +163,6 @@ with pkgs; [
   stdenv.cc.cc
   stylua
   sumneko-lua-language-server
-  tectonic
   tokei
   tree-sitter
   typescript
@@ -138,4 +172,5 @@ with pkgs; [
   yamlfix
   yarn
   yarn2nix
+  zlib
 ]

@@ -5,22 +5,12 @@
       ankacoder
       ankacoder-condensed
       annapurna-sil
-      arkpandora_ttf
       b612
       cascadia-code # microsoft ligatures font
-      cm_unicode
       corefonts
       d2coding
-      departure-mono
-      dina-font
-      envypn-font
-      font-awesome
       font-awesome_4
       font-awesome_5
-      fontpreview
-      hackgen-font
-      hackgen-nf-font
-      hermit
       icomoon-feather
       inter
       jost
@@ -39,22 +29,14 @@
       noto-fonts-extra
       ocr-a
       pixel-code
-      powerline-fonts
       proggyfonts
       rounded-mgenplus
-      scientifica
-      serious-sans
-      sf-mono-liga-bin
       siji
       sudo-font
       terminus_font
       undefined-medium
-      uni-vga
-      unifont
-      unifont_upper
       vistafonts
       xkcd-font
-      xlsfonts
     ];
 
     fontconfig = {

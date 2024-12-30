@@ -17,20 +17,21 @@ in {
     };
     systemPackages = with pkgs; [
       cudatoolkit
-      cudaPackages.cutensor
-      cudaPackages.cudnn
-      cudaPackages.cuda_opencl
-      cudaPackages.saxpy
-      cudaPackages.libnpp
-      cudaPackages.libcufft
-      cudaPackages.nvidia_fs
+      # TODO re-enable these when the system is built
+      #   cudaPackages.cutensor
+      #   cudaPackages.cudnn
+      #   cudaPackages.cuda_opencl
+      #   cudaPackages.saxpy
+      #   cudaPackages.libnpp
+      #   cudaPackages.libcufft
+      #   cudaPackages.nvidia_fs
       nvidia-container-toolkit
       nvidia_cg_toolkit
       nv-codec-headers
       nvtopPackages.nvidia
     ];
   };
-  services.xserver.videoDrivers = ["nvidia"]; # necessary evil I suppose
+  services.xserver.videoDrivers = ["nvidia"];
   nixpkgs.config = {
     allowUnfree = true;
     cudaSupport = true;
@@ -45,23 +46,21 @@ in {
   };
 
   hardware = {
-   graphics = {
-     enable = true;
-     enable32Bit = true;
-     extraPackages = with pkgs; [
-       nvidiaDriverChannel
-       intel-gmmlib
-       libvdpau-va-gl
-       nvidia-vaapi-driver
-       intel-media-driver
-       libva-utils
-       libvdpau
-       nvidia-texture-tools
-       mesa
-     ];
-   };
-
-
+    graphics = {
+      enable = true;
+      enable32Bit = true;
+      extraPackages = with pkgs; [
+        nvidiaDriverChannel
+        intel-gmmlib
+        libvdpau-va-gl
+        nvidia-vaapi-driver
+        intel-media-driver
+        libva-utils
+        libvdpau
+        nvidia-texture-tools
+        mesa
+      ];
+    };
 
     nvidia = {
       modesetting.enable = true;
@@ -77,7 +76,7 @@ in {
       prime = {
         reverseSync = {
           enable = lib.mkForce true;
-          setupCommands.enable = true;
+          setupCommands.enable = lib.mkForce true; # requires a dm with xsetupcommands ie sddm lightdm or gdm
         };
         offload.enable = lib.mkForce false;
         # Multiple uses are available, check the NVIDIA NixOS wiki
@@ -86,21 +85,5 @@ in {
         nvidiaBusId = "PCI:01:00:0";
       };
     };
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
   };
- 
 }

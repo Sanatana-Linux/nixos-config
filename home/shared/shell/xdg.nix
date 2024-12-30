@@ -64,13 +64,14 @@ with lib; let
     "application/mobipocket-ebook" = zathura; # .mobi
   };
 in {
-  home.packages = [pkgs.xdg-utils];
+  home.packages = [pkgs.xdg-utils pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal];
 
   xdg = {
     enable = true;
     userDirs = {
       enable = true;
       createDirectories = true;
+      portal.enable = true;
     };
 
     mimeApps = {

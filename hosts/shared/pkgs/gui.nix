@@ -1,6 +1,6 @@
 {pkgs, ...}:
 with pkgs; [
-  alsaequal
+  alsaequal #gui tool
   appimage-run
   appimagekit
   appstream-glib
@@ -12,17 +12,9 @@ with pkgs; [
   aspellDicts.hi
   bleachbit
   blueman
-  brightnessctl
-  cairo
-  cairomm
-  codespell
-  dbus-broker
-  dconf
   ebook_tools
-  eggdbus
   eyedropper
   fbida
-  fcft
   file-roller
   fntsample
   fontpreview
@@ -41,7 +33,6 @@ with pkgs; [
   goocanvas
   goocanvas3
   gparted
-  gpick
   graphite2
   gspell
   gthumb
@@ -59,22 +50,12 @@ with pkgs; [
   hunspellDicts.de_DE
   hunspellDicts.en_US-large
   hunspellDicts.es_MX
-  i3lock-color
   inkscape-with-extensions
-  inotify-tools
   lcdf-typetools
   leela
   libappindicator
   libappindicator-gtk3
-  libcanberra-gtk3
-  libdbusmenu
-  libdbusmenu-gtk3
-  libfm
-  libfm-extra
-  libgee
   libglibutil
-  libgudev
-  libinput
   libnotify
   libsForQt5.qt5ct
   libsForQt5.qtcurve
@@ -82,33 +63,25 @@ with pkgs; [
   libusb1
   libxdg_basedir
   luakit
-  maim
-  menu-cache
   mime-types
   mimetic
   mupdf
-  mythes
   nemo-with-extensions
   nerd-font-patcher
   networkmanagerapplet
   ocrmypdf
-  pango
-  pangomm
   pastel
+  pavucontrol #gui tool
   pdf-parser
-  pdfarranger
   pdftag
   pdftk
   perl538Packages.CairoGObject
   perl538Packages.GooCanvas2CairoTypes
   phinger-cursors
   pixcat
-  polkit_gnome
   poppler_utils
   psftools
   pulseeffects-legacy
-  python311Packages.pdftotext
-  python311Packages.pyxdg
   qt6.qt5compat
   rep-gtk
   rofi
@@ -118,7 +91,6 @@ with pkgs; [
   tdesktop
   template-glib
   termcolor
-  terminus_font
   themechanger
   transmission_4-gtk
   ttfautohint
@@ -136,27 +108,12 @@ with pkgs; [
   xarchiver
   xclip
   xcolor
-  xdg-dbus-proxy
   xdg-desktop-portal
-  xdg-desktop-portal-gtk
   xdg-launch
-  xdg-user-dirs
-  xdg-utils
   xdgmenumaker
   xdotool
-  xdragon
-  xfce.exo
-  xfce.garcon
-  xfce.libxfce4ui
-  xfce.libxfce4util
-  xfce.xfce4-power-manager
   xfce.xfce4-settings
-  xfce.xfconf
-  xlsfonts
   xorg-rgb
   xorg.xfontsel
   xscreensaver
-  xsecurelock
-  xsuspender
-  xterm
 ]

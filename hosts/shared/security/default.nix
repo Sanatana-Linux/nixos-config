@@ -31,7 +31,9 @@
     polkit.enable = true;
     rtkit.enable = true;
     tpm2 = {
-      enable = false;
+      enable = true;
+      pkcs11.enable = true;
+      abrmd.enable = true;
     };
   };
 }

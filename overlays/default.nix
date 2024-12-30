@@ -1,31 +1,34 @@
-{
-  outputs,
-  inputs,
-}: let
-  # Adds my custom packages
-  additions = final: _: import ../pkgs {pkgs = final;};
+# This file defines overlays
+{inputs, ...}: {
+  # This one brings our custom packages from the 'pkgs' directory
+  additions = final: _prev: import ../pkgs final.pkgs;
 
-  # Modifies existing packages
+  # This one contains whatever you want to overlay
+  # You can change versions, add patches, set compilation flags, anything really.
+  # https://nixos.wiki/wiki/Overlays
   modifications = final: prev: {
-    master-pkgs = inputs.nixpkgs-master.legacyPackages.${prev.system};
-    chaotic-pkgs = inputs.chaotic.packages.${prev.system};
     awesome-git-luajit = inputs.nixpkgs-f2k.packages.${prev.system}.awesome-luajit-git;
     nps = inputs.nps.defaultPackage.${prev.system};
-
-    sf-mono-liga-bin = prev.stdenvNoCC.mkDerivation rec {
-      pname = "sf-mono-liga-bin";
-      version = "dev";
-      src = inputs.sf-mono-liga-src;
-      dontConfigure = true;
-      installPhase = ''
-        mkdir -p $out/share/fonts/opentype
-        cp -R $src/*.otf $out/share/fonts/opentype/
-      '';
-    };
-    nixpkgs-f2k = inputs.nixpkgs-f2k.packages.${prev.system};
-    nur = inputs.nur.overlays.default;
-    neovim-nightly = inputs.neovim-nightly-overlay.overlays.default;
   };
-in {
-  default = final: prev: (additions final prev) // (modifications final prev);
+
+  # When applied, the unstable nixpkgs set (declared in the flake inputs) will
+  # be accessible through 'pkgs.unstable'
+  master-packages = final: _prev: {
+    unstable = import inputs.nixpkgs-master {
+      system = final.system;
+      config.allowUnfree = true;
+    };
+  };
+  f2k-packages = final: _prev: {
+    f2k = import inputs.nixpkgs-f2k {
+      system = final.system;
+      config.allowUnfree = true;
+    };
+  };
+  chaotic-packages = final: _prev: {
+    chaotic = import inputs.nixpkgs-chaotic {
+      system = final.system;
+      config.allowUnfree = true;
+    };
+  };
 }

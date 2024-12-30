@@ -3,19 +3,20 @@
   config,
   ...
 }: let
-  ai = import ../shared/pkgs/ai.nix {inherit pkgs;};
   archives = import ../shared/pkgs/archives.nix {inherit pkgs;};
   android = import ../shared/pkgs/android.nix {inherit pkgs;};
-  cliutils = import ../shared/pkgs/cliutils.nix {inherit pkgs;};
-  common = import ../shared/pkgs/common.nix {inherit pkgs;};
   core = import ../shared/pkgs/core.nix {inherit pkgs;};
-  development = import ../shared/pkgs/development.nix {inherit pkgs;};
-  guiutils = import ../shared/pkgs/guiutils.nix {inherit pkgs;};
-  media = import ../shared/pkgs/media.nix {inherit pkgs;};
+  devtools = import ../shared/pkgs/devtools.nix {inherit pkgs;};
+  gui = import ../shared/pkgs/gui.nix {inherit pkgs;};
+  guilibs = import ../shared/pkgs/guilibs.nix {inherit pkgs;};
+  image = import ../shared/pkgs/image.nix {inherit pkgs;};
+  network = import ../shared/pkgs/network.nix {inherit pkgs;};
   pentesting = import ../shared/pkgs/pentesting.nix {inherit pkgs;};
   pythonpackages = import ../shared/pkgs/python.nix {inherit pkgs;};
+  shellutils = import ../shared/pkgs/shellutils.nix {inherit pkgs;};
   sound = import ../shared/pkgs/sound.nix {inherit pkgs;};
-  virtualization = import ../shared/pkgs/virtualization.nix {inherit pkgs;};
+  system = import ../shared/pkgs/system.nix {inherit pkgs;};
+  video = import ../shared/pkgs/video.nix {inherit pkgs;};
 in {
   imports = [../shared/pkgs/fonts.nix];
   environment.systemPackages = with pkgs;
@@ -24,16 +25,18 @@ in {
       toilet
       pfetch
     ]
-    ++ ai
     ++ android
     ++ archives
-    ++ cliutils
-    ++ common
     ++ core
-    ++ development
-    ++ guiutils
-    ++ media
+    ++ devtools
+    ++ gui
+    ++ guilibs
+    ++ image
+    ++ network
     ++ pentesting
     ++ pythonpackages
-    ++ sound;
+    ++ shellutils
+    ++ sound
+    ++ system
+    ++ video;
 }

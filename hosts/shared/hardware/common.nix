@@ -12,20 +12,20 @@
       linux-firmware
       firmwareLinuxNonfree
     ];
-  };# end hardware
+  }; # end hardware
 
   environment.systemPackages = with pkgs; [
-      tpm-tools
-      tpm2-tools
-      tpmmanager
-      tpm2-tss
-      udevil
-      udisks
-      udiskie
-      usbutils
-      wirelesstools
-      solaar
-      pciutils
-      dmidecode
+    tpm-tools
+    tpm2-tools
+    tpmmanager
+    tpm2-tss
+    udevil
+    udisks
+    udiskie
+    usbutils
+    wirelesstools
+    solaar
+    pciutils
+    dmidecode
   ];
 }

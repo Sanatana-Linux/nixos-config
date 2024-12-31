@@ -34,5 +34,5 @@ with pkgs; [
   gnome2.gtkglext
   gobject-introspection-unwrapped
   gtk_engines
-  gtk-sharp-2_0
+
 ]

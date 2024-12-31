@@ -24,7 +24,6 @@ with pkgs; [
   gtk3
   gtk3-x11
   gtk4
-  gtkextra
   gtkspell3
   gtkspellmm
   gusb

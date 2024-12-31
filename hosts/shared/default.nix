@@ -27,7 +27,7 @@
     overlays = [
       outputs.overlays.additions
       outputs.overlays.modifications
-      outputs.overlays.master-packages
+      outputs.overlays.unstable-packages
       outputs.overlays.f2k-packages
       outputs.overlays.chaotic-packages
 

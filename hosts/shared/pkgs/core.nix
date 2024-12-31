@@ -8,7 +8,6 @@ with pkgs; [
   automake
   avfs
   bintools
-  binutils
   cached-nix-shell
   cachix
   cbfmt
@@ -25,14 +24,15 @@ with pkgs; [
   dosfstools
   exfatprogs
   ffmpeg-full
-  gccStdenv
+  figlet
+  gcc_latest
   glib
   glibc
   kconfig-frontends
   keyutils
   kmsxx
-  man-pages
-  man-pages-posix
+  libgcc
+  libgccjit
   manix
   mdds
   meson
@@ -47,27 +47,19 @@ with pkgs; [
   nix-doc
   nix-health
   nix-index
-  nix-janitor
-  nix-plugins
-  nix-prefetch
-  nix-prefetch-scripts
-  nix-template
   nix-zsh-completions
-  nixdoc
   nixos-generators
   nmap
   node2nix
   ntfs3g
   nurl
   opencl-clang
-  ouch
   out-of-tree
   parallel
   pfetch
   pinentry-tty
   pmutils
   poppler_gi
-  power-profiles-daemon
   premake
   ps_mem
   pulseaudio
@@ -88,12 +80,11 @@ with pkgs; [
   systemdgenie
   systeroid
   sysvtools
-  tbb
   tealdeer
   template-glib
+  toilet
   tor
   trash-cli
-  tree
   ucl
   usbmuxd
   utillinux
@@ -101,32 +92,23 @@ with pkgs; [
   wmutils-core
   wmutils-libwm
   wmutils-opt
-  xbrightness
   xclip
   xgeometry-select
   xorg.fontalias
   xorg.fonttosfnt
   xorg.fontutil
   xorg.libxcb
-  xorg.libXxf86dga
-  xorg.libXxf86misc
-  xorg.libXxf86vm
   xorg.mkfontdir
-  xorg.xbacklight
   xorg.xcbutil
   xorg.xcbutilerrors
   xorg.xcbutilimage
   xorg.xcbutilrenderutil
   xorg.xcbutilwm
-  xorg.xconsole
   xorg.xev
   xorg.xhost
-  xorg.xinit
   xorg.xkill
   xorg.xorgproto
   xorg.xprop
   xorg.xwininfo
   xsettingsd
-  xxHash
-  zsync
 ]

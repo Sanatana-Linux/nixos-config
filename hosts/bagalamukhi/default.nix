@@ -16,7 +16,7 @@
     ../shared/users/tlh.nix
 
     # Ollama's configuration
-    ../shared/ai/ollama.nix
+    # ../shared/ai/ollama.nix
     ../shared/ai/default.nix
 
     # Virtualization configuration
@@ -84,7 +84,7 @@
 
     tmp.cleanOnBoot = true; # clean the /tmp directory on boot
 
-    kernelPackages = pkgs.linuxPackages_xanmod_latest; # use the xanmod kernel
+    kernelPackages = pkgs.linuxPackages; # use the xanmod kernel
 
     # specify the extra kernel modules to be included
     extraModulePackages = [

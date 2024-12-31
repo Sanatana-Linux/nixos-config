@@ -14,15 +14,12 @@
   pentesting = import ../shared/pkgs/pentesting.nix {inherit pkgs;};
   pythonpackages = import ../shared/pkgs/python.nix {inherit pkgs;};
   shellutils = import ../shared/pkgs/shellutils.nix {inherit pkgs;};
-  sound = import ../shared/pkgs/sound.nix {inherit pkgs;};
   system = import ../shared/pkgs/system.nix {inherit pkgs;};
   video = import ../shared/pkgs/video.nix {inherit pkgs;};
 in {
   imports = [../shared/pkgs/fonts.nix];
   environment.systemPackages = with pkgs;
     [
-      figlet
-      toilet
       pfetch
     ]
     ++ android
@@ -36,7 +33,6 @@ in {
     ++ pentesting
     ++ pythonpackages
     ++ shellutils
-    ++ sound
     ++ system
     ++ video;
 }

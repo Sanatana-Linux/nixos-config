@@ -12,9 +12,6 @@ with pkgs; [
   libinput
   maim
   pure-prompt
-  squashfs-tools-ng
-  squashfsTools
-  squashfuse
   zplug
   zsh
   zsh-autocomplete

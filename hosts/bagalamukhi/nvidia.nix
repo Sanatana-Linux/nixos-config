@@ -16,7 +16,7 @@ in {
       #   __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     };
     systemPackages = with pkgs; [
-      cudatoolkit
+      #    cudatoolkit
       # TODO re-enable these when the system is built
       #   cudaPackages.cutensor
       #   cudaPackages.cudnn
@@ -26,15 +26,15 @@ in {
       #   cudaPackages.libcufft
       #   cudaPackages.nvidia_fs
       nvidia-container-toolkit
-      nvidia_cg_toolkit
-      nv-codec-headers
-      nvtopPackages.nvidia
+      #   nvidia_cg_toolkit
+      #  nv-codec-headers
+      #   nvtopPackages.nvidia
     ];
   };
   services.xserver.videoDrivers = ["nvidia"];
   nixpkgs.config = {
     allowUnfree = true;
-    cudaSupport = true;
+    #   cudaSupport = true;
     nvidia.acceptLicense = true;
     allowUnfreePredicate = pkg:
       builtins.elem (lib.getName pkg) [
@@ -57,7 +57,7 @@ in {
         intel-media-driver
         libva-utils
         libvdpau
-        nvidia-texture-tools
+        #   nvidia-texture-tools
         mesa
       ];
     };

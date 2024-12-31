@@ -52,9 +52,9 @@
 
       defaultFonts = {
         emoji = ["Noto Color Emoji"];
-        monospace = ["Liga SFMono Nerd Font Medium"];
-        sansSerif = ["Liga SFMono Nerd Font Semibold"];
-        serif = ["Liga SFMono Nerd Font Semibold"];
+        monospace = ["M+ Nerd Font Medium"];
+        sansSerif = ["M+ Nerd Font Semibold"];
+        serif = ["M+ Nerd Font Semibold"];
       };
     };
   };

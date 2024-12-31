@@ -1,51 +1,30 @@
 {pkgs, ...}:
 with pkgs; [
   _7zz
-  p7zip-rar
   advancecomp
-  ouch
   archivemount
   archiver
-  arj
-  ark
-  btar
-  bzip2
-  bzip3
   cpio
   crabz
-  dejsonlz4
   dtrx
-  efficient-compression-tool
   fastjar
   gnome-autoar
   gnutar
   libarchive
   lz4
   mozlz4a
-  ncompress
-  p7zip
-  pbzip2
+  ouch
+  p7zip-rar
   pigz
   pixz
   plzip
   pxz
   rar
   rarcrack
-  runzip
-  snzip
-  squashfs-tools-ng
-  squashfsTools
-  squashfuse
-  tarlz
-  tarlz
-  unrar
-  unzip
+
   xarchiver
   xz
-  zarchive
   zip
-  zlib
   zlib-ng
   zstd
-  zziplib
 ]

@@ -29,7 +29,7 @@
     };
     font = {
       size = 12;
-      name = "Liga SFMono Nerd Font Semibold";
+      name = "M+1 Nerd Font Semibold";
     };
     shellIntegration = {
       enableZshIntegration = true;

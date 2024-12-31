@@ -8,17 +8,13 @@ with pkgs; [
   ebook_tools
   ffcast
   ffmpeg
-  flac
-  flac2all
-  flaca
-  flacon
+
   flowblade
   frei0r
   fswebcam
   gallery-dl
   gi-docgen
   gibo
-  gmic
   gnome-video-effects
   gnome.nixos-gsettings-overrides
   gsettings-desktop-schemas
@@ -48,10 +44,10 @@ with pkgs; [
   pantheon.granite
   peek
   pipeline
-  python311Packages.pygobject3
+  python312Packages.pygobject3
   redoflacs
   rx
-  shotcut
+ # unstable.shotcut
   spotdl
   switcheroo
   traverso

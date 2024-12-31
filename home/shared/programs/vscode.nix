@@ -8,7 +8,6 @@
   marketplace-extensions = with inputs.nix-vscode-extensions.extensions.${pkgs.system}.vscode-marketplace; [
     johnnymorganz.stylua
     ms-python.black-formatter
-    ms-python.python
     rvest.vs-code-prettier-eslint
     sndst00m.markdown-github-dark-pack
   ];
@@ -38,14 +37,13 @@ in {
         kamadorueda.alejandra
         mads-hartmann.bash-ide-vscode
         mkhl.direnv
-        ms-python.vscode-pylance
+
         naumovs.color-highlight
         oderwat.indent-rainbow
         pkief.material-icon-theme
         pkief.material-product-icons
         rioj7.commandonallfiles
         spywhere.guides
-        stkb.rewrap
         streetsidesoftware.code-spell-checker
         sumneko.lua
         timonwong.shellcheck

@@ -1,19 +1,10 @@
 {pkgs, ...}:
 with pkgs; [
-  alsaequal #gui tool
   appimage-run
-  appimagekit
+  # appimagekit
   appstream-glib
-  aspell
-  aspellDicts.de
-  aspellDicts.en
-  aspellDicts.en-computers
-  aspellDicts.en-science
-  aspellDicts.hi
   bleachbit
-  blueman
   ebook_tools
-  eyedropper
   fbida
   file-roller
   fntsample
@@ -21,23 +12,14 @@ with pkgs; [
   fuseiso
   gcolor3
   geocode-glib_2
-  gmime
   gmime3
   gnome-disk-utility
   gnome-font-viewer
   gnome-themes-extra
-  gnome.gvfs
-  gnome2.gtkglext
   gob2
-  gobject-introspection-unwrapped
-  goocanvas
-  goocanvas3
   gparted
   graphite2
-  gspell
   gthumb
-  gtk_engines
-  gtk-sharp-2_0
   gtk2-x11
   gtk3
   gtk3-x11
@@ -50,10 +32,8 @@ with pkgs; [
   hunspellDicts.de_DE
   hunspellDicts.en_US-large
   hunspellDicts.es_MX
-  inkscape-with-extensions
   lcdf-typetools
   leela
-  libappindicator
   libappindicator-gtk3
   libglibutil
   libnotify
@@ -62,7 +42,6 @@ with pkgs; [
   libsForQt5.qtstyleplugins
   libusb1
   libxdg_basedir
-  luakit
   mime-types
   mimetic
   mupdf
@@ -71,22 +50,17 @@ with pkgs; [
   networkmanagerapplet
   ocrmypdf
   pastel
-  pavucontrol #gui tool
+  pavucontrol
   pdf-parser
   pdftag
   pdftk
   perl538Packages.CairoGObject
-  perl538Packages.GooCanvas2CairoTypes
-  phinger-cursors
-  pixcat
   poppler_utils
   psftools
   pulseeffects-legacy
   qt6.qt5compat
-  rep-gtk
   rofi
-  shutter
-  t1lib
+
   t1utils
   tdesktop
   template-glib
@@ -94,26 +68,18 @@ with pkgs; [
   themechanger
   transmission_4-gtk
   ttfautohint
-  typos
-  unrar
-  unscd
   updfparser
   ventoy-full
-  vlc
-  vte-gtk4
   wirelesstools
   wmctrl
   woff2
-  wpa_supplicant
   xarchiver
   xclip
-  xcolor
   xdg-desktop-portal
   xdg-launch
   xdgmenumaker
   xdotool
   xfce.xfce4-settings
-  xorg-rgb
   xorg.xfontsel
   xscreensaver
 ]

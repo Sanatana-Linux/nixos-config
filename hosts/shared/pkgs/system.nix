@@ -7,11 +7,11 @@ with pkgs; [
   deer
   didyoumean
   efibootmgr
-  efitools
+
   fd
   ghostscript
   gh
-  
+
   htop
   inotify-tools
   jdupes
@@ -49,7 +49,6 @@ with pkgs; [
   wget
   whois
   wmctrl
-  xcftools
   xdg-dbus-proxy
   xdg-desktop-portal-gtk
   xdg-user-dirs
@@ -57,7 +56,6 @@ with pkgs; [
   xdotool
   xfce.tumbler
   xfce.xfce4-power-manager
-  xorg.gccmakedep
   xorg.mkfontdir
   xorg.xbacklight
   xorg.xcbutil
@@ -76,5 +74,4 @@ with pkgs; [
   xsecurelock
   xss-lock
   xsuspender
-  
 ]

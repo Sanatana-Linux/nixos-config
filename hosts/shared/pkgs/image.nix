@@ -4,33 +4,29 @@ with pkgs; [
   colorstorm
   colorz
   curtail
-  deface
-  delve
-  dipc
   emacsPackages.svgo
   exiftool
   feh
   figlet
-  fim
   gdk-pixbuf
   gif-for-cli
   giflib
   gifsicle
-  gimp-with-plugins
-  gimpPlugins.bimp
-  gimpPlugins.exposureBlend
-  gimpPlugins.farbfeld
-  gimpPlugins.fourier
-  gimpPlugins.gap
-  gimpPlugins.gimplensfun
-  gimpPlugins.gmic
-  gimpPlugins.lightning
-  gimpPlugins.lqrPlugin
-  gimpPlugins.resynthesizer
-  gimpPlugins.texturize
-  gimpPlugins.waveletSharpen
-  gobject-introspection
-  gobject-introspection
+  #gimp-with-plugins
+  #gimpPlugins.bimp
+  #gimpPlugins.exposureBlend
+  #gimpPlugins.farbfeld
+  #gimpPlugins.fourier
+  #gimpPlugins.gap
+  #gimpPlugins.gimplensfun
+  #gimpPlugins.gmic
+  #gimpPlugins.lightning
+  #gimpPlugins.lqrPlugin
+  #gimpPlugins.resynthesizer
+  #gimpPlugins.texturize
+  #gimpPlugins.waveletSharpen
+  #  gmic
+  inkscape-with-extensions
   graphicsmagick
   image_optim
   image-roll
@@ -39,20 +35,11 @@ with pkgs; [
   imgcat
   imlib2-nox
   imlib2Full
-  imlib2Full
-  imv
-  jhead
-  jp2a
-  jpegexiforient
   jpeginfo
   jpegoptim
-  jpegrescan
-  labelImg
-  libdevil-nox
   libexif
   libjpeg
   libpng
-  librsvg
   librsvg
   libspng
   libwebp
@@ -65,44 +52,22 @@ with pkgs; [
   pixel2svg
   pixeluvo
   pngcrush
-  pngloss
-  pngout
-  pngpp
-  pngquant
   pngtoico
   pngtools
   potrace
-  python312Packages.cairosvg
   python312Packages.colorthief
   python312Packages.pyfiglet
   python312Packages.pystache
-  python312Packages.pysvg-py3
-  python312Packages.svg-path
   python312Packages.svgwrite
   pywal
   resvg
-  rubyPackages.cairo-gobject
-  rubyPackages.cairo-gobject
-  rubyPackages.gdk_pixbuf2
-  rubyPackages.gdk_pixbuf2
-  rubyPackages.gobject-introspection
-  rubyPackages.gobject-introspection
   svgcleaner
-  svgcleaner
-  t1lib
-  t1lib
-  t1utils
   t1utils
   termcolor
-  termcolor
-  upscaler
   upscaler
   upscayl
-  upscayl
-  upscayl-ncnn
   upscayl-ncnn
   xcolor
   xcolor
-  xorg-rgb
   xorg-rgb
 ]

@@ -67,8 +67,6 @@
     menu-cache
     pango
     pangomm
-    perl538Packages.CairoGObject
-    perl538Packages.GooCanvas2CairoTypes
     polkit_gnome
     xfce.exo
     xfce.garcon
@@ -77,7 +75,6 @@
     xfce.tumbler
     xfce.xfce4-power-manager
     xfce.xfconf
-
     cairo
     cairomm
     awesome-git-luajit

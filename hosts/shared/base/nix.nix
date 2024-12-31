@@ -57,9 +57,9 @@
       min-free = "${toString (5 * 1024 * 1024 * 1024)}";
       max-free = "${toString (10 * 1024 * 1024 * 1024)}";
       # Useful/Necessary Features to Have Enabled
-      system-features = ["kvm" "recursive-nix" "big-parallel"];
+      system-features = lib.mkForce ["kvm" "recursive-nix" "big-parallel"];
       # Necessary Experimental Nix Features for Flakes and Friends
-      experimental-features = ["recursive-nix" "cgroups" "ca-derivations" "nix-command" "flakes"];
+      experimental-features = lib.mkForce ["recursive-nix" "cgroups" "ca-derivations" "nix-command" "flakes"];
       flake-registry = "/etc/nix/registry.json";
       # Use C-Groups for builds(requires experimental setting above)
       use-cgroups = true;

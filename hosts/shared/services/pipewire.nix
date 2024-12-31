@@ -1,10 +1,9 @@
 {pkgs, ...}: {
-  hardware.pulseaudio.enable = false;
   services.pipewire = {
     enable = true;
     wireplumber.enable = true;
     pulse.enable = true;
-    jack.enable = true;
+    #jack.enable = true;
     alsa = {
       enable = true;
       support32Bit = true;
@@ -18,4 +17,35 @@
       wantedBy = ["default.target"];
     };
   };
+  environment.systemPackages = with pkgs; [
+    alsa-firmware
+    alsa-lib
+    alsa-oss
+    alsa-plugins
+    alsa-tools
+    alsa-utils
+    #alsaequal
+    #audacity
+    cava
+    flac
+    flac2all
+    flaca
+    libpulseaudio
+    #lmms
+    mediainfo
+    mpc_cli
+    mpd
+    mpd-discord-rpc
+    mpd-mpris
+    mpdevil
+    pamixer
+    pavucontrol
+    playerctl
+    pulseaudio-ctl
+    pulseaudioFull
+    pulseeffects-legacy
+    #pulsemixer
+    spotify-cli-linux
+    vlc
+  ];
 }

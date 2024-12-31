@@ -73,7 +73,7 @@
       (pkgs.xorg)
       xev
       ;
-    pylsp = pkgs.python311.withPackages (p:
+    pylsp = pkgs.python312.withPackages (p:
       with p; [
         flake8
         python-lsp-server

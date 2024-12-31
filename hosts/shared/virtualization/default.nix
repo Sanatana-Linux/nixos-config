@@ -28,7 +28,7 @@
     nvidia-container-toolkit
     kvmtool
     oxker
-    qemu_full
+    #qemu_full
     virt-manager
     x11docker
   ];

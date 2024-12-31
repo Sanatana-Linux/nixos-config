@@ -11,7 +11,6 @@
       bash
       binutils
       curl
-      gcc
       glib
       glibc
       gobject-introspection
@@ -22,7 +21,7 @@
       libdbusmenu-gtk3
       libfm
       libfm-extra
-      libgccjit
+
       libgee
       libgig
       libgit2

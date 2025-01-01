@@ -44,9 +44,8 @@ in {
   xdg.configFile."aichat/config.yaml".text = aichatConfig;
 
   # Roles
-  xdg.configFile."aichat/roles/dutch.md".text = dutchRole;
   xdg.configFile."aichat/roles/english.md".text = englishRole;
-  xdg.configFile."aichat/roles/commit.md".text = builtins.readFile ./aichat/roles/commit.md;
+  xdg.configFile."aichat/roles/commit.md".text = builtins.readFile ./aichat/commit.md;
   xdg.configFile."aichat/roles/commitSuggester.md".text = commitSuggesterRole;
 
   programs.fish = {

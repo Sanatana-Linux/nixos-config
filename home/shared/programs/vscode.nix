@@ -14,6 +14,7 @@
 in {
   programs.vscode = {
     enable = true;
+    package = pkgs.vscode-fhs;
     mutableExtensionsDir = true;
     extensions = with pkgs.vscode-extensions;
       [
@@ -37,7 +38,6 @@ in {
         kamadorueda.alejandra
         mads-hartmann.bash-ide-vscode
         mkhl.direnv
-
         naumovs.color-highlight
         oderwat.indent-rainbow
         pkief.material-icon-theme
@@ -49,7 +49,7 @@ in {
         timonwong.shellcheck
         tyriar.sort-lines
         usernamehw.errorlens
-        usernamehw.errorlens
+
         vadimcn.vscode-lldb
         xaver.clang-format
       ]
@@ -145,16 +145,7 @@ in {
         cursorWidth = 2;
         fontFamily = "'monospace'";
         fontSize = 11;
-        smoothScrolling = true;
-      };
-      window.menuBarVisibility = "toggle";
-      window.zoomLevel = 1;
-      workbench = {
-        editor.tabCloseButton = "left";
-        iconTheme = "material-icon-theme";
-        ignoreInvalidSettings = true;
-        list.smoothScrolling = true;
-        productIconTheme = "material-product-icons";
+        smoothScrolling = true;vscodeial-product-icons";
         settings.enableEdit = false;
         smoothScrolling = true;
       };

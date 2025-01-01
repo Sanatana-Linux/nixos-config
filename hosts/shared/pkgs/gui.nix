@@ -1,7 +1,7 @@
 {pkgs, ...}:
 with pkgs; [
   appimage-run
-  # appimagekit
+  #   appimagekit
   appstream-glib
   bleachbit
   ebook_tools
@@ -56,7 +56,7 @@ with pkgs; [
   perl538Packages.CairoGObject
   poppler_utils
   psftools
-  pulseeffects-legacy
+
   qt6.qt5compat
   rofi
 

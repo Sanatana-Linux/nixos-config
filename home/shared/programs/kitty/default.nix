@@ -29,7 +29,7 @@
     };
     font = {
       size = 12;
-      name = "M+1 Nerd Font Semibold";
+      name = "Mplus Code 60";
     };
     shellIntegration = {
       enableZshIntegration = true;

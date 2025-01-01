@@ -7,12 +7,12 @@
 }: {
   imports = [
     inputs.home-manager.nixosModules.home-manager
-    ./base
-    ./environment
-    ./programs
+    ./base/default.nix
+    ./environment/default.nix
+    ./programs/default.nix
     ./hardware/networking.nix
-    ./security
-    ./services
+    ./security/default.nix
+    ./services/default.nix
   ];
 
   # Set up everything home-manager related for my user

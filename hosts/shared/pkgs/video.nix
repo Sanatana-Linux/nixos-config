@@ -3,7 +3,6 @@ with pkgs; [
   aaxtomp3
   audiofile
   beautysh
-  byzanz
   cheese
   ebook_tools
   ffcast
@@ -47,7 +46,7 @@ with pkgs; [
   python312Packages.pygobject3
   redoflacs
   rx
- # unstable.shotcut
+  #  shotcut
   spotdl
   switcheroo
   traverso

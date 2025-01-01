@@ -52,9 +52,9 @@
 
       defaultFonts = {
         emoji = ["Noto Color Emoji"];
-        monospace = ["M+ Nerd Font Medium"];
-        sansSerif = ["M+ Nerd Font Semibold"];
-        serif = ["M+ Nerd Font Semibold"];
+        monospace = ["Mplus Code 60"];
+        sansSerif = ["Mplus Code 60"];
+        serif = ["Mplus Code 60"];
       };
     };
   };

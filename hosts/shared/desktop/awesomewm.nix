@@ -5,7 +5,10 @@
     }; # ends display manager
     xserver = {
       enable = true;
+      autorun = true;
       exportConfiguration = true;
+      updateDbusEnvironment = true;
+
       displayManager = {
         lightdm = {
           enable = true;
@@ -25,10 +28,10 @@
               package = pkgs.reversal-icon-theme;
               name = "Reversal";
             };
-            indicators = ["~session" "~spacer"];
+            indicators = ["~session" "~spacer" "~clock" "--spacer" "~power"];
           };
         };
-      };
+      }; # ends displayManager not xserver
       windowManager.awesome = {
         enable = true;
         package = pkgs.awesome-git-luajit;
@@ -94,4 +97,5 @@
     xfce.libxfce4util
     xorg.xwininfo
   ];
+  xdg.portal.extraPortals = with pkgs; [xdg-desktop-portal-gtk];
 }

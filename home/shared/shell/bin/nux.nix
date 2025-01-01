@@ -58,7 +58,7 @@ with pkgs;
         echo "Rebuilding Configuration Now"
         rm -rf $HOME/.config/*.bak
         rm -rf $HOME/.config/**/*.bak
-        doas nixos-rebuild switch --impure --flake $dots#"$2" -v && echo "Done Rebuilding NixOS Configuration"
+        doas nixos-rebuild switch --flake ".#$2" --impure -v && echo "Done Rebuilding NixOS Configuration"
     }
 
     function vm() {
@@ -103,7 +103,7 @@ with pkgs;
 
 
     function search() {
-       nix-search  "$2" --details
+       nix search  nixpkgs "$2"
     }
 
     case "$1" in

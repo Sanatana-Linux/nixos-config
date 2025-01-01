@@ -43,7 +43,6 @@
     playerctl
     pulseaudio-ctl
     pulseaudioFull
-    pulseeffects-legacy
     #pulsemixer
     spotify-cli-linux
     vlc

@@ -11,11 +11,11 @@ with pkgs; [
   deadnix
   direnv
   fuse3
-#  squashfs-tools-ng
-#  squashfsTools
-#  squashfuse
+  #  squashfs-tools-ng
+  #  squashfsTools
+  #  squashfuse
   getopt
-    pixcat
+  pixcat
 
   getoptions
   gettext

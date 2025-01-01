@@ -2,8 +2,8 @@
   description = "The Sanatana Linux is the ShizNix";
 
   inputs = {
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs.url = "github:nixos/nixpkgs/master";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/master";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     nixpkgs-f2k.url = "github:moni-dz/nixpkgs-f2k";
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
@@ -74,7 +74,7 @@
       # ┣━━━━━━━━━━━━━━━━━━━━━━━┫ Dinosaur Laptop ┣━━━━━━━━━━━━━━━━━━━━━━━┫
 
       macbook-air = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
+        specialArgs = {inherit inputs outputs self;};
         modules = [
           nur.modules.nixos.default
 
@@ -102,8 +102,8 @@
           nixos-hardware.nixosModules.lenovo-legion-16irx9h
           ./hosts/bagalamukhi
           bhairava-grub-theme.nixosModule
-          home-manager.nixosModules.home-manager
           chaotic.nixosModules.default
+          home-manager.nixosModules.home-manager
           {
             home-manager = {
               useUserPackages = true;
@@ -123,8 +123,8 @@
           nixos-hardware.nixosModules.lenovo-legion-16irx9h
           ./hosts/remus
           bhairava-grub-theme.nixosModule
-          home-manager.nixosModules.home-manager
           chaotic.nixosModules.default
+          home-manager.nixosModules.home-manager
           {
             home-manager = {
               useUserPackages = true;
@@ -137,7 +137,21 @@
         ];
       };
     };
-
+    # ┣━━━━━━━━━━━━━━━━━━━━━┫ Home Configurations ┣━━━━━━━━━━━━━━━━━━━━━┫
+    homeConfigurations = {
+      tlh = inputs.home-manager.lib.homeManagerConfiguration {
+        extraSpecialArgs = {inherit inputs outputs self;};
+        modules = [
+          ./home/tlh/default.nix
+        ];
+      };
+      smg = inputs.home-manager.lib.homeManagerConfiguration {
+        extraSpecialArgs = {inherit inputs outputs self;};
+        modules = [
+          ./home/smg/default.nix
+        ];
+      };
+    };
     # ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
 
     macbook-air = self.nixosConfigurations.macbook-air.config.system.build.toplevel;

@@ -9,7 +9,7 @@
 
     # Font settings for GTK
     font = {
-      name = "M+1 Nerd Font Semibold";
+      name = "Mplus Code 60";
       size = 11;
     };
 

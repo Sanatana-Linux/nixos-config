@@ -1,7 +1,6 @@
 {
   pkgs,
   config,
-  lib,
   ...
 }: let
   nvidiaDriverChannel = config.boot.kernelPackages.nvidiaPackages.latest; # stable, beta, etc.
@@ -13,28 +12,34 @@ in {
       _JAVA_OPTIONS = "-Dsun.java2d.uiScale=1";
       GBM_BACKEND = "nvidia-drm";
       LIBVA_DRIVER_NAME = "nvidia"; # hardware acceleration
-      #   __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+      # __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     };
     systemPackages = with pkgs; [
-      #    cudatoolkit
-      # TODO re-enable these when the system is built
-      #   cudaPackages.cutensor
-      #   cudaPackages.cudnn
-      #   cudaPackages.cuda_opencl
-      #   cudaPackages.saxpy
-      #   cudaPackages.libnpp
-      #   cudaPackages.libcufft
-      #   cudaPackages.nvidia_fs
+      cudatoolkit
       nvidia-container-toolkit
-      #   nvidia_cg_toolkit
-      #  nv-codec-headers
-      #   nvtopPackages.nvidia
+      nvidia_cg_toolkit
+      nv-codec-headers
+      mesa
+      nvtopPackages.nvidia
+      config.boot.kernelPackages.nvidia_x11 # nvidia x11 kernel module
+      config.boot.kernelPackages.acpi_call # acpi_call kernel module
+      libGLX
+      nvidia-texture-tools
+      peakperf
+      intel-media-driver
+      intel-vaapi-driver
+      xorg_sys_opengl
+      mlx42
+      glfw
+      vaapiVdpau
+      libvdpau-va-gl
+      nvidia-vaapi-driver
     ];
   };
-  services.xserver.videoDrivers = ["nvidia"];
+
   nixpkgs.config = {
     allowUnfree = true;
-    #   cudaSupport = true;
+    cudaSupport = true;
     nvidia.acceptLicense = true;
     allowUnfreePredicate = pkg:
       builtins.elem (lib.getName pkg) [
@@ -44,28 +49,27 @@ in {
         "nvidia-x11"
       ];
   };
-
   hardware = {
     graphics = {
       enable = true;
       enable32Bit = true;
       extraPackages = with pkgs; [
-        nvidiaDriverChannel
-        intel-gmmlib
-        libvdpau-va-gl
-        nvidia-vaapi-driver
-        intel-media-driver
+        glfw
+        intel-vaapi-driver
         libva-utils
-        libvdpau
-        #   nvidia-texture-tools
+        libvdpau-va-gl
         mesa
+        mlx42
+        nvidia-vaapi-driver
+        nvidiaDriverChannel
+        vaapiVdpau
+        xorg_sys_opengl
       ];
     };
-
     nvidia = {
       modesetting.enable = true;
       nvidiaSettings = true;
-      nvidiaPersistenced = true;
+      #nvidiaPersistenced = true;
       dynamicBoost.enable = true;
       powerManagement = {
         enable = true;
@@ -78,6 +82,7 @@ in {
           enable = lib.mkForce true;
           setupCommands.enable = lib.mkForce true; # requires a dm with xsetupcommands ie sddm lightdm or gdm
         };
+        #   sync.enable = true;
         offload.enable = lib.mkForce false;
         # Multiple uses are available, check the NVIDIA NixOS wiki
         # Use "lspci | grep -E 'VGA|3D'" to get PCI-bus IDs

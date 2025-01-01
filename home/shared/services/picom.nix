@@ -6,16 +6,16 @@
 }: {
   services.picom = {
     enable = true;
-    package = pkgs.picom;
+    package = pkgs.picom-next;
     activeOpacity = 1.0;
-    backend = "glx";
+    backend = "xrender";
     fade = true;
     fadeDelta = 3;
     fadeSteps = [0.03 0.03];
 
     opacityRules = [
-      "85:class_g = 'kitty' && !focused"
-      "93:class_g = 'kitty' && focused"
+      "96:class_g = 'kitty' && !focused"
+      "98:class_g = 'kitty' && focused"
       "85:class_g = 'ncmpcpppad' && !focused"
       "93:class_g = 'ncmpcpppad' && focused"
       "85:class_g = 'neofetchpad' && !focused"
@@ -66,13 +66,12 @@
       ];
       blur = {
         method = "dual_kawase";
-        strength = 5.0;
-        deviation = 1.0;
-
+        strength = 12.0;
+        deviation = 3.0;
         kernel = "11x11gaussian";
       };
 
-      blur-background = false;
+      blur-background = true;
       blur-background-frame = true;
       blur-background-fixed = true;
       xrender-sync-fence = true;

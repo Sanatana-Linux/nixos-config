@@ -34,5 +34,4 @@ with pkgs; [
   gnome2.gtkglext
   gobject-introspection-unwrapped
   gtk_engines
-
 ]

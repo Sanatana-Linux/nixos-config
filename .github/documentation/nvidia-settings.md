@@ -91,6 +91,10 @@ in {
 
 In a Reverse PRIME setup, the Intel GPU is used as the primary renderer, and the NVIDIA GPU is used as a secondary renderer. The Intel GPU renders the desktop and 2D graphics, while the NVIDIA GPU is used to accelerate 3D graphics and compute tasks. The rendered images from the NVIDIA GPU are then sent to the Intel GPU, which displays the final image on the screen. This setup is particularly useful when the iGPU is more power-efficient for basic tasks, while the dGPU provides additional performance for demanding tasks.
 
+> [!NOTE]
+>
+> This requires that you are using a Nvidia driver versions <560, which at the time of writing requires the nixpkgs unstable beta version. You also need to use a display manager capable of accepting xorg setup commands: lightdm, gdm or sddm. No idea if this works on wayland, but if you know drop an issue in this repo and I will update the document to reflect as much.
+
 ```nix
          reverseSync ={
            enable = true;
@@ -113,6 +117,8 @@ In a Reverse PRIME setup, the Intel GPU is used as the primary renderer, and the
 
 ## Render Offload
  Render Offload allows only specified applications to be rendered on the dGPU while the rest of the system uses the iGPU. It is particularly useful for offloading demanding graphical tasks to the dGPU without switching the entire system's rendering to the dGPU. This can be beneficial for power efficiency and performance, as it allows the iGPU to handle less demanding tasks while the dGPU is used for more intensive applications on a per-need basis, but requires either running the task with a prefixed wrapper command,such as is set up below, or manually setting the environmental variables.
+
+ This makes the most sense for older Nvidia based laptops with less driver support or when you want to really maximize battery life at the expense of having access to GPU based compute power, which can be set up as a specialization that you opt to boot into via GRUB (see the [NixOS Wiki]() article for more on that)
 
 ```nix
         # ----------------------------

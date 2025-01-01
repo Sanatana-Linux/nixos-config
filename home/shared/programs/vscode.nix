@@ -145,7 +145,6 @@ in {
         cursorWidth = 2;
         fontFamily = "'monospace'";
         fontSize = 11;
-        smoothScrolling = true;vscodeial-product-icons";
         settings.enableEdit = false;
         smoothScrolling = true;
       };

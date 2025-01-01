@@ -57,4 +57,7 @@ nix fmt flake.nix
 # get a file's sha256 checksum for packaging purposes
 nix flake prefetch github:<repo>/<repo>/<rev>
 
+# Delete a nix store locations
+nix store delete /nix/store/path/goes/here
+
 ```

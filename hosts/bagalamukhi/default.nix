@@ -105,7 +105,7 @@
 
     tmp.cleanOnBoot = true; # clean the /tmp directory on boot
 
-    kernelPackages = pkgs.linuxPackages_xanmod_latest; # use the xanmod kernel
+    kernelPackages = pkgs.linuxPackages_zen; # use the xanmod kernel
 
     # specify the extra kernel modules to be included
     extraModulePackages = [
@@ -131,7 +131,9 @@
       # Nvidia dGPU settings
       "nvidia_drm.fbdev=1" # Framebuffer driver
       "nvidia-drm.modeset=1" # Modesetting Kernel Module
-      "lenovo-legion.force=1" # laptop
+      # Potentially useful for hanging or shutdown
+      "reboot=acpi" 
+      
     ];
 
     loader = {

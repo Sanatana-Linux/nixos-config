@@ -15,6 +15,7 @@
     # https://github.com/CachyOS/CachyOS-Settings/blob/master/usr/lib/sysctl.d/99-cachyos-settings.conf
     # The sysctl swappiness parameter determines the kernel's preference for pushing anonymous pages or page cache to disk in memory-starved situations.
 
+    "lenovo-legion.force" = 1; # laptop
     # A low value causes the kernel to prefer freeing up open files (page cache), a high value causes the kernel to try to use swap space,
     # and a value of 100 means IO cost is assumed to be equal.
     "vm.swappiness" = 150;

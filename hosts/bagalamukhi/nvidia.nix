@@ -13,9 +13,9 @@ in {
       GBM_BACKEND = "nvidia-drm";
       LIBVA_DRIVER_NAME = "nvidia"; # hardware acceleration
       # __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-    CUDA_PATH = "${pkgs.cudatoolkit}";
-    EXTRA_LDFLAGS = "-L/lib -L${pkgs.linuxPackages.nvidia_x11}/lib";
-    EXTRA_CCFLAGS = "-I/usr/include";
+      CUDA_PATH = "${pkgs.cudatoolkit}";
+      EXTRA_LDFLAGS = "-L/lib -L${pkgs.linuxPackages.nvidia_x11}/lib";
+      EXTRA_CCFLAGS = "-I/usr/include";
     };
     systemPackages = with pkgs; [
       cudatoolkit

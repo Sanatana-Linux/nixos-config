@@ -7,7 +7,7 @@ with pkgs; [
   deer
   didyoumean
   efibootmgr
-ghostty 
+  ghostty
   fd
   ghostscript
   gh

@@ -132,8 +132,7 @@
       "nvidia_drm.fbdev=1" # Framebuffer driver
       "nvidia-drm.modeset=1" # Modesetting Kernel Module
       # Potentially useful for hanging or shutdown
-      "reboot=acpi" 
-      
+      "reboot=acpi"
     ];
 
     loader = {

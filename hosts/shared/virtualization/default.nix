@@ -7,12 +7,13 @@
     docker = {
       enable = true;
       enableOnBoot = true;
+      rootless.enable = true;
       extraOptions = "--add-runtime nvidia=/run/current-system/sw/bin/nvidia-container-runtime";
     };
     libvirtd.enable = true;
   };
   hardware.nvidia-container-toolkit.enable = true;
-
+  hardware.graphics.enable32Bit = true;
   environment.systemPackages = with pkgs; [
     appvm
     conmon

@@ -18,7 +18,7 @@
     #markdown
     ''
       ---
-      model: "ollama:llama3.2:3b"
+      model: ollama:llama3.2:3b
       temperature:
       top_p:
       ---
@@ -29,7 +29,7 @@
     #markdown
     ''
       ---
-      model: ollama:"Code Qwen 2.5"
+      model: ollama:Qwen 2.5 Coder
       temperature:
       top_p:
       ---
@@ -47,5 +47,4 @@ in {
   xdg.configFile."aichat/roles/english.md".text = englishRole;
   xdg.configFile."aichat/roles/commit.md".text = builtins.readFile ./aichat/commit.md;
   xdg.configFile."aichat/roles/commitSuggester.md".text = commitSuggesterRole;
-
 }

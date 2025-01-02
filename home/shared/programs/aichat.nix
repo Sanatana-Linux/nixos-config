@@ -28,12 +28,16 @@
   commitSuggesterRole =
     #markdown
     ''
-      ---
-      model: ollama:Qwen 2.5 Coder
-      temperature:
-      top_p:
-      ---
-      I want you to act as a commit message generator. Suggest me clean, comprehensive, good commit messages for my commit following conventional commit convention (<type>[optional scope]: <description>). Output results as a list, not more than 6 items. I will provide you with information about the task and the prefix for the task code, and I would like you to generate an appropriate commit message using the conventional commit format. Do not write any explanations or other words, just reply with the commit message.
+            ---
+            model: ollama:Qwen 2.5 Coder
+            temperature:
+            top_p:
+            ---
+          `Generate succinct Git commit message from piped Git diff log:
+      `
+      ```
+      cat git_log | perl -pe 's/\S+//g; s/^\| */\n/g' | sort -u | head -1
+      ```
     '';
 in {
   home.packages = with pkgs; [

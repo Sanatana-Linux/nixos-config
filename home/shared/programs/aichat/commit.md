@@ -1,6 +1,6 @@
 ---
-model: ollama:llama3
-temperature: 0.1
+model: ollama:llama3.2:3b
+temperature: 0.4
 top_p: 0.1
 ---
 

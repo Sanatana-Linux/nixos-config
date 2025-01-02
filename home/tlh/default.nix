@@ -11,6 +11,7 @@
     ../shared/pkgs
     ../shared/programs/yazi/default.nix
     ../shared/programs/aichat.nix
+    ../shared/programs/ghostty.nix
     ../shared/programs/vscode.nix
     ../shared/programs/firefox.nix
     ../shared/programs/gpg/default.nix

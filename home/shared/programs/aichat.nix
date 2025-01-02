@@ -18,7 +18,7 @@
     #markdown
     ''
       ---
-      model: ollama:llama3.2:3b
+      model: "ollama:llama3.2:3b"
       temperature:
       top_p:
       ---
@@ -29,7 +29,7 @@
     #markdown
     ''
       ---
-      model: ollama:Code Qwen 2.5
+      model: ollama:"Code Qwen 2.5"
       temperature:
       top_p:
       ---
@@ -48,14 +48,4 @@ in {
   xdg.configFile."aichat/roles/commit.md".text = builtins.readFile ./aichat/commit.md;
   xdg.configFile."aichat/roles/commitSuggester.md".text = commitSuggesterRole;
 
-  programs.fish = {
-    interactiveShellInit =
-      #fish
-      ''
-        # [c]ommit [m]essage
-        abbr --add cm "git diff --staged | aichat --role commit"
-        # [c]ommit [s]uggester
-        abbr --add cs --set-cursor "aichat --role commitSuggester \"%\""
-      '';
-  };
 }

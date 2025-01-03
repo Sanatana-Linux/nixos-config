@@ -49,6 +49,9 @@
 
     # Create the completion cache directory
     initExtra = ''
+                  export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense' # optional
+                  zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
+                  source <(carapace _carapace)
 
                   mkdir -p "${config.xdg.cacheHome}/zsh/completion-cache" # Use xdg directory for cache
 

@@ -171,6 +171,12 @@ in {
         "toolkit.telemetry.enabled" = false;
         "toolkit.telemetry.unified" = false;
         "ui.systemUsesDarkTheme" = 1;
+
+        "dom.webgpu.workers.enabled" = true;
+        "dom.webgpu.enabled" = true;
+        "gfx.webgpu.force-enabled" = true; 
+
+
         "higgs-boson.disable.verticaltab.bar" = false;
 
         "higgs-boson.disable.windowcontrols.button" = true;

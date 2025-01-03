@@ -12,20 +12,21 @@ with pkgs; [
   gif-for-cli
   giflib
   gifsicle
-  #gimp-with-plugins
+# unstable.gimp-with-plugins
   #gimpPlugins.bimp
-  #gimpPlugins.exposureBlend
-  #gimpPlugins.farbfeld
-  #gimpPlugins.fourier
-  #gimpPlugins.gap
-  #gimpPlugins.gimplensfun
-  #gimpPlugins.gmic
-  #gimpPlugins.lightning
-  #gimpPlugins.lqrPlugin
-  #gimpPlugins.resynthesizer
-  #gimpPlugins.texturize
-  #gimpPlugins.waveletSharpen
-  #  gmic
+  gimp 
+  gimpPlugins.exposureBlend
+  gimpPlugins.farbfeld
+  gimpPlugins.fourier
+ # gimpPlugins.gap
+  gimpPlugins.gimplensfun
+  gimpPlugins.gmic
+  gimpPlugins.lightning
+  gimpPlugins.lqrPlugin
+  gimpPlugins.resynthesizer
+  gimpPlugins.texturize
+  gimpPlugins.waveletSharpen
+    gmic
   inkscape-with-extensions
   graphicsmagick
   image_optim

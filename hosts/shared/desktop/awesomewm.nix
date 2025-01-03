@@ -1,4 +1,5 @@
 {pkgs, config, ...}: {
+  environment.sessionVariables.MOZ_ENABLE_WAYLAND = 0;
   services = {
     displayManager = {
       defaultSession = "none+awesome";

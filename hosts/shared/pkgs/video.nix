@@ -7,6 +7,7 @@ with pkgs; [
   ebook_tools
   ffcast
   ffmpeg
+  libdrm
 
   flowblade
   frei0r

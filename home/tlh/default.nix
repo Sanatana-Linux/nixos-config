@@ -26,6 +26,7 @@
 
   systemd.user.startServices = "sd-switch";
 
+  # we have manix & internet for this
   manual = {
     html.enable = false;
     json.enable = false;

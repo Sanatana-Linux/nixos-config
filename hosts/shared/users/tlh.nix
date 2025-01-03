@@ -9,8 +9,8 @@ in {
   programs.zsh.enable = true;
   # Please don't mute me since I am mutable!
   users.mutableUsers = true;
-
   users.users.tlh = {
+    name = "tlh";
     description = "Thomas Leon Highbaugh"; # That's me in case you didn't know :P
     initialPassword = "password";
     isNormalUser = true;

@@ -74,6 +74,7 @@
     libdbusmenu
     libdbusmenu-gtk3
     linuxHeaders
+    qt5.qtwebglplugin
     luajitPackages.ldbus
     polkit_gnome
     wirelesstools
@@ -105,7 +106,7 @@
 
     tmp.cleanOnBoot = true; # clean the /tmp directory on boot
 
-    kernelPackages = pkgs.linuxPackages_zen; # use the xanmod kernel
+    kernelPackages = pkgs.linuxPackages_xanmod_latest; # use the xanmod kernel
 
     # specify the extra kernel modules to be included
     extraModulePackages = [

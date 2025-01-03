@@ -1,10 +1,10 @@
-{pkgs, config, ...}:{
-  imports = inputs.ghostty;
-  {
+{pkgs, inputs, config, ...}:{
+  imports =[ inputs.ghostty-hm-module.homeModules.default];
+  programs.ghostty = {
   enable = true;
-  package = inputs.ghostty.packages.${system}.default;
+  package = pkgs.ghostty;
   shellIntegration.enable = true;
-
+  shellIntegration.enableZshIntegration = true;
   settings = {
     background-blur-radius = 20;
     theme = "dark:catppuccin-mocha,light:catppuccin-latte";

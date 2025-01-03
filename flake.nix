@@ -37,7 +37,7 @@
       url = "github:nix-community/neovim-nightly-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-      ghostty.url = "github:clo4/ghostty-hm-module";
+    ghostty-hm-module.url = "github:clo4/ghostty-hm-module";
   };
 
   outputs = {
@@ -135,7 +135,7 @@
               };
             };
           }
-        ]; 
+        ];
       };
     };
     # ┣━━━━━━━━━━━━━━━━━━━━━┫ Home Configurations ┣━━━━━━━━━━━━━━━━━━━━━┫
@@ -150,7 +150,6 @@
         extraSpecialArgs = {inherit inputs outputs self;};
         modules = [
           ./home/smg/default.nix
-
         ];
       };
     };

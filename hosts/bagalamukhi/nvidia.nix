@@ -22,6 +22,10 @@ in {
       nvidia-container-toolkit
       nvidia_cg_toolkit
       nv-codec-headers
+      freeglut 
+      gegl
+      glew-egl
+      eglexternalplatform
       mesa
       nvtopPackages.nvidia
       config.boot.kernelPackages.nvidia_x11 # nvidia x11 kernel module

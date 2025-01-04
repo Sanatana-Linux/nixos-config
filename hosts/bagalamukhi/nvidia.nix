@@ -7,12 +7,12 @@
 in {
   environment = {
     variables = {
-      GDK_SCALE = "1";
-      GDK_DPI_SCALE = "1";
+      GDK_SCALE = "0.5";
+      GDK_DPI_SCALE = "0.75";
       _JAVA_OPTIONS = "-Dsun.java2d.uiScale=1";
       GBM_BACKEND = "nvidia-drm";
       LIBVA_DRIVER_NAME = "nvidia"; # hardware acceleration
-      # __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+      __GLX_VENDOR_LIBRARY_NAME = "nvidia";
       CUDA_PATH = "${pkgs.cudatoolkit}";
       EXTRA_LDFLAGS = "-L/lib -L${pkgs.linuxPackages.nvidia_x11}/lib";
       EXTRA_CCFLAGS = "-I/usr/include";
@@ -22,7 +22,7 @@ in {
       nvidia-container-toolkit
       nvidia_cg_toolkit
       nv-codec-headers
-      freeglut 
+      freeglut
       gegl
       glew-egl
       eglexternalplatform

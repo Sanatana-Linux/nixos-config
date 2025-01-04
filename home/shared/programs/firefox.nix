@@ -174,8 +174,7 @@ in {
 
         "dom.webgpu.workers.enabled" = true;
         "dom.webgpu.enabled" = true;
-        "gfx.webgpu.force-enabled" = true; 
-
+        "gfx.webgpu.force-enabled" = true;
 
         "higgs-boson.disable.verticaltab.bar" = false;
 

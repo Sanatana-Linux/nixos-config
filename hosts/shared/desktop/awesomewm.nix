@@ -1,5 +1,8 @@
-{pkgs, config, ...}: {
-  environment.sessionVariables.MOZ_ENABLE_WAYLAND = 0;
+{
+  pkgs,
+  config,
+  ...
+}: {
   services = {
     displayManager = {
       defaultSession = "none+awesome";
@@ -91,8 +94,8 @@
     xsettingsd
     dconf-editor
     xfce.xfce4-clipman-plugin
-    xfce.xfconf
     xfce.xfce4-settings
+    xfce.xfconf
     xfce.exo
     xfce.libxfce4ui
     xfce.libxfce4util
@@ -101,15 +104,15 @@
   xdg.portal.extraPortals = with pkgs; [xdg-desktop-portal-gtk];
 
   systemd.user.services.xfsettings-startup = {
-  script = ''
-      # Insure the XFCE keybindings are out of the way
-    rm -rf $HOME/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.xml 
-   echo " " > $HOME/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.xml 
-    # Make sure xfsettingsd is started for DPI settings to be applied
-    xfsettingsd --replace --background --disable-wm-check & 
+    script = ''
+         # Insure the XFCE keybindings are out of the way
+       rm -rf $HOME/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.xml
+      echo " " > $HOME/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.xml
+       # Make sure xfsettingsd is started for DPI settings to be applied
+       xfsettingsd --replace --background --disable-wm-check &
 
-  '';
-  wantedBy = [ "graphical-session.target" ];
-  partOf = [ "graphical-session.target" ];
-};
+    '';
+    wantedBy = ["graphical-session.target"];
+    partOf = ["graphical-session.target"];
+  };
 }

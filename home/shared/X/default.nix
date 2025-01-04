@@ -1,5 +1,7 @@
 {
   xresources.extraConfig = ''
+
+        Xft.dpi: 96
     ! Now featuring Monokai Pro Spectrum
         *background: #222222
         *foreground:#fbf8ff

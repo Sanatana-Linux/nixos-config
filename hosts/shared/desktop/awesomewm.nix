@@ -32,7 +32,7 @@
               package = pkgs.reversal-icon-theme;
               name = "Reversal";
             };
-            indicators = ["~session" "~spacer" "~clock" "--spacer" "~power"];
+            indicators = ["~session" "~spacer" "--spacer" "~clock" "--spacer" "--spacer" "~power"];
           };
         };
       }; # ends displayManager not xserver
@@ -75,13 +75,10 @@
     pango
     pangomm
     polkit_gnome
-    xfce.exo
     xfce.garcon
     xfce.libxfce4ui
     xfce.libxfce4util
     xfce.tumbler
-    xfce.xfce4-power-manager
-    xfce.xfconf
     cairo
     cairomm
     awesome-git-luajit
@@ -93,26 +90,9 @@
     xsel
     xsettingsd
     dconf-editor
-    xfce.xfce4-clipman-plugin
-    xfce.xfce4-settings
-    xfce.xfconf
-    xfce.exo
     xfce.libxfce4ui
     xfce.libxfce4util
     xorg.xwininfo
   ];
   xdg.portal.extraPortals = with pkgs; [xdg-desktop-portal-gtk];
-
-  systemd.user.services.xfsettings-startup = {
-    script = ''
-         # Insure the XFCE keybindings are out of the way
-       rm -rf $HOME/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.xml
-      echo " " > $HOME/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.xml
-       # Make sure xfsettingsd is started for DPI settings to be applied
-       xfsettingsd --replace --background --disable-wm-check &
-
-    '';
-    wantedBy = ["graphical-session.target"];
-    partOf = ["graphical-session.target"];
-  };
 }

@@ -1,5 +1,28 @@
 {
     "[markdown]": {
         "editor.cursorSurroundingLines": 0
-    }
+    },
+    "cSpell.words": [
+        "adpyke",
+        "bbenoist",
+        "brettm",
+        "catppuccin",
+        "codeium",
+        "codesnap",
+        "commandonallfiles",
+        "coolbear",
+        "dbaeumer",
+        "direnv",
+        "eamodio",
+        "johnnymorganz",
+        "pkgs",
+        "rvest",
+        "sndst",
+        "stylua",
+        "sumneko",
+        "timonwong",
+        "tyriar",
+        "usernamehw",
+        "xaver"
+    ]
 }

@@ -49,7 +49,7 @@
     ./pkgs.nix
   ];
 
-  services.xserver.videoDrivers = ["nvidia" "i915"];
+  services.xserver.videoDrivers = ["nvidia"];
   services.xserver.enable = true;
   boot.plymouth.enable = true;
   # boot.plymouth.theme = "loader";
@@ -74,7 +74,6 @@
     libdbusmenu
     libdbusmenu-gtk3
     linuxHeaders
-    qt5.qtwebglplugin
     luajitPackages.ldbus
     polkit_gnome
     wirelesstools
@@ -96,7 +95,6 @@
         "nvidia-drm"
         "nvidia-uvm"
         "nvidia-modeset"
-        "i915"
       ];
     };
 
@@ -119,8 +117,10 @@
       # I too enjoy living dangerously
       # check if vulnerable with: grep . /sys/devices/system/cpu/vulnerabilities/*
       "mitigations=off"
-      #      "preempt=full"
-      # "acpi_call"
+      # Rudest Kernel Interrupt for Priority Processes
+      "preempt=full"
+      # Hardware I/O Interface
+      "acpi_call"
       # prevent the kernel from blanking plymouth out of the fb
       "fbcon=nodefer"
       # Plymouth, because apparently you can't turn it off
@@ -134,6 +134,10 @@
       "nvidia-drm.modeset=1" # Modesetting Kernel Module
       # Potentially useful for hanging or shutdown
       "reboot=acpi"
+      # No hanging on reboot due to something I don't need on my laptop
+      "nowatchdog"
+      # Lenovo Legion Module force enable
+      "lenovo-legion.force=1"
     ];
 
     loader = {

@@ -85,7 +85,7 @@
 
     # nix package manager version
     package = pkgs.nixVersions.git;
-
+    # Garbage Collection Settings
     gc = {
       automatic = true;
       dates = "daily";

@@ -40,8 +40,6 @@ in {
         mkhl.direnv
         naumovs.color-highlight
         oderwat.indent-rainbow
-        pkief.material-icon-theme
-        pkief.material-product-icons
         rioj7.commandonallfiles
         spywhere.guides
         streetsidesoftware.code-spell-checker
@@ -49,9 +47,6 @@ in {
         timonwong.shellcheck
         tyriar.sort-lines
         usernamehw.errorlens
-
-        vadimcn.vscode-lldb
-        xaver.clang-format
       ]
       ++ marketplace-extensions;
 
@@ -98,7 +93,7 @@ in {
           bracketPairs = true;
           indentation = true;
         };
-        inlayHints.enabled = "off";
+        inlayHints.enabled = "on";
         inlineSuggest.enabled = true;
         largeFileOptimizations = false;
         lineNumbers = "on";

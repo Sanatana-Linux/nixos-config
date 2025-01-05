@@ -26,7 +26,7 @@
     };
   };
   chaotic-packages = final: _prev: {
-    chaotic = import inputs.nixpkgs-chaotic {
+    chaotic = import inputs.chaotic {
       system = final.system;
       config.allowUnfree = true;
     };

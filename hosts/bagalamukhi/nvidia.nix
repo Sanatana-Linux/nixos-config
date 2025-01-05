@@ -7,8 +7,8 @@
 in {
   environment = {
     variables = {
-      GDK_SCALE = "0.5";
-      GDK_DPI_SCALE = "0.75";
+      GDK_SCALE = "1";
+      GDK_DPI_SCALE = "1";
       _JAVA_OPTIONS = "-Dsun.java2d.uiScale=1";
       GBM_BACKEND = "nvidia-drm";
       LIBVA_DRIVER_NAME = "nvidia"; # hardware acceleration
@@ -22,10 +22,6 @@ in {
       nvidia-container-toolkit
       nvidia_cg_toolkit
       nv-codec-headers
-      freeglut
-      gegl
-      glew-egl
-      eglexternalplatform
       mesa
       nvtopPackages.nvidia
       config.boot.kernelPackages.nvidia_x11 # nvidia x11 kernel module

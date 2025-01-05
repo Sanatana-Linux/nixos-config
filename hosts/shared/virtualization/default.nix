@@ -3,6 +3,10 @@
   pkgs,
   ...
 }: {
+  imports = [
+    ./podman.nix
+    ./virt-manager.nix
+  ];
   virtualisation = {
     docker = {
       enable = true;

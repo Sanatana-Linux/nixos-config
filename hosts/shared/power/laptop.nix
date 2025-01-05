@@ -6,7 +6,6 @@
   powerManagement = {
     enable = true;
     powertop.enable = true;
-    cpuFreqGovernor = "ondemand";
   };
   services = {
     # thermal sensors and controls

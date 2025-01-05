@@ -6,20 +6,16 @@
 }: {
   services.picom = {
     enable = true;
-    package = pkgs.picom-next;
+    package = pkgs.picom;
     activeOpacity = 1.0;
-    backend = "xrender";
+    backend = "glx";
     fade = true;
     fadeDelta = 3;
-    fadeSteps = [0.03 0.03];
+    fadeSteps = [0.3 0.3];
 
     opacityRules = [
-      "96:class_g = 'kitty' && !focused"
+      "93:class_g = 'kitty' && !focused"
       "98:class_g = 'kitty' && focused"
-      "85:class_g = 'ncmpcpppad' && !focused"
-      "93:class_g = 'ncmpcpppad' && focused"
-      "85:class_g = 'neofetchpad' && !focused"
-      "93:class_g = 'neofetchpad' && focused"
       "99:class_g = 'awesome'"
     ];
     settings = {
@@ -35,7 +31,7 @@
       enable-fading-prev-tag = true;
       animation-for-next-tag = "zoom";
       enable-fading-next-tag = true;
-      corner-radius = 12;
+      corner-radius = 0; # awesome handles this better
       shadow = true;
       shadow-radius = 15;
       shadow-offset-x = -15;
@@ -65,10 +61,13 @@
         "name ~= 'maim'"
       ];
       blur = {
-        method = "dual_kawase";
-        strength = 12.0;
-        deviation = 3.0;
-        kernel = "11x11gaussian";
+        #   method = "dual_kawase";
+        # strength = 12.0;
+        # deviation = 3.0;
+        method = "gaussian";
+        size = 20;
+        deviation = 15;
+        # kernel = "11x11gaussian";
       };
 
       blur-background = true;

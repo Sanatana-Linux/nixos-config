@@ -44,14 +44,9 @@ with pkgs;
     }
     function sync() {
         echo "Syncing Nix Configuration Now"
-        cd $dots \
-        &&  git pull \
-        &&  git add . \
-        &&  git commit \
-        &&  git push \
-        || echo "Error with location of Nix Configuration" \
-        && exit
-        echo "Sync Completed!"
+             echo "Syncing Nix Configuration Now"
+     message=$(git diff | aichat role commitSugggester)
+     cd $dots && git add . && git commit -m "$message" && git push && echo "Sync Completed!" || echo "Error With Git, See Output Above"  && exit
       }
 
     function rebuild() {

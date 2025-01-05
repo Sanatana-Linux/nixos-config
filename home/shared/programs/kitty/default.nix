@@ -14,8 +14,8 @@
       focus_follows_mouse = "yes";
       cursor_shape = "block";
       copy_on_select = "yes";
-      hide_window_decorations = "yes";
-      update_check_interval = 0;
+      sync_to_monitor = "yes";
+
       visual_bell_duration = 0;
       window_alert_on_bell = "no";
       cursor_underline_thickness = "0.5";

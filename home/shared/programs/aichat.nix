@@ -13,6 +13,10 @@
           max_input_tokens: null
         - name: Qwen 2.5 Coder
           max_input_tokens: null
+        - name: wizard-vicuna-uncensored:13b
+          max_input_tokens: null
+        - name: huggingface.co/Novaciano/Llama-3.2-3b-NSFW_Aesir_Uncensored-GGUF:latest
+          max_input_tokens: null
     '';
   englishRole =
     #markdown
@@ -22,22 +26,20 @@
       temperature:
       top_p:
       ---
+
       You are a language assistant. If the input is in English, you review the text and fix errors. If the input in another language than English, you translate the input to English. Do NOT add any additional information. Reply only with the translated or improved text.
     '';
 
   commitSuggesterRole =
     #markdown
     ''
-            ---
-            model: ollama:Qwen 2.5 Coder
-            temperature:
-            top_p:
-            ---
-          `Generate succinct Git commit message from piped Git diff log:
-      `
-      ```
-      cat git_log | perl -pe 's/\S+//g; s/^\| */\n/g' | sort -u | head -1
-      ```
+      ---
+      model: ollama:codellama:13b
+      temperature: 0.8
+      top_p:
+      ---
+
+      Please provide a concise summary of the changes introduced in this commit. The change should follow the Conventional Commits format: `<type>(<scope>): <short summary>`. Here is the git diff output for reference:
     '';
 in {
   home.packages = with pkgs; [

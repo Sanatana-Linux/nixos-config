@@ -77,6 +77,7 @@ with pkgs; [
   xdg-desktop-portal
   xdg-launch
   xdgmenumaker
+  vscode-fhs
   xdotool
   xfce.xfce4-settings
   xorg.xfontsel

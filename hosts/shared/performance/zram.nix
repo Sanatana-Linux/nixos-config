@@ -7,5 +7,6 @@
     algorithm = "zstd";
     enable = true;
     memoryPercent = 100;
+    priority = 10;
   };
 }

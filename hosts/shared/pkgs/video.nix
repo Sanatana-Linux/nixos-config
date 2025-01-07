@@ -7,8 +7,6 @@ with pkgs; [
   ebook_tools
   ffcast
   ffmpeg
-  libdrm
-
   flowblade
   frei0r
   fswebcam
@@ -22,6 +20,7 @@ with pkgs; [
   imgpatchtools
   inkscape-with-extensions
   kooha
+  libdrm
   libgee
   libplacebo
   librem
@@ -47,7 +46,7 @@ with pkgs; [
   python312Packages.pygobject3
   redoflacs
   rx
-  #  shotcut
+  unstable.shotcut
   spotdl
   switcheroo
   traverso

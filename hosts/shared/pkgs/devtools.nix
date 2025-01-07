@@ -11,9 +11,9 @@ with pkgs; [
   deadnix
   direnv
   fuse3
-  #  squashfs-tools-ng
-  #  squashfsTools
-  #  squashfuse
+  unstable.squashfs-tools-ng
+  unstable.squashfsTools
+  unstable.squashfuse
   getopt
   pixcat
 

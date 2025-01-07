@@ -1,21 +1,21 @@
 {pkgs, ...}:
 with pkgs; [
-  abootimg
-  adbfs-rootless
-  androguard
-  android-backup-extractor
-  android-file-transfer
-  android-tools
-  android-udev-rules
-  apkeep
-  apkg
-  apkid
-  apko
-  apksigcopier
-  apksigner
-  apktool
-  bundletool
-  dex2jar
-  imgpatchtools
-  jadx
+ abootimg
+adbfs-rootless
+androguard
+android-backup-extractor
+android-file-transfer
+android-tools
+android-udev-rules
+apkeep
+apkg
+apkid
+apko
+apksigcopier
+apksigner
+apktool
+bundletool
+dex2jar
+imgpatchtools
+jadx
 ]

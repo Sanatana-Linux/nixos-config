@@ -1,7 +1,6 @@
 {pkgs, ...}:
 with pkgs; [
   appimage-run
-  #   appimagekit
   appstream-glib
   bleachbit
   ebook_tools
@@ -56,19 +55,16 @@ with pkgs; [
   perl538Packages.CairoGObject
   poppler_utils
   psftools
-
-  qt6.qt5compat
   rofi
-
   t1utils
   tdesktop
   template-glib
-  termcolor
   themechanger
   transmission_4-gtk
   ttfautohint
   updfparser
   ventoy-full
+  vscode-fhs
   wirelesstools
   wmctrl
   woff2
@@ -77,9 +73,7 @@ with pkgs; [
   xdg-desktop-portal
   xdg-launch
   xdgmenumaker
-  vscode-fhs
   xdotool
-  xfce.xfce4-settings
   xorg.xfontsel
   xscreensaver
 ]

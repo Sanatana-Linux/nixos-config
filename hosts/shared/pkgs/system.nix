@@ -10,7 +10,7 @@ with pkgs; [
   fd
   ghostscript
   gh
-
+  lazyjournal
   htop
   inotify-tools
   jdupes

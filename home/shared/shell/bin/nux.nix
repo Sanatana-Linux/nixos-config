@@ -43,10 +43,9 @@ with pkgs;
         nix path-info -Sh /run/current-system
     }
     function sync() {
-        echo "Syncing Nix Configuration Now"
+
              echo "Syncing Nix Configuration Now"
-     message=$(git diff | aichat role commitSugggester)
-     cd $dots && git add . && git commit -m "$message" && git push && echo "Sync Completed!" || echo "Error With Git, See Output Above"  && exit
+     cd $dots && git add . && git commit  && git push && echo "Sync Completed!" || echo "Error With Git, See Output Above"  && exit
       }
 
     function rebuild() {
@@ -88,6 +87,7 @@ with pkgs;
         doas nix-env --delete-generations old
         echo "Collecting system garbage"
         doas nix-collect-garbage -d
+        doas nix profile wipe-history
         echo "Collecting user garbage"
         nix-collect-garbage -d
         nix profile wipe-history

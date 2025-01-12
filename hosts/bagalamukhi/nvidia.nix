@@ -1,6 +1,7 @@
 {
   pkgs,
   config,
+  lib,
   ...
 }: let
   nvidiaDriverChannel = config.boot.kernelPackages.nvidiaPackages.latest; # stable, beta, etc.
@@ -10,12 +11,29 @@ in {
       GDK_SCALE = "1";
       GDK_DPI_SCALE = "1";
       _JAVA_OPTIONS = "-Dsun.java2d.uiScale=1";
-      GBM_BACKEND = "nvidia-drm";
-      LIBVA_DRIVER_NAME = "nvidia"; # hardware acceleration
+      # Necessary to correctly enable va-api (video codec hardware
+      # acceleration). If this isn't set, the libvdpau backend will be
+      # picked, and that one doesn't work with most things, including
+      # Firefox.
+      LIBVA_DRIVER_NAME = "nvidia";
+      # Required to run the correct GBM backend for nvidia GPUs on wayland
+      #    GBM_BACKEND = "nvidia-drm";
+      # Apparently, without this nouveau may attempt to be used instead
+      # (despite it being blacklisted)
       __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+      # CUDA Cores Package Location
       CUDA_PATH = "${pkgs.cudatoolkit}";
       EXTRA_LDFLAGS = "-L/lib -L${pkgs.linuxPackages.nvidia_x11}/lib";
       EXTRA_CCFLAGS = "-I/usr/include";
+      # Hardware cursors are currently broken on nvidia
+      WLR_NO_HARDWARE_CURSORS = "1";
+      # Required to use va-api it in Firefox. See
+      # https://github.com/elFarto/nvidia-vaapi-driver/issues/96
+      MOZ_DISABLE_RDD_SANDBOX = "1";
+      # It appears that the normal rendering mode is broken on recent
+      # nvidia drivers:
+      # https://github.com/elFarto/nvidia-vaapi-driver/issues/213#issuecomment-1585584038
+      NVD_BACKEND = "direct";
     };
     systemPackages = with pkgs; [
       cudatoolkit
@@ -64,7 +82,7 @@ in {
         mesa
         mlx42
         nvidia-vaapi-driver
-        nvidiaDriverChannel
+        #   nvidiaDriverChannel
         vaapiVdpau
         xorg_sys_opengl
       ];
@@ -72,14 +90,14 @@ in {
     nvidia = {
       modesetting.enable = true;
       nvidiaSettings = true;
-      #nvidiaPersistenced = true;
+      nvidiaPersistenced = true;
       dynamicBoost.enable = true;
       powerManagement = {
         enable = true;
         finegrained = false;
       };
       open = false;
-      package = nvidiaDriverChannel;
+      #   package = nvidiaDriverChannel;
       prime = {
         reverseSync = {
           enable = lib.mkForce true;

@@ -12,21 +12,21 @@ with pkgs; [
   gif-for-cli
   giflib
   gifsicle
-  # unstable.gimp-with-plugins
+  unstable.gimp-with-plugins
   #gimpPlugins.bimp
-  gimp
-  gimpPlugins.exposureBlend
-  gimpPlugins.farbfeld
-  gimpPlugins.fourier
-  # gimpPlugins.gap
-  gimpPlugins.gimplensfun
-  gimpPlugins.gmic
-  gimpPlugins.lightning
-  gimpPlugins.lqrPlugin
-  gimpPlugins.resynthesizer
-  gimpPlugins.texturize
-  gimpPlugins.waveletSharpen
-  gmic
+  # gimp
+  # unstable.gimpPlugins.exposureBlend
+  # unstable.gimpPlugins.farbfeld
+  # unstable.gimpPlugins.fourier
+  # unstable.gimpPlugins.gap
+  # unstable.gimpPlugins.gimplensfun
+  # unstable.gimpPlugins.gmic
+  # unstable.gimpPlugins.lightning
+  # unstable.gimpPlugins.lqrPlugin
+  # unstable.gimpPlugins.resynthesizer
+  # unstable.gimpPlugins.texturize
+  # unstable.gimpPlugins.waveletSharpen
+  # unstable.gmic
   inkscape-with-extensions
   graphicsmagick
   image_optim
@@ -57,6 +57,7 @@ with pkgs; [
   pngtools
   potrace
   python312Packages.colorthief
+  stable-diffusion-webui.forge.cuda
   python312Packages.pyfiglet
   python312Packages.pystache
   python312Packages.svgwrite

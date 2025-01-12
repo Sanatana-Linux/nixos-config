@@ -21,7 +21,7 @@
 
     # GTK icon theme configuration
     iconTheme = {
-      name = "Reversal";
+      name = "Reversal-dark";
       package = pkgs.reversal-icon-theme;
     };
 

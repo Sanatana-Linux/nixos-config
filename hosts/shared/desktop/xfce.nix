@@ -105,7 +105,7 @@
               size = 48;
             };
             iconTheme = {
-              name = "Reversal";
+              name = "Reversal-dark";
               package = pkgs.reversal-icon-theme;
             };
             indicators = ["~session" "~spacer"];

@@ -30,7 +30,7 @@
       outputs.overlays.unstable-packages
       outputs.overlays.f2k-packages
       outputs.overlays.chaotic-packages
-
+      inputs.stable-diffusion-webui-nix.overlays.default
       inputs.nixpkgs-f2k.overlays.default
       inputs.nur.overlays.default
     ];

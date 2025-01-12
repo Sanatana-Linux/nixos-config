@@ -30,7 +30,7 @@
             };
             iconTheme = {
               package = pkgs.reversal-icon-theme;
-              name = "Reversal";
+              name = "Reversal-dark";
             };
             indicators = ["~session" "~spacer" "--spacer" "~clock" "--spacer" "--spacer" "~power"];
           };

@@ -32,7 +32,7 @@
     ../shared/hardware/bluetooth.nix
 
     # nvidia support
-
+    ./nvidia.nix
     # common hardware support
     ../shared/hardware/common.nix
 

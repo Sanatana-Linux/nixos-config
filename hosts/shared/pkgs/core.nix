@@ -49,6 +49,9 @@ with pkgs; [
   nix-index
   nix-zsh-completions
   nixos-generators
+  nixt
+  nvd
+  optinix
   nmap
   node2nix
   ntfs3g

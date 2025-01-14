@@ -1,16 +1,18 @@
 {pkgs}:
 with pkgs;
-  writeScriptBin "nux" ''
+  writeScriptBin "dix" ''
      #!/usr/bin/env bash
      dots="/etc/nixos"
 
     function help() {
     cat <<EOF
 
-    The Nux script is a wrapper around various functions that ease the use
-    of the Nix package manager within the context of a NixOS system.
+    The dix script, recently renamed from Nux as that was taken apparently
+    and named for theartist Otto Dix, is a wrapper around various functions
+    that ease the useof the Nix package manager within the specific context
+    of a NixOS system.
 
-    Usage: nux [OPTION] [OPTION]
+    Usage: dix [OPTION] [OPTION]
 
     Options:
         help               show this text
@@ -21,6 +23,7 @@ with pkgs;
         weight             determine the size of the system's configuration
         rollback           rollback to previous generation
         search             search packages available
+        search-options     search nixos options
         sync               pull config from git repo, then commit and push
         update             update flake
         vm                 build a vm
@@ -101,6 +104,10 @@ with pkgs;
        nix search  nixpkgs "$2"
     }
 
+    function search-options(){
+        manix  --source=hm_options,nixos_options,nixpkgs_doc,nixpkgs_tree,nixpkgs_comments "$2"
+    }
+
     case "$1" in
         sync)       sync ;;
         repair)     repair ;;
@@ -112,6 +119,7 @@ with pkgs;
         update)     update ;;
         clean)      clean ;;
         search)     search "$@" ;;
+        search-options) search-options "$@";;
         help)       help ;;
         *)          help ;;
     esac

@@ -24,8 +24,10 @@
         TLP_DEFAULT_MODE = "BAT";
         TLP_PERSISTENT_DEFAULT = 1;
         #Optional helps save long term battery health
-        START_CHARGE_THRESH_BAT0 = 40; # 40 and bellow it starts to charge
+        START_CHARGE_THRESH_BAT0 = 10; # 40 and bellow it starts to charge
         STOP_CHARGE_THRESH_BAT0 = 80; # 80 and above it stops charging
+        DEVICES_TO_DISABLE_ON_LAN_CONNECT = "wifi bluetooth";
+        DEVICES_TO_ENABLE_ON_LAN_DISCONNECT = "wifi bluetooth";
       };
     };
     upower = {

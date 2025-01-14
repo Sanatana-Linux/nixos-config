@@ -12,6 +12,7 @@ with pkgs; [
   gobject-introspection-unwrapped
   gsettings-desktop-schemas
   gtk_engines
+  htmldoc
   libcanberra-gtk3 #system tool
   libgee
   libglibutil

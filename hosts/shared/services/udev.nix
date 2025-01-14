@@ -17,6 +17,16 @@
         pkgs.libsigrok # For pulseview
       ];
     };
+    udisks2 = {
+      enable = true;
+      settings = {
+        "mount_options.conf" = {
+          defaults = {
+            defaults = "noatime";
+          };
+        };
+      };
+    };
     # udiskie = {
     #   enable = true;
     #   automount = true;
@@ -24,5 +34,6 @@
     #   notify = true;
     # };
   };
+  boot.supportedFilesystems = ["ntfs"];
   programs.udevil.enable = true;
 }

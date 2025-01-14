@@ -5,6 +5,7 @@ with pkgs; [
   bleachbit
   ebook_tools
   fbida
+  gnome-characters
   file-roller
   fntsample
   fontpreview

@@ -1,0 +1,48 @@
+{
+  pkgs,
+  inputs,
+  config,
+  ...
+}: {
+  programs.ghostty = {
+    enable = true;
+    enableZshIntegration = true;
+    enableBashIntegration = true;
+    installVimSyntax = true;
+
+    themes = {
+      monokai-pro-spectrum = {
+        background = "#19191a";
+        cursor-color = "#bab6c0";
+        foreground = "#f7f1ff";
+        palette = [
+          "0=#232325"
+          "1=#fc618d"
+          "2=#7bd88f"
+          "3=#fd9353"
+          "4=#948ae3"
+          "5=#5ad4e6"
+          "6=#94e2d5"
+          "7=#bab6c0"
+          "8=#353538"
+          "9=#fc618d"
+          "10=#7bd88f"
+          "11=#fd9353"
+          "12=#948ae3"
+          "13=#5ad4e6"
+          "14=#94e2d5"
+          "15=#525053"
+        ];
+        selection-background = "#525053";
+        selection-foreground = "#bab6c0";
+      };
+    };
+
+    settings = {
+      background-blur-radius = 20;
+      window-theme = "dark";
+      background-opacity = 0.59;
+      minimum-contrast = 1.1;
+    };
+  };
+}

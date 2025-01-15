@@ -5,28 +5,29 @@ with pkgs;
          dots="/etc/nixos"
 
         function help() {
-        echo -n  "The dix script, recently renamed from Nux as that was taken apparently"
-        echo -n  "and named for theartist Otto Dix, is a wrapper around various functions"
-        echo -n  "that ease the useof the Nix package manager within the specific context"
-        echo -n  "of a NixOS system."
-        echo -n
-        echo -n  "Usage: dix [OPTION] [OPTION]"
-        echo -n
-        echo -n  "Options:"
-        echo -n
-        echo -n  "            help               show this  text"
-        echo -n  "            repair             repair the Nix Store"
-        echo -n  "            clean              clean and garabge collect store"
-        echo -n  "            rebuild            rebuild configuration for host"
-        echo -n  "            optimize           clean then optimize the Nix Store"
-        echo -n  "            weight             determine the size of the system's configuration"
-        echo -n  "            rollback           rollback to previous generation"
-        echo -n  "            search             search packages available"
-        echo -n  "            options            search nixos and home-manager options"
-        echo -n  "            sync               pull config from git repo, then commit and push"
-        echo -n  "            update             update flake"
-        echo -n  "            vm                 build a vm"
+        cat <<EOF
 
+        The dix script, recently renamed from Nux as that was taken apparently
+        and named for theartist Otto Dix, is a wrapper around various functions
+        that ease the useof the Nix package manager within the specific context
+        of a NixOS system.
+
+        Usage: dix [OPTION] [OPTION]
+
+        Options:
+            help               show this text
+            repair             repair the Nix Store
+            clean              clean and garabge collect store
+            rebuild            rebuild configuration for host
+            optimize           clean then optimize the Nix Store
+            weight             determine the size of the system's configuration
+            rollback           rollback to previous generation
+            search             search packages available
+            options            search nixos and home-manager options
+            sync               pull config from git repo, then commit and push
+            update             update flake
+            vm                 build a vm
+        EOF
         }
 
         function repair() {
@@ -65,7 +66,7 @@ with pkgs;
            echo "Optimizing the Nix Store Now"
             doas nix-collect-garbage -d
             doas nix-store --verify --check-contents --repair
-            doas nix-store  --optimize --verbose
+            doas nix-store --optimize --verbose
          }
 
         function rollback() {
@@ -76,6 +77,7 @@ with pkgs;
         function update() {
             echo "Updating Flake Lock File Now"
             doas nix flake update
+
     }
 
 

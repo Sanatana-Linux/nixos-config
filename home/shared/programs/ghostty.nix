@@ -9,40 +9,18 @@
     enableZshIntegration = true;
     enableBashIntegration = true;
     installVimSyntax = true;
-    
-    themes =[
-  monokai-pro-spectrum= {
-    background = "19191a";
-    cursor-color = "bab6c0";
-    foreground = "f7f1ff";
-    palette = [
-      "0=#232325"
-      "1=#fc618d"
-      "2=#7bd88f"
-      "3=#fd9353"
-      "4=#948ae3"
-      "5=#5ad4e6"
-      "6=#94e2d5"
-      "7=#bab6c0"
-      "8=#353538"
-      "9=#fc618d"
-      "10=#7bd88f"
-      "11=#fd9353"
-      "12=#948ae3"
-      "13=#5ad4e6"
-      "14=#94e2d5"
-      "15=#525053"
-    ];
-    selection-background = "525053";
-    selection-foreground = "babn6c0";
-  }
-];
 
     settings = {
       background-blur-radius = 20;
-      theme = "dark:monokai-pro-spectrum,light:default";
+      theme = "dark:Monokai Pro Spectrum,light:Monokai Pro Light";
       window-theme = "dark";
-      background-opacity = 0.99;
+      window-decoration = false;
+      background-opacity = 0.8;
       minimum-contrast = 1.1;
+      window-padding-x = 2;
+      window-padding-y = 2;
+      gtk-adwaita = false;
+      gtk-single-instance = false;
     };
+  };
 }

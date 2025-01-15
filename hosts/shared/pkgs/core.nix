@@ -49,8 +49,14 @@ with pkgs; [
   nix-index
   nix-zsh-completions
   nixos-generators
+  nixpacks
+  nox
+  nixd
+  nixel
   nixt
   nvd
+  nux
+  shellify
   optinix
   nmap
   node2nix

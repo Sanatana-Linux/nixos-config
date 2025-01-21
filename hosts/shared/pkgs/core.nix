@@ -36,6 +36,9 @@ with pkgs; [
   manix
   mdds
   meson
+  lame
+  sox
+  espeak-ng
   microcodeIntel
   minizip2
   networkmanager
@@ -54,6 +57,7 @@ with pkgs; [
   nixd
   nixel
   nixt
+  lorri
   nvd
   nux
   shellify

@@ -8,6 +8,8 @@ with pkgs; [
   fzf
   fzy
   libdbusmenu
+  espeak-ng
+
   libdbusmenu-gtk3
   libinput
   maim

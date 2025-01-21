@@ -7,7 +7,7 @@
   services.picom = {
     enable = true;
     package = pkgs.picom;
-    activeOpacity = 1.0;
+    activeOpacity = 0.99;
     backend = "glx";
     fade = true;
     fadeDelta = 3;
@@ -15,6 +15,8 @@
 
     opacityRules = [
       "93:class_g = 'kitty' && !focused"
+      "93:class_g = 'ghostty' && !focused"
+      "98:class_g = 'ghostty' && focused"
       "98:class_g = 'kitty' && focused"
       "99:class_g = 'awesome'"
     ];

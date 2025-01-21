@@ -13,12 +13,15 @@
     # https://wiki.archlinux.org/title/Zram#Optimizing_swap_on_zram
     # https://github.com/pop-os/default-settings/blob/master_noble/etc/sysctl.d/10-pop-default-settings.conf
     # https://github.com/CachyOS/CachyOS-Settings/blob/master/usr/lib/sysctl.d/99-cachyos-settings.conf
-    # The sysctl swappiness parameter determines the kernel's preference for pushing anonymous pages or page cache to disk in memory-starved situations.
 
-    "lenovo-legion.force" = 1; # laptop
+    # The sysctl swappiness parameter determines the kernel's preference for pushing anonymous pages or page cache to disk in memory-starved situations.
     # A low value causes the kernel to prefer freeing up open files (page cache), a high value causes the kernel to try to use swap space,
     # and a value of 100 means IO cost is assumed to be equal.
     "vm.swappiness" = 150;
+
+    # This parameter determines how aggressively the kernel will reclaim memory used by the VFS
+    # cache. Values >100 mean the kernel will reclaim VFS cache more aggressively
+    "vm.vfs_cache_pressure" = 120;
 
     # page-cluster controls the number of pages up to which consecutive pages are read in from swap in a single attempt.
     # This is the swap counterpart to page cache readahead. The mentioned consecutivity is not in terms of virtual/physical addresses,
@@ -32,6 +35,18 @@
 
     # Enable the sysctl setting kernel.unprivileged_userns_clone to allow normal users to run unprivileged containers.
     "kernel.unprivileged_userns_clone" = 1;
+
+    # controls whether the Out-of-Memory (OOM) killer should kill the task that is allocating memory when the system
+    # runs out of memory. This can be particularly useful in scenarios where a single process is causing a memory
+    # leak or is consuming a large amount of memory, leading to an OOM condition.
+    "vm.oom_kill_allocating_task" = true;
+
+    # controls the behavior of the "Magic SysRq" key, which allows the user to send commands directly to the kernel.
+    # This can be very useful for debugging and recovery in situations where the system is unresponsive or un unresponsive.
+    "kernel.sysrq" = 1;
+
+    # For lenovo-legion kernel module
+    "lenovo-legion.force" = 1; # laptop
   };
   services.bpftune.enable = true;
 }

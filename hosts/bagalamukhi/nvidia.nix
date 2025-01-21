@@ -4,7 +4,7 @@
   lib,
   ...
 }: let
-  nvidiaDriverChannel = config.boot.kernelPackages.nvidiaPackages.latest; # stable, beta, etc.
+  nvidiaDriverChannel = config.boot.kernelPackages.nvidiaPackages.production; # stable, beta, etc.
 in {
   environment = {
     variables = {
@@ -17,13 +17,13 @@ in {
       # Firefox.
       LIBVA_DRIVER_NAME = "nvidia";
       # Required to run the correct GBM backend for nvidia GPUs on wayland
-      #    GBM_BACKEND = "nvidia-drm";
+      GBM_BACKEND = "nvidia-drm";
       # Apparently, without this nouveau may attempt to be used instead
       # (despite it being blacklisted)
       __GLX_VENDOR_LIBRARY_NAME = "nvidia";
       # CUDA Cores Package Location
       CUDA_PATH = "${pkgs.cudatoolkit}";
-      EXTRA_LDFLAGS = "-L/lib -L${pkgs.linuxPackages.nvidia_x11}/lib";
+      EXTRA_LDFLAGS = "-L/lib -L${pkgs.linuxPackages.nvidiaPackages.production}/lib";
       EXTRA_CCFLAGS = "-I/usr/include";
       # Hardware cursors are currently broken on nvidia
       WLR_NO_HARDWARE_CURSORS = "1";
@@ -33,7 +33,7 @@ in {
       # It appears that the normal rendering mode is broken on recent
       # nvidia drivers:
       # https://github.com/elFarto/nvidia-vaapi-driver/issues/213#issuecomment-1585584038
-      NVD_BACKEND = "direct";
+      #NVD_BACKEND = "direct";
     };
     systemPackages = with pkgs; [
       cudatoolkit
@@ -42,7 +42,6 @@ in {
       nv-codec-headers
       mesa
       nvtopPackages.nvidia
-      config.boot.kernelPackages.nvidia_x11 # nvidia x11 kernel module
       config.boot.kernelPackages.acpi_call # acpi_call kernel module
       libGLX
       nvidia-texture-tools
@@ -65,9 +64,10 @@ in {
     allowUnfreePredicate = pkg:
       builtins.elem (lib.getName pkg) [
         "cudatoolkit"
+        "nvidia-powerd"
         "nvidia-persistenced"
         "nvidia-settings"
-        "nvidia-x11"
+        "nvidiaPackags.production"
       ];
   };
   hardware = {
@@ -82,7 +82,7 @@ in {
         mesa
         mlx42
         nvidia-vaapi-driver
-        #   nvidiaDriverChannel
+        #        nvidiaDriverChannel
         vaapiVdpau
         xorg_sys_opengl
       ];
@@ -90,14 +90,15 @@ in {
     nvidia = {
       modesetting.enable = true;
       nvidiaSettings = true;
-      nvidiaPersistenced = true;
+      nvidiaPersistenced = false;
       dynamicBoost.enable = true;
+      # forceFullCompositionPipeline = true; # fixes screen tearing
       powerManagement = {
         enable = true;
         finegrained = false;
       };
       open = false;
-      #   package = nvidiaDriverChannel;
+      package = nvidiaDriverChannel;
       prime = {
         reverseSync = {
           enable = lib.mkForce true;

@@ -14,6 +14,7 @@
     duf
     editorconfig-core-c
     fd
+    fnm
     fzf-obc
     fzf
     findutils

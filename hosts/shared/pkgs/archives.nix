@@ -3,7 +3,6 @@ with pkgs; [
   _7zz
   advancecomp
   archivemount
-  archiver
   cpio
   crabz
   dtrx

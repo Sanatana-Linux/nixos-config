@@ -57,7 +57,6 @@
 
   environment.systemPackages = with pkgs; [
     cpufrequtils
-    config.boot.kernelPackages.nvidia_x11 # nvidia x11 kernel module
     config.boot.kernelPackages.acpi_call # acpi_call kernel module
     nvme-cli
     dbus
@@ -110,7 +109,7 @@
     extraModulePackages = [
       config.boot.kernelPackages.acpi_call # acpi_call kernel module
       config.boot.kernelPackages.lenovo-legion-module # lenovo legion kernel module
-      config.boot.kernelPackages.nvidia_x11 # nvidia x11 kernel module
+      config.boot.kernelPackages.nvidiaPackages.production # nvidia x11 kernel module
     ];
 
     kernelParams = [

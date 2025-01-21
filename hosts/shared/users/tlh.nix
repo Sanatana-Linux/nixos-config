@@ -26,6 +26,7 @@ in {
       ]
       ++ ifTheyExist [
         "docker"
+        "podman"
         "git"
         "libvirtd"
         "lp"

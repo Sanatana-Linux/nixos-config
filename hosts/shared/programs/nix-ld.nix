@@ -1,5 +1,6 @@
 {
   lib,
+  config,
   pkgs,
   ...
 }: {
@@ -16,12 +17,16 @@
       gobject-introspection
       gmime3
       icu
+      config.boot.kernelPackages.nvidiaPackages.production # nvidia x11 kernel module
+      cudaPackages.cudnn
+      cudaPackages.nccl
+      cudaPackages.nvidia_fs
+      libnvidia-container
       libcanberra-gtk3
       libdbusmenu
       libdbusmenu-gtk3
       libfm
       libfm-extra
-
       libgee
       libgig
       libgit2

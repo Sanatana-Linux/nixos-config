@@ -49,62 +49,60 @@
 
     # Create the completion cache directory
     initExtra = ''
-                              export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense' # optional
-                              zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
-                              source <(carapace _carapace)
+                        export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense' # optional
+                        zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
+                        source <(carapace _carapace)
 
-                              mkdir -p "${config.xdg.cacheHome}/zsh/completion-cache" # Use xdg directory for cache
+                        mkdir -p "${config.xdg.cacheHome}/zsh/completion-cache" # Use xdg directory for cache
 
-                              # Completion & Completion Menu Oprions
-                              # :completion:<function>:<completer>:<command>:<argument>:<tag>
+                        # Completion & Completion Menu Oprions
+                        # :completion:<function>:<completer>:<command>:<argument>:<tag>
 
-                              zstyle ':completion:*' completer _complete _ignored _approximate
-                              zstyle ':completion:*' complete true
-                              zstyle ':completion:*' complete-options true
-                              zstyle ':completion:*' file-sort modification
-                              zstyle ':completion:*' group-name '''
-                              zstyle ':completion:*' keep-prefix true
-                              zstyle ':completion:*' list-colors ''${(s.:.)LS_COLORS}
-                              zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-                              zstyle ':completion:*' menu select
-                              zstyle ':completion:*' verbose true
+                        zstyle ':completion:*' completer _complete _ignored _approximate
+                        zstyle ':completion:*' complete true
+                        zstyle ':completion:*' complete-options true
+                        zstyle ':completion:*' file-sort modification
+                        zstyle ':completion:*' group-name '''
+                        zstyle ':completion:*' keep-prefix true
+                        zstyle ':completion:*' list-colors ''${(s.:.)LS_COLORS}
+                        zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+                        zstyle ':completion:*' menu select
+                        zstyle ':completion:*' verbose true
 
-                              zstyle ':completion:*:default' list-prompt '%S%M matches%s'
-                              zstyle ':completion:*:corrections' format '%F{yellow}!- %d (errors: %e) -!%f'
-                              zstyle ':completion:*:descriptions' format '%F{blue}-- %D %d --%f'
-                              zstyle ':completion:*:messages' format ' %F{purple} -- %d --%f'
-                              zstyle ':completion:*:warnings' format ' %F{red}-- no matches found --%f'
-                              zstyle ':completion:*:*:-command-:*:*' group-order aliases builtins functions commands
+                        zstyle ':completion:*:default' list-prompt '%S%M matches%s'
+                        zstyle ':completion:*:corrections' format '%F{yellow}!- %d (errors: %e) -!%f'
+                        zstyle ':completion:*:descriptions' format '%F{blue}-- %D %d --%f'
+                        zstyle ':completion:*:messages' format ' %F{purple} -- %d --%f'
+                        zstyle ':completion:*:warnings' format ' %F{red}-- no matches found --%f'
+                        zstyle ':completion:*:*:-command-:*:*' group-order aliases builtins functions commands
 
-                              zstyle ':completion:*' use-cache on
-                              zstyle ':completion:*' cache-path "${config.xdg.cacheHome}/zsh/completion-cache" # Use xdg directory for cache
+                        zstyle ':completion:*' use-cache on
+                        zstyle ':completion:*' cache-path "${config.xdg.cacheHome}/zsh/completion-cache" # Use xdg directory for cache
 
 
-                        # ┣━━━━━━━━━━━━━━━━━━━━━━━━━┫ Functions ┣━━━━━━━━━━━━━━━━━━━━━━━━━┫
+                  # ┣━━━━━━━━━━━━━━━━━━━━━━━━━┫ Functions ┣━━━━━━━━━━━━━━━━━━━━━━━━━┫
 
-                        # walk tui file management and navigation
+                  # walk tui file management and navigation
 
-                        function lk {
-                          cd "$(walk --icons  "$@")"
-                        }
-
-                  _aichat_zsh() {
-                      if [[ -n "$BUFFER" ]]; then
-                          local _old=$BUFFER
-                          BUFFER+="⌛"
-                          zle -I && zle redisplay
-                          BUFFER=$(aichat -e "$_old")
-                          zle end-of-line
-                      fi
+                  function lk {
+                    cd "$(walk --icons  "$@")"
                   }
-                  zle -N _aichat_zsh
-                  bindkey '\ee' _aichat_zsh
 
-            # Node Version Management
-              eval "$(${lib.getExe pkgs.fnm} env --shell zsh --use-on-cd --corepack-enabled )" &
+            _aichat_zsh() {
+                if [[ -n "$BUFFER" ]]; then
+                    local _old=$BUFFER
+                    BUFFER+="⌛"
+                    zle -I && zle redisplay
+                    BUFFER=$(aichat -e "$_old")
+                    zle end-of-line
+                fi
+            }
+            zle -N _aichat_zsh
+            bindkey '\ee' _aichat_zsh
 
-      # lorri
-      lorri daemon &
+      # Node Version Management
+        eval "$(${lib.getExe pkgs.fnm} env --shell zsh --use-on-cd --corepack-enabled )" &
+
 
 
     '';

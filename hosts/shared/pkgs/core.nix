@@ -84,6 +84,7 @@ with pkgs; [
   smartmontools
   snappy
   sssd
+  statix
   swtpm
   sysctl
   sysfsutils

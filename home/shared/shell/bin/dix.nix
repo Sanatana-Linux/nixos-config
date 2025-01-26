@@ -3,29 +3,46 @@ with pkgs;
   writeScriptBin "dix" ''
          #!/usr/bin/env bash
          dots="/etc/nixos"
+         PROGRAM_NAME = "dix"
 
         function help() {
-        echo -n  "The dix script, recently renamed from Nux as that was taken apparently"
-        echo -n  "and named for theartist Otto Dix, is a wrapper around various functions"
-        echo -n  "that ease the useof the Nix package manager within the specific context"
-        echo -n  "of a NixOS system."
-        echo -n
-        echo -n  "Usage: dix [OPTION] [OPTION]"
-        echo -n
-        echo -n  "Options:"
-        echo -n
-        echo -n  "            help               show this  text"
-        echo -n  "            repair             repair the Nix Store"
-        echo -n  "            clean              clean and garabge collect store"
-        echo -n  "            rebuild            rebuild configuration for host"
-        echo -n  "            optimize           clean then optimize the Nix Store"
-        echo -n  "            weight             determine the size of the system's configuration"
-        echo -n  "            rollback           rollback to previous generation"
-        echo -n  "            search             search packages available"
-        echo -n  "            options            search nixos and home-manager options"
-        echo -n  "            sync               pull config from git repo, then commit and push"
-        echo -n  "            update             update flake"
-        echo -n  "            vm                 build a vm"
+         WHITE_PINK="\e[38;2;232;232;232m"
+         SKY_BLUE="\e[38;2;136;192;208m"
+         MAGENTA="\e[38;2;154;32;201m"
+         ORANGE="\e[38;2;242;161;56m"
+         DIRTY="\e[38;2;133;133;133m"
+         YELLOW="\e[38;2;219;245;76m"
+         RED="\e[38;2;191;97;106m"
+
+         UNDERLINE="\e[4m"
+         SPECIAL_END="\e[0m"
+
+
+
+        echo -e "$UNDERLINE Description: $SPECIAL_END"
+        echo "This script, named for the artist Otto Dix, is a personal"
+        echo "wrapper script around various functions I use to ease the"
+        echo "administration of my NixOS systems."
+        echo
+        echo
+        echo -e "$DIRTY$PROGRAM_NAME$SPECIAL_END [command] [flags]"
+
+        echo  "Options:"
+        echo -e "Available commands:"
+        echo
+        echo  "            help               show this  text"
+        echo  "            repair             repair the Nix Store"
+        echo  "            clean              clean and garabge collect store"
+        echo  "            rebuild            rebuild configuration for host"
+        echo  "            optimize           clean then optimize the Nix Store"
+        echo  "            weight             determine the size of the system's configuration"
+        echo  "            rollback           rollback to previous generation"
+        echo  "            search             search packages available"
+        echo  "            options            search nixos and home-manager options"
+        echo   "            sync               pull config from git repo, then commit and push"
+        echo "            update             update flake"
+        echo "            format             format nix files in configuration"
+        echo "            vm                 build a vm"
 
         }
 
@@ -36,8 +53,14 @@ with pkgs;
           doas nix-store --verify --check-contents --repair
           doas nix store verify --all
           doas nix store repair --all
-         doas nix-collect-garbage -d
+          doas nix-collect-garbage -d
           echo "Repair Process Finished"
+        }
+
+        function format(){
+            echo "Formatting NixOS Configuration Files Now"
+            cd $dots
+            alejandra **/*.nix
         }
 
         function weight(){
@@ -109,6 +132,7 @@ with pkgs;
             repair)     repair ;;
             rebuild)    rebuild "$@";;
             optimize)    optimize;;
+            format)     format;;
             vm)         vm "$@";;
             rollback)   rollback ;;
             weight)     weight ;;

@@ -4,7 +4,7 @@
   lib,
   ...
 }: let
-  nvidiaDriverChannel = config.boot.kernelPackages.nvidiaPackages.production; # stable, beta, etc.
+  nvidiaDriverChannel = config.boot.kernelPackages.nvidiaPackages.production; # stable, production, etc.
 in {
   environment = {
     variables = {
@@ -82,7 +82,7 @@ in {
         mesa
         mlx42
         nvidia-vaapi-driver
-        #        nvidiaDriverChannel
+        nvidiaDriverChannel
         vaapiVdpau
         xorg_sys_opengl
       ];
@@ -91,8 +91,8 @@ in {
       modesetting.enable = true;
       nvidiaSettings = true;
       nvidiaPersistenced = false;
+      #      forceFullCompositionPipeline = true;
       dynamicBoost.enable = true;
-      # forceFullCompositionPipeline = true; # fixes screen tearing
       powerManagement = {
         enable = true;
         finegrained = false;

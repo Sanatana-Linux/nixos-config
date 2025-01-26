@@ -10,6 +10,7 @@ with lib; let
   zathura = ["org.pwmt.zathura.desktop"]; # Define zathura application
   vlc = ["vlc.desktop"]; # VLC application
   imv = ["imv-dir.desktop"];
+  inkview = ["inkview.desktop"];
 
   associations = {
     "application/x-extension-htm" = browser;
@@ -29,6 +30,7 @@ with lib; let
     "audio/*" = vlc;
     "video/*" = vlc;
     "image/*" = imv;
+    "image/svg+xml" = inkview;
 
     "application/json" = browser;
 
@@ -68,7 +70,6 @@ in {
 
   xdg = {
     enable = true;
-    icons.enable = true;
     userDirs = {
       enable = true;
       createDirectories = true;
@@ -76,8 +77,8 @@ in {
 
     portal = {
       enable = true;
+      config.common.default = "*";
       extraPortals = with pkgs; [
-        xdg-desktop-portal-hyprland
         xdg-desktop-portal-gtk
       ];
     };

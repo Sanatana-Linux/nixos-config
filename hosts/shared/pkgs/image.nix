@@ -1,6 +1,15 @@
 {pkgs, ...}:
 with pkgs; [
+  # unstable.gimpPlugins.exposureBlend
+  # unstable.gimpPlugins.fourier
+  # unstable.gimpPlugins.gimplensfun
+  # unstable.gimpPlugins.lightning
+  # unstable.gimpPlugins.lqrPlugin
+  # unstable.gimpPlugins.resynthesizer
+  # unstable.gimpPlugins.texturize
+  # unstable.gimpPlugins.waveletSharpen
   babl
+  cairosvg
   colorstorm
   colorz
   curtail
@@ -12,30 +21,15 @@ with pkgs; [
   gif-for-cli
   giflib
   gifsicle
-  unstable.gimp-with-plugins
-  unstable.gimpPlugins.bimp
-  # gimp
-  # unstable.gimpPlugins.exposureBlend
-  unstable.gimpPlugins.farbfeld
-  # unstable.gimpPlugins.fourier
-  # unstable.gimpPlugins.gap
-  # unstable.gimpPlugins.gimplensfun
-  unstable.gimpPlugins.gmic
-  # unstable.gimpPlugins.lightning
-  # unstable.gimpPlugins.lqrPlugin
-  # unstable.gimpPlugins.resynthesizer
-  # unstable.gimpPlugins.texturize
-  # unstable.gimpPlugins.waveletSharpen
-  unstable.gmic
-  inkscape-with-extensions
   graphicsmagick
-  image_optim
   image-roll
+  image_optim
   imagemagick
   img-cat
   imgcat
   imlib2-nox
   imlib2Full
+  inkscape-with-extensions
   jpeginfo
   jpegoptim
   libexif
@@ -44,6 +38,7 @@ with pkgs; [
   librsvg
   libspng
   libwebp
+  lutgen
   meme-image-generator
   metapixel
   mozjpeg
@@ -57,20 +52,26 @@ with pkgs; [
   pngtools
   potrace
   python312Packages.colorthief
-  stable-diffusion-webui.forge.cuda
   python313Packages.pyfiglet
   python313Packages.pystache
   python313Packages.svgwrite
   pywal
   resvg
-  lutgen
+  resvg
+  scour
+  stable-diffusion-webui.forge.cuda
   svgcleaner
   t1utils
   termcolor
+  toilet
+  unstable.gimp-with-plugins
+  unstable.gimpPlugins.bimp
+  unstable.gimpPlugins.farbfeld
+  unstable.gimpPlugins.gmic
+  unstable.gmic
   upscayl
   upscayl-ncnn
   xcolor
   xcolor
   xorg-rgb
-  toilet
 ]

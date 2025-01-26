@@ -1,10 +1,13 @@
 # Host: Bagalamukhi
 
+<img src="../../.github/assets/Bagalamukhi3.jpg" alt="Maa Bagalamukhi in amodern depiction that emphasizes the facial expressions to excellent effect in my opinion." align="center" width="100%" >
 
+<br>
+<p>An excellent rendition of Maa Bagalamukhi in Her typical depiction, the face of the demon about
+to be struck by Her cudgel is top notch.</p>
 
+## Hardware Specs
 
-## Hardware Specs 
-<img src="../../.github/assets/Bagalamukhi3.jpg" alt="Maa Bagalamukhi in amodern depiction that emphasizes the facial expressions to excellent effect in my opinion." align="right" width="350px" >
 <table>
 <tr><td>Manufacturer:</td> <td>Lenovo</td> </tr>
 
@@ -21,18 +24,15 @@
 <br>
 <br clear="both">
 
+### About the Goddess Bagalamukhi
 
-### Maa Bagalamukhi
+Maa Bagalamukhi is a member of a group of Goddess associated with the Hindu Tantric Shaktist traditions known as the Mahavidya. `Mahavidya` means "great vision" or in this specific context "great wisdom" as `vidya` refers to the auspicious sight of the Divine (such as one experiences when seeing an icon while visiting a temple) and `maha` is a prefix generally meaning "great(er)".
 
-Her Legend as told [on Wikipedia](https://en.wikipedia.org/wiki/Bagalamukhi#Legend) will hopefully give the reader some context and inspire them to discover the profound wisdon for themselves in reflecting upon its meaning:
-
+From Her Legend as told on [Wikipedia](https://en.wikipedia.org/wiki/Bagalamukhi#Legend) that will hopefully give the reader some context and potentially even inspire them to discover some of the profound wisdom for themselves in reflecting upon its meaning:
 
 > Another tale records that a demon named Madan acquired Vak-siddhi, by which whatever he said came true. He misused it to trouble humans and murder people. The gods beseeched Bagalamukhi. The goddess grabbed the demon's tongue and immobilized his power. Madan requested the goddess that he be worshipped with her; the goddess granted him this boon, before slaying him.
-
 
 From the Rudrayamala, a Tantric Scripture, regarding Maa Bagalamukhi:
 
 > By the effect of Your Mantra good conversationalists become speechless; rich become beggars; devastating fire gets cooled. The anger of the angry person is removed; an evil minded person becomes good. The quick moving person becomes crippled. The conceit of the conceited person is reduced. Knowledgeable person nearly becomes a fool. Salutations to the compassionate Bagalamukhi!
 
-
-![Maa Bagalamukhi in Her Tradition Depiction](../../.github/assets/Bagalamukhi.jpg)

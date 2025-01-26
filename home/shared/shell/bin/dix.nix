@@ -3,7 +3,6 @@ with pkgs;
   writeScriptBin "dix" ''
          #!/usr/bin/env bash
          dots="/etc/nixos"
-         PROGRAM_NAME = "dix"
 
         function help() {
          WHITE_PINK="\e[38;2;232;232;232m"
@@ -18,31 +17,29 @@ with pkgs;
          SPECIAL_END="\e[0m"
 
 
-
-        echo -e "$UNDERLINE Description: $SPECIAL_END"
+        echo -e "$SKY_BLUE Description: $SPECIAL_END"
         echo "This script, named for the artist Otto Dix, is a personal"
         echo "wrapper script around various functions I use to ease the"
         echo "administration of my NixOS systems."
         echo
         echo
-        echo -e "$DIRTY$PROGRAM_NAME$SPECIAL_END [command] [flags]"
-
-        echo  "Options:"
-        echo -e "Available commands:"
+        echo -e "$DIRTY dix $SPECIAL_END [command] [flags]"
         echo
-        echo  "            help               show this  text"
-        echo  "            repair             repair the Nix Store"
-        echo  "            clean              clean and garabge collect store"
-        echo  "            rebuild            rebuild configuration for host"
-        echo  "            optimize           clean then optimize the Nix Store"
-        echo  "            weight             determine the size of the system's configuration"
-        echo  "            rollback           rollback to previous generation"
-        echo  "            search             search packages available"
-        echo  "            options            search nixos and home-manager options"
-        echo   "            sync               pull config from git repo, then commit and push"
-        echo "            update             update flake"
-        echo "            format             format nix files in configuration"
-        echo "            vm                 build a vm"
+        echo -e "$YELLOW Available commands: $SPECIAL_END"
+        echo
+        echo -e  "            $ORANGE help $SPECIAL_END               show this  text"
+        echo -e  "            $MAGENTA repair $SPECIAL_END             repair the Nix Store"
+        echo -e  "            $RED clean $SPECIAL_END              clean and garabge collect store"
+        echo -e  "            $WHITE_PINK rebuild $SPECIAL_END            rebuild configuration for host"
+        echo -e  "            $SKY_BLUE optimize $SPECIAL_END           clean then optimize the Nix Store"
+        echo -e  "            $YELLOW weight $SPECIAL_END             determine the size of the system's configuration"
+        echo -e  "            $ORANGE rollback $SPECIAL_END           rollback to previous generation"
+        echo -e  "            $MAGENTA search $SPECIAL_END             search packages available"
+        echo -e  "            $RED options $SPECIAL_END            search nixos and home-manager options"
+        echo -e   "            $WHITE_PINK sync $SPECIAL_END               pull config from git repo, then commit and push"
+        echo -e "            $SKY_BLUE update $SPECIAL_END             update flake"
+        echo -e "            $YELLOW format $SPECIAL_END             format nix files in configuration"
+        echo -e "            $ORANGE vm $SPECIAL_END                 build a vm"
 
         }
 

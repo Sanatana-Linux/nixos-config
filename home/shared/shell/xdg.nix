@@ -68,9 +68,18 @@ in {
 
   xdg = {
     enable = true;
+    icons.enable = true;
     userDirs = {
       enable = true;
       createDirectories = true;
+    };
+
+    portal = {
+      enable = true;
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-hyprland
+        xdg-desktop-portal-gtk
+      ];
     };
 
     mimeApps = {

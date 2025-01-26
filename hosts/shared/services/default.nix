@@ -18,8 +18,8 @@
     fwupd.enable = true;
     # limit systemd journal size
     journald.extraConfig = ''
-      SystemMaxUse=50M
-      RuntimeMaxUse=10M
+      SystemMaxUse=80M
+      RuntimeMaxUse=30M
     '';
     dbus = {
       enable = true;

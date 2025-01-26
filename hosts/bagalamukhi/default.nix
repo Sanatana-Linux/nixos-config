@@ -63,7 +63,6 @@
     mesa
     plymouth
     kdePackages.plymouth-kcm
-    adi1090x-plymouth-themes
     dbus-broker
     dbus-glib
     lenovo-legion
@@ -80,7 +79,7 @@
     xssproxy
   ];
   boot = {
-    # initrd settings
+    # early boot settings
     initrd = {
       systemd.enable = true; # enable systemd in initrd
       verbose = false; # disable verbose mode in initrd
@@ -89,21 +88,21 @@
       compressorArgs = ["-19"];
       # specify the kernel modules to be included in early in boot process
       kernelModules = [
-        "nvidia" # nvidia drivers
-        "nvidiafb"
-        "nvidia-drm"
-        "nvidia-uvm"
-        "nvidia-modeset"
+        "nvidia" # nvidia driver
+        "nvidiafb" # nvidia framebuffer
+        "nvidia-drm" # nvidia drm
+        "nvidia-uvm" # nvidia uvm
+        "nvidia-modeset" # modesetting nvidia driver
       ];
     };
 
     blacklistedKernelModules = ["nouveau"]; # blacklisted kernel modules
 
-    kernelModules = ["lenovo_legion" "kvm-intel" "ideapad" "apci_call"]; # specify the regukar kernel modules to be loaded at boot
+    kernelModules = ["lenovo_legion" "kvm-intel" "ideapad" "apci_call"]; # specify the regular kernel modules to be loaded at boot
 
     tmp.cleanOnBoot = true; # clean the /tmp directory on boot
 
-    kernelPackages = pkgs.linuxPackages_xanmod_latest; # use the xanmod kernel
+    kernelPackages = pkgs.linuxPackages_xanmod_latest; # use the latest xanmod kernel
 
     # specify the extra kernel modules to be included
     extraModulePackages = [
@@ -113,7 +112,7 @@
     ];
 
     kernelParams = [
-      # I too enjoy living dangerously
+      # `I too like living dangerously`
       # check if vulnerable with: grep . /sys/devices/system/cpu/vulnerabilities/*
       "mitigations=off"
       # Rudest Kernel Interrupt for Priority Processes
@@ -129,12 +128,12 @@
       # disable usb autosuspend
       "usbcore.autosuspend=-1"
       # Nvidia dGPU settings
-      "nvidia_drm.fbdev=1" # Framebuffer driver
-      "nvidia-drm.modeset=1" # Modesetting Kernel Module
+      "nvidia_drm.fbdev=1" # enable Framebuffer driver
+      "nvidia-drm.modeset=1" # enable Modesetting Kernel Module
       # Potentially useful for hanging or shutdown
       "reboot=acpi"
       # No hanging on reboot due to something I don't need on my laptop
-      "nowatchdog"
+      "watchdog=0"
       # Lenovo Legion Module force enable
       "lenovo-legion.force=1"
     ];

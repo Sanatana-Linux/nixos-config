@@ -8,13 +8,13 @@
 in {
   environment = {
     variables = {
+      # Display scaling, I like things nice and compact what can I say?
       GDK_SCALE = "1";
       GDK_DPI_SCALE = "1";
       _JAVA_OPTIONS = "-Dsun.java2d.uiScale=1";
       # Necessary to correctly enable va-api (video codec hardware
       # acceleration). If this isn't set, the libvdpau backend will be
-      # picked, and that one doesn't work with most things, including
-      # Firefox.
+      # picked, and it doesn't work with things like Firefox.
       LIBVA_DRIVER_NAME = "nvidia";
       # Required to run the correct GBM backend for nvidia GPUs on wayland
       GBM_BACKEND = "nvidia-drm";
@@ -27,13 +27,13 @@ in {
       EXTRA_CCFLAGS = "-I/usr/include";
       # Hardware cursors are currently broken on nvidia
       WLR_NO_HARDWARE_CURSORS = "1";
-      # Required to use va-api it in Firefox. See
+      # Required to use va-api in Firefox. See
       # https://github.com/elFarto/nvidia-vaapi-driver/issues/96
       MOZ_DISABLE_RDD_SANDBOX = "1";
       # It appears that the normal rendering mode is broken on recent
       # nvidia drivers:
       # https://github.com/elFarto/nvidia-vaapi-driver/issues/213#issuecomment-1585584038
-      #NVD_BACKEND = "direct";
+      NVD_BACKEND = "direct";
     };
     systemPackages = with pkgs; [
       cudatoolkit

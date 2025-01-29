@@ -36,24 +36,41 @@ in {
       NVD_BACKEND = "direct";
     };
     systemPackages = with pkgs; [
+      #      cudaPackages.autoAddCudaCompatRunpath
+      cudaPackages.cuda_cccl
+      # cudaPackages.cuda_compat
+      cudaPackages.cuda_cudart
+      cudaPackages.cuda_gdb
+      cudaPackages.cuda_nvml_dev
+      cudaPackages.cuda_opencl
+      cudaPackages.cudatoolkit
+      cudaPackages.cudnn
+      cudaPackages.cutensor
+      cudaPackages.libcublas
+      cudaPackages.libcusparse
+      cudaPackages.libnvidia_nscq
       cudatoolkit
-      nvidia-container-toolkit
-      nvidia_cg_toolkit
-      nv-codec-headers
-      mesa
-      nvtopPackages.nvidia
-      config.boot.kernelPackages.acpi_call # acpi_call kernel module
-      libGLX
-      nvidia-texture-tools
-      peakperf
+      freeglut
+      ftgl
+      glew
+      glfw
       intel-media-driver
       intel-vaapi-driver
-      xorg_sys_opengl
-      mlx42
-      glfw
-      vaapiVdpau
+      libGL
+      libGLX
+      libnvidia-container
       libvdpau-va-gl
+      mesa
+      mlx42
+      nv-codec-headers
+      nvidia-container-toolkit
+      nvidia-texture-tools
       nvidia-vaapi-driver
+      nvidia_cg_toolkit
+      nvtopPackages.nvidia
+      peakperf
+      vaapiVdpau
+      xorg_sys_opengl
     ];
   };
 
@@ -71,6 +88,7 @@ in {
       ];
   };
   hardware = {
+    nvidia-container-toolkit.enable = true;
     graphics = {
       enable = true;
       enable32Bit = true;

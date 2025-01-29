@@ -25,6 +25,8 @@ in {
         "input"
       ]
       ++ ifTheyExist [
+        "plugdev"
+        "adbusers"
         "docker"
         "podman"
         "git"

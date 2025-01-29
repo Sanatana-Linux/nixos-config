@@ -136,22 +136,18 @@
       mkcd = "mkdir $1 && cd $1 "; # Create a directory and change to it.
 
       # File Management and Viewing
-      l = "${lib.getBin eza}/bin/eza -lF --git --color=auto --group-directories-first --time-style=long-iso --icons -s extension "; # Enhanced ls.
-      la = "${lib.getBin eza}/bin/eza -lah --tree --git --color=auto --group-directories-first --time-style=long-iso --icons -s extension "; # Enhanced ls with all and human readable sizes.
-      ll = "${lib.getBin eza}/bin/eza -alh "; # Another alias for enhanced ls.
-      ls = "${lib.getBin eza}/bin/eza -h --git --icons --color=auto --group-directories-first -s extension"; # Enhanced ls with human readable sizes.
-      lx = "${lib.getBin eza}/bin/eza -alh -s extension --color=auto --group-directories-first --icons --git"; # Another enhanced ls alias.
-
-      tree = "${lib.getBin eza}/bin/eza --tree --icons --tree";
-      cat = "${lib.getBin bat}/bin/bat --style=plain"; # Use bat for syntax highlighting, plain style for regular "cat" behaviour.
+      l = "eza -l --git --color=auto --group-directories-first --time-style=long-iso --icons -s extension "; # Enhanced ls.
+      la = "eza -lah --tree --git --color=auto --group-directories-first --time-style=long-iso --icons -s extension "; # Enhanced ls with all and human readable sizes.
+      ll = "eza -alh "; # Another alias for enhanced ls.
+      ls = "eza -h --git --icons --color=auto --group-directories-first -s extension"; # Enhanced ls with human readable sizes.
+      lx = "eza -alh -s extension --color=auto --group-directories-first --icons -R"; # Another enhanced ls alias.
+      tree = "eza --icons --tree";
+      cat = "bat --style=plain"; # Use bat for syntax highlighting, plain style for regular "cat" behaviour.
       du = "${lib.getBin du-dust}/bin/du-dust"; # Disk usage analyzer.
       gz = "gzip -l"; # list contents of gzipped files
       rm = "rm -rvf"; # remove files and directories recursively and forcefully
       trm = "${lib.getBin trash-cli}/bin/trash-cli"; # Move files to trash
       firefox = "firefox-nightly";
-
-      # Archiving
-      "dtrx-zip-all" = "for i in ./**/*.zip; do dtrx $i; done"; # Extract all zip files recursively. Make sure `dtrx` is available
 
       # System
       cleanup = "sudo nix-collect-garbage --delete-older-than 3d"; # Clean up old Nix store entries.

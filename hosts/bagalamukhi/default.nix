@@ -28,6 +28,9 @@
     # performance tweaks
     ../shared/performance/default.nix
 
+    # Android
+    ../shared/hardware/android.nix
+
     # bluetooth support
     ../shared/hardware/bluetooth.nix
 

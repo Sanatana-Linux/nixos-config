@@ -9,7 +9,6 @@
       statix
       nix-bash-completions
       nix-direnv
-
       nix-binary-cache
       nix-bundle
       nix-direnv-flakes

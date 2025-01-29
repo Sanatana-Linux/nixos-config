@@ -27,11 +27,12 @@
     #alsaequal
     #audacity
     cava
+    fdk_aac
     flac
     flac2all
     flaca
     libpulseaudio
-    #lmms
+    lmms
     mediainfo
     mpc_cli
     mpd

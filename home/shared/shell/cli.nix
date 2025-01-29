@@ -13,6 +13,7 @@
     du-dust
     duf
     editorconfig-core-c
+    eza
     fd
     fnm
     fzf-obc
@@ -24,8 +25,6 @@
     killall
     lm_sensors
     lz4
-    man-pages
-    man-pages-posix
     mpc_cli
     mpg123
     neofetch
@@ -55,7 +54,6 @@
   programs = {
     eza = {
       enable = true;
-      extraOptions = ["--group-directories-first" "--header"];
       colors = "always";
       icons = "always";
       git = true;

@@ -18,11 +18,12 @@ with pkgs;
       SPECIAL_END="\e[0m"
 
       echo -e "$SKY_BLUE Description: $SPECIAL_END"
-      echo "This script is a personal wrapper script around various functions"
-      echo "used to ease the administration of NixOS systems."
+      echo " This script is a personal wrapper script around various functions"
+      echo " used to ease the administration of NixOS systems. Not to be "
+      echo " confused with omnix, which is unrelated... and not as useful ;]"
       echo
       echo
-      echo -e "$DIRTY om $SPECIAL_END [command] [flags]"
+      echo -e "$RED USAGE: $SPECIAL_END $DIRTY om $SPECIAL_END [command]"
       echo
       echo -e "$GREEN Available commands: $SPECIAL_END"
       echo
@@ -32,10 +33,10 @@ with pkgs;
       echo -e "            $SKY_BLUE rebuild $SPECIAL_END            rebuild configuration for host"
       echo -e "            $SKY_BLUE optimize $SPECIAL_END           clean then optimize the Nix Store"
       echo -e "            $SKY_BLUE weight $SPECIAL_END             determine the size of the system's configuration"
-      echo -e "           $SKY_BLUE rollback $SPECIAL_END           rollback to previous generation"
-      echo -e "           $SKY_BLUE search $SPECIAL_END             search packages available"
-      echo -e "           $SKY_BLUE options $SPECIAL_END            search nixos and home-manager options"
-      echo -e "          $SKY_BLUE sync $SPECIAL_END               pull config from git repo, then commit and push"
+      echo -e "            $SKY_BLUE rollback $SPECIAL_END           rollback to previous generation"
+      echo -e "            $SKY_BLUE search $SPECIAL_END             search packages available"
+      echo -e "            $SKY_BLUE options $SPECIAL_END            search nixos and home-manager options"
+      echo -e "            $SKY_BLUE sync $SPECIAL_END               pull config from git repo, then commit and push"
       echo -e "            $SKY_BLUE update $SPECIAL_END             update flake"
       echo -e "            $SKY_BLUE format $SPECIAL_END             format nix files in configuration"
       echo -e "            $SKY_BLUE vm $SPECIAL_END                 build a vm"
@@ -55,9 +56,9 @@ with pkgs;
 
     function format() {
       echo "Formatting NixOS Configuration Files Now"
-      cd $dots
-      alejandra /etc/nixos/*.nix
-      alejandra /etc/nixos/**/*.nix
+      find "$dots" -name "*.nix" -print0 | while IFS= read -r -d $'\0' file; do
+        alejandra "$file"
+      done
     }
 
     function weight() {

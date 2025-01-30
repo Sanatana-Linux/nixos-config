@@ -1,7 +1,9 @@
-virtualisation = {
+{pkgs, ...}: {
+  virtualisation = {
     waydroid = {
-        enable = true;
+      enable = true;
     };
-};
+  };
 
-environment.systemPackages = with pkgs; [weston];
+  environment.systemPackages = with pkgs; [weston];
+}

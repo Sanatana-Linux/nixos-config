@@ -41,6 +41,7 @@
 
     fontconfig = {
       enable = true;
+      cache32Bit = true;
       antialias = true;
       hinting = {
         enable = true;

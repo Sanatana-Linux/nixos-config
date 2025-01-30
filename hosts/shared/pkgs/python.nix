@@ -1,7 +1,7 @@
 {pkgs, ...}:
 with pkgs;
   [
-    (python312.withPackages (p:
+    (python313.withPackages (p:
       with p; [
         beautifulsoup4
         brotlicffi
@@ -17,6 +17,7 @@ with pkgs;
         pip-tools
         pipx
         protobuf
+        pydantic
         pygobject3
         PyICU
         pylev
@@ -36,6 +37,7 @@ with pkgs;
   ]
   ++ [
     gobject-introspection
+    streamlit
     pipenv
     black
     ruff

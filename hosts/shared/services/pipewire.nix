@@ -32,7 +32,8 @@
     flac2all
     flaca
     libpulseaudio
-    lmms
+    deadbeef-with-plugins
+    unstable.lmms
     mediainfo
     mpc_cli
     mpd

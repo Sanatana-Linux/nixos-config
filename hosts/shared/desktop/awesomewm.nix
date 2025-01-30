@@ -4,9 +4,6 @@
   ...
 }: {
   services = {
-    displayManager = {
-      defaultSession = "none+awesome";
-    }; # ends display manager
     xserver = {
       enable = true;
       autorun = true;
@@ -63,6 +60,14 @@
         ];
       };
     }; # ends xserver
+
+    libinput = {
+      enable = true;
+      touchpad = {
+        naturalScrolling = false;
+        disableWhileTyping = true;
+      };
+    }; #ends libinput
   }; # ends services
   # ------------------------------------------------- #
   environment.systemPackages = with pkgs; [

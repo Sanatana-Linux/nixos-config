@@ -30,6 +30,7 @@
 
     # Android
     ../shared/hardware/android.nix
+    ../shared/virtualization/waydroid.nix
 
     # bluetooth support
     ../shared/hardware/bluetooth.nix
@@ -172,14 +173,10 @@
       lidSwitch = "suspend";
       powerKeyLongPress = "suspend";
     };
-    libinput = {
-      enable = true;
-      touchpad = {
-        naturalScrolling = false;
-        disableWhileTyping = true;
-      };
-    };
-  }; # enable systemd in initrd
+    displayManager = {
+      defaultSession = "none+awesome";
+    }; # ends display manager
+  };
 
   services.xserver.dpi = 189;
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

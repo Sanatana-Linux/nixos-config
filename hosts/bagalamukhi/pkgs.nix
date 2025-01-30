@@ -4,7 +4,6 @@
   ...
 }: let
   archives = import ../shared/pkgs/archives.nix {inherit pkgs;};
-  android = import ../shared/pkgs/android.nix {inherit pkgs;};
   core = import ../shared/pkgs/core.nix {inherit pkgs;};
   devtools = import ../shared/pkgs/devtools.nix {inherit pkgs;};
   gui = import ../shared/pkgs/gui.nix {inherit pkgs;};
@@ -22,7 +21,6 @@ in {
     [
       pfetch
     ]
-    ++ android
     ++ archives
     ++ core
     ++ devtools

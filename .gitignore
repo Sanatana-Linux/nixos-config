@@ -1,3 +1,5 @@
-.direnv/*
+./.direnv/*
 ./.direnv/nix-profile*
 ./result
+./result/*
+

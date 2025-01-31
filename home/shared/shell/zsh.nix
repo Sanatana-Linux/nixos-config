@@ -80,6 +80,7 @@
                         zstyle ':completion:*' cache-path "${config.xdg.cacheHome}/zsh/completion-cache" # Use xdg directory for cache
 
 
+
                   # ┣━━━━━━━━━━━━━━━━━━━━━━━━━┫ Functions ┣━━━━━━━━━━━━━━━━━━━━━━━━━┫
 
                   # walk tui file management and navigation

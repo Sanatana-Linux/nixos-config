@@ -1,12 +1,12 @@
 {pkgs, ...}:
 with pkgs; [
   # unstable.gimpPlugins.exposureBlend
-  # unstable.gimpPlugins.fourier
+  unstable.gimpPlugins.fourier
   # unstable.gimpPlugins.gimplensfun
   # unstable.gimpPlugins.lightning
   # unstable.gimpPlugins.lqrPlugin
   # unstable.gimpPlugins.resynthesizer
-  # unstable.gimpPlugins.texturize
+  unstable.gimpPlugins.texturize
   # unstable.gimpPlugins.waveletSharpen
   babl
   cairosvg
@@ -39,6 +39,7 @@ with pkgs; [
   libspng
   libwebp
   lutgen
+  unstable.gegl
   meme-image-generator
   metapixel
   mozjpeg

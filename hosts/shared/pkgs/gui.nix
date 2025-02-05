@@ -4,6 +4,8 @@ with pkgs; [
   appstream-glib
   bleachbit
   ebook_tools
+  rofi-rbw
+  rofimoji
   fbida
   gnome-characters
   file-roller

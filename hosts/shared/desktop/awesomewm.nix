@@ -29,7 +29,7 @@
               package = pkgs.reversal-icon-theme;
               name = "Reversal-dark";
             };
-            indicators = ["~session" "~spacer" "--spacer" "~clock" "--spacer" "--spacer" "~power"];
+            indicators = ["~session" "--spacer" "~power"];
           };
         };
       }; # ends displayManager not xserver

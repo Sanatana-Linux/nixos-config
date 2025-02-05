@@ -36,9 +36,7 @@ in {
       NVD_BACKEND = "direct";
     };
     systemPackages = with pkgs; [
-      #      cudaPackages.autoAddCudaCompatRunpath
       cudaPackages.cuda_cccl
-      # cudaPackages.cuda_compat
       cudaPackages.cuda_cudart
       cudaPackages.cuda_gdb
       cudaPackages.cuda_nvml_dev
@@ -108,8 +106,8 @@ in {
     nvidia = {
       modesetting.enable = true;
       nvidiaSettings = true;
-      nvidiaPersistenced = false;
-      #      forceFullCompositionPipeline = true;
+      nvidiaPersistenced = true;
+      #  forceFullCompositionPipeline = true;
       dynamicBoost.enable = true;
       powerManagement = {
         enable = true;

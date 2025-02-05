@@ -10,14 +10,19 @@
     # docker = {
     #   enable = true;
     #   enableOnBoot = true;
-    #   rootless.enable = true;
+    #   rootless = [
+    #   enable = true;
+    #    daemon.settings.features.cdi = true;# see: https://nixos.wiki/wiki/Nvidia#NVIDIA_Docker_not_Working
+    #  };
     #   extraOptions = "--add-runtime nvidia=/run/current-system/sw/bin/nvidia-container-runtime ";
     #   package = pkgs.docker_25;
+
     # };
     containers.enable = true;
     libvirtd.enable = true;
     containerd.enable = true;
     oci-containers.backend = "podman";
+    # I *think* I like podman better at the end of the day, jury is still out
     podman = {
       defaultNetwork.settings = {
         dns_enabled = true;
@@ -39,6 +44,9 @@
     podman-desktop
     podman-compose
     podman-tui
+    kvmtool
+    virt-manager
+    qemu_full
     # docker_25
     # docker-buildx
     # docker-client
@@ -47,17 +55,7 @@
     # docker-distribution
     # docker-gc
     # docker-slim
-    nvidia-container-toolkit
-    libnvidia-container
-    cudaPackages.cudatoolkit
-    cudaPackages.cuda_opencl
-    cudaPackages.libnvidia_nscq
-    cudaPackages.cuda_cccl
-    cudaPackages.cuda_cudart
-    kvmtool
-    #    oxker
-    qemu_full
-    virt-manager
+
     #   x11docker
   ];
 }

@@ -11,6 +11,7 @@
       d2coding
       font-awesome_4
       font-awesome_5
+      font-awesome_6
       icomoon-feather
       inter
       jost

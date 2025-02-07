@@ -149,6 +149,7 @@
       rm = "rm -rvf"; # remove files and directories recursively and forcefully
       trm = "${lib.getBin trash-cli}/bin/trash-cli"; # Move files to trash
       firefox = "firefox-nightly";
+      less = "moar";
 
       # System
       cleanup = "sudo nix-collect-garbage --delete-older-than 3d"; # Clean up old Nix store entries.

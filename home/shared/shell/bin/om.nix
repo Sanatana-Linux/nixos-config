@@ -45,12 +45,12 @@ with pkgs;
 
     function repair() {
       echo "Repairing the Nix Store Now"
-      doas nix-collect-garbage -d
-      doas nix-store --verify --repair
-      doas nix-store --verify --check-contents --repair
-      doas nix store verify --all
-      doas nix store repair --all
-      doas nix-collect-garbage -d
+      nix-collect-garbage -d
+      nix-store --verify --repair
+      nix-store --verify --check-contents --repair
+      nix store verify --all
+      nix store repair --all
+      nix-collect-garbage -d
       echo "Repair Process Finished"
     }
 
@@ -75,51 +75,51 @@ with pkgs;
       echo "Rebuilding Configuration Now"
       rm -rf $HOME/.config/*.bak
       rm -rf $HOME/.config/**/*.bak
-      doas nixos-rebuild switch --flake ".#$2" --impure -v && echo "Done Rebuilding NixOS Configuration"
+      nixos-rebuild switch --flake ".#$2" --impure -v && echo "Done Rebuilding NixOS Configuration"
     }
 
     function vm() {
       echo "Creating Virtual Machine Now"
-      doas nixos-rebuild --flake $dots#"$2" --impure build-vm
+      nixos-rebuild --flake $dots#"$2" --impure build-vm
     }
 
     function optimize() {
       echo "Optimizing the Nix Store Now"
-      doas nix-collect-garbage -d
-      doas nix-store --verify --check-contents --repair
-      doas nix-store --optimize --verbose
+      nix-collect-garbage -d
+      nix-store --verify --check-contents --repair
+      nix-store --optimize --verbose
     }
 
     function rollback() {
       echo "Rolling Back Configuration Now"
-      doas nixos-rebuild --rollback switch
+      nixos-rebuild --rollback switch
     }
 
     function update() {
       echo "Updating Flake Lock File Now"
-      doas nix flake update
+      nix flake update
     }
 
     function clean() {
       echo "Cleaning the Nix Store"
-      doas nix-store --gc
+      nix-store --gc
       echo "Removing old generations"
-      doas nix-env --delete-generations old
+      nix-env --delete-generations old
       echo "Collecting system garbage"
-      doas nix-collect-garbage -d
-      doas nix profile wipe-history
+      nix-collect-garbage -d
+      nix profile wipe-history
       echo "Collecting user garbage"
       nix-collect-garbage -d
       nix profile wipe-history
-      doas janitor --gc
+      janitor --gc
     }
 
     function search() {
-      nix search nixpkgs "$2"
+      nix search nixpkgs "$2" | moar
     }
 
     function options() {
-      manix --source=hm_options,nixos_options,nixpkgs_doc,nixpkgs_tree,nixpkgs_comments "$2"
+      manix --source=hm_options,nixos_options,nixpkgs_doc,nixpkgs_tree,nixpkgs_comments "$2" | moar
     }
 
     function health() {

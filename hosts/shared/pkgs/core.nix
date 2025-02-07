@@ -85,6 +85,15 @@ with pkgs; [
   snappy
   sssd
   statix
+  font-manager
+  fontpreview
+  ftgl
+  fntsample
+  fcft
+  ttfautohint
+  webfontkitgenerator
+  woff2
+  xfontsel
   swtpm
   sysctl
   sysfsutils

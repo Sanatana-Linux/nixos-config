@@ -120,12 +120,12 @@
         ];
       };
       # ┣━━━━━━━━━━━━━━━━━━┫ Sara's Lenovo Legion Pro ┣━━━━━━━━━━━━━━━━┫
-      remus = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs self;};
+      matangi = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
         modules = [
           nur.modules.nixos.default
           nixos-hardware.nixosModules.lenovo-legion-16irx9h
-          ./hosts/remus
+          ./hosts/matangi
           bhairava-grub-theme.nixosModule
           chaotic.nixosModules.default
           home-manager.nixosModules.home-manager
@@ -159,7 +159,7 @@
     # ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
 
     macbook-air = self.nixosConfigurations.macbook-air.config.system.build.toplevel;
-    remus = self.nixosConfigurations.remus.config.system.build.toplevel;
+    matangi = self.nixosConfigurations.remus.config.system.build.toplevel;
     bagalamukhi = self.nixosConfigurations.bagalamukhi.config.system.build.toplevel;
   };
 }

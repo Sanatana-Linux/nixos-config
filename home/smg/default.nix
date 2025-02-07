@@ -5,22 +5,22 @@
   outputs,
   ...
 }: {
-  imports =
-    [
-      ./X
-      ./desktop
-      ./pkgs
-      ./programs/yazi/default.nix
-      ./programs/kitty/default.nix
-      ./programs/zathura/default.nix
-
-      ./services
-      ./shell
-    ]
-    ++ (builtins.attrValues outputs.homeManagerModules);
+  imports = [
+    ../shared/X
+    ../shared/desktop
+    ../shared/pkgs
+    ../shared/programs/aichat.nix
+    ../shared/programs/ghostty.nix
+    #    ../shared/programs/firefox.nix
+    ../shared/programs/kitty/default.nix
+    ../shared/services/default.nix
+    ../shared/services/picom.nix
+    ../shared/shell
+  ];
 
   systemd.user.startServices = "sd-switch";
 
+  # we have tealdeer & internet for this. Rendered in more readable formats
   manual = {
     html.enable = false;
     json.enable = false;
@@ -29,7 +29,11 @@
 
   nixpkgs = {
     overlays = [
-      outputs.overlays.default
+      outputs.overlays.additions
+      outputs.overlays.modifications
+      outputs.overlays.unstable-packages
+      outputs.overlays.f2k-packages
+      outputs.overlays.chaotic-packages
       inputs.nixpkgs-f2k.overlays.default
       inputs.nur.overlays.default
       inputs.neovim-nightly-overlay.overlays.default

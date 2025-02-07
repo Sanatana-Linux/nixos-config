@@ -8,6 +8,7 @@
     btop
     catimg
     bat
+    moar
     curl
     direnv
     du-dust

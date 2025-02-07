@@ -92,6 +92,7 @@ in {
       enable32Bit = true;
       extraPackages = with pkgs; [
         glfw
+        forge
         intel-vaapi-driver
         libva-utils
         libvdpau-va-gl

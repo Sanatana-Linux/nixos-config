@@ -13,7 +13,7 @@
     ../shared/default.nix
 
     # Select the user configuration
-    ../shared/users/tlh.nix
+    ../shared/users/smg.nix
 
     # Ollama's configuration
     ../shared/ai/ollama.nix
@@ -47,8 +47,8 @@
     # Specific configuration
     ./hardware-configuration.nix
 
-    # AwesomeWM
-    ../shared/desktop/awesomewm.nix
+    # XFCE4
+    ../shared/desktop/xfce.nix
 
     # Packages
     ./pkgs.nix

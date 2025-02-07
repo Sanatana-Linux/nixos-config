@@ -1,18 +1,20 @@
 {
   config,
+  inputs,
   pkgs,
   ...
 }: let
   ifTheyExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
 in {
-  # just until implementing the impermanence module
   programs.zsh.enable = true;
+  # Please don't mute me since I am mutable!
   users.mutableUsers = true;
   users.users.smg = {
+    name = "smg";
     description = "Sara Marie Guidotti";
     initialPassword = "password";
     isNormalUser = true;
-    uid = 1001;
+    uid = 1000;
     shell = pkgs.zsh;
     extraGroups =
       [
@@ -23,7 +25,10 @@ in {
         "input"
       ]
       ++ ifTheyExist [
+        "plugdev"
+        "adbusers"
         "docker"
+        "podman"
         "git"
         "libvirtd"
         "lp"
@@ -41,6 +46,5 @@ in {
 
     packages = [pkgs.home-manager];
   };
-
-  home-manager.users.smg = import ../../../home/smg/default.nix;
+  home-manager.users.tlh = import ../../../home/smg/default.nix;
 }

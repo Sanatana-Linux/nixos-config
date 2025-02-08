@@ -1,6 +1,7 @@
 {pkgs, ...}:
 with pkgs; [
   #nodePackages_latest.neovim
+  actionlint
   any-nix-shell
   brotli
   cached-nix-shell
@@ -8,15 +9,14 @@ with pkgs; [
   cargo-binutils
   clang
   cmake
+  commitlint-rs
   deadnix
+  diagnostic-languageserver
   direnv
+  dotenv-linter
+  eslint_d
   fuse3
-  unstable.squashfs-tools-ng
-  unstable.squashfsTools
-  unstable.squashfuse
   getopt
-  pixcat
-
   getoptions
   gettext
   git
@@ -33,6 +33,7 @@ with pkgs; [
   gnutls
   go
   gource
+  hlint
   imlib2Full
   inetutils
   just
@@ -75,16 +76,18 @@ with pkgs; [
   luajitPackages.vicious
   luajitPackages.wrapLua
   lynis
+  markdownlint-cli2
   nil
   nix-init
+  nix-linter
   nix-tree
   nixpkgs-fmt
   node2nix
-  nodenv
   nodePackages_latest.diagnostic-languageserver
   nodePackages_latest.gulp
   nodePackages_latest.nodejs
   nodePackages_latest.prettier
+  nodenv
   nps
   nss
   nvd
@@ -97,10 +100,12 @@ with pkgs; [
   php
   php83Packages.composer
   pipx
+  pixcat
   pkg-config
   poetry
   protobuf
   protobufc
+  rmlint
   ruby
   rubyfmt
   rustc
@@ -121,10 +126,15 @@ with pkgs; [
   tokei
   tree-sitter
   typescript
+  unstable.squashfs-tools-ng
+  unstable.squashfsTools
+  unstable.squashfuse
+  vscode-langservers-extracted
   wkhtmltopdf-bin
-  xorg_sys_opengl
   xorg.libX11
+  xorg_sys_opengl
   yamlfix
+  yamllint
   yarn
   yarn2nix
   zlib

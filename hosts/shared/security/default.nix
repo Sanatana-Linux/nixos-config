@@ -1,4 +1,13 @@
 {pkgs, ...}: {
+  environment.systemPackages = with pkgs; [
+    libtpms
+    python313Packages.tpm2-pytss
+    ssh-tpm-agent
+    tpm2-abrmd
+    tpm2-tools
+    tpm2-tss
+    tpmmanager
+  ];
   security = {
     # I am told this is a better choice, I don't notice much difference but its more ergonomic to type
     doas = {

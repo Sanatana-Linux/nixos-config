@@ -3,6 +3,8 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    # TODO change this to master as well as the unstable.pkg(s) to
+    # master.pkg(s)
     nixpkgs-unstable.url = "github:nixos/nixpkgs/master";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     nixpkgs-f2k.url = "github:moni-dz/nixpkgs-f2k";

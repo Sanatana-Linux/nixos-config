@@ -91,6 +91,10 @@ with pkgs; [
   fntsample
   fcft
   ttfautohint
+  openssl.dev
+  nerdfix
+  papirus-folders
+  fontforge
   webfontkitgenerator
   woff2
   xfontsel

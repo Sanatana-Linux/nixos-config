@@ -3,12 +3,12 @@ with pkgs;
   [
     (python313.withPackages (p:
       with p; [
+        GitPython
+        PyICU
         beautifulsoup4
         brotlicffi
         brotlipy
         gitdb
-        pyxdg
-        GitPython
         googleapis-common-protos
         levenshtein
         mdformat
@@ -19,12 +19,12 @@ with pkgs;
         protobuf
         pydantic
         pygobject3
-        PyICU
         pylev
         pylint
         pylint-venv
         pylsp-mypy
         python-dotenv
+        pyxdg
         setuptoolsBuildHook
         smmap
         sortedcontainers
@@ -37,7 +37,6 @@ with pkgs;
   ]
   ++ [
     gobject-introspection
-    streamlit
     pipenv
     black
     ruff

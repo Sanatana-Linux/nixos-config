@@ -70,8 +70,10 @@ with pkgs; [
   unstable.gimpPlugins.farbfeld
   unstable.gimpPlugins.gmic
   unstable.gmic
-  upscayl
-  upscayl-ncnn
+  unstable.upscayl
+  geticons
+  gfie
+  unstable.upscayl-ncnn
   xcolor
   xcolor
   xorg-rgb

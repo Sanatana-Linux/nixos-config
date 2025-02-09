@@ -2,7 +2,6 @@
 with pkgs; [
   abootimg
   adbfs-rootless
-  androguard
   android-backup-extractor
   android-file-transfer
   android-tools

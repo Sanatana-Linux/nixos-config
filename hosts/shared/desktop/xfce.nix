@@ -1,5 +1,5 @@
-{pkgs, ...}: {
   xdg.portal = {
+      {pkgs, ...}: {
     enable = true;
     # wlr.enable = true;
     # gtk portal needed to make gtk apps happy
@@ -50,7 +50,7 @@
       xtitle
       xwinmosaic
       orchis-theme
-      reversal-icon-theme
+      papirus-icon-theme
       phinger-cursors
     ];
   };
@@ -105,8 +105,8 @@
               size = 48;
             };
             iconTheme = {
-              name = "Reversal-dark";
-              package = pkgs.reversal-icon-theme;
+              name = "Papirus-Dark";
+              package = pkgs.papirus-icon-theme;
             };
             indicators = ["~session" "~spacer"];
           };

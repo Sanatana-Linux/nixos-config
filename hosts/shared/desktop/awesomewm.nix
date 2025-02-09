@@ -26,8 +26,8 @@
               size = 48;
             };
             iconTheme = {
-              package = pkgs.reversal-icon-theme;
-              name = "Reversal-dark";
+              package = pkgs.papirus-icon-theme;
+              name = "Papirus-Dark";
             };
             indicators = ["~session" "--spacer" "~power"];
           };

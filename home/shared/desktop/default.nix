@@ -9,8 +9,8 @@
 
     # Font settings for GTK
     font = {
-      name = "Mplus Code 60";
-      size = 11;
+      name = "SFProText Nerd Font,  Bold  ";
+      size = 10;
     };
 
     # GTK theme configuration
@@ -21,8 +21,8 @@
 
     # GTK icon theme configuration
     iconTheme = {
-      name = "Reversal-dark";
-      package = pkgs.reversal-icon-theme;
+      name = "Papirus-Dark";
+      package = pkgs.papirus-icon-theme;
     };
 
     # GTK cursor theme configuration

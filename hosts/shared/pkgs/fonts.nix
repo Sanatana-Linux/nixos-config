@@ -16,8 +16,8 @@
       inter
       jost
       kanit-font
-      line-awesome
       material-symbols
+      material-design-icons
       mplus-outline-fonts.githubRelease
       nerd-fonts._3270
       nerd-fonts.agave

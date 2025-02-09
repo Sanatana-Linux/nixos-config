@@ -9,8 +9,6 @@
 
     # rootless access to adb fs
     adbfs-rootless
-    # Tool and Python library to interact with Android Files
-    androguard
     # backup extraction
     android-backup-extractor
     # mount android with fuse

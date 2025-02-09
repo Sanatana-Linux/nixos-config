@@ -2,6 +2,7 @@
 with pkgs; [
   #nodePackages_latest.neovim
   actionlint
+  tailwindcss-language-server
   any-nix-shell
   brotli
   cached-nix-shell
@@ -79,7 +80,6 @@ with pkgs; [
   markdownlint-cli2
   nil
   nix-init
-  nix-linter
   nix-tree
   nixpkgs-fmt
   node2nix
@@ -113,6 +113,7 @@ with pkgs; [
   rustscan
   rustup
   rustywind
+  rustlings
   sass
   sassc
   shellcheck
@@ -133,7 +134,6 @@ with pkgs; [
   wkhtmltopdf-bin
   xorg.libX11
   xorg_sys_opengl
-  yamlfix
   yamllint
   yarn
   yarn2nix

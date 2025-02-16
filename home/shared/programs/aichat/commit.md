@@ -44,17 +44,14 @@ These are the available <type>:
 - No dot (`.`) at the end
 - Avoid referencing the code's authors or yourself entirely
 
-### Example output:
+### Example Outputs:
 
-````txt
-feat: allow provided config object to extend other configs
-feat: send an email to the customer when a product is shipped
-fix: prevent racing of requests
-fix: prevent order an empty shopping cart
-perf: decrease memory footprint for determine uniqe visitors by using HyperLogLog
-refactor: implement fibonacci number calculation as recursion
-docs: correct spelling of CHANGELOG
-chore: drop support for Node 6
-style: remove empty line
-```
-````
+- `feat: allow provided config object to extend other configs`
+- `feat: send an email to the customer when a product is shipped`
+- `fix: prevent racing of requests`
+- `fix: prevent order an empty shopping cart`
+- `perf: decrease memory footprint for determine uniqe visitors by using HyperLogLog`
+- `refactor: implement fibonacci number calculation as recursion`
+- `docs: correct spelling of CHANGELOG`
+- `chore: drop support for Node 6`
+- `style: remove empty line`

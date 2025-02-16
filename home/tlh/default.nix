@@ -10,6 +10,7 @@
     ../shared/desktop
     ../shared/pkgs
     ../shared/programs/yazi/default.nix
+    ../shared/programs/nemo/default.nix
     ../shared/programs/aichat.nix
     ../shared/programs/ghostty.nix
     ../shared/programs/joshuto.nix

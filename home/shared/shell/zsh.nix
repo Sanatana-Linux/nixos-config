@@ -168,6 +168,7 @@
       ytmp3 = ''
         ${lib.getBin yt-dlp}/bin/yt-dlp -x --continue --add-metadata --embed-thumbnail --audio-format mp3 --audio-quality 0 --metadata-from-title="%(artist)s - %(title)s" --prefer-ffmpeg -o "%(title)s.%(ext)s"
       ''; # Download YouTube videos as MP3.
+      aider = "aider --model ollama_chat/deepseek-r1:14b";
     };
 
     zplug = {

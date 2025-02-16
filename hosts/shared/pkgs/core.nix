@@ -128,6 +128,7 @@ with pkgs; [
   xorg.fontutil
   xorg.libxcb
   xorg.mkfontdir
+  optinix
   xorg.xcbutil
   xorg.xcbutilerrors
   xorg.xcbutilimage

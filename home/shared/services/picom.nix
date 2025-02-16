@@ -1,5 +1,4 @@
 {
-  colors,
   pkgs,
   outputs,
   ...

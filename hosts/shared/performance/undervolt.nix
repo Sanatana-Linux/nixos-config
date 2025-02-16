@@ -3,14 +3,27 @@
   config,
   ...
 }: {
+  # enable fix for Intel CPU throttling
+  services.throttled.enable = true;
   # Also done with the "advanced" BIOS setting to limit a
   # amount of current that the CPU can request (default was no limit!)
-  # Doubling up to insure system functionality
+  # rest of undevolting done via  OS configuration as it is more responsive to experimentation
   services.undervolt = {
     enable = true;
-    coreOffset = -100; # The amount of voltage in mV to offset the CPU cores by.
+    uncoreOffset = -50; # in mV
+    coreOffset = -50; # in mV
     package = pkgs.undervolt;
     verbose = true; # More logging
-    turbo = 0; #Changes the Intel Turbo feature status (1 is disabled and 0 is enabled).
+    turbo = 0; # Keep Intel Turbo feature enabled (1 for disabled)
+    p1 = {
+      # P-State 1 limit and time window (both must be set)
+      limit = 150; # in Watts
+      window = 300; # in Seconds
+    };
+    p2 = {
+      # P-State 2 limit and time window (both must be set)
+      limit = 150; # in Watts
+      window = 224; # in Seconds
+    };
   };
 }

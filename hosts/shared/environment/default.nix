@@ -4,6 +4,9 @@
   ...
 }: {
   imports = [./variables.nix];
+
+  # execute shebangs that assume hardcoded shell paths
+
   programs.zsh.enable = true;
   environment = with pkgs; {
     shells = [bash zsh];

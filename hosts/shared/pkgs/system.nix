@@ -73,4 +73,5 @@ with pkgs; [
   xsecurelock
   xss-lock
   xsuspender
+  wiper
 ]

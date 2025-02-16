@@ -1,5 +1,6 @@
 {pkgs, ...}:
 with pkgs; [
+  OVMFFull
   alejandra
   any-nix-shell
   appstream
@@ -22,25 +23,36 @@ with pkgs; [
   deadnix
   dnsutils
   dosfstools
+  edk2
+  edk2-uefi-shell
+  espeak-ng
   exfatprogs
+  fcft
   ffmpeg-full
   figlet
+  fntsample
+  font-manager
+  fontforge
+  fontpreview
+  ftgl
   gcc_latest
   glib
   glibc
+  grub2_full
   kconfig-frontends
   keyutils
   kmsxx
+  lame
   libgcc
   libgccjit
+  libisoburn
+  lorri
   manix
   mdds
   meson
-  lame
-  sox
-  espeak-ng
   microcodeIntel
   minizip2
+  nerdfix
   networkmanager
   ngrok
   nix-bash-completions
@@ -51,23 +63,22 @@ with pkgs; [
   nix-health
   nix-index
   nix-zsh-completions
-  nixos-generators
-  nixpacks
-  nox
   nixd
   nixel
+  nixos-generators
+  nixpacks
   nixt
-  lorri
-  nvd
-  nux
-  shellify
-  optinix
   nmap
   node2nix
+  nox
   ntfs3g
   nurl
+  nux
+  nvd
   opencl-clang
+  optinix
   out-of-tree
+  papirus-folders
   parallel
   pfetch
   pinentry-tty
@@ -80,25 +91,13 @@ with pkgs; [
   rcshist
   sassc
   service-wrapper
+  shellify
   simpleTpmPk11
   smartmontools
   snappy
+  sox
   sssd
   statix
-  font-manager
-  fontpreview
-  ftgl
-  fntsample
-  fcft
-  ttfautohint
-  openssl.dev
-  nerdfix
-  papirus-folders
-  fontforge
-  webfontkitgenerator
-  woff2
-  xfontsel
-  swtpm
   sysctl
   sysfsutils
   sysprof
@@ -110,16 +109,19 @@ with pkgs; [
   tealdeer
   template-glib
   toilet
-  tor
   trash-cli
+  ttfautohint
   ucl
   usbmuxd
   utillinux
+  webfontkitgenerator
   wmic-bin
   wmutils-core
   wmutils-libwm
   wmutils-opt
+  woff2
   xclip
+  xfontsel
   xgeometry-select
   xorg.fontalias
   xorg.fonttosfnt
@@ -137,5 +139,6 @@ with pkgs; [
   xorg.xorgproto
   xorg.xprop
   xorg.xwininfo
+  xorriso
   xsettingsd
 ]

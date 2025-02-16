@@ -102,7 +102,7 @@
             bindkey '\ee' _aichat_zsh
 
       # Node Version Management
-        eval "$(${lib.getExe pkgs.fnm} env --shell zsh --use-on-cd --corepack-enabled )" &
+        eval "$(fnm env --shell zsh --use-on-cd --corepack-enabled )" &
 
 
 

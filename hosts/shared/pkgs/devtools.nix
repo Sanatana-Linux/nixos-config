@@ -83,10 +83,10 @@ with pkgs; [
   nix-tree
   nixpkgs-fmt
   node2nix
-  nodePackages_latest.diagnostic-languageserver
-  nodePackages_latest.gulp
-  nodePackages_latest.nodejs
-  nodePackages_latest.prettier
+  #nodePackages_latest.diagnostic-languageserver
+  #nodePackages_latest.gulp
+  #nodePackages_latest.nodejs
+  #nodePackages_latest.prettier
   nodenv
   nps
   nss
@@ -135,7 +135,6 @@ with pkgs; [
   xorg.libX11
   xorg_sys_opengl
   yamllint
-  yarn
   yarn2nix
   zlib
 ]

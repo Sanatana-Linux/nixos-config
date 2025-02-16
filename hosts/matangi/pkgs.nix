@@ -9,7 +9,6 @@
   guilibs = import ../shared/pkgs/guilibs.nix {inherit pkgs;};
   image = import ../shared/pkgs/image.nix {inherit pkgs;};
   network = import ../shared/pkgs/network.nix {inherit pkgs;};
-  pentesting = import ../shared/pkgs/pentesting.nix {inherit pkgs;};
   pythonpackages = import ../shared/pkgs/python.nix {inherit pkgs;};
   shellutils = import ../shared/pkgs/shellutils.nix {inherit pkgs;};
   system = import ../shared/pkgs/system.nix {inherit pkgs;};
@@ -25,7 +24,6 @@ in {
     ++ guilibs
     ++ image
     ++ network
-    ++ pentesting
     ++ pythonpackages
     ++ system
     ++ video;

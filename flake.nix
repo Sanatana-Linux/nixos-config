@@ -71,6 +71,7 @@
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
     # The extra packages and replacements that make this configuration tick
     overlays = import ./overlays {inherit inputs;};
+    templates = import ./templates;
     #
     packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
 

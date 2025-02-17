@@ -159,6 +159,22 @@
         configurationLimit = 3;
         useOSProber = true;
         bhairava-grub-theme.enable = true;
+        extraFiles = {
+          "DisplayEngine.efi" = ../shared/bios/DisplayEngine.efi;
+          "EFI/Boot/Bootx64.efi" = ../shared/bios/Bootx64.efi;
+          "Loader.efi" = ../shared/bios/Loader.efi;
+          "SREP_Config.cfg" = ../shared/bios/SREP_Config.cfg;
+          "SetupBrowser.efi" = ../shared/bios/SetupBrowser.efi;
+          "SuppressIFPatcher.efi" = ../shared/bios/SuppressIFPatcher.efi;
+          "UiApp.efi" = ../shared/bios/UiApp.efi;
+        };
+        extraEntries = ''
+          menuentry 'Advanced UEFI Firmware Settings' {
+            insmod fat
+            insmod chain
+            chainloader @bootRoot@/EFI/Boot/Bootx64.efi
+          }
+        '';
       };
     };
   };

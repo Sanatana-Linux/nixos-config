@@ -7,7 +7,7 @@
 }: {
   imports = [
     ../shared/X
-    ./desktop.nix
+    ./theme.nix
     ../shared/pkgs
     ../shared/programs/yazi/default.nix
     ../shared/programs/nemo/default.nix
@@ -62,4 +62,23 @@
     homeDirectory = "/home/tlh";
     stateVersion = "24.11";
   };
+  # Installation of AwesomeWM configuration if not present
+  activation.installAwesomeWMConfig = ''
+    if [ ! -d /home/tlh/.config/awesome ]; then
+      git clone https://github.com/Sanatana-Linux/nixos-awesomewm /home/tlh/.config/awesome
+      chmod -R +w /home/tlh/.config/awesome
+      chown -R tlh /home/tlh/.config/awesome
+      mkdir -p /home/tlh/.cache/awesome/json/
+      touch  /home/tlh/.cache/awesome/json/settings.json
+    fi
+  '';
+
+  # Installation of Neovim configuration if not present
+  activation.installNvimConfig = ''
+    if [ ! -d /home/tlh/.config/nvim ]; then
+      git clone https://github.com/Thomashighbaugh/nvim-forge /home/tlh/.config/nvim
+      chmod -R +w "/home/tlh/.config/nvim"
+      chown -R tlh /home/tlh/.config/nvim
+    fi
+  '';
 }

@@ -2,6 +2,7 @@
 with pkgs; [
   appimage-run
   appstream-glib
+  calibre
   bleachbit
   ebook_tools
   rofi-rbw

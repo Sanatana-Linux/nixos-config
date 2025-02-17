@@ -7,14 +7,14 @@
 }: {
   imports = [
     ../shared/X
-    ../shared/desktop
+    ./desktop.nix
     ../shared/pkgs
     ../shared/programs/aichat.nix
     ../shared/programs/ghostty.nix
     #    ../shared/programs/firefox.nix
     ../shared/programs/kitty/default.nix
     ../shared/services/default.nix
-    ../shared/services/picom.nix
+    # ../shared/services/picom.nix
     ../shared/shell
   ];
 
@@ -48,6 +48,8 @@
   };
 
   programs.home-manager.enable = true;
+  services.picom.enable = true;
+  # GTK Configuration
 
   home = {
     username = "smg";

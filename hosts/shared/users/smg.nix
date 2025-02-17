@@ -46,5 +46,5 @@ in {
 
     packages = [pkgs.home-manager];
   };
-  home-manager.users.tlh = import ../../../home/smg/default.nix;
+  home-manager.users.smg = import ../../../home/smg/default.nix;
 }

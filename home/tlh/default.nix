@@ -7,7 +7,7 @@
 }: {
   imports = [
     ../shared/X
-    ../shared/desktop
+    ./desktop.nix
     ../shared/pkgs
     ../shared/programs/yazi/default.nix
     ../shared/programs/nemo/default.nix

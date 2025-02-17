@@ -1,6 +1,5 @@
-{pkgs, ... }:{  
-    home.packages = with pkgs; [
-    p7zip-rar # support for encrypted archives
+{pkgs, ...}: {
+  home.packages = with pkgs; [
     nemo-fileroller
     nemo-with-extensions
     webp-pixbuf-loader # for webp thumbnails
@@ -18,13 +17,14 @@
       "application/x-bzip2-compressed-tar" = "org.gnome.FileRoller.desktop";
       "application/x-tar" = "org.gnome.FileRoller.desktop";
     };
+  };
   dconf.settings = {
     # fix open in terminal
     "org/gnome/desktop/applications/terminal" = {
-      exec = lib.getExe pkgs.xdg-terminal-exec;
+      exec = "kitty -e ";
     };
     "org/cinnamon/desktop/applications/terminal" = {
-      exec = lib.getExe pkgs.xdg-terminal-exec;
+      exec = "kitty -e ";
     };
     "org/nemo/preferences" = {
       default-folder-viewer = "list-view";
@@ -42,5 +42,4 @@
       selection-menu-move-to = true;
     };
   };
-
-  }
+}

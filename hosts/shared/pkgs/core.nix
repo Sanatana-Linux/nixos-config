@@ -76,8 +76,9 @@ with pkgs; [
   nux
   nvd
   opencl-clang
-  optinix
   out-of-tree
+  moar
+  nix-janitor
   papirus-folders
   parallel
   pfetch
@@ -128,7 +129,6 @@ with pkgs; [
   xorg.fontutil
   xorg.libxcb
   xorg.mkfontdir
-  optinix
   xorg.xcbutil
   xorg.xcbutilerrors
   xorg.xcbutilimage

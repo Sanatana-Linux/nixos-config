@@ -1,6 +1,12 @@
-{pkgs, ...}:
+{
+  pkgs,
+  inputs,
+  ...
+}:
 with pkgs; [
   OVMFFull
+  inputs.winapps.packages."${system}".winapps
+  inputs.winapps.packages."${system}".winapps-launcher # optional
   alejandra
   any-nix-shell
   appstream

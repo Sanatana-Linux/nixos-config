@@ -1,10 +1,11 @@
 {
+  inputs,
   pkgs,
   config,
   ...
 }: let
   archives = import ../shared/pkgs/archives.nix {inherit pkgs;};
-  core = import ../shared/pkgs/core.nix {inherit pkgs;};
+  core = import ../shared/pkgs/core.nix {inherit pkgs inputs;};
   devtools = import ../shared/pkgs/devtools.nix {inherit pkgs;};
   gui = import ../shared/pkgs/gui.nix {inherit pkgs;};
   guilibs = import ../shared/pkgs/guilibs.nix {inherit pkgs;};

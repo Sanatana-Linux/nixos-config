@@ -19,6 +19,7 @@ This configuration, like many others, owes a huge debt of gratitude to other con
 - [lourkeur's distro](https://github.com/lourkeur/distro)
 - [cole h's nixos-config](https://github.com/cole-h/nixos-config)
 - [viperML's dotfiles](https://github.com/viperML/dotfiles)
+- [SlyHarvey's NixOS](https://github.com/Sly-Harvey/NixOS)
 
 ...and a whole lot more, see below
 

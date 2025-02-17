@@ -63,7 +63,7 @@
     stateVersion = "24.11";
   };
   # Installation of AwesomeWM configuration if not present
-  activation.installAwesomeWMConfig = ''
+  home.activation.installAwesomeWMConfig = ''
     if [ ! -d /home/tlh/.config/awesome ]; then
       git clone https://github.com/Sanatana-Linux/nixos-awesomewm /home/tlh/.config/awesome
       chmod -R +w /home/tlh/.config/awesome
@@ -74,7 +74,7 @@
   '';
 
   # Installation of Neovim configuration if not present
-  activation.installNvimConfig = ''
+  home.activation.installNvimConfig = ''
     if [ ! -d /home/tlh/.config/nvim ]; then
       git clone https://github.com/Thomashighbaugh/nvim-forge /home/tlh/.config/nvim
       chmod -R +w "/home/tlh/.config/nvim"

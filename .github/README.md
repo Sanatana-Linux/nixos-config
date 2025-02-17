@@ -12,16 +12,15 @@
 <br>
 
 <br>
-<br> 
-
+<br>
 
 ---
+
 <br>
 <br>
 <br>
 
 <br>
-
 
 [![built with nix](https://builtwithnix.org/badge.svg)](https://builtwithnix.org)
 
@@ -37,3 +36,6 @@
 1. [Useful Nix Commands](.github/documentation/nix-commands.md) - Informs the functions of my nix wrapper script
 1. [Inspiration and Credits](.github/documentation/credits.md) - Just some of those who have inadvertently helped me along in this process either as inspiration or careful examination of their implementations.
 1. [Debugging Journal](.github/documentation/debugging/index.md) - Logs of problems and how I have mitigated or learned to cope with them, useful for insight into the process of adjusting to NixOS, maybe solely as an example of what not to do...
+1. [Advanced BIOS for Lenovo Legion as a Grub Menu Entry at
+   Boot](.github/documentation/lenovo-advanced-bios.md) - Access from Grub Boot Menu to the unlocked
+   "Advanced BIOS" firmware settings for my Lenovo Legion 5 Pro (16irx9).

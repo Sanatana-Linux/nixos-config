@@ -143,6 +143,7 @@
     ];
 
     loader = {
+      timeout = 0;
       systemd-boot.enable = false;
       efi = {
         canTouchEfiVariables = true;
@@ -153,6 +154,7 @@
         enable = true;
         device = "nodev";
         efiSupport = true;
+        timeoutStyle = "hidden";
         configurationLimit = 3;
         useOSProber = true;
         bhairava-grub-theme.enable = true;

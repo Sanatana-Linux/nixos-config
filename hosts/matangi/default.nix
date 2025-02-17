@@ -16,7 +16,7 @@
     ../shared/users/smg.nix
 
     # Ollama's configuration
-    ../shared/ai/ollama.nix
+    #    ../shared/ai/ollama.nix
     ../shared/ai/default.nix
 
     # Virtualization configuration
@@ -144,6 +144,7 @@
     ];
 
     loader = {
+      timeout = 0;
       systemd-boot.enable = false;
       efi = {
         canTouchEfiVariables = true;
@@ -153,6 +154,7 @@
       grub = {
         enable = true;
         device = "nodev";
+        timeoutStyle = "hidden";
         efiSupport = true;
         configurationLimit = 3;
         useOSProber = true;

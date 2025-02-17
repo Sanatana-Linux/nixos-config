@@ -168,7 +168,7 @@
   };
 
   networking = {
-    hostName = "bagalamukhi";
+    hostName = "matangi";
     networkmanager.enable = true;
   };
   services = {

@@ -180,7 +180,7 @@
     # ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
 
     macbook-air = self.nixosConfigurations.macbook-air.config.system.build.toplevel;
-    matangi = self.nixosConfigurations.remus.config.system.build.toplevel;
+    matangi = self.nixosConfigurations.matangi.config.system.build.toplevel;
     bagalamukhi = self.nixosConfigurations.bagalamukhi.config.system.build.toplevel;
   };
 }

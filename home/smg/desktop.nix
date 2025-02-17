@@ -93,28 +93,10 @@
       gtk.enable = true;
     };
 
-    # Installation of AwesomeWM configuration if not present
-    activation.installAwesomeWMConfig = ''
-      if [ ! -d "${config.home.homeDirectory}/.config/awesome" ]; then
-        ${pkgs.git}/bin/git clone https://github.com/Sanatana-Linux/nixos-awesomewm "${config.home.homeDirectory}/.config/awesome"
-        chmod -R +w "${config.home.homeDirectory}/.config/awesome"
-        chown -R tlh "${config.home.homeDirectory}/.config/awesome"
-      fi
-    '';
-
-    # Installation of Neovim configuration if not present
-    activation.installNvimConfig = ''
-      if [ ! -d "${config.home.homeDirectory}/.config/nvim" ]; then
-        ${pkgs.git}/bin/git clone https://github.com/Thomashighbaugh/nvim-forge "${config.home.homeDirectory}/.config/nvim"
-        chmod -R +w "$HOME/.config/nvim"
-        chown -R tlh "${config.home.homeDirectory}/.config/nvim"
-      fi
-    '';
-
     # File configuration for icon theme
-    file = {
-      ".icons/default".source = "${pkgs.cosmic-icons}/share/icons/cosmic-icons";
-    };
+    #    file = {
+    #      ".icons/default".source = "${pkgs.cosmic-icons}/share/icons/cosmic-icons";
+    #    };
   };
 
   fonts.fontconfig = {

@@ -155,6 +155,7 @@
         device = "nodev";
         efiSupport = true;
         timeoutStyle = "hidden";
+        memtest86.enable = true;
         configurationLimit = 3;
         useOSProber = true;
         bhairava-grub-theme.enable = true;

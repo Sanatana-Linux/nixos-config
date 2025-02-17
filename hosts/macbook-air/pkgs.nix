@@ -12,7 +12,7 @@
   pythonpackages = import ../shared/python.nix {inherit pkgs;};
   sound = import ../shared/sound.nix {inherit pkgs;};
 in {
-  imports = [./fonts.nix];
+  imports = [../shared/pkgs/fonts.nix];
   environment.systemPackages = with pkgs;
     [
       figlet

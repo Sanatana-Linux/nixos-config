@@ -7,10 +7,6 @@
   bhairava-grub-theme,
   ...
 }: {
-  disabledModules = [
-    # Disable the default Awesome WM module
-    "services/x11/window-managers/awesome.nix"
-  ];
 
   imports = [
     # Shared configuration across all machines
@@ -18,6 +14,9 @@
 
     # Select the user configuration
     ../shared/users/tlh.nix
+
+    ../shared/desktop/awesomewm.nix
+
 
     # Packages to install
     ./pkgs.nix
@@ -189,7 +188,7 @@
         };
         charger = {
           governor = "performance";
-          turbo = "auto";
+          turbo = "auto";macbook-air
         };
       };
     };
@@ -215,8 +214,6 @@
     };
   };
 
-  # Use custom Awesome WM module
-  services.xserver.windowManager.awesome.enable = true;
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "24.11";

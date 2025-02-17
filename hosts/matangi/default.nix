@@ -177,7 +177,7 @@
       powerKeyLongPress = "suspend";
     };
     displayManager = {
-      defaultSession = "none+awesome";
+      defaultSession = "xfce";
     }; # ends display manager
   };
 

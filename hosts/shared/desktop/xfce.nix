@@ -1,5 +1,5 @@
+{pkgs, ...}: {
   xdg.portal = {
-      {pkgs, ...}: {
     enable = true;
     # wlr.enable = true;
     # gtk portal needed to make gtk apps happy

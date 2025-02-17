@@ -7,7 +7,6 @@
   bhairava-grub-theme,
   ...
 }: {
-
   imports = [
     # Shared configuration across all machines
     ../shared
@@ -16,7 +15,6 @@
     ../shared/users/tlh.nix
 
     ../shared/desktop/awesomewm.nix
-
 
     # Packages to install
     ./pkgs.nix
@@ -188,7 +186,7 @@
         };
         charger = {
           governor = "performance";
-          turbo = "auto";macbook-air
+          turbo = "auto";
         };
       };
     };
@@ -213,7 +211,6 @@
       };
     };
   };
-
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "24.11";

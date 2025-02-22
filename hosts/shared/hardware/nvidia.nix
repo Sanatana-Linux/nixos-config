@@ -35,41 +35,55 @@ in {
       # https://github.com/elFarto/nvidia-vaapi-driver/issues/213#issuecomment-1585584038
       NVD_BACKEND = "direct";
     };
-    systemPackages = with pkgs; [
-      cudaPackages.cuda_cccl
-      cudaPackages.cuda_cudart
-      cudaPackages.cuda_gdb
-      cudaPackages.cuda_nvml_dev
-      cudaPackages.cuda_opencl
-      cudaPackages.cudatoolkit
-      cudaPackages.cudnn
-      cudaPackages.cutensor
-      cudaPackages.libcublas
-      cudaPackages.libcusparse
-      cudaPackages.libnvidia_nscq
-      cudatoolkit
-      freeglut
-      ftgl
-      glew
-      glfw
-      intel-media-driver
-      intel-vaapi-driver
-      libGL
-      libGLX
-      libnvidia-container
-      libvdpau-va-gl
-      mesa
-      mlx42
-      nv-codec-headers
-      nvidia-container-toolkit
-      nvidia-texture-tools
-      nvidia-vaapi-driver
-      nvidia_cg_toolkit
-      nvtopPackages.nvidia
-      peakperf
-      vaapiVdpau
-      xorg_sys_opengl
-    ];
+    systemPackages = with pkgs;
+      [
+        cudaPackages.cuda_cccl
+        cudaPackages.cuda_cudart
+        cudaPackages.cuda_gdb
+        cudaPackages.saxpy
+        cudaPackages.nvidia_fs
+        cudaPackages.cuda_nvml_dev
+        cudaPackages.cuda_opencl
+        cudaPackages.cudatoolkit
+        cudaPackages.cudnn
+        cudaPackages.cutensor
+        cudaPackages.libcublas
+        cudaPackages.libcusparse
+        cudaPackages.libnvidia_nscq
+        cudatoolkit
+        freeglut
+        tiny-cuda-nn
+        ftgl
+        glew
+        glfw
+        intel-media-driver
+        intel-vaapi-driver
+        libGL
+        libGLX
+        libnvidia-container
+        libvdpau-va-gl
+        mesa
+        mlx42
+        nv-codec-headers
+        nvidia-container-toolkit
+        nvidia-texture-tools
+        nvidia-vaapi-driver
+        nvidia_cg_toolkit
+        nvtopPackages.nvidia
+        peakperf
+        vaapiVdpau
+        xorg_sys_opengl
+      ]
+      ++ [
+        (python312.withPackages (p:
+          with p; [
+            torchWithCuda
+            tensorflowWithCuda
+            triton-cuda
+            pycuda
+            cupy
+          ]))
+      ];
   };
 
   nixpkgs.config = {

@@ -4,6 +4,7 @@
   services = {
     gpg-agent = {
       enable = true;
+      enableSshSupport = true;
       pinentryPackage = pkgs.pinentry-tty;
       enableZshIntegration = true;
       extraConfig = ''

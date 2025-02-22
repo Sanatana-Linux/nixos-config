@@ -1,5 +1,5 @@
 {
-  description = "The Sanatana Linux is the ShizNix";
+  description = "The ShizNix Upon Which I Constantly Nit Pick";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -103,26 +103,28 @@
       ];
       # ┣━━━━━━━━━━━━━━━━━━━━━━━┫ Dinosaur Laptop ┣━━━━━━━━━━━━━━━━━━━━━━━┫
 
-      macbook-air = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs self;};
-        modules = [
-          nur.modules.nixos.default
-
-          nixos-hardware.nixosModules.apple-macbook-air-6
-          ./hosts/macbook-air
-          bhairava-grub-theme.nixosModule
-          home-manager.nixosModules.home-manager
-          chaotic.nixosModules.default
-          {
-            home-manager = {
-              useUserPackages = true;
-              backupFileExtension = "bak";
-              users.tlh = {imports = [./home/tlh/default.nix];};
-            };
-          }
-        ];
-      };
-
+      # TODO this whole config needs to be updated to effectively interface with changes to repo
+      # TODO rename Chamunda and write appropiate README honoring the mother like bagalamukhi and Matangi
+      # macbook-air = nixpkgs.lib.nixosSystem {
+      #   specialArgs = {inherit inputs outputs self;};
+      #   modules = [
+      #     nur.modules.nixos.default
+      #
+      #     nixos-hardware.nixosModules.apple-macbook-air-6
+      #     ./hosts/macbook-air
+      #     bhairava-grub-theme.nixosModule
+      #     home-manager.nixosModules.home-manager
+      #     chaotic.nixosModules.default
+      #     {
+      #       home-manager = {
+      #         useUserPackages = true;
+      #         backupFileExtension = "bak";
+      #         users.tlh = {imports = [./home/tlh/default.nix];};
+      #       };
+      #     }
+      #   ];
+      # };
+      #
       # ┣━━━━━━━━━━━━━━━━━━━━━━┫ My Lenovo Legion Pro ┣━━━━━━━━━━━━━━━━━━━━━━┫
 
       bagalamukhi = nixpkgs.lib.nixosSystem {

@@ -27,12 +27,6 @@
         };
       };
     };
-    # udiskie = {
-    #   enable = true;
-    #   automount = true;
-    #   tray = "never";
-    #   notify = true;
-    # };
   };
   boot.supportedFilesystems = ["ntfs"];
   programs.udevil.enable = true;

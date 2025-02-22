@@ -22,6 +22,16 @@
     fsType = "ext4";
   };
 
+  fileSystems."/home/tlh/WinRoot" = {
+    device = "/dev/disk/by-uuid/68AA420BAA41D5EA";
+    fsType = "ntfs";
+  };
+
+  fileSystems."/home/tlh/VM" = {
+    device = "/dev/disk/by-uuid/1fbb8f2c-e224-4e2f-86a9-b2413dca2319";
+    fsType = "ext4";
+  };
+
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/378C-C628";
     fsType = "vfat";

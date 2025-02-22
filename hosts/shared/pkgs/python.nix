@@ -1,10 +1,12 @@
 {pkgs, ...}:
 with pkgs;
   [
-    (python313.withPackages (p:
+    (python312.withPackages (p:
       with p; [
         GitPython
         PyICU
+        pydantic
+        pydantic-core
         beautifulsoup4
         brotlicffi
         brotlipy

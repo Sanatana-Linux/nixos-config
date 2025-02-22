@@ -7,6 +7,7 @@ with pkgs; [
   OVMFFull
   inputs.winapps.packages."${system}".winapps
   inputs.winapps.packages."${system}".winapps-launcher # optional
+  afuse
   alejandra
   any-nix-shell
   appstream
@@ -38,7 +39,7 @@ with pkgs; [
   figlet
   fntsample
   font-manager
-  fontforge
+  fontforge-gtk
   fontpreview
   ftgl
   gcc_latest
@@ -78,7 +79,14 @@ with pkgs; [
   node2nix
   nox
   ntfs3g
+  ntfsprogs
+  dmg2img
   nurl
+  nil
+  prettier-d-slim
+  pls # "prettier and powerful ls"
+  cdrtools # for mkisofs
+  fontforge-fonttools
   nux
   nvd
   opencl-clang
@@ -136,6 +144,8 @@ with pkgs; [
   xorg.libxcb
   xorg.mkfontdir
   xorg.xcbutil
+  python312Packages.compreffor
+  python312Packages.fonttools
   xorg.xcbutilerrors
   xorg.xcbutilimage
   xorg.xcbutilrenderutil

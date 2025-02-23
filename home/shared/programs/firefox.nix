@@ -48,7 +48,7 @@ in {
     package = firefox-nightly;
     profiles.${profile} = {
       id = 0;
-      extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+      extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
         add-custom-search-engine
         auto-tab-discard
         bitwarden
@@ -58,7 +58,6 @@ in {
         don-t-fuck-with-paste
         export-cookies-txt
         export-tabs-urls-and-titles
-        firefox-translations
         form-history-control
         foxytab
         gaoptout
@@ -73,7 +72,6 @@ in {
         re-enable-right-click
         refined-github
         search-engines-helper
-        side-view
         stylebot-web
         ublock-origin
         view-image

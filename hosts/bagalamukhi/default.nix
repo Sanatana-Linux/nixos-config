@@ -64,6 +64,7 @@
     config.boot.kernelPackages.acpi_call # acpi_call kernel module
     nvme-cli
     dbus
+    grub2_full
     mesa
     plymouth
     kdePackages.plymouth-kcm
@@ -155,10 +156,10 @@
         device = "nodev";
         efiSupport = true;
         timeoutStyle = "hidden";
-        memtest86.enable = true;
-        configurationLimit = 3;
-        useOSProber = true;
+        configurationLimit = 5;
+        useOSProber = true; # Scan for Windows/Other Installs
         bhairava-grub-theme.enable = true;
+        # Files needed to enter Advanced BIOS
         extraFiles = {
           "DisplayEngine.efi" = ../shared/bios/DisplayEngine.efi;
           "EFI/Boot/Bootx64.efi" = ../shared/bios/Bootx64.efi;
@@ -168,6 +169,7 @@
           "SuppressIFPatcher.efi" = ../shared/bios/SuppressIFPatcher.efi;
           "UiApp.efi" = ../shared/bios/UiApp.efi;
         };
+        # Add in advanced BIOS entry (works for lenovo legion 16irx9, YMMV)
         extraEntries = ''
           menuentry 'Advanced UEFI Firmware Settings' {
             insmod fat

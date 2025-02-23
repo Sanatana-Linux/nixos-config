@@ -12,7 +12,6 @@ with pkgs; [
 
   libdbusmenu-gtk3
   libinput
-  maim
   pure-prompt
   zplug
   zsh

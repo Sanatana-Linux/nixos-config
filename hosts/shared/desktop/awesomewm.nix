@@ -75,7 +75,7 @@
     dbus-broker
     dbus-glib
     gobject-introspection-unwrapped
-    maim
+    unstable.maim
     menu-cache
     pango
     pangomm
@@ -87,7 +87,6 @@
     cairo
     cairomm
     awesome-git-luajit
-    maim
     pango
     pangomm
     xclip

@@ -3,7 +3,8 @@
   config,
   ...
 }: let
-  core = import ../shared/pkgs/core.nix {inherit pkgs;};
+  #  core = import ../shared/pkgs/core.nix {inherit pkgs;};
+  default = import ../shared/pkgs/default.nix {inherit pkgs;};
   devtools = import ../shared/pkgs/devtools.nix {inherit pkgs;};
   gui = import ../shared/pkgs/gui.nix {inherit pkgs;};
   guilibs = import ../shared/pkgs/guilibs.nix {inherit pkgs;};

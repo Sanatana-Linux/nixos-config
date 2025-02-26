@@ -154,11 +154,29 @@
       grub = {
         enable = true;
         device = "nodev";
-        timeoutStyle = "hidden";
         efiSupport = true;
-        configurationLimit = 3;
-        useOSProber = true;
+        timeoutStyle = "hidden";
+        configurationLimit = 5;
+        useOSProber = true; # Scan for Windows/Other Installs
         bhairava-grub-theme.enable = true;
+        # Files needed to enter Advanced BIOS
+        extraFiles = {
+          "DisplayEngine.efi" = ../shared/bios/DisplayEngine.efi;
+          "EFI/Boot/Bootx64.efi" = ../shared/bios/Bootx64.efi;
+          "Loader.efi" = ../shared/bios/Loader.efi;
+          "SREP_Config.cfg" = ../shared/bios/SREP_Config.cfg;
+          "SetupBrowser.efi" = ../shared/bios/SetupBrowser.efi;
+          "SuppressIFPatcher.efi" = ../shared/bios/SuppressIFPatcher.efi;
+          "UiApp.efi" = ../shared/bios/UiApp.efi;
+        };
+        # Add in advanced BIOS entry (works for lenovo legion 16irx9, YMMV)
+        extraEntries = ''
+          menuentry 'Advanced UEFI Firmware Settings' {
+            insmod fat
+            insmod chain
+            chainloader @bootRoot@/EFI/Boot/Bootx64.efi
+          }
+        '';
       };
     };
   };
@@ -178,7 +196,7 @@
     };
     displayManager = {
       defaultSession = "xfce";
-    }; # ends display manager
+    };
   };
 
   services.xserver.dpi = 189;

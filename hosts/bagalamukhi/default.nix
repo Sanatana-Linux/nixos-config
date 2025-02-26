@@ -194,9 +194,11 @@
       lidSwitch = "suspend";
       powerKeyLongPress = "suspend";
     };
+    # -------------------------------------------------------------------------- #
+    # For desktop environment selection (since the display manager is generalized)
     displayManager = {
       defaultSession = "none+awesome";
-    }; # ends display manager
+    };
   };
 
   services.xserver.dpi = 189;

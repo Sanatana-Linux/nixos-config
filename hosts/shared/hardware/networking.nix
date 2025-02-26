@@ -13,18 +13,23 @@
     "net.ipv4.tcp_fastopen" = 3;
   };
   networking = {
+    nameservers = ["1.1.1.1" "9.9.9.9"];
+    # make DHCP received nameservers don't override above
+    dhcpcd.extraConfig = "nohook resolv.conf";
     networkmanager = {
       enable = true;
+      dns = "none";
       unmanaged = ["docker0" "rndis0"];
       wifi = {
-        #        macAddress = "random";
+        # not while using hotel wifi at least
+        # macAddress = "random";
         powersave = true;
       };
     };
 
     firewall = {
       enable = true;
-      allowedTCPPorts = [22 69 80 443 1087 3456 11434];
+      allowedTCPPorts = [22 53 69 80 443 1087 3456 11434];
       allowedUDPPortRanges = [
         {
           from = 4000;

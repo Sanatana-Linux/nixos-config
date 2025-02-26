@@ -75,7 +75,8 @@
     dbus-broker
     dbus-glib
     gobject-introspection-unwrapped
-    unstable.maim
+    # maim
+    scrot
     menu-cache
     pango
     pangomm

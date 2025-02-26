@@ -2,6 +2,7 @@
   stdenv,
   pkgs,
 }:
+# TODO Builod this out to be functional as a Display Manager. Currently it has the repo source and the necessary packages but it needs options to be built, likely based on other lightdm greeters
 stdenv.mkDerivation {
   pname = "sea-greeter";
   version = "0.1.0";

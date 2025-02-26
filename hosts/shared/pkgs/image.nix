@@ -7,9 +7,11 @@ with pkgs; [
   # unstable.gimpPlugins.lqrPlugin
   # unstable.gimpPlugins.resynthesizer
   unstable.gimpPlugins.texturize
-  # unstable.gimpPlugins.waveletSharpen
+  unstable.gimpPlugins.waveletSharpen
   babl
   cairosvg
+  shutter
+  satty
   colorstorm
   colorz
   curtail

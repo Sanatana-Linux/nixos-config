@@ -6,7 +6,7 @@
     bright = ["2c2c2c" "d8557b" "6fbe81" "d9c65b" "53bbcc" "8179c6" "4a9cec" "dcd8e1"];
   in {
     colors = normal ++ bright;
-    font = "${pkgs.terminus_font}/share/consolefonts/ter-c14b.psf.gz";
+    font = "${pkgs.terminus_font}/share/consolefonts/ter-c18b.psf.gz";
     useXkbConfig = true;
     earlySetup = true;
   };

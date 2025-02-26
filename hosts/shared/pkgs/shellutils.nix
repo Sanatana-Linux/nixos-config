@@ -9,7 +9,6 @@ with pkgs; [
   fzy
   libdbusmenu
   espeak-ng
-
   libdbusmenu-gtk3
   libinput
   pure-prompt

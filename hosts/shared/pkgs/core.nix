@@ -20,6 +20,7 @@ with pkgs; [
   cachix
   cbfmt
   ccls
+  cdrtools # for mkisofs
   clang-tools
   cmake
   commonsCompress
@@ -28,6 +29,7 @@ with pkgs; [
   ddcui
   ddcutil
   deadnix
+  dmg2img
   dnsutils
   dosfstools
   edk2
@@ -39,6 +41,7 @@ with pkgs; [
   figlet
   fntsample
   font-manager
+  fontforge-fonttools
   fontforge-gtk
   fontpreview
   ftgl
@@ -59,9 +62,11 @@ with pkgs; [
   meson
   microcodeIntel
   minizip2
-  nerdfix
+  moar
+  mtools
   networkmanager
   ngrok
+  nil
   nix-bash-completions
   nix-binary-cache
   nix-bundle
@@ -69,6 +74,7 @@ with pkgs; [
   nix-doc
   nix-health
   nix-index
+  nix-janitor
   nix-zsh-completions
   nixd
   nixel
@@ -80,28 +86,24 @@ with pkgs; [
   nox
   ntfs3g
   ntfsprogs
-  dmg2img
   nurl
-  nil
-  prettier-d-slim
-  pls # "prettier and powerful ls"
-  cdrtools # for mkisofs
-  fontforge-fonttools
   nux
   nvd
   opencl-clang
   out-of-tree
-  moar
-  nix-janitor
   papirus-folders
   parallel
   pfetch
   pinentry-tty
+  pls # "prettier and powerful ls"
   pmutils
   poppler_gi
   premake
+  prettier-d-slim
   ps_mem
   pulseaudio
+  python312Packages.compreffor
+  python312Packages.fonttools
   python312Packages.py-dmidecode
   rcshist
   sassc
@@ -144,8 +146,6 @@ with pkgs; [
   xorg.libxcb
   xorg.mkfontdir
   xorg.xcbutil
-  python312Packages.compreffor
-  python312Packages.fonttools
   xorg.xcbutilerrors
   xorg.xcbutilimage
   xorg.xcbutilrenderutil

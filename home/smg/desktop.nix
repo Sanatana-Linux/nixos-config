@@ -15,8 +15,8 @@
 
     # GTK theme configuration
     theme = {
-      name = "Nightfox-Dark";
-      package = pkgs.nightfox-gtk-theme;
+      name = "Orchis-Dark";
+      package = pkgs.orchis-theme;
     };
 
     # GTK icon theme configuration

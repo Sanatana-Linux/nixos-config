@@ -20,7 +20,7 @@ in {
     [
       pfetch
     ]
-    ++ core
+    ++ default
     ++ gui
     ++ guilibs
     ++ image

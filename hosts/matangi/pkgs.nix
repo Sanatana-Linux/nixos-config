@@ -1,10 +1,10 @@
 {
   pkgs,
+  inputs,
   config,
   ...
 }: let
-  #  core = import ../shared/pkgs/core.nix {inherit pkgs;};
-  default = import ../shared/pkgs/default.nix {inherit pkgs;};
+  core = import ../shared/pkgs/core.nix {inherit pkgs inputs;};
   devtools = import ../shared/pkgs/devtools.nix {inherit pkgs;};
   gui = import ../shared/pkgs/gui.nix {inherit pkgs;};
   guilibs = import ../shared/pkgs/guilibs.nix {inherit pkgs;};
@@ -20,7 +20,7 @@ in {
     [
       pfetch
     ]
-    ++ default
+    ++ core
     ++ gui
     ++ guilibs
     ++ image

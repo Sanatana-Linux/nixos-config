@@ -1,11 +1,9 @@
 {
-  pkgs,
   inputs,
+  pkgs,
   ...
 }:
 with pkgs; [
-  # inputs.winapps.packages."${system}".winapps
-  # inputs.winapps.packages."${system}".winapps-launcher # optional
   OVMFFull
   afuse
   alejandra

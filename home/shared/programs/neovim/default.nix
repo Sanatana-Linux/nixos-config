@@ -13,6 +13,7 @@
     withPython3 = true;
     extraPackages = with pkgs; [
       jq
+
       tree-sitter
       nodePackages_latest.nodejs
       # nodePackages_latest.neovim

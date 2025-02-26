@@ -4,9 +4,9 @@
   ...
 }:
 with pkgs; [
+  # inputs.winapps.packages."${system}".winapps
+  # inputs.winapps.packages."${system}".winapps-launcher # optional
   OVMFFull
-  inputs.winapps.packages."${system}".winapps
-  inputs.winapps.packages."${system}".winapps-launcher # optional
   afuse
   alejandra
   any-nix-shell

@@ -6,7 +6,7 @@
     user = "ollama";
     group = "ollama";
 
-    # home = "/var/lib/ollama";
+    home = "/var/lib/ollama";
     # models = "/var/lib/ollama/models";
 
     #  loadModels = [
@@ -15,8 +15,6 @@
     #  ];
     acceleration = "cuda"; # since I am having issues and it is ollama-cuda already let's see
   };
-
-  services.nextjs-ollama-llm-ui.enable = true;
 
   fileSystems."/var/lib/ollama/models" = {
     device = "/var/lib/ollama/models";

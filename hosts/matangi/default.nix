@@ -15,8 +15,8 @@
     # Select the user configuration
     ../shared/users/smg.nix
 
-    # Ollama's configuration
-    #    ../shared/ai/ollama.nix
+    # Ollama configuration
+    ../shared/ai/ollama.nix
     ../shared/ai/default.nix
 
     # Virtualization configuration

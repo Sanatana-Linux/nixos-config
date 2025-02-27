@@ -52,7 +52,6 @@ in {
         cudaPackages.libnvidia_nscq
         cudatoolkit
         freeglut
-        tiny-cuda-nn
         ftgl
         glew
         glfw

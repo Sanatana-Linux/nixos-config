@@ -15,8 +15,8 @@
 
     # GTK theme configuration
     theme = {
-      name = "Orchis-Grey-Dark-Compact";
-      package = pkgs.orchis-theme;
+      name = "Materia-dark-compact";
+      package = pkgs.materia-theme-transparent;
     };
 
     # GTK icon theme configuration
@@ -81,7 +81,7 @@
   home = {
     # Environment variables for session
     sessionVariables = {
-      GTK_THEME = "Orchis-Grey-Dark-Compact";
+      GTK_THEME = "Materia-dark-compact";
       QT_QPA_PLATFORMTHEME = "gtk3";
     };
 

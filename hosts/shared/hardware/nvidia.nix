@@ -125,7 +125,7 @@ in {
       #  forceFullCompositionPipeline = true;
       dynamicBoost.enable = true;
       powerManagement = {
-        enable = true;
+        enable = false;
         finegrained = false;
       };
       open = false;

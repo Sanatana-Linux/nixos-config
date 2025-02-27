@@ -75,7 +75,6 @@
     dbus-broker
     dbus-glib
     gobject-introspection-unwrapped
-    # maim
     scrot
     menu-cache
     pango

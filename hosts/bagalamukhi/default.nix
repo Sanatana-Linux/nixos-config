@@ -47,6 +47,7 @@
     ./hardware-configuration.nix
 
     # AwesomeWM
+    ../shared/desktop/default.nix
     ../shared/desktop/awesomewm.nix
 
     # Packages
@@ -113,7 +114,7 @@
     extraModulePackages = [
       config.boot.kernelPackages.acpi_call # acpi_call kernel module
       config.boot.kernelPackages.lenovo-legion-module # lenovo legion kernel module
-      config.boot.kernelPackages.nvidiaPackages.production # nvidia x11 kernel module
+      config.boot.kernelPackages.nvidiaPackages.stable # nvidia x11 kernel module
     ];
 
     kernelParams = [

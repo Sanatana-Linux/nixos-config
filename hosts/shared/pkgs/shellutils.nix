@@ -7,6 +7,10 @@ with pkgs; [
   fd
   fzf
   fzy
+  killall
+
+  walk
+  trash-cli
   libdbusmenu
   espeak-ng
   libdbusmenu-gtk3

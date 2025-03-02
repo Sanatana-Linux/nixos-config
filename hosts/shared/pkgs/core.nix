@@ -5,35 +5,19 @@
 }:
 with pkgs; [
   OVMFFull
-  afuse
   alejandra
   any-nix-shell
-  appstream
-  appstream-glib
-  as-tree
-  automake
-  avfs
-  bintools
   cached-nix-shell
   cachix
   cbfmt
   ccls
-  cdrtools # for mkisofs
   clang-tools
   cmake
   commonsCompress
-  curtail
-  dconf
-  ddcui
-  ddcutil
   deadnix
   dmg2img
   dnsutils
-  dosfstools
-  edk2
-  edk2-uefi-shell
   espeak-ng
-  exfatprogs
   fcft
   ffmpeg-full
   figlet
@@ -43,25 +27,8 @@ with pkgs; [
   fontforge-gtk
   fontpreview
   ftgl
-  gcc_latest
-  glib
-  glibc
-  grub2_full
-  kconfig-frontends
-  keyutils
-  kmsxx
-  lame
-  libgcc
-  libgccjit
-  libisoburn
-  lorri
   manix
-  mdds
-  meson
-  microcodeIntel
   minizip2
-  moar
-  mtools
   networkmanager
   ngrok
   nil
@@ -82,78 +49,22 @@ with pkgs; [
   nmap
   node2nix
   nox
-  ntfs3g
-  ntfsprogs
   nurl
   nux
   nvd
-  opencl-clang
-  out-of-tree
   papirus-folders
-  parallel
-  pfetch
-  pinentry-tty
-  pls # "prettier and powerful ls"
-  pmutils
   poppler_gi
-  premake
-  prettier-d-slim
-  ps_mem
   pulseaudio
   python312Packages.compreffor
   python312Packages.fonttools
-  python312Packages.py-dmidecode
-  rcshist
   sassc
   service-wrapper
-  shellify
-  simpleTpmPk11
-  smartmontools
-  snappy
   sox
   sssd
   statix
-  sysctl
-  sysfsutils
-  sysprof
-  sysstat
-  systemctl-tui
-  systemdgenie
-  systeroid
-  sysvtools
   tealdeer
-  template-glib
   toilet
-  trash-cli
   ttfautohint
-  ucl
-  usbmuxd
-  utillinux
   webfontkitgenerator
-  wmic-bin
-  wmutils-core
-  wmutils-libwm
-  wmutils-opt
   woff2
-  xclip
-  xfontsel
-  xgeometry-select
-  xorg.fontalias
-  xorg.fonttosfnt
-  xorg.fontutil
-  xorg.libxcb
-  xorg.mkfontdir
-  xorg.xcbutil
-  xorg.xcbutilerrors
-  xorg.xcbutilimage
-  xorg.xcbutilrenderutil
-  xorg.xcbutilwm
-  xorg.xev
-  xorg.xhost
-  xorg.xkill
-  xorg.xorgproto
-  xorg.xprop
-  xorg.xwininfo
-  xorriso
-  xsettingsd
 ]

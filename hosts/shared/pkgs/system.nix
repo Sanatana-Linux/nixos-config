@@ -1,53 +1,130 @@
 {pkgs, ...}:
 with pkgs; [
+  afuse
+  appstream
+  appstream-glib
+  as-tree
+  automake
+  avfs
   beep
+  dbus-broker
+  eggdbus
+  pcre2
+  procps
+
+  gnome-keyring
+  libgnome-keyring
+  bintools
   brightnessctl #system tool
+  cdrtools # for mkisofs
+  moreutils
+
   comma
   csv2latex
+  curtail
+  dconf
+  ddcui
+  ddcutil
   deer
   didyoumean
+  dosfstools
+  edk2
+  edk2-uefi-shell
   efibootmgr
+  exfatprogs
   fd
-  ghostscript
+  gcc_latest
   gh
-  lazyjournal
+  ghostscript
+  glib
+  glibc
+  grub2_full
   htop
   inotify-tools
   jdupes
   jq
+  kconfig-frontends
+  keyutils
+  kmsxx
+  lame
   latex2html
   latexrun
+  lazyjournal
+  libgcc
+  libgccjit
+  libisoburn
   lm_sensors
   lshw
   massren
+  mdds
+  meson
+  microcodeIntel
+  moar
+  mtools
   neofetch
   nmon
   ntfs3g
+  ntfs3g
+  ntfsprogs
+  opencl-clang
   openssl
+  out-of-tree
+  parallel
   patchelf
   pcre
   pcre-cpp
   pcre2
+  pfetch
+  pinentry-tty
+  pls # "prettier and powerful ls"
+  pmutils
   polkit_gnome
+  premake
   ps_mem
+  ps_mem
+  python312Packages.py-dmidecode
+  rcshist
   renameutils
   ripgrep-all
   rnr
   sdbus-cpp
   shared-mime-info
+  shellify
   silver-searcher
+  simpleTpmPk11
   slop
+  smartmontools
+  snappy
+  sysctl
+  sysfsutils
+  sysprof
+  sysstat
+  systemctl-tui
+  systemdgenie
+  systeroid
+  sysvtools
   sysz
+  template-glib
   testdisk
+  trash-cli
   tree
+  ucl
   unscd
   usbmuxd
+  usbmuxd
+  utillinux
   ventoy-full
   vgrep
   vimv
   wget
   whois
+  wiper
   wmctrl
+  wmic-bin
+  wmutils-core
+  wmutils-libwm
+  wmutils-opt
+  xclip
   xdg-dbus-proxy
   xdg-desktop-portal-gtk
   xdg-user-dirs
@@ -55,23 +132,42 @@ with pkgs; [
   xdotool
   xfce.tumbler
   xfce.xfce4-power-manager
+  xfontsel
+  xgeometry-select
+  xorg.fontalias
+  xorg.fonttosfnt
+  xorg.fontutil
+  xorg.libxcb
+  xorg.mkfontdir
   xorg.mkfontdir
   xorg.xbacklight
   xorg.xcbutil
+  xorg.xcbutil
+  xorg.xcbutilerrors
   xorg.xcbutilerrors
   xorg.xcbutilimage
+  xorg.xcbutilimage
   xorg.xcbutilrenderutil
+  xorg.xcbutilrenderutil
+  xorg.xcbutilwm
   xorg.xcbutilwm
   xorg.xconsole
   xorg.xev
+  xorg.xev
+  xorg.xhost
   xorg.xhost
   xorg.xinit
   xorg.xkill
+  xorg.xkill
+  xorg.xorgproto
   xorg.xorgproto
   xorg.xprop
+  xorg.xprop
   xorg.xwininfo
+  xorg.xwininfo
+  xorriso
   xsecurelock
+  xsettingsd
   xss-lock
   xsuspender
-  wiper
 ]

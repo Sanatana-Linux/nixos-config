@@ -27,6 +27,7 @@
       implementation = "dbus"; # lock dbus impl to dbus-broker
     };
 
+    # because both gnome-keyring and gnome.gnome-keyring exist
     gnome = {
       glib-networking.enable = true;
       gnome-keyring.enable = true;

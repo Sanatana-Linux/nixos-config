@@ -6,68 +6,16 @@
   home.packages = lib.attrValues {
     inherit
       (pkgs)
-      dbus-broker
-      eggdbus
-      bc
       thunderbird-bin
-      bfg-repo-cleaner
       feh
-      fzf
-      gist
-      git
-      git-backup-go
-      git-extras
-      git-filter-repo
-      git-lfs
-      git-repo-updater
-      git-revise
-      git-trim
-      gitleaks
-      gnome-keyring
-      meson-tools
-      meson
-      go
-      gopls
-      grex
       i3lock-color
       imagemagick
-      kbfs
-      keybase
-      keybase-gui
       keychain
-      killall
-      libgnome-keyring
-      moreutils
-      mpc-cli
-      mpdris2
-      obsidian
-      pavucontrol
-      playerctl
+      adwaita-icon-theme
+      adwaita-icon-theme-legacy
+      hicolor-icon-theme
       pre-commit
-      pcre2
-      procps
-      pywal
-      rust-analyzer
-      sassc
       slurp
-      socat
-      swww
-      trash-cli
-      walk
-      xplorer
-      wf-recorder
-      xdg-desktop-portal
-      ;
-    inherit
-      (pkgs.gitAndTools)
-      gh
-      git-absorb
-      git-machete
-      gitui
-      ;
-    inherit
-      (pkgs.luajitPackages)
-      lua
       ;
     inherit
       (pkgs.xorg)

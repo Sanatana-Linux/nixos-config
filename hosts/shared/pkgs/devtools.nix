@@ -4,8 +4,35 @@ with pkgs; [
   actionlint
   tailwindcss-language-server
   any-nix-shell
+  bc
+
+  meson-tools
+  gitAndTools.gh
+  gitAndTools.git-absorb
+  gitAndTools.git-machete
+  gitAndTools.gitui
+  luajitPackages.lua
+
+  rust-analyzer
+  grex
+  gopls
+  go
+  meson
   brotli
   cached-nix-shell
+  gist
+  git
+  git-backup-go
+  git-extras
+  git-filter-repo
+  git-lfs
+  git-repo-updater
+  git-revise
+  git-trim
+  gitleaks
+
+  bfg-repo-cleaner
+  sassc
   cargo
   cargo-binutils
   clang

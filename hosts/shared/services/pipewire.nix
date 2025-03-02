@@ -3,7 +3,7 @@
     enable = true;
     wireplumber.enable = true;
     pulse.enable = true;
-    #jack.enable = true;
+    jack.enable = true;
     alsa = {
       enable = true;
       support32Bit = true;
@@ -23,6 +23,11 @@
     alsa-oss
     alsa-plugins
     alsa-tools
+    mpc-cli
+    mpdris2
+    pavucontrol
+    playerctl
+
     alsa-utils
     #alsaequal
     #audacity
@@ -46,7 +51,6 @@
     pulseaudio-ctl
     pulseaudioFull
     #pulsemixer
-    spotify-cli-linux
     vlc
   ];
 }

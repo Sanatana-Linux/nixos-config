@@ -9,6 +9,8 @@ with pkgs;
         pydantic-core
         beautifulsoup4
         brotlicffi
+        python-lsp-server
+        flake8
         brotlipy
         gitdb
         googleapis-common-protos

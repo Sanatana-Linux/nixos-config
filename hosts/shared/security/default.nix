@@ -77,16 +77,18 @@
         Defaults env_keep+=SSH_AUTH_SOCK
       '';
     };
-    # solve open file limits
-    pam.loginLimits = [
-      {
-        domain = "*";
-        type = "soft";
-        item = "nofile";
-        value = "81920";
-      }
-    ];
 
+    pam = {
+      # solve open file limits
+      loginLimits = [
+        {
+          domain = "*";
+          type = "soft";
+          item = "nofile";
+          value = "81920";
+        }
+      ];
+    };
     polkit.enable = true;
     rtkit.enable = true;
     tpm2 = {

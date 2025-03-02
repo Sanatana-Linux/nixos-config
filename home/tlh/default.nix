@@ -55,6 +55,7 @@
     };
   };
 
+  services.gnome-keyring.enable = true;
   programs.home-manager.enable = true;
 
   home = {

@@ -10,6 +10,7 @@
   # rest of undevolting done via  OS configuration as it is more responsive to experimentation
   services.undervolt = {
     enable = true;
+    tempBat = 85; # Maximum battery temperature
     uncoreOffset = -50; # in mV
     coreOffset = -50; # in mV
     package = pkgs.undervolt;

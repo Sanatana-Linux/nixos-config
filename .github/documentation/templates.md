@@ -1,6 +1,6 @@
 # Project Templates
 
-The `outputs.templates` configured by this repository's `flake.nix` can be used in the following way: 1. run `nix flake init -t myTemplateFlake#templateName` 2. run `git init` 3. replace placeholder names with the name of the project 4. run `git add .` to make nix aware of all required files 5. run `nix develop` to enter the development environment
+The `outputs.templates` configured by this repository's `flake.nix` can be used in the following way: 1. run `nix flake init -t /etc/nixos/#templateName` 2. run `git init` 3. replace placeholder names with the name of the project 4. run `git add .` to make nix aware of all required files 5. run `nix develop` to enter the development environment
 
 ## Available Templates
 

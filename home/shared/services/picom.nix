@@ -66,8 +66,8 @@
         # strength = 12.0;
         # deviation = 3.0;
         method = "gaussian";
-        size = 20;
-        deviation = 15;
+        size = 10;
+        deviation = 5;
         # kernel = "11x11gaussian";
       };
 

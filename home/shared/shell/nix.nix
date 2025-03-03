@@ -22,8 +22,9 @@
       nix-zsh-completions
     ];
 
-    sessionVariables = {
+    sessionVariables = with pkgs; {
       DIRENV_LOG_FORMAT = "";
+      LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib";
     };
   };
 

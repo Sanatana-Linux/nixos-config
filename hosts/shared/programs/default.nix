@@ -20,9 +20,6 @@
       enable = true;
       package = pkgs.jre;
     };
-    # gnome's keyring manager
-
-    seahorse.enable = true;
 
     nm-applet.enable = false;
 

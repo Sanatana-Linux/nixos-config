@@ -4,7 +4,7 @@
   lib,
   ...
 }: let
-  nvidiaDriverChannel = config.boot.kernelPackages.nvidiaPackages.stable; # stable, production, etc.
+  nvidiaDriverChannel = config.boot.kernelPackages.nvidiaPackages.production; # stable, production, beta, latest
 in {
   environment = {
     variables = {

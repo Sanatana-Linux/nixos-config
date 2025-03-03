@@ -79,6 +79,7 @@
     };
 
     pam = {
+      sshAgentAuth.enable = true;
       # solve open file limits
       loginLimits = [
         {

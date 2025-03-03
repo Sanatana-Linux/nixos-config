@@ -7,6 +7,7 @@ with pkgs; [
   OVMFFull
   alejandra
   any-nix-shell
+  stdenv.cc.cc
   cached-nix-shell
   cachix
   cbfmt

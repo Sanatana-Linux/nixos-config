@@ -12,48 +12,65 @@
       mapping_tools:                   # Alias for a tool or toolset
          fs: 'fs_cat,fs_ls,fs_mkdir,fs_rm,fs_write'
       use_tools: fts,web_search # Enables or disables wrapping of code blocks
-      model: ollama
+
+
+      # ---- apperence ----
+      highlight: true                  # Controls syntax highlighting
+      light_theme: false               # Activates a light color theme when true. env: AICHAT_LIGHT_THEME
+      # Custom REPL left/right prompts, see https://github.com/sigoden/aichat/wiki/Custom-REPL-Prompt for more details
+      left_prompt: '{color.green}{?session {?agent {agent}>}{session}{?role /}}{!session {?agent {agent}>}}{role}{?rag @{rag}}{color.cyan}{?session )}{!session >}{color.reset} '
+      right_prompt:  '{color.purple}{?session {?consume_tokens {consume_tokens}({consume_percent}%)}{!consume_tokens {consume_tokens}}}{color.reset}'
+      model: ollama:deepseek-r1:14b
       clients:
         - type: openai-compatible
           name: ollama
           api_base: http://localhost:11434/v1
           api_key: null
           models:
-          - name: llama3.2:3b
+          - name: bge-m3:latest
             max_input_tokens: null
-          - name: Qwen 2.5 Coder
+            type: embedding
+          - name: snowflake-arctic-embed:latest
             max_input_tokens: null
-          - name: wizard-vicuna-uncensored:13b
+            type: embedding
+          - name: nomic-embed-text:latest
             max_input_tokens: null
-          - name: huggingface.co/Novaciano/Llama-3.2-3b-NSFW_Aesir_Uncensored-GGUF:latest
+            type: embedding
+          - name: huggingface.co/DavidAU/DeepSeek-MOE-4X8B-R1-Distill-Llama-3.1-Deep-Thinker-Uncensored-24B-GGUF:latest
             max_input_tokens: null
           - name: huggingface.co/TheBloke/deepseek-coder-33B-instruct-GGUF:latest
+            max_input_tokens: null
+          - name: huggingface.co/DavidAU/Mistral-MOE-4X7B-Dark-MultiVerse-Uncensored-Enhanced32-24B-gguf:latest
+            max_input_tokens: null
+          - name: huggingface.co/DevQuasar/DevQuasar-R1-Uncensored-Llama-8B-GGUF:latest
             max_input_tokens: null
           - name: deepseek-r1:14b
             max_input_tokens: null
           - name: granite3-dense:8b
             max_input_tokens: null
-          - name: zephyr:7b
+          - name: llama3.2:3b
+            max_input_tokens: null
+          - name: huggingface.co/DavidAU/L3-Grand-Story-Darkness-MOE-4X8-24.9B-e32-GGUF:latest
+            max_input_tokens: null
+          - name: huggingface.co/DavidAU/Llama-3.2-4X3B-MOE-Hell-California-Uncensored-10B-GGUF:latest
+            max_input_tokens: null
+          - name: huggingface.co/DavidAU/Llama-3.2-8X3B-MOE-Dark-Champion-Instruct-uncensored-abliterated-18.4B-GGUF:latest
+            max_input_tokens: null
+          - name: huggingface.co/byroneverson/LongWriter-glm4-9b-abliterated-gguf:latest
+            max_input_tokens: null
+          - name: huggingface.co/QuantFactory/DarkIdol-Llama-3.1-8B-Instruct-1.2-Uncensored-GGUF:latest
             max_input_tokens: null
           - name: nemotron-mini:4b
             max_input_tokens: null
+          - name: wizard-vicuna-uncensored:13b
+            max_input_tokens: null
+      rag_embedding_model: ollama:bge-m3:latest
+      rag_reranker_model: ollama:bge-m3:latest
 
-
-    '';
-  english_role =
-    #markdown
-    ''
-      ---
-      model: ollama:llama3.2:3b
-      temperature:
-      top_p:
-      ---
-
-      You are a language assistant. If the input is in English, you review the text and fix errors. If the input in another language than English, you translate the input to English. Do NOT add any additional information. Reply only with the translated or improved text.
     '';
   bash_one_liner_role = ''
          ---
-         model: ollama:llama3.2:3b
+         model: ollama:huggingface.co/TheBloke/deepseek-coder-33B-instruct-GGUF:latest
          temperature:
          top_p:
          ---
@@ -63,27 +80,12 @@
   '';
   coder_role = ''
        ---
-       model: ollama:llama3.2:3b
+       model: ollama:huggingface.co/TheBloke/deepseek-coder-33B-instruct-GGUF:latest
        temperature:
        top_p:
        ---
     I want you to act as a senior programmer. I want you to answer only with the fenced code block. I want you to add an language identifier to the fenced code block. Do not write explanations.
   '';
-
-  commit_suggester_role =
-    #markdown
-    ''
-      ---
-      model: ollama:granite3-dense:8b
-      temperature: 0.9
-      top_p:
-      ---
-
-      Please provide a concise one-line summary of the changes introduced in this commit. The change
-      should follow the Conventional Commits format: `<type>(<scope>): <short summary>`. Do not
-      respond with anything other than the commit message(!IMPORTANT) .Here is the
-      `git diff -z` output to base your message on:
-    '';
   prompt_improver_role = ''
      ---
      model: ollama:deepseek-r1:14b
@@ -122,11 +124,9 @@ in {
   xdg.configFile."aichat/config.yaml".text = aichatConfig;
 
   # Roles
-  xdg.configFile."aichat/roles/english.md".text = english_role;
   xdg.configFile."aichat/roles/bashOneLiner.md".text = bash_one_liner_role;
   xdg.configFile."aichat/roles/prompt_improver_role.md".text = prompt_improver_role;
   xdg.configFile."aichat/roles/prompt_creator_role.md".text = prompt_creator_role;
   xdg.configFile."aichat/roles/coder.md".text = coder_role;
   xdg.configFile."aichat/roles/commit.md".text = builtins.readFile ./aichat/commit.md;
-  xdg.configFile."aichat/roles/commitSuggester.md".text = commit_suggester_role;
 }

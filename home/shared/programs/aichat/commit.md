@@ -1,6 +1,6 @@
 ---
-model: ollama:llama3.2:3b
-temperature: 0.4
+model: ollama:deepseek-r1:14b
+temperature: 0.7
 top_p: 0.1
 ---
 

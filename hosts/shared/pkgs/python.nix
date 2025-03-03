@@ -16,7 +16,6 @@ with pkgs;
         googleapis-common-protos
         levenshtein
         mdformat
-        numpy
         pip
         pip-tools
         pipx

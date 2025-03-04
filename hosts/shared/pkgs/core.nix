@@ -5,17 +5,11 @@
 }:
 with pkgs; [
   OVMFFull
-  alejandra
-  any-nix-shell
-  stdenv.cc.cc
-  cached-nix-shell
-  cachix
   cbfmt
   ccls
   clang-tools
   cmake
   commonsCompress
-  deadnix
   dmg2img
   dnsutils
   espeak-ng
@@ -28,31 +22,10 @@ with pkgs; [
   fontforge-gtk
   fontpreview
   ftgl
-  manix
   minizip2
   networkmanager
   ngrok
-  nil
-  nix-bash-completions
-  nix-binary-cache
-  nix-bundle
-  nix-direnv-flakes
-  nix-doc
-  nix-health
-  nix-index
-  nix-janitor
-  nix-zsh-completions
-  nixd
-  nixel
-  nixos-generators
-  nixpacks
-  nixt
   nmap
-  node2nix
-  nox
-  nurl
-  nux
-  nvd
   papirus-folders
   poppler_gi
   pulseaudio
@@ -62,7 +35,7 @@ with pkgs; [
   service-wrapper
   sox
   sssd
-  statix
+  stdenv.cc.cc
   tealdeer
   toilet
   ttfautohint

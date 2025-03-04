@@ -65,32 +65,26 @@
           - name: wizard-vicuna-uncensored:13b
             max_input_tokens: null
       rag_embedding_model: ollama:bge-m3:latest
-      rag_reranker_model: ollama:bge-m3:latest
 
     '';
   bash_one_liner_role = ''
-         ---
-         model: ollama:huggingface.co/TheBloke/deepseek-coder-33B-instruct-GGUF:latest
-         temperature:
-         top_p:
-         ---
+    ---
+    model: ollama:huggingface.co/TheBloke/deepseek-coder-33B-instruct-GGUF:latest
+    ---
 
     I want you to act as a linux shell expert. You will provide a bash one-liner that meets the
     spcifications I will provide to you. I want you to answer only with code. Do not write explanations.
   '';
   coder_role = ''
-       ---
-       model: ollama:huggingface.co/TheBloke/deepseek-coder-33B-instruct-GGUF:latest
-       temperature:
-       top_p:
-       ---
+    ---
+    model: ollama:huggingface.co/TheBloke/deepseek-coder-33B-instruct-GGUF:latest
+    ---
     I want you to act as a senior programmer. I want you to answer only with the fenced code block. I want you to add an language identifier to the fenced code block. Do not write explanations.
   '';
   prompt_improver_role = ''
      ---
      model: ollama:deepseek-r1:14b
      temperature: 0.8
-     top_p:
      ---
     As a world-clas AI researcher, your task is to improve the generative language model prompt provided in the next message.
     First, organize the information.
@@ -106,7 +100,6 @@
      ---
      model: ollama:deepseek-r1:14b
      temperature: 0.8
-     top_p:
     ---
      As a world-class AI researcher, your task is to asist the user in creating a system prompt for a the generative language model.
      Consider the user's goal and potential misinterpretations while making improvements.
@@ -124,9 +117,10 @@ in {
   xdg.configFile."aichat/config.yaml".text = aichatConfig;
 
   # Roles
-  xdg.configFile."aichat/roles/bashOneLiner.md".text = bash_one_liner_role;
+  xdg.configFile."aichat/roles/bash_one_liner.md".text = bash_one_liner_role;
   xdg.configFile."aichat/roles/prompt_improver_role.md".text = prompt_improver_role;
   xdg.configFile."aichat/roles/prompt_creator_role.md".text = prompt_creator_role;
   xdg.configFile."aichat/roles/coder.md".text = coder_role;
   xdg.configFile."aichat/roles/commit.md".text = builtins.readFile ./aichat/commit.md;
+  xdg.configFile."aichat/roles/system_design.md".text = builtins.readFile ./aichat/system_design.md;
 }

@@ -41,7 +41,6 @@
     act
     distrobox
     fuse-overlayfs
-    podman-desktop
     podman-compose
     podman-tui
     kvmtool

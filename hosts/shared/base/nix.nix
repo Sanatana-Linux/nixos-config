@@ -5,6 +5,36 @@
   config,
   ...
 }: {
+  environment.systemPackages = with pkgs; [
+    alejandra
+    any-nix-shell
+    cached-nix-shell
+    cachix
+    deadnix
+    manix
+    nil
+    nix-bash-completions
+    nix-binary-cache
+    nix-bundle
+    nix-direnv-flakes
+    nix-doc
+    nix-health
+    nix-index
+    nix-janitor
+    nix-zsh-completions
+    nixd
+    nixel
+    nixos-generators
+    nixpacks
+    nixt
+    node2nix
+    nox
+    nurl
+    nux
+    nvd
+    statix
+  ];
+
   # Disable all documentation to reduce closure size
   documentation = {
     # disable documentation generation

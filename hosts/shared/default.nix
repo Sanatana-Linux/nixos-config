@@ -33,6 +33,7 @@
       inputs.stable-diffusion-webui-nix.overlays.default
       inputs.nixpkgs-f2k.overlays.default
       inputs.nur.overlays.default
+      inputs.nix-comfyui.overlays.default
     ];
 
     config = {

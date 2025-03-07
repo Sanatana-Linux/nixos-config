@@ -27,7 +27,12 @@
           api_base: http://localhost:11434/v1
           api_key: null
           models:
-          - name: codegeex4:latest
+          - name: huggingface.co/DavidAU/L3.1-Dark-Planet-10.7B-ExxxxxxxxTended-GGUF:latest
+            supports_function_calling: true
+          - name: granite3.2:latest
+            supports_function_calling: true
+          - name: huggingface.co/THUDM/codegeex4-all-9b-GGUF:latest
+            supports_function_calling: true
           - name: bge-m3:latest
             type: embedding
           - name: snowflake-arctic-embed:latest
@@ -35,19 +40,33 @@
           - name: nomic-embed-text:latest
             type: embedding
           - name: huggingface.co/DavidAU/DeepSeek-MOE-4X8B-R1-Distill-Llama-3.1-Deep-Thinker-Uncensored-24B-GGUF:latest
+            supports_function_calling: true
           - name: huggingface.co/TheBloke/deepseek-coder-33B-instruct-GGUF:latest
+            supports_function_calling: true
           - name: huggingface.co/DavidAU/Mistral-MOE-4X7B-Dark-MultiVerse-Uncensored-Enhanced32-24B-gguf:latest
+            supports_function_calling: true
           - name: huggingface.co/DevQuasar/DevQuasar-R1-Uncensored-Llama-8B-GGUF:latest
+            supports_function_calling: true
           - name: deepseek-r1:14b
+            supports_function_calling: true
           - name: granite3-dense:8b
+            supports_function_calling: true
           - name: llama3.2:3b
+            supports_function_calling: true
           - name: huggingface.co/DavidAU/L3-Grand-Story-Darkness-MOE-4X8-24.9B-e32-GGUF:latest
+            supports_function_calling: true
           - name: huggingface.co/DavidAU/Llama-3.2-4X3B-MOE-Hell-California-Uncensored-10B-GGUF:latest
+            supports_function_calling: true
           - name: huggingface.co/DavidAU/Llama-3.2-8X3B-MOE-Dark-Champion-Instruct-uncensored-abliterated-18.4B-GGUF:latest
+            supports_function_calling: true
           - name: huggingface.co/byroneverson/LongWriter-glm4-9b-abliterated-gguf:latest
+            supports_function_calling: true
           - name: huggingface.co/QuantFactory/DarkIdol-Llama-3.1-8B-Instruct-1.2-Uncensored-GGUF:latest
+            supports_function_calling: true
           - name: nemotron-mini:4b
+            supports_function_calling: true
           - name: wizard-vicuna-uncensored:13b
+            supports_function_calling: true
 
     '';
   bash_one_liner_role = ''

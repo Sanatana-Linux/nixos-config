@@ -2,5 +2,5 @@
 ./.direnv/nix-profile*
 ./result
 ./result/*
-
+prompt.txt
 .aider*

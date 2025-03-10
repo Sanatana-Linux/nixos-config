@@ -28,11 +28,10 @@
           api_key: null
           models:
           - name: huggingface.co/DavidAU/L3.1-Dark-Planet-10.7B-ExxxxxxxxTended-GGUF:latest
-            supports_function_calling: true
           - name: granite3.2:latest
             supports_function_calling: true
           - name: huggingface.co/THUDM/codegeex4-all-9b-GGUF:latest
-            supports_function_calling: true
+            supports_function_calling: false
           - name: bge-m3:latest
             type: embedding
           - name: snowflake-arctic-embed:latest
@@ -40,17 +39,11 @@
           - name: nomic-embed-text:latest
             type: embedding
           - name: huggingface.co/DavidAU/DeepSeek-MOE-4X8B-R1-Distill-Llama-3.1-Deep-Thinker-Uncensored-24B-GGUF:latest
-            supports_function_calling: true
           - name: huggingface.co/TheBloke/deepseek-coder-33B-instruct-GGUF:latest
-            supports_function_calling: true
           - name: huggingface.co/DavidAU/Mistral-MOE-4X7B-Dark-MultiVerse-Uncensored-Enhanced32-24B-gguf:latest
-            supports_function_calling: true
           - name: huggingface.co/DevQuasar/DevQuasar-R1-Uncensored-Llama-8B-GGUF:latest
-            supports_function_calling: true
           - name: deepseek-r1:14b
-            supports_function_calling: true
-          - name: granite3-dense:8b
-            supports_function_calling: true
+            supports_function_calling: false
           - name: llama3.2:3b
             supports_function_calling: true
           - name: huggingface.co/DavidAU/L3-Grand-Story-Darkness-MOE-4X8-24.9B-e32-GGUF:latest
@@ -60,7 +53,6 @@
           - name: huggingface.co/DavidAU/Llama-3.2-8X3B-MOE-Dark-Champion-Instruct-uncensored-abliterated-18.4B-GGUF:latest
             supports_function_calling: true
           - name: huggingface.co/byroneverson/LongWriter-glm4-9b-abliterated-gguf:latest
-            supports_function_calling: true
           - name: huggingface.co/QuantFactory/DarkIdol-Llama-3.1-8B-Instruct-1.2-Uncensored-GGUF:latest
             supports_function_calling: true
           - name: nemotron-mini:4b
@@ -71,7 +63,7 @@
     '';
   bash_one_liner_role = ''
     ---
-    model: ollama:huggingface.co/TheBloke/deepseek-coder-33B-instruct-GGUF:latest
+    model: ollama:huggingface.co/THUDM/codegeex4-all-9b-GGUF:latest
     ---
 
     I want you to act as a linux shell expert. You will provide a bash one-liner that meets the
@@ -79,15 +71,11 @@
   '';
   coder_role = ''
     ---
-    model: ollama:huggingface.co/TheBloke/deepseek-coder-33B-instruct-GGUF:latest
+    model: ollama:huggingface.co/THUDM/codegeex4-all-9b-GGUF:latest
     ---
     I want you to act as a senior programmer. I want you to answer only with the fenced code block. I want you to add an language identifier to the fenced code block. Do not write explanations.
   '';
   prompt_improver_role = ''
-     ---
-     model: ollama:deepseek-r1:14b
-     temperature: 0.8
-     ---
     As a world-clas AI researcher, your task is to improve the generative language model prompt provided in the next message.
     First, organize the information.
     Then, eliminate duplicates.
@@ -96,7 +84,10 @@
     Consider the user's goal and potential misinterpretations while making improvements.
     After that, provide specific editorial recommendations and reasoning.
     Finally, present the revised prompt, with one sentence per line (no extra whitespace or blank lines).
+    Remember, my next message will be the prompt you are to improve and is intended not for you to follow but for you to actively improve as described above.
+
     The prompt is:
+    ````
   '';
   prompt_creator_role = ''
      ---

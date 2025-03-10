@@ -15,7 +15,6 @@ with pkgs; [
   colorstorm
   colorz
   curtail
-  emacsPackages.svgo
   exiftool
   feh
   figlet

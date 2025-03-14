@@ -8,7 +8,14 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/master";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     nixpkgs-f2k.url = "github:moni-dz/nixpkgs-f2k";
-    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+
+    pre-commit-hooks = {
+      url = "github:cachix/pre-commit-hooks.nix";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
+
     nur = {
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -79,6 +86,15 @@
       in
         import ./shell.nix {inherit pkgs;}
     );
+
+    checks = {
+      pre-commit-check = pre-commit-hooks.lib.${system}.run {
+        hooks = {
+          nixpkgs-fmt.enable = true;
+          statix.enable = true;
+        };
+      };
+    };
 
     nixosConfigurations = {
       extra-substituters = [

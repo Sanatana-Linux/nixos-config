@@ -88,11 +88,12 @@ that would be available to `nix search` can be used. Below are the search option
 output of `nix search --help` in an easy to read and refer to Markdown table and adapted to `om search`
 specifically to ease your integration of the new package manager wrapper utility.
 
+
 | Search Option                        | Description                                              |
 | ------------------------------------ | -------------------------------------------------------- | --------------------------------------------------------- |
 | `om search [package name]`           | Search for a package by name.                            |
-| `om search #gnome3 vala`             | search gnome3 packages within nixpkgs for package `vala` |
-| `om search "[package1]               | [package2]"`                                             | Search for either package1 or package2                    |
-| `om search "git 'frontend            | gui'"`                                                   | Search packages containing git and either frontend or gui |
+| `om search #gnome3 vala`             | search `gnome3` packages within `nixpkgs` for package `vala` |
+| `om search "[package1]               | [package2]"`                                             | Search for either [package1] or [package2]                    |
+| `om search "git 'frontend [PIPE SYMBOL HERE] gui'"`                                                   | Search packages containing git and either frontend or gui |
 | `om search "neovim --exclude 'python | gui'"`                                                   | Search for packages containing neovim but hide ones       |
 | containing either gui or python      |

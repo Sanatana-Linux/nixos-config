@@ -37,6 +37,7 @@ in {
     };
     systemPackages = with pkgs;
       [
+        cudaPackages.libnvjitlink
         cudaPackages.cuda_cccl
         cudaPackages.cuda_cudart
         cudaPackages.cuda_gdb
@@ -72,6 +73,7 @@ in {
         peakperf
         vaapiVdpau
         xorg_sys_opengl
+        zenith-nvidia
       ]
       ++ [
         (python312.withPackages (p:
@@ -125,7 +127,7 @@ in {
       dynamicBoost.enable = true;
       powerManagement = {
         # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
-        enable = false;
+        enable = true;
         # Fine-grained power management. Turns off GPU when not in use.
         # Experimental and only works on modern Nvidia GPUs (Turing or newer).
         finegrained = false;

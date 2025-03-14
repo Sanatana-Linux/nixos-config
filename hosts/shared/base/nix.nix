@@ -111,20 +111,29 @@
       # Turn off that annoying warning from not committing
       warn-dirty = false;
       use-xdg-base-directories = true;
+      # Explicitly allow flake.nix, just in case
+      accept-flake-config = true;
     };
 
     # nix package manager version
     package = pkgs.nixVersions.git;
     # Garbage Collection Settings
     gc = {
+      # Less Aggressive since both laptops have more than 1 TB of storage
+      # and macbook-air I can configure aggressively when I get to fixing that config
       automatic = true;
-      dates = "daily";
-      options = "--delete-older-than 3d";
+      dates = "weekly";
+      options = "--delete-older-than 14d";
     };
     # Transform the `inputs` attribute set into a registry format
     registry = lib.mapAttrs (_: value: {flake = value;}) inputs;
 
     # Convert the `registry` attribute set to a list of strings in the form "key=path"
     nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
+  };
+  # switch nixos-rebuild to the next generation
+  system.switch = {
+    enable = false;
+    enableNg = true;
   };
 }

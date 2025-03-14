@@ -27,6 +27,11 @@
           api_base: http://localhost:11434/v1
           api_key: null
           models:
+          - name: huggingface.co/mradermacher/Arch-Function-7B-GGUF:latest
+            supports_function_calling: true
+          - name: huggingface.co/QuantFactory/Llama3.2-3B-Enigma-GGUF:latest
+          - name: huggingface.co/QuantFactory/OpenCoder-8B-Instruct-GGUF:latest
+          - name: huggingface.co/bartowski/suayptalha_Maestro-10B-GGUF:latest
           - name: huggingface.co/DavidAU/L3.1-Dark-Planet-10.7B-ExxxxxxxxTended-GGUF:latest
           - name: granite3.2:latest
             supports_function_calling: true
@@ -45,20 +50,13 @@
           - name: deepseek-r1:14b
             supports_function_calling: false
           - name: llama3.2:3b
-            supports_function_calling: true
           - name: huggingface.co/DavidAU/L3-Grand-Story-Darkness-MOE-4X8-24.9B-e32-GGUF:latest
-            supports_function_calling: true
           - name: huggingface.co/DavidAU/Llama-3.2-4X3B-MOE-Hell-California-Uncensored-10B-GGUF:latest
-            supports_function_calling: true
           - name: huggingface.co/DavidAU/Llama-3.2-8X3B-MOE-Dark-Champion-Instruct-uncensored-abliterated-18.4B-GGUF:latest
-            supports_function_calling: true
           - name: huggingface.co/byroneverson/LongWriter-glm4-9b-abliterated-gguf:latest
           - name: huggingface.co/QuantFactory/DarkIdol-Llama-3.1-8B-Instruct-1.2-Uncensored-GGUF:latest
-            supports_function_calling: true
           - name: nemotron-mini:4b
-            supports_function_calling: true
           - name: wizard-vicuna-uncensored:13b
-            supports_function_calling: true
 
     '';
   bash_one_liner_role = ''

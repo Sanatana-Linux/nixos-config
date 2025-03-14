@@ -45,12 +45,16 @@ with pkgs;
 
     function repair() {
       echo "Repairing the Nix Store Now"
-      nix-collect-garbage -d
-      nix-store --verify --repair
-      nix-store --verify --check-contents --repair
-      nix store verify --all
-      nix store repair --all
-      nix-collect-garbage -d
+      doas nix-store --verify --repair
+      doas nix-store --verify --check-contents --repair
+      doas nix store verify --all
+      doas nix store repair --all
+      doas nix-collect-garbage -d
+      echo "Finding SymLinks into the Store & Deleting"
+      doas find ~/* -lname '/nix/store/*' -delete
+      echo "Run the Garbage Collector"
+      doas nix-store --gc
+
       echo "Repair Process Finished"
     }
 
@@ -85,9 +89,8 @@ with pkgs;
 
     function optimize() {
       echo "Optimizing the Nix Store Now"
-      nix-collect-garbage -d
-      nix-store --verify --check-contents --repair
-      nix-store --optimize --verbose
+      doas nix store optimise --verbose
+      doas nix-store --optimize --verbose
     }
 
     function rollback() {
@@ -102,16 +105,20 @@ with pkgs;
 
     function clean() {
       echo "Cleaning the Nix Store"
-      nix-store --gc
-      echo "Removing old generations"
-      nix-env --delete-generations old
-      echo "Collecting system garbage"
+      echo "Finding SymLinks into the Store & Deleting"
+      doas find ~/* -lname '/nix/store/*' -delete
+      echo "Run the Garbage Collector"
+      doas nix-store --gc
+      echo "Removing Old Generations"
+      doas nix-env --delete-generations old
+      echo "Collecting System Garbage"
+      doas nix-collect-garbage -d
+      doas nix profile wipe-history
+      echo "Collecting User Garbage"
       nix-collect-garbage -d
       nix profile wipe-history
-      echo "Collecting user garbage"
-      nix-collect-garbage -d
-      nix profile wipe-history
-      janitor --gc
+      echo "Running nix-janitor as a Redundancy"
+      doas janitor --gc
     }
 
     function search() {

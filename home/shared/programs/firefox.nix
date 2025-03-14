@@ -139,17 +139,18 @@ in {
         "gfx.webrender.svg-images" = true;
         "gfx.x11-egl.force-enabled" = true;
         "layers.acceleration.force-enabled" = true;
-        "layout.css.backdrop-filter.enabled" = true;
+        "layout.css.backdrop-filter.enabled" = true; # acrylic gaussian blur
         "layout.css.cached-scrollbar-styles.enabled" = false;
         "layout.css.color-mix.enabled" = true;
         "layout.css.font-visibility.private" = 3;
         "layout.css.font-visibility.resistFingerprinting" = 3;
         "layout.css.has-selector.enabled" = true;
+        "layout.css.light-dark.enabled" = true;
         "layout.css.moz-document.content.enabled" = true;
         "layout.css.moz-outline-radius.enabled" = true;
         "layout.css.xul-box-display-values.content.enabled" = true;
         "layout.css.xul-display-values.content.enabled" = true;
-        "layout.css.xul-tree-pseudos.content.enabled" = true;
+        "layout.css.xul-tree-pseudos.content.enabled" = true; # allow stylesheets to modify trees in system pages viewed in regular tabs
         "loop.logDomains" = false;
         "media.av1.enabled" = false;
         "media.ffmpeg.vaapi.enabled" = true;
@@ -169,11 +170,9 @@ in {
         "toolkit.telemetry.enabled" = false;
         "toolkit.telemetry.unified" = false;
         "ui.systemUsesDarkTheme" = 1;
-
         "dom.webgpu.workers.enabled" = true;
         "dom.webgpu.enabled" = true;
         "gfx.webgpu.force-enabled" = true;
-
         "higgs-boson.disable.verticaltab.bar" = false;
 
         "higgs-boson.disable.windowcontrols.button" = true;

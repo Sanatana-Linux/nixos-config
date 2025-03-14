@@ -7,7 +7,13 @@
     lunacy
     plandex
     # local-ai
-    open-interpreter
+    python312Packages.peacasso
+    python312Packages.diffusers
+    python312Packages.optimum
+    libtorch-bin
+    python312Packages.pytorch-bin
+    python312Packages.transformers
+    python312Packages.triton-cuda
     ollama-cuda
     python312Packages.ollama
     tgpt

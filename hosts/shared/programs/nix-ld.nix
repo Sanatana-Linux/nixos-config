@@ -16,6 +16,7 @@
       glibc
       gobject-introspection
       gmime3
+      xorg.libxcb
       icu
       config.boot.kernelPackages.nvidiaPackages.production # nvidia x11 kernel module
       cudaPackages.cudnn

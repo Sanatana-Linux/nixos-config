@@ -17,7 +17,6 @@
     # Ollama's configuration
     ../shared/ai/ollama.nix
     ../shared/ai/default.nix
-    ../shared/ai/comfyui.nix
 
     # Virtualization configuration
     ../shared/virtualization/default.nix

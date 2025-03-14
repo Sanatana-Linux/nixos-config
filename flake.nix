@@ -39,10 +39,7 @@
     #   url = "github:nix-community/neovim-nightly-overlay";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
-    stable-diffusion-webui-nix = {
-      url = "github:Janrupf/stable-diffusion-webui-nix/main";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nixmox.url = "github:Sorixelle/nixmox";
   };
 
   outputs = {
@@ -75,7 +72,13 @@
     #
     packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
 
-    devShells = forAllSystems (pkgs: import ./shell.nix {inherit pkgs;});
+    # devShells = forAllSystems (pkgs: import ./shell.nix {inherit pkgs;});
+    devShells = forAllSystems (
+      system: let
+        pkgs = nixpkgs.legacyPackages.${system};
+      in
+        import ./shell.nix {inherit pkgs;}
+    );
 
     nixosConfigurations = {
       extra-substituters = [
@@ -86,6 +89,7 @@
         "https://pre-commit-hooks.cachix.org" # pre commit hooks
         "https://cuda-maintainers.cachix.org" # cuda maintainers
         "https://ai.cachix.org" # nixified cache
+        "https://stable-diff.cachix.org" # stable diffusion related cache
         "https://sanatanalinux.cachix.org" # sanatana linux
       ];
       extra-trusted-public-keys = [
@@ -97,6 +101,7 @@
         "pre-commit-hooks.cachix.org-1:Pkk3Panw5AW24TOv6kz3PvLhlH8puAsJTBbOPmBo7Rc="
         "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
         "ai.cachix.org-1:N9dzRK+alWwoKXQlnn0H6aUx0lU/mspIoz8hMvGvbbc="
+        "stable-diff.cachix.org-1:liYFm3f3q1dAoilj2Ag2IEKzW3Q9/HJcLlrAIytAcy0="
         "sanatanalinux.cachix.org-1:9WsJYECJ+Lt0HPTUI7+6f9uAaAUouaBUyTd9iAJbUEY="
       ];
       # ┣━━━━━━━━━━━━━━━━━━━━━━━┫ Dinosaur Laptop ┣━━━━━━━━━━━━━━━━━━━━━━━┫

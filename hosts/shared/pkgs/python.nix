@@ -40,6 +40,7 @@ with pkgs;
   ]
   ++ [
     gobject-introspection
+    pylint
     pipenv
     black
     ruff

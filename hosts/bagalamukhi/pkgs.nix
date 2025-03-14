@@ -7,7 +7,7 @@
   archives = import ../shared/pkgs/archives.nix {inherit pkgs;};
   core = import ../shared/pkgs/core.nix {inherit pkgs inputs;};
   devtools = import ../shared/pkgs/devtools.nix {inherit pkgs;};
-  gui = import ../shared/pkgs/gui.nix {inherit pkgs;};
+  gui = import ../shared/pkgs/gui.nix {inherit pkgs inputs;};
   guilibs = import ../shared/pkgs/guilibs.nix {inherit pkgs;};
   image = import ../shared/pkgs/image.nix {inherit pkgs;};
   network = import ../shared/pkgs/network.nix {inherit pkgs;};

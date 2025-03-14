@@ -61,7 +61,6 @@ with pkgs; [
   resvg
   resvg
   scour
-  stable-diffusion-webui.forge.cuda
   svgcleaner
   t1utils
   termcolor

@@ -1,9 +1,15 @@
-{pkgs, ...}:
+{
+  pkgs,
+  inputs,
+  ...
+}:
 with pkgs; [
   appimage-run
   appstream-glib
   calibre
   bleachbit
+  inputs.nixmox.packages.x86_64-linux.oomoxFull
+  epiphany
   ebook_tools
   rofi-rbw
   rofimoji

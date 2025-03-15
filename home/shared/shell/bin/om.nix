@@ -122,7 +122,7 @@ with pkgs;
     }
 
     function search() {
-    nix search --impure nixpkgs "$2" | moar
+    nix search --impure nixpkgs "$2" && nps -e=true --columns=description "$2" | moar
     }
 
     function options() {

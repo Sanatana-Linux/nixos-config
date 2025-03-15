@@ -8,8 +8,10 @@ with pkgs; [
   appstream-glib
   calibre
   bleachbit
-  inputs.nixmox.packages.x86_64-linux.oomoxFull
   epiphany
+  kdePackages.breeze-icons
+  gnome-icon-theme
+
   ebook_tools
   rofi-rbw
   rofimoji

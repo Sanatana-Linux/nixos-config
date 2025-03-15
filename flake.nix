@@ -8,14 +8,6 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/master";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     nixpkgs-f2k.url = "github:moni-dz/nixpkgs-f2k";
-
-    pre-commit-hooks = {
-      url = "github:cachix/pre-commit-hooks.nix";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-      };
-    };
-
     nur = {
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -46,7 +38,6 @@
     #   url = "github:nix-community/neovim-nightly-overlay";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
-    nixmox.url = "github:Sorixelle/nixmox";
   };
 
   outputs = {
@@ -75,26 +66,18 @@
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
     # The extra packages and replacements that make this configuration tick
     overlays = import ./overlays {inherit inputs;};
+    # Flake Templates Easing the  Development Process and Taking Advantage of Nix in It
     templates = import ./templates;
-    #
+    # Packages themselves
     packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
 
-    # devShells = forAllSystems (pkgs: import ./shell.nix {inherit pkgs;});
+    # Development Environment for This Project, Most Useful During Fresh Installs
     devShells = forAllSystems (
       system: let
         pkgs = nixpkgs.legacyPackages.${system};
       in
         import ./shell.nix {inherit pkgs;}
     );
-
-    checks = {
-      pre-commit-check = pre-commit-hooks.lib.${system}.run {
-        hooks = {
-          nixpkgs-fmt.enable = true;
-          statix.enable = true;
-        };
-      };
-    };
 
     nixosConfigurations = {
       extra-substituters = [

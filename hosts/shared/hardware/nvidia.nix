@@ -37,20 +37,20 @@ in {
     };
     systemPackages = with pkgs;
       [
-        cudaPackages.libnvjitlink
-        cudaPackages.cuda_cccl
-        cudaPackages.cuda_cudart
-        cudaPackages.cuda_gdb
-        cudaPackages.saxpy
-        cudaPackages.nvidia_fs
-        cudaPackages.cuda_nvml_dev
-        cudaPackages.cuda_opencl
-        cudaPackages.cudatoolkit
-        cudaPackages.cudnn
-        cudaPackages.cutensor
-        cudaPackages.libcublas
-        cudaPackages.libcusparse
-        cudaPackages.libnvidia_nscq
+         cudaPackages.libnvjitlink
+         cudaPackages.cuda_cccl
+         cudaPackages.cuda_cudart
+         cudaPackages.cuda_gdb
+         cudaPackages.saxpy
+         cudaPackages.nvidia_fs
+         cudaPackages.cuda_nvml_dev
+         cudaPackages.cuda_opencl
+         cudaPackages.cudatoolkit
+         cudaPackages.cudnn
+         cudaPackages.cutensor
+         cudaPackages.libcublas
+         cudaPackages.libcusparse
+         cudaPackages.libnvidia_nscq
         cudatoolkit
         freeglut
         ftgl
@@ -78,7 +78,7 @@ in {
       ++ [
         (python312.withPackages (p:
           with p; [
-            torchWithCuda
+            #    torchWithCuda
             tensorflowWithCuda
             triton-cuda
             pycuda

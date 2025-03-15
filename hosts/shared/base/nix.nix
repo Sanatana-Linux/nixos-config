@@ -72,13 +72,11 @@
 
       # ----------------------------------------------------------------------
       # allow sudo users to mark the following values as trusted
-      allowed-users = ["@wheel" "root" "tlh" "smg"];
+      allowed-users = ["@wheel" "root"];
       # only allow sudo users to manage the nix store
       trusted-users = [
         "root"
         "@wheel"
-        "tlh"
-        "smg"
       ];
       # Allow the store to optimize itself
       auto-optimise-store = true;

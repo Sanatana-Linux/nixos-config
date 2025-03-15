@@ -5,6 +5,11 @@ with pkgs; [
   tailwindcss-language-server
   any-nix-shell
   bc
+  sqlite
+  sqlite-interactive
+  sqlite-analyzer
+  sqlite-utils
+  sqlitebrowser
 
   meson-tools
   gitAndTools.gh

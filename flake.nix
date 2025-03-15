@@ -80,6 +80,12 @@
     );
 
     nixosConfigurations = {
+      nix.settings = {
+        # Use Binary Cache because we don't want to wait our lives away
+        builders-use-substitutes = true;
+        # No Seriously, Use the Binary Caches
+        always-allow-substitutes = true;
+      };
       extra-substituters = [
         "https://cache.nixos.org?priority=10" # nixos cache
         "https://fortuneteller2k.cachix.org" # f2k's cache

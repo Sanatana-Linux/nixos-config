@@ -16,6 +16,11 @@
       glibc
       gobject-introspection
       gmime3
+      sqlite
+      sqlite-interactive
+      sqlite-analyzer
+      sqlite-utils
+      sqlitebrowser
       xorg.libxcb
       icu
       config.boot.kernelPackages.nvidiaPackages.production # nvidia x11 kernel module

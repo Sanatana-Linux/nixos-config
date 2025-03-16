@@ -14,6 +14,10 @@ with pkgs; [
   gtk_engines
   htmldoc
   libcanberra-gtk3 #system tool
+  libpeas2 
+  libpeas
+  libgudev
+  libgee 
   libgee
   libglibutil
   libnotify

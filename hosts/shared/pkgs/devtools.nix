@@ -6,6 +6,7 @@ with pkgs; [
   any-nix-shell
   bc
   sqlite
+  nodejs
   sqlite-interactive
   sqlite-analyzer
   sqlite-utils

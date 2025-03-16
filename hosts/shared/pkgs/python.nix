@@ -36,6 +36,9 @@ with pkgs;
         wheel
         wheelUnpackHook
         youtube-transcript-api
+        pycairo
+        pygobject3
+        cairocffi
       ]))
   ]
   ++ [

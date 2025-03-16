@@ -72,7 +72,7 @@
     enable = true;
 
     # Set GTK3 as the platform theme for QT
-    platformTheme.name = "gtk3";
+    platformTheme.name = "qt6ct";
   };
 
   # ─────────────────────────────────────────────────────────────────
@@ -82,7 +82,6 @@
     # Environment variables for session
     sessionVariables = {
       GTK_THEME = "Materia-dark-compact";
-      QT_QPA_PLATFORMTHEME = "gtk3";
     };
 
     # Pointer cursor configuration

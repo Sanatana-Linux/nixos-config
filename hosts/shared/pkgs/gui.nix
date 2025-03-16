@@ -48,7 +48,8 @@ with pkgs; [
   libglibutil
   libnotify
   libsForQt5.qt5ct
-  libsForQt6.qt6ct
+  kdePackages.qt6ct
+  qt6.full
   libsForQt5.qtcurve
   libsForQt5.qtstyleplugins
   libusb1

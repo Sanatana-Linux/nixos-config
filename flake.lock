@@ -260,11 +260,11 @@
     "higgs-boson": {
       "flake": false,
       "locked": {
-        "lastModified": 1742111788,
-        "narHash": "sha256-Ou3E9EIApfAGwuS1La7Ygn720zzQCHlVkfm+YC/RxXg=",
+        "lastModified": 1742170023,
+        "narHash": "sha256-aq8T2UhA9ootLnELvw5261ElX1CamsJrDcSKMwmHkOM=",
         "owner": "ThomasHighbaugh",
         "repo": "firefox",
-        "rev": "69c38a5b3c26bf1e7fcb69b3e799581f039cf18b",
+        "rev": "683c76341688cb5a1993b78ddfa93670db930aaa",
         "type": "github"
       },
       "original": {
@@ -578,11 +578,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1742162567,
-        "narHash": "sha256-kP56YrUrz8goafYMh6czbmDWNMY7AyDUhlG2ymF8p1c=",
+        "lastModified": 1742169275,
+        "narHash": "sha256-nkH2Edu9rClcsQp2PYBe8E6fp8LDPi2uDBQ6wyMdeXI=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "1bd8161356d85fe7c190d3dd0bb51c7ebc129eff",
+        "rev": "5d9b5431f967007b3952c057fc92af49a4c5f3b2",
         "type": "github"
       },
       "original": {
@@ -747,11 +747,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1742157031,
-        "narHash": "sha256-A+D2pGs/+ks9jmdaX8U/SWtqDLWW80S32afM6woZIl0=",
+        "lastModified": 1742168772,
+        "narHash": "sha256-J/I5BzyTR+05z7cU5oXoNEJWkW3zZN+dZI+dd0BgkL4=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "88af54cefd786e310ca592a07102f09a593e89c6",
+        "rev": "04744b0ea29ba0846e1cc83a9960f8a4d5437938",
         "type": "github"
       },
       "original": {

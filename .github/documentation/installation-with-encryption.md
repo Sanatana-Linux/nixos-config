@@ -1,12 +1,21 @@
-# Encrypted Root
+# Installation + Root Encrption
 
-from: [https://github.com/ksevelyar/idempotent-desktop/blob/main/doc/encrypted-root.md](https://github.com/ksevelyar/idempotent-desktop/blob/main/doc/encrypted-root.md)
+> [!NOTE]  
+> This process is currently being handled by the nifty installation script I put together for fresh installs, _which I may move to using a justfile for_, **we shall see**. Therefore these notes are not my precise workflow but kept as part of my overall research on the subject and in case I opt to move away from using the installation script I will have access to the notes still (which is sort of the point of all this documentation).
+
+Originally sourced and adapted from: [https://github.com/ksevelyar/idempotent-desktop/blob/main/doc/encrypted-root.md](https://github.com/ksevelyar/idempotent-desktop/blob/main/doc/encrypted-root.md)
+
+## 1. Obtain Administrator Access
 
 ```
 sudo su
 ```
 
-## [Create partitions](https://nixos.org/manual/nixos/stable/index.html#sec-installation-partitioning-UEFI)
+## Create partitions
+
+Let's assume you will be using `ext4` as your root filesystem, for simplicity's sake.
+
+**References**: - [NixOS Manual - Creating Partitions](https://nixos.org/manual/nixos/stable/index.html#sec-installation-partitioning-UEFI)
 
 ```
 parted /dev/nvme0n1 -- mklabel gpt
@@ -48,16 +57,20 @@ mount /dev/disk/by-label/boot /mnt/boot
 ## Clone configs
 
 ```
-git clone https://github.com/ksevelyar/idempotent-desktop.git /mnt/etc/nixos
+git clone https://github.com/SanatanaLinux/nixos-config /mnt/etc/nixos
 chown -R 1000:users /mnt/etc/nixos
 
 cd /mnt/etc/nixos/
-ln -s hosts/hk47.nix configuration.nix
+nixos-generate-config --root /mnt
+rm /mnt/etc/nixos/configuration.nix
+mv hardware-configuration.nix hosts/[hostname]/
+nvim hosts/[hostname]/hardware-configuration.nix
 ```
 
-## Add LUKS2 container to configuration.nix
+## Add LUKS2 container to hardware-configuration.nix
 
 ```
+
 boot.initrd.luks.devices.nixos = {
   device = "/dev/disk/by-label/enc-nixos";
   allowDiscards = true;
@@ -74,12 +87,14 @@ fileSystems."/" = {
   fsType = "ext4";
   options = [ "noatime" "nodiratime" ];
 };
+
+
 ```
 
 ## Install
 
 ```
-nixos-install --root /mnt --flake /mnt/etc/nixos#hk47
+nixos-install --root /mnt --flake /mnt/etc/nixos#[hostname]
 reboot
 ```
 

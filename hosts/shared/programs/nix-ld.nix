@@ -13,7 +13,6 @@
       SDL2_mixer
       SDL_image
       SDL_mixer
-      SDL_ttf
       alsa-lib-with-plugins
       android-tools
       android-udev-rules

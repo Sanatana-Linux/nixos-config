@@ -47,6 +47,7 @@ with pkgs;
     pipenv
     black
     ruff
+    streamlit
     virtualenv
     virtualenv-clone
   ]

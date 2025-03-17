@@ -7,52 +7,112 @@
   programs.nix-ld = {
     enable = true;
     libraries = with pkgs; [
+      SDL
+      SDL2
+      SDL2_image
+      SDL2_mixer
+      SDL_image
+      SDL_mixer
+      SDL_ttf
+      alsa-lib-with-plugins
       android-tools
       android-udev-rules
+      at-spi2-atk
+      at-spi2-core
+      atk
       bash
       binutils
-      curl
-      glib
-      glibc
-      gobject-introspection
-      gmime3
-      sqlite
-      sqlite-interactive
-      sqlite-analyzer
-      sqlite-utils
-      sqlitebrowser
-      xorg.libxcb
-      icu
+      bzip2
+      cairo
+      clang
       config.boot.kernelPackages.nvidiaPackages.production # nvidia x11 kernel module
       cudaPackages.cudnn
       cudaPackages.nccl
       cudaPackages.nvidia_fs
-      libnvidia-container
+      cups
+      curl
+      curlWithGnuTls
+      dbus
+      dbus-glib
+      desktop-file-utils
+      e2fsprogs
+      expat
+      flac
+      fontconfig
+      freeglut
+      freetype
+      fribidi
+      fuse
+      fuse3
+      gdk-pixbuf
+      glew110
+      glib
+      glibc
+      gmime3
+      gmp
+      gobject-introspection
+      gst_all_1.gst-plugins-base
+      gst_all_1.gst-plugins-ugly
+      gst_all_1.gstreamer
+      gtk2
+      gtk3
+      harfbuzz
+      icu
+      keyutils.lib
+      libGL
+      libGLU
+      libappindicator-gtk2
+      libcaca
+      libcanberra
       libcanberra-gtk3
+      libcap
+      libclang.lib
       libdbusmenu
       libdbusmenu-gtk3
+      libdrm
       libfm
       libfm-extra
+      libgcrypt
       libgee
       libgig
       libgit2
       libgit2-glib
       libglibutil
+      libgpg-error
       libgudev
+      libidn
       libimobiledevice
       libinput
       libisoburn
+      libjack2
+      libjpeg
+      libmikmod
       libnotify
-      #librewolf
+      libnvidia-container
+      libogg
+      libpng12
+      libpulseaudio
       librsvg
       libsForQt5.qt5ct
+      libsamplerate
       libsecret
+      libthai
+      libtheora
       libtiff
       libtool
+      libudev0-shim
       libunwind
+      libusb1
       libuuid
+      libvdpau
+      libvorbis
+      libvpx
+      libxcrypt-legacy
       libxdg_basedir
+      libxkbcommon
+      libxml2
       lightlocker
+      lld
       luajitPackages.cjson
       luajitPackages.cqueues
       luajitPackages.inspect
@@ -78,14 +138,58 @@
       luajitPackages.stdlib
       luajitPackages.vicious
       luajitPackages.wrapLua
+      mesa
+      nspr
+      nss
       openssl
+      p11-kit
+      pango
+      pixman
+      pkg-config
+      python3
       ranger
       sassc
       speechd
+      speex
+      sqlite
+      sqlite-analyzer
+      sqlite-interactive
+      sqlite-utils
+      sqlitebrowser
       stdenv.cc.cc
+      tbb
+      udev
       util-linux
+      vulkan-loader
+      wayland
+      xorg.libICE
+      xorg.libSM
       xorg.libX11
+      xorg.libXScrnSaver
+      xorg.libXcomposite
+      xorg.libXcursor
+      xorg.libXdamage
+      xorg.libXext
+      xorg.libXfixes
+      xorg.libXft
+      xorg.libXi
+      xorg.libXinerama
+      xorg.libXmu
+      xorg.libXrandr
+      xorg.libXrender
+      xorg.libXt
+      xorg.libXtst
+      xorg.libXxf86vm
+      xorg.libpciaccess
+      xorg.libxcb
+      xorg.xcbutil
+      xorg.xcbutilimage
+      xorg.xcbutilkeysyms
+      xorg.xcbutilrenderutil
+      xorg.xcbutilwm
+      xorg.xkeyboardconfig
       xsettingsd
+      xz
       zlib
       zsh
     ];

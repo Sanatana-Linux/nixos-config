@@ -113,6 +113,44 @@
       lightlocker
       lld
       luajitPackages.cjson
+      linuxPackages.nvidiaPackages.production
+      cudaPackages.libnvjitlink
+      cudaPackages.cuda_cccl
+      cudaPackages.cuda_cudart
+      cudaPackages.cuda_gdb
+      cudaPackages.saxpy
+      cudaPackages.nvidia_fs
+      cudaPackages.cuda_nvml_dev
+      cudaPackages.cuda_opencl
+      cudaPackages.cudatoolkit
+      cudaPackages.cudnn
+      cudaPackages.cutensor
+      cudaPackages.libcublas
+      cudaPackages.libcusparse
+      cudaPackages.libnvidia_nscq
+      cudatoolkit
+      freeglut
+      ftgl
+      glew
+      glfw
+      intel-media-driver
+      intel-vaapi-driver
+      libGL
+      libGLX
+      libnvidia-container
+      libvdpau-va-gl
+      mesa
+      mlx42
+      nv-codec-headers
+      nvidia-container-toolkit
+      nvidia-texture-tools
+      nvidia-vaapi-driver
+      nvidia_cg_toolkit
+      nvtopPackages.nvidia
+      peakperf
+      vaapiVdpau
+      xorg_sys_opengl
+
       luajitPackages.cqueues
       luajitPackages.inspect
       luajitPackages.ldbus

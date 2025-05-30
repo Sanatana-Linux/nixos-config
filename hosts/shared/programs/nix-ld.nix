@@ -229,6 +229,8 @@
       xz
       zlib
       zsh
+      gccStdenv
+      xorg.gccmakedep
     ];
   };
 }

@@ -16,7 +16,6 @@ with pkgs; [
   fcft
   ffmpeg-full
   figlet
-  fntsample
   font-manager
   fontforge-fonttools
   fontforge-gtk
@@ -35,7 +34,6 @@ with pkgs; [
   service-wrapper
   sox
   sssd
-  stdenv.cc.cc
   tealdeer
   toilet
   ttfautohint

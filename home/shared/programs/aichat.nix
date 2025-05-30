@@ -9,9 +9,9 @@
       wrap_code: true
       # Visit https://github.com/sigoden/llm-functions for setup instructions
       function_calling: true           # Enables or disables function calling (Globally).
-      mapping_tools:                   # Alias for a tool or toolset
-         fs: 'fs_cat,fs_ls,fs_mkdir,fs_rm,fs_write'
-      use_tools: all # Enables or disables wrapping of code blocks
+      # mapping_tools:                   # Alias for a tool or toolset
+      #    fs: 'fs_cat,fs_ls,fs_mkdir,fs_rm,fs_write'
+      # use_tools: all # Enables or disables wrapping of code blocks
 
 
       # ---- apperence ----
@@ -27,37 +27,38 @@
           api_base: http://localhost:11434/v1
           api_key: null
           models:
-          - name: huggingface.co/mradermacher/Arch-Function-7B-GGUF:latest
-            supports_function_calling: true
-          - name: huggingface.co/QuantFactory/Llama3.2-3B-Enigma-GGUF:latest
-          - name: huggingface.co/QuantFactory/OpenCoder-8B-Instruct-GGUF:latest
-          - name: huggingface.co/bartowski/suayptalha_Maestro-10B-GGUF:latest
-          - name: huggingface.co/DavidAU/L3.1-Dark-Planet-10.7B-ExxxxxxxxTended-GGUF:latest
+          # ╓
+          # ║                    Function Calling:
+          # ╙
           - name: granite3.2:latest
             supports_function_calling: true
+          - name: huggingface.co/mradermacher/Arch-Function-7B-GGUF:latest
+            supports_function_calling: true
+          # ╓
+          # ║                           Code
+          # ╙
           - name: huggingface.co/THUDM/codegeex4-all-9b-GGUF:latest
-            supports_function_calling: false
-          - name: bge-m3:latest
+            supports_function_calling: true
+          - name: devstral:24b
+          # ╓
+          # ║                     Embedding Models
+          # ╙
+          - name: snowflake-arctic-embed2:latest
             type: embedding
-          - name: snowflake-arctic-embed:latest
-            type: embedding
-          - name: nomic-embed-text:latest
-            type: embedding
+          # ╓
+          # ║                       General Use
+          # ╙
+          - name: hugginface.co/DavidAU/Llama-3.2-8X4B-MOE-V2-Dark-Champion-Instruct-uncensored-abliterated-21B-GGUF:latest
+          - name: huggingface.co/DavidAU/Llama-3.2-8X3B-MOE-Dark-Champion-Instruct-uncensored-abliterated-18.4B-GGUF:latest
           - name: huggingface.co/DavidAU/DeepSeek-MOE-4X8B-R1-Distill-Llama-3.1-Deep-Thinker-Uncensored-24B-GGUF:latest
-          - name: huggingface.co/TheBloke/deepseek-coder-33B-instruct-GGUF:latest
-          - name: huggingface.co/DavidAU/Mistral-MOE-4X7B-Dark-MultiVerse-Uncensored-Enhanced32-24B-gguf:latest
-          - name: huggingface.co/DevQuasar/DevQuasar-R1-Uncensored-Llama-8B-GGUF:latest
-          - name: deepseek-r1:14b
-            supports_function_calling: false
-          - name: llama3.2:3b
           - name: huggingface.co/DavidAU/L3-Grand-Story-Darkness-MOE-4X8-24.9B-e32-GGUF:latest
           - name: huggingface.co/DavidAU/Llama-3.2-4X3B-MOE-Hell-California-Uncensored-10B-GGUF:latest
-          - name: huggingface.co/DavidAU/Llama-3.2-8X3B-MOE-Dark-Champion-Instruct-uncensored-abliterated-18.4B-GGUF:latest
+          - name: huggingface.co/DavidAU/MN-WORDSTORM-pt3-RCM-POV-Nightmare-18.5B-Instruct-GGUF:latest
+          - name: huggingface.co/DavidAU/Mistral-MOE-4X7B-Dark-MultiVerse-Uncensored-Enhanced32-24B-gguf:latest
           - name: huggingface.co/byroneverson/LongWriter-glm4-9b-abliterated-gguf:latest
-          - name: huggingface.co/QuantFactory/DarkIdol-Llama-3.1-8B-Instruct-1.2-Uncensored-GGUF:latest
-          - name: nemotron-mini:4b
-          - name: wizard-vicuna-uncensored:13b
-
+          - name: huggingface.co/lmstudio-community/DeepSeek-Coder-V2-Lite-Instruct-GGUF:latest
+          - name: huggingface.co/mradermacher/MS-Magpantheonsel-lark-v4x1.6.2RP-Cydonia-vXXX-22B-6-i1-GGUF:latest
+          - name: mistral-nemo:latest
     '';
   bash_one_liner_role = ''
     ---
@@ -102,7 +103,7 @@
 in {
   home.packages = with pkgs; [
     aichat
-    ollama
+    ollama-cuda
   ];
 
   xdg.configFile."aichat/config.yaml".text = aichatConfig;

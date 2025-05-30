@@ -21,7 +21,7 @@
       mplus-outline-fonts.githubRelease
       nerd-fonts._3270
       nerd-fonts.agave
-      nerd-fonts.mplus
+      #      nerd-fonts.mplus
       nerd-fonts.ubuntu
       norwester-font
       noto-fonts # I really hate these fonts
@@ -54,9 +54,9 @@
 
       defaultFonts = {
         emoji = ["Noto Color Emoji"];
-        monospace = ["Mplus Code 60"];
-        sansSerif = ["Mplus Code 60"];
-        serif = ["Mplus Code 60"];
+        monospace = ["BerkeleyMono Nerd Font Bold"];
+        sansSerif = ["Berkeley Mono Variable Semi-Bold"];
+        serif = ["TX-02 Medium Oblique Condensed"];
       };
     };
   };

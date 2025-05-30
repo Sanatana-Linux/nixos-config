@@ -15,12 +15,12 @@
         daemon.settings.features.cdi = true; # see: https://nixos.wiki/wiki/Nvidia#NVIDIA_Docker_not_Working
       };
       extraOptions = "--add-runtime nvidia=/run/current-system/sw/bin/nvidia-container-runtime ";
-      package = pkgs.docker_25;
+      #      package = pkgs.docker_25;
     };
     containers.enable = true;
     libvirtd.enable = true;
     containerd.enable = true;
-    oci-containers.backend = "podman";
+    oci-containers.backend = "docker";
     # I *think* I like podman better at the end of the day, jury is still out
     # podman = {
     #   defaultNetwork.settings = {
@@ -40,12 +40,12 @@
     act
     distrobox
     fuse-overlayfs
-    podman-compose
-    podman-tui
+    # podman-compose
+    # podman-tui
     kvmtool
     virt-manager
     qemu_full
-    docker_25
+    docker
     docker-buildx
     docker-client
     docker-compose

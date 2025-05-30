@@ -30,7 +30,6 @@
     node2nix
     nox
     nurl
-    nux
     nvd
     statix
   ];

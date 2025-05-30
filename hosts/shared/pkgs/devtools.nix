@@ -160,9 +160,14 @@ with pkgs; [
   tokei
   tree-sitter
   typescript
+  xorg.gccmakedep
+  gcc
+  gccStdenv
   unstable.squashfs-tools-ng
   unstable.squashfsTools
   unstable.squashfuse
+  usql
+  lldb
   vscode-langservers-extracted
   wkhtmltopdf-bin
   xorg.libX11

@@ -18,7 +18,6 @@ with pkgs; [
   fbida
   gnome-characters
   file-roller
-  fntsample
   fontpreview
   fuseiso
   gcolor3

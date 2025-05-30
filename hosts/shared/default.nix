@@ -40,16 +40,18 @@
       allowUnfreePredicate = _: true;
       allowBroken = true;
       permittedInsecurePackages = [
-        "openssl-1.1.1w"
         "dcraw-9.28.0"
-        "imagemagick-6.9.13-10"
-        "nix-2.16.2"
-        "freeimage-unstable-2021-11-01"
-        "openssl-1.1.1v"
-        "python3.12-youtube-dl-2021.12.17"
         "electron-24.8.6"
         "electron-25.9.0"
         "electron-27.3.11"
+        "freeimage-3.18.0-unstable-2024-04-18"
+        "freeimage-unstable-2021-11-01"
+        "imagemagick-6.9.13-10"
+        "nix-2.16.2"
+        "openssl-1.1.1v"
+        "openssl-1.1.1w"
+        "python3.12-youtube-dl-2021.12.17"
+        "ventoy-1.1.05"
         "xpdf-4.05"
       ];
     };

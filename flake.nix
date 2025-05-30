@@ -2,9 +2,10 @@
   description = "The ShizNix Upon Which I Constantly Nit Pick";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/master";
     # TODO change this to master as well as the unstable.pkg(s) to
     # master.pkg(s)
+    # "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/master";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     nixpkgs-f2k.url = "github:moni-dz/nixpkgs-f2k";

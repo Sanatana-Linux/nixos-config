@@ -5,7 +5,7 @@
     gpg-agent = {
       enable = true;
       enableSshSupport = true;
-      pinentryPackage = pkgs.pinentry-tty;
+      pinentry.package = pkgs.pinentry-tty;
       enableZshIntegration = true;
       extraConfig = ''
         allow-loopback-pinentry

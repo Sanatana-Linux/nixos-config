@@ -4,7 +4,6 @@
     alpaca
     code2prompt
     codegrab # use as `grab`
-    #    promptfoo
     gollama
     #    lunacy
     #    plandex
@@ -12,7 +11,6 @@
     #    python312Packages.peacasso
     python312Packages.diffusers
     python312Packages.optimum
-    koboldcpp
     libtorch-bin
     python312Packages.pytorch-bin
     python312Packages.transformers

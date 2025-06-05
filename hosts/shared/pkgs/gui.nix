@@ -11,7 +11,6 @@ with pkgs; [
   epiphany
   kdePackages.breeze-icons
   gnome-icon-theme
-
   ebook_tools
   rofi-rbw
   rofimoji
@@ -56,7 +55,6 @@ with pkgs; [
   mime-types
   mimetic
   mupdf
-  nemo-with-extensions
   nerd-font-patcher
   networkmanagerapplet
   ocrmypdf

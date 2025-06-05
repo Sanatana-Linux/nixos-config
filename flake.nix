@@ -2,7 +2,7 @@
   description = "The ShizNix Upon Which I Constantly Nit Pick";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/master";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     # TODO change this to master as well as the unstable.pkg(s) to
     # master.pkg(s)
     # "github:nixos/nixpkgs/nixos-unstable";
@@ -13,10 +13,7 @@
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    home-manager.url = "github:nix-community/home-manager";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixos-generators.url = "github:nix-community/nixos-generators";
     rust-overlay.url = "github:oxalica/rust-overlay";
@@ -35,10 +32,6 @@
       url = "github:Sanatana-Linux/Bhairava-Grub-Theme";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # neovim-nightly-overlay = {
-    #   url = "github:nix-community/neovim-nightly-overlay";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
   };
 
   outputs = {
@@ -47,7 +40,6 @@
     home-manager,
     nixos-hardware,
     nixos-generators,
-    #   neovim-nightly-overlay,
     bhairava-grub-theme,
     nur,
     chaotic,

@@ -31,12 +31,14 @@
   fileSystems."/home/tlh/749" = {
     device = "/dev/disk/by-uuid/3b1e4391-e139-4f5a-86c2-549849a194d5";
     fsType = "ext4";
+    options = ["nofail"];
   };
 
-  fileSystems."/home/tlh/Dropbox" = {
-    device = "dropbox:";
-    fsType = "fuse.rclone";
-  };
+  # fileSystems."/home/tlh/Dropbox" =
+  # { device = "dropbox:";
+  #   fsType = "fuse.rclone";
+  #    options=["nofail"];
+  # };
 
   swapDevices = [
     {device = "/dev/disk/by-uuid/47c6e943-e3fe-4729-807a-9d5c8b70af24";}

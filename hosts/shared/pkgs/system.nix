@@ -7,21 +7,13 @@ with pkgs; [
   automake
   avfs
   beep
-  dbus-broker
-  eggdbus
-  pcre2
-  procps
-
-  gnome-keyring
-  libgnome-keyring
   bintools
   brightnessctl #system tool
   cdrtools # for mkisofs
-  moreutils
-
   comma
   csv2latex
   curtail
+  dbus-broker
   dconf
   ddcui
   ddcutil
@@ -31,6 +23,7 @@ with pkgs; [
   edk2
   edk2-uefi-shell
   efibootmgr
+  eggdbus
   exfatprogs
   fd
   gcc_latest
@@ -38,6 +31,7 @@ with pkgs; [
   ghostscript
   glib
   glibc
+  gnome-keyring
   grub2_full
   htop
   inotify-tools
@@ -52,6 +46,7 @@ with pkgs; [
   lazyjournal
   libgcc
   libgccjit
+  libgnome-keyring
   libisoburn
   lm_sensors
   lshw
@@ -60,6 +55,7 @@ with pkgs; [
   meson
   microcodeIntel
   moar
+  moreutils
   mtools
   neofetch
   nmon
@@ -74,12 +70,14 @@ with pkgs; [
   pcre
   pcre-cpp
   pcre2
+  pcre2
   pfetch
   pinentry-tty
   pls # "prettier and powerful ls"
   pmutils
   polkit_gnome
   premake
+  procps
   ps_mem
   ps_mem
   python312Packages.py-dmidecode
@@ -155,15 +153,10 @@ with pkgs; [
   xorg.xev
   xorg.xev
   xorg.xhost
-  xorg.xhost
   xorg.xinit
   xorg.xkill
-  xorg.xkill
-  xorg.xorgproto
   xorg.xorgproto
   xorg.xprop
-  xorg.xprop
-  xorg.xwininfo
   xorg.xwininfo
   xorriso
   xsecurelock

@@ -82,6 +82,9 @@ with pkgs; [
   libtool
   lua
   lua-language-server
+  lua5_1
+  lua5_2
+  lua5_2_compat
   lua5_3_compat
   lua5_4_compat
   luabind

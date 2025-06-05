@@ -1,6 +1,7 @@
 {pkgs ? (import ./nixpkgs.nix) {}}: {
   default = pkgs.mkShell {
     nativeBuildInputs = with pkgs; [
+      nix
       git
       home-manager
       figlet

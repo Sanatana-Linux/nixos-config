@@ -51,13 +51,6 @@
       };
 
       subpixel.lcdfilter = "default";
-
-      defaultFonts = {
-        emoji = ["Noto Color Emoji"];
-        monospace = ["BerkeleyMono Nerd Font Bold"];
-        sansSerif = ["Berkeley Mono Variable Semi-Bold"];
-        serif = ["TX-02 Medium Oblique Condensed"];
-      };
     };
   };
 }

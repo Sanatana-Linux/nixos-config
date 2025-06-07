@@ -53,13 +53,16 @@ in {
         cudaPackages.libcusparse
         cudaPackages.libnvidia_nscq
         cudatoolkit
+        eglexternalplatform
         freeglut
         ftgl
+        gegl
         glew
         glfw
         intel-media-driver
         intel-vaapi-driver
         libGL
+        libglut
         libGLX
         libnvidia-container
         libvdpau-va-gl
@@ -79,7 +82,7 @@ in {
       ++ [
         (python312.withPackages (p:
           with p; [
-            #    torchWithCuda
+            torchWithCuda
             tensorflowWithCuda
             triton-cuda
             pycuda

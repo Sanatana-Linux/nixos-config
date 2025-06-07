@@ -97,6 +97,13 @@
     toList = attrs: concatStringsSep "\n" (mkAttrsString true true attrs);
   in
     lib.mkAfter (toList {
+      blur-background-exclude = [
+        "class_g = 'slop'"
+      ];
+      shadow-exclude = [
+        "class_g *?= 'slop'"
+      ];
+
       #################################
       #           Animations          #
       #################################
@@ -150,8 +157,9 @@
           blur = false;
         }
         {
-          match = "window_type = 'desktop'";
+          match = "window_type = 'desktop' || class_g *?= 'slop' || class_i *?=  'slop' || name *?= 'slop'";
           corner-radius = 0;
+          opacity = opFULL;
           shadow = false;
           blur = false;
           dim = 0;
@@ -239,6 +247,7 @@
         {
           match = "class_g='flameshot'";
           fade = false;
+          blur = false;
           animations = let
             d = 0.2;
           in {
@@ -258,18 +267,16 @@
           match = "class_g = 'kitty' || class_g = 'dropdown' || name = 'Eww - bar'";
           transparent-clipping = false;
           animations = let
-            d = 0.3;
+            d = 0.6;
           in {
             appear = {
               triggers = ["open" "show"];
-              preset = "slide-in";
-              direction = "down";
+              preset = "fly-in";
               duration = d;
             };
             disappear = {
               triggers = ["close" "hide"];
-              preset = "slide-out";
-              direction = "up";
+              preset = "fly-out";
               duration = d;
             };
           };

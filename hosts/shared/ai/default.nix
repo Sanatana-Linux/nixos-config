@@ -9,10 +9,10 @@
     #    plandex
     # local-ai
     #    python312Packages.peacasso
+    libtorch-bin
     python312Packages.diffusers
     python312Packages.optimum
-    libtorch-bin
-    python312Packages.pytorch-bin
+    python312Packages.torchWithCuda
     python312Packages.transformers
     python312Packages.triton-cuda
     ollama-cuda

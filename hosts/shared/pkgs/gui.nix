@@ -6,7 +6,6 @@
 with pkgs; [
   appimage-run
   appstream-glib
-  calibre
   bleachbit
   epiphany
   kdePackages.breeze-icons

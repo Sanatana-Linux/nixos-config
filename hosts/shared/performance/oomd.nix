@@ -12,7 +12,7 @@
     enableUserSlices = true; # User
     enableSystemSlice = true; # System
     extraConfig = {
-      "DefaultMemoryPressureDurationSec" = "10s"; # time after memory pressure to take action
+      "DefaultMemoryPressureDurationSec" = "8s"; # time after memory pressure to take action
     };
   };
   services.irqbalance.enable = true; # distributes hardware interrupts to processor

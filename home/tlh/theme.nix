@@ -9,8 +9,8 @@
 
     # Font settings for GTK
     font = {
-      name = "SFProText Nerd Font,  Bold  ";
-      size = 10;
+      name = "BerkeleyMono Nerd Font Bold";
+      size = 12;
     };
 
     # GTK theme configuration

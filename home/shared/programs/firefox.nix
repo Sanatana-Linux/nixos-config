@@ -49,30 +49,35 @@ in {
     profiles.${profile} = {
       id = 0;
       extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
+        absolute-enable-right-click
         add-custom-search-engine
         auto-tab-discard
         bitwarden
-        buster-captcha-solver
         cookie-quick-manager
         copy-selection-as-markdown
         don-t-fuck-with-paste
         export-cookies-txt
         export-tabs-urls-and-titles
+        firemonkey
         form-history-control
         foxytab
         gaoptout
         github-file-icons
         ipfs-companion
         istilldontcareaboutcookies
+        justdeleteme
         keybase
         lexicon
         link-gopher
         lovely-forks
+        markdownload
+        multi-account-containers
         raindropio
         re-enable-right-click
         refined-github
         search-engines-helper
         stylebot-web
+        stylus
         ublock-origin
         view-image
       ];

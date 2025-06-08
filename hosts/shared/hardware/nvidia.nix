@@ -37,6 +37,11 @@ in {
     };
     systemPackages = with pkgs;
       [
+        libGL
+        libGLU
+        libGLX
+        libglut
+        libglvnd
         cudaPackages.libnvjitlink
         blas
         cudaPackages.cuda_cccl

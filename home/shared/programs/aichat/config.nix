@@ -129,13 +129,13 @@
 
     # --- Function Calling ---
     function_calling = false;
-    #    use_tools = "all"; # Enabled file system tools
+    use_tools = "all"; # Enabled file system tools
 
     # --- Session ---
-    # save_session = true;
-    # compress_threshold = 4000;
-    # summarize_prompt = "Summarize the discussion briefly in 200 words or less to use as a prompt for future context.";
-    # summary_prompt = "This is a summary of the chat history as a recap: ";
+    save_session = true;
+    compress_threshold = 4000;
+    summarize_prompt = "Summarize the discussion briefly in 200 words or less to use as a prompt for future context.";
+    summary_prompt = "This is a summary of the chat history as a recap: ";
 
     # --- RAG ---
     rag_embedding_model = "ollama:snowflake-arctic-embed2:latest";

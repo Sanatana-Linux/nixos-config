@@ -12,6 +12,7 @@ with pkgs; [
   commonsCompress
   dmg2img
   dnsutils
+  libglibutil
   espeak-ng
   fcft
   ffmpeg-full

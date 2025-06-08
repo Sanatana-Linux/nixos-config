@@ -14,10 +14,10 @@ with pkgs; [
   gtk_engines
   htmldoc
   libcanberra-gtk3 #system tool
-  libpeas2 
+  libpeas2
   libpeas
   libgudev
-  libgee 
+  libgee
   libgee
   libglibutil
   libnotify
@@ -27,6 +27,8 @@ with pkgs; [
   polkit_gnome
   poppler_utils #system tool
   python312Packages.cairosvg
+  python312Packages.pyqt6
+  python312Packages.qtpy
   rubyPackages.cairo-gobject
   rubyPackages.gdk_pixbuf2
   rubyPackages.gobject-introspection

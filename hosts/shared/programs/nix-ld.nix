@@ -7,6 +7,11 @@
   programs.nix-ld = {
     enable = true;
     libraries = with pkgs; [
+      libGL
+      libGLX
+      libGLU
+      libglut
+      libglvnd
       SDL
       SDL2
       SDL2_image

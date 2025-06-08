@@ -15,6 +15,7 @@ with pkgs; [
   black
   usort
   cloudflare-cli
+  claude-code
 
   meson-tools
   gitAndTools.gh

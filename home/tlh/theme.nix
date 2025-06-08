@@ -82,8 +82,8 @@
     # Environment variables for session
     sessionVariables = {
       GTK_THEME = "Materia-dark-compact";
-      GDK_PIXBUF_MODULE_FILE = "${pkgs.librsvg.out}/lib/gdk-pixbuf-2.0/*/loaders.cache";
-      XDG_DATA_DIRS = "${pkgs.materia-theme-transparent}/share:$XDG_DATA_DIRS";
+      #  GDK_PIXBUF_MODULE_FILE = "${pkgs.librsvg.out}/lib/gdk-pixbuf-2.0/*/loaders.cache";
+      # XDG_DATA_DIRS = "${pkgs.materia-theme-transparent}/share:$XDG_DATA_DIRS";
     };
 
     # Pointer cursor configuration

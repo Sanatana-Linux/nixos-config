@@ -120,7 +120,7 @@
     ];
 
     # --- Behavior ---
-    stream = true;
+    stream = false;
     save = true;
     keybindings = "vi";
     editor = "nvim";

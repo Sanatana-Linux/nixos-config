@@ -14,7 +14,6 @@ with pkgs; [
   pylint
   black
   usort
-  cloudflare-cli
 
   meson-tools
   gitAndTools.gh

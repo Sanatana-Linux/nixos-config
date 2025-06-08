@@ -7,6 +7,7 @@ with pkgs; [
   appimage-run
   appstream-glib
   bleachbit
+  discord
   epiphany
   kdePackages.breeze-icons
   gnome-icon-theme

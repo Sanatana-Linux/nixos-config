@@ -1,6 +1,6 @@
-./.direnv/*
-./.direnv/nix-profile*
-./result
-./result/*
+.direnv/*
+.direnv/nix-profile*
+result
+result/*
 prompt.txt
 .aider*

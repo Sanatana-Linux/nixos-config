@@ -12,6 +12,7 @@ with pkgs; [
   cdrtools # for mkisofs
   comma
   csv2latex
+  portaudio
   curtail
   dbus-broker
   dconf

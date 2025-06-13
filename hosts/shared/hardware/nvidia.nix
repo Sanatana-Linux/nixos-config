@@ -51,13 +51,21 @@ in {
         cudaPackages.nvidia_fs
         cudaPackages.cuda_nvml_dev
         cudaPackages.cuda_opencl
+        cudaPackages.cuda_sandbox_dev
         cudaPackages.cudatoolkit
+        cudaPackages.cuda_sanitizer_api
+        cudaPackages.cudnn-frontend
         cudaPackages.cudnn
         cudaPackages.cutensor
         cudaPackages.libcublas
+        cudaPackages.libcufile
         cudaPackages.libcusparse
         cudaPackages.libnvidia_nscq
+        cudaPackages.libnvjitlink
+        cudaPackages.libnvjpeg
         cudatoolkit
+        cudaPackages.saxpy
+        cudaPackages.nvidia_fs
         eglexternalplatform
         freeglut
         ftgl
@@ -80,6 +88,7 @@ in {
         nvidia_cg_toolkit
         nvtopPackages.nvidia
         peakperf
+        python312Packages.triton-cuda
         vaapiVdpau
         xorg_sys_opengl
         zenith-nvidia

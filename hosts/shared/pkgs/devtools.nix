@@ -16,7 +16,8 @@ with pkgs; [
   usort
   cloudflare-cli
   claude-code
-
+  lua51Packages.lua
+  lua51Packages.luarocks
   meson-tools
   gitAndTools.gh
   gitAndTools.git-absorb

@@ -32,6 +32,8 @@
       url = "github:Sanatana-Linux/Bhairava-Grub-Theme";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-index-database.url = "github:nix-community/nix-index-database";
+    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {
@@ -73,35 +75,37 @@
     );
 
     nixosConfigurations = {
-      nix.settings = {
-        # Use Binary Cache because we don't want to wait our lives away
-        builders-use-substitutes = true;
-        # No Seriously, Use the Binary Caches
-        always-allow-substitutes = true;
+      nixos = {
+        settings = {
+          # Use Binary Cache because we don't want to wait our lives away
+          builders-use-substitutes = true;
+          # No Seriously, Use the Binary Caches
+          always-allow-substitutes = true;
+        };
+        extra-substituters = [
+          "https://cache.nixos.org?priority=10" # nixos cache
+          "https://fortuneteller2k.cachix.org" # f2k's cache
+          "https://nix-community.cachix.org" # community cache
+          "https://nixpkgs-unfree.cachix.org" # nixpkgs-unfree
+          "https://pre-commit-hooks.cachix.org" # pre commit hooks
+          "https://cuda-maintainers.cachix.org" # cuda maintainers
+          "https://ai.cachix.org" # nixified cache
+          "https://stable-diff.cachix.org" # stable diffusion related cache
+          "https://sanatanalinux.cachix.org" # sanatana linux
+        ];
+        extra-trusted-public-keys = [
+          "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+          "fortuneteller2k.cachix.org-1:kXXNkMV5yheEQwT0I4XYh1MaCSz+qg72k8XAi2PthJI="
+          "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+          "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+          "nixpkgs-unfree.cachix.org-1:hqvoInulhbV4nJ9yJOEr+4wxhDV4xq2d1DK7S6Nj6rs="
+          "pre-commit-hooks.cachix.org-1:Pkk3Panw5AW24TOv6kz3PvLhlH8puAsJTBbOPmBo7Rc="
+          "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
+          "ai.cachix.org-1:N9dzRK+alWwoKXQlnn0H6aUx0lU/mspIoz8hMvGvbbc="
+          "stable-diff.cachix.org-1:liYFm3f3q1dAoilj2Ag2IEKzW3Q9/HJcLlrAIytAcy0="
+          "sanatanalinux.cachix.org-1:9WsJYECJ+Lt0HPTUI7+6f9uAaAUouaBUyTd9iAJbUEY="
+        ];
       };
-      extra-substituters = [
-        "https://cache.nixos.org?priority=10" # nixos cache
-        "https://fortuneteller2k.cachix.org" # f2k's cache
-        "https://nix-community.cachix.org" # community cache
-        "https://nixpkgs-unfree.cachix.org" # nixpkgs-unfree
-        "https://pre-commit-hooks.cachix.org" # pre commit hooks
-        "https://cuda-maintainers.cachix.org" # cuda maintainers
-        "https://ai.cachix.org" # nixified cache
-        "https://stable-diff.cachix.org" # stable diffusion related cache
-        "https://sanatanalinux.cachix.org" # sanatana linux
-      ];
-      extra-trusted-public-keys = [
-        "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-        "fortuneteller2k.cachix.org-1:kXXNkMV5yheEQwT0I4XYh1MaCSz+qg72k8XAi2PthJI="
-        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-        "nixpkgs-unfree.cachix.org-1:hqvoInulhbV4nJ9yJOEr+4wxhDV4xq2d1DK7S6Nj6rs="
-        "pre-commit-hooks.cachix.org-1:Pkk3Panw5AW24TOv6kz3PvLhlH8puAsJTBbOPmBo7Rc="
-        "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
-        "ai.cachix.org-1:N9dzRK+alWwoKXQlnn0H6aUx0lU/mspIoz8hMvGvbbc="
-        "stable-diff.cachix.org-1:liYFm3f3q1dAoilj2Ag2IEKzW3Q9/HJcLlrAIytAcy0="
-        "sanatanalinux.cachix.org-1:9WsJYECJ+Lt0HPTUI7+6f9uAaAUouaBUyTd9iAJbUEY="
-      ];
       # ┣━━━━━━━━━━━━━━━━━━━━━━━┫ Dinosaur Laptop ┣━━━━━━━━━━━━━━━━━━━━━━━┫
 
       # TODO this whole config needs to be updated to effectively interface with changes to repo
@@ -133,7 +137,6 @@
         modules = [
           nur.modules.nixos.default
           nixos-hardware.nixosModules.lenovo-legion-16irx9h
-          ./hosts/bagalamukhi
           bhairava-grub-theme.nixosModule
           chaotic.nixosModules.default
           home-manager.nixosModules.home-manager
@@ -146,6 +149,7 @@
               };
             };
           }
+          ./hosts/bagalamukhi
         ];
       };
       # ┣━━━━━━━━━━━━━━━━━━┫ Sara's Lenovo Legion Pro ┣━━━━━━━━━━━━━━━━┫
@@ -154,7 +158,6 @@
         modules = [
           nur.modules.nixos.default
           nixos-hardware.nixosModules.lenovo-legion-16irx9h
-          ./hosts/matangi
           bhairava-grub-theme.nixosModule
           chaotic.nixosModules.default
           home-manager.nixosModules.home-manager
@@ -167,6 +170,7 @@
               };
             };
           }
+          ./hosts/matangi
         ];
       };
     };

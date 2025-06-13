@@ -62,24 +62,15 @@
     username = "tlh";
     homeDirectory = "/home/tlh";
     stateVersion = "24.11";
+    activation = {
+      installConfig = ''
+        if [ ! -d "${config.home.homeDirectory}/.config/awesome" ]; then
+          ${pkgs.git}/bin/git clone https://github.com/Sanatana-Linux/nixos-awesomewm ${config.home.homeDirectory}/.config/awesome
+        fi
+        if [ ! -d "${config.home.homeDirectory}/.config/nvim" ]; then
+          ${pkgs.git}/bin/git clone https://github.com/Thomashighbaugh/nvim-forge ${config.home.homeDirectory}/.config/nvim
+        fi
+      '';
+    };
   };
-  # Installation of AwesomeWM configuration if not present
-  home.activation.installAwesomeWMConfig = ''
-    if [ ! -d /home/tlh/.config/awesome ]; then
-      git clone https://github.com/Sanatana-Linux/nixos-awesomewm /home/tlh/.config/awesome
-      chmod -R +w /home/tlh/.config/awesome
-      chown -R tlh /home/tlh/.config/awesome
-      mkdir -p /home/tlh/.cache/awesome/json/
-      touch  /home/tlh/.cache/awesome/json/settings.json
-    fi
-  '';
-
-  # Installation of Neovim configuration if not present
-  home.activation.installNvimConfig = ''
-    if [ ! -d /home/tlh/.config/nvim ]; then
-      git clone https://github.com/Thomashighbaugh/nvim-forge /home/tlh/.config/nvim
-      chmod -R +w "/home/tlh/.config/nvim"
-      chown -R tlh /home/tlh/.config/nvim
-    fi
-  '';
 }

@@ -7,7 +7,7 @@
     gollama
     #    lunacy
     #    plandex
-    # local-ai
+    local-ai
     #    python312Packages.peacasso
     libtorch-bin
     python312Packages.diffusers

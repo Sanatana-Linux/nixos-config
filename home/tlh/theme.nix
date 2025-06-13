@@ -16,7 +16,7 @@
     # GTK theme configuration
     theme = {
       name = "Materia-dark-compact";
-      package = pkgs.materia-theme-transparent;
+      package = pkgs.materia-theme;
     };
 
     # GTK icon theme configuration

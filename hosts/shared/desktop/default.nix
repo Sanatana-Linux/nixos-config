@@ -22,7 +22,7 @@
           greeters.gtk = {
             enable = true;
             theme = {
-              package = pkgs.materia-theme-transparent;
+              package = pkgs.materia-theme;
               name = "Materia-dark-compact";
             };
             cursorTheme = {

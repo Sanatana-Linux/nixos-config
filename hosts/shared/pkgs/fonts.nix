@@ -1,43 +1,31 @@
 {pkgs, ...}: {
   fonts = {
     packages = with pkgs; [
-      agave
-      ankacoder
-      ankacoder-condensed
-      annapurna-sil
-      b612
-      cascadia-code # microsoft ligatures font
-      corefonts
-      d2coding
+      nerd-fonts.agave
+      nerd-fonts.d2coding
+      nerd-fonts.proggy-clean-tt
+      icomoon-feather
+
+      nerd-fonts.ubuntu
+      nerd-fonts.ubuntu-mono
+      nerd-fonts.ubuntu-sans
+      siji
+      nerd-fonts.noto
+      emacs-all-the-icons-fonts
+      font-awesome
       font-awesome_4
       font-awesome_5
-      font-awesome_6
-      icomoon-feather
-      inter
+      annapurna-sil
+      corefonts
       jost
       kanit-font
-      material-symbols
       material-design-icons
+      material-symbols
       mplus-outline-fonts.githubRelease
-      nerd-fonts._3270
-      nerd-fonts.agave
-      #      nerd-fonts.mplus
-      nerd-fonts.ubuntu
       norwester-font
-      noto-fonts # I really hate these fonts
-      noto-fonts-cjk-sans # but its better than scripts not rendering
-      noto-fonts-emoji # I guess...
-      noto-fonts-extra
-      ocr-a
       pixel-code
-      proggyfonts
-      rounded-mgenplus
-      siji
-      sudo-font
       terminus_font
-      undefined-medium
       vistafonts
-      xkcd-font
     ];
 
     fontconfig = {
@@ -49,7 +37,11 @@
         autohint = true;
         style = "slight";
       };
-
+      defaultFonts = {
+        serif = ["Agave Nerd Font Propo Regular" "FreeSerif"];
+        sansSerif = ["Agave Nerd Font Propo Regular" "Ubuntu Nerd Font Medium"];
+        monospace = ["Agave Nerd Font Mono" "Ubuntu Nerd Font Mono"];
+      };
       subpixel.lcdfilter = "default";
     };
   };

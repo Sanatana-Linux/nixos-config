@@ -13,6 +13,7 @@ with pkgs; [
   dmg2img
   dnsutils
   libglibutil
+  font-alias
   espeak-ng
   fcft
   ffmpeg-full

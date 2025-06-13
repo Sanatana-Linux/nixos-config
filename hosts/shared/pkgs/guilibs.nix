@@ -4,6 +4,7 @@ with pkgs; [
   cairomm
   dbus-broker #gui tool
   dconf
+  portaudio
   gdk-pixbuf
   gdk-pixbuf-xlib
   gnome.gvfs

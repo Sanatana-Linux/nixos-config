@@ -9,7 +9,7 @@
     xserver = {
       windowManager.awesome = {
         enable = true;
-        package = pkgs.awesome-git; # Use the latest git version of AwesomeWM.
+        package = inputs.nixpkgs-f2k.packages.x86_64-linux.awesome-luajit-git; # Use the latest git version of AwesomeWM.
         # List of Lua modules to be available for AwesomeWM.
         luaModules = with pkgs.luajitPackages; [
           luaposix # POSIX bindings for Lua.
@@ -42,6 +42,9 @@
   # System packages required for AwesomeWM and its ecosystem.
   # TODO: Describe each package in detail.
   environment.systemPackages = with pkgs; [
+    lua51Packages.lua # Lua 5.1 interpreter.
+    lua51Packages.lgi # Lua 5.1 packages for luajit compatibility.
+    lua51Packages.luarocks # LuaRocks package manager for Lua 5.1.
     dbus # Message bus system.
     dbus-broker # Modern D-Bus message broker.
     dbus-glib # GLib bindings for D-Bus.

@@ -4,13 +4,50 @@
     model = "ollama:mistral-nemo:latest";
     clients = [
       {
-        type = "openai-compatible";
-        name = "openrouter";
-        api_base = "https://openrouter.ai/api/v1";
+        type = "gemini";
+        api_base = "https://generativelanguage.googleapis.com/v1beta";
         models = [
           {
-            name = "deepseek/deepseek-chat-v3-0324:free";
-            max_input_tokens = 163840; # Added token limit
+            name = "gemini-2.5-flash-preview-05-20";
+          }
+          {
+            name = "gemini-2.5-flash-preview-04-17";
+          }
+          {
+            name = "gemini-2.0-flash-lite-001";
+          }
+          {
+            name = "gemini-2.0-flash-001";
+          }
+        ];
+      }
+      {
+        type = "openai-compatible";
+        name = "mistral";
+        api_base = "https://api.mistral.ai/v1";
+        models = [
+          {
+            name = "open-mistral-nemo";
+          }
+          {
+            name = "open-mistral-7b";
+          }
+          {
+            name = "open-mixtral-8x22b";
+          }
+        ];
+      }
+      {
+        type = "openai-compatible";
+        name = "groq";
+        api_base = "https://api.groq.com/openai/v1";
+        models = [
+          {
+            name = "deepseek-r1-distill-llama-70b";
+            max_input_tokens = 8192; # Added token
+          }
+          {
+            name = "deepseek-r1-diistill-qwen-32b";
           }
         ];
       }
@@ -111,9 +148,9 @@
           {
             name = "snowflake-arctic-embed2:latest";
             type = "embedding";
-            # max_tokens_per_chunk = 8192;
-            # default_chunk_size = 1000;
-            #  max_batch_size = 50;
+            max_tokens_per_chunk = 8192;
+            default_chunk_size = 1000;
+            max_batch_size = 50;
           }
         ];
       }
@@ -128,7 +165,7 @@
     wrap_code = true; # Enable code wrapping for better display
 
     # --- Function Calling ---
-    function_calling = false;
+    function_calling = true;
     use_tools = "all"; # Enabled file system tools
 
     # --- Session ---
@@ -140,9 +177,9 @@
     # --- RAG ---
     rag_embedding_model = "ollama:snowflake-arctic-embed2:latest";
     rag_reranker_model = null;
-    # rag_top_k = 4;
-    #rag_chunk_size = 1000; # Added specific chunk size
-    #rag_chunk_overlap = 200; # Added overlap for better context
+    rag_top_k = 4;
+    rag_chunk_size = 1000; # Added specific chunk size
+    rag_chunk_overlap = 200; # Added overlap for better context
 
     # --- Appearance ---
     highlight = true;
@@ -151,7 +188,7 @@
     right_prompt = "{color.yellow}{model_name} {color.light_blue}[{?consume_tokens {consume_tokens}{color.magenta}({consume_percent:.2f}%){color.light_blue}}{!consume_tokens -}]{color.reset}";
 
     # --- Misc ---
-    server_addr = "127.0.0.1:8000";
+    # server_addr = "127.0.0.1:8000";
     user_agent = "auto"; # Set to auto for version tracking
     save_shell_history = true;
   };

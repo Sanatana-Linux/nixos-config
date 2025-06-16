@@ -13,19 +13,19 @@
   # When applied, the unstable nixpkgs set (declared in the flake inputs) will
   # be accessible through 'pkgs.unstable'
 
-  unstable-packages = final: _prev: {
+  unstable-packages = final: prev: {
     unstable = import inputs.nixpkgs-unstable {
       system = final.system;
       config.allowUnfree = true;
     };
   };
-  f2k-packages = final: _prev: {
+  f2k-packages = final: prev: {
     f2k = import inputs.nixpkgs-f2k {
       system = final.system;
       config.allowUnfree = true;
     };
   };
-  chaotic-packages = final: _prev: {
+  chaotic-packages = final: prev: {
     chaotic = import inputs.chaotic {
       system = final.system;
       config.allowUnfree = true;

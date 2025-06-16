@@ -21,6 +21,10 @@
       SystemMaxUse=80M
       RuntimeMaxUse=30M
     '';
+
+    # notifications about "power"-related things
+    poweralertd.enable = true;
+
     dbus = {
       enable = true;
       packages = with pkgs; [dconf gcr dbus-broker polkit_gnome];

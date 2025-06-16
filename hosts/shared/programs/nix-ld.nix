@@ -176,6 +176,15 @@
       cups # Printing system
       curl # Data transfer library
       curlWithGnuTls # Curl with GNU TLS support
+      luajitPackages.lgi #
+      luajitPackages.lua # Lua interpreter
+      lua51Packages.lua # Lua 5.1 interpreter
+      lua51Packages.lgi #
+      lua51Packages.luarocks
+      luajitPackages.luarocks-nix # Nix integration for luarocks
+      luajitPackages.luarocks # LuaRocks package manager
+      lua51Packages.luarocks-nix # Nix integration for LuaRocks
+      lua51Packages.luarocks # LuaRocks package manager for Lua 5.1
       dbus # Message bus system
       dbus-glib # GLib bindings for DBus
       e2fsprogs # Ext2/3/4 filesystem utilities

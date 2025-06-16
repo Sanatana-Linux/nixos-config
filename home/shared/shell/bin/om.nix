@@ -35,7 +35,6 @@ with pkgs;
       echo -e "            $SKY_BLUE weight $SPECIAL_END             determine the size of the system's configuration"
       echo -e "            $SKY_BLUE rollback $SPECIAL_END           rollback to previous generation"
       echo -e "            $SKY_BLUE search $SPECIAL_END             search packages available"
-      echo -e "            $SKY_BLUE options $SPECIAL_END            search nixos and home-manager options"
       echo -e "            $SKY_BLUE sync $SPECIAL_END               pull config from git repo, then commit and push"
       echo -e "            $SKY_BLUE update $SPECIAL_END             update flake"
       echo -e "            $SKY_BLUE format $SPECIAL_END             format nix files in configuration"
@@ -122,12 +121,9 @@ with pkgs;
     }
 
     function search() {
-    (nix search --impure nixpkgs "$2" && nps -e=true --columns=description "$2") | moar
+    nix-search-tv-integration
     }
 
-    function options() {
-      manix --source=hm_options,nixos_options,nixpkgs_doc,nixpkgs_tree,nixpkgs_comments "$2" | moar
-    }
 
     function health() {
       echo "Running nix-health check"
@@ -167,9 +163,6 @@ with pkgs;
       ;;
     search)
       search "$@"
-      ;;
-    options)
-      options "$@"
       ;;
     health)
       health

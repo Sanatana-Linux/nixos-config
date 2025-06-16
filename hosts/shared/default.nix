@@ -30,11 +30,6 @@
       outputs.overlays.unstable-packages
       outputs.overlays.f2k-packages
       outputs.overlays.chaotic-packages
-      inputs.nixpkgs-f2k.overlays.default
-      inputs.nur.overlays.default
-      inputs.nixpkgs-f2k.overlays.stdenvs
-      inputs.nixpkgs-f2k.overlays.compositors
-      inputs.nur.overlays.default
       (final: prev: {
         awesome-git = (final.awesome.override {lua = final.luajit;}).overrideAttrs (old: rec
           {
@@ -71,7 +66,6 @@
         "freeimage-3.18.0-unstable-2024-04-18"
         "freeimage-unstable-2021-11-01"
         "imagemagick-6.9.13-10"
-        "nix-2.16.2"
         "openssl-1.1.1v"
         "openssl-1.1.1w"
         "python3.12-youtube-dl-2021.12.17"

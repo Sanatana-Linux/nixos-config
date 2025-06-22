@@ -38,6 +38,7 @@ in {
         "plugdev"
         "podman"
         "power"
+        "i2c"
         "systemd-journal"
         "tss"
         "video"

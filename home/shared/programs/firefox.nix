@@ -188,7 +188,7 @@ in {
         "xpinstall.signatures.required" = false; # Don't require signe extensions
       };
       search = {
-        default = "StartPage";
+        default = "google";
         force = true;
         engines = {
           "Nix Packages" = {

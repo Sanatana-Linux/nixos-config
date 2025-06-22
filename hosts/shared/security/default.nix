@@ -31,7 +31,7 @@
     nmap # network scanner
     onesixtyone # snmp scanner
     openssl.dev # TSL/SSL
-    python313Packages.tpm2-pytss
+    python312Packages.tpm2-pytss
     radare2 # reverse engineering framework
     sqlmap # sql injection tool
     ssh-tpm-agent

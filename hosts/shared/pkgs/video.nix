@@ -2,6 +2,9 @@
 with pkgs; [
   aaxtomp3
   audiofile
+  redoflacs
+  phototonic
+  hoard
   beautysh
   cheese
   ebook_tools

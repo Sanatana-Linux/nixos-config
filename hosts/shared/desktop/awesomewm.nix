@@ -12,6 +12,7 @@
         package = inputs.nixpkgs-f2k.packages.x86_64-linux.awesome-luajit-git; # Use the latest git version of AwesomeWM.
         # List of Lua modules to be available for AwesomeWM.
         luaModules = with pkgs.luajitPackages; [
+          luautf8 # text handling
           luaposix # POSIX bindings for Lua.
           cqueues # Networking, event loop, and coroutine library.
           cjson # Fast JSON parsing and encoding support.
@@ -45,6 +46,14 @@
     lua51Packages.lua # Lua 5.1 interpreter.
     lua51Packages.lgi # Lua 5.1 packages for luajit compatibility.
     lua51Packages.luarocks # LuaRocks package manager for Lua 5.1.
+    lua51Packages.luaposix # POSIX bindings for Lua 5.1.
+    lua51Packages.luautf8 # UTF-8 support for Lua 5.1.
+    lua51Packages.lpeg # Parsing Expression Grammars for Lua 5.1.
+    lua51Packages.lpeg_patterns # Common patterns for LPeg in Lua 5.1.
+    lua51Packages.lpeglabel # LPeg extension for labeled failures in Lua 5.1.
+    lua51Packages.lua-messagepack # MessagePack serialization for Lua 5.1.
+    lua51Packages.luasocket # Networking support for Lua 5.1.
+    lua51Packages.mpack # MessagePack implementation for Lua 5.1.
     dbus # Message bus system.
     dbus-broker # Modern D-Bus message broker.
     dbus-glib # GLib bindings for D-Bus.
@@ -77,4 +86,7 @@
 
   # Add extra XDG portal for GTK support.
   xdg.portal.extraPortals = with pkgs; [xdg-desktop-portal-gtk];
+  environment.variables = {
+    GDK_BACKEND = "x11";
+  };
 }

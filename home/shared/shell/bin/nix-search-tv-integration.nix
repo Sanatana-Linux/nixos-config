@@ -1,124 +1,111 @@
-
 {pkgs}:
 with pkgs;
+# We will use writeScriptBin as requested, and inject the necessary PATH
+# at the top of the script.
   writeScriptBin "nix-search-tv-integration" ''
-  #!/usr/bin/env bash
+      #!/usr/bin/env bash
 
-# === Change keybinds or add more here ===
+      # === Dependency Injection ===
+      # This is the crucial fix for a `writeScriptBin` script. We are building
+      # a PATH variable that includes all the tools our script needs to run.
+      # This line is processed by Nix when the script is built, embedding the
+      # full /nix/store paths into the final script.
+      export PATH="${lib.makeBinPath [
+      nix-search-tv
+      fzf
+      xdg-utils # for xdg-open
+      ncurses # for tput
+      nix # for nix-shell
+      gnused # for sed
+      gawk # for awk
+      coreutils # for tr
+    ]}:$PATH"
 
-declare -a INDEXES=(
-    "nixpkgs ctrl-n"
-    "home-manager ctrl-h"
+      # === Keybinds and Indexes ===
 
-    # you can add any indexes combination here,
-    # like `nixpkgs,nixos`
+      SEARCH_SNIPPET_KEY="ctrl-w"
+      OPEN_SOURCE_KEY="ctrl-s"
+      OPEN_HOMEPAGE_KEY="ctrl-o"
+      NIX_SHELL_KEY="ctrl-i"
+      OPENER="xdg-open"
 
-    "all ctrl-a"
-)
+      # === State and Command Setup ===
 
-SEARCH_SNIPPET_KEY="ctrl-w"
-OPEN_SOURCE_KEY="ctrl-s"
-OPEN_HOMEPAGE_KEY="ctrl-o"
-NIX_SHELL_KEY="ctrl-i"
+      # We can now refer to the command directly as it's in our PATH.
+      CMD="nix-search-tv"
+      STATE_FILE="/tmp/nix-search-tv-fzf"
 
-OPENER="xdg-open"
+      # === Functions ===
 
-if [[ "$(uname)" == 'Darwin' ]]; then
-    SEARCH_SNIPPET_KEY="alt-w"
-    OPEN_SOURCE_KEY="alt-s"
-    OPEN_HOMEPAGE_KEY="alt-o"
-    NIX_SHELL_KEY="alt-i"
+      bind_index() {
+          local key="$1" index="$2"
+          local prompt="" indexes_flag=""
+          [[ -n "$index" && "$index" != "all" ]] && indexes_flag="--indexes $index" && prompt=$index
+          local preview="$CMD preview $indexes_flag"
+          local print="$CMD print $indexes_flag"
+          echo "$key:change-prompt($prompt> )+change-preview($preview {})+reload($print)"
+      }
 
-    OPENER="open"
-fi
+      save_state() {
+          local index="$1"
+          local indexes_flag=""
+          [[ -n "$index" && "$index" != "all" ]] && indexes_flag="--indexes $index"
+          echo "execute(echo $indexes_flag > $STATE_FILE)"
+      }
 
-# ========================================
+      # === Header and FZF Binds ===
 
-# for debug / development
-CMD="${NIX_SEARCH_TV:-nix-search-tv}"
+      HEADER="$OPEN_HOMEPAGE_KEY - open homepage
+    $OPEN_SOURCE_KEY - open source
+    $SEARCH_SNIPPET_KEY - search github for snippets
+    $NIX_SHELL_KEY - nix-shell
+    "
 
-# bind_index binds the given $key to the given $index
-bind_index() {
-    local key="$1"
-    local index="$2"
+      FZF_BINDS=""
+      while IFS=":" read -r index keybind; do
+          fzf_bind=$(bind_index "$keybind" "$index")
+          fzf_save_state=$(save_state "$index")
+          FZF_BINDS="$FZF_BINDS --bind '$fzf_bind+$fzf_save_state'"
+          # FIX 1: We must escape the '$' in bash's `$'...'` syntax.
+          # The escape sequence in Nix's indented strings is `''$`.
+          HEADER+="$keybind - $index"''$'\n'
+      done <<EOF
+    nixpkgs:ctrl-n
+    home-manager:ctrl-h
+    all:ctrl-a
+    EOF
 
-    local prompt=""
-    local indexes_flag=""
-    if [[ -n "$index" && "$index" != "all" ]]; then
-        indexes_flag="--indexes $index"
-        prompt=$index
-    fi
+      # === Reset State ===
 
-    local preview="$CMD preview $indexes_flag"
-    local print="$CMD print $indexes_flag"
+      : > "$STATE_FILE"
 
-    echo "$key:change-prompt($prompt> )+change-preview($preview {})+reload($print)"
-}
+      # === Command Templates ===
 
-STATE_FILE="/tmp/nix-search-tv-fzf"
+      # The original command was fine, just ensuring robustness with quoting.
+      SEARCH_SNIPPET_CMD='url=$(echo "{}" | tr -d "'"'"'" | awk "{ print \$2 ? \$2 : \$1 }" | xargs -I{} printf "https://github.com/search?type=code&q=lang:nix+%s" "{}"); '"$OPENER"' "$url"'
 
-# save_state saves the currently displayed index
-# to the $STATE_FILE. This file serves as an external script state
-# for communication between "print" and "preview" commands
-save_state() {
-    local index="$1"
+      NIX_SHELL_CMD='nix-shell --run "$SHELL" -p $(echo "{}" | sed "s:nixpkgs/::g" | tr -d "'"'"'")'
 
-    local indexes_flag=""
-    if [[ -n "$index" && "$index" != "all" ]]; then
-        indexes_flag="--indexes $index"
-    fi
+      # === Preview Window ===
 
-    echo "execute(echo $indexes_flag > $STATE_FILE)"
-}
+      PREVIEW_WINDOW="wrap"
+      [ "$(tput cols)" -lt 90 ] && PREVIEW_WINDOW="$PREVIEW_WINDOW,up"
 
-HEADER="$OPEN_HOMEPAGE_KEY - open homepage
-$OPEN_SOURCE_KEY - open source
-$SEARCH_SNIPPET_KEY - search github for snippets
-$NIX_SHELL_KEY - nix-shell
-"
+      # === Main FZF Invocation ===
 
-FZF_BINDS=""
-for e in "${INDEXES[@]}"; do
-    index=$(echo "$e" | awk '{ print $1 }')
-    keybind=$(echo "$e" | awk '{ print $2 }')
-
-    fzf_bind=$(bind_index "$keybind" "$index")
-    fzf_save_state=$(save_state "$index")
-    FZF_BINDS="$FZF_BINDS --bind '$fzf_bind+$fzf_save_state'"
-
-    newline=$'\n'
-    HEADER="$HEADER$keybind - $index$newline"
-done
-
-# reset the state
-echo "" >/tmp/nix-search-tv-fzf
-
-SEARCH_SNIPPET_CMD=$'echo "{}"'
-# fzf surrounds the matched package with ', trim them
-SEARCH_SNIPPET_CMD="$SEARCH_SNIPPET_CMD | tr -d \"\'\" "
-# if it's multi-index search, then we need to remote the prefix
-SEARCH_SNIPPET_CMD="$SEARCH_SNIPPET_CMD | awk \'{ if (\$2) { print \$2 } else print \$1 }\' "
-SEARCH_SNIPPET_CMD="$SEARCH_SNIPPET_CMD | xargs printf \"https://github.com/search?type=code&q=lang:nix+%s\" \$1 "
-
-NIX_SHELL_CMD='nix-shell --run $SHELL -p $(echo "{}" | sed "s:nixpkgs/::g"'
-NIX_SHELL_CMD="$NIX_SHELL_CMD | tr -d \"\'\")"
-
-PREVIEW_WINDOW="wrap"
-[ "$(tput cols)" -lt 90 ] && PREVIEW_WINDOW="$PREVIEW_WINDOW,up"
-
-eval "$CMD print | fzf \
-    --preview '$CMD preview \$(cat $STATE_FILE) {}' \
-    --bind '$OPEN_SOURCE_KEY:execute($CMD source \$(cat $STATE_FILE) {} | xargs $OPENER)' \
-    --bind '$OPEN_HOMEPAGE_KEY:execute($CMD homepage \$(cat $STATE_FILE) {} | xargs $OPENER)' \
-    --bind $'$SEARCH_SNIPPET_KEY:execute($SEARCH_SNIPPET_CMD | xargs $OPENER)' \
-    --bind $'$NIX_SHELL_KEY:become($NIX_SHELL_CMD)' \
-    --layout reverse \
-    --scheme history \
-    --preview-window='$PREVIEW_WINDOW' \
-    --header '$HEADER' \
-    --header-first \
-    --header-border \
-    --header-label \"Help\" \
-    $FZF_BINDS
-"
+      eval "$CMD print | fzf \
+          --preview '$CMD preview \$(cat $STATE_FILE) {}' \
+          --bind '$OPEN_SOURCE_KEY:execute($CMD source \$(cat $STATE_FILE) {} | xargs -r $OPENER)' \
+          --bind '$OPEN_HOMEPAGE_KEY:execute($CMD homepage \$(cat $STATE_FILE) {} | xargs -r $OPENER)' \
+          --bind ''$'$SEARCH_SNIPPET_KEY:execute($SEARCH_SNIPPET_CMD)' \
+          --bind ''$'$NIX_SHELL_KEY:become($NIX_SHELL_CMD)' \
+          --layout reverse \
+          --scheme history \
+          --preview-window='$PREVIEW_WINDOW' \
+          --header \"$HEADER\" \
+          --header-first \
+          --header-border \
+          --header-label \"Help\" \
+          $FZF_BINDS
+      "
   ''

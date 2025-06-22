@@ -2,12 +2,13 @@
   description = "The ShizNix Upon Which I Constantly Nit Pick";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable?shallow=1";
     # TODO change this to master as well as the unstable.pkg(s) to
     # master.pkg(s)
     # "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/master";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/master?shallow=1";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+    zen-browser.url = "github:MarceColl/zen-browser-flake";
     nixpkgs-f2k.url = "github:moni-dz/nixpkgs-f2k";
     nur = {
       url = "github:nix-community/NUR";
@@ -20,11 +21,6 @@
     higgs-boson = {
       url = "github:ThomasHighbaugh/firefox";
       flake = false;
-    };
-    nil = {
-      url = "github:oxalica/nil";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.rust-overlay.follows = "rust-overlay";
     };
     firefox-nightly.url = "github:nix-community/flake-firefox-nightly";
     nps.url = "github:OleMussmann/Nix-Package-Search";
@@ -43,6 +39,7 @@
     nixos-hardware,
     nixos-generators,
     bhairava-grub-theme,
+    nix-index-database,
     nur,
     chaotic,
     ...
@@ -139,6 +136,7 @@
           nixos-hardware.nixosModules.lenovo-legion-16irx9h
           bhairava-grub-theme.nixosModule
           chaotic.nixosModules.default
+          nix-index-database.nixosModules.nix-index
           home-manager.nixosModules.home-manager
           {
             home-manager = {

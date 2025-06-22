@@ -19,8 +19,14 @@ with pkgs; [
   ffmpeg-full
   figlet
   font-manager
+  fontconfig
   fontforge-fonttools
   fontforge-gtk
+  fontfor
+  gnome-font-viewer
+  font-util
+  font-alias
+  komika-fonts
   fontpreview
   ftgl
   minizip2

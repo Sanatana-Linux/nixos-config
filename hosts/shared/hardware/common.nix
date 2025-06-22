@@ -6,6 +6,7 @@
   hardware = {
     enableAllFirmware = true;
     enableRedistributableFirmware = true;
+    i2c.enable = true;
 
     acpilight.enable = true;
     firmware = with pkgs; [

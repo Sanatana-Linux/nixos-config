@@ -12,7 +12,6 @@ with pkgs; [
   cairosvg
   shutter
   satty
-  colorstorm
   colorz
   curtail
   exiftool
@@ -54,9 +53,9 @@ with pkgs; [
   pngtools
   potrace
   python312Packages.colorthief
-  python313Packages.pyfiglet
-  python313Packages.pystache
-  python313Packages.svgwrite
+  python312Packages.pyfiglet
+  python312Packages.pystache
+  python312Packages.svgwrite
   pywal
   resvg
   resvg

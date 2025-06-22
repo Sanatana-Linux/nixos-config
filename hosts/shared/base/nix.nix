@@ -130,8 +130,4 @@
     nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
   };
   # switch nixos-rebuild to the next generation
-  system.switch = {
-    enable = false;
-    enableNg = true;
-  };
 }

@@ -6,6 +6,7 @@
 with pkgs; [
   appimage-run
   appstream-glib
+  inputs.zen-browser.packages."${system}".default
   bleachbit
   discord
   epiphany

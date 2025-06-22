@@ -225,7 +225,6 @@
       openssl # SSL/TLS cryptography library
       p11-kit # PKCS#11 module management
       pkg-config # Build configuration tool
-      python3 # Python 3 interpreter
       sqlite # SQL database engine
       sqlite-analyzer # SQLite database analysis tool
       sqlite-interactive # SQLite interactive shell
@@ -241,6 +240,13 @@
       zlib # Compression library
       zsh # Z shell
       gccStdenv # GCC-based stdenv
+
+      lua51Packages.lua # Lua interpreter
+      lua51Packages.luautf8 # UTF-8 support for LuaJIT
+      lua51Packages.std-_debug # Debugging utilities for LuaJIT
+      lua51Packages.std-normalize # Normalization utilities for LuaJIT
+      lua51Packages.stdlib # Standard library for LuaJIT
+      lua51Packages.vicious # Widget library for window managers
 
       # LuaJIT and Lua libraries
       luajitPackages.cjson # JSON parsing for LuaJIT
@@ -261,6 +267,7 @@
       luajitPackages.luarocks-nix # Nix integration for LuaRocks
       luajitPackages.luasocket # Networking support for LuaJIT
       luajitPackages.luasql-sqlite3 # SQLite3 bindings for LuaJIT
+      luajitPackages.luautf8 # UTF-8 support for LuaJIT
       luajitPackages.mediator_lua # Mediator pattern for LuaJIT
       luajitPackages.mpack # MessagePack for LuaJIT
       luajitPackages.std-_debug # Debugging utilities for LuaJIT

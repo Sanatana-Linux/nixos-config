@@ -57,6 +57,7 @@
   services.xserver.videoDrivers = ["nvidia"];
   services.xserver.enable = true;
   boot.plymouth.enable = true;
+  # boot.plymouth.logo = "https://github.com/Thomashighbaugh/Thomashighbaugh/blob/main/src/resources/images/icon.png"; # use a custom logo for plymouth
   # boot.plymouth.theme = "loader";
   # boot.plymouth.themePackages = [pkgs.adi1090x-plymouth-themes];
 

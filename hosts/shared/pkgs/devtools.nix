@@ -4,6 +4,7 @@ with pkgs; [
   actionlint
   tailwindcss-language-server
   any-nix-shell
+  stylua
   bc
   sqlite
   nodejs

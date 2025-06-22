@@ -60,6 +60,7 @@
       allowBroken = true;
       permittedInsecurePackages = [
         "dcraw-9.28.0"
+        "qtwebkit-5.212.0-alpha4"
         "electron-24.8.6"
         "electron-25.9.0"
         "electron-27.3.11"

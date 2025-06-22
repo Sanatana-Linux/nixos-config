@@ -25,6 +25,7 @@ in {
         "input"
       ]
       ++ ifTheyExist [
+        "i2c"
         "plugdev"
         "adbusers"
         "docker"

@@ -32,6 +32,8 @@
       enable = true;
       cache32Bit = true;
       antialias = true;
+      useEmbeddedBitmaps = true;
+
       hinting = {
         enable = true;
         autohint = true;

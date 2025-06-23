@@ -23,7 +23,6 @@
     ../shared/programs/zathura/default.nix
     ../shared/services/default.nix
     ../shared/services/picom.nix
-    ../shared/services/lockscreen.nix
     ../shared/shell
   ];
 
@@ -45,7 +44,6 @@
       outputs.overlays.chaotic-packages
       inputs.nixpkgs-f2k.overlays.default
       inputs.nur.overlays.default
-      #  inputs.neovim-nightly-overlay.overlays.default
     ];
 
     config = {

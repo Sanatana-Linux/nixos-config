@@ -6,6 +6,8 @@
 with pkgs; [
   OVMFFull
   cbfmt
+  coreutils-full
+  uutils-coreutils
   ccls
   clang-tools
   cmake

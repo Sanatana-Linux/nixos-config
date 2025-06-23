@@ -9,8 +9,7 @@ with lib; let
   fileRoller = ["file-roller.desktop"]; # Define file-roller application
   zathura = ["org.pwmt.zathura.desktop"]; # Define zathura application
   vlc = ["vlc.desktop"]; # VLC application
-  imv = ["imv-dir.desktop"];
-  inkview = ["inkview.desktop"];
+  gthumb = ["applications/org.gnome.gThumb.desktop"];
 
   associations = {
     "application/x-extension-htm" = browser;
@@ -21,7 +20,6 @@ with lib; let
     "application/xhtml+xml" = browser;
     "text/html" = browser;
     "x-scheme-handler/about" = browser;
-    "x-scheme-handler/chrome" = ["google-chrome.desktop"];
     "x-scheme-handler/ftp" = browser;
     "x-scheme-handler/http" = browser;
     "x-scheme-handler/https" = browser;
@@ -29,8 +27,8 @@ with lib; let
 
     "audio/*" = vlc;
     "video/*" = vlc;
-    "image/*" = imv;
-    "image/svg+xml" = inkview;
+    "image/*" = gthumb;
+    "image/svg+xml" = gthumb;
 
     "application/json" = browser;
 
@@ -55,19 +53,24 @@ with lib; let
     "application/zip" = fileRoller;
     "application/x-zip-compressed" = fileRoller;
 
-    # Ebook formats
-    "application/epub+zip" = zathura;
-    "application/x-cbz" = zathura; # Comic book archive
-    "application/pdf" = zathura;
-    "application/x-cbr" = zathura; # Comic book archive
-    "application/x-pdf" = zathura; # Although you already have a PDF rule, using zathura here is consistent.
-    "application/djvu" = zathura;
-    "application/fb2" = zathura;
-    "application/mobipocket-ebook" = zathura; # .mobi
+    # Ebook formats... Sorry but firefox just does it better!
+    "application/epub+zip" = browser;
+    "application/epub" = browser; # .epub
+    "application/pdf" = browser;
+    "application/x-pdf" = browser;
   };
 in {
-  home.packages = [pkgs.xdg-utils pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal];
-
+  home.packages = with pkgs; [
+    xdg-utils
+    xdg-desktop-portal-gtk
+    xdg-desktop-portal
+    xdg-launch
+    xdg-user-dirs
+    xdg-user-dirs-gtk
+    xdg-utils
+    xdg-utils-cxx
+    xdgmenumaker
+  ];
   xdg = {
     enable = true;
     userDirs = {
@@ -80,6 +83,8 @@ in {
       config.common.default = "*";
       extraPortals = with pkgs; [
         xdg-desktop-portal-gtk
+        xdg-desktop-portal-gnome
+        xdg-desktop-portal-xapp
       ];
     };
 

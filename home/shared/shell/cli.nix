@@ -69,6 +69,11 @@
       enableBashIntegration = true;
       enableZshIntegration = true;
     };
+    skim = {
+      enable = true;
+      enableBashIntegration = true;
+      enableZshIntegration = true;
+    };
     pyenv = {
       enable = true;
       enableZshIntegration = true;

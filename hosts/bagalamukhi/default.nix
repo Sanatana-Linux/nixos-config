@@ -140,7 +140,7 @@
       "nvidia-drm.modeset=1" # enable Modesetting Kernel Module
       # Potentially useful for hanging or shutdown
       "reboot=acpi"
-      # No hanging on reboot due to something I don't need on my laptop
+      # No hanging on reboot due to somethin/home/tlh/.cache/fontconfigg I don't need on my laptop
       "watchdog=0"
       # Lenovo Legion Module force enable
       "lenovo-legion.force=1"

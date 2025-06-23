@@ -6,6 +6,7 @@
 }: {
   services.betterlockscreen = {
     enable = true;
+    package = pkgs.betterlockscreen;
     inactiveInterval = "15";
   };
 
@@ -18,12 +19,12 @@
       "suspend.target"
     ];
     serviceConfig = {
-      User = username;
+      User = config.home.username;
       Type = "simple";
       Environment = "DISPLAY=:0";
       TimeoutSec = "infinity";
-      ExecStart = "${lib.getExe betterlockscreen} --lock --dim 25 --blur 0.5 --span";
-      ExecStartPost = "${lib.getExe' pkgs.coreutils-full "sleep"} 1";
+      ExecStart = "betterlockscreen --lock --dim 25 --blur 0.5 --span";
+      ExecStartPost = "sleep 1";
     };
     wantedBy = [
       "sleep.target"

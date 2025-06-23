@@ -52,6 +52,8 @@
                               export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense' # optional
                               zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
                               source <(carapace _carapace)
+                              source <(sk --shell zsh)
+
 
                               mkdir -p "${config.xdg.cacheHome}/zsh/completion-cache" # Use xdg directory for cache
 
@@ -165,6 +167,8 @@
       # Searching and File Opening
       grep = "${lib.getBin ripgrep-all}/bin/rga"; # Use ripgrep for fast searching
       fzim = "fzf | xargs nvim"; # Fuzzy find a file and open it with Neovim.
+      skvim = "nvim \${$(find . -name '*' | sk -m)}"; # Fuzzy find a file or multiple with TAB selection and open it with Neovim.
+
       vim = "nvim";
 
       # Miscellaneous
@@ -174,7 +178,6 @@
       ytmp3 = ''
         ${lib.getBin yt-dlp}/bin/yt-dlp -x --continue --add-metadata --embed-thumbnail --audio-format mp3 --audio-quality 0 --metadata-from-title="%(artist)s - %(title)s" --prefer-ffmpeg -o "%(title)s.%(ext)s"
       ''; # Download YouTube videos as MP3.
-      aider = "aider --model ollama_chat/deepseek-r1:14b";
     };
 
     zplug = {

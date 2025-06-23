@@ -1,13 +1,5 @@
 {pkgs, ...}:
 with pkgs; [
-  # unstable.gimpPlugins.exposureBlend
-  unstable.gimpPlugins.fourier
-  # unstable.gimpPlugins.gimplensfun
-  # unstable.gimpPlugins.lightning
-  # unstable.gimpPlugins.lqrPlugin
-  # unstable.gimpPlugins.resynthesizer
-  unstable.gimpPlugins.texturize
-  unstable.gimpPlugins.waveletSharpen
   babl
   cairosvg
   shutter
@@ -64,15 +56,13 @@ with pkgs; [
   t1utils
   termcolor
   toilet
-  unstable.gimp-with-plugins
-  unstable.gimpPlugins.bimp
-  unstable.gimpPlugins.farbfeld
-  unstable.gimpPlugins.gmic
-  unstable.gmic
-  unstable.upscayl
+  gimp3-with-plugins
+  gimp3Plugins.gmic
+  gmic
+  upscayl
   geticons
   gfie
-  unstable.upscayl-ncnn
+  upscayl-ncnn
   xcolor
   xcolor
   xorg-rgb

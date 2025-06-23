@@ -102,6 +102,48 @@
     toList = attrs: concatStringsSep "\n" (mkAttrsString true true attrs);
   in
     lib.mkAfter (toList {
+      #################################
+      #       General Settings        #
+      #################################
+      backend = "xrender";
+      dithered-present = false;
+      vsync = true;
+      mark-wmwin-focused = true;
+      mark-ovredir-focused = true;
+      corner-radius = 4;
+      detect-rounded-corners = true;
+      detect-client-opacity = true;
+      detect-transient = true;
+      glx-no-stencil = true;
+      use-damage = true;
+      transparent-clipping = false;
+      log-level = "warn";
+
+      #################################
+      #             Shadows           #
+      #################################
+      shadow = true;
+      shadow-radius = 15;
+      shadow-opacity = 0.9;
+      shadow-offset-x = -15;
+      shadow-offset-y = -15;
+      crop-shadow-to-monitor = true;
+
+      #################################
+      #           Fading              #
+      #################################
+      fading = true;
+      fade-in-step = 0.3;
+      fade-out-step = 0.3;
+      # no-fading-openclose = true
+
+      #################################
+      #     Background-Blurring       #
+      #################################
+      blur-method = "dual_kawase";
+      blur-size = 3;
+      blur-strength = 15;
+
       blur-background-exclude = [
         "class_g = 'slop'"
       ];
@@ -119,8 +161,7 @@
             "show"
           ];
 
-          preset = "fly-in";
-
+          preset = "slide-in";
           direction = "down";
           duration = 0.2;
         }
@@ -130,7 +171,7 @@
             "hide"
           ];
 
-          preset = "fly-out";
+          preset = "slide-out";
           direction = "up";
           duration = 0.2;
         }
@@ -138,7 +179,6 @@
           triggers = [
             "geometry"
           ];
-
           preset = "geometry-change";
           duration = 0.1;
         }
@@ -161,14 +201,12 @@
           match = "class_g = 'Gnome-terminal' || class_g = 'XTerm' || class_g = 'Konsole'";
           shadow = true;
           blur = true;
-          dim = 0;
         }
         {
           match = "window_type = 'dock'";
           corner-radius = 0;
           dim = 0;
           shadow = false;
-          blur = false;
         }
         {
           match = "window_type = 'desktop' || class_g *?= 'slop' || class_i *?=  'slop' || name *?= 'slop'";
@@ -209,60 +247,7 @@
           shadow = false;
           dim = 0;
         }
-        {
-          match = "class_g = 'i3-frame' || class_i = 'i3-frame'";
-          opacity = opMAX;
-          transparent-clipping = false;
-          shadow = false;
-          animations = let
-            d = 0.1;
-          in {
-            appear = {
-              triggers = ["open" "show"];
-              preset = "slide-in";
-              direction = "up";
-              duration = d;
-            };
-            disappear = {
-              triggers = ["close" "hide"];
-              preset = "slide-out";
-              direction = "up";
-              duration = d;
-            };
-            geometry = {
-              triggers = ["geometry"];
-              preset = "geometry-change";
-              duration = d;
-            };
-          };
-        }
-        {
-          match = "name = 'Dunst' || name = 'Notification'";
-          opacity = opNORM;
-          transparent-clipping = false;
-          full-shadow = false;
-          animations = let
-            d = 0.3;
-          in {
-            geometry = {
-              triggers = ["geometry"];
-              preset = "geometry-change";
-              duration = d;
-            };
-            appear = {
-              triggers = ["open" "show"];
-              preset = "fly-in";
-              direction = "down";
-              duration = d;
-            };
-            disappear = {
-              triggers = ["close" "hide"];
-              preset = "fly-out";
-              direction = "up";
-              duration = d;
-            };
-          };
-        }
+
         {
           match = "class_g='flameshot'";
           fade = false;
@@ -283,7 +268,7 @@
           };
         }
         {
-          match = "class_g = 'kitty' || class_g = 'dropdown' || name = 'Eww - bar'";
+          match = "class_g = 'kitty' || class_g = 'dropdown'";
           transparent-clipping = true;
           opacity = 0.9;
           blur = true;
@@ -292,12 +277,14 @@
           in {
             appear = {
               triggers = ["open" "show"];
-              preset = "zoom";
+              preset = "slide-in";
+              direction = "down";
               duration = d;
             };
             disappear = {
               triggers = ["close" "hide"];
-              preset = "disappear";
+              preset = "slide-out";
+              direction = "up";
               duration = d;
             };
           };

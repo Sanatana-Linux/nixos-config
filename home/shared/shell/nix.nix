@@ -18,6 +18,7 @@
       nix-prefetch
       nix-prefetch-scripts
       nix-search-cli
+      nix-search-tv
       nix-template
       nix-zsh-completions
     ];

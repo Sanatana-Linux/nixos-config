@@ -11,12 +11,12 @@
       #################################
       #       General Settings        #
       #################################
-      backend = "glx";
+      backend = "xrender";
       dithered-present = false;
-      vsync = false;
-      # mark-wmwin-focused = true;
-      # mark-ovredir-focused = true;
-      corner-radius = 0;
+      vsync = true;
+      mark-wmwin-focused = true;
+      mark-ovredir-focused = true;
+      corner-radius = 4;
       detect-rounded-corners = true;
       detect-client-opacity = true;
       detect-transient = true;
@@ -29,18 +29,18 @@
       #             Shadows           #
       #################################
       shadow = true;
-      shadow-radius = 20;
-      shadow-opacity = 0.8;
+      shadow-radius = 15;
+      shadow-opacity = 0.9;
       shadow-offset-x = -15;
-      shadow-offset-y = -10;
+      shadow-offset-y = -15;
       crop-shadow-to-monitor = true;
 
       #################################
       #           Fading              #
       #################################
       fading = true;
-      fade-in-step = 0.1;
-      fade-out-step = 0.1;
+      fade-in-step = 0.3;
+      fade-out-step = 0.3;
       # no-fading-openclose = true
 
       #################################
@@ -119,7 +119,9 @@
             "show"
           ];
 
-          preset = "zoom-in";
+          preset = "fly-in";
+
+          direction = "down";
           duration = 0.2;
         }
         {
@@ -128,7 +130,8 @@
             "hide"
           ];
 
-          preset = "zoom-out";
+          preset = "fly-out";
+          direction = "up";
           duration = 0.2;
         }
         {
@@ -137,7 +140,7 @@
           ];
 
           preset = "geometry-change";
-          duration = 0.4;
+          duration = 0.1;
         }
       ];
       #################################
@@ -146,13 +149,19 @@
       rules = let
         opFULL = 1;
         opMAX = 0.99;
-        opNORM = 0.9;
-        opLOW = 0.8;
+        opNORM = 0.99;
+        opLOW = 0.9;
       in [
         {
           match = "_GTK_FRAME_EXTENTS@";
-          shadow = false;
-          blur = false;
+          shadow = true;
+          blur = true;
+        }
+        {
+          match = "class_g = 'Gnome-terminal' || class_g = 'XTerm' || class_g = 'Konsole'";
+          shadow = true;
+          blur = true;
+          dim = 0;
         }
         {
           match = "window_type = 'dock'";
@@ -171,7 +180,10 @@
         }
         {
           match = "window_type = 'popup_menu' || window_type = 'tooltip'";
-          transparent-clipping = false;
+          transparent-clipping = true;
+          shadow = true;
+          blur = true;
+          corner-radius = 4;
         }
         {
           match = "fullscreen";
@@ -185,7 +197,7 @@
         {
           match = "!(focused || group_focused) && (!fullscreen)"; #inactive
           opacity = opLOW;
-          dim = 0.1;
+          dim = 0.2;
         }
         {
           match = "class_g = 'Darktable'";
@@ -240,11 +252,13 @@
             appear = {
               triggers = ["open" "show"];
               preset = "fly-in";
+              direction = "down";
               duration = d;
             };
             disappear = {
               triggers = ["close" "hide"];
               preset = "fly-out";
+              direction = "up";
               duration = d;
             };
           };
@@ -270,18 +284,20 @@
         }
         {
           match = "class_g = 'kitty' || class_g = 'dropdown' || name = 'Eww - bar'";
-          transparent-clipping = false;
+          transparent-clipping = true;
+          opacity = 0.9;
+          blur = true;
           animations = let
-            d = 0.6;
+            d = 0.2;
           in {
             appear = {
               triggers = ["open" "show"];
-              preset = "fly-in";
+              preset = "zoom";
               duration = d;
             };
             disappear = {
               triggers = ["close" "hide"];
-              preset = "fly-out";
+              preset = "disappear";
               duration = d;
             };
           };

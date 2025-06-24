@@ -122,7 +122,7 @@ with pkgs;
     }
 
     function search() {
-    nix-search-tv print | fzf --preview 'nix-search-tv preview {}' --scheme history
+        ns
     }
 
     function options() {

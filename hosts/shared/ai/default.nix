@@ -7,14 +7,15 @@
     gollama
     #    lunacy
     #    plandex
-    local-ai
+    # local-ai
     #    python312Packages.peacasso
     libtorch-bin
-    python312Packages.diffusers
-    python312Packages.optimum
-    python312Packages.torchWithCuda
-    python312Packages.transformers
-    python312Packages.triton-cuda
+    # python312Packages.diffusers
+    # python312Packages.optimum
+    python312Packages.torch-bin
+    # python312Packages.torchWithCuda
+    # python312Packages.transformers
+    # python312Packages.triton-cuda
     ollama-cuda
     python312Packages.ollama
     tgpt

@@ -64,7 +64,6 @@ in {
         cudaPackages.libnvjitlink
         cudaPackages.libnvjpeg
         cudatoolkit
-        cudaPackages.saxpy
         cudaPackages.nvidia_fs
         eglexternalplatform
         freeglut
@@ -88,7 +87,6 @@ in {
         nvidia_cg_toolkit
         nvtopPackages.nvidia
         peakperf
-        python312Packages.triton-cuda
         vaapiVdpau
         xorg_sys_opengl
         zenith-nvidia
@@ -96,7 +94,7 @@ in {
       ++ [
         (python312.withPackages (p:
           with p; [
-            torchWithCuda
+            # torchWithCuda
             tensorflowWithCuda
             triton-cuda
             pycuda

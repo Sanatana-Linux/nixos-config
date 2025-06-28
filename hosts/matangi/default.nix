@@ -30,7 +30,6 @@
 
     # Android
     ../shared/hardware/android.nix
-    ../shared/virtualization/waydroid.nix
 
     # bluetooth support
     ../shared/hardware/bluetooth.nix

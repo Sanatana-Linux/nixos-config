@@ -38,8 +38,6 @@ with pkgs; [
   nodePackages_latest.svgo
   optipng
   oxipng
-  pixel2svg
-  pixeluvo
   pngcrush
   pngtoico
   pngtools

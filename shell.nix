@@ -6,7 +6,7 @@
       home-manager
       figlet
       lolcat
-      nixVersions.git
+      nixVersions.latest
       alejandra
       neovim
       silver-searcher

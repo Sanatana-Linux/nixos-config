@@ -1,54 +1,22 @@
 {pkgs, ...}:
 with pkgs; [
   #nodePackages_latest.neovim
+  #nodePackages_latest.diagnostic-languageserver
+  #nodePackages_latest.gulp
+  #nodePackages_latest.nodejs
+  #nodePackages_latest.prettier
   actionlint
-  tailwindcss-language-server
   any-nix-shell
-  stylua
   bc
-  sqlite
-  nodejs
-  sqlite-interactive
-  sqlite-analyzer
-  sqlite-utils
-  sqlitebrowser
-  pylint
+  bfg-repo-cleaner
   black
-  usort
-  cloudflare-cli
-  claude-code
-  lua51Packages.lua
-  lua51Packages.luarocks
-  meson-tools
-  gitAndTools.gh
-  gitAndTools.git-absorb
-  gitAndTools.git-machete
-  gitAndTools.gitui
-  luajitPackages.lua
-
-  rust-analyzer
-  grex
-  gopls
-  go
-  meson
   brotli
   cached-nix-shell
-  gist
-  git
-  git-backup-go
-  git-extras
-  git-filter-repo
-  git-lfs
-  git-repo-updater
-  git-revise
-  git-trim
-  gitleaks
-
-  bfg-repo-cleaner
-  sassc
   cargo
   cargo-binutils
   clang
+  claude-code
+  cloudflare-cli
   cmake
   commitlint-rs
   deadnix
@@ -57,27 +25,47 @@ with pkgs; [
   dotenv-linter
   eslint_d
   fuse3
+  gcc
+  gccStdenv
   getopt
   getoptions
   gettext
+  gist
   git
+  git
+  git-backup-go
+  git-extras
   git-extras
   git-filter-repo
+  git-filter-repo
   git-ignore
+  git-lfs
+  git-repo-updater
   git-repo-updater
   git-revise
+  git-revise
   git-trim
+  git-trim
+  gitAndTools.gh
+  gitAndTools.git-absorb
+  gitAndTools.git-machete
+  gitAndTools.gitui
+  gitleaks
   gitleaks
   glib
   glow
   gnumake
   gnutls
   go
+  go
+  gopls
   gource
+  grex
   hlint
   imlib2Full
   inetutils
   just
+  latex2html
   leptosfmt
   libclang
   libcxxStdenv
@@ -87,8 +75,11 @@ with pkgs; [
   libpkgconf
   libtiff
   libtool
+  lldb
   lua
   lua-language-server
+  lua51Packages.lua
+  lua51Packages.luarocks
   lua5_1
   lua5_2
   lua5_2_compat
@@ -104,6 +95,7 @@ with pkgs; [
   luajitPackages.lpeg
   luajitPackages.lpeg_patterns
   luajitPackages.lpeglabel
+  luajitPackages.lua
   luajitPackages.lua
   luajitPackages.lua-curl
   luajitPackages.lua-messagepack
@@ -121,15 +113,14 @@ with pkgs; [
   luajitPackages.wrapLua
   lynis
   markdownlint-cli2
+  meson
+  meson-tools
   nil
   nix-init
   nix-tree
   nixpkgs-fmt
   node2nix
-  #nodePackages_latest.diagnostic-languageserver
-  #nodePackages_latest.gulp
-  #nodePackages_latest.nodejs
-  #nodePackages_latest.prettier
+  nodejs
   nodenv
   nps
   nss
@@ -148,38 +139,46 @@ with pkgs; [
   poetry
   protobuf
   protobufc
+  pylint
   rmlint
   ruby
   rubyfmt
+  rust-analyzer
   rustc
   rustfmt
+  rustlings
   rustscan
   rustup
   rustywind
-  rustlings
   sass
+  sassc
   sassc
   shellcheck
   shellharden
   shfmt
   sqlite
+  sqlite
+  sqlite-analyzer
+  sqlite-interactive
   sqlite-utils
+  sqlite-utils
+  sqlitebrowser
   stdenv.cc.cc
   stylua
+  stylua
   sumneko-lua-language-server
+  tailwindcss-language-server
   tokei
   tree-sitter
   typescript
-  xorg.gccmakedep
-  gcc
-  gccStdenv
   unstable.squashfs-tools-ng
   unstable.squashfsTools
   unstable.squashfuse
+  usort
   usql
-  lldb
   vscode-langservers-extracted
   wkhtmltopdf-bin
+  xorg.gccmakedep
   xorg.libX11
   xorg_sys_opengl
   yamllint

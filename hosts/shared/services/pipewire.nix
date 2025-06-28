@@ -27,10 +27,11 @@
     mpdris2
     pavucontrol
     playerctl
+    aaxtomp3
+    audiofile
+    redoflacs
 
     alsa-utils
-    #alsaequal
-    #audacity
     cava
     fdk_aac
     flac
@@ -38,7 +39,6 @@
     flaca
     libpulseaudio
     deadbeef-with-plugins
-    unstable.lmms
     mediainfo
     mpc_cli
     mpd
@@ -50,7 +50,6 @@
     playerctl
     pulseaudio-ctl
     pulseaudioFull
-    #pulsemixer
     vlc
   ];
 }

@@ -29,7 +29,6 @@
 
     # Android
     ../shared/hardware/android.nix
-    ../shared/virtualization/waydroid.nix
 
     # bluetooth support
     ../shared/hardware/bluetooth.nix
@@ -49,6 +48,7 @@
     # AwesomeWM
     ../shared/desktop/default.nix
     ../shared/desktop/awesomewm.nix
+    ../shared/desktop/niri.nix
 
     # Packages
     ./pkgs.nix
@@ -174,7 +174,7 @@
         };
         # Add in advanced BIOS entry (works for lenovo legion 16irx9, YMMV)
         extraEntries = ''
-          menuentry 'Advanced UEFI Firmware Settings' --class uefi {
+          menuentry 'Advanced UEFI Firmware Settings' --class efi --class uefi {
             insmod fat
             insmod chain
             chainloader @bootRoot@/EFI/Boot/Bootx64.efi

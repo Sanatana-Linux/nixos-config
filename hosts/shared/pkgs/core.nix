@@ -9,6 +9,11 @@ with pkgs; [
   coreutils-full
   uutils-coreutils
   ccls
+  sops
+  age
+  agenix-cli
+  ssh-to-age
+
   clang-tools
   cmake
   commonsCompress

@@ -21,15 +21,6 @@
     libvirtd.enable = true;
     containerd.enable = true;
     oci-containers.backend = "docker";
-    # I *think* I like podman better at the end of the day, jury is still out
-    # podman = {
-    #   defaultNetwork.settings = {
-    #     dns_enabled = true;
-    #   };
-    #   dockerCompat = true;
-    #   dockerSocket.enable = true;
-    #   enable = true;
-    # };
   };
   hardware.nvidia-container-toolkit.enable = true;
   hardware.graphics.enable32Bit = true;
@@ -40,8 +31,6 @@
     act
     distrobox
     fuse-overlayfs
-    # podman-compose
-    # podman-tui
     kvmtool
     virt-manager
     qemu_full
@@ -53,7 +42,6 @@
     docker-distribution
     docker-gc
     docker-slim
-
     x11docker
   ];
 }

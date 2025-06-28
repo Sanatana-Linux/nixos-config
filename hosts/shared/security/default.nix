@@ -12,11 +12,11 @@
     bws # bitwarden secrets management
     certgraph # ssl certificate graph crawler
     crunch # wordlist generator
-    deepsecrets # find secrets in code
+    # deepsecrets # find secrets in code
     dnsenum # dns enumeration
     enchive # encrypted archive
     encpipe # encrypt pipe
-    enum4linux-ng # enumerate info from windows/samba
+    # enum4linux-ng # enumerate info from windows/samba
     fcrackzip # zip password cracker
     ghorg # mass clone git repos
     hashcat # hash cracker

@@ -5,7 +5,11 @@ with pkgs;
       with p; [
         GitPython
         PyICU
+        pylatexenc
+        pylatex
         pydantic
+        meson
+        meson-python
         pydantic-core
         beautifulsoup4
         brotlicffi

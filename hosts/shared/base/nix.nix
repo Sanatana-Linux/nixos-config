@@ -114,14 +114,14 @@
     };
 
     # nix package manager version
-    package = pkgs.nixVersions.git;
+    package = pkgs.nixVersions.latest;
     # Garbage Collection Settings
     gc = {
       # Less Aggressive since both laptops have more than 1 TB of storage
       # and macbook-air I can configure aggressively when I get to fixing that config
       automatic = true;
       dates = "weekly";
-      options = "--delete-older-than 14d";
+      options = "--delete-older-than 7d";
     };
     # Transform the `inputs` attribute set into a registry format
     registry = lib.mapAttrs (_: value: {flake = value;}) inputs;

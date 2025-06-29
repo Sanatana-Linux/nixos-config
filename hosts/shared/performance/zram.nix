@@ -6,7 +6,7 @@
   zramSwap = {
     algorithm = "zstd";
     enable = true;
-    memoryPercent = 100;
-    priority = 10;
+    memoryPercent = 50; # Use 50% of available RAM for zram swap
+    priority = 1501;
   };
 }

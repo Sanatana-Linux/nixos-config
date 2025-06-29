@@ -10,6 +10,7 @@ with pkgs;
         pydantic
         meson
         meson-python
+        typecode-libmagic
         pydantic-core
         beautifulsoup4
         brotlicffi

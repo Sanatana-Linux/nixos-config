@@ -22,6 +22,8 @@
       "$GOBIN"
       "${config.home.homeDirectory}/.cargo/bin"
       "${config.home.homeDirectory}/.yarn/bin"
+      "${config.home.homeDirectory}/.local/share/pnpm"
+      "${config.home.homeDirectory}/node_modules/.bin"
       "${config.home.homeDirectory}/.local/share/flatpak/exports/share"
       "/run/user/1000/fnm_multishells/87711_1736929409043/bin"
     ];
@@ -30,6 +32,7 @@
       GOPATH = "${config.home.homeDirectory}/Workspace/go";
       GOBIN = "${config.home.homeDirectory}/Workspace/go/bin";
       SHELL = "${pkgs.zsh}/bin/zsh";
+      PNPM_HOME = "${config.home.homeDirectory}/.local/share/pnpm";
       FNM_MULTISHELL_PATH = "/run/user/1000/fnm_multishells/87711_1736929409043";
       FNM_VERSION_FILE_STRATEGY = "local";
       FNM_DIR = "/home/tlh/.local/share/fnm";

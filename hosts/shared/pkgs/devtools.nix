@@ -171,6 +171,7 @@ with pkgs; [
   tokei
   tree-sitter
   typescript
+  pnpm
   unstable.squashfs-tools-ng
   unstable.squashfsTools
   unstable.squashfuse

@@ -79,7 +79,7 @@ with pkgs;
       echo "Rebuilding Configuration Now"
       rm -rf $HOME/.config/*.bak
       rm -rf $HOME/.config/**/*.bak
-      nixos-rebuild switch --flake ".#$2" --impure  --use-remote-sudo && echo "Done Rebuilding NixOS Configuration"
+      nixos-rebuild switch --flake ".#$2" --impure  --sudo && echo "Done Rebuilding NixOS Configuration"
     }
 
     function vm() {

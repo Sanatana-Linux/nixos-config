@@ -12,6 +12,8 @@
   programs.nix-ld = {
     enable = true;
     libraries = with pkgs; [
+      xdotool
+      xdo
       # Graphics
       libGL # OpenGL library
       libGLU # OpenGL Utility Library

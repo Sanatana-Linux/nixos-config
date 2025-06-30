@@ -8,6 +8,7 @@ with pkgs; [
   appstream-glib
   inputs.zen-browser.packages."${system}".default
   bleachbit
+  unstable.calibre
   discord
   epiphany
   kdePackages.breeze-icons
@@ -22,6 +23,7 @@ with pkgs; [
   fuseiso
   gcolor3
   geocode-glib_2
+  kotatogram-desktop
   gmime3
   gnome-disk-utility
   gnome-font-viewer

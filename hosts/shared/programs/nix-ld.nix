@@ -30,6 +30,8 @@
       libva # Video Acceleration API
       libva-utils # Utilities for VA-API
 
+      perl
+
       # SDL (Simple DirectMedia Layer)
       SDL # SDL 1.2, cross-platform multimedia library
       SDL2 # SDL 2.x, newer version

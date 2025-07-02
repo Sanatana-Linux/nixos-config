@@ -19,6 +19,7 @@
     ../shared/programs/zathura/default.nix
     ../shared/programs/kitty/default.nix
     ../shared/programs/neovim/default.nix
+    ../shared/services/portals/default.nix
     ../shared/programs/ranger/default.nix
     ../shared/programs/zathura/default.nix
     ../shared/services/default.nix

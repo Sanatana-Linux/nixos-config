@@ -23,6 +23,9 @@
 
     nm-applet.enable = false;
 
+    # enable appimage support
+    appimage.enable = true;
+    appimage.binfmt = true;
     # ------------------------------------------------- #
   };
 }

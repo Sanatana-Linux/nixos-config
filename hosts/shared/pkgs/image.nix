@@ -38,6 +38,8 @@ with pkgs; [
   nodePackages_latest.svgo
   optipng
   oxipng
+  perl538Packages.ImageMagick
+  perl538Packages.PerlMagick
   pngcrush
   pngtoico
   pngtools

@@ -30,6 +30,7 @@
 
     sessionVariables = {
       GOPATH = "${config.home.homeDirectory}/Workspace/go";
+      PERLPATH = "/run/current-system/sw/bin/perl";
       GOBIN = "${config.home.homeDirectory}/Workspace/go/bin";
       SHELL = "${pkgs.zsh}/bin/zsh";
       PNPM_HOME = "${config.home.homeDirectory}/.local/share/pnpm";

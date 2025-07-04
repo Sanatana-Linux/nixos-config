@@ -20,7 +20,7 @@
       buildCommand =
         (oldAttrs.buildCommand or "")
         + ''
-          # Find firefox dir
+          # Find firefox Dir
           firefoxDir=$(find "$out/lib/" -type d -name 'firefox*' -print -quit)
 
           # Function to replace symlink with destination file
@@ -51,31 +51,22 @@ in {
       extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
         absolute-enable-right-click
         add-custom-search-engine
-        auto-tab-discard
         bitwarden
-        cookie-quick-manager
-        copy-selection-as-markdown
-        don-t-fuck-with-paste
-        export-cookies-txt
         export-tabs-urls-and-titles
+        fastforwardteam
         firemonkey
         form-history-control
         foxytab
         gaoptout
-        github-file-icons
         ipfs-companion
         istilldontcareaboutcookies
         justdeleteme
         keybase
-        lexicon
         link-gopher
-        lovely-forks
         markdownload
         multi-account-containers
         raindropio
-        re-enable-right-click
         refined-github
-        search-engines-helper
         stylebot-web
         stylus
         ublock-origin

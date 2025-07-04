@@ -9,7 +9,7 @@
 
     # Font settings for GTK
     font = {
-      name = "BerkeleyMono Nerd Font Bold";
+      name = "Agave Nerd Font Propo";
       size = 12;
     };
 

@@ -72,7 +72,6 @@ in {
         glew
         glfw
         intel-media-driver
-        intel-vaapi-driver
         libGL
         libglut
         libGLX

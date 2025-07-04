@@ -40,6 +40,7 @@ with pkgs; [
   oxipng
   perl538Packages.ImageMagick
   perl538Packages.PerlMagick
+  gnome-obfuscate
   pngcrush
   pngtoico
   pngtools
@@ -60,6 +61,8 @@ with pkgs; [
   gimp3Plugins.gmic
   gmic
   upscayl
+  gradia
+
   geticons
   gfie
   upscayl-ncnn

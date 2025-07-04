@@ -1,15 +1,15 @@
 [manager]
 layout = [2, 4, 3]
 sort_sensitive = true
-sort_reverse = true
+sort_reverse = false # hate that
 sort_dir_first = true
 show_hidden = true
 show_symlink = true
 
 [preview]
-tab_size = 2
-max_width = 600
-max_height = 900
+tab_size = 3
+max_width = 640
+max_height = 860
 cache_dir = ""
 
 [opener]

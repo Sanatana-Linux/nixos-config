@@ -8,6 +8,11 @@ with pkgs; [
   actionlint
   any-nix-shell
   bc
+  opencode
+  prettier
+  cloudflare-cli
+  cloudflared
+  quictls
   bfg-repo-cleaner
   black
   brotli

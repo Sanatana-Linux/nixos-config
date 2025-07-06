@@ -111,6 +111,9 @@
               echo "Updating $package..."
               ollama pull "$package"
           done
+
+
+
       }
 
 
@@ -158,6 +161,11 @@
       trm = "${lib.getBin trash-cli}/bin/trash-cli"; # Move files to trash
       firefox = "firefox-nightly";
       less = "moar";
+      # Decom: Decrypts, cleans up, decompresses, and cleans up again.
+      decom = "_() { echo -n 'Enter base name to decrypt: '; read n; gpg -d \"$n.7z.gpg\" > \"$n.7z\" && rm \"$n.7z.gpg\" && ouch decompress \"$n.7z\" && rm \"$n.7z\"; }; _";
+
+      # Encom: Compresses, cleans up, encrypts, and cleans up again.
+      encom = "_() { echo -n 'Enter directory name to compress and encrypt: '; read n; ouch compress \"$n\" \"$n.7z\" && rm -rf \"$n\" && gpg --symmetric \"$n.7z\" && rm \"$n.7z\"; }; _";
 
       # System
       cleanup = "sudo nix-collect-garbage --delete-older-than 3d"; # Clean up old Nix store entries.
@@ -189,6 +197,7 @@
         {name = "molovo/tipz";}
         {name = "nix-community/nix-zsh-completions";}
         {name = "ytet5uy4/fzf-widgets";}
+        {name = "mrjohannchang/zsh-interactive-cd";}
       ];
     };
   };

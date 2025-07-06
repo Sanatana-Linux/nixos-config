@@ -39,3 +39,9 @@
 1. [Advanced BIOS for Lenovo Legion as a Grub Menu Entry at
    Boot](.github/documentation/lenovo-advanced-bios.md) - Access from Grub Boot Menu to the unlocked
    "Advanced BIOS" firmware settings for my Lenovo Legion 5 Pro (16irx9).
+
+<figure>
+<img src = "./assets/nix-trinity.svg" alt="Nix Trinity" width="100%" height="100%" align="center"/>
+
+<figcaption><a href = "https://writerit.nl/software/nixos/my-personal-journey-into-nixos/">Image Sourced from the Writer IT Blog</a></figcaption>
+</figure>

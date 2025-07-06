@@ -51,9 +51,14 @@ in {
       extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
         absolute-enable-right-click
         add-custom-search-engine
+        auto-referer
+        auto-tab-discard
         bitwarden
+        cookie-quick-manager
+        copy-selection-as-markdown
+        don-t-fuck-with-paste
+        export-cookies-txt
         export-tabs-urls-and-titles
-        fastforwardteam
         firemonkey
         form-history-control
         foxytab

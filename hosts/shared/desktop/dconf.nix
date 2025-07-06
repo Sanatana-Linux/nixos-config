@@ -44,7 +44,7 @@
             clock-show-seconds = true;
             clock-show-weekday = true;
             color-scheme = "prefer-dark";
-            cursor-size = 24;
+            cursor-size = 48;
             cursor-theme = "Phinger Cursors (light)";
             enable-animations = true;
             enable-hot-corners = false;
@@ -169,10 +169,6 @@
 
           "org/gnome/nautilus/window-state" = {
             initial-size = mkTuple [890 550];
-          };
-
-          "org/gnome/portal/filechooser/org/gnome/Settings" = {
-            last-folder-path = "/home/${username}/Downloads";
           };
 
           "org/gnome/settings-daemon/plugins/color" = {

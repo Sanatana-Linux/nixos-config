@@ -2,18 +2,12 @@
   imports = [
     ./dconf.nix
   ];
-  services.xserver = {
-    enable = true;
-    desktopManager.gnome.enable = true;
+  services.desktopManager.gnome.enable = true;
 
-    #libinput = { touchpad.tapping = true; };
-  };
   services.gnome.gnome-initial-setup.enable = false;
   services.gnome.games.enable = true;
 
   environment.gnome.excludePackages = with pkgs.gnome; [
-    gnome-maps
-    gnome-music
     pkgs.gnome-tour
     pkgs.gnome-text-editor
     pkgs.gnome-user-docs
@@ -28,12 +22,10 @@
     gnomeExtensions.gtile
     gnomeExtensions.dash-to-panel
     gnomeExtensions.tray-icons-reloaded
-    gnome.gnome-tweaks
+    gnome-tweaks
     gnomeExtensions.arcmenu
-    gnomeExtensions.gesture-improvements
     gnomeExtensions.paperwm
     gnomeExtensions.just-perfection
-    gnomeExtensions.rounded-window-corners
     gnomeExtensions.vitals
   ];
 }

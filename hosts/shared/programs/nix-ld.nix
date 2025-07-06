@@ -245,6 +245,8 @@
       zsh # Z shell
       gccStdenv # GCC-based stdenv
 
+      python3Packages.pygobject3
+
       lua51Packages.lua # Lua interpreter
       lua51Packages.luautf8 # UTF-8 support for LuaJIT
       lua51Packages.std-_debug # Debugging utilities for LuaJIT

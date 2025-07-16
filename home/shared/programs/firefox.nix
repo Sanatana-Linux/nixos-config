@@ -174,9 +174,6 @@ in {
         "dom.webgpu.workers.enabled" = true; # Enable WebGPU in workers
         "dom.webgpu.enabled" = true; # Enable WebGPU
         "gfx.webgpu.force-enabled" = true; # Force-enable WebGPU
-
-        "browser.tabs.allow_transparent_browser" = true; # Allow transparent browser tabs
-        "widget.disable-native-theme-for-content" = true; # Disable native theme for content
         "widget.dmabuf.force-enabled" = true; # Force-enable DMABUF for buffer sharing
         "widget.gtk.rounded-bottom-corners.enabled" = true; # Enable rounded bottom corners in GTK
         "widget.non-native-theme.win.scrollbar.use-system-size" = false; # Don't use system scrollbar size on Windows

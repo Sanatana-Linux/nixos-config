@@ -13,8 +13,8 @@
     "net.ipv4.tcp_fastopen" = 3;
   };
   networking = {
-    nameservers = ["1.1.1.1" "9.9.9.9"];
-    # make DHCP received nameservers don't override above
+    nameservers = ["1.1.1.1" "8.8.8.8" "8.8.4.4" "9.9.9.9"];
+    # make sure DHCP received nameservers don't override above
     dhcpcd.extraConfig = "nohook resolv.conf";
     networkmanager = {
       enable = true;
@@ -29,7 +29,7 @@
 
     firewall = {
       enable = true;
-      allowedTCPPorts = [22 53 69 80 443 1087 3456 11434];
+      allowedTCPPorts = [22 53 69 80 443 1087 3456 5572 11434];
       allowedUDPPortRanges = [
         {
           from = 4000;

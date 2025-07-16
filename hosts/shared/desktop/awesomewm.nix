@@ -43,9 +43,12 @@
   # System packages required for AwesomeWM and its ecosystem.
   # TODO: Describe each package in detail.
   environment.systemPackages = with pkgs; [
+    betterlockscreen # Lock screen utility.
+    luabind_luajit # Lua bindings for C++ using LuaJIT.
     lua51Packages.lua # Lua 5.1 interpreter.
     lua51Packages.lgi # Lua 5.1 packages for luajit compatibility.
     lua51Packages.luarocks # LuaRocks package manager for Lua 5.1.
+    lua51Packages.lua-pam # PAM bindings for Lua 5.1.
     lua51Packages.luaposix # POSIX bindings for Lua 5.1.
     lua51Packages.luautf8 # UTF-8 support for Lua 5.1.
     lua51Packages.lpeg # Parsing Expression Grammars for Lua 5.1.

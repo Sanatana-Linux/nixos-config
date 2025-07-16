@@ -2,6 +2,7 @@
   environment.systemPackages = with pkgs; [
     aichat
     alpaca
+    gemini-cli
     code2prompt
     codegrab # use as `grab`
     gollama

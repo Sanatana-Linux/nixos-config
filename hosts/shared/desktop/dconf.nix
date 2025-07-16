@@ -62,10 +62,6 @@
             application-id = "org.gnome.tweaks.desktop";
           };
 
-          "org/gnome/desktop/peripherals/mouse" = {
-            natural-scroll = false;
-          };
-
           "org/gnome/desktop/peripherals/tablets/056a:037a" = {
             keep-aspect = false;
           };
@@ -75,16 +71,7 @@
             two-finger-scrolling-enabled = true;
           };
 
-          "org/gnome/desktop/privacy" = {
-            disable-microphone = false;
-            old-files-age = mkUint32 3;
-            recent-files-max-age = -1;
-            remove-old-temp-files = true;
-            remove-old-trash-files = true;
-          };
-
           "org/gnome/desktop/screensaver" = {
-            color-shading-type = "solid";
             lock-enabled = true;
             picture-options = "zoom";
             picture-uri = "file:///run/current-system/sw/share/backgrounds/gnome/blobs-l.svg";
@@ -145,7 +132,7 @@
           };
 
           "org/gnome/mutter" = {
-            attach-modal-dialogs = false;
+            attach-modal-dialogs = true;
             edge-tiling = false;
             overlay-key = "Super_L";
             workspaces-only-on-primary = false;
@@ -229,36 +216,6 @@
 
           "org/gnome/tweaks" = {
             show-extensions-notice = false;
-          };
-
-          "org/gtk/gtk4/settings/file-chooser" = {
-            date-format = "regular";
-            location-mode = "path-bar";
-            show-hidden = false;
-            show-size-column = true;
-            show-type-column = true;
-            sidebar-width = 140;
-            sort-column = "name";
-            sort-directories-first = true;
-            sort-order = "ascending";
-            type-format = "category";
-            view-type = "list";
-            window-size = mkTuple [859 372];
-          };
-
-          "org/gtk/settings/file-chooser" = {
-            date-format = "regular";
-            location-mode = "path-bar";
-            show-hidden = false;
-            show-size-column = true;
-            show-type-column = true;
-            sidebar-width = 161;
-            sort-column = "name";
-            sort-directories-first = false;
-            sort-order = "ascending";
-            type-format = "category";
-            window-position = mkTuple [103 103];
-            window-size = mkTuple [1231 902];
           };
         };
       })

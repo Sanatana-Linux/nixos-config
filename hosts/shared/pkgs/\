@@ -15,7 +15,6 @@ with pkgs; [
   quictls
   bfg-repo-cleaner
   black
-  treegen
   brotli
   cached-nix-shell
   cargo

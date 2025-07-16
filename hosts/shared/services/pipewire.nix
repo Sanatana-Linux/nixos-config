@@ -30,9 +30,13 @@
     aaxtomp3
     audiofile
     redoflacs
-
+    distrho-ports
     alsa-utils
     cava
+    easyeffects
+    rustplayer
+    libvorbis
+    tap-plugins
     fdk_aac
     flac
     flac2all

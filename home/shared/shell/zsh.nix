@@ -175,8 +175,7 @@
       # Searching and File Opening
       grep = "${lib.getBin ripgrep-all}/bin/rga"; # Use ripgrep for fast searching
       fzim = "fzf | xargs nvim"; # Fuzzy find a file and open it with Neovim.
-      skvim = "nvim \${find . -name '*' | sk -m}"; # Fuzzy find a file or multiple with TAB selection and open it with Neovim.
-
+      skvim = ''nvim $(find . -type f | sk -m)'';
       vim = "nvim";
 
       # Miscellaneous

@@ -12,6 +12,7 @@
     bws # bitwarden secrets management
     certgraph # ssl certificate graph crawler
     crunch # wordlist generator
+    dalfox # search for secrets
     # deepsecrets # find secrets in code
     dnsenum # dns enumeration
     enchive # encrypted archive

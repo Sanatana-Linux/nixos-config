@@ -38,10 +38,10 @@
       };
     }; # ends xserver
   }; # ends services
-
+  # to enable the dconf editor and other dconf related utilities
+  programs.dconf.enable = true;
   # ------------------------------------------------- #
   # System packages required for AwesomeWM and its ecosystem.
-  # TODO: Describe each package in detail.
   environment.systemPackages = with pkgs; [
     betterlockscreen # Lock screen utility.
     luabind_luajit # Lua bindings for C++ using LuaJIT.
@@ -57,6 +57,7 @@
     lua51Packages.lua-messagepack # MessagePack serialization for Lua 5.1.
     lua51Packages.luasocket # Networking support for Lua 5.1.
     lua51Packages.mpack # MessagePack implementation for Lua 5.1.
+    gsettings-desktop-schemas # Schemas for GSettings.
     dbus # Message bus system.
     dbus-broker # Modern D-Bus message broker.
     dbus-glib # GLib bindings for D-Bus.
@@ -87,8 +88,8 @@
     xdg-utils # XDG utilities.
   ];
 
-  # Add extra XDG portal for GTK support.
-  xdg.portal.extraPortals = with pkgs; [xdg-desktop-portal-gtk];
+  # Add extra XDG portal for GTK support. File chooser and other GTK applications will use this portal.
+  xdg.portal.extraPortals = with pkgs; [xdg-desktop-portal-gtk xdg-desktop-portal-xapp];
   environment.variables = {
     GDK_BACKEND = "x11";
   };

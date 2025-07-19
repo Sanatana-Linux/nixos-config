@@ -48,7 +48,6 @@
     # AwesomeWM
     ../shared/desktop/default.nix
     ../shared/desktop/awesomewm.nix
-    ../shared/desktop/gnome.nix
 
     # Packages
     ./pkgs.nix

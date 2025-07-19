@@ -73,7 +73,6 @@ with pkgs; [
   t1utils
   tdesktop
   template-glib
-  themechanger
   transmission_4-gtk
   ttfautohint
   updfparser

@@ -99,6 +99,11 @@
         "nvidia-drm" # nvidia drm
         "nvidia-uvm" # nvidia uvm
         "nvidia-modeset" # modesetting nvidia driver
+        "intel_cstate" # intel cpu state
+        "aesni_intel" # intel aesni driver
+        "intel_uncore" # intel uncore driver
+        "intel_uncore_frequency" # intel uncore frequency driver
+        "intel_powerclamp" # intel power clamp driver
       ];
     };
 

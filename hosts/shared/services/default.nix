@@ -6,6 +6,7 @@
   imports = [
     ./pipewire.nix
     ./udev.nix
+    ./systemd.nix
   ];
 
   services = {
@@ -17,6 +18,7 @@
     journald.extraConfig = ''
       SystemMaxUse=80M
       RuntimeMaxUse=30M
+      MaxRetentionSec=7d
     '';
 
     dbus = {

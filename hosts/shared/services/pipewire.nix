@@ -18,42 +18,33 @@
     };
   };
   environment.systemPackages = with pkgs; [
+    aaxtomp3
     alsa-firmware
     alsa-lib
     alsa-oss
     alsa-plugins
     alsa-tools
-    mpc-cli
-    mpdris2
-    pavucontrol
-    playerctl
-    aaxtomp3
-    audiofile
-    redoflacs
-    distrho-ports
     alsa-utils
+    audiofile
     cava
+    deadbeef-with-plugins
+    distrho-ports
     easyeffects
-    rustplayer
-    libvorbis
-    tap-plugins
     fdk_aac
     flac
     flac2all
     flaca
     libpulseaudio
-    deadbeef-with-plugins
+    libvorbis
     mediainfo
-    mpc_cli
-    mpd
-    mpd-discord-rpc
-    mpd-mpris
-    mpdevil
     pamixer
     pavucontrol
     playerctl
     pulseaudio-ctl
     pulseaudioFull
+    redoflacs
+    rustplayer
+    tap-plugins
     vlc
   ];
 }

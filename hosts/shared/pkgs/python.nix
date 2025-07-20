@@ -18,7 +18,6 @@ with pkgs;
         flake8
         brotlipy
         gitdb
-        googleapis-common-protos
         levenshtein
         mdformat
         pip

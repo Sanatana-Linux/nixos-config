@@ -4,7 +4,9 @@
   inputs,
   ...
 }: {
-  # Enable and configure the X server with AwesomeWM as the window manager.
+  xdg.portal.enable = true;
+  xdg.portal.config.common.default = "*";
+  # Ena  xdg.portal.config.common.default = "*";ble and configure the X server with AwesomeWM as the window manager.
   services = {
     xserver = {
       windowManager.awesome = {
@@ -38,10 +40,10 @@
       };
     }; # ends xserver
   }; # ends services
-  # to enable the dconf editor and other dconf related utilities
   programs.dconf.enable = true;
   # ------------------------------------------------- #
   # System packages required for AwesomeWM and its ecosystem.
+  # TODO: Describe each package in detail.
   environment.systemPackages = with pkgs; [
     betterlockscreen # Lock screen utility.
     luabind_luajit # Lua bindings for C++ using LuaJIT.
@@ -88,8 +90,8 @@
     xdg-utils # XDG utilities.
   ];
 
-  # Add extra XDG portal for GTK support. File chooser and other GTK applications will use this portal.
-  xdg.portal.extraPortals = with pkgs; [xdg-desktop-portal-gtk xdg-desktop-portal-xapp];
+  # Add extra XDG portal for GTK support.
+  xdg.portal.extraPortals = with pkgs; [xdg-desktop-portal-gtk];
   environment.variables = {
     GDK_BACKEND = "x11";
   };

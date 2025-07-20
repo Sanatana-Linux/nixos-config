@@ -82,7 +82,6 @@
       libnvidia-container # NVIDIA container runtime library
       libvdpau # Video Decode and Presentation API for Unix
       libvdpau-va-gl # VDPAU driver with VA-API backend
-      mlx42 # Mellanox network library
       nv-codec-headers # NVIDIA codec headers
       nvidia-container-toolkit # NVIDIA container toolkit
       nvidia-texture-tools # NVIDIA texture processing tools
@@ -164,7 +163,6 @@
       libnotify # Desktop notification library
       librsvg # SVG rendering library
       libsForQt5.qt5ct # Qt5 configuration tool
-      lightlocker # Simple session locker
       pango # Text layout and rendering
       pixman # Pixel manipulation library
       ranger # Terminal file manager
@@ -245,7 +243,7 @@
       zsh # Z shell
       gccStdenv # GCC-based stdenv
 
-      python3Packages.pygobject3
+      python313Packages.pygobject3
 
       lua51Packages.lua # Lua interpreter
       lua51Packages.luautf8 # UTF-8 support for LuaJIT

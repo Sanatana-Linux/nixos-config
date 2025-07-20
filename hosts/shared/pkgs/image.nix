@@ -31,7 +31,7 @@ with pkgs; [
   libspng
   libwebp
   lutgen
-  unstable.gegl
+  gegl
   meme-image-generator
   metapixel
   mozjpeg

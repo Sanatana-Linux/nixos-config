@@ -1,6 +1,5 @@
 {pkgs, ...}:
 with pkgs; [
-  phototonic
   beautysh
   cheese
   ebook_tools
@@ -27,7 +26,6 @@ with pkgs; [
   gst_all_1.gstreamermm
   imgpatchtools
   inkscape-with-extensions
-  kooha
   libdrm
   libgee
   libplacebo
@@ -46,7 +44,7 @@ with pkgs; [
   mnamer
   mp4v2
   oggvideotools
-  olive-editor
+  # olive-editor
   p7zip
   pantheon.granite
   peek

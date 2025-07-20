@@ -8,9 +8,6 @@
     ./udev.nix
   ];
 
-  xdg.portal.enable = true;
-  xdg.portal.config.common.default = "*";
-
   services = {
     # discard blocks that are not in use by the filesystem, good for SSDs
     fstrim.enable = true;

@@ -33,9 +33,7 @@ with pkgs; [
   glib
   glibc
   gnome-keyring
-  grub2_full
   htop
-  inotify-tools
   jdupes
   jq
   kconfig-frontends
@@ -61,7 +59,6 @@ with pkgs; [
   neofetch
   nmon
   ntfs3g
-  ntfs3g
   ntfsprogs
   opencl-clang
   openssl
@@ -74,7 +71,6 @@ with pkgs; [
   pcre2
   pfetch
   pinentry-tty
-  pls # "prettier and powerful ls"
   pmutils
   polkit_gnome
   premake
@@ -98,8 +94,6 @@ with pkgs; [
   sysfsutils
   sysprof
   sysstat
-  systemctl-tui
-  systemdgenie
   systeroid
   sysvtools
   sysz
@@ -109,7 +103,6 @@ with pkgs; [
   tree
   ucl
   unscd
-  usbmuxd
   usbmuxd
   utillinux
   ventoy-full

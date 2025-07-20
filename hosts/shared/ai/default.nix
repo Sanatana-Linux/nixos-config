@@ -1,15 +1,11 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     aichat
-    alpaca
     gemini-cli
     code2prompt
     codegrab # use as `grab`
     gollama
-    #    lunacy
-    #    plandex
     # local-ai
-    #    python312Packages.peacasso
     libtorch-bin
     # python312Packages.diffusers
     # python312Packages.optimum

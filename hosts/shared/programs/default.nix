@@ -12,7 +12,7 @@
   hardware = {
     logitech.wireless = {
       enable = true;
-      enableGraphical = true;
+      enableGraphical = false;
     };
   };
   programs = {

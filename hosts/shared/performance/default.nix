@@ -12,12 +12,12 @@
 
     # The sysctl swappiness parameter determines the kernel's preference for pushing anonymous pages or page cache to disk in memory-starved situations.
     # A low value causes the kernel to prefer freeing up open files (page cache), a high value causes the kernel to try to use swap space,
-    # and a value of 100 means IO cost is assumed to be equal.
-    "vm.swappiness" = 150;
+    # and a value of 100 means  cost is assumed to be equal.
+    "vm.swappiness" = 120;
 
     # This parameter determines how aggressively the kernel will reclaim memory used by the VFS
     # cache. Values >100 mean the kernel will reclaim VFS cache more aggressively
-    "vm.vfs_cache_pressure" = 120;
+    "vm.vfs_cache_pressure" = 150;
 
     # page-cluster controls the number of pages up to which consecutive pages are read in from swap in a single attempt.
     # This is the swap counterpart to page cache readahead. The mentioned consecutivity is not in terms of virtual/physical addresses,

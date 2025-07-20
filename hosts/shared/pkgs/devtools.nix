@@ -21,7 +21,6 @@ with pkgs; [
   cargo
   cargo-binutils
   clang
-  claude-code
   cloudflare-cli
   cmake
   commitlint-rs
@@ -93,32 +92,21 @@ with pkgs; [
   lua5_4_compat
   luabind
   luaformatter
-  luajitPackages.cqueues
   luajitPackages.inspect
   luajitPackages.ldbus
   luajitPackages.ldoc
   luajitPackages.lgi
-  luajitPackages.lpeg
-  luajitPackages.lpeg_patterns
-  luajitPackages.lpeglabel
   luajitPackages.lua
-  luajitPackages.lua
-  luajitPackages.lua-curl
   luajitPackages.lua-messagepack
   luajitPackages.lua-protobuf
-  luajitPackages.lua-subprocess
   luajitPackages.luarocks-nix
   luajitPackages.luasocket
-  luajitPackages.luasql-sqlite3
-  luajitPackages.mediator_lua
-  luajitPackages.mpack
   luajitPackages.std-_debug
   luajitPackages.std-normalize
   luajitPackages.stdlib
   luajitPackages.vicious
   luajitPackages.wrapLua
   lynis
-  markdownlint-cli2
   meson
   meson-tools
   nil
@@ -137,8 +125,6 @@ with pkgs; [
   pandoc-lua-filters
   pciutils
   pet
-  php
-  php83Packages.composer
   pipx
   pixcat
   pkg-config
@@ -158,11 +144,9 @@ with pkgs; [
   rustywind
   sass
   sassc
-  sassc
   shellcheck
   shellharden
   shfmt
-  sqlite
   sqlite
   sqlite-analyzer
   sqlite-interactive
@@ -178,9 +162,9 @@ with pkgs; [
   tree-sitter
   typescript
   pnpm
-  unstable.squashfs-tools-ng
-  unstable.squashfsTools
-  unstable.squashfuse
+  squashfs-tools-ng
+  squashfsTools
+  squashfuse
   usort
   usql
   vscode-langservers-extracted

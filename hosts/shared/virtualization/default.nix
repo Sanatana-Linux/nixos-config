@@ -28,15 +28,12 @@
     appvm
     conmon
     containerd
-    act
-    distrobox
     fuse-overlayfs
     kvmtool
     virt-manager
     qemu_full
     docker
     docker-buildx
-    quickemu
     docker-client
     docker-compose
     docker-credential-helpers

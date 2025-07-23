@@ -107,8 +107,11 @@
     # Transform the `inputs` attribute set into a registry format
     registry = lib.mapAttrs (_: value: {flake = value;}) inputs;
 
-    # Convert the `registry` attribute set to a list of strings in the form "key=path"
+    # Convert the `registry` attribute set to a list of strings in the form "key=path
     nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
+    # smooth rebuilds
+    daemonCPUSchedPolicy = "idle";
+    daemonIOSchedPriority = 4; # 7 max
   };
   # switch nixos-rebuild to the next generation
 }

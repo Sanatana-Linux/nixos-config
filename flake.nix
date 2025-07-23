@@ -171,6 +171,27 @@
           ./hosts/matangi
         ];
       };
+
+      # ┣━━━━━━━━━━━━━━━━━━━━━┫ NixOS Live USB ┣━━━━━━━━━━━━━━━━━━━━━┫
+      kalima = nixpkgs.lib.nixosSystem {
+        specialArgs = {
+          inherit inputs outputs self;
+          format = "isoImage";
+        };
+        modules = [
+          nur.modules.nixos.default
+          bhairava-grub-theme.nixosModule
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useUserPackages = true;
+              backupFileExtension = "bak";
+              users.tlh = {imports = [./home/tlh/default.nix];};
+            };
+          }
+          ./hosts/kalima
+        ];
+      };
     };
     # ┣━━━━━━━━━━━━━━━━━━━━━┫ Home Configurations ┣━━━━━━━━━━━━━━━━━━━━━┫
     homeConfigurations = {
@@ -188,8 +209,8 @@
       };
     };
     # ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-
-    matangi = self.nixosConfigurations.matangi.config.system.build.toplevel;
+    kalima = self.nixosConfigurations.kalima.config.system.build.toplevel;
+    matangi = self.nixosConfigurations.matangi.config.system.build.top:level;
     bagalamukhi = self.nixosConfigurations.bagalamukhi.config.system.build.toplevel;
   };
 }

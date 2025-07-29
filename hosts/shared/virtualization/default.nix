@@ -32,7 +32,7 @@
     fuse-overlayfs
     kvmtool
     virt-manager
-    qemu_full
+    # qemu_full
     docker
     docker-buildx
     docker-client

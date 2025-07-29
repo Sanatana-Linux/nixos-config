@@ -1,34 +1,23 @@
 {
-  config,
-  nixpkgs,
-  overlays,
-  inputs,
-  home-manager,
-  system,
+  lib,
+  modulesPath,
   ...
-}:
-with nixpkgs;
-  lib.nixosSystem rec {
-    inherit system;
+}: let
+  inherit (lib) mkDefault;
+in {
+  imports = [
+    (modulesPath + "/installer/cd-dvd/iso-image.nix")
+    (modulesPath + "/profiles/all-hardware.nix")
+    (modulesPath + "/profiles/base.nix")
+    (modulesPath + "/installer/scan/detected.nix")
+    (modulesPath + "/installer/scan/not-detected.nix")
+  ];
 
-    modules = [
-      ./configuration.nix
+  # EFI booting
+  isoImage.makeEfiBootable = true;
 
-      {
-        nixpkgs = {
-          inherit overlays config;
-        };
-      }
+  # USB booting
+  isoImage.makeUsbBootable = true;
 
-      home-manager.nixosModules.home-manager
-      {
-        home-manager.useGlobalPkgs = true;
-        home-manager.useUserPackages = true;
-        home-manager.users.liveuser = {
-          imports = [
-            ../shared/users/tlh.nix
-          ];
-        };
-      }
-    ];
-  }
+  services.qemuGuest.enable = mkDefault true;
+}

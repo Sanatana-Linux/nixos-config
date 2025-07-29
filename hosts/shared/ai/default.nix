@@ -5,6 +5,7 @@
     code2prompt
     codegrab # use as `grab`
     gollama
+    mistral-rs
     # local-ai
     libtorch-bin
     # python312Packages.diffusers

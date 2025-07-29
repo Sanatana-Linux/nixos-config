@@ -32,6 +32,7 @@ with pkgs; [
   libwebp
   lutgen
   gegl
+  giph
   meme-image-generator
   metapixel
   mozjpeg

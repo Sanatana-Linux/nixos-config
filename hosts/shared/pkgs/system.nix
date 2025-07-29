@@ -1,9 +1,15 @@
-{pkgs, ...}:
+{
+  pkgs,
+  inputs,
+  ...
+}:
 with pkgs; [
   afuse
   appstream
   appstream-glib
   as-tree
+  inputs.rippkgs.packages.${system}.rippkgs
+  inputs.rippkgs.packages.${system}.rippkgs-index
   automake
   avfs
   beep

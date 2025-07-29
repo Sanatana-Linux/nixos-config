@@ -1,4 +1,4 @@
-[manager]
+[mgr]
 layout = [2, 4, 3]
 sort_sensitive = true
 sort_reverse = false # hate that

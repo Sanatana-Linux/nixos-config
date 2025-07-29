@@ -4,6 +4,8 @@ with pkgs;
     (python312.withPackages (p:
       with p; [
         GitPython
+        playsound
+        wheel
         PyICU
         pylatexenc
         pylatex

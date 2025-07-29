@@ -2,7 +2,7 @@
   description = "The ShizNix Upon Which I Constantly Nit Pick";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable?shallow=1";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable?shallow=1";
     # TODO change this to master as well as the unstable.pkg(s) to
     # master.pkg(s)
     # "github:nixos/nixpkgs/nixos-unstable";
@@ -10,6 +10,7 @@
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     zen-browser.url = "github:MarceColl/zen-browser-flake";
     nixpkgs-f2k.url = "github:moni-dz/nixpkgs-f2k";
+    rippkgs.url = "github:replit/rippkgs";
     nur = {
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -40,6 +41,7 @@
     nixos-generators,
     bhairava-grub-theme,
     nix-index-database,
+    rippkgs,
     nur,
     chaotic,
     ...
@@ -47,7 +49,7 @@
     inherit (self) outputs;
     # Supported systems for your flake packages, shell, etc.
     systems = [
-      "aarch64-linux"
+      # "aarch64-linux"
       "x86_64-linux"
     ];
     # This is a function that generates an attribute by calling a function you

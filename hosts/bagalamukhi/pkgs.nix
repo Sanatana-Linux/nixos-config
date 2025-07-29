@@ -13,7 +13,7 @@
   network = import ../shared/pkgs/network.nix {inherit pkgs;};
   pythonpackages = import ../shared/pkgs/python.nix {inherit pkgs;};
   shellutils = import ../shared/pkgs/shellutils.nix {inherit pkgs;};
-  system = import ../shared/pkgs/system.nix {inherit pkgs;};
+  system = import ../shared/pkgs/system.nix {inherit inputs pkgs;};
   video = import ../shared/pkgs/video.nix {inherit pkgs;};
 in {
   imports = [../shared/pkgs/fonts.nix];

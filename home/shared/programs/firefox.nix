@@ -49,11 +49,14 @@ in {
     profiles.${profile} = {
       id = 0;
       extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
+        about-sync
+
         absolute-enable-right-click
         add-custom-search-engine
         auto-referer
         auto-tab-discard
         bitwarden
+        chrome-mask
         cookie-quick-manager
         copy-selection-as-markdown
         don-t-fuck-with-paste
@@ -63,17 +66,21 @@ in {
         form-history-control
         foxytab
         gaoptout
+        header-editor
         ipfs-companion
         istilldontcareaboutcookies
         justdeleteme
-        keybase
         link-gopher
         markdownload
         multi-account-containers
+        multiple-tab-handler
+        overview
+        persistentpin
         raindropio
         refined-github
         stylebot-web
-        stylus
+        tab-stash
+        umatrix
         ublock-origin
         view-image
       ];
@@ -124,9 +131,8 @@ in {
         "devtools.chrome.enabled" = true; # Enable devtools for browser chrome
         "devtools.debugger.prompt-connection" = false; # Don't prompt for remote debugger connection
         "devtools.debugger.remote-enabled" = true; # Enable remote debugging
-        "experiments.enabled" = false; # Disable experiments
-        "experiments.manifest.uri" = ""; # Clear experiments manifest URI
-        "experiments.supported" = false; # Mark experiments as unsupported
+        "experiments.enabled" = true; #  experiments
+        "experiments.supported" = true; # Mark experiments as unsupported
         "extensions.autoDisableScopes" = 0; # Don't auto-disable extensions
         "extensions.pocket.enabled" = false; # Disable Pocket integration
         "extensions.pocket.onSaveRecs" = false; # Disable Pocket recommendations
@@ -162,6 +168,7 @@ in {
         "privacy.globalprivacycontrol.enabled" = true; # Enable Global Privacy Control
         "privacy.globalprivacycontrol.functionality.enabled" = true; # Enable GPC functionality
         "privacy.popups.disable_from_plugins" = 0; # Allow popups from plugins
+        "privacy.resistFingerprinting" = false; #  fingerprinting resistance
         "sidebar.revamp" = true; # Enable sidebar revamp
         "sidebar.verticalTabs" = true; # Enable vertical tabs in sidebar
         "svg.context-properties.content.enabled" = true; # Enable SVG context properties in content
@@ -179,6 +186,7 @@ in {
         "widget.non-native-theme.win.scrollbar.use-system-size" = false; # Don't use system scrollbar size on Windows
         "widget.use-xdg-desktop-portal" = true; # Use XDG desktop portal integration
         "xpinstall.signatures.required" = false; # Don't require signe extensions
+        "extensions.webextensions.restrictedDomains" = " "; # Allow all domains for WebExtensions because I hate firefox's AMO not having a dark mode and its other sites being clunky and hideous
       };
       search = {
         default = "google";

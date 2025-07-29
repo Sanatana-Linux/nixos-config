@@ -15,6 +15,8 @@
       xdotool
       xdo
       # Graphics
+      clutter
+      clutter-gtk # Clutter graphics library with GTK3 support
       libGL # OpenGL library
       libGLU # OpenGL Utility Library
       libGLX # GLX (OpenGL Extension to the X Window System)

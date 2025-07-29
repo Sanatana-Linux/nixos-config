@@ -95,8 +95,7 @@ in {
           with p; [
             # torchWithCuda
             tensorflowWithCuda
-            triton-cuda
-            pycuda
+            # triton-cuda
             cupy
           ]))
       ];

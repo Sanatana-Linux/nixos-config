@@ -30,9 +30,6 @@
     conmon
     containerd
     fuse-overlayfs
-    kvmtool
-    virt-manager
-    # qemu_full
     docker
     docker-buildx
     docker-client
@@ -41,6 +38,9 @@
     docker-distribution
     docker-gc
     docker-slim
+    libvirt 
+    libvirt-glib
+    libgovirt
     x11docker
   ];
 }

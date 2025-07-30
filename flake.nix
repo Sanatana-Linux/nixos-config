@@ -2,6 +2,9 @@
   description = "The ShizNix Upon Which I Constantly Nit Pick";
 
   inputs = {
+    master.url = "github:nixos/nixpkgs/master?shallow=1";
+    stable.url = "github:nixos/nixpkgs/nixos-25.05?shallow=1";
+    unstable.url = "github:nixos/nixpkgs/nixos-unstable?shallow=1";
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable?shallow=1";
     # TODO change this to master as well as the unstable.pkg(s) to
     # master.pkg(s)
@@ -36,20 +39,12 @@
   outputs = {
     self,
     nixpkgs,
-    home-manager,
-    nixos-hardware,
-    nixos-generators,
-    bhairava-grub-theme,
-    nix-index-database,
-    rippkgs,
-    nur,
-    chaotic,
     ...
   } @ inputs: let
     inherit (self) outputs;
     # Supported systems for your flake packages, shell, etc.
     systems = [
-      # "aarch64-linux"
+      "aarch64-linux"
       "x86_64-linux"
     ];
     # This is a function that generates an attribute by calling a function you
@@ -134,12 +129,12 @@
       bagalamukhi = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [
-          nur.modules.nixos.default
-          nixos-hardware.nixosModules.lenovo-legion-16irx9h
-          bhairava-grub-theme.nixosModule
-          chaotic.nixosModules.default
-          nix-index-database.nixosModules.nix-index
-          home-manager.nixosModules.home-manager
+          inputs.nur.modules.nixos.default
+          inputs.nixos-hardware.nixosModules.lenovo-legion-16irx9h
+          inputs.bhairava-grub-theme.nixosModule
+          inputs.chaotic.nixosModules.default
+          inputs.nix-index-database.nixosModules.nix-index
+          inputs.home-manager.nixosModules.home-manager
           {
             home-manager = {
               useUserPackages = true;
@@ -156,11 +151,11 @@
       matangi = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [
-          nur.modules.nixos.default
-          nixos-hardware.nixosModules.lenovo-legion-16irx9h
-          bhairava-grub-theme.nixosModule
-          chaotic.nixosModules.default
-          home-manager.nixosModules.home-manager
+          inputs.nur.modules.nixos.default
+          inputs.nixos-hardware.nixosModules.lenovo-legion-16irx9h
+          inputs.bhairava-grub-theme.nixosModule
+          inputs.chaotic.nixosModules.default
+          inputs.home-manager.nixosModules.home-manager
           {
             home-manager = {
               useUserPackages = true;
@@ -175,23 +170,22 @@
       };
 
       # ┣━━━━━━━━━━━━━━━━━━━━━┫ NixOS Live USB ┣━━━━━━━━━━━━━━━━━━━━━┫
-      kalima = nixpkgs.lib.nixosSystem {
+      chhinamasta = nixpkgs.lib.nixosSystem {
         specialArgs = {
           inherit inputs outputs self;
           format = "isoImage";
         };
         modules = [
-          nur.modules.nixos.default
-          bhairava-grub-theme.nixosModule
-          home-manager.nixosModules.home-manager
+          inputs.nur.modules.nixos.default
+          inputs.bhairava-grub-theme.nixosModule
+          inputs.home-manager.nixosModules.home-manager
           {
             home-manager = {
               useUserPackages = true;
-              backupFileExtension = "bak";
               users.tlh = {imports = [./home/tlh/default.nix];};
             };
           }
-          ./hosts/kalima
+          ./hosts/chhinamasta
         ];
       };
     };

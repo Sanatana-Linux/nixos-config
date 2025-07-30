@@ -45,7 +45,10 @@
   # System packages required for AwesomeWM and its ecosystem.
   # TODO: Describe each package in detail.
   environment.systemPackages = with pkgs; [
-    betterlockscreen # Lock screen utility.
+    i3lock-fancy-rapid # Lock screen utility.
+    xss-lock # X11 screen saver lock utility.
+    xdg-desktop-portal # Portal for desktop integration.
+    xdg-desktop-portal-gtk # GTK support for XDG portals.
     luabind_luajit # Lua bindings for C++ using LuaJIT.
     lua51Packages.lua # Lua 5.1 interpreter.
     lua51Packages.lgi # Lua 5.1 packages for luajit compatibility.

@@ -2,11 +2,20 @@
   inputs,
   lib,
   config,
+  modulesPath,
   pkgs,
   bhairava-grub-theme,
   ...
-}: {
+}: let
+  inherit (lib) mkDefault;
+in {
   imports = [
+    (modulesPath + "/installer/cd-dvd/iso-image.nix")
+    (modulesPath + "/profiles/all-hardware.nix")
+    (modulesPath + "/profiles/base.nix")
+    (modulesPath + "/installer/scan/detected.nix")
+    (modulesPath + "/installer/scan/not-detected.nix")
+
     inputs.home-manager.nixosModules.home-manager
     # Shared configuration across all machines
     ../shared/default.nix
@@ -22,7 +31,6 @@
     ./pkgs.nix
   ];
 
-  services.xserver.videoDrivers = ["nvidia"];
   services.xserver.enable = true;
   boot.plymouth.enable = true;
 
@@ -63,14 +71,6 @@
 
     kernelPackages = pkgs.linuxPackages_xanmod_latest; # use the latest xanmod kernel
 
-    # specify the extra kernel modules to be included
-    extraModulePackages = [
-      config.boot.kernelPackages.acpi_call # acpi_call kernel module
-      config.boot.kernelPackages.cpupower #  Tool to examine and tune power saving features
-      config.boot.kernelPackages.lenovo-legion-module # lenovo legion kernel module
-      config.boot.kernelPackages.nvidiaPackages.production # nvidia x11 kernel module
-    ];
-
     kernelParams = [
       # `I too like living dangerously`
       # check if vulnerable with: grep . /sys/devices/system/cpu/vulnerabilities/*
@@ -89,24 +89,24 @@
       "watchdog=0"
     ];
 
-    loader = {
-      timeout = null;
-      systemd-boot.enable = false;
-      efi = {
-        canTouchEfiVariables = true;
-        efiSysMountPoint = "/boot/";
-      };
-
-      grub = {
-        enable = true;
-        device = "nodev";
-        efiSupport = true;
-        timeoutStyle = "hidden";
-        configurationLimit = 5;
-        useOSProber = false; # Scan for Windows/Other Installs
-        bhairava-grub-theme.enable = true;
-      };
-    };
+    # loader = {
+    #   timeout = null;
+    #   systemd-boot.enable = false;
+    #   efi = {
+    #     canTouchEfiVariables = true;
+    #     efiSysMountPoint = "/boot/";
+    #   };
+    #
+    #   # grub = {
+    #   #   enable = true;
+    #   #   device = "nodev";
+    #   #   efiSupport = true;
+    #   #   timeoutStyle = "hidden";
+    #   #   configurationLimit = 5;
+    #   #   useOSProber = false; # Scan for Windows/Other Installs
+    #   #   bhairava-grub-theme.enable = true;
+    #   # };
+    # };
   };
   hardware = {
     enableAllFirmware = true;
@@ -114,7 +114,7 @@
   };
 
   networking = {
-    hostName = "bagalamukhi";
+    hostName = "chhinamasta";
     networkmanager.enable = true;
   };
   services = {
@@ -125,6 +125,14 @@
     };
   };
 
+  # EFI booting
+  isoImage.makeEfiBootable = true;
+
+  # USB booting
+  isoImage.makeUsbBootable = true;
+
+  services.qemuGuest.enable = mkDefault true;
+  nixpkgs.hostPlatform = "x86_64-linux"; # Set the host platform for Nixpkgs
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "24.11";
 }

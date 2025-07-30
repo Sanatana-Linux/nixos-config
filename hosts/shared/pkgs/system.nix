@@ -82,7 +82,6 @@ with pkgs; [
   premake
   procps
   ps_mem
-  ps_mem
   python312Packages.py-dmidecode
   rcshist
   renameutils
@@ -106,17 +105,13 @@ with pkgs; [
   template-glib
   testdisk
   trash-cli
-  tree
   ucl
   unscd
   usbmuxd
   utillinux
-  ventoy-full
   vgrep
   vimv
   wget
-  whois
-  wiper
   wmctrl
   wmic-bin
   wmutils-core
@@ -127,9 +122,7 @@ with pkgs; [
   xdg-desktop-portal-gtk
   xdg-user-dirs
   xdg-utils
-  xdotool
   xfce.tumbler
-  xfce.xfce4-power-manager
   xfontsel
   xgeometry-select
   xorg.fontalias
@@ -137,17 +130,11 @@ with pkgs; [
   xorg.fontutil
   xorg.libxcb
   xorg.mkfontdir
-  xorg.mkfontdir
   xorg.xbacklight
   xorg.xcbutil
-  xorg.xcbutil
-  xorg.xcbutilerrors
   xorg.xcbutilerrors
   xorg.xcbutilimage
-  xorg.xcbutilimage
   xorg.xcbutilrenderutil
-  xorg.xcbutilrenderutil
-  xorg.xcbutilwm
   xorg.xcbutilwm
   xorg.xconsole
   xorg.xev

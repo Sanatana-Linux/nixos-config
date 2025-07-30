@@ -2,7 +2,6 @@
 with pkgs; [
   beautysh
   cheese
-  ebook_tools
   ffcast
   ffmpeg
   flowblade
@@ -41,10 +40,9 @@ with pkgs; [
   menyoki
   metadata-cleaner
   mjpegtoolsFull
-  mnamer
   mp4v2
   oggvideotools
-  # olive-editor
+  unstable.olive-editor
   p7zip
   pantheon.granite
   peek

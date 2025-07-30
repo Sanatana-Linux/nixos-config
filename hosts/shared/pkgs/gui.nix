@@ -23,7 +23,6 @@ with pkgs; [
   fuseiso
   gcolor3
   geocode-glib_2
-  kotatogram-desktop
   gmime3
   gnome-disk-utility
   gnome-font-viewer
@@ -73,6 +72,7 @@ with pkgs; [
   t1utils
   tdesktop
   template-glib
+  themechanger
   transmission_4-gtk
   ttfautohint
   updfparser

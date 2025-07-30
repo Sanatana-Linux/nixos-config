@@ -2,7 +2,6 @@
 with pkgs; [
   babl
   cairosvg
-  shutter
   satty
   colorz
   curtail
@@ -30,7 +29,6 @@ with pkgs; [
   librsvg
   libspng
   libwebp
-  lutgen
   gegl
   giph
   meme-image-generator
@@ -50,8 +48,6 @@ with pkgs; [
   python312Packages.pyfiglet
   python312Packages.pystache
   python312Packages.svgwrite
-  pywal
-  resvg
   resvg
   scour
   svgcleaner
@@ -68,6 +64,4 @@ with pkgs; [
   gfie
   upscayl-ncnn
   xcolor
-  xcolor
-  xorg-rgb
 ]

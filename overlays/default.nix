@@ -14,13 +14,25 @@
   # be accessible through 'pkgs.unstable'
 
   unstable-packages = final: prev: {
-    unstable = import inputs.nixpkgs-unstable {
+    unstable = import inputs.unstable {
       system = final.system;
       config.allowUnfree = true;
     };
   };
   f2k-packages = final: prev: {
     f2k = import inputs.nixpkgs-f2k {
+      system = final.system;
+      config.allowUnfree = true;
+    };
+  };
+  stable-packages = final: prev: {
+    stable = import inputs.stable {
+      system = final.system;
+      config.allowUnfree = true;
+    };
+  };
+  master-packages = final: prev: {
+    master = import inputs.nixpkgs-master {
       system = final.system;
       config.allowUnfree = true;
     };

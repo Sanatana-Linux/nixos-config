@@ -39,6 +39,9 @@
   outputs = {
     self,
     nixpkgs,
+    master,
+    stable,
+    unstable,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -205,7 +208,6 @@
       };
     };
     # ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-    kalima = self.nixosConfigurations.kalima.config.system.build.toplevel;
     matangi = self.nixosConfigurations.matangi.config.system.build.top:level;
     bagalamukhi = self.nixosConfigurations.bagalamukhi.config.system.build.toplevel;
   };

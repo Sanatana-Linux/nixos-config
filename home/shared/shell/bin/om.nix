@@ -122,11 +122,11 @@ with pkgs;
     }
 
     function search() {
-            (nix search --impure nixpkgs "$2" && nps -e=true --columns=description "$2") | moar
+        rippkgs  -m 100 "$2"
     }
 
     function options() {
-      manix --source=hm_options,nixos_options,nixpkgs_doc,nixpkgs_tree,nixpkgs_comments "$2" | moar
+             ns
     }
 
     function health() {

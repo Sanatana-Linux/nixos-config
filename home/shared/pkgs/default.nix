@@ -6,7 +6,8 @@
   home.packages = lib.attrValues {
     inherit
       (pkgs)
-      betterbird
+      thunderbird-bin
+      feh
       i3lock-color
       imagemagick
       keychain

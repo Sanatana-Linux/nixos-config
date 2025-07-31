@@ -34,7 +34,6 @@
     procs
     psmisc
     p7zip
-    ranger
     ripgrep
     rsync
     sd

@@ -167,7 +167,6 @@
       libsForQt5.qt5ct # Qt5 configuration tool
       pango # Text layout and rendering
       pixman # Pixel manipulation library
-      ranger # Terminal file manager
       sassc # Sass compiler
       speechd # Speech dispatcher
       xsettingsd # XSettings daemon

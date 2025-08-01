@@ -66,6 +66,8 @@ secring.*
 *.tzst
 
 # Packing-only formats
+edStatusbar.uc.js:221
+CustomizableUI.sys.mjs:4319:17
 *.iso
 *.tar
 
@@ -91,3 +93,5 @@ secring.*
 *.tmp
 
 
+edStatusbar.uc.js:221
+CustomizableUI.sys.mjs:4319:17

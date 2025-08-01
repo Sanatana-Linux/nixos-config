@@ -199,6 +199,7 @@
   services = {
     logind = {
       lidSwitch = "suspend";
+      powerKey = "ignore";
       powerKeyLongPress = "suspend";
     };
     # -------------------------------------------------------------------------- #

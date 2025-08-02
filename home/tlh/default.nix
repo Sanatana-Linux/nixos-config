@@ -22,6 +22,7 @@
     ../shared/programs/zathura/default.nix
     ../shared/services/default.nix
     ../shared/services/picom.nix
+    ../shared/services/xscreensaver.nix
     ../shared/shell
   ];
 

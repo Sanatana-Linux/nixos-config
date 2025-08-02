@@ -22,6 +22,8 @@
       rounded-corners-exclude = [
         "class_i = 'polybar'"
         "class_g = 'i3lock'"
+        "class_g = 'awesome'"
+        "class_g = 'dock'"
       ];
       round-borders = 3;
       round-borders-exclude = [];
@@ -89,12 +91,14 @@
           focus = true;
           full-shadow = false;
         };
-        dock = {shadow = false;};
+        dock = {
+          shadow = false;
+          rounded-corners = false;
+        };
         dnd = {shadow = false;};
         popup_menu = {opacity = 1.0;};
         dropdown_menu = {opacity = 1.0;};
       };
     };
   };
-  #  xdg.configFile."picom/picom.conf".source = ./picom/picom.conf;
 }

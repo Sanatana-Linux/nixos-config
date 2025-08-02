@@ -94,6 +94,7 @@
 
   # Add extra XDG portal for GTK support.
   xdg.portal.extraPortals = with pkgs; [xdg-desktop-portal-gtk];
+  security.pam.services.i3lock.enable = true;
   environment.variables = {
     GDK_BACKEND = "x11";
   };

@@ -175,4 +175,5 @@ with pkgs; [
   yamllint
   yarn2nix
   zlib
+  youtube2webpage
 ]

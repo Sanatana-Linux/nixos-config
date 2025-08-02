@@ -42,6 +42,8 @@
     master,
     stable,
     unstable,
+    home-manager,
+    higgs-boson,
     ...
   } @ inputs: let
     inherit (self) outputs;

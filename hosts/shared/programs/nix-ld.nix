@@ -136,7 +136,6 @@
       xorg.xcbutilrenderutil # XCB render utilities
       xorg.xcbutilwm # XCB window manager utilities
       xorg.xkeyboardconfig # X keyboard configuration
-      xorg.gccmakedep # GCC dependency generator for Xorg
 
       # GTK/GUI
       at-spi2-atk # Assistive Technology Service Provider Interface
@@ -175,7 +174,6 @@
       bash # GNU Bourne Again SHell
       binutils # Binary utilities (linker, assembler, etc.)
       bzip2 # Compression library
-      clang # C language family frontend for LLVM
       cups # Printing system
       curl # Data transfer library
       curlWithGnuTls # Curl with GNU TLS support
@@ -201,7 +199,6 @@
       icu # International Components for Unicode
       keyutils.lib # Key management utilities
       libcap # POSIX capabilities library
-      libclang.lib # Clang C language frontend library
       libgcrypt # Cryptographic library
       libglibutil # GLib utilities
       libgpg-error # GnuPG error library
@@ -224,6 +221,7 @@
       libxdg_basedir # XDG base directory specification
       libxkbcommon # Keyboard handling library
       libxml2 # XML parsing library
+      nss
       lld # LLVM linker
       openssl # SSL/TLS cryptography library
       p11-kit # PKCS#11 module management
@@ -242,7 +240,6 @@
       xz # Compression library
       zlib # Compression library
       zsh # Z shell
-      gccStdenv # GCC-based stdenv
 
       python313Packages.pygobject3
 

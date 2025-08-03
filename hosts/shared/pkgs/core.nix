@@ -13,9 +13,7 @@ with pkgs; [
   age
   agenix-cli
   ssh-to-age
-
-  clang-tools
-  cmake
+  nss
   commonsCompress
   dmg2img
   dnsutils

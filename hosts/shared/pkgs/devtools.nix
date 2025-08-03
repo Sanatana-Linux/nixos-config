@@ -20,7 +20,6 @@ with pkgs; [
   cached-nix-shell
   cargo
   cargo-binutils
-  clang
   cloudflare-cli
   cmake
   commitlint-rs
@@ -30,8 +29,6 @@ with pkgs; [
   dotenv-linter
   eslint_d
   fuse3
-  gcc
-  gccStdenv
   getopt
   getoptions
   gettext
@@ -72,8 +69,6 @@ with pkgs; [
   just
   latex2html
   leptosfmt
-  libclang
-  libcxxStdenv
   libffi
   libglibutil
   libimobiledevice
@@ -169,7 +164,6 @@ with pkgs; [
   usql
   vscode-langservers-extracted
   wkhtmltopdf-bin
-  xorg.gccmakedep
   xorg.libX11
   xorg_sys_opengl
   yamllint

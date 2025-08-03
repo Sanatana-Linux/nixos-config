@@ -99,6 +99,10 @@
     path = ./php;
     description = "PHP development environment";
   };
+  perl = {
+    path = ./perl;
+    description = "Perl development environment";
+  };
   platformio = {
     path = ./platformio;
     description = "PlatformIO development environment";

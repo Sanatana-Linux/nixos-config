@@ -33,7 +33,6 @@ with pkgs; [
   eggdbus
   exfatprogs
   fd
-  gcc_latest
   gh
   ghostscript
   glib
@@ -49,8 +48,6 @@ with pkgs; [
   latex2html
   latexrun
   lazyjournal
-  libgcc
-  libgccjit
   libgnome-keyring
   libisoburn
   lm_sensors

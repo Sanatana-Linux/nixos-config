@@ -11,6 +11,7 @@
       i3lock-color
       imagemagick
       keychain
+      kotatogram-desktop
       adwaita-icon-theme
       adwaita-icon-theme-legacy
       hicolor-icon-theme

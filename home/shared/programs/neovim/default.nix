@@ -56,7 +56,6 @@
       fswatch
 
       # Build some extensions
-      gcc
       cmake
     ];
 

@@ -64,24 +64,16 @@
     cpufrequtils
     config.boot.kernelPackages.acpi_call # acpi_call kernel module
     nvme-cli
-    dbus
     grub2_full
     mesa
     plymouth
     kdePackages.plymouth-kcm
-    dbus-broker
-    dbus-glib
     lenovo-legion
     i2c-tools
     peakperf
     intel-media-driver
-    libdbusmenu
-    libdbusmenu-gtk3
     linuxHeaders
     luajitPackages.ldbus
-    polkit_gnome
-    wirelesstools
-    xss-lock
     xssproxy
   ];
   boot = {

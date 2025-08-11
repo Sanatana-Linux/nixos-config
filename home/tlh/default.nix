@@ -10,16 +10,12 @@
     ./theme.nix
     ../shared/pkgs
     ../shared/programs/yazi/default.nix
-    ../shared/programs/nemo/default.nix
     ../shared/programs/aichat.nix
-    ../shared/programs/ghostty.nix
-    ../shared/programs/joshuto.nix
     ../shared/programs/firefox.nix
     ../shared/programs/gpg/default.nix
     ../shared/programs/zathura/default.nix
     ../shared/programs/kitty/default.nix
     ../shared/programs/neovim/default.nix
-    ../shared/programs/zathura/default.nix
     ../shared/services/default.nix
     ../shared/services/picom.nix
     ../shared/services/xscreensaver.nix

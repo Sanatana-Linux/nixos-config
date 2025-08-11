@@ -27,10 +27,8 @@ with pkgs; [
   fontconfig
   fontforge-fonttools
   fontforge-gtk
-  fontfor
   gnome-font-viewer
   font-util
-  font-alias
   komika-fonts
   fontpreview
   ftgl

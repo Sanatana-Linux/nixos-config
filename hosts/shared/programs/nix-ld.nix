@@ -221,7 +221,6 @@
       libxdg_basedir # XDG base directory specification
       libxkbcommon # Keyboard handling library
       libxml2 # XML parsing library
-      nss
       lld # LLVM linker
       openssl # SSL/TLS cryptography library
       p11-kit # PKCS#11 module management
@@ -249,8 +248,9 @@
       lua51Packages.std-normalize # Normalization utilities for LuaJIT
       lua51Packages.stdlib # Standard library for LuaJIT
       lua51Packages.vicious # Widget library for window managers
-
+      libGLX
       # LuaJIT and Lua libraries
+      luajit
       luajitPackages.cjson # JSON parsing for LuaJIT
       luajitPackages.cqueues # Networking and event loop for LuaJIT
       luajitPackages.inspect # Object inspection for LuaJIT

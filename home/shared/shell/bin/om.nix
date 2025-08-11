@@ -122,7 +122,8 @@ with pkgs;
     }
 
     function search() {
-        rippkgs  -m 100 "$2"
+      #  rippkgs  -m 100 "$2"
+      nps -e=true "$2"
     }
 
     function options() {

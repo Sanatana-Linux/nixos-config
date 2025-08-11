@@ -3,189 +3,294 @@
   pkgs,
   config,
   ...
-}: let
-  archives = import ../shared/pkgs/archives.nix {inherit pkgs;};
-  core = import ../shared/pkgs/core.nix {inherit pkgs inputs;};
-  devtools = import ../shared/pkgs/devtools.nix {inherit pkgs;};
-  gui = import ../shared/pkgs/gui.nix {inherit pkgs inputs;};
-  guilibs = import ../shared/pkgs/guilibs.nix {inherit pkgs;};
-  network = import ../shared/pkgs/network.nix {inherit pkgs;};
-  pythonpackages = import ../shared/pkgs/python.nix {inherit pkgs;};
-  shellutils = import ../shared/pkgs/shellutils.nix {inherit pkgs;};
-  system = import ../shared/pkgs/system.nix {inherit inputs pkgs;};
-in {
+}: {
   imports = [../shared/pkgs/fonts.nix];
   environment.systemPackages = with pkgs; [
-    _7zz
-    afuse
-    age
-    agenix-cli
-    any-nix-shell
-    archivemount
-    brightnessctl #system tool
-    cairo
-    cairomm
+    ouch
+
     coreutils-full
-    cpio
-    dbus-broker #gui tool
-    dconf
-    ddcui
-    ddcutil
-    dosfstools
-    eggdbus
-    exfatprogs
-    eza
-    fcft
-    fd
-    ffmpeg-full
-    file-roller
+    uutils-coreutils
+    nss
     font-alias
+    fcft
+    ffmpeg-full
+    figlet
+    font-manager
     fontconfig
+    gnome-font-viewer
+    font-util
     ftgl
-    fzf
-    fzy
-    gcolor3
-    gdk-pixbuf
-    gdk-pixbuf-xlib
-    gh
-    gist
+    networkmanager
+    nmap
+    toilet
+    ttfautohint
+    woff2
+
+    any-nix-shell
+    bc
+    brotli
+    cached-nix-shell
+    direnv
     git
     glib
-    glibc
-    gmime3
-    gnome-disk-utility
-    gnome-icon-theme
-    gnome-keyring
-    gnome-themes-extra
-    gnome.gvfs
-    gnutar
     gnutls
+    go
+    imlib2Full
+    inetutils
+    just
+    libpkgconf
+    libtool
+    lua-language-server
+    luaformatter
+    luajitPackages.inspect
+    luajitPackages.ldbus
+    luajitPackages.ldoc
+    luajitPackages.lgi
+    luajitPackages.lua
+    luajitPackages.lua-messagepack
+    luajitPackages.lua-protobuf
+    luajitPackages.luarocks-nix
+    luajitPackages.luasocket
+    luajitPackages.std-_debug
+    luajitPackages.std-normalize
+    luajitPackages.stdlib
+    luajitPackages.vicious
+    luajitPackages.wrapLua
+    meson
+    meson-tools
+    nil
+    nix-init
+    nodejs
+    nodenv
+    nps
+    nvd
+    pciutils
+    pixcat
+    pkg-config
+    protobuf
+    protobufc
+    rmlint
+    tree-sitter
+    xorg.libX11
+    xorg_sys_opengl
+    zlib
+
+    # GUI Applications
+    appstream-glib
+    bleachbit
+    kdePackages.breeze-icons
+    gnome-icon-theme
+    file-roller
+    fuseiso
+    gcolor3
+    geocode-glib_2
+    gmime3
+    gnome-themes-extra
     gob2
-    gobject-introspection
     gparted
     graphite2
-    gsettings-desktop-schemas
     gthumb
     gtk2-x11
     gtk3
     gtk3-x11
     gtk4
-    gtk_engines
+    gtkspell3
+    gtkspellmm
     gusb
-    htop
-    imlib2Full
-    inetutils
-    jq
-    kdePackages.breeze-icons
-    killall
+    lcdf-typetools
+    leela
     libappindicator-gtk3
-    libarchive
-    libcanberra-gtk3 #system tool
-    libdbusmenu
-    libdbusmenu-gtk3
-    libgnome-keyring
     libnotify
-    libpeas
-    libpeas2
-    libpkgconf
-    libtool
+    libsForQt5.qt5ct
+    kdePackages.qt6ct
+    qt6.full
+    libsForQt5.qtcurve
+    libsForQt5.qtstyleplugins
     libusb1
     libxdg_basedir
-    lm_sensors
-    lshw
-    lz4
-    massren
     mime-types
-    minizip2
-    moreutils
-    mozlz4a
-    mtools
-    neofetch
-    networkmanager
+    mimetic
+    nerd-font-patcher
     networkmanagerapplet
-    nix-init
-    nmap
-    ntfs3g
-    ntfsprogs
-    openssl
-    ouch
+    pavucontrol
+    perl538Packages.CairoGObject
+    rofi
+    template-glib
+    wirelesstools
+    wmctrl
+    xclip
+    xdg-desktop-portal
+    xdg-launch
+    xdgmenumaker
+    xdotool
+    xorg.xfontsel
+    xscreensaver
+
+    # GUI Libraries
+    cairo
+    cairomm
+    dbus-broker
+    dconf
+    portaudio
+    gdk-pixbuf
+    gdk-pixbuf-xlib
+    gnome.gvfs
+    gnome2.gtkglext
+    gobject-introspection
+    gobject-introspection-unwrapped
+    gsettings-desktop-schemas
+    gtk_engines
+    htmldoc
+    libcanberra-gtk3
+    libpeas2
+    libpeas
+    libgudev
+    libgee
+    libnotify
+    menu-cache
     pango
     pangomm
-    pastel
-    pavucontrol
-    pciutils
-    perl538Packages.CairoGObject
-    pinentry-tty
-    pmutils
     polkit_gnome
-    portaudio
-    procps
-    protobuf
-    protobufc
-    ps_mem
-    psftools
-    pulseaudio
     python312Packages.cairosvg
-    python312Packages.py-dmidecode
     python312Packages.pyqt6
     python312Packages.qtpy
-    rar
-    rarcrack
-    ripgrep-all
     rubyPackages.cairo-gobject
     rubyPackages.gdk_pixbuf2
     rubyPackages.gobject-introspection
+    terminus_font
+    vte-gtk4
+    xfce.libxfce4ui
+    xfce.libxfce4util
+    xfce.xfconf
+    xorg-rgb
+
+    # Image Tools
+    babl
+    cairosvg
+    satty
+    colorz
+    curtail
+    exiftool
+    feh
+    gdk-pixbuf
+    graphicsmagick
+    image_optim
+    imagemagick
+    img-cat
+    imgcat
+    imlib2-nox
+    imlib2Full
+    jpeginfo
+    jpegoptim
+    libexif
+    libjpeg
+    libpng
+    librsvg
+    libspng
+    libwebp
+    gegl
+    mozjpeg
+    svgcleaner
+    termcolor
+
+    # Network Tools
+    iw
+    rclone
+    yt-dlp
+    libgit2
+    libgit2-glib
+
+    # Shell Utilities
+    bash-completion
+    bat
+    curl
+    eza
+    fd
+    fzf
+    fzy
+    killall
+    walk
+    trash-cli
+    libdbusmenu
+    libdbusmenu-gtk3
+    libinput
+
+    # System Tools
+    appstream
+    as-tree
+    automake
+    avfs
+    bintools
+    brightnessctl
+    didyoumean
+    dosfstools
+    eggdbus
+    exfatprogs
+    glibc
+    gnome-keyring
+    htop
+    jdupes
+    jq
+    kconfig-frontends
+    keyutils
+    latexrun
+    libgnome-keyring
+    libisoburn
+    lm_sensors
+    lshw
+    massren
+    mdds
+    microcodeIntel
+    moar
+    moreutils
+    mtools
+    neofetch
+    nmon
+    ntfs3g
+    ntfsprogs
+    opencl-clang
+    openssl
+    out-of-tree
+    pinentry-tty
+    pmutils
+    procps
+    ps_mem
+    python312Packages.py-dmidecode
+    rcshist
+    ripgrep-all
     shared-mime-info
     silver-searcher
+    simpleTpmPk11
+    slop
     smartmontools
-    sops
-    squashfs-tools-ng
-    squashfsTools
-    squashfuse
-    ssh-to-age
+    sysctl
     sysfsutils
+    sysprof
     sysstat
     sysvtools
     sysz
-    t1utils
-    template-glib
-    terminus_font #system tool
     testdisk
-    trash-cli
-    tree-sitter
-    ttfautohint
-    usbmuxd
+    ucl
+    unscd
     utillinux
-    uutils-coreutils
     vgrep
-    vimv
-    vte-gtk4
     wget
-    whois
-    wirelesstools
-    wmctrl
     wmic-bin
     wmutils-core
     wmutils-libwm
     wmutils-opt
-    xarchiver
-    xclip
     xdg-dbus-proxy
-    xdg-desktop-portal
     xdg-desktop-portal-gtk
-    xdg-launch
     xdg-user-dirs
     xdg-utils
-    xdgmenumaker
-    xotool
+    xfce.tumbler
+    xfontsel
     xgeometry-select
-    xorg-rgb
     xorg.fontalias
     xorg.fonttosfnt
     xorg.fontutil
-    xorg.libX11
     xorg.libxcb
-    xorg.mkfontir
+    xorg.mkfontdir
     xorg.xbacklight
     xorg.xcbutil
     xorg.xcbutilerrors
@@ -194,24 +299,55 @@ in {
     xorg.xcbutilwm
     xorg.xconsole
     xorg.xev
-    xorg.xev
     xorg.xhost
     xorg.xinit
     xorg.xkill
     xorg.xorgproto
     xorg.xprop
     xorg.xwininfo
-    xorg_sys_opengl
-    xorriso
-    xscreensaver
-    xsecurelock
     xsettingsd
     xss-lock
-    xz
-    yamllint
-    zip
-    zlib
-    zlib-ng
-    zstd
+
+    # Video Tools
+    ffmpeg
+    gallery-dl
+    gst_all_1.gst-libav
+    gst_all_1.gst-plugins-bad
+    gst_all_1.gst-plugins-base
+    gst_all_1.gst-plugins-good
+    gst_all_1.gst-plugins-ugly
+    gst_all_1.gst-devtools
+    gst_all_1.gst-editing-services
+    gst_all_1.gst-vaapi
+    gst_all_1.gstreamer
+    gst_all_1.gstreamermm
+    imgpatchtools
+    libdrm
+    libplacebo
+    librem
+    libtheora
+    libvpl
+    libwebcam
+    losslesscut-bin
+    lrzip
+    lsix
+    lv2
+    mjpegtoolsFull
+    mp4v2
+    oggvideotools
+    p7zip
+    pipeline
+    python312Packages.pygobject3
+    spotdl
+    switcheroo
+    vlc
+    webp-pixbuf-loader
+
+    # ISO-specific packages
+    gparted
+    testdisk
+    gnome-disk-utility
+    ddcui
+    ddcutil
   ];
 }

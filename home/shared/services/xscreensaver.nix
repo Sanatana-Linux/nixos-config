@@ -2,7 +2,7 @@
   services.xscreensaver = {
     enable = true;
     settings = {
-      timeout = 1;
+      timeout = 9;
       mode = "blank";
     };
   }; # ends xscreensaver

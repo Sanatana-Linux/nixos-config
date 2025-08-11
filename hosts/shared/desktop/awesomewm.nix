@@ -46,9 +46,6 @@
   # TODO: Describe each package in detail.
   environment.systemPackages = with pkgs; [
     i3lock-fancy-rapid # Lock screen utility.
-    xss-lock # X11 screen saver lock utility.
-    xdg-desktop-portal # Portal for desktop integration.
-    xdg-desktop-portal-gtk # GTK support for XDG portals.
     luabind_luajit # Lua bindings for C++ using LuaJIT.
     lua51Packages.lua # Lua 5.1 interpreter.
     lua51Packages.lgi # Lua 5.1 packages for luajit compatibility.
@@ -62,27 +59,18 @@
     lua51Packages.luasocket # Networking support for Lua 5.1.
     lua51Packages.mpack # MessagePack implementation for Lua 5.1.
     gsettings-desktop-schemas # Schemas for GSettings.
-    dbus # Message bus system.
-    dbus-broker # Modern D-Bus message broker.
-    dbus-glib # GLib bindings for D-Bus.
     gobject-introspection-unwrapped # GObject introspection support.
     eggdbus # D-Bus utilities for GObject.
     scrot # Screenshot utility.
     maim # Screenshot utility.
     satty # Screenshot annotation tool.
     menu-cache # Caching mechanism for freedesktop.org menus.
-    pango # Text layout and rendering.
-    pangomm # C++ bindings for Pango.
-    polkit_gnome # Authentication agent for PolicyKit.
     xfce.garcon # Freedesktop.org menu library.
     xfce.libxfce4ui # XFCE UI library.
     xfce.libxfce4util # XFCE utility library.
     xfce.tumbler # Thumbnail service for XFCE.
-    cairo # 2D graphics library.
-    cairomm # C++ bindings for Cairo.
     gdk-pixbuf # Image loading library.
     gdk-pixbuf-xlib # Xlib integration for gdk-pixbuf.
-    xclip # Command line interface to X selections.
     xdotool # Simulate keyboard/mouse input.
     xsel # Manipulate X selections.
     xsettingsd # XSETTINGS daemon.

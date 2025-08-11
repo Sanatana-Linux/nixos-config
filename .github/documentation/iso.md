@@ -7,3 +7,4 @@ Mostly a personal reminder of how to generate the iso
 ```bash
  doas nixos-generate --flake '/etc/nixos/#live-usb' --format iso -o sanatana_linux
 ```
+nix build /etc/nixos#nixosConfigurations.chhinamasta.config.system.build.isoImage

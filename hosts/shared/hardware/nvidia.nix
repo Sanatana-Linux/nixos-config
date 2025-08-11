@@ -44,11 +44,18 @@ in {
         libglvnd
         cudaPackages.libnvjitlink
         blas
+        cudaPackages.cutensor
+        cudaPackages.cuda_nvprof
+        cudaPackages.cuda_opencl
+        cudaPackages.cuda_cudart
+        cudaPackages.libnpp
+        cudaPackages.libcublas
         cudaPackages.cuda_cccl
         cudaPackages.cuda_cudart
         cudaPackages.cuda_gdb
         cudaPackages.saxpy
         cudaPackages.nvidia_fs
+        cudaPackages.cuda_nvcc
         cudaPackages.cuda_nvml_dev
         cudaPackages.cuda_opencl
         cudaPackages.cuda_sandbox_dev
@@ -85,6 +92,7 @@ in {
         nvidia-vaapi-driver
         nvidia_cg_toolkit
         nvtopPackages.nvidia
+        python312Packages.numpy
         peakperf
         vaapiVdpau
         xorg_sys_opengl

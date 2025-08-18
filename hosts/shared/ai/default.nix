@@ -17,6 +17,5 @@
     ollama-cuda
     python312Packages.ollama
     tgpt
-    vectorcode
   ];
 }

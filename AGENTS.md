@@ -1,28 +1,27 @@
 # AGENTS.md - NixOS Configuration Codebase
 
-## Build/Deploy Commands
-- **Build system configuration**: `sudo nixos-rebuild switch --flake .#bagalamukhi` (or `matangi`, `chhinamasta`)
-- **Test configuration without switching**: `sudo nixos-rebuild test --flake .#bagalamukhi`
-- **Build and enter shell**: `nix develop` (uses shell.nix with development tools)
-- **Format code**: `nix fmt` (uses alejandra formatter from flake.nix:60)
-- **Build ISO image**: `nix build .#nixosConfigurations.chhinamasta.config.system.build.isoImage`
+## Build, Lint, and Test Commands
+- **Build system config:** `sudo nixos-rebuild switch --flake .#<host>` (replace `<host>` with bagalamukhi, matangi, chhinamasta)
+- **Test config (no switch):** `sudo nixos-rebuild test --flake .#<host>`
+- **Run a single test:** Use `nixos-rebuild test --flake .#<host>` after editing relevant files; for module/unit tests, see documentation/debugging/
+- **Enter dev shell:** `nix develop` (uses shell.nix)
+- **Format code:** `nix fmt` (Alejandra, see flake.nix)
+- **Build ISO:** `nix build .#nixosConfigurations.<host>.config.system.build.isoImage`
 
 ## Code Style Guidelines
-- **Formatting**: Use Alejandra formatter (configured in flake.nix)
-- **Imports**: Group by type - inputs first, then local modules (see hosts/shared/default.nix:8-16)
-- **Attribute sets**: Use multi-line format with trailing semicolons
-- **Naming**: Use kebab-case for files/directories, camelCase for Nix attributes
-- **Function signatures**: Multi-line with named parameters in curly braces
-- **Comments**: Use `#` for line comments, prefer descriptive attribute names over comments
+- **Formatting:** Always run `nix fmt` before committing.
+- **Imports:** Inputs first, then local modules; see hosts/shared/default.nix:8-16.
+- **Attribute sets:** Multi-line, trailing semicolons.
+- **Naming:** kebab-case for files/dirs, camelCase for Nix attrs.
+- **Function signatures:** Multi-line, named params in curly braces.
+- **Comments:** Use `#` for lines; prefer descriptive attribute names over comments.
+- **Types:** Use explicit types for Nix options and module arguments.
+- **Error handling:** Use `lib.mkIf` for conditionals; pass inputs via `specialArgs`.
+- **Testing:** Always run `nixos-rebuild test` before switching; check debugging/ for more.
 
 ## Architecture
-- **Hosts**: Machine-specific configs in `hosts/` (bagalamukhi, matangi, chhinamasta)
-- **Modules**: Reusable components in `hosts/shared/` and `modules/`
-- **Home Manager**: User configs in `home/` directory
-- **Overlays**: Package modifications in `overlays/`
-- **Templates**: Development environments in `templates/`
-
-## Error Handling
-- Use `lib.mkIf` for conditional configurations
-- Leverage `specialArgs` for passing inputs to modules
-- Test configurations with `nixos-rebuild test` before switching
+- Hosts: `hosts/` (machine configs)
+- Modules: `hosts/shared/`, `modules/` (reusable)
+- Home Manager: `home/` (user configs)
+- Overlays: `overlays/` (package mods)
+- Templates: `templates/` (dev envs)

@@ -46,6 +46,7 @@
         "60:class_g = 'Dunst'"
         "95:class_g = 'kitty' && focused"
         "90:class_g = 'kitty' && !focused"
+        "100:class_g = 'awesome'"
       ];
 
       #  blur-kern = "3x3box";
@@ -61,11 +62,22 @@
       shadow-exclude = [
         "class_g = 'firefox-nightly'"
         "class_g = 'Dunst'"
+        "class_g = 'awesome'"
       ];
 
       blur-background-exclude = [
         "class_g = 'Dunst'"
         "class_g = 'slop'"
+        "class_g = 'awesome'"
+        "class_g = 'Awesome'"
+        "window_type = 'dock'"
+        "window_type = 'popup_menu'"
+        "name = 'control_panel'"
+        "window_type = 'desktop'"
+        "class_g = 'Cairo-clock'"
+        "class_g = 'pop_report'"
+        "class_g = 'Gnome-screenshot'"
+        "class_g ~= 'slop'"
       ];
 
       backend = "glx";
@@ -82,7 +94,7 @@
       wintypes = {
         normal = {
           fade = true;
-          shadow = false;
+          shadow = true;
         };
         tooltip = {
           fade = true;
@@ -94,6 +106,7 @@
         dock = {
           shadow = false;
           rounded-corners = false;
+          opacity = 1.0;
         };
         dnd = {shadow = false;};
         popup_menu = {opacity = 1.0;};

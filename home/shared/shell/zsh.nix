@@ -16,7 +16,7 @@
       highlight = "fg=8,bg=default"; # Set highlight style for autosuggestions.
     };
     defaultKeymap = "viins"; # Use vi insert mode as the default keymap.
-    dotDir = ".config/zsh"; # Location for ZSH configuration files.
+    dotDir = "${config.xdg.configHome}/zsh"; # Location for ZSH configuration files.
 
     # History configuration
     history = {

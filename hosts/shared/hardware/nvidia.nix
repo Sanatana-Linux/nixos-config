@@ -42,6 +42,8 @@ in {
         libGLX
         libglut
         libglvnd
+
+        libtorch-bin
         cudaPackages.libnvjitlink
         blas
         cudaPackages.cutensor
@@ -59,13 +61,11 @@ in {
         cudaPackages.cuda_nvml_dev
         cudaPackages.cuda_opencl
         cudaPackages.cuda_sandbox_dev
-        cudaPackages.cudatoolkit
         cudaPackages.cuda_sanitizer_api
         cudaPackages.cudnn-frontend
         cudaPackages.cudnn
         cudaPackages.cutensor
         cudaPackages.libcublas
-        cudaPackages.libcufile
         cudaPackages.libcusparse
         cudaPackages.libnvidia_nscq
         cudaPackages.libnvjitlink
@@ -92,7 +92,9 @@ in {
         nvidia-vaapi-driver
         nvidia_cg_toolkit
         nvtopPackages.nvidia
-        python312Packages.numpy
+        python313Packages.numpy
+        python313Packages.pytorch-bin
+        python313Packages.torch-bin
         peakperf
         vaapiVdpau
         xorg_sys_opengl

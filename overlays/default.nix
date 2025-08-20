@@ -8,7 +8,18 @@
   # https://nixos.wiki/wiki/Overlays
   modifications = final: prev: {
     nps = inputs.nps.defaultPackage.${prev.system};
-  };
+    
+
+	newm = inputs.newm.packages.newm.overrideAttrs (old: rec {
+		postInstall = ''
+			mkdir -p $out/share/wayland-sessions/
+			cp newm/resources/newm.desktop $out/share/wayland-sessions/
+		'';
+	
+		passthru.providedSessions = [ "newm" ];                   
+	});   
+
+    };
 
   # When applied, the unstable nixpkgs set (declared in the flake inputs) will
   # be accessible through 'pkgs.unstable'

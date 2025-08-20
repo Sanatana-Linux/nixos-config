@@ -1,7 +1,6 @@
-<h1 align+"center"> Sanatana Linux</h1>
-<hr/>
+<h1 align="center"> Sanatana Linux</h1>
 
-<img width="300px" align="left"  src="./assets/om-glitch.gif" alt="Om Puurnnam-Adah Puurnnam-Idam Puurnnaat-Puurnnam-Udacyate | Puurnnasya Puurnnam-Aadaaya Puurnnam-Eva-Avashissyate || Om Shaantih Shaantih Shaantih "/>
+<img width="300px" align="center"  src="./assets/om-glitch.gif" alt="Om Puurnnam-Adah Puurnnam-Idam Puurnnaat-Puurnnam-Udacyate | Puurnnasya Puurnnam-Aadaaya Puurnnam-Eva-Avashissyate || Om Shaantih Shaantih Shaantih "/>
 
 <br>
 <br>
@@ -41,7 +40,9 @@
    "Advanced BIOS" firmware settings for my Lenovo Legion 5 Pro (16irx9).
 
 <figure>
-<img src = "./assets/nix-trinity.svg" alt="Nix Trinity" width="100%" height="100%" align="center"/>
+<img src = "./assets/nix-trinity.svg" alt="Nix Trinity" width="100%" height="100%" align="center">
 
-<figcaption><a href = "https://writerit.nl/software/nixos/my-personal-journey-into-nixos/">Image Sourced from the Writer IT Blog</a></figcaption>
+<figcaption> 
+<a href="https://writerit.nl/software/nixos/my-personal-journey-into-nixos/">Image Sourced from the Writer IT Blog</a>
+</figcaption>
 </figure>

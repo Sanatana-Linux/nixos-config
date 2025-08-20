@@ -44,6 +44,7 @@
     unstable,
     home-manager,
     higgs-boson,
+    bhairava-grub-theme,
     ...
   } @ inputs: let
     inherit (self) outputs;

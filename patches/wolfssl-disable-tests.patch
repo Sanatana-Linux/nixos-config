@@ -1,0 +1,10 @@
+--- a/configure.ac
++++ b/configure.ac
+@@ -5000,7 +5000,7 @@ AC_ARG_ENABLE([examples],
+     [AS_HELP_STRING([--enable-examples],[Enable Examples (default: disabled)])],
+     [ ENABLED_EXAMPLES=$enableval ],
+     [ ENABLED_EXAMPLES=no ]
+     )
+ 
+ # Enable wolfCrypt test and benchmark
+ AC_ARG_ENABLE([crypttests],

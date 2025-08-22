@@ -1,0 +1,15 @@
+--- a/linker/linker.h
++++ b/linker/linker.h
+@@ -49,12 +49,12 @@
+ 
+ #ifndef R_AARCH64_TLS_DTPREL32
+-#pragma message "The R_AARCH64_TLS_DTPREL32 was not set :("
++#define R_AARCH64_TLS_DTPREL32 1031
+ #endif
+ 
+ #ifndef R_AARCH64_TLS_TPREL64
+-#pragma message "The R_AARCH64_TLS_TPREL64 was not set :("
++#define R_AARCH64_TLS_TPREL64 1030
+ #endif
+ 
+ #define ELF_HASH_CHAIN_SIZE 4096

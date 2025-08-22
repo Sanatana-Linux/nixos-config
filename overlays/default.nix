@@ -8,18 +8,40 @@
   # https://nixos.wiki/wiki/Overlays
   modifications = final: prev: {
     nps = inputs.nps.defaultPackage.${prev.system};
-    
 
-	newm = inputs.newm.packages.newm.overrideAttrs (old: rec {
-		postInstall = ''
-			mkdir -p $out/share/wayland-sessions/
-			cp newm/resources/newm.desktop $out/share/wayland-sessions/
-		'';
-	
-		passthru.providedSessions = [ "newm" ];                   
-	});   
+    # Fix android-translation-layer build issues
+    android-translation-layer = prev.android-translation-layer.overrideAttrs (oldAttrs: {
+      patches =
+        (oldAttrs.patches or [])
+        ++ [
+          ../patches/android-translation-layer-aarch64-relocs.patch
+          ../patches/android-translation-layer-elfutils-glibc.patch
+          ../patches/android-translation-layer-cmake-glib.patch
+        ];
 
-    };
+      # Additional build fixes
+      preConfigure = ''
+        ${oldAttrs.preConfigure or ""}
+        # Fix missing includes
+        export CPPFLAGS="-I${prev.glib.dev}/include/glib-2.0 -I${prev.glib.out}/lib/glib-2.0/include $CPPFLAGS"
+        export PKG_CONFIG_PATH="${prev.glib.dev}/lib/pkgconfig:$PKG_CONFIG_PATH"
+      '';
+
+      buildInputs =
+        (oldAttrs.buildInputs or [])
+        ++ [
+          prev.glib
+          prev.pkg-config
+        ];
+
+      nativeBuildInputs =
+        (oldAttrs.nativeBuildInputs or [])
+        ++ [
+          prev.cmake
+          prev.pkg-config
+        ];
+    });
+  };
 
   # When applied, the unstable nixpkgs set (declared in the flake inputs) will
   # be accessible through 'pkgs.unstable'

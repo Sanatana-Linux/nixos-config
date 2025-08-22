@@ -41,6 +41,7 @@ with pkgs;
       echo -e "            $SKY_BLUE format $SPECIAL_END             format nix files in configuration"
       echo -e "            $SKY_BLUE vm $SPECIAL_END                 build a vm"
       echo -e "            $SKY_BLUE health $SPECIAL_END             run nix-health check"
+      echo -e "            $SKY_BLUE tree $SPECIAL_END               show dependency tree for a host (nix-tree)"
     }
 
     function repair() {
@@ -135,6 +136,10 @@ with pkgs;
       nix-health
     }
 
+    function tree() {
+      nix-tree ".#$2" --derivation
+    }
+
     case "$1" in
     sync)
       sync
@@ -174,6 +179,9 @@ with pkgs;
       ;;
     health)
       health
+      ;;
+    tree)
+      tree "$@"
       ;;
     help)
       help

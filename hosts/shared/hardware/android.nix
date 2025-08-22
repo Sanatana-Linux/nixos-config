@@ -34,6 +34,8 @@
     payload-dumper-go # Tool for extracting all .img files from an Android OTA payload.bin file
     # Non-decompiling Android vulnerability scanner
     trueseeing
+    # Android Translation Layer
+    android-translation-layer
   ];
 
   # https://nixos.wiki/wiki/Android

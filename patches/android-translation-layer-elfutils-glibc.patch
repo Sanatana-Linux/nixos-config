@@ -1,0 +1,14 @@
+--- a/vendor/elfutils/libdw/libdw.h
++++ b/vendor/elfutils/libdw/libdw.h
+@@ -38,6 +38,11 @@
+ 
+ #include <gelf.h>
+ 
++/* Work around glibc BZ #15366.  */
++#ifdef __GNUC__
++#pragma GCC diagnostic ignored "-Wunused-variable"
++#endif
++
+ #if defined(__GNUC__) && __GNUC__ >= 4 && __GNUC_MINOR__ >= 3
+ # define __nonnull_attribute__(...) __attribute__ ((__nonnull__ (__VA_ARGS__)))
+ # define __deprecated_attribute__ __attribute__ ((__deprecated__))

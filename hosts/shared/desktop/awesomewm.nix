@@ -2,16 +2,34 @@
   pkgs,
   config,
   inputs,
+  lib,
   ...
 }: {
   xdg.portal.enable = true;
   xdg.portal.config.common.default = "*";
-  # Ena  xdg.portal.config.common.default = "*";ble and configure the X server with AwesomeWM as the window manager.
+
   services = {
     xserver = {
       windowManager.awesome = {
         enable = true;
-        package = inputs.nixpkgs-f2k.packages.x86_64-linux.awesome-luajit-git; # Use the latest git version of AwesomeWM.
+
+        package = inputs.nixpkgs-f2k.packages.${pkgs.system}.awesome-luajit-git.overrideAttrs (prevAttrs: {
+          GI_TYPELIB_PATH = let
+            mkTypeLibPath = pkg: "${pkg}/lib/girepository-1.0";
+            extraGITypeLibPaths =
+              lib.forEach (
+                with pkgs; [
+                  networkmanager
+                  upower
+                  cairo
+                  goocanvas
+                  librsvg
+                ]
+              )
+              mkTypeLibPath;
+          in
+            lib.concatStringsSep ":" (extraGITypeLibPaths ++ [(mkTypeLibPath pkgs.pango.out)]);
+        });
         # List of Lua modules to be available for AwesomeWM.
         luaModules = with pkgs.luajitPackages; [
           luautf8 # text handling
@@ -43,21 +61,11 @@
   programs.dconf.enable = true;
   # ------------------------------------------------- #
   # System packages required for AwesomeWM and its ecosystem.
-  # TODO: Describe each package in detail.
   environment.systemPackages = with pkgs; [
     i3lock-fancy-rapid # Lock screen utility.
     luabind_luajit # Lua bindings for C++ using LuaJIT.
     lua51Packages.lua # Lua 5.1 interpreter.
     lua51Packages.lgi # Lua 5.1 packages for luajit compatibility.
-    lua51Packages.luarocks # LuaRocks package manager for Lua 5.1.
-    lua51Packages.luaposix # POSIX bindings for Lua 5.1.
-    lua51Packages.luautf8 # UTF-8 support for Lua 5.1.
-    lua51Packages.lpeg # Parsing Expression Grammars for Lua 5.1.
-    lua51Packages.lpeg_patterns # Common patterns for LPeg in Lua 5.1.
-    lua51Packages.lpeglabel # LPeg extension for labeled failures in Lua 5.1.
-    lua51Packages.lua-messagepack # MessagePack serialization for Lua 5.1.
-    lua51Packages.luasocket # Networking support for Lua 5.1.
-    lua51Packages.mpack # MessagePack implementation for Lua 5.1.
     gsettings-desktop-schemas # Schemas for GSettings.
     gobject-introspection-unwrapped # GObject introspection support.
     eggdbus # D-Bus utilities for GObject.
@@ -72,6 +80,7 @@
     gdk-pixbuf # Image loading library.
     gdk-pixbuf-xlib # Xlib integration for gdk-pixbuf.
     xdotool # Simulate keyboard/mouse input.
+    inputs.lemonake.packages.${pkgs.system}.lua-pam-git # PAM bindings for Lua.
     xsel # Manipulate X selections.
     xsettingsd # XSETTINGS daemon.
     dconf-editor # Editor for dconf settings.
@@ -80,10 +89,16 @@
     xdg-utils # XDG utilities.
   ];
 
-  # Add extra XDG portal for GTK support.
-  xdg.portal.extraPortals = with pkgs; [xdg-desktop-portal-gtk];
   security.pam.services.i3lock.enable = true;
-  environment.variables = {
-    GDK_BACKEND = "x11";
+  environment = {
+    variables = {
+      GDK_BACKEND = "x11";
+    };
+
+    sessionVariables = {
+      LUA_PATH = "${pkgs.luajitPackages.luarocks}/share/lua/${pkgs.luajit.luaversion}/?.lua;${pkgs.luajitPackages.luarocks}/share/lua/${pkgs.luajit.luaversion}/?/init.lua";
+      LUA_CPATH = "${pkgs.luajitPackages.luarocks}/lib/lua/${pkgs.luajit.luaversion}/?.so";
+      PATH = ["${pkgs.luajitPackages.luarocks}/bin"];
+    };
   };
 }

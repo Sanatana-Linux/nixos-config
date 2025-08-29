@@ -26,6 +26,7 @@
       url = "github:ThomasHighbaugh/firefox";
       flake = false;
     };
+    lemonake.url = "github:passivelemon/lemonake";
     firefox-nightly.url = "github:nix-community/flake-firefox-nightly";
     nps.url = "github:OleMussmann/Nix-Package-Search";
     bhairava-grub-theme = {

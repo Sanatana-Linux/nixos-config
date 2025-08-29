@@ -41,6 +41,5 @@
     libvirt
     libvirt-glib
     libgovirt
-    x11docker
   ];
 }

@@ -38,7 +38,6 @@ with pkgs; [
   lv2
   megapixels
   menyoki
-  metadata-cleaner
   mjpegtoolsFull
   mp4v2
   oggvideotools

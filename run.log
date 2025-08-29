@@ -1,0 +1,9 @@
+[ERROR][2025-08-24 11:45:47][shared_folder.py:100] - waydroid-monitor.service or waydroid-monitor.service not exists!
+[INFO][2025-08-24 11:45:48][extensions_manager.py:144] - extension json has been updated
+[INFO][2025-08-24 11:46:22][extensions_manager.py:311] - File downloaded and saved to /home/tlh/.cache/waydroid-helper/extensions/opengapps/EXTENSION
+[INFO][2025-08-24 11:46:48][extensions_manager.py:311] - File downloaded and saved to /home/tlh/.cache/waydroid-helper/extensions/opengapps/opengapps-20220503.zip
+[ERROR][2025-08-24 11:46:48][available_version_page.py:294] - Command failed with return code 2: tar (child): lzip: Cannot exec: No such file or directory
+tar (child): Error is not recoverable: exiting now
+tar: Child returned status 2
+tar: Error is not recoverable: exiting now
+

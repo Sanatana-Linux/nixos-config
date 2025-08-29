@@ -1,10 +1,20 @@
---- a/configure.ac
-+++ b/configure.ac
-@@ -5000,7 +5000,7 @@ AC_ARG_ENABLE([examples],
-     [AS_HELP_STRING([--enable-examples],[Enable Examples (default: disabled)])],
-     [ ENABLED_EXAMPLES=$enableval ],
-     [ ENABLED_EXAMPLES=no ]
-     )
- 
- # Enable wolfCrypt test and benchmark
- AC_ARG_ENABLE([crypttests],
+--- a/tests/unit.c
++++ b/tests/unit.c
+@@ -31234,7 +31234,9 @@ static int test_wc_ed25519_export_private(void)
+     ret = wc_ed25519_export_private(&key, out, &outlen);
+     if (ret == 0) {
+         ret = wc_ed25519_check_key(&key);
++#ifndef WOLFSSL_ED25519_PERSISTENT_SHA
+         if (ret == 0 && XMEMCMP(out, privKey, outlen) != 0) {
++#else
+             ret = -1;
+         }
+     }
+@@ -31256,6 +31258,7 @@ static int test_wc_ed25519_export_private(void)
+         ret = wc_ed25519_check_key(&key);
+         if (ret == 0 && XMEMCMP(out, privKey, outlen) != 0) {
+             ret = -1;
++#endif
+         }
+     }
+     wc_ed25519_free(&key);

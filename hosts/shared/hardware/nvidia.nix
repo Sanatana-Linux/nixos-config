@@ -4,7 +4,7 @@
   lib,
   ...
 }: let
-  nvidiaDriverChannel = config.boot.kernelPackages.nvidiaPackages.production; # stable, production, beta, latest
+  nvidiaDriverChannel = config.boot.kernelPackages.nvidiaPackages.stable; # stable, production, beta, latest
 in {
   environment = {
     variables = {
@@ -85,6 +85,7 @@ in {
         libnvidia-container
         libvdpau-va-gl
         mesa
+        mesa_glu
         mlx42
         nv-codec-headers
         nvidia-container-toolkit
@@ -135,6 +136,7 @@ in {
         libva-utils
         libvdpau-va-gl
         mesa
+        mesa-demos # includes glxinfo, glxgears
         mlx42
         nvidia-vaapi-driver
         nvidiaDriverChannel
@@ -146,7 +148,7 @@ in {
       modesetting.enable = true;
       nvidiaSettings = true;
       nvidiaPersistenced = true;
-      #  forceFullCompositionPipeline = true;
+      forceFullCompositionPipeline = true;
       dynamicBoost.enable = true;
       powerManagement = {
         # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
@@ -165,12 +167,12 @@ in {
       open = false;
       package = nvidiaDriverChannel;
       prime = {
+        sync.enable = lib.mkForce false;
+        offload.enable = lib.mkForce false;
         reverseSync = {
           enable = lib.mkForce true;
-          setupCommands.enable = lib.mkForce true; # requires a dm with xsetupcommands ie sddm lightdm or gdm
+          setupCommands.enable = lib.mkForce true; # requires a dm with xsetupcommands...
         };
-        #   sync.enable = true;
-        offload.enable = lib.mkForce false;
         # Multiple uses are available, check the NVIDIA NixOS wiki
         # Use "lspci | grep -E 'VGA|3D'" to get PCI-bus IDs
         intelBusId = "PCI:00:02:0";

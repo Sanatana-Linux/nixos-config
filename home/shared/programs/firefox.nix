@@ -86,6 +86,7 @@ in {
       ];
 
       settings = {
+        "security.allow_unsafe_dangerous_privileged_evil_eval" = true; # use eval()
         "accessibility.tabfocus_applies_to_xul" = true; # Tab focus applies to XUL elements
         "app.normandy.enabled" = false; # Disable Normandy (remote experiments)
         "app.normandy.first_run" = false; # Disable Normandy first run

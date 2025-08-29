@@ -55,6 +55,13 @@
 
   services.xserver.videoDrivers = ["nvidia"];
   services.xserver.enable = true;
+
+  # OpenGL configuration
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
+
   boot.plymouth.enable = true;
   # boot.plymouth.logo = "https://github.com/Thomashighbaugh/Thomashighbaugh/blob/main/src/resources/images/icon.png"; # use a custom logo for plymouth
   # boot.plymouth.theme = "loader";
@@ -66,6 +73,8 @@
     nvme-cli
     grub2_full
     mesa
+    mesa-demos # includes glxinfo and glxgears for OpenGL testing
+    glxinfo # explicit OpenGL info utility
     plymouth
     kdePackages.plymouth-kcm
     lenovo-legion
@@ -112,7 +121,7 @@
       config.boot.kernelPackages.acpi_call # acpi_call kernel module
       config.boot.kernelPackages.cpupower #  Tool to examine and tune power saving features
       config.boot.kernelPackages.lenovo-legion-module # lenovo legion kernel module
-      config.boot.kernelPackages.nvidiaPackages.production # nvidia x11 kernel module
+      config.boot.kernelPackages.nvidiaPackages.stable # nvidia x11 kernel module
     ];
 
     kernelParams = [

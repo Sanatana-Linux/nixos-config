@@ -18,7 +18,6 @@
     ../shared/programs/neovim/default.nix
     ../shared/services/default.nix
     ../shared/services/picom.nix
-    ../shared/services/xscreensaver.nix
     ../shared/shell
   ];
 

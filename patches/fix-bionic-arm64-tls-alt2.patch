@@ -1,5 +1,5 @@
---- a/system/core/libbionic/linker/linker.h
-+++ b/system/core/libbionic/linker/linker.h
+--- a/external/bionic/linker/linker.h
++++ b/external/bionic/linker/linker.h
 @@ -49,12 +49,12 @@
  
  #ifndef R_AARCH64_TLS_DTPREL32
@@ -7,6 +7,7 @@
 +#define R_AARCH64_TLS_DTPREL32 1031
  #endif
  
+
  #ifndef R_AARCH64_TLS_TPREL64
 -#pragma message "The R_AARCH64_TLS_TPREL64 was not set :("
 +#define R_AARCH64_TLS_TPREL64 1030

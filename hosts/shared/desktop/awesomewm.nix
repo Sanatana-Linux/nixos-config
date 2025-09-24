@@ -9,6 +9,7 @@
   xdg.portal.config.common.default = "*";
 
   services = {
+    displayManager.defaultSession = "none+awesome";
     xserver = {
       windowManager.awesome = {
         enable = true;

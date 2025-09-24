@@ -49,7 +49,10 @@
     };
   };
 
-  services.gnome-keyring.enable = true;
+  services.gnome-keyring = {
+    enable = true;
+    components = ["secrets" "ssh" "pkcs11"];
+  };
   programs.home-manager.enable = true;
 
   home = {

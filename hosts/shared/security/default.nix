@@ -1,34 +1,21 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
-    # john # hash cracker
     bitwarden #password management
     bitwarden-desktop # password management native app
-    # deepsecrets # find secrets in code
-    # enum4linux-ng # enumerate info from windows/samba
-    fcrackzip # zip password cracker
     ghorg # mass clone git repos
-    hashcat # hash cracker
-    iaito # gui for radare2
     libtpms # tpm library
-    msldapdump # ldap enumeration
-    nikto # web server scanner
+    linux-pam # pam
     nmap # network scanner
     openssl.dev # TSL/SSL
     python312Packages.tpm2-pytss
-    radare2 # reverse engineering framework
-    sqlmap # sql injection tool
     ssh-tpm-agent
-    sslscan # ssl scanner
     swtpm # software tpm
-    testssl # ssl checker
-    thc-hydra # network logon cracker
     tor # privacy network protocol
     tor-browser-bundle-bin # firefox with integrated tor connections by default
     tpm2-abrmd # TPM2 resource manage
     tpm2-tools # tools for working with TPM chip
     tpm2-tss #  OSS implementation of the TCG TPM2 Software Stack
     tpmmanager # manage TPM hardware
-    zap # web app penetration testing
   ];
   security = {
     # I am told this is a better choice, I don't notice much difference but its more ergonomic to type

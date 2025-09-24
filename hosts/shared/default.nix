@@ -39,7 +39,6 @@
       allowBroken = true;
       permittedInsecurePackages = [
         "dcraw-9.28.0"
-        "qtwebkit-5.212.0-alpha4"
         "electron-24.8.6"
         "electron-25.9.0"
         "electron-27.3.11"
@@ -48,7 +47,9 @@
         "openssl-1.1.1v"
         "openssl-1.1.1w"
         "python3.12-youtube-dl-2021.12.17"
-        "ventoy-1.1.05"
+        "qtwebengine-5.15.19"
+        "qtwebkit-5.212.0-alpha4"
+        "ventoy-1.1.07"
         "xpdf-4.05"
       ];
     };

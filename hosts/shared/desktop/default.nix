@@ -14,7 +14,7 @@
       autorun = true;
       exportConfiguration = true;
       updateDbusEnvironment = true;
-
+      desktopManager.runXdgAutostartIfNone = true; # Without this earlyoom won't start but is not documented anywhere
       displayManager = {
         lightdm = {
           enable = true;

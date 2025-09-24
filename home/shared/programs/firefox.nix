@@ -20,20 +20,20 @@
       buildCommand =
         (oldAttrs.buildCommand or "")
         + ''
-          # Find firefox Dir
-          firefoxDir=$(find "$out/lib/" -type d -name 'firefox*' -print -quit)
+                    # Find firefox Dir
+                    firefoxDir=$(find "$out/lib/" -type d -name 'firefox*' -print -quit)
 
-          # Function to replace symlink with destination file
-          replaceSymlink() {
-            local symlink_path="$firefoxDir/$1"
-            local target_path=$(readlink -f "$symlink_path")
-            rm "$symlink_path"
-            cp "$target_path" "$symlink_path"
-          }
+                    # Function to replace symlink with destination file
+                    replaceSymlink() {
+                      local symlink_path="$firefoxDir/$1"
+                      local target_path=$(readlink -f "$symlink_path")
+                      rm "$symlink_path"
+                      cp "$target_path" "$symlink_path"
+                    }
 
-          # Copy firefox binaries
-          replaceSymlink "firefox"
-          replaceSymlink "firefox-bin"
+                    # Copy firefox binaries
+          #          replaceSymlink "firefox"
+          #          replaceSymlink "firefox-bin"
         '';
     });
   profile = "tlh";
@@ -184,6 +184,7 @@ in {
         "gfx.webgpu.force-enabled" = true; # Force-enable WebGPU
         "widget.dmabuf.force-enabled" = true; # Force-enable DMABUF for buffer sharing
         "widget.gtk.rounded-bottom-corners.enabled" = true; # Enable rounded bottom corners in GTK
+        "widget.content.gtk-theme-override" = "Materia-Dark-Compact"; # Override GTK theme
         "widget.non-native-theme.win.scrollbar.use-system-size" = false; # Don't use system scrollbar size on Windows
         "widget.use-xdg-desktop-portal" = true; # Use XDG desktop portal integration
         "xpinstall.signatures.required" = false; # Don't require signe extensions

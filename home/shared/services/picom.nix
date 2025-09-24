@@ -35,7 +35,7 @@
       shadow-offset-y = -8;
       fading = false;
       inactive-opacity = 0.95;
-      frame-opacity = 0.7;
+      frame-opacity = 0.9;
       inactive-opacity-override = false;
       active-opacity = 1.0;
       focus-exclude = [
@@ -52,7 +52,7 @@
       #  blur-kern = "3x3box";
       blur = {
         method = "dual_kawase";
-        strength = 8;
+        strength = 6;
         #background = false;
         #background-frame = false;
         #background-fixed = false;
@@ -68,24 +68,23 @@
       blur-background-exclude = [
         "class_g = 'Dunst'"
         "class_g = 'slop'"
-        "class_g = 'awesome'"
-        "class_g = 'Awesome'"
-        "window_type = 'dock'"
-        "window_type = 'popup_menu'"
-        "name = 'control_panel'"
+        # "class_g = 'awesome'"
+        # "class_g = 'Awesome'"
+        # "window_type = 'dock'"
+        # "window_type = 'popup_menu'"
+        # "name = 'control_panel'"
         "window_type = 'desktop'"
         "class_g = 'Cairo-clock'"
         "class_g = 'pop_report'"
         "class_g = 'Gnome-screenshot'"
-        "class_g ~= 'slop'"
       ];
 
-      backend = "glx";
+      backend = "egl";
       vsync = true;
       mark-wmwin-focused = true;
       mark-ovredir-focused = true;
       detect-rounded-corners = true;
-      detect-client-opacity = false;
+      detect-client-opacity = true;
       detect-transient = true;
       detect-client-leader = true;
       use-damage = true;
@@ -98,13 +97,13 @@
         };
         tooltip = {
           fade = true;
-          shadow = false;
+          shadow = true;
           opacity = 1;
           focus = true;
           full-shadow = false;
         };
         dock = {
-          shadow = false;
+          shadow = true;
           rounded-corners = false;
           opacity = 1.0;
         };

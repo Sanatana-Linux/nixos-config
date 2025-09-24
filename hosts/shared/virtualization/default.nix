@@ -26,7 +26,6 @@
   hardware.nvidia-container-toolkit.enable = true;
   hardware.graphics.enable32Bit = true;
   environment.systemPackages = with pkgs; [
-    appvm
     conmon
     containerd
     fuse-overlayfs

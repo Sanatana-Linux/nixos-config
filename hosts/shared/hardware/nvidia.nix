@@ -4,7 +4,7 @@
   lib,
   ...
 }: let
-  nvidiaDriverChannel = config.boot.kernelPackages.nvidiaPackages.stable; # stable, production, beta, latest
+  nvidiaDriverChannel = config.boot.kernelPackages.nvidiaPackages.stable; # stable, latest, beta, production
 in {
   environment = {
     variables = {
@@ -23,7 +23,7 @@ in {
       __GLX_VENDOR_LIBRARY_NAME = "nvidia";
       # CUDA Cores Package Location
       CUDA_PATH = "${pkgs.cudatoolkit}";
-      EXTRA_LDFLAGS = "-L/lib -L${pkgs.linuxPackages.nvidiaPackages.production}/lib";
+      EXTRA_LDFLAGS = "-L/lib -L${pkgs.linuxPackages.nvidiaPackages.stable}/lib";
       EXTRA_CCFLAGS = "-I/usr/include";
       # Hardware cursors are currently broken on nvidia
       WLR_NO_HARDWARE_CURSORS = "1";
@@ -77,6 +77,7 @@ in {
         ftgl
         gegl
         glew
+        glee
         glfw
         intel-media-driver
         libGL
@@ -86,6 +87,8 @@ in {
         libvdpau-va-gl
         mesa
         mesa_glu
+        mesa-gl-headers
+        mesa-demos # includes glxinfo, glxgears
         mlx42
         nv-codec-headers
         nvidia-container-toolkit
@@ -122,9 +125,10 @@ in {
         "nvidia-powerd"
         "nvidia-persistenced"
         "nvidia-settings"
-        "nvidiaPackags.production"
+        "nvidiaPackags.stable"
       ];
   };
+
   hardware = {
     nvidia-container-toolkit.enable = true;
     graphics = {
@@ -136,6 +140,7 @@ in {
         libva-utils
         libvdpau-va-gl
         mesa
+        mesa-gl-headers
         mesa-demos # includes glxinfo, glxgears
         mlx42
         nvidia-vaapi-driver
@@ -152,7 +157,7 @@ in {
       dynamicBoost.enable = true;
       powerManagement = {
         # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
-        enable = true;
+        enable = false;
         # Fine-grained power management. Turns off GPU when not in use.
         # Experimental and only works on modern Nvidia GPUs (Turing or newer).
         finegrained = false;
@@ -167,12 +172,13 @@ in {
       open = false;
       package = nvidiaDriverChannel;
       prime = {
-        sync.enable = lib.mkForce false;
+        sync.enable = lib.mkForce true;
         offload.enable = lib.mkForce false;
-        reverseSync = {
-          enable = lib.mkForce true;
-          setupCommands.enable = lib.mkForce true; # requires a dm with xsetupcommands...
-        };
+
+        # reverseSync = {
+        #   enable = lib.mkForce true;
+        #   setupCommands.enable = lib.mkForce true; # requires a dm with xsetupcommands...
+        # };
         # Multiple uses are available, check the NVIDIA NixOS wiki
         # Use "lspci | grep -E 'VGA|3D'" to get PCI-bus IDs
         intelBusId = "PCI:00:02:0";

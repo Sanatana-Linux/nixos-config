@@ -72,7 +72,6 @@
     };
     gpg.enable = true;
     man.enable = true;
-    ssh.enable = true;
 
     fzf = {
       enable = true;

@@ -142,7 +142,6 @@
       "usbcore.autosuspend=-1"
       # Nvidia dGPU settings
       "nvidia_drm.fbdev=1" # enable Framebuffer driver
-      "nvidia-drm.modeset=1" # enable Modesetting Kernel Module
       # Potentially useful for hanging or shutdown
       "reboot=acpi"
       # No hanging on reboot due to something I don't need on my laptop
@@ -199,9 +198,9 @@
   };
   services = {
     logind = {
-      lidSwitch = "suspend";
-      powerKey = "ignore";
-      powerKeyLongPress = "suspend";
+      settings.Login.HandleLidSwitch = "suspend";
+      settings.Login.HandlePowerKey = "ignore";
+      settings.Login.HandlePowerKeyLongPress = "suspend";
     };
     # -------------------------------------------------------------------------- #
     # For desktop environment selection (since the display manager is generalized)

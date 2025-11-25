@@ -26,7 +26,7 @@ with pkgs; [
   pango
   pangomm
   polkit_gnome
-  poppler_utils #system tool
+  poppler-utils #system tool
   python312Packages.cairosvg
   python312Packages.pyqt6
   python312Packages.qtpy

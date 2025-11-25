@@ -32,7 +32,7 @@ with pkgs; [
   komika-fonts
   fontpreview
   ftgl
-  minizip2
+  minizip-ng
   networkmanager
   ngrok
   nmap

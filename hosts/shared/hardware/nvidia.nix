@@ -4,7 +4,7 @@
   lib,
   ...
 }: let
-  nvidiaDriverChannel = config.boot.kernelPackages.nvidiaPackages.stable; # stable, latest, beta, production
+  nvidiaDriverChannel = config.boot.kernelPackages.nvidiaPackages.production; # stable, latest, beta, production
 in {
   environment = {
     variables = {
@@ -23,7 +23,7 @@ in {
       __GLX_VENDOR_LIBRARY_NAME = "nvidia";
       # CUDA Cores Package Location
       CUDA_PATH = "${pkgs.cudatoolkit}";
-      EXTRA_LDFLAGS = "-L/lib -L${pkgs.linuxPackages.nvidiaPackages.stable}/lib";
+      EXTRA_LDFLAGS = "-L/lib -L${pkgs.linuxPackages.nvidiaPackages.production}/lib";
       EXTRA_CCFLAGS = "-I/usr/include";
       # Hardware cursors are currently broken on nvidia
       WLR_NO_HARDWARE_CURSORS = "1";
@@ -46,26 +46,20 @@ in {
         libtorch-bin
         cudaPackages.libnvjitlink
         blas
-        cudaPackages.cutensor
-        cudaPackages.cuda_nvprof
-        cudaPackages.cuda_opencl
-        cudaPackages.cuda_cudart
-        cudaPackages.libnpp
-        cudaPackages.libcublas
         cudaPackages.cuda_cccl
         cudaPackages.cuda_cudart
         cudaPackages.cuda_gdb
         cudaPackages.saxpy
         cudaPackages.nvidia_fs
-        cudaPackages.cuda_nvcc
         cudaPackages.cuda_nvml_dev
         cudaPackages.cuda_opencl
-        cudaPackages.cuda_sandbox_dev
+        cudaPackages.cudatoolkit
         cudaPackages.cuda_sanitizer_api
         cudaPackages.cudnn-frontend
         cudaPackages.cudnn
         cudaPackages.cutensor
         cudaPackages.libcublas
+        cudaPackages.libcufile
         cudaPackages.libcusparse
         cudaPackages.libnvidia_nscq
         cudaPackages.libnvjitlink
@@ -100,7 +94,7 @@ in {
         python313Packages.pytorch-bin
         python313Packages.torch-bin
         peakperf
-        vaapiVdpau
+        libva-vdpau-driver
         xorg_sys_opengl
         zenith-nvidia
       ]
@@ -145,7 +139,7 @@ in {
         mlx42
         nvidia-vaapi-driver
         nvidiaDriverChannel
-        vaapiVdpau
+        libva-vdpau-driver
         xorg_sys_opengl
       ];
     };

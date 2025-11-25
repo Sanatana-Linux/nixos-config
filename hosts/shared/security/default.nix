@@ -1,6 +1,5 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
-    bitwarden #password management
     bitwarden-desktop # password management native app
     ghorg # mass clone git repos
     libtpms # tpm library
@@ -11,7 +10,7 @@
     ssh-tpm-agent
     swtpm # software tpm
     tor # privacy network protocol
-    tor-browser-bundle-bin # firefox with integrated tor connections by default
+    tor-browser # firefox with integrated tor connections by default
     tpm2-abrmd # TPM2 resource manage
     tpm2-tools # tools for working with TPM chip
     tpm2-tss #  OSS implementation of the TCG TPM2 Software Stack

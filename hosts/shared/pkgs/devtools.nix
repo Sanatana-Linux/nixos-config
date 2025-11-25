@@ -51,9 +51,9 @@ with pkgs; [
   git-trim # (duplicate) Remove merged branches
 
   # GitHub tools
-  gitAndTools.gh # GitHub CLI
-  gitAndTools.git-absorb # Auto-squash fixup commits
-  gitAndTools.git-machete # Git branch management
+  gh # GitHub CLI
+  git-absorb # Auto-squash fixup commits
+  git-machete # Git branch management
 
   # Security and code quality
   gitleaks # Scan for secrets in git repos
@@ -158,7 +158,7 @@ with pkgs; [
   sqlitebrowser # SQLite database browser
   stylua # Lua code formatter
   stylua # (duplicate) Lua code formatter
-  sumneko-lua-language-server # Lua language server (Sumneko)
+  lua-language-server # Lua language server
   tailwindcss-language-server # Tailwind CSS language server
   tokei # Code statistics
   tree-sitter # Incremental parsing library
@@ -170,7 +170,7 @@ with pkgs; [
   usort # Python import sorter
   usql # Universal SQL client
   vscode-langservers-extracted # VSCode language servers
-  wkhtmltopdf-bin # HTML to PDF converter
+  wkhtmltopdf # HTML to PDF converter
   xorg.libX11 # X11 library
   xorg_sys_opengl # Xorg OpenGL system
   yamllint # YAML linter

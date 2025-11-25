@@ -11,7 +11,6 @@
     acpilight.enable = true;
     firmware = with pkgs; [
       linux-firmware
-      firmwareLinuxNonfree
     ];
   }; # end hardware
 

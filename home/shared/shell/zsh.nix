@@ -155,12 +155,12 @@
       lx = "eza -alh -s extension --color=auto --group-directories-first --icons -R"; # Another enhanced ls alias.
       tree = "eza --icons --tree";
       cat = "bat --style=plain"; # Use bat for syntax highlighting, plain style for regular "cat" behaviour.
-      du = "${lib.getBin du-dust}/bin/du-dust"; # Disk usage analyzer.
+      du = "${lib.getBin dust}/bin/dust"; # Disk usage analyzer.
       gz = "gzip -l"; # list contents of gzipped files
       rm = "rm -rvf"; # remove files and directories recursively and forcefully
       trm = "${lib.getBin trash-cli}/bin/trash-cli"; # Move files to trash
       firefox = "firefox-nightly";
-      less = "moar";
+      less = "moor";
       # Decom: Decrypts, cleans up, decompresses, and cleans up again.
       decom = "_() { echo -n 'Enter base name to decrypt: '; read n; gpg -d \"$n.7z.gpg\" > \"$n.7z\" && rm \"$n.7z.gpg\" && ouch decompress \"$n.7z\" && rm \"$n.7z\"; }; _";
 

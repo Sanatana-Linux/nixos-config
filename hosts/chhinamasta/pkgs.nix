@@ -103,12 +103,13 @@
     libnotify
     libsForQt5.qt5ct
     kdePackages.qt6ct
-    qt6.full
+    kdePackages.qtbase
+    kdePackages.qtwayland
     libsForQt5.qtcurve
     libsForQt5.qtstyleplugins
     libusb1
     libxdg_basedir
-    mime-types
+    mailcap
     mimetic
     nerd-font-patcher
     networkmanagerapplet
@@ -240,15 +241,15 @@
     lshw
     massren
     mdds
-    microcodeIntel
-    moar
+    microcode-intel
+    moor
     moreutils
     mtools
     neofetch
     nmon
     ntfs3g
     ntfsprogs
-    opencl-clang
+    intel-graphics-compiler
     openssl
     out-of-tree
     pinentry-tty

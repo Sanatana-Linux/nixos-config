@@ -11,7 +11,6 @@
       nix-direnv
       nix-binary-cache
       nix-bundle
-      nix-direnv-flakes
       nix-health
       nix-janitor
       nix-plugins

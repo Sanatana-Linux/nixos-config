@@ -5,7 +5,7 @@
 }: {
   services.picom = {
     enable = true;
-    package = pkgs.picom-next;
+    package = pkgs.picom;
 
     settings = {
       animations = true;

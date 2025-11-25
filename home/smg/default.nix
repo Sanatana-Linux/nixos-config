@@ -41,7 +41,7 @@
     config = {
       allowUnfree = true;
       allowUnfreePredicate = _: true;
-      allowUnsupportedSystem = true;
+      # allowUnsupportedSystem = true;
       allowBroken = true;
     };
   };

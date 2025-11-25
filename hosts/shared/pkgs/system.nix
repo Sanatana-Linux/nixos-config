@@ -55,15 +55,15 @@ with pkgs; [
   massren
   mdds
   meson
-  microcodeIntel
-  moar
+  microcode-intel
+  moor
   moreutils
   mtools
   neofetch
   nmon
   ntfs3g
   ntfsprogs
-  opencl-clang
+  intel-graphics-compiler
   openssl
   out-of-tree
   parallel

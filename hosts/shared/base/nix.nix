@@ -17,7 +17,7 @@
     nix-bash-completions
     nix-binary-cache
     nix-bundle
-    nix-direnv-flakes
+    nix-direnv
     nix-doc
     nix-health
     nix-index

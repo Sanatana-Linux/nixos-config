@@ -49,12 +49,13 @@ with pkgs; [
   libnotify
   libsForQt5.qt5ct
   kdePackages.qt6ct
-  qt6.full
+  kdePackages.qtbase
+  kdePackages.qtwayland
   libsForQt5.qtcurve
   libsForQt5.qtstyleplugins
   libusb1
   libxdg_basedir
-  mime-types
+  mailcap
   mimetic
   mupdf
   nerd-font-patcher
@@ -66,11 +67,11 @@ with pkgs; [
   pdftag
   pdftk
   perl538Packages.CairoGObject
-  poppler_utils
+  poppler-utils
   psftools
   rofi
   t1utils
-  tdesktop
+  telegram-desktop
   template-glib
   themechanger
   transmission_4-gtk

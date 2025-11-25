@@ -34,7 +34,7 @@
 
     config = {
       allowUnfree = true;
-      allowUnsupportedSystem = true;
+      # allowUnsupportedSystem = true;
       allowUnfreePredicate = _: true;
       allowBroken = true;
       permittedInsecurePackages = [

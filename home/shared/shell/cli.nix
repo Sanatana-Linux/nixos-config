@@ -8,10 +8,10 @@
     btop
     catimg
     bat
-    moar
+    moor
     curl
     direnv
-    du-dust
+    dust
     duf
     editorconfig-core-c
     eza
@@ -26,7 +26,7 @@
     killall
     lm_sensors
     lz4
-    mpc_cli
+    mpc
     mpg123
     neofetch
     pciutils

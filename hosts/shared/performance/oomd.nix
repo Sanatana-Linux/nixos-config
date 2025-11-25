@@ -11,7 +11,7 @@
     enableRootSlice = true; # Root
     enableUserSlices = true; # User
     enableSystemSlice = true; # System
-    extraConfig = {
+    settings.OOM = {
       "DefaultMemoryPressureDurationSec" = "8s"; # time after memory pressure to take action
     };
   };

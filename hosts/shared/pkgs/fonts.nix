@@ -25,7 +25,7 @@
       norwester-font
       pixel-code
       terminus_font
-      vistafonts
+      vista-fonts
     ];
 
     fontconfig = {

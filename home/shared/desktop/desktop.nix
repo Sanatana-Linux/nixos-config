@@ -110,9 +110,7 @@
       fi
     '';
 
-    # File configuration for icon theme
     file = {
-      ".icons/default".source = "${pkgs.phinger-cursors}/share/icons/phinger-cursors-light";
       "awesome/lib/liblua_pam.so" = {source = "${inputs.lemonake.packages.${pkgs.system}.lua-pam-git}/lib/liblua_pam.so";};
     };
   };

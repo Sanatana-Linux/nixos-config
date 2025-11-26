@@ -112,6 +112,7 @@
         "${pkgs.cairo}/lib/girepository-1.0"
         "${pkgs.pango.out}/lib/girepository-1.0"
         "${pkgs.librsvg}/lib/girepository-1.0"
+        "${pkgs.goocanvas}/lib/girepository-1.0"
       ];
     };
   };

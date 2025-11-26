@@ -16,15 +16,15 @@
     package = pkgs.undervolt;
     verbose = true; # More logging
     turbo = 0; # Keep Intel Turbo feature enabled (1 for disabled)
-    p1 = {
-      # P-State 1 limit and time window (both must be set)
-      limit = 150; # in Watts
-      window = 300; # in Seconds
-    };
-    p2 = {
-      # P-State 2 limit and time window (both must be set)
-      limit = 150; # in Watts
-      window = 224; # in Seconds
-    };
+    # p1 = {
+    #   # P-State 1 limit and time window (both must be set)
+    #   limit = 150; # in Watts
+    #   window = 300; # in Seconds
+    # };
+    # p2 = {
+    #   # P-State 2 limit and time window (both must be set)
+    #   limit = 150; # in Watts
+    #   window = 224; # in Seconds
+    # };
   };
 }

@@ -6,7 +6,7 @@
 with pkgs; [
   appimage-run
   appstream-glib
-  inputs.zen-browser.packages."${system}".default
+  inputs.zen-browser.packages."${pkgs.stdenv.hostPlatform.system}".default
   bleachbit
   unstable.calibre
   discord

@@ -74,10 +74,8 @@
       cudaPackages.cuda_nvml_dev # NVIDIA Management Library (dev)
       cudaPackages.cuda_opencl # CUDA OpenCL support
       cudaPackages.cudatoolkit # CUDA toolkit
-      cudaPackages.cutensor # CUDA tensor operations
       cudaPackages.libcublas # CUDA BLAS library
       cudaPackages.libcusparse # CUDA sparse matrix library
-      cudaPackages.libnvidia_nscq # NVIDIA NSCQ library
       cudatoolkit # CUDA toolkit (meta)
       intel-media-driver # Intel VAAPI driver for GPUs
       intel-vaapi-driver # Intel VAAPI driver (older)
@@ -91,7 +89,7 @@
       nvidia_cg_toolkit # NVIDIA Cg toolkit
       nvtopPackages.nvidia # NVIDIA GPU monitoring tool
       peakperf # Performance analysis tool
-      vaapiVdpau # VAAPI to VDPAU translation library
+      libva-vdpau-driver # VAAPI to VDPAU translation library
       # GStreamer
       gst_all_1.gst-plugins-ugly # GStreamer plugins for proprietary codecs
       gst_all_1.gst-plugins-bad # GStreamer plugins that are not fully tested

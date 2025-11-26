@@ -57,11 +57,9 @@ in {
         cudaPackages.cuda_sanitizer_api
         cudaPackages.cudnn-frontend
         cudaPackages.cudnn
-        cudaPackages.cutensor
         cudaPackages.libcublas
         cudaPackages.libcufile
         cudaPackages.libcusparse
-        cudaPackages.libnvidia_nscq
         cudaPackages.libnvjitlink
         cudaPackages.libnvjpeg
         cudatoolkit
@@ -91,7 +89,6 @@ in {
         nvidia_cg_toolkit
         nvtopPackages.nvidia
         python313Packages.numpy
-        python313Packages.pytorch-bin
         python313Packages.torch-bin
         peakperf
         libva-vdpau-driver
@@ -130,7 +127,6 @@ in {
       enable32Bit = true;
       extraPackages = with pkgs; [
         glfw
-        intel-vaapi-driver
         libva-utils
         libvdpau-va-gl
         mesa
@@ -139,7 +135,6 @@ in {
         mlx42
         nvidia-vaapi-driver
         nvidiaDriverChannel
-        libva-vdpau-driver
         xorg_sys_opengl
       ];
     };

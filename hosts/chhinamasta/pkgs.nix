@@ -273,7 +273,7 @@
     testdisk
     ucl
     unscd
-    utillinux
+    util-linux
     vgrep
     wget
     wmic-bin

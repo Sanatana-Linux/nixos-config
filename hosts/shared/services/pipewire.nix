@@ -27,7 +27,6 @@
     alsa-utils
     audiofile
     cava
-    deadbeef-with-plugins
     distrho-ports
     easyeffects
     fdk_aac

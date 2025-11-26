@@ -3,10 +3,10 @@ with pkgs;
   [
     (python312.withPackages (p:
       with p; [
-        GitPython
+        gitpython
         playsound
         wheel
-        PyICU
+        pyicu
         pylatexenc
         pylatex
         pydantic

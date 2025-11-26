@@ -8,8 +8,8 @@ with pkgs; [
   appstream
   appstream-glib
   as-tree
-  inputs.rippkgs.packages.${system}.rippkgs
-  inputs.rippkgs.packages.${system}.rippkgs-index
+  inputs.rippkgs.packages.${pkgs.stdenv.hostPlatform.system}.rippkgs
+  inputs.rippkgs.packages.${pkgs.stdenv.hostPlatform.system}.rippkgs-index
   automake
   avfs
   beep
@@ -105,7 +105,7 @@ with pkgs; [
   ucl
   unscd
   usbmuxd
-  utillinux
+  util-linux
   vgrep
   vimv
   wget

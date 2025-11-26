@@ -39,9 +39,5 @@
   # https://nixos.wiki/wiki/Android
   programs.adb.enable = true;
 
-  services.udev.packages = with pkgs; [
-    # To run apps on an Android device, the computer needs to have installed
-    # the udev rules that cover that Android device
-    android-udev-rules
-  ];
+  # Android udev rules are now built into systemd uaccess rules
 }

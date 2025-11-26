@@ -37,7 +37,7 @@ in {
   environment.systemPackages = with pkgs; [
     cpufrequtils
     dbus
-    grub2_full
+    grub2
     plymouth
     dbus-broker
     dbus-glib

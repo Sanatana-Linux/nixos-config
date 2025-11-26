@@ -86,7 +86,7 @@
       keep-outputs = true;
       # Set the max number of jobs to run simultaneously (works fine once installed, but
       # limiting this is very helpful when nix-install is being buggy)
-      max-jobs = 2; #   "auto";
+      max-jobs = "auto"; #   "auto";
       # Turn off that annoying warning from not committing
       warn-dirty = false;
       use-xdg-base-directories = true;

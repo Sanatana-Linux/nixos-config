@@ -34,7 +34,7 @@
     docker-client
     docker-compose
     docker-credential-helpers
-    docker-distribution
+    distribution
     docker-gc
     docker-slim
     libvirt

@@ -48,7 +48,6 @@ with pkgs; [
   pipeline
   python312Packages.pygobject3
   redoflacs
-  rx
   unstable.shotcut
   spotdl
   switcheroo

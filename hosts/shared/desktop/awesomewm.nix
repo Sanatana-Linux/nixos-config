@@ -25,6 +25,7 @@
                   cairo
                   goocanvas
                   librsvg
+                  gobject-introspection-unwrapped
                 ]
               )
               mkTypeLibPath;
@@ -32,30 +33,34 @@
             lib.concatStringsSep ":" (extraGITypeLibPaths ++ [(mkTypeLibPath pkgs.pango.out)]);
         });
         # List of Lua modules to be available for AwesomeWM.
-        luaModules = with pkgs.luajitPackages; [
-          luautf8 # text handling
-          luaposix # POSIX bindings for Lua.
-          cqueues # Networking, event loop, and coroutine library.
-          cjson # Fast JSON parsing and encoding support.
-          dkjson # Pure Lua JSON module.
-          ldbus # D-Bus bindings for Lua.
-          ldoc # Documentation generator for Lua code.
-          lgi # GObject Introspection for Lua.
-          lpeg # Parsing Expression Grammars for Lua.
-          lpeg_patterns # Common patterns for LPeg.
-          lpeglabel # LPeg extension for labeled failures.
-          lua # The Lua language itself.
-          lua-messagepack # MessagePack serialization for Lua.
-          luarocks # Package manager for Lua modules.
-          luasocket # Networking support for Lua.
-          luasql-sqlite3 # SQLite3 bindings for LuaSQL.
-          mpack # MessagePack implementation for Lua.
-          std-_debug # Debugging utilities for Lua.
-          std-normalize # Normalization utilities for Lua.
-          stdlib # Standard library for Lua.
-          vicious # Widgets for AwesomeWM.
-          wrapLua # Utility for wrapping Lua scripts.
-        ];
+        luaModules = with pkgs.luajitPackages;
+          [
+            luautf8 # text handling
+            luaposix # POSIX bindings for Lua.
+            cqueues # Networking, event loop, and coroutine library.
+            cjson # Fast JSON parsing and encoding support.
+            dkjson # Pure Lua JSON module.
+            ldbus # D-Bus bindings for Lua.
+            ldoc # Documentation generator for Lua code.
+            lgi # GObject Introspection for Lua.
+            lpeg # Parsing Expression Grammars for Lua.
+            lpeg_patterns # Common patterns for LPeg.
+            lpeglabel # LPeg extension for labeled failures.
+            lua # The Lua language itself.
+            lua-messagepack # MessagePack serialization for Lua.
+            luarocks # Package manager for Lua modules.
+            luasocket # Networking support for Lua.
+            luasql-sqlite3 # SQLite3 bindings for LuaSQL.
+            mpack # MessagePack implementation for Lua.
+            std-_debug # Debugging utilities for Lua.
+            std-normalize # Normalization utilities for Lua.
+            stdlib # Standard library for Lua.
+            vicious # Widgets for AwesomeWM.
+            wrapLua # Utility for wrapping Lua scripts.
+          ]
+          ++ [
+            pkgs.lua51Packages.lgi # Lua 5.1 LGI for compatibility
+          ];
       };
     }; # ends xserver
   }; # ends services
@@ -97,9 +102,17 @@
     };
 
     sessionVariables = {
-      LUA_PATH = "${pkgs.luajitPackages.luarocks}/share/lua/${pkgs.luajit.luaversion}/?.lua;${pkgs.luajitPackages.luarocks}/share/lua/${pkgs.luajit.luaversion}/?/init.lua";
-      LUA_CPATH = "${pkgs.luajitPackages.luarocks}/lib/lua/${pkgs.luajit.luaversion}/?.so";
+      LUA_PATH = "${pkgs.luajitPackages.luarocks}/share/lua/${pkgs.luajit.luaversion}/?.lua;${pkgs.luajitPackages.luarocks}/share/lua/${pkgs.luajit.luaversion}/?/init.lua;${pkgs.lua51Packages.lgi}/share/lua/5.1/?.lua;${pkgs.lua51Packages.lgi}/share/lua/5.1/?/init.lua";
+      LUA_CPATH = "${pkgs.luajitPackages.luarocks}/lib/lua/${pkgs.luajit.luaversion}/?.so;${pkgs.lua51Packages.lgi}/lib/lua/5.1/?.so";
       PATH = ["${pkgs.luajitPackages.luarocks}/bin"];
+      GI_TYPELIB_PATH = lib.concatStringsSep ":" [
+        "${pkgs.gobject-introspection-unwrapped}/lib/girepository-1.0"
+        "${pkgs.networkmanager}/lib/girepository-1.0"
+        "${pkgs.upower}/lib/girepository-1.0"
+        "${pkgs.cairo}/lib/girepository-1.0"
+        "${pkgs.pango.out}/lib/girepository-1.0"
+        "${pkgs.librsvg}/lib/girepository-1.0"
+      ];
     };
   };
 }

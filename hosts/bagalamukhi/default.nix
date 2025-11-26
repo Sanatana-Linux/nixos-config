@@ -71,10 +71,9 @@
     cpufrequtils
     config.boot.kernelPackages.acpi_call # acpi_call kernel module
     nvme-cli
-    grub2_full
+    grub2
     mesa
     mesa-demos # includes glxinfo and glxgears for OpenGL testing
-    glxinfo # explicit OpenGL info utility
     plymouth
     kdePackages.plymouth-kcm
     lenovo-legion

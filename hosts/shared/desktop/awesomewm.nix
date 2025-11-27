@@ -13,7 +13,7 @@
     xserver = {
       windowManager.awesome = {
         enable = true;
-        package = (import ../../../pkgs {inherit pkgs;}).awesome-luajit;
+        package = inputs.nixpkgs-f2k.packages.${pkgs.system}.awesome-luajit-git;
         luaModules = with pkgs.luajitPackages; [
           luautf8
           luaposix

@@ -13,31 +13,62 @@
     xserver = {
       windowManager.awesome = {
         enable = true;
-        package = inputs.nixpkgs-f2k.packages.${pkgs.system}.awesome-luajit-git;
-        luaModules = with pkgs.luajitPackages; [
-          luautf8
-          luaposix
-          cqueues
-          cjson
-          dkjson
-          ldbus
-          ldoc
-          lgi
-          lpeg
-          lpeg_patterns
-          lpeglabel
-          lua
-          lua-messagepack
-          luarocks
-          luasocket
-          luasql-sqlite3
-          mpack
-          std-_debug
-          std-normalize
-          stdlib
-          vicious
-          wrapLua
-        ] ++ [pkgs.lua51Packages.lgi];
+        package = pkgs.awesome.overrideAttrs (old: rec {
+          version = "git-2024-12-08";
+          src = pkgs.fetchFromGitHub {
+            owner = "awesomewm";
+            repo = "awesome";
+            rev = "41473c05ed9e85de66ffb805d872f2737c0458b6";
+            hash = "sha256-dGceJ5cAxDSUPCqXYAZgzEeC9hd7GQMYPex7nCZ8SEg=";
+          };
+          patches = [];
+          # Ensure GIO_EXTRA_MODULES is available for GioUnix
+          buildInputs = old.buildInputs ++ [pkgs.glib-networking];
+          # Combined fixes for CMake version and fontconfig sandbox issues
+          postPatch = ''
+            substituteInPlace {,tests/examples/}CMakeLists.txt \
+              --replace-fail 'cmake_minimum_required(VERSION 3.5)' 'cmake_minimum_required(VERSION 3.10)' \
+              --replace-warn 'cmake_policy(VERSION 2.6)' 'cmake_policy(VERSION 3.10)'
+            # Create fontconfig cache directory and set proper environment
+            mkdir -p /tmp/.cache/fontconfig
+            chmod 700 /tmp/.cache/fontconfig
+          '';
+          # Set fontconfig environment variables for sandbox and fix Lua scripts
+          preConfigure = ''
+            export FONTCONFIG_PATH=/etc/fonts
+            export XDG_CACHE_HOME=/tmp
+            export HOME=/tmp
+            # Fix the Lua postprocessing script shebang
+            substituteInPlace tests/examples/_postprocess.lua \
+              --replace '/usr/bin/env lua' '${pkgs.lua}/bin/lua'
+          '';
+        });
+        luaModules = with pkgs.luajitPackages;
+          [
+            luautf8
+            luaposix
+            cqueues
+            cjson
+            dkjson
+            ldbus
+            ldoc
+            lgi
+            lpeg
+            lpeg_patterns
+            lpeglabel
+            lua
+            lua-messagepack
+            luarocks
+            luasocket
+            luasql-sqlite3
+            mpack
+            std-_debug
+            std-normalize
+            stdlib
+            vicious
+            wrapLua
+          ]
+          ++ [pkgs.lua51Packages.lgi];
       };
     }; # ends xserver
   }; # ends services

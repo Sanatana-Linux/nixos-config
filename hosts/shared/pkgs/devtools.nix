@@ -16,7 +16,7 @@ with pkgs; [
   cloudflare-cli # Cloudflare command-line interface
   cloudflared # Cloudflare tunneling daemon
 
-  quictls # TLS library with QUIC support
+
 
   # Git and repository management
   bfg-repo-cleaner # Remove large files from Git history

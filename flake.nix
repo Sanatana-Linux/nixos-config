@@ -142,6 +142,7 @@
           inputs.chaotic.nixosModules.default
           inputs.nix-index-database.nixosModules.nix-index
           inputs.home-manager.nixosModules.home-manager
+          ./modules/nixos
           {
             home-manager = {
               useUserPackages = true;

@@ -73,7 +73,7 @@
       # Use C-Groups for builds(requires experimental setting above)
       use-cgroups = true;
       # show more log lines for failed builds
-      log-lines = 20;
+      log-lines = 50;
       # Use Binary Cache because we don't want to wait our lives away
       builders-use-substitutes = true;
       # No Seriously, Use the Binary Caches
@@ -86,12 +86,38 @@
       keep-outputs = true;
       # Set the max number of jobs to run simultaneously (works fine once installed, but
       # limiting this is very helpful when nix-install is being buggy)
-      max-jobs = "auto"; #   "auto";
+      max-jobs = "auto";
       # Turn off that annoying warning from not committing
       warn-dirty = false;
       use-xdg-base-directories = true;
       # Explicitly allow flake.nix, just in case
       accept-flake-config = true;
+      # Binary cache substituters
+      substituters = [
+        "https://cache.nixos.org?priority=10"
+        "https://fortuneteller2k.cachix.org"
+        "https://nix-community.cachix.org"
+        "https://nixpkgs-unfree.cachix.org"
+        "https://pre-commit-hooks.cachix.org"
+        "https://cuda-maintainers.cachix.org"
+        "https://ai.cachix.org"
+        "https://stable-diff.cachix.org"
+        "https://sanatanalinux.cachix.org"
+        "https://chaotic-nyx.cachix.org"
+      ];
+      # Trusted public keys for binary caches
+      trusted-public-keys = [
+        "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+        "fortuneteller2k.cachix.org-1:kXXNkMV5yheEQwT0I4XYh1MaCSz+qg72k8XAi2PthJI="
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+        "nixpkgs-unfree.cachix.org-1:hqvoInulhbV4nJ9yJOEr+4wxhDV4xq2d1DK7S6Nj6rs="
+        "pre-commit-hooks.cachix.org-1:Pkk3Panw5AW24TOv6kz3PvLhlH8puAsJTBbOPmBo7Rc="
+        "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
+        "ai.cachix.org-1:N9dzRK+alWwoKXQlnn0H6aUx0lU/mspIoz8hMvGvbbc="
+        "stable-diff.cachix.org-1:liYFm3f3q1dAoilj2Ag2IEKzW3Q9/HJcLlrAIytAcy0="
+        "sanatanalinux.cachix.org-1:9WsJYECJ+Lt0HPTUI7+6f9uAaAUouaBUyTd9iAJbUEY="
+        "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
+      ];
     };
 
     # nix package manager version
@@ -113,5 +139,4 @@
     daemonCPUSchedPolicy = "idle";
     daemonIOSchedPriority = 4; # 7 max
   };
-  # switch nixos-rebuild to the next generation
 }

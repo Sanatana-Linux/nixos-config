@@ -32,8 +32,6 @@
     # Android SDK platform tools (adb, fastboot, etc...)
     android-tools
     payload-dumper-go # Tool for extracting all .img files from an Android OTA payload.bin file
-    # Android Translation Layer
-    android-translation-layer
   ];
 
   # https://nixos.wiki/wiki/Android

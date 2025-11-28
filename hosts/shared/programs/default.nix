@@ -6,8 +6,8 @@
   ...
 }: {
   imports = [./nix-ld.nix ./thunar.nix];
-  ## Terminfo for all!
-  environment.enableAllTerminfo = true;
+  ## Terminfo - disabled due to contour build failure (termbench-pro/glaze issue)
+  # environment.enableAllTerminfo = true;
   # Logitech for My Trackball Mouse Cause Its Ergonomic
   hardware = {
     logitech.wireless = {

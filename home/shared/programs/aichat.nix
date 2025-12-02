@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
     aichat
-    ollama-cuda
+    # ollama-cuda
   ];
 
   imports = [

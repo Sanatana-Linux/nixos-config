@@ -26,8 +26,12 @@
       url = "github:ThomasHighbaugh/firefox";
       flake = false;
     };
+    fx-autoconfig = {
+      url = "github:MrOtherGuy/fx-autoconfig";
+      flake = false;
+    };
     lemonake.url = "github:passivelemon/lemonake";
-    firefox-nightly.url = "github:nix-community/flake-firefox-nightly";
+
     nps.url = "github:OleMussmann/Nix-Package-Search";
     bhairava-grub-theme = {
       url = "github:Sanatana-Linux/Bhairava-Grub-Theme";
@@ -45,6 +49,7 @@
     unstable,
     home-manager,
     higgs-boson,
+    fx-autoconfig,
     bhairava-grub-theme,
     ...
   } @ inputs: let

@@ -120,22 +120,20 @@ in {
 
     environment.systemPackages = [cfg.package];
 
-    # Install configuration
-    environment.etc."lightdm/sea-greeter.conf".source = seaGreeterConf;
-
-    # Install themes if provided
-    environment.etc = mkIf (cfg.theme.package != null) {
+    # Install configuration and desktop entry
+    environment.etc = {
+      "lightdm/sea-greeter.conf".source = seaGreeterConf;
+      
+      "lightdm/greeters.d/sea-greeter.desktop".text = ''
+        [Desktop Entry]
+        Name=Sea Greeter
+        Comment=LightDM greeter made with WebKit2GTK
+        Exec=${cfg.package}/bin/sea-greeter
+        Type=Application
+        X-Ubuntu-Gettext-Domain=sea-greeter
+      '';
+    } // lib.optionalAttrs (cfg.theme.package != null) {
       "sea-greeter/themes/${cfg.theme.name}".source = "${cfg.theme.package}";
     };
-
-    # Create desktop entry for LightDM
-    environment.etc."lightdm/greeters.d/sea-greeter.desktop".text = ''
-      [Desktop Entry]
-      Name=Sea Greeter
-      Comment=LightDM greeter made with WebKit2GTK
-      Exec=${cfg.package}/bin/sea-greeter
-      Type=Application
-      X-Ubuntu-Gettext-Domain=sea-greeter
-    '';
   };
 }

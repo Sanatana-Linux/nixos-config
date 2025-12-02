@@ -4,10 +4,10 @@
   inputs,
   ...
 }: let
-  # Firefox Nightly with https://github.com/MrOtherGuy/fx-autoconfig
-  firefox-nightly =
+  # Firefox with https://github.com/MrOtherGuy/fx-autoconfig
+  firefox-custom =
     (
-      inputs.firefox-nightly.packages.${pkgs.system}.firefox-nightly-bin.override {
+      pkgs.firefox.override {
         extraPrefsFiles = [
           (builtins.fetchurl {
             url = "https://raw.githubusercontent.com/MrOtherGuy/fx-autoconfig/master/program/config.js";
@@ -45,7 +45,7 @@ in {
 
   programs.firefox = {
     enable = true;
-    package = firefox-nightly;
+    package = firefox-custom;
     profiles.${profile} = {
       id = 0;
       extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
@@ -132,12 +132,14 @@ in {
         "devtools.chrome.enabled" = true; # Enable devtools for browser chrome
         "devtools.debugger.prompt-connection" = false; # Don't prompt for remote debugger connection
         "devtools.debugger.remote-enabled" = true; # Enable remote debugging
+        "browser.dom.window.dump.enabled" = true; # Enable dump() for debugging userChrome.js
         "experiments.enabled" = true; #  experiments
         "experiments.supported" = true; # Mark experiments as unsupported
         "extensions.autoDisableScopes" = 0; # Don't auto-disable extensions
         "extensions.pocket.enabled" = false; # Disable Pocket integration
         "extensions.pocket.onSaveRecs" = false; # Disable Pocket recommendations
         "extensions.shield-recipe-client.enabled" = false; # Disable Shield recipe client
+        "general.config.filename" = "mozilla.cfg"; # Config filename (required for fx-autoconfig)
         "general.config.obscure_value" = 0; # Don't obscure config file
         "general.config.sandbox_enabled" = false; # Disable config sandbox
         "general.smoothScroll" = true; # Enable smooth scrolling
@@ -300,8 +302,16 @@ in {
       };
     };
   };
+  # Use higgs-boson for customizations but override utils with latest fx-autoconfig
   home.file.".mozilla/firefox/${profile}/chrome" = {
     source = "${inputs.higgs-boson}";
     recursive = true;
+  };
+  # Override utils directory with latest fx-autoconfig to fix Firefox 147 compatibility
+  # Force override by explicitly setting each file
+  home.file.".mozilla/firefox/${profile}/chrome/utils" = {
+    source = "${inputs.fx-autoconfig}/profile/chrome/utils";
+    recursive = true;
+    force = true; # Force override of higgs-boson utils
   };
 }

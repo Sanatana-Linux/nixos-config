@@ -10,7 +10,7 @@ with pkgs; [
   gallery-dl
   gi-docgen
   gibo
-  gnome-video-effects
+  # gnome-video-effects
   gnome.nixos-gsettings-overrides
   gsettings-desktop-schemas
   gst_all_1.gst-libav
@@ -41,7 +41,7 @@ with pkgs; [
   mjpegtoolsFull
   mp4v2
   oggvideotools
-  unstable.olive-editor
+  # unstable.olive-editor
   p7zip
   pantheon.granite
   peek

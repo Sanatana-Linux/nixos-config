@@ -112,7 +112,6 @@ with pkgs; [
   lynis # Security auditing tool
   meson # Build system
   meson-tools # Meson utilities
-  nil # Nix language server
   nix-init # Nix package initializer
   nix-tree # Visualize Nix store
   nixpkgs-fmt # Nix code formatter

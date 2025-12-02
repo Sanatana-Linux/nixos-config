@@ -11,7 +11,7 @@
 sudo su
 
 # Get the nix shell with the features you need
-nix-shell -p git nixUnstable neovim
+nix-shell -p git nixVersions.git silver-searcher neovim
 
 # Create the /etc/ file you'll be working in
 mkdir -p /mnt/etc/

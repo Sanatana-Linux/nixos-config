@@ -159,7 +159,7 @@
       gz = "gzip -l"; # list contents of gzipped files
       rm = "rm -rvf"; # remove files and directories recursively and forcefully
       trm = "${lib.getBin trash-cli}/bin/trash-cli"; # Move files to trash
-      firefox = "firefox-nightly";
+      firefox = "firefox";
       less = "moor";
       # Decom: Decrypts, cleans up, decompresses, and cleans up again.
       decom = "_() { echo -n 'Enter base name to decrypt: '; read n; gpg -d \"$n.7z.gpg\" > \"$n.7z\" && rm \"$n.7z.gpg\" && ouch decompress \"$n.7z\" && rm \"$n.7z\"; }; _";

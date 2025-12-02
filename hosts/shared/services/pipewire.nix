@@ -28,7 +28,6 @@
     audiofile
     cava
     distrho-ports
-    easyeffects
     fdk_aac
     flac
     flac2all

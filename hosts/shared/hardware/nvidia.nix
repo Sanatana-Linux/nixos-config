@@ -46,23 +46,23 @@ in {
         libtorch-bin
         cudaPackages.libnvjitlink
         blas
-        cudaPackages.cuda_cccl
-        cudaPackages.cuda_cudart
-        cudaPackages.cuda_gdb
-        cudaPackages.saxpy
-        cudaPackages.nvidia_fs
-        cudaPackages.cuda_nvml_dev
-        cudaPackages.cuda_opencl
-        cudaPackages.cudatoolkit
-        cudaPackages.cuda_sanitizer_api
-        cudaPackages.cudnn-frontend
-        cudaPackages.cudnn
-        cudaPackages.libcublas
-        cudaPackages.libcufile
-        cudaPackages.libcusparse
-        cudaPackages.libnvjitlink
-        cudaPackages.libnvjpeg
-        cudatoolkit
+        # cudaPackages.cuda_cccl
+        # cudaPackages.cuda_cudart
+        # cudaPackages.cuda_gdb
+        # cudaPackages.saxpy
+        # cudaPackages.nvidia_fs
+        # cudaPackages.cuda_nvml_dev
+        # cudaPackages.cuda_opencl
+        # cudaPackages.cudatoolkit
+        # cudaPackages.cuda_sanitizer_api
+        # cudaPackages.cudnn-frontend
+        # cudaPackages.cudnn
+        # cudaPackages.libcublas
+        # cudaPackages.libcufile
+        # cudaPackages.libcusparse
+        # cudaPackages.libnvjitlink
+        # cudaPackages.libnvjpeg
+        # cudatoolkit
         cudaPackages.nvidia_fs
         eglexternalplatform
         freeglut

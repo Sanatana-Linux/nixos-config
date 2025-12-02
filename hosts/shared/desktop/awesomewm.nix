@@ -118,12 +118,15 @@
         "${pkgs.glib.dev}/lib/girepository-1.0"
         "${pkgs.gobject-introspection-unwrapped}/lib/girepository-1.0"
         "${pkgs.gobject-introspection}/lib/girepository-1.0"
+        "${pkgs.gtk3}/lib/girepository-1.0"
         "${pkgs.networkmanager}/lib/girepository-1.0"
         "${pkgs.upower}/lib/girepository-1.0"
         "${pkgs.cairo}/lib/girepository-1.0"
         "${pkgs.pango.out}/lib/girepository-1.0"
         "${pkgs.librsvg}/lib/girepository-1.0"
         "${pkgs.goocanvas}/lib/girepository-1.0"
+        "${pkgs.at-spi2-core}/lib/girepository-1.0"
+        "${pkgs.atk}/lib/girepository-1.0"
       ];
     };
   };

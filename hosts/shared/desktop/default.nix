@@ -20,7 +20,7 @@
           enable = true;
           background = ../wallpaper/monokaiprospectrum.png;
           greeters.gtk = {
-            enable = false; # Disabled in favor of sea-greeter
+            enable = true;
             theme = {
               package = pkgs.materia-theme;
               name = "Materia-dark-compact";
@@ -37,15 +37,16 @@
             indicators = ["~session" "--spacer" "~power"];
           };
           # Sea-greeter configuration - webkit2gtk-based greeter themed with web technologies
-          greeters.sea = {
-            enable = true;
-            background = "${../wallpaper/monokaiprospectrum.png}";
-            theme.name = "gruvbox";
-            debug = false;
-            detectThemeErrors = true;
-            screensaverTimeout = 300;
-            secureMode = true;
-          };
+          # TODO: Enable after fixing sea-greeter package build
+          # greeters.sea = {
+          #   enable = true;
+          #   background = "${../wallpaper/monokaiprospectrum.png}";
+          #   theme.name = "gruvbox";
+          #   debug = false;
+          #   detectThemeErrors = true;
+          #   screensaverTimeout = 300;
+          #   secureMode = true;
+          # };
         };
       }; # ends displayManager not xserver
     }; # ends xserver

@@ -63,20 +63,20 @@
 
       # CUDA/NVIDIA
       config.boot.kernelPackages.nvidiaPackages.production # NVIDIA X11 kernel module
-      cudaPackages.cudnn # NVIDIA CUDA Deep Neural Network library
-      cudaPackages.nccl # NVIDIA Collective Communications Library
-      cudaPackages.nvidia_fs # NVIDIA file system support
-      cudaPackages.libnvjitlink # CUDA JIT linker
-      cudaPackages.cuda_cccl # CUDA C++ Core Libraries
-      cudaPackages.cuda_cudart # CUDA runtime library
-      cudaPackages.cuda_gdb # CUDA debugger
-      cudaPackages.saxpy # CUDA sample code
-      cudaPackages.cuda_nvml_dev # NVIDIA Management Library (dev)
-      cudaPackages.cuda_opencl # CUDA OpenCL support
-      cudaPackages.cudatoolkit # CUDA toolkit
-      cudaPackages.libcublas # CUDA BLAS library
-      cudaPackages.libcusparse # CUDA sparse matrix library
-      cudatoolkit # CUDA toolkit (meta)
+     # cudaPackages.cudnn # NVIDIA CUDA Deep Neural Network library
+     # cudaPackages.nccl # NVIDIA Collective Communications Library
+     # cudaPackages.nvidia_fs # NVIDIA file system support
+     # cudaPackages.libnvjitlink # CUDA JIT linker
+     # cudaPackages.cuda_cccl # CUDA C++ Core Libraries
+     # cudaPackages.cuda_cudart # CUDA runtime library
+     # cudaPackages.cuda_gdb # CUDA debugger
+     # cudaPackages.saxpy # CUDA sample code
+     # cudaPackages.cuda_nvml_dev # NVIDIA Management Library (dev)
+     # cudaPackages.cuda_opencl # CUDA OpenCL support
+     # cudaPackages.cudatoolkit # CUDA toolkit
+     # cudaPackages.libcublas # CUDA BLAS library
+     # cudaPackages.libcusparse # CUDA sparse matrix library
+     # cudatoolkit # CUDA toolkit (meta)
       intel-media-driver # Intel VAAPI driver for GPUs
       intel-vaapi-driver # Intel VAAPI driver (older)
       libnvidia-container # NVIDIA container runtime library

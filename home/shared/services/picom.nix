@@ -60,7 +60,7 @@
       };
 
       shadow-exclude = [
-        "class_g = 'firefox-nightly'"
+        "class_g = 'firefox'"
         "class_g = 'Dunst'"
         "class_g = 'awesome'"
       ];

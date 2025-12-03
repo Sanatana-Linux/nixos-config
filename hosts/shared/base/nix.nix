@@ -104,7 +104,6 @@
         "https://sanatanalinux.cachix.org"
         "https://chaotic-nyx.cachix.org"
         "https://zen-browser.cachix.org"
-        "https://rippkgs.cachix.org"
         "https://nix-gaming.cachix.org"
       ];
       # Trusted public keys for binary caches
@@ -120,7 +119,6 @@
         "sanatanalinux.cachix.org-1:9WsJYECJ+Lt0HPTUI7+6f9uAaAUouaBUyTd9iAJbUEY="
         "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
         "zen-browser.cachix.org-1:VkBZFD6ielaF2pp1M0KGDAXdYqB25lX5x0bJ8uMnbHs="
-        "rippkgs.cachix.org-1:LnE95w6+UWZeCaZFhRJZD71kH8rKWDTtrRKkvLZWHEU="
         "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
       ];
     };

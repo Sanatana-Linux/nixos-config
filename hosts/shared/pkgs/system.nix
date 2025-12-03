@@ -8,8 +8,6 @@ with pkgs; [
   appstream
   appstream-glib
   as-tree
-  inputs.rippkgs.packages.${pkgs.stdenv.hostPlatform.system}.rippkgs
-  inputs.rippkgs.packages.${pkgs.stdenv.hostPlatform.system}.rippkgs-index
   automake
   avfs
   beep

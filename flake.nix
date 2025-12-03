@@ -13,7 +13,6 @@
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     zen-browser.url = "github:MarceColl/zen-browser-flake";
     nixpkgs-f2k.url = "github:moni-dz/nixpkgs-f2k";
-    rippkgs.url = "github:replit/rippkgs";
     nur = {
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";

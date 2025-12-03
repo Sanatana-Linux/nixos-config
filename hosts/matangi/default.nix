@@ -1,6 +1,5 @@
 {
   inputs,
-  outputs,
   lib,
   config,
   pkgs,
@@ -15,8 +14,8 @@
     # Select the user configuration
     ../shared/users/smg.nix
 
-    # Ollama configuration
-    ../shared/ai/ollama.nix
+    # Ollama's configuration - disabled, using API access for now
+    # ../shared/ai/ollama.nix
     ../shared/ai/default.nix
 
     # Virtualization configuration
@@ -46,8 +45,9 @@
     # Specific configuration
     ./hardware-configuration.nix
 
-    # XFCE4
-    ../shared/desktop/xfce.nix
+    # AwesomeWM
+    ../shared/desktop/default.nix
+    ../shared/desktop/awesomewm.nix
 
     # Packages
     ./pkgs.nix
@@ -55,7 +55,15 @@
 
   services.xserver.videoDrivers = ["nvidia"];
   services.xserver.enable = true;
+
+  # OpenGL configuration
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
+
   boot.plymouth.enable = true;
+  # boot.plymouth.logo = "https://github.com/Thomashighbaugh/Thomashighbaugh/blob/main/src/resources/images/icon.png"; # use a custom logo for plymouth
   # boot.plymouth.theme = "loader";
   # boot.plymouth.themePackages = [pkgs.adi1090x-plymouth-themes];
 
@@ -63,7 +71,9 @@
     cpufrequtils
     config.boot.kernelPackages.acpi_call # acpi_call kernel module
     nvme-cli
+    grub2
     mesa
+    mesa-demos # includes glxinfo and glxgears for OpenGL testing
     plymouth
     kdePackages.plymouth-kcm
     lenovo-legion
@@ -89,12 +99,17 @@
         "nvidia-drm" # nvidia drm
         "nvidia-uvm" # nvidia uvm
         "nvidia-modeset" # modesetting nvidia driver
+        "intel_cstate" # intel cpu state
+        "aesni_intel" # intel aesni driver
+        "intel_uncore" # intel uncore driver
+        "intel_uncore_frequency" # intel uncore frequency driver
+        "intel_powerclamp" # intel power clamp driver
       ];
     };
 
     blacklistedKernelModules = ["nouveau"]; # blacklisted kernel modules
 
-    kernelModules = ["lenovo_legion" "phc-intel" "kvm-intel" "ideapad" "apci_call"]; # specify the regular kernel modules to be loaded at boot
+    kernelModules = ["lenovo_legion" "phc-intel" "kvm-intel" "ideapad" "apci_call" "cpupower"]; # specify the regular kernel modules to be loaded at boot
 
     tmp.cleanOnBoot = true; # clean the /tmp directory on boot
 
@@ -103,8 +118,9 @@
     # specify the extra kernel modules to be included
     extraModulePackages = [
       config.boot.kernelPackages.acpi_call # acpi_call kernel module
+      config.boot.kernelPackages.cpupower #  Tool to examine and tune power saving features
       config.boot.kernelPackages.lenovo-legion-module # lenovo legion kernel module
-      config.boot.kernelPackages.nvidiaPackages.production # nvidia x11 kernel module
+      config.boot.kernelPackages.nvidiaPackages.stable # nvidia x11 kernel module
     ];
 
     kernelParams = [
@@ -125,7 +141,6 @@
       "usbcore.autosuspend=-1"
       # Nvidia dGPU settings
       "nvidia_drm.fbdev=1" # enable Framebuffer driver
-      "nvidia-drm.modeset=1" # enable Modesetting Kernel Module
       # Potentially useful for hanging or shutdown
       "reboot=acpi"
       # No hanging on reboot due to something I don't need on my laptop
@@ -162,7 +177,7 @@
         };
         # Add in advanced BIOS entry (works for lenovo legion 16irx9, YMMV)
         extraEntries = ''
-          menuentry 'Advanced UEFI Firmware Settings' {
+          menuentry 'Advanced UEFI Firmware Settings' --class efi --class uefi {
             insmod fat
             insmod chain
             chainloader @bootRoot@/EFI/Boot/Bootx64.efi
@@ -182,11 +197,14 @@
   };
   services = {
     logind = {
-      lidSwitch = "suspend";
-      powerKeyLongPress = "suspend";
+      settings.Login.HandleLidSwitch = "suspend";
+      settings.Login.HandlePowerKey = "ignore";
+      settings.Login.HandlePowerKeyLongPress = "suspend";
     };
+    # -------------------------------------------------------------------------- #
+    # For desktop environment selection (since the display manager is generalized)
     displayManager = {
-      defaultSession = "xfce";
+      defaultSession = "none+awesome";
     };
   };
 

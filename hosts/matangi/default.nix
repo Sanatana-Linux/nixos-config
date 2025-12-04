@@ -45,9 +45,8 @@
     # Specific configuration
     ./hardware-configuration.nix
 
-    # AwesomeWM
-    ../shared/desktop/default.nix
-    ../shared/desktop/awesomewm.nix
+    # XFCE Desktop Environment for smg user
+    ../shared/desktop/xfce.nix
 
     # Packages
     ./pkgs.nix
@@ -204,7 +203,7 @@
     # -------------------------------------------------------------------------- #
     # For desktop environment selection (since the display manager is generalized)
     displayManager = {
-      defaultSession = "none+awesome";
+      defaultSession = "xfce";
     };
   };
 

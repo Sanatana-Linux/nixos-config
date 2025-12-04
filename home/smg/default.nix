@@ -11,12 +11,19 @@
     ../shared/pkgs
     ../shared/programs/aichat.nix
     ../shared/programs/ghostty.nix
-    #    ../shared/programs/firefox.nix
+    # Custom Firefox is disabled for smg - using regular Firefox from XFCE
+    # ../shared/programs/firefox.nix
     ../shared/programs/kitty/default.nix
     ../shared/services/default.nix
     # ../shared/services/picom.nix
     ../shared/shell
   ];
+
+  # Enable regular Firefox (not the custom tlh configuration)
+  programs.firefox = {
+    enable = true;
+    package = pkgs.firefox;
+  };
 
   systemd.user.startServices = "sd-switch";
 

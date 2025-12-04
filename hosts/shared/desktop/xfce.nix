@@ -13,7 +13,9 @@
       deja-dup
       drawing
       elementary-xfce-icon-theme
-      firefox
+      # Firefox removed - smg user doesn't want any firefox customizations
+      # and doesn't want it building from source
+      # firefox
       evince
       foliate
       font-manager

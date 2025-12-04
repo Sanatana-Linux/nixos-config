@@ -18,10 +18,8 @@
     ../shared/shell
   ];
 
-  # Enable regular Firefox (not the custom tlh configuration)
-  programs.firefox = {
-    enable = true;
-  };
+  # Firefox completely removed from smg user configuration
+  # No Firefox will be installed for this user to avoid any source building
 
   systemd.user.startServices = "sd-switch";
 

@@ -10,7 +10,6 @@
     ./desktop.nix
     ../shared/pkgs
     ../shared/programs/aichat.nix
-    ../shared/programs/ghostty.nix
     # Custom Firefox is disabled for smg - using regular Firefox from XFCE
     # ../shared/programs/firefox.nix
     ../shared/programs/kitty/default.nix

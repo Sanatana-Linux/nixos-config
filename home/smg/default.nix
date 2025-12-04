@@ -21,7 +21,6 @@
   # Enable regular Firefox (not the custom tlh configuration)
   programs.firefox = {
     enable = true;
-    package = pkgs.firefox;
   };
 
   systemd.user.startServices = "sd-switch";

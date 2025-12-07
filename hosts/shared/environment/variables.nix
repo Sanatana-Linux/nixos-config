@@ -10,5 +10,6 @@
     G2TP_GRUB_LIB = "/nix/store/77r7pkdhylp119m32lhh349yqc5dyig6-grub-2.12/lib/grub";
     OLLAMA_API_BASE = "http://127.0.0.1:11434";
     OPENAI_API_BASE = "http://localhost:11434";
+    QT_QPA_PLATFORMTHEME = "qt5ct";
   };
 }

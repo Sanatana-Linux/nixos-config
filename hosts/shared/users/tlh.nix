@@ -46,6 +46,7 @@ in {
         "systemd-journal"
         "tss"
         "video"
+        "waydroid"
         "wireshark"
       ];
 

@@ -95,7 +95,7 @@
     gdk-pixbuf
     gdk-pixbuf-xlib
     xdotool
-    inputs.lemonake.packages.${pkgs.system}.lua-pam-git
+    inputs.lemonake.packages.${pkgs.stdenv.hostPlatform.system}.lua-pam-git
     xsel
     xsettingsd
     dconf-editor

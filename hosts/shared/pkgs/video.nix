@@ -41,7 +41,7 @@ with pkgs; [
   mjpegtoolsFull
   mp4v2
   oggvideotools
-  # unstable.olive-editor
+  unstable.olive-editor
   p7zip
   pantheon.granite
   peek

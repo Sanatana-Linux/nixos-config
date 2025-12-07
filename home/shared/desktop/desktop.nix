@@ -111,7 +111,7 @@
     '';
 
     file = {
-      "awesome/lib/liblua_pam.so" = {source = "${inputs.lemonake.packages.${pkgs.system}.lua-pam-git}/lib/liblua_pam.so";};
+      "awesome/lib/liblua_pam.so" = {source = "${inputs.lemonake.packages.${pkgs.stdenv.hostPlatform.system}.lua-pam-git}/lib/liblua_pam.so";};
     };
   };
 

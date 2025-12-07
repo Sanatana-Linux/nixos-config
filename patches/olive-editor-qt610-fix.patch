@@ -1,0 +1,26 @@
+diff --git a/app/ui/humanstrings.cpp b/app/ui/humanstrings.cpp
+index 1234567..abcdefg 100644
+--- a/app/ui/humanstrings.cpp
++++ b/app/ui/humanstrings.cpp
+@@ -60,7 +60,7 @@ QString HumanStrings::FormatToString(const core::SampleFormat &f)
+     return QCoreApplication::translate("AudioParams", "Float 64-bit");
+   }
+ 
+-  return QCoreApplication::translate("AudioParams", "Unknown (0x%1)").arg(f, 1, 16);
++  return QCoreApplication::translate("AudioParams", "Unknown (0x%1)").arg(static_cast<int>(f), 1, 16);
+ }
+ 
+ QString HumanStrings::ChannelLayoutToString(const uint64_t &layout)
+diff --git a/app/render/videoparams.cpp b/app/render/videoparams.cpp
+index 1234567..abcdefg 100644
+--- a/app/render/videoparams.cpp
++++ b/app/render/videoparams.cpp
+@@ -226,7 +226,7 @@ QString VideoParams::GetFormatName(const PixelFormat& format)
+     return QCoreApplication::translate("VideoParams", "Unsigned 16-bit");
+   }
+ 
+-  return QCoreApplication::translate("VideoParams", "Unknown (0x%1)").arg(format, 0, 16);
++  return QCoreApplication::translate("VideoParams", "Unknown (0x%1)").arg(static_cast<int>(format), 0, 16);
+ }
+ 
+ QString VideoParams::GetInterlacingName(const Interlacing &interlacing)

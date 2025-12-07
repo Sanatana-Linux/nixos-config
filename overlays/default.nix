@@ -8,6 +8,13 @@
   # https://nixos.wiki/wiki/Overlays
   modifications = final: prev: {
     nps = inputs.nps.defaultPackage.${prev.stdenv.hostPlatform.system};
+
+    # Fix olive-editor Qt 6.10 compatibility
+    olive-editor = prev.olive-editor.overrideAttrs (oldAttrs: {
+      patches = (oldAttrs.patches or []) ++ [
+        ../patches/olive-editor-qt610-fix.patch
+      ];
+    });
   };
 
   # When applied, the unstable nixpkgs set (declared in the flake inputs) will
@@ -17,6 +24,10 @@
     unstable = import inputs.unstable {
       system = final.stdenv.hostPlatform.system;
       config.allowUnfree = true;
+      overlays = [
+        # Fix olive-editor Qt 6.10 compatibility
+        (import ./olive-editor-qt610-fix.nix)
+      ];
     };
   };
   f2k-packages = final: prev: {

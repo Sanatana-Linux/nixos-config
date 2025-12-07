@@ -165,7 +165,7 @@
       decom = "_() { echo -n 'Enter base name to decrypt: '; read n; gpg -d \"$n.7z.gpg\" > \"$n.7z\" && rm \"$n.7z.gpg\" && ouch decompress \"$n.7z\" && rm \"$n.7z\"; }; _";
 
       # Encom: Compresses, cleans up, encrypts, and cleans up again.
-      encom = "_() { echo -n 'Enter directory name to compress and encrypt: '; read n; ouch compress \"$n\" \"$n.7z\" && rm -rf \"$n\" && gpg --symmetric \"$n.7z\" && rm \"$n.7z\"; }; _";
+      encom = "_() { echo -n 'Enter directory name to compress and encrypt: '; read n; ouch compress \"$n\" \"$n.7z\" && gpg --symmetric \"$n.7z\" && rm \"$n.7z\"; }; _";
 
       # System
       cleanup = "sudo nix-collect-garbage --delete-older-than 3d"; # Clean up old Nix store entries.

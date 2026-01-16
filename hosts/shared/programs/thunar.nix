@@ -3,7 +3,7 @@
   # we enable thunar here and add plugins instead of in systemPackages
   programs.thunar = {
     enable = true;
-    plugins = with pkgs.xfce; [
+    plugins = with pkgs; [
       thunar-archive-plugin
       thunar-media-tags-plugin
       thunar-volman
@@ -13,7 +13,7 @@
   environment = {
     systemPackages = with pkgs; [
       # packages necessery for thunar thumbnails
-      xfce.tumbler
+      tumbler
       libgsf # odf files
       ffmpegthumbnailer
       kdePackages.ark # GUI archiver for thunar archive plugin

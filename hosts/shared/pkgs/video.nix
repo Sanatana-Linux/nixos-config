@@ -48,7 +48,7 @@ with pkgs; [
   pipeline
   python312Packages.pygobject3
   redoflacs
-  unstable.shotcut
+  shotcut
   spotdl
   switcheroo
   traverso

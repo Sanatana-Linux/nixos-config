@@ -79,7 +79,6 @@ with pkgs; [
   ps_mem
   python312Packages.py-dmidecode
   rcshist
-  renameutils
   ripgrep-all
   rnr
   sdbus-cpp
@@ -117,7 +116,7 @@ with pkgs; [
   xdg-desktop-portal-gtk
   xdg-user-dirs
   xdg-utils
-  xfce.tumbler
+  tumbler
   xfontsel
   xgeometry-select
   xorg.fontalias

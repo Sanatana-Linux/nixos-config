@@ -37,10 +37,10 @@ with pkgs; [
   terminus_font #system tool
   vte-gtk4
   xclip #gui tool
-  xfce.exo
-  xfce.garcon
-  xfce.libxfce4ui
-  xfce.libxfce4util
-  xfce.xfconf
+  xfce4-exo
+  garcon
+  libxfce4ui
+  libxfce4util
+  xfconf
   xorg-rgb
 ]

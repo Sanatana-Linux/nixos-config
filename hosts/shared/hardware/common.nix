@@ -19,7 +19,6 @@
     tpm2-tools
     tpmmanager
     tpm2-tss
-    udevil
     udisks
     udiskie
     usbutils

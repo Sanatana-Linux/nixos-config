@@ -6,7 +6,6 @@
 with pkgs; [
   appimage-run
   appstream-glib
-  inputs.zen-browser.packages."${pkgs.stdenv.hostPlatform.system}".default
   bleachbit
   unstable.calibre
   discord
@@ -15,8 +14,8 @@ with pkgs; [
   gnome-icon-theme
   ebook_tools
   rofi-rbw
-  rofimoji
-  fbida
+  emocli
+
   gnome-characters
   file-roller
   fontpreview
@@ -28,6 +27,7 @@ with pkgs; [
   gnome-font-viewer
   gnome-themes-extra
   gob2
+  goocanvas
   gparted
   graphite2
   gthumb
@@ -66,7 +66,9 @@ with pkgs; [
   pdf-parser
   pdftag
   pdftk
-  perl538Packages.CairoGObject
+  perlPackages.CairoGObject
+  perlPackages.GooCanvas2CairoTypes
+  perlPackages.Cairo
   poppler-utils
   psftools
   rofi

@@ -19,7 +19,6 @@ with pkgs; [
   plzip # Parallel lzip compressor
   pxz # Parallel XZ compressor
   rar # RAR archive tool
-  rarcrack # Password cracker for RAR/ZIP/7z archives
   xarchiver # GTK+ archive manager
   xz # XZ compression utility
   zip # ZIP archive tool

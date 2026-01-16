@@ -159,9 +159,9 @@
     rubyPackages.gobject-introspection
     terminus_font
     vte-gtk4
-    xfce.libxfce4ui
-    xfce.libxfce4util
-    xfce.xfconf
+    libxfce4ui
+    libxfce4util
+    xfconf
     xorg-rgb
 
     # Image Tools
@@ -283,7 +283,7 @@
     xdg-desktop-portal-gtk
     xdg-user-dirs
     xdg-utils
-    xfce.tumbler
+    tumbler
     xfontsel
     xgeometry-select
     xorg.fontalias

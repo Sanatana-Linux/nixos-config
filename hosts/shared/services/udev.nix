@@ -9,7 +9,7 @@
       packages = [
         pkgs.gnome-settings-daemon
         pkgs.xsettingsd
-        pkgs.xfce.xfce4-settings
+        pkgs.xfce4-settings
         pkgs.logitech-udev-rules # for logitech
         pkgs.via
         pkgs.qmk-udev-rules # For QMK/Via
@@ -28,5 +28,5 @@
     };
   };
   boot.supportedFilesystems = ["ntfs"];
-  programs.udevil.enable = true;
+  # programs.udevil.enable = true;
 }

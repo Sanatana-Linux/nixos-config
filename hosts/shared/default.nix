@@ -50,6 +50,7 @@
         "qtwebengine-5.15.19"
         "qtwebkit-5.212.0-alpha4"
         "ventoy-1.1.07"
+        "ventoy-1.1.10"
         "xpdf-4.05"
       ];
     };

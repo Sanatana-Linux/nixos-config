@@ -101,7 +101,6 @@ in {
             # torchWithCuda
             tensorflowWithCuda
             # triton-cuda
-            cupy
           ]))
       ];
   };

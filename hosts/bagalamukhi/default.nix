@@ -95,7 +95,7 @@
       # specify the kernel modules to be included in early in boot process
       kernelModules = [
         "nvidia" # nvidia driver
-        "nvidiafb" # nvidia framebuffer
+	"nvidiafb" # nvidia framebuffer driver (also enabled through nvidia-drm) 
         "nvidia-drm" # nvidia drm
         "nvidia-uvm" # nvidia uvm
         "nvidia-modeset" # modesetting nvidia driver
@@ -109,11 +109,11 @@
 
     blacklistedKernelModules = ["nouveau"]; # blacklisted kernel modules
 
-    kernelModules = ["lenovo_legion" "phc-intel" "kvm-intel" "ideapad" "apci_call" "cpupower"]; # specify the regular kernel modules to be loaded at boot
+    kernelModules = ["lenovo_legion" "phc-intel" "kvm-intel" "ideapad" "apci_call" "cpupower"        ]; # specify the regular kernel modules to be loaded at boot
 
     tmp.cleanOnBoot = true; # clean the /tmp directory on boot
 
-    kernelPackages = pkgs.linuxPackages_xanmod_latest; # use the latest xanmod kernel
+	kernelPackages = pkgs.linuxPackages_latest; # use the latest xanmod kernel
 
     # specify the extra kernel modules to be included
     extraModulePackages = [
@@ -127,6 +127,7 @@
       # `I too like living dangerously`
       # check if vulnerable with: grep . /sys/devices/system/cpu/vulnerabilities/*
       "mitigations=off"
+      "dev.i915.perf_stream_paranoid=0"
       # Rudest Kernel Interrupt for Priority Processes
       "preempt=full"
       # Hardware I/O Interface
@@ -141,8 +142,6 @@
       "usbcore.autosuspend=-1"
       # Nvidia dGPU settings
       "nvidia_drm.fbdev=1" # enable Framebuffer driver
-      # Potentially useful for hanging or shutdown
-      "reboot=acpi"
       # No hanging on reboot due to something I don't need on my laptop
       "watchdog=0"
       # Lenovo Legion Module force enable
@@ -154,7 +153,7 @@
       systemd-boot.enable = false;
       efi = {
         canTouchEfiVariables = true;
-        efiSysMountPoint = "/boot/";
+        efiSysMountPoint = "/boot/efi";
       };
 
       grub = {
@@ -166,23 +165,24 @@
         useOSProber = true; # Scan for Windows/Other Installs
         bhairava-grub-theme.enable = true;
         # Files needed to enter Advanced BIOS
-        extraFiles = {
-          "DisplayEngine.efi" = ../shared/bios/DisplayEngine.efi;
-          "EFI/Boot/Bootx64.efi" = ../shared/bios/Bootx64.efi;
-          "Loader.efi" = ../shared/bios/Loader.efi;
-          "SREP_Config.cfg" = ../shared/bios/SREP_Config.cfg;
-          "SetupBrowser.efi" = ../shared/bios/SetupBrowser.efi;
-          "SuppressIFPatcher.efi" = ../shared/bios/SuppressIFPatcher.efi;
-          "UiApp.efi" = ../shared/bios/UiApp.efi;
-        };
-        # Add in advanced BIOS entry (works for lenovo legion 16irx9, YMMV)
-        extraEntries = ''
-          menuentry 'Advanced UEFI Firmware Settings' --class efi --class uefi {
-            insmod fat
-            insmod chain
-            chainloader @bootRoot@/EFI/Boot/Bootx64.efi
-          }
-        '';
+         extraFiles = {
+           "DisplayEngine.efi" = ../shared/bios/DisplayEngine.efi;
+           "EFI/Boot/Bootx64.efi" = ../shared/bios/Bootx64.efi;
+           "Loader.efi" = ../shared/bios/Loader.efi;
+           "SREP_Config.cfg" = ../shared/bios/SREP_Config.cfg;
+           "SetupBrowser.efi" = ../shared/bios/SetupBrowser.efi;
+           "SuppressIFPatcher.efi" = ../shared/bios/SuppressIFPatcher.efi;
+           "UiApp.efi" = ../shared/bios/UiApp.efi;
+         };
+         # Add in advanced BIOS entry (works for lenovo legion 16irx9, YMMV)
+	 # insmod commands load the fat32 driver then the chainloader driver -> chainloader that strings together the advanced bios cracker. Most recent mobo firmware breaks this (and offers no improved functionality otherwise) 
+         extraEntries = ''
+           menuentry 'Advanced UEFI Firmware Settings' --class efi --class uefi {
+             insmod fat
+             insmod chain
+             chainloader @bootRoot@/EFI/Boot/Bootx64.efi
+           }
+         '';
       };
     };
   };

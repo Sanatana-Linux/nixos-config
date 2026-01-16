@@ -37,8 +37,8 @@ with pkgs; [
   nodePackages_latest.svgo
   optipng
   oxipng
-  perl538Packages.ImageMagick
-  perl538Packages.PerlMagick
+  perlPackages.ImageMagick
+  perlPackages.PerlMagick
   gnome-obfuscate
   pngcrush
   pngtoico
@@ -61,7 +61,6 @@ with pkgs; [
   gradia
 
   geticons
-  gfie
   upscayl-ncnn
   xcolor
 ]

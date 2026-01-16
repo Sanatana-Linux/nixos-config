@@ -40,7 +40,7 @@
             export HOME=/tmp
             # Fix the Lua postprocessing script shebang
             substituteInPlace tests/examples/_postprocess.lua \
-              --replace '/usr/bin/env lua' '${pkgs.lua}/bin/lua'
+              --replace '/usr/bin/env lua' '${pkgs.luajit}/bin/lua'
           '';
         });
         luaModules = with pkgs.luajitPackages;
@@ -88,10 +88,10 @@
     maim
     satty
     menu-cache
-    xfce.garcon
-    xfce.libxfce4ui
-    xfce.libxfce4util
-    xfce.tumbler
+    garcon
+    libxfce4ui
+    libxfce4util
+    tumbler
     gdk-pixbuf
     gdk-pixbuf-xlib
     xdotool

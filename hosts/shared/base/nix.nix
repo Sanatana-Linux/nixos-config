@@ -83,9 +83,9 @@
       keep-derivations = true;
       # Keep Flake Outputs (not Garbage Collected)
       keep-outputs = true;
-      # Set the max number of jobs to run simultaneously (works fine once installed, but
+      # Set the max number of jobs to run simultaneously ('auto' works fine once installed, but
       # limiting this is very helpful when nix-install is being buggy)
-      max-jobs = "auto";
+      max-jobs = 8;
       # Turn off that annoying warning from not committing
       warn-dirty = false;
       use-xdg-base-directories = true;

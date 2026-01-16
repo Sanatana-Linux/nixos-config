@@ -34,8 +34,5 @@
     payload-dumper-go # Tool for extracting all .img files from an Android OTA payload.bin file
   ];
 
-  # https://nixos.wiki/wiki/Android
-  programs.adb.enable = true;
-
   # Android udev rules are now built into systemd uaccess rules
 }

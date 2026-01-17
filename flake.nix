@@ -38,6 +38,14 @@
     };
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+    antigravity-nix = {
+      url = "github:jacopone/antigravity-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    cachy-tweaks = {
+      url = "github:AniviaFlome/cachy-tweaks-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -114,7 +122,7 @@
       # ┣━━━━━━━━━━━━━━━━━━━━━━━┫ Dinosaur Laptop ┣━━━━━━━━━━━━━━━━━━━━━━━┫
 
       # TODO this whole config needs to be updated to effectively interface with changes to repo
-      # TODO rename Chamunda and write appropiate README honoring the mother like bagalamukhi and Matangi
+      # TODO rename Chamunda and write appropiate README honoring the Mother like bagalamukhi and Matangi
       # macbook-air = nixpkgs.lib.nixosSystem {
       #   specialArgs = {inherit inputs outputs self;};
       #   modules = [

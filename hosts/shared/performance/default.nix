@@ -1,5 +1,6 @@
 {...}: {
   imports = [
+    ./cachy.nix
     ./oomd.nix
     ./undervolt.nix
     ./zram.nix
@@ -36,13 +37,16 @@
     # runs out of memory. This can be particularly useful in scenarios where a single process is causing a memory
     # leak or is consuming a large amount of memory, leading to an OOM condition.
     "vm.oom_kill_allocating_task" = true;
+    "vm.oom_dump_tasks" = false;
 
     # controls the behavior of the "Magic SysRq" key, which allows the user to send commands directly to the kernel.
     # This can be very useful for debugging and recovery in situations where the system is unresponsive or un unresponsive.
-    "kernel.sysrq" = 1;
+    "kernel.sysrq" = 438;
 
     # For lenovo-legion kernel module
     "lenovo-legion.force" = 1; # laptop
+
+    "vm.overcommit_memory" = 1;
   };
   services.bpftune.enable = true;
 }

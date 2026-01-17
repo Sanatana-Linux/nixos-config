@@ -30,6 +30,7 @@
       outputs.overlays.unstable-packages
       outputs.overlays.f2k-packages
       outputs.overlays.chaotic-packages
+      inputs.antigravity-nix.overlays.default
     ];
 
     config = {

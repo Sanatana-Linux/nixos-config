@@ -29,6 +29,7 @@ with pkgs; [
   poppler-utils #system tool
   python312Packages.cairosvg
   python312Packages.pyqt6
+  python313Packages.pyqt6
   python312Packages.qtpy
   rubyPackages.cairo-gobject
   rubyPackages.gdk_pixbuf2

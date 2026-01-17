@@ -16,7 +16,7 @@ with pkgs; [
   cloudflare-cli # Cloudflare command-line interface
   cloudflared # Cloudflare tunneling daemon
 
-
+  google-antigravity
 
   # Git and repository management
   bfg-repo-cleaner # Remove large files from Git history

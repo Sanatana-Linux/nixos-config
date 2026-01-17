@@ -144,4 +144,6 @@ with pkgs; [
   xsettingsd
   xss-lock
   xsuspender
+  wine
+  winetricks
 ]

@@ -93,6 +93,7 @@
       accept-flake-config = true;
       # Binary cache substituters
       substituters = [
+        " https://cache.garnix.io"
         "https://cache.nixos.org?priority=10"
         "https://fortuneteller2k.cachix.org"
         "https://nix-community.cachix.org"
@@ -108,6 +109,7 @@
       ];
       # Trusted public keys for binary caches
       trusted-public-keys = [
+        "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
         "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
         "fortuneteller2k.cachix.org-1:kXXNkMV5yheEQwT0I4XYh1MaCSz+qg72k8XAi2PthJI="
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="

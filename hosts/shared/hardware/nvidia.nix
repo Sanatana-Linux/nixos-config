@@ -94,6 +94,17 @@ in {
         libva-vdpau-driver
         xorg_sys_opengl
         zenith-nvidia
+        vulkan-headers
+        vulkan-extension-layer
+        vulkan-helper
+        vulkan-loader
+        vulkan-tools
+        vulkan-utility-libraries
+        python312Packages.vulkan
+        python313Packages.vulkan
+        vkd3d
+        vk-bootstrap
+        kompute
       ]
       ++ [
         (python312.withPackages (p:

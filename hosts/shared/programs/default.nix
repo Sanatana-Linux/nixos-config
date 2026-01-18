@@ -5,7 +5,7 @@
   config,
   ...
 }: {
-  imports = [./nix-ld.nix ./thunar.nix];
+  imports = [./nix-ld.nix ./affinity.nix ./thunar.nix];
   ## Terminfo - disabled due to contour build failure (termbench-pro/glaze issue)
   # environment.enableAllTerminfo = true;
   # Logitech for My Trackball Mouse Cause Its Ergonomic

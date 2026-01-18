@@ -46,6 +46,7 @@
       url = "github:AniviaFlome/cachy-tweaks-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    affinity-nix.url = "github:mrshmllow/affinity-nix";
   };
 
   outputs = {
@@ -58,6 +59,7 @@
     higgs-boson,
     fx-autoconfig,
     bhairava-grub-theme,
+    affinity-nix,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -105,6 +107,7 @@
           "https://ai.cachix.org" # nixified cache
           "https://stable-diff.cachix.org" # stable diffusion related cache
           "https://sanatanalinux.cachix.org" # sanatana linux
+          "https://cache.garnix.io"
         ];
         extra-trusted-public-keys = [
           "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
@@ -117,6 +120,7 @@
           "ai.cachix.org-1:N9dzRK+alWwoKXQlnn0H6aUx0lU/mspIoz8hMvGvbbc="
           "stable-diff.cachix.org-1:liYFm3f3q1dAoilj2Ag2IEKzW3Q9/HJcLlrAIytAcy0="
           "sanatanalinux.cachix.org-1:9WsJYECJ+Lt0HPTUI7+6f9uAaAUouaBUyTd9iAJbUEY="
+          "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
         ];
       };
       # ┣━━━━━━━━━━━━━━━━━━━━━━━┫ Dinosaur Laptop ┣━━━━━━━━━━━━━━━━━━━━━━━┫

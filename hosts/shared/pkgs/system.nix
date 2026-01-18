@@ -144,6 +144,6 @@ with pkgs; [
   xsettingsd
   xss-lock
   xsuspender
-  wine
-  winetricks
+  wineWow64Packages.full
+  meli
 ]

@@ -4,6 +4,8 @@
     gemini-cli
     code2prompt
     codegrab # use as `grab`
+    llm
+    python313Packages.litellm
     # gollama
     # local-ai
     # libtorch-bin

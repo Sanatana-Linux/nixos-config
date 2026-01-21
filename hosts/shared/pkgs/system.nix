@@ -100,6 +100,7 @@ with pkgs; [
   testdisk
   trash-cli
   ucl
+  aichat
   unscd
   usbmuxd
   util-linux

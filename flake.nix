@@ -46,7 +46,6 @@
       url = "github:AniviaFlome/cachy-tweaks-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    affinity-nix.url = "github:mrshmllow/affinity-nix";
   };
 
   outputs = {
@@ -59,7 +58,6 @@
     higgs-boson,
     fx-autoconfig,
     bhairava-grub-theme,
-    affinity-nix,
     ...
   } @ inputs: let
     inherit (self) outputs;

@@ -66,7 +66,7 @@ in {
         form-history-control
         foxytab
         gaoptout
-        header-editor
+        # header-editor
         ipfs-companion
         istilldontcareaboutcookies
         justdeleteme
@@ -78,9 +78,8 @@ in {
         persistentpin
         raindropio
         refined-github
-        stylebot-web
         tab-stash
-        umatrix
+        # umatrix
         ublock-origin
         view-image
       ];

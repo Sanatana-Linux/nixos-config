@@ -24,7 +24,7 @@
       libglvnd # GL Vendor-Neutral Dispatch library
       freeglut # Alternative to GLUT
       glew # OpenGL Extension Wrangler
-      glew110 # Older version of GLEW for compatibility
+      glew_1_10 # Older version of GLEW for compatibility
       glfw # OpenGL framework for window/context/input
       mesa # Open-source OpenGL implementation
       xorg_sys_opengl # Xorg OpenGL system integration

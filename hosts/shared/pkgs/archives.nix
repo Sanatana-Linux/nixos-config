@@ -19,7 +19,6 @@ with pkgs; [
   plzip # Parallel lzip compressor
   pxz # Parallel XZ compressor
   rar # RAR archive tool
-  xarchiver # GTK+ archive manager
   xz # XZ compression utility
   zip # ZIP archive tool
   zlib-ng # Next-generation zlib compression library

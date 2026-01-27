@@ -43,7 +43,7 @@ in {
         libglut
         libglvnd
 
-        libtorch-bin
+        stable.libtorch-bin
         cudaPackages.libnvjitlink
         blas
         # cudaPackages.cuda_cccl

@@ -28,6 +28,7 @@
       outputs.overlays.additions
       outputs.overlays.modifications
       outputs.overlays.unstable-packages
+      outputs.overlays.stable-packages
       outputs.overlays.f2k-packages
       outputs.overlays.chaotic-packages
       inputs.antigravity-nix.overlays.default

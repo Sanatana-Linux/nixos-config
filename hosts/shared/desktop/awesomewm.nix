@@ -124,7 +124,7 @@
         "${pkgs.cairo}/lib/girepository-1.0"
         "${pkgs.pango.out}/lib/girepository-1.0"
         "${pkgs.librsvg}/lib/girepository-1.0"
-        "${pkgs.goocanvas}/lib/girepository-1.0"
+        "${pkgs.goocanvas_1}/lib/girepository-1.0"
         "${pkgs.at-spi2-core}/lib/girepository-1.0"
         "${pkgs.atk}/lib/girepository-1.0"
       ];

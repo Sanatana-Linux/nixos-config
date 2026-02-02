@@ -54,7 +54,7 @@ with pkgs; [
   python312Packages.pyfiglet # Python implementation of figlet
   python312Packages.pystache # Mustache template renderer
   python312Packages.svgwrite # Python library to create SVG drawings
-  rclip # ai image search
+  # rclip # ai image search - DISABLED: requires python3.13-torch which OOMs display manager during compilation
   resvg # SVG rendering library
   satty # Screenshot annotation tool
   scour # SVG optimizer written in Python

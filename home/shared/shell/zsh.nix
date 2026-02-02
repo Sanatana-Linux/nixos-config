@@ -192,6 +192,7 @@
       zplugHome = "${config.xdg.configHome}/zsh/zplug";
       plugins = [
         {name = "hlissner/zsh-autopair";}
+        {name = "kutsan/zsh-system-clipboard";}
         {name = "chisui/zsh-nix-shell";}
         {name = "molovo/tipz";}
         {name = "nix-community/nix-zsh-completions";}

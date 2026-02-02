@@ -62,7 +62,7 @@ in {
         # cudaPackages.libcusparse
         # cudaPackages.libnvjitlink
         # cudaPackages.libnvjpeg
-        # cudatoolkit
+        cudatoolkit
         cudaPackages.nvidia_fs
         eglexternalplatform
         freeglut
@@ -89,7 +89,7 @@ in {
         nvidia_cg_toolkit
         nvtopPackages.nvidia
         python313Packages.numpy
-        python313Packages.torch-bin
+        # python313Packages.torch-bin
         peakperf
         libva-vdpau-driver
         xorg_sys_opengl
@@ -100,8 +100,6 @@ in {
         vulkan-loader
         vulkan-tools
         vulkan-utility-libraries
-        python312Packages.vulkan
-        python313Packages.vulkan
         vkd3d
         vk-bootstrap
         kompute

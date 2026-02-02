@@ -78,6 +78,7 @@ with pkgs; [
   unstable.calibre # E-book library management application
   updfparser # PDF parser library
   ventoy-full # Bootable USB solution (full version)
+  vesktop # discord client
   vscode-fhs # Visual Studio Code with FHS filesystem
   wirelesstools # Wireless network tools
   wmctrl # Command-line tool to interact with window managers

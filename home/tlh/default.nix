@@ -15,7 +15,7 @@
     ../shared/programs/gpg/default.nix
     ../shared/programs/zathura/default.nix
     ../shared/programs/kitty/default.nix
-    ../shared/programs/neovim/default.nix
+    # ../shared/programs/neovim/default.nix
     ../shared/services/default.nix
     ../shared/services/picom.nix
     ../shared/shell

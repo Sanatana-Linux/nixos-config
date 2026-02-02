@@ -227,7 +227,7 @@
       };
     };
     # ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-    matangi = self.nixosConfigurations.matangi.config.system.build.top:level;
+    matangi = self.nixosConfigurations.matangi.config.system.build.toplevel;
     bagalamukhi = self.nixosConfigurations.bagalamukhi.config.system.build.toplevel;
   };
 }

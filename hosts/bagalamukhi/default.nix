@@ -67,6 +67,7 @@
   # boot.plymouth.theme = "loader";
   # boot.plymouth.themePackages = [pkgs.adi1090x-plymouth-themes];
 
+  environment.pathsToLink = ["/share/zsh"];
   environment.systemPackages = with pkgs; [
     cpufrequtils
     config.boot.kernelPackages.acpi_call # acpi_call kernel module

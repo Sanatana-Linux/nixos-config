@@ -49,6 +49,9 @@
 
     # Create the completion cache directory
     initContent = ''
+                              bindkey '\e[H' beginning-of-line
+                              bindkey '\e[F' end-of-line
+
                               export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense' # optional
                               zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
                               source <(carapace _carapace)
@@ -192,7 +195,6 @@
       zplugHome = "${config.xdg.configHome}/zsh/zplug";
       plugins = [
         {name = "hlissner/zsh-autopair";}
-        {name = "kutsan/zsh-system-clipboard";}
         {name = "chisui/zsh-nix-shell";}
         {name = "molovo/tipz";}
         {name = "nix-community/nix-zsh-completions";}

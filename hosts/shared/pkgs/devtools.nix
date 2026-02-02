@@ -62,6 +62,7 @@ with pkgs; [
   lua-language-server # Language server for Lua
   lua51Packages.lua # Lua 5.1 package
   lua51Packages.luarocks # Lua package manager
+  lua51Packages.luarocks-nix # LuaRocks package manager for nix-init
   lua5_1 # Lua 5.1 interpreter
   lua5_2 # Lua 5.2 interpreter
   lua5_2_compat # Lua 5.2 compatibility layer
@@ -76,6 +77,7 @@ with pkgs; [
   luajitPackages.lua # LuaJIT interpreter
   luajitPackages.lua-messagepack # MessagePack for Lua
   luajitPackages.lua-protobuf # Protocol Buffers for Lua
+  luajitPackages.luarocks # LuaRocks package manager for LuaJIT
   luajitPackages.luarocks-nix # LuaRocks package manager for Nix
   luajitPackages.luasocket # Network support for Lua
   luajitPackages.std-_debug # Debug library for Lua
@@ -146,44 +148,46 @@ with pkgs; [
   yamllint # Linter for YAML files
   yarn2nix # Convert Yarn dependencies to Nix expressions
   neovim
-     jq
+  jq
 
-      tree-sitter
-      nodePackages_latest.nodejs
-      # nodePackages_latest.neovim
-      tree-sitter-grammars.tree-sitter-c
-      tree-sitter-grammars.tree-sitter-ql
-      tree-sitter-grammars.tree-sitter-go
-      tree-sitter-grammars.tree-sitter-vue
-      tree-sitter-grammars.tree-sitter-rust
-      tree-sitter-grammars.tree-sitter-vim
-      tree-sitter-grammars.tree-sitter-tsx
-      tree-sitter-grammars.tree-sitter-sql
-      tree-sitter-grammars.tree-sitter-rst
-      tree-sitter-grammars.tree-sitter-nix
-      tree-sitter-grammars.tree-sitter-lua
-      tree-sitter-grammars.tree-sitter-dot
-      tree-sitter-grammars.tree-sitter-css
-      tree-sitter-grammars.tree-sitter-cpp
-      tree-sitter-grammars.tree-sitter-yaml
-      tree-sitter-grammars.tree-sitter-toml
-      tree-sitter-grammars.tree-sitter-scss
-      tree-sitter-grammars.tree-sitter-ruby
-      tree-sitter-grammars.tree-sitter-regex
-      tree-sitter-grammars.tree-sitter-make
-      tree-sitter-grammars.tree-sitter-just
-      tree-sitter-grammars.tree-sitter-json
-      tree-sitter-grammars.tree-sitter-cuda
-      tree-sitter-grammars.tree-sitter-html
-      tree-sitter-grammars.tree-sitter-bash
-      tree-sitter-grammars.tree-sitter-python
-      tree-sitter-grammars.tree-sitter-graphql
-      tree-sitter-grammars.tree-sitter-markdown
-      tree-sitter-grammars.tree-sitter-typescript
-      tree-sitter-grammars.tree-sitter-javascript
-      tree-sitter-grammars.tree-sitter-dockerfile
-      python312Packages.pynvim
-fswatch 
-cmake 
-yarn
+  tree-sitter
+  nodePackages_latest.nodejs
+  # nodePackages_latest.neovim
+  tree-sitter-grammars.tree-sitter-c
+  tree-sitter-grammars.tree-sitter-ql
+  tree-sitter-grammars.tree-sitter-go
+  tree-sitter-grammars.tree-sitter-vue
+  tree-sitter-grammars.tree-sitter-rust
+  tree-sitter-grammars.tree-sitter-vim
+  tree-sitter-grammars.tree-sitter-tsx
+  tree-sitter-grammars.tree-sitter-sql
+  tree-sitter-grammars.tree-sitter-rst
+  tree-sitter-grammars.tree-sitter-nix
+  tree-sitter-grammars.tree-sitter-lua
+  tree-sitter-grammars.tree-sitter-dot
+  tree-sitter-grammars.tree-sitter-css
+  tree-sitter-grammars.tree-sitter-cpp
+  tree-sitter-grammars.tree-sitter-yaml
+  tree-sitter-grammars.tree-sitter-toml
+  tree-sitter-grammars.tree-sitter-scss
+  tree-sitter-grammars.tree-sitter-ruby
+  tree-sitter-grammars.tree-sitter-regex
+  tree-sitter-grammars.tree-sitter-make
+  tree-sitter-grammars.tree-sitter-just
+  tree-sitter-grammars.tree-sitter-json
+  tree-sitter-grammars.tree-sitter-cuda
+  tree-sitter-grammars.tree-sitter-html
+  tree-sitter-grammars.tree-sitter-bash
+  tree-sitter-grammars.tree-sitter-python
+  tree-sitter-grammars.tree-sitter-graphql
+  tree-sitter-grammars.tree-sitter-markdown
+  tree-sitter-grammars.tree-sitter-typescript
+  tree-sitter-grammars.tree-sitter-javascript
+  tree-sitter-grammars.tree-sitter-dockerfile
+  python312Packages.pynvim
+  fswatch
+  cmake
+  yarn
+  lldb
+  lynx
 ]

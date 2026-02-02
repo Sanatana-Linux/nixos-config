@@ -33,6 +33,7 @@
       PERLPATH = "/run/current-system/sw/bin/perl";
       GOBIN = "${config.home.homeDirectory}/Workspace/go/bin";
       SHELL = "${pkgs.zsh}/bin/zsh";
+      EDITOR = "${pkgs.neovim}/bin/nvim";
       PNPM_HOME = "${config.home.homeDirectory}/.local/share/pnpm";
       FNM_MULTISHELL_PATH = "/run/user/1000/fnm_multishells/87711_1736929409043";
       FNM_VERSION_FILE_STRATEGY = "local";

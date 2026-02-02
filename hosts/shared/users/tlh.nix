@@ -7,6 +7,7 @@
   ifTheyExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
 in {
   programs.zsh.enable = true;
+  environment.variables.EDITOR = "nvim";
   # Please don't mute me since I am mutable!
   users.mutableUsers = true;
   users.users.tlh = {

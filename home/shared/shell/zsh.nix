@@ -49,8 +49,28 @@
 
     # Create the completion cache directory
     initContent = ''
-                              bindkey '\e[H' beginning-of-line
-                              bindkey '\e[F' end-of-line
+                              # Home/End key bindings - cover all common escape sequences
+                              # Standard xterm sequences
+                              bindkey '^[[H' beginning-of-line
+                              bindkey '^[[F' end-of-line
+                              # Alternative sequences (some terminals)
+                              bindkey '^[[1~' beginning-of-line
+                              bindkey '^[[4~' end-of-line
+                              # Kitty/terminfo sequences
+                              bindkey '^[[7~' beginning-of-line
+                              bindkey '^[[8~' end-of-line
+                              # Application mode (used by some terminals)
+                              bindkey '^[OH' beginning-of-line
+                              bindkey '^[OF' end-of-line
+                              # Bind for vi command mode as well
+                              bindkey -M vicmd '^[[H' beginning-of-line
+                              bindkey -M vicmd '^[[F' end-of-line
+                              bindkey -M vicmd '^[[1~' beginning-of-line
+                              bindkey -M vicmd '^[[4~' end-of-line
+                              bindkey -M vicmd '^[[7~' beginning-of-line
+                              bindkey -M vicmd '^[[8~' end-of-line
+                              bindkey -M vicmd '^[OH' beginning-of-line
+                              bindkey -M vicmd '^[OF' end-of-line
 
                               export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense' # optional
                               zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'

@@ -10,6 +10,7 @@ with lib; let
   zathura = ["org.pwmt.zathura.desktop"]; # Define zathura application
   vlc = ["vlc.desktop"]; # VLC application
   gthumb = ["applications/org.gnome.gThumb.desktop"];
+  neovim = ["nvim.desktop"]; # Neovim for text files
 
   associations = {
     "application/x-extension-htm" = browser;
@@ -35,6 +36,24 @@ with lib; let
     "x-scheme-handler/discord" = ["discord.desktop"];
     "x-scheme-handler/spotify" = ["spotify.desktop"];
     "x-scheme-handler/tg" = ["telegramdesktop.desktop"];
+
+    # Text files
+    "text/plain" = neovim;
+    "text/x-script" = neovim;
+    "application/x-shellscript" = neovim;
+    "text/x-python" = neovim;
+    "text/x-java" = neovim;
+    "text/x-c" = neovim;
+    "text/x-c++" = neovim;
+    "text/x-markdown" = neovim;
+    "text/markdown" = neovim;
+    "application/toml" = neovim;
+    "application/yaml" = neovim;
+    "application/x-yaml" = neovim;
+    "text/x-lua" = neovim;
+    "text/x-rust" = neovim;
+    "application/javascript" = neovim;
+    "text/javascript" = neovim;
 
     # Archive Files
     "application/x-7z-compressed" = fileRoller;

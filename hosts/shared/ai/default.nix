@@ -1,5 +1,6 @@
 {pkgs, ...}: {
-  imports = [./ollama.nix];
+  imports = [./virtualbox.nix ./ollama.nix];
+
   environment.systemPackages = with pkgs; [
     aichat
     gemini-cli

@@ -40,5 +40,6 @@
     libvirt
     libvirt-glib
     libgovirt
+    virtualboxWithExtpack
   ];
 }

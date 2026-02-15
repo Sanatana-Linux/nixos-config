@@ -134,7 +134,8 @@
               echo "Updating $package..."
               ollama pull "$package"
           done
-
+      # Television fuzzy finder
+      eval "$(tv init zsh)"
 
 
       }

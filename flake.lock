@@ -324,11 +324,11 @@
     "higgs-boson": {
       "flake": false,
       "locked": {
-        "lastModified": 1770136716,
-        "narHash": "sha256-/0onOJsExqWuhtLleWRL7Qeeebzo5VCGh6mDbx510YM=",
+        "lastModified": 1771122043,
+        "narHash": "sha256-kEzE8XevBB16emDzjtsXvPV0DoJuFHRwOXlvWwr8R/k=",
         "owner": "ThomasHighbaugh",
         "repo": "firefox",
-        "rev": "844a6f8f0c9c805a87b57836bb77800a66f93cbe",
+        "rev": "ae950bd426bb37d75cdf1ee7b39d7fcbbcf0760f",
         "type": "github"
       },
       "original": {

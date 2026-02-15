@@ -20,7 +20,7 @@
   };
 
   time = {
-    timeZone = "America/Los_Angeles";
+    timeZone = "America/New_York";
     hardwareClockInLocalTime = true;
   };
 }

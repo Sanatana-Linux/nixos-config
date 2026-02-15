@@ -190,4 +190,5 @@ with pkgs; [
   yarn
   lldb
   lynx
+  feather
 ]

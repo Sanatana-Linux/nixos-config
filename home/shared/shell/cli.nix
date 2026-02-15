@@ -38,6 +38,7 @@
     rsync
     sd
     trash-cli
+    television
     tree
     unrar
     unzip
@@ -110,6 +111,10 @@
     keychain = {
       enable = true;
       enableZshIntegration = true;
+    };
+    nix-search-tv = {
+      enable = true;
+      enableTelevisionIntegration = true;
     };
   };
 }

@@ -26,6 +26,8 @@
 
     # performance tweaks
     ../shared/performance/default.nix
+    # printer
+    ../shared/printer/default.nix
 
     # Android
     ../shared/hardware/android.nix

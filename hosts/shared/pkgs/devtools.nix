@@ -43,7 +43,6 @@ with pkgs; [
   gnumake # GNU Make build automation tool
   gnutls # Transport Layer Security library
   go # Go programming language
-  google-antigravity # Easter egg from Google
   gopls # Go language server
   gource # Software version control visualization
   grex # Generate regular expressions from test cases

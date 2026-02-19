@@ -28,7 +28,7 @@
       glfw # OpenGL framework for window/context/input
       mesa # Open-source OpenGL implementation
       xorg_sys_opengl # Xorg OpenGL system integration
-      xorg.libxshmfence # X shared memory fence Library
+      libxshmfence # X shared memory fence Library
       libva # Video Acceleration API
       libva-utils # Utilities for VA-API
 
@@ -108,32 +108,32 @@
       gvfs # GNOME Virtual File system
 
       # Xorg
-      xorg.libICE # X Inter-Client Exchange library
-      xorg.libSM # X Session Management library
-      xorg.libX11 # X11 client-side library
-      xorg.libXScrnSaver # X11 Screen Saver extension
-      xorg.libXcomposite # X11 Composite extension
-      xorg.libXcursor # X11 Cursor management
-      xorg.libXdamage # X11 Damage extension
-      xorg.libXext # X11 miscellaneous extensions
-      xorg.libXfixes # X11 Fixes extension
-      xorg.libXft # X FreeType interface library
-      xorg.libXi # X Input extension
-      xorg.libXinerama # Xinerama extension for multi-head
-      xorg.libXmu # Miscellaneous utility functions
-      xorg.libXrandr # X Resize, Rotate and Reflect extension
-      xorg.libXrender # X Rendering extension
-      xorg.libXt # X Toolkit Intrinsics
-      xorg.libXtst # X Testing extension
-      xorg.libXxf86vm # XFree86 video mode extension
-      xorg.libpciaccess # PCI access library
-      xorg.libxcb # X protocol C-language Binding
-      xorg.xcbutil # XCB utility library
-      xorg.xcbutilimage # XCB image extension
-      xorg.xcbutilkeysyms # XCB key symbol utilities
-      xorg.xcbutilrenderutil # XCB render utilities
-      xorg.xcbutilwm # XCB window manager utilities
-      xorg.xkeyboardconfig # X keyboard configuration
+      libice # X Inter-Client Exchange library
+      libsm # X Session Management library
+      libx11 # X11 client-side library
+      libxscrnsaver # X11 Screen Saver extension
+      libxcomposite # X11 Composite extension
+      libxcursor # X11 Cursor management
+      libxdamage # X11 Damage extension
+      libxext # X11 miscellaneous extensions
+      libxfixes # X11 Fixes extension
+      libxft # X FreeType interface library
+      libxi # X Input extension
+      libxinerama # Xinerama extension for multi-head
+      libxmu # Miscellaneous utility functions
+      libxrandr # X Resize, Rotate and Reflect extension
+      libxrender # X Rendering extension
+      libxt # X Toolkit Intrinsics
+      libxtst # X Testing extension
+      libxxf86vm # XFree86 video mode extension
+      libpciaccess # PCI access library
+      libxcb # X protocol C-language Binding
+      libxcb-util # XCB utility library
+      libxcb-image # XCB image extension
+      libxcb-keysyms # XCB key symbol utilities
+      libxcb-render-util # XCB render utilities
+      libxcb-wm # XCB window manager utilities
+      xkeyboard-config # X keyboard configuration
 
       # GTK/GUI
       at-spi2-atk # Assistive Technology Service Provider Interface

@@ -9,7 +9,7 @@ with pkgs; [
   agenix-cli # CLI tool for agenix secrets management
   cbfmt # Code block formatter
   ccls # C/C++ language server
-  commonsCompress # Apache Commons Compress library
+  commons-compress # Apache Commons Compress library
   coreutils-full # GNU core utilities (full version)
   dmg2img # Convert macOS DMG files to IMG format
   dnsutils # DNS utilities (dig, nslookup, etc.)

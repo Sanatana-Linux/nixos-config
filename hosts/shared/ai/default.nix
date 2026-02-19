@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-  imports = [./virtualbox.nix ./ollama.nix];
+  imports = [./ollama.nix];
 
   environment.systemPackages = with pkgs; [
     aichat

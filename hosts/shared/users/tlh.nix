@@ -28,7 +28,6 @@ in {
       ++ ifTheyExist [
         "i2c"
         "plugdev"
-        "vboxusers"
         "adbusers"
         "docker"
         "podman"

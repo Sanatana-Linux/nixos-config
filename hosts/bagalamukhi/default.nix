@@ -121,8 +121,6 @@
       config.boot.kernelPackages.acpi_call # acpi_call kernel module
       config.boot.kernelPackages.cpupower #  Tool to examine and tune power saving features
       config.boot.kernelPackages.lenovo-legion-module # lenovo legion kernel module
-      config.boot.kernelPackages.virtualbox
-      config.boot.kernelPackages.virtualboxGuestAdditions
       config.boot.kernelPackages.nvidiaPackages.stable # nvidia x11 kernel module
     ];
 

@@ -86,7 +86,7 @@ with pkgs; [
   shared-mime-info # Shared MIME database
   shellify # Convert shell history to shell scripts
   silver-searcher # Code searching tool similar to ack
-  simpleTpmPk11 # Simple TPM PKCS#11 module
+  simple-tpm-pk11 # Simple TPM PKCS#11 module
   slop # Select screen region and print to stdout
   smartmontools # Control and monitor SMART enabled hard drives
   snappy # Fast compression/decompression library
@@ -121,25 +121,25 @@ with pkgs; [
   xdg-utils # Desktop integration utilities
   xfontsel # X11 font selector
   xgeometry-select # Select screen geometry
-  xorg.fontalias # X11 font alias definitions
-  xorg.fonttosfnt # X11 font converter
-  xorg.fontutil # X11 font utilities
-  xorg.libxcb # X protocol C-language binding
-  xorg.mkfontdir # Create fonts.dir files
-  xorg.xbacklight # Adjust backlight brightness using RandR
-  xorg.xcbutil # XCB utility functions library
-  xorg.xcbutilerrors # XCB errors library
-  xorg.xcbutilimage # XCB image convenience library
-  xorg.xcbutilrenderutil # XCB render utilities
-  xorg.xcbutilwm # XCB window manager utilities
-  xorg.xconsole # X11 console display
-  xorg.xev # X11 event tester
-  xorg.xhost # Server access control program for X
-  xorg.xinit # X Window System initializer
-  xorg.xkill # Kill X11 clients by clicking on windows
-  xorg.xorgproto # X11 protocol headers
-  xorg.xprop # X11 property displayer
-  xorg.xwininfo # X11 window information utility
+  font-alias # X11 font alias definitions
+  fonttosfnt # X11 font converter
+  font-util # X11 font utilities
+  libxcb # X protocol C-language binding
+  mkfontscale # Create fonts.dir files
+  xbacklight # Adjust backlight brightness using RandR
+  libxcb-util # XCB utility functions library
+  libxcb-errors # XCB errors library
+  libxcb-image # XCB image convenience library
+  libxcb-render-util # XCB render utilities
+  libxcb-wm # XCB window manager utilities
+  xconsole # X11 console display
+  xev # X11 event tester
+  xhost # Server access control program for X
+  xinit # X Window System initializer
+  xkill # Kill X11 clients by clicking on windows
+  xorgproto # X11 protocol headers
+  xprop # X11 property displayer
+  xwininfo # X11 window information utility
   xorriso # ISO 9660 and Rock Ridge filesystem manipulator
   xsecurelock # X11 screen locker
   xsettingsd # Daemon for X settings

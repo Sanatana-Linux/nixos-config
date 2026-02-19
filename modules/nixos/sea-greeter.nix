@@ -6,27 +6,38 @@
 }:
 with lib; let
   cfg = config.services.xserver.displayManager.lightdm.greeters.sea;
-  
+
   # Sea-greeter configuration file
   seaGreeterConf = pkgs.writeText "sea-greeter.conf" ''
     [greeter]
-    debug_mode = ${if cfg.debug then "true" else "false"}
-    detect_theme_errors = ${if cfg.detectThemeErrors then "true" else "false"}
+    debug_mode = ${
+      if cfg.debug
+      then "true"
+      else "false"
+    }
+    detect_theme_errors = ${
+      if cfg.detectThemeErrors
+      then "true"
+      else "false"
+    }
     screensaver_timeout = ${toString cfg.screensaverTimeout}
-    secure_mode = ${if cfg.secureMode then "true" else "false"}
+    secure_mode = ${
+      if cfg.secureMode
+      then "true"
+      else "false"
+    }
     time_language = ${cfg.timeLanguage}
-    
+
     [branding]
     background_images = ${cfg.background}
     logo = ${cfg.logo}
     user_image = ${cfg.userImage}
-    
+
     [theme]
     theme = ${cfg.theme.name}
-    
+
     ${cfg.extraConfig}
   '';
-
 in {
   options = {
     services.xserver.displayManager.lightdm.greeters.sea = {
@@ -111,7 +122,7 @@ in {
 
   config = mkIf (config.services.xserver.displayManager.lightdm.enable && cfg.enable) {
     services.xserver.displayManager.lightdm.greeters.gtk.enable = false;
-    
+
     services.xserver.displayManager.lightdm = {
       extraSeatDefaults = ''
         greeter-session=sea-greeter
@@ -121,19 +132,21 @@ in {
     environment.systemPackages = [cfg.package];
 
     # Install configuration and desktop entry
-    environment.etc = {
-      "lightdm/sea-greeter.conf".source = seaGreeterConf;
-      
-      "lightdm/greeters.d/sea-greeter.desktop".text = ''
-        [Desktop Entry]
-        Name=Sea Greeter
-        Comment=LightDM greeter made with WebKit2GTK
-        Exec=${cfg.package}/bin/sea-greeter
-        Type=Application
-        X-Ubuntu-Gettext-Domain=sea-greeter
-      '';
-    } // lib.optionalAttrs (cfg.theme.package != null) {
-      "sea-greeter/themes/${cfg.theme.name}".source = "${cfg.theme.package}";
-    };
+    environment.etc =
+      {
+        "lightdm/sea-greeter.conf".source = seaGreeterConf;
+
+        "lightdm/greeters.d/sea-greeter.desktop".text = ''
+          [Desktop Entry]
+          Name=Sea Greeter
+          Comment=LightDM greeter made with WebKit2GTK
+          Exec=${cfg.package}/bin/sea-greeter
+          Type=Application
+          X-Ubuntu-Gettext-Domain=sea-greeter
+        '';
+      }
+      // lib.optionalAttrs (cfg.theme.package != null) {
+        "sea-greeter/themes/${cfg.theme.name}".source = "${cfg.theme.package}";
+      };
   };
 }

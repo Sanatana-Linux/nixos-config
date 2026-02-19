@@ -70,7 +70,7 @@
     protobufc
     rmlint
     tree-sitter
-    xorg.libX11
+    libx11
     xorg_sys_opengl
     zlib
 
@@ -123,7 +123,7 @@
     xdg-launch
     xdgmenumaker
     xdotool
-    xorg.xfontsel
+    xfontsel
     xscreensaver
 
     # GUI Libraries
@@ -260,7 +260,7 @@
     ripgrep-all
     shared-mime-info
     silver-searcher
-    simpleTpmPk11
+    simple-tpm-pk11
     slop
     smartmontools
     sysctl
@@ -274,6 +274,7 @@
     unscd
     util-linux
     vgrep
+    vimv
     wget
     wmic-bin
     wmutils-core
@@ -286,25 +287,25 @@
     tumbler
     xfontsel
     xgeometry-select
-    xorg.fontalias
-    xorg.fonttosfnt
-    xorg.fontutil
-    xorg.libxcb
-    xorg.mkfontdir
-    xorg.xbacklight
-    xorg.xcbutil
-    xorg.xcbutilerrors
-    xorg.xcbutilimage
-    xorg.xcbutilrenderutil
-    xorg.xcbutilwm
-    xorg.xconsole
-    xorg.xev
-    xorg.xhost
-    xorg.xinit
-    xorg.xkill
-    xorg.xorgproto
-    xorg.xprop
-    xorg.xwininfo
+    font-alias
+    fonttosfnt
+    font-util
+    libxcb
+    mkfontscale
+    xbacklight
+    libxcb-util
+    libxcb-errors
+    libxcb-image
+    libxcb-render-util
+    libxcb-wm
+    xconsole
+    xev
+    xhost
+    xinit
+    xkill
+    xorgproto
+    xprop
+    xwininfo
     xsettingsd
     xss-lock
 

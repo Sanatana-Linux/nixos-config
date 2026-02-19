@@ -143,7 +143,7 @@ with pkgs; [
   usql # Universal command-line interface for SQL databases
   vscode-langservers-extracted # Language servers extracted from VS Code
   wkhtmltopdf # Convert HTML to PDF using WebKit
-  xorg.libX11 # X11 client library
+  libx11 # X11 client library
   xorg_sys_opengl # X.org OpenGL system integration
   yamllint # Linter for YAML files
   yarn2nix # Convert Yarn dependencies to Nix expressions

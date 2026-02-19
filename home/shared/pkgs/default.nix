@@ -19,7 +19,7 @@
       slurp
       ;
     inherit
-      (pkgs.xorg)
+      (pkgs)
       xev
       ;
     pylsp = pkgs.python312.withPackages (p:

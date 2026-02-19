@@ -154,7 +154,7 @@
         mesa
         mesa-demos
         glfw
-        xorg.xf86videointel
+        xf86_video_intel
       ];
     };
   };

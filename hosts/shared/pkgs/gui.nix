@@ -89,6 +89,6 @@ with pkgs; [
   xdg-launch # Launch applications using XDG specifications
   xdgmenumaker # Automatic menu generator for window managers
   xdotool # Command-line X11 automation tool
-  xorg.xfontsel # X11 font selector
+  xfontsel # X11 font selector
   xscreensaver # Screen saver and locker for X11
 ]

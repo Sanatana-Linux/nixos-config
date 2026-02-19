@@ -99,7 +99,7 @@
     xsel
     xsettingsd
     dconf-editor
-    xorg.xwininfo
+    xwininfo
     xdg-launch
     xdg-utils
   ];

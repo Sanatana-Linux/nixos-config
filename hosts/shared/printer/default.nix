@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   services.printing = {
     enable = true;
-    drivers = [pkg.brlaser];
+    drivers = [pkgs.brlaser];
   };
 
   services.avahi = {

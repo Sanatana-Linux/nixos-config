@@ -160,6 +160,8 @@
             home-manager = {
               useUserPackages = true;
               backupFileExtension = "bak";
+              extraSpecialArgs = {inherit inputs outputs;};
+              sharedModules = [./modules/home-manager];
               users = {
                 tlh = {imports = [./home/tlh/default.nix];};
               };
@@ -177,10 +179,12 @@
           inputs.bhairava-grub-theme.nixosModule
           inputs.chaotic.nixosModules.default
           inputs.home-manager.nixosModules.home-manager
+          ./modules/nixos
           {
             home-manager = {
               useUserPackages = true;
               backupFileExtension = "bak";
+              extraSpecialArgs = {inherit inputs outputs;};
               users = {
                 smg = {imports = [./home/smg/default.nix];};
               };
@@ -200,10 +204,13 @@
           inputs.nur.modules.nixos.default
           inputs.bhairava-grub-theme.nixosModule
           inputs.home-manager.nixosModules.home-manager
+          ./modules/nixos
           {
             home-manager = {
               useUserPackages = true;
-              users.tlh = {imports = [./home/tlh/default.nix];};
+              extraSpecialArgs = {inherit inputs outputs;};
+              sharedModules = [./modules/home-manager];
+              users.user = {imports = [./home/user/default.nix];};
             };
           }
           ./hosts/chhinamasta

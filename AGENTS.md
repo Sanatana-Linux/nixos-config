@@ -1,5 +1,8 @@
 # AGENTS.md - NixOS Configuration Codebase
 
+## Repository Guidelines
+**IMPORTANT:** All modifications must be made to THIS repository (`/home/tlh/nixos`) only. Never modify files in `/etc/nixos` or system directories. This flake-based configuration is self-contained and manages the entire system configuration through this repository.
+
 ## Build, Lint, and Test Commands
 - **Build system config:** `sudo nixos-rebuild switch --flake .#<host>` (replace `<host>` with bagalamukhi, matangi, chhinamasta)
 - **Test config (no switch):** `sudo nixos-rebuild test --flake .#<host>`

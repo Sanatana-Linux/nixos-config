@@ -6,20 +6,36 @@
   ...
 }: {
   imports = [
-    ../shared/X
     ./theme.nix
-    ../shared/pkgs
-    ../shared/programs/yazi/default.nix
-    # ../shared/programs/aichat.nix
-    ../shared/programs/firefox.nix
-    ../shared/programs/gpg/default.nix
-    ../shared/programs/zathura/default.nix
-    ../shared/programs/kitty/default.nix
-    # ../shared/programs/neovim/default.nix
-    ../shared/services/default.nix
-    ../shared/services/picom.nix
-    ../shared/shell
   ];
+
+  # Restored modules configuration for feature parity - ONLY originally enabled modules
+  modules = {
+    packages = {
+      essential.enable = true;
+    };
+    shell = {
+      home.enable = true;
+    };
+    desktop = {
+      enable = true;
+    };
+    programs = {
+      firefox = {
+        enable = true;
+        higgs-boson = true; # Enable custom Firefox theme for tlh user
+      };
+      kitty.enable = true;
+      gpg.enable = true;
+      zathura.enable = true;
+      yazi.enable = true;
+      # Note: neovim was commented out in original config, not enabling
+    };
+    services = {
+      picom.enable = true;
+      xscreensaver.enable = true;
+    };
+  };
 
   systemd.user.startServices = "sd-switch";
 

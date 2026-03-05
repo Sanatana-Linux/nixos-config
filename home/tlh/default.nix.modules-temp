@@ -1,0 +1,74 @@
+{
+  pkgs,
+  config,
+  inputs,
+  outputs,
+  ...
+}: {
+  imports = [
+    ./theme.nix
+    # Directly import the home-manager modules instead of using the modules.* pattern
+    ../../../modules/home-manager/desktop/desktop.nix
+    ../../../modules/home-manager/shell/home.nix
+    ../../../modules/home-manager/services/home.nix
+    ../../../modules/home-manager/programs/firefox.nix
+  ];
+
+  # Enable modules directly using their enable options
+  modules = {
+    desktop.enable = true;
+    shell.home.enable = true;
+    services.home.enable = true;
+    programs.firefox.enable = true;
+  };
+
+  systemd.user.startServices = "sd-switch";
+
+  # we have tealdeer & internet for this. Rendered in more readable formats
+  manual = {
+    html.enable = false;
+    json.enable = false;
+    manpages.enable = false;
+  };
+
+  nixpkgs = {
+    overlays = [
+      outputs.overlays.additions
+      outputs.overlays.modifications
+      outputs.overlays.unstable-packages
+      outputs.overlays.f2k-packages
+      outputs.overlays.chaotic-packages
+      inputs.nixpkgs-f2k.overlays.default
+      inputs.nur.overlays.default
+    ];
+
+    config = {
+      allowUnfree = true;
+      allowUnfreePredicate = _: true;
+      # allowUnsupportedSystem = true;
+      allowBroken = true;
+    };
+  };
+
+  services.gnome-keyring = {
+    enable = true;
+    components = ["secrets" "ssh" "pkcs11"];
+  };
+  programs.home-manager.enable = true;
+
+  home = {
+    username = "tlh";
+    homeDirectory = "/home/tlh";
+    stateVersion = "24.11";
+    activation = {
+      installConfig = ''
+        if [ ! -d "${config.home.homeDirectory}/.config/awesome" ]; then
+          ${pkgs.git}/bin/git clone https://github.com/Sanatana-Linux/nixos-awesomewm ${config.home.homeDirectory}/.config/awesome
+        fi
+        if [ ! -d "${config.home.homeDirectory}/.config/nvim" ]; then
+          ${pkgs.git}/bin/git clone https://github.com/Thomashighbaugh/nvim-forge ${config.home.homeDirectory}/.config/nvim
+        fi
+      '';
+    };
+  };
+}

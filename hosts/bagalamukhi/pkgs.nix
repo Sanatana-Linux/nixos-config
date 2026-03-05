@@ -16,7 +16,7 @@
   system = import ../shared/pkgs/system.nix {inherit inputs pkgs;};
   video = import ../shared/pkgs/video.nix {inherit pkgs;};
 in {
-  imports = [../shared/pkgs/fonts.nix];
+  # Note: fonts are now managed through modules.packages.fonts.enable
   environment.systemPackages = with pkgs;
     archives
     ++ core

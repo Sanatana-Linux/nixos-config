@@ -1,33 +1,23 @@
 {
-  pkgs,
   config,
+  pkgs,
   inputs,
   outputs,
   ...
 }: {
   imports = [
-    ../shared/X
     ./desktop.nix
-    ../shared/pkgs
-    ../shared/programs/aichat.nix
-    # Custom Firefox is disabled for smg - using regular Firefox from XFCE
-    # ../shared/programs/firefox.nix
-    ../shared/programs/kitty/default.nix
-    ../shared/services/default.nix
-    # ../shared/services/picom.nix
-    ../shared/shell
+    ../../modules/home-manager/default.nix
   ];
 
-  # Firefox completely removed from smg user configuration
-  # No Firefox will be installed for this user to avoid any source building
-
-  systemd.user.startServices = "sd-switch";
-
-  # we have tealdeer & internet for this. Rendered in more readable formats
-  manual = {
-    html.enable = false;
-    json.enable = false;
-    manpages.enable = false;
+  modules = {
+    shell = {
+      home.enable = true;
+    };
+    programs.firefox = {
+      enable = true;
+      higgs-boson = false; # strictly disabled for smg
+    };
   };
 
   nixpkgs = {
@@ -44,18 +34,10 @@
     config = {
       allowUnfree = true;
       allowUnfreePredicate = _: true;
-      # allowUnsupportedSystem = true;
       allowBroken = true;
     };
   };
 
-  programs.home-manager.enable = true;
-  services.picom.enable = true;
-  # GTK Configuration
-
-  home = {
-    username = "smg";
-    homeDirectory = "/home/smg";
-    stateVersion = "24.11";
-  };
+  # Required by home-manager
+  home.stateVersion = "24.11";
 }

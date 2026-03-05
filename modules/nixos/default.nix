@@ -1,5 +1,20 @@
 {
   imports = [
-    ./sea-greeter.nix
+    ./base
+    ./hardware
+    ./desktop
+    ./virtualization
+    ./packages
+    ./services
+    ./ai
+    ./security
+    ./shell
+    ./system
+    ./users
+    ./performance
+    ./power
+    ./programs
+    ./environment
+    ./printer
   ];
 }

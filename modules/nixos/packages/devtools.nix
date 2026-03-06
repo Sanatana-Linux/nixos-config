@@ -14,6 +14,9 @@ with lib; {
     runtimeLanguages = mkEnableOption "Programming language runtimes" // {default = true;};
     luaEcosystem = mkEnableOption "Complete Lua development ecosystem" // {default = false;};
     rustEcosystem = mkEnableOption "Complete Rust development ecosystem" // {default = false;};
+    androidDevelopment = mkEnableOption "Android/APK development and analysis tools" // {default = false;};
+    nixUtilities = mkEnableOption "Nix development and exploration utilities" // {default = true;};
+    systemCompilers = mkEnableOption "System compilers and low-level tools" // {default = false;};
     webDevelopment = mkEnableOption "Web development tools" // {default = true;};
     databases = mkEnableOption "Database tools and utilities" // {default = true;};
     editors = mkEnableOption "Text editors and IDEs" // {default = true;};
@@ -152,6 +155,29 @@ with lib; {
           rustscan
           rustup
           rustywind
+        ]
+        # Android/APK development and analysis
+        ++ optionals config.modules.packages.devtools.androidDevelopment [
+          abootimg # Android boot image tools
+          android-tools # Android platform tools (adb, fastboot)
+          apkeep # APK downloader
+          apksigner # APK signing tool
+          apktool # Tool for reverse engineering Android APK files
+          bundletool # Android App Bundle tool
+          dex2jar # Tools to work with Android .dex and Java .class files
+          simg2img # Sparse image to image converter
+        ]
+        # Nix development utilities
+        ++ optionals config.modules.packages.devtools.nixUtilities [
+          manix # Fast documentation searcher for Nix
+          nix-index # Nix package and option search
+          nixos-generators # NixOS image generators for different formats
+        ]
+        # System compilers and low-level tools
+        ++ optionals config.modules.packages.devtools.systemCompilers [
+          clang # C/C++ compiler
+          gcc-unwrapped # GCC compiler unwrapped
+          patchelf # Modify ELF executables and libraries
         ]
         # Web development
         ++ optionals config.modules.packages.devtools.webDevelopment [

@@ -79,22 +79,30 @@ with lib; {
           "UiApp.efi" = ../../../assets/bios/UiApp.efi;
         };
 
-        # Windows Dual Boot Configuration
-        extraEntries = mkIf config.modules.system.boot.windowsDualBoot.enable ''
-          menuentry "Windows 11" --class windows --class os {
-            insmod part_gpt
-            insmod fat
-            search --no-floppy --fs-uuid --set=root 7443-B072
-            chainloader /EFI/Microsoft/Boot/bootmgfw.efi
-          }
-          menuentry "System Setup" {
-            fwsetup
-          }
-          menuentry "Recovery" {
-            search --no-floppy --fs-uuid --set=root 7443-B072
-            chainloader /EFI/Boot/Bootx64.efi
-          }
-        '';
+        # Combined extra entries for Windows Dual Boot and Advanced BIOS
+        extraEntries = 
+          optionalString config.modules.system.boot.windowsDualBoot.enable ''
+            menuentry "Windows 11" --class windows --class os {
+              insmod part_gpt
+              insmod fat
+              search --no-floppy --fs-uuid --set=root 7443-B072
+              chainloader /EFI/Microsoft/Boot/bootmgfw.efi
+            }
+            menuentry "System Setup" {
+              fwsetup
+            }
+            menuentry "Recovery" {
+              search --no-floppy --fs-uuid --set=root 7443-B072
+              chainloader /EFI/Boot/Bootx64.efi
+            }
+          '' +
+          optionalString config.modules.system.boot.advancedBios.enable ''
+            menuentry 'Advanced UEFI Firmware Settings' --class settings {
+              insmod fat
+              insmod chain
+              chainloader @bootRoot@/EFI/Boot/Bootx64.efi
+            }
+          '';
       };
     };
   };

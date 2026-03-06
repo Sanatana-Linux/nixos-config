@@ -51,6 +51,7 @@ in {
           mjpegtoolsFull
           mp4v2
           oggvideotools
+          openshot-qt # Video editor
           peek
           spotdl
           vid-stab
@@ -61,6 +62,7 @@ in {
         ]
         # Image processing tools
         ++ optionals config.modules.packages.multimedia.imageTools [
+          ascii-image-converter # Convert images to ASCII art
           autotrace
           babl
           cairosvg
@@ -73,8 +75,10 @@ in {
           gegl
           geticons
           gif-for-cli
+          gifgen
           giflib
           gifsicle
+          gifski
           giph
           gmic
           gnome-obfuscate
@@ -88,6 +92,7 @@ in {
           img-cat
           imgcat
           inkscape-with-extensions
+          jp2a # Convert images to ASCII/ANSI art
           jpeginfo
           jpegoptim
           libexif
@@ -105,6 +110,7 @@ in {
           perlPackages.ImageMagick
           perlPackages.PerlMagick
           pngcrush
+          pngquant # PNG image optimizer
           pngtoico
           pngtools
           potrace

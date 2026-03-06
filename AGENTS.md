@@ -28,3 +28,15 @@
 - Home Manager: `home/` (user configs)
 - Overlays: `overlays/` (package mods)
 - Templates: `templates/` (dev envs)
+
+## Changelog Management
+All significant changes to the configuration must be documented in `.documentation/CHANGELOG.md`. When making changes, add entries as unordered list items with the following format:
+- **YYYY-MM-DD**: Brief description of the change
+  - Detailed sub-items for each specific change
+
+Changes to document include:
+- Package additions or removals
+- Module structure changes
+- Host configuration updates
+- Build system modifications
+- Breaking changes or deprecations

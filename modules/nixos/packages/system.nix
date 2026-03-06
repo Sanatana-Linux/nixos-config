@@ -54,17 +54,28 @@ in {
       environment.systemPackages = with pkgs;
         (optionals cfg.enable [
           # Essential system utilities
+          acpi # ACPI information tools
           automake # GNU automatic makefile generator
+          binutils # Binary manipulation tools
           comma # Run programs without installing them
           fd # Simple, fast alternative to find
+          file # File type identification tool
           gh # GitHub CLI
+          iw # Wireless configuration tool
           jq # Command-line JSON processor
           moreutils # Additional Unix utilities
           neofetch # System information tool
           parallel # Execute jobs in parallel
+          pciutils # PCI utilities
           ripgrep-all # Search tool combining ripgrep with parsers
+          usbmuxd # USB multiplexing daemon for iOS devices
+          usbutils # USB device utilities
           util-linux # System utilities for Linux
           wget # Network downloader
+          whois # WHOIS client
+          wirelesstools # Wireless network configuration tools
+          yad # Yet Another Dialog - display dialogs from shell
+          zip # ZIP compression utility
         ])
         ++ (optionals cfg.filesystem.enable [
           # Filesystem utilities

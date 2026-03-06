@@ -29,6 +29,12 @@ in {
       description = "Enable development tools (VSCode, appimage-run)";
     };
 
+    windowManagement = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Enable window management utilities (picom, wmctrl, maim)";
+    };
+
     messaging = mkOption {
       type = types.bool;
       default = true;
@@ -103,6 +109,11 @@ in {
           appimage-run
           vscode-fhs
           ventoy-full
+        ]
+        ++ optionals cfg.windowManagement [
+          maim # Screenshot utility
+          picom # Compositor for X11
+          wmctrl # Command-line window manager control
         ]
         ++ optionals cfg.messaging [
           telegram-desktop

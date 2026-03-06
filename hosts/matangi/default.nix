@@ -13,7 +13,11 @@
 
   # Enable modules using the new "activate by enable option" paradigm
   modules = {
-    system.boot.enable = true;
+    system.boot = {
+      enable = true;
+      theme.enable = true;
+      advancedBios.enable = true;
+    };
     base = {
       enable = true;
       timezone = "America/New_York";

@@ -71,7 +71,14 @@
       };
       network.enable = true;
       shell.enable = true;
-      system.enable = true;
+      system = {
+        enable = true;
+        performance.enable = true; # Includes sysz, htop, etc.
+        desktop.enable = true; # X11 utilities, dbus, etc.
+        hardware.enable = true; # Hardware monitoring tools
+        filesystem.enable = true; # Filesystem utilities
+        multimedia.enable = true; # Media processing tools
+      };
     };
     hardware = {
       nvidia = {

@@ -5,9 +5,9 @@
   ...
 }:
 with lib; let
-  cfg = config.modules.services.core;
+  cfg = config.modules.base.services;
 in {
-  options.modules.services.core = {
+  options.modules.base.services = {
     enable = mkEnableOption "core system services (fstrim, fwupd, journald, dbus, gnome services)";
 
     fstrim.enable = mkOption {

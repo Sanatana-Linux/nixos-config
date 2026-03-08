@@ -5,9 +5,9 @@
   ...
 }:
 with lib; let
-  cfg = config.modules.services.udev;
+  cfg = config.modules.hardware.udev;
 in {
-  options.modules.services.udev = {
+  options.modules.hardware.udev = {
     enable = mkEnableOption "udev services with hardware packages";
 
     packages = mkOption {

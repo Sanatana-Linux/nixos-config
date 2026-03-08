@@ -4,9 +4,9 @@
   ...
 }:
 with lib; let
-  cfg = config.modules.programs.logitech;
+  cfg = config.modules.hardware.logitech;
 in {
-  options.modules.programs.logitech = {
+  options.modules.hardware.logitech = {
     enable = mkEnableOption "Logitech wireless hardware support";
     enableGraphical = mkEnableOption "Logitech graphical tools";
   };

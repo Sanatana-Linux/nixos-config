@@ -34,6 +34,7 @@ sudo /tmp/install.sh
 ```
 
 **What the script does:**
+
 - Prompts for target disk selection
 - Sets up partitioning (LVM + LUKS encryption)
 - Formats and mounts filesystems
@@ -56,6 +57,7 @@ Remove the USB drive during reboot.
 ### 5. Login
 
 You'll be prompted for the LUKS encryption password, then:
+
 - Login as your user (tlh for bagalamukhi, smg for matangi)
 - Default password is set in the configuration (change it immediately!)
 
@@ -168,6 +170,7 @@ cd /etc/nixos
 ```
 
 Follow the prompts to:
+
 - Provide your GPG key fingerprint (for manual editing)
 - Add the age key from step 1 (for automatic decryption)
 - Create initial `secrets.yaml` structure
@@ -243,9 +246,9 @@ Add your host's age key to the configuration:
 creation_rules:
   - path_regex: .*.yaml
     pgp:
-      - &your_gpg_key 6E2D4B7F33D88C1A7C722A6A169E5DE9DC02FFB5
+      - &your_gpg_key XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
     age:
-      - &bagalamukhi age1qqw8r...  # Paste the age key from step 1
+      - &bagalamukhi XXXXXXXXX... # Paste the age key from step 1
 ```
 
 #### 5. Re-encrypt Secrets with New Host Key
@@ -264,17 +267,6 @@ git commit -S -m "Add $(hostname) to secrets access"
 git push
 ```
 
-#### 7. Update NixOS Configuration
-
-Ensure your `flake.nix` includes the nix-secrets input:
-
-```nix
-inputs.nix-secrets = {
-  url = "git+ssh://git@github.com/yourusername/nix-secrets.git";
-  flake = true;
-};
-```
-
 #### 8. Rebuild NixOS with Secrets
 
 ```bash
@@ -290,86 +282,29 @@ After rebuild, secrets should be available in `/run/secrets/`:
 ls -la /run/secrets/
 ```
 
-## User Environment Variables (Alternative to sops)
-
-If you prefer managing user-specific environment variables (API keys, tokens) separately from system secrets:
-
-### Option 1: Encrypted .env with GPG (Current Method)
-
-1. **Create plain text env file**:
-   ```bash
-   mkdir -p ~/.config
-   cat > ~/.config/.env <<EOF
-   export OPENAI_API_KEY="sk-..."
-   export ANTHROPIC_API_KEY="sk-ant-..."
-   export GITHUB_TOKEN="ghp_..."
-   EOF
-   chmod 600 ~/.config/.env
-   ```
-
-2. **Encrypt it with GPG**:
-   ```bash
-   gpg --symmetric --cipher-algo AES256 ~/.config/.env
-   # Creates ~/.config/.env.gpg
-   ```
-
-3. **Store encrypted version in private dotfiles repo**:
-   ```bash
-   # Create private dotfiles repo if needed
-   gh repo create dotfiles --private --clone
-   
-   cp ~/.config/.env.gpg ~/dotfiles/
-   cd ~/dotfiles
-   git add .env.gpg
-   git commit -S -m "Add encrypted environment variables"
-   git push
-   ```
-
-4. **Source in shell** (already configured in this repo's zshrc):
-   ```bash
-   # In ~/.zshrc (line 5 in this config):
-   [[ -f ~/.config/.env ]] && source ~/.config/.env
-   ```
-
-### Option 2: Keep .env in Private nix-secrets Repo
-
-Store user env files alongside system secrets:
-
-```
-nix-secrets/
-├── .sops.yaml
-├── secrets.yaml           # System secrets (encrypted with sops)
-└── users/
-    └── tlh/
-        └── .env.gpg       # User env vars (encrypted with GPG)
-```
-
-On new host:
-```bash
-cd ~/nix-secrets
-gpg --decrypt users/tlh/.env.gpg > ~/.config/.env
-chmod 600 ~/.config/.env
-```
-
 ## Troubleshooting
 
 ### Script fails during partition setup
+
 - Check disk device name: `lsblk`
 - Ensure disk is not mounted: `umount -R /mnt`
 - Verify disk is correct target (all data will be erased!)
 
 ### Can't authenticate to GitHub
+
 - Ensure internet connection: `ping github.com`
 - Install GitHub CLI: `nix-shell -p gh`
 - Try PAT authentication: `gh auth login --with-token < token.txt`
 
 ### Secrets won't decrypt after rebuild
+
 - Verify host age key was added to `.sops.yaml`
 - Check sops configuration: `cat ~/nix-secrets/.sops.yaml`
 - Re-run: `sops updatekeys secrets.yaml`
 - Ensure flake.nix includes nix-secrets input
 
 ### GPG key not found for commit signing
+
 - Import existing key: `gpg --import < your-key.asc`
 - Or generate new: `gpg --full-generate-key`
 - Add to GitHub: `gh gpg-key add`
@@ -378,10 +313,10 @@ chmod 600 ~/.config/.env
 
 ```bash
 # Check system status
-sudo nixos-rebuild switch --flake .#$(hostname)
+om rebuild $(hostname)
 
-# Update flake inputs
-nix flake update
+# Update flake inputs (after first install)
+om update
 
 # Test config without switching
 sudo nixos-rebuild test --flake .#$(hostname)

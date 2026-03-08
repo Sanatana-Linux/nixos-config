@@ -140,6 +140,7 @@ with lib; {
             "browser.startup.page" = "0";
             "browser.startup.preXulSkeletonUI" = true;
             "browser.tabs.hoverPreview.enabled" = true;
+            "browser.tabs.splitView.enabled" = true;
             "browser.tabs.tabmanager.enabled" = true;
             "browser.uitour.enabled" = false;
             "browser.urlbar.suggest.calculator" = true;

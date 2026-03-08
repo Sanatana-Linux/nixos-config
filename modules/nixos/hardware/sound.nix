@@ -8,57 +8,59 @@ with lib; let
   cfg = config.modules.hardware.sound;
 in {
   options.modules.hardware.sound = {
-    enable = mkEnableOption "Audio hardware support";
-
-    pipewire = mkOption {
-      type = types.bool;
-      default = true;
-      description = "Use PipeWire instead of PulseAudio";
-    };
-
-    lowLatency = mkOption {
-      type = types.bool;
-      default = false;
-      description = "Enable low latency audio configuration";
-    };
-
-    extraPackages = mkOption {
-      type = types.listOf types.package;
-      default = [];
-      description = "Additional audio packages to install";
-    };
+    enable = mkEnableOption "PipeWire audio stack with full hardware support";
   };
 
   config = mkIf cfg.enable {
-    # sound.enable is deprecated in newer NixOS versions
-
-    security.rtkit.enable = cfg.pipewire;
-
-    services.pipewire = mkIf cfg.pipewire {
+    services.pipewire = {
       enable = true;
       audio.enable = true;
+      wireplumber.enable = true;
       pulse.enable = true;
       jack.enable = true;
       alsa = {
         enable = true;
         support32Bit = true;
       };
-      wireplumber.enable = true;
     };
 
-    hardware.pulseaudio = mkIf (!cfg.pipewire) {
-      enable = true;
-      support32Bit = true;
+    systemd.user.services = {
+      pipewire.wantedBy = ["default.target"];
+      pipewire-pulse = {
+        path = [pkgs.pulseaudio];
+        wantedBy = ["default.target"];
+      };
     };
 
-    environment.systemPackages = with pkgs;
-      [
-        pavucontrol
-        pulsemixer
-      ]
-      ++ optionals cfg.pipewire [
-        qpwgraph
-      ]
-      ++ cfg.extraPackages;
+    environment.systemPackages = with pkgs; [
+      aaxtomp3
+      alsa-firmware
+      alsa-lib
+      alsa-oss
+      alsa-plugins
+      alsa-tools
+      alsa-utils
+      audiofile
+      cava
+      distrho-ports
+      fdk_aac
+      flac
+      flac2all
+      flaca
+      libpulseaudio
+      libvorbis
+      mediainfo
+      pamixer
+      pavucontrol
+      playerctl
+      pulseaudio-ctl
+      pulseaudioFull
+      pulsemixer
+      qpwgraph
+      redoflacs
+      rustplayer
+      tap-plugins
+      vlc
+    ];
   };
 }

@@ -10,6 +10,7 @@ in {
   imports = [
     ./nix.nix
     ./permitted-packages.nix
+    ./services.nix
   ];
 
   options.modules.base = {

@@ -22,6 +22,7 @@
   modules = {
     # System
     system = {
+      systemd.enable = true;
       boot = {
         enable = true;
         theme.enable = true;
@@ -39,6 +40,7 @@
       enable = true;
       nix.enable = true;
       permittedPackages.enable = true;
+      services.enable = true;
     };
 
     # User
@@ -49,7 +51,13 @@
     };
 
     # Programs
-    programs.nix-ld.enable = true;
+    programs = {
+      nix-ld.enable = true;
+      appimage.enable = true;
+    };
+
+    # Environment
+    environment.variables.enable = true;
 
     # Virtualization
     virtualization = {
@@ -67,15 +75,12 @@
     performance = {
       default.enable = true;
       undervolt.enable = true;
+      cachy.enable = true;
+      oomd.enable = true;
+      zram.enable = true;
     };
 
     # Services
-    services = {
-      core.enable = true;
-      ssh.enable = true;
-      udev.enable = true;
-    };
-
     # Power
     power.laptop.enable = true;
 
@@ -182,14 +187,13 @@
       intel.enable = true;
       bluetooth.enable = true;
       tpm.enable = true;
+      udev.enable = true;
+      logitech.enable = true;
       openrgb = {
         enable = true;
         motherboard = "intel";
       };
-      sound = {
-        enable = true;
-        pipewire = true;
-      };
+      sound.enable = true;
       networking = {
         enable = true;
         hostName = "bagalamukhi";
@@ -205,12 +209,19 @@
     };
 
     # AI
-    ai.ollama.enable = true;
+    ai = {
+      ollama.enable = true;
+      core.enable = true;
+    };
 
     # Security
     security = {
       doas.enable = true;
       fail2ban.enable = true;
+      ssh.enable = true;
+      sudo.enable = true;
+      pam.enable = true;
+      packages.enable = true;
     };
   };
 

@@ -8,15 +8,6 @@
   # https://nixos.wiki/wiki/Overlays
   modifications = final: prev: {
     nps = inputs.nps.defaultPackage.${prev.stdenv.hostPlatform.system};
-
-    # Fix olive-editor Qt 6.10 compatibility
-    olive-editor = prev.olive-editor.overrideAttrs (oldAttrs: {
-      patches =
-        (oldAttrs.patches or [])
-        ++ [
-          ../modules/nixos/packages/olive-editor-qt610-fix.patch
-        ];
-    });
   };
 
   # Master packages overlay (bleeding edge)

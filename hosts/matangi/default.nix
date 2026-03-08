@@ -22,6 +22,7 @@
       enable = true;
       timezone = "America/New_York";
       nix.enable = true;
+      permittedPackages.enable = true;
     };
     shell = {
       enable = true;
@@ -72,9 +73,6 @@
       fail2ban.enable = true;
     };
   };
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
 
   environment = {
     pathsToLink = ["/share/zsh" "/share/applications" "/share/xdg-desktop-portal"];

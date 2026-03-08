@@ -23,6 +23,7 @@
       enable = true;
       timezone = "America/New_York";
       nix.enable = true;
+      permittedPackages.enable = true;
     };
 
     shell = {

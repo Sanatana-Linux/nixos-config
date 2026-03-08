@@ -9,6 +9,7 @@ with lib; let
 in {
   imports = [
     ./nix.nix
+    ./permitted-packages.nix
   ];
 
   options.modules.base = {

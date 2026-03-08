@@ -125,9 +125,6 @@ in {
       allowUnfree = true;
       cudaSupport = cfg.cudaSupport;
       nvidia.acceptLicense = true;
-      permittedInsecurePackages = [
-        "qtwebengine-5.15.19"
-      ];
       allowUnfreePredicate = pkg:
         builtins.elem (lib.getName pkg) [
           "cudatoolkit"

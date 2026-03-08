@@ -11,6 +11,16 @@ Each entry follows this format:
 
 ## Changes
 
+- **2026-03-07**: Created centralized permitted insecure packages module for both hosts
+  - Created `modules/nixos/base/permitted-packages.nix` with enable option and extensible packages list
+  - Configured `qtwebengine-5.15.19` as permitted insecure package (required by Qt-based applications)
+  - Module sets both `allowUnfree = true` and `permittedInsecurePackages` to ensure proper nixpkgs.config merging
+  - Enabled on both matangi and bagalamukhi via `modules.base.permittedPackages.enable = true`
+  - Removed duplicate `allowUnfree` from matangi/default.nix (now managed by module)
+  - Removed duplicate `permittedInsecurePackages` from nvidia.nix (now centrally managed)
+  - Verified evaluation: both hosts properly merge all nixpkgs.config attributes across modules
+  - Additional insecure packages can be added via `modules.base.permittedPackages.packages = ["package-name"];`
+
 - **2026-03-07**: Enhanced AGENTS.md with comprehensive module and workflow guidelines
   - Added "Host-Specific Information" section with primary users for each host (bagalamukhi/tlh, matangi/smg, chhinamasta/user)
   - Added "Module Structure and Organization" section documenting the "activate by enable option" paradigm

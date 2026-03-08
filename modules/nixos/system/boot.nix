@@ -91,10 +91,7 @@ with lib; {
               search --no-floppy --fs-uuid --set=root 7443-B072
               chainloader /EFI/Microsoft/Boot/bootmgfw.efi
             }
-            menuentry "System Setup" {
-              fwsetup
-            }
-            menuentry "Recovery" {
+            menuentry "Windows Recovery" --class windows --class settings {
               search --no-floppy --fs-uuid --set=root 7443-B072
               chainloader /EFI/Boot/Bootx64.efi
             }

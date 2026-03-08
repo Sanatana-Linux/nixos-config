@@ -11,6 +11,16 @@ Each entry follows this format:
 
 ## Changes
 
+- **2026-03-08**: Overlay cleanup and synchronization across host and home-manager configs
+  - Removed unused overlays: `master-packages`, `f2k-packages`, `chaotic-packages` from `overlays/default.nix`
+  - Removed unused flake inputs: `master` (nixpkgs/master), `nixpkgs-f2k`, `antigravity-nix`
+  - Removed `fortuneteller2k.cachix.org` substituter and trusted public key (no longer needed without nixpkgs-f2k)
+  - Removed duplicate `nix-community.cachix.org` trusted public key entry
+  - Host configs (bagalamukhi, matangi): now apply `additions`, `modifications`, `stable-packages`, `inputs.nur.overlays.default`
+  - Home configs (tlh, smg, user): now apply `additions`, `modifications`, `stable-packages`, `inputs.nur.overlays.default`
+  - All host and home overlay sets are now consistent; `chhinamasta` ISO remains overlay-free intentionally
+  - Note: `chaotic` is still used via `inputs.chaotic.nixosModules.default` for binary cache infrastructure (not as an overlay)
+
 - **2026-03-08**: Package sub-options no longer default enabled
   - Removed `default = true` from all package module sub-options in `packages.nix`
   - Host configs now explicitly enable each package sub-option they need

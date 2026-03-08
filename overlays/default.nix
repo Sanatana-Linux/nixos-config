@@ -10,29 +10,8 @@
     nps = inputs.nps.defaultPackage.${prev.stdenv.hostPlatform.system};
   };
 
-  # Master packages overlay (bleeding edge)
-  master-packages = final: prev: {
-    master = import inputs.master {
-      system = final.stdenv.hostPlatform.system;
-      config.allowUnfree = true;
-    };
-  };
-
-  f2k-packages = final: prev: {
-    f2k = import inputs.nixpkgs-f2k {
-      system = final.stdenv.hostPlatform.system;
-      config.allowUnfree = true;
-    };
-  };
   stable-packages = final: prev: {
     stable = import inputs.stable {
-      system = final.stdenv.hostPlatform.system;
-      config.allowUnfree = true;
-    };
-  };
-
-  chaotic-packages = final: prev: {
-    chaotic = import inputs.chaotic {
       system = final.stdenv.hostPlatform.system;
       config.allowUnfree = true;
     };

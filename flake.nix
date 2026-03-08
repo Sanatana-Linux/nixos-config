@@ -2,13 +2,11 @@
   description = "The ShizNix Upon Which I Constantly Nit Pick";
 
   inputs = {
-    master.url = "github:nixos/nixpkgs/master?shallow=1";
     stable.url = "github:nixos/nixpkgs/nixos-25.05?shallow=1";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable?shallow=1";
     # nixpkgs is our default (unstable), no separate unstable input needed
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     zen-browser.url = "github:MarceColl/zen-browser-flake";
-    nixpkgs-f2k.url = "github:moni-dz/nixpkgs-f2k";
     nur = {
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -34,9 +32,6 @@
     };
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
-    antigravity-nix = {
-      url = "github:jacopone/antigravity-nix";
-    };
     cachy-tweaks = {
       url = "github:AniviaFlome/cachy-tweaks-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -46,7 +41,6 @@
   outputs = {
     self,
     nixpkgs,
-    master,
     stable,
     home-manager,
     higgs-boson,
@@ -91,7 +85,6 @@
         };
         extra-substituters = [
           "https://cache.nixos.org?priority=10" # nixos cache
-          "https://fortuneteller2k.cachix.org" # f2k's cache
           "https://nix-community.cachix.org" # community cache
           "https://nixpkgs-unfree.cachix.org" # nixpkgs-unfree
           "https://pre-commit-hooks.cachix.org" # pre commit hooks
@@ -103,8 +96,6 @@
         ];
         extra-trusted-public-keys = [
           "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-          "fortuneteller2k.cachix.org-1:kXXNkMV5yheEQwT0I4XYh1MaCSz+qg72k8XAi2PthJI="
-          "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
           "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
           "nixpkgs-unfree.cachix.org-1:hqvoInulhbV4nJ9yJOEr+4wxhDV4xq2d1DK7S6Nj6rs="
           "pre-commit-hooks.cachix.org-1:Pkk3Panw5AW24TOv6kz3PvLhlH8puAsJTBbOPmBo7Rc="

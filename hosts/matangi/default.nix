@@ -80,19 +80,19 @@
       };
       core.enable = true;
       development = {
-        enable = true;
-        linters = true;
-        versionControl = true;
-        buildTools = true;
-        runtimeLanguages = true;
-        luaEcosystem = true;
-        rustEcosystem = true;
+        enable = false;
+        linters = false;
+        versionControl = false;
+        buildTools = false;
+        runtimeLanguages = false;
+        luaEcosystem = false;
+        rustEcosystem = false;
         nixUtilities = true;
         systemCompilers = true;
-        webDevelopment = true;
-        databases = true;
-        editors = true;
-        treeSitterGrammars = true;
+        webDevelopment = false;
+        databases = false;
+        editors = false;
+        treeSitterGrammars = false;
       };
       fonts = {
         enable = true;
@@ -104,7 +104,7 @@
         enable = true;
         applicationLauncher = true;
         mediaTools = true;
-        developmentTools = true;
+        developmentTools = false;
         windowManagement = true;
         messaging = true;
         extraPackages = true;
@@ -138,7 +138,7 @@
       python = {
         enable = true;
         development = true;
-        webDevelopment = true;
+        webDevelopment = false;
         dataProcessing = true;
         systemIntegration = true;
         graphics = true;

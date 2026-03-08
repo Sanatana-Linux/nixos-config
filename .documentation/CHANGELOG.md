@@ -11,6 +11,14 @@ Each entry follows this format:
 
 ## Changes
 
+- **2026-03-08**: Fix `node2nix` build failure — add `nodejs` to `nativeBuildInputs`
+  - `node2nix-1.11.0` in nixpkgs-unstable fails to build in the Nix sandbox because `npm` is not available (nixpkgs bug: `nodejs` missing from outer derivation's `nativeBuildInputs`)
+  - Added `node2nix` override in `modifications` overlay (`overlays/default.nix`) to append `nodejs` to `nativeBuildInputs`
+
+- **2026-03-08**: Override `lenovo-legion-module` kernel module to use fork with Legion 5 16IRX9 83DG support
+  - Added overlay in `modifications` (overlays/default.nix) that extends `linuxPackages_latest` to replace `lenovo-legion-module` src with fork `jlbyh2o/LenovoLegionLinux@4cc42952` (branch: `add-legion-5-16irx9-83dg-nmcn`)
+  - The fork adds the Legion 5 16IRX9 83DG (NMCN BIOS) to the driver allowlist, enabling the `lenovo_legion` kernel module on both bagalamukhi and matangi
+
 - **2026-03-08**: Remove redundant local gnome-keyring home-manager wrapper module
   - Deleted `modules/home-manager/services/gnome-keyring.nix` — thin wrapper over upstream `services.gnome-keyring` that provided no added value and caused confusion (missing `enableSSH` option was added expecting the wrapper to handle it)
   - Removed from `modules/home-manager/services/default.nix` imports

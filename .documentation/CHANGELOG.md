@@ -11,6 +11,58 @@ Each entry follows this format:
 
 ## Changes
 
+- **2026-03-07**: Enhanced AGENTS.md with comprehensive module and workflow guidelines
+  - Added "Host-Specific Information" section with primary users for each host (bagalamukhi/tlh, matangi/smg, chhinamasta/user)
+  - Added "Module Structure and Organization" section documenting the "activate by enable option" paradigm
+  - Documented all module categories under `modules/nixos/` (ai, base, desktop, environment, hardware, packages, performance, power, printer, programs, security, services, shell, system, users, virtualization)
+  - Documented all module categories under `modules/home-manager/` (desktop, packages, programs, services, shell)
+  - Added module template showing required `mkEnableOption` and `mkIf` pattern
+  - Added module import rules requiring `default.nix` in each category directory
+  - Enhanced changelog management section with reminder to use today's date (Sat Mar 07 2026) and update immediately after changes
+
+- **2026-03-07**: Created iPhone/iOS device access module
+  - Created `modules/nixos/hardware/iphone.nix` for iOS device USB access
+  - Added packages: libimobiledevice, ifuse, ideviceinstaller, usbmuxd
+  - Enabled services.usbmuxd for iOS device communication
+  - Created plugdev group for device access (smg user automatically added via ifTheyExist)
+  - Enabled iPhone module on matangi/smg configuration
+
+- **2026-03-06**: Fixed kernel 6.19 build failure caused by VFIO_VIRQFD dependency conflict
+  - Removed explicit `VFIO_VIRQFD = module` setting from `modules/nixos/hardware/intel.nix:109`
+  - Kernel 6.19 changed VFIO_VIRQFD dependencies, making it incompatible as a module
+  - Now auto-configured by kernel build system based on parent option dependencies
+  - Resolves error: "option not set correctly: VFIO_VIRQFD (wanted 'm', got 'y')"
+
+- **2026-03-06**: Created dedicated TPM 2.0 module and removed redundancy
+  - Created `modules/nixos/hardware/tpm.nix` with comprehensive TPM 2.0 support
+  - Added options: `enable`, `enableAbrmd` (default: false), `enableTctiEnvironment` (default: true), `enablePkcs11` (default: true), `initrdSupport` (default: true)
+  - Configuration includes: security.tpm2 settings, boot.initrd.kernelModules for TPM, and TPM-related packages (libtpms, tpm2-pytss, ssh-tpm-agent, swtpm, tpm2-abrmd, tpm2-tools, tpm2-tss, tpmmanager)
+  - Removed redundant TPM configuration from `modules/nixos/security/doas.nix` (security.tpm2 block and 8 TPM packages)
+  - Enabled TPM module on bagalamukhi only (TPM 2.0 hardware present)
+  - Verified: tpm2-abrmd.service running, TPM 2.0 detected (Intel INTC, revision 1.38)
+
+- **2026-03-06**: Enhanced bluetooth module with comprehensive reconnection settings
+  - Restructured `modules/nixos/hardware/bluetooth.nix` with improved configuration options
+  - Added `powerOnBoot` option (default: true) to power on Bluetooth adapter on boot
+  - Added `fastConnectable` option (default: true) for quicker device connections
+  - Added `autoEnable` option (default: true) to automatically enable Bluetooth adapter
+  - Added `reconnectAttempts` option (default: 7) for number of reconnection attempts
+  - Added `reconnectIntervals` option (default: "1,2,3,4,8") for reconnection timing pattern
+  - Changed `experimentalFeatures` default from true to false for stability
+  - Removed simple `autoConnect` option in favor of comprehensive Policy settings
+  - Enabled bluetooth on matangi host (was already enabled on bagalamukhi)
+  - Configuration now includes General.FastConnectable and Policy (ReconnectAttempts, ReconnectIntervals, AutoEnable)
+
+- **2026-03-06**: Added fail2ban security module and refactored SSH keyring configuration
+  - Created `modules/nixos/security/fail2ban.nix` module with activate-by-enable-option pattern
+  - Added configurable options: `maxRetry` (default: 5), `banTime` (default: 1h), `findTime` (default: 10m), `enableSSH` (default: true)
+  - Enabled fail2ban on both bagalamukhi and matangi hosts
+  - Created `modules/home-manager/services/gnome-keyring.nix` module to split SSH agent configuration
+  - Added `enableSSH` option to gnome-keyring module for per-user SSH agent control
+  - Enabled SSH agent (gnome-keyring) for tlh user on bagalamukhi
+  - Disabled SSH agent (gnome-keyring) for smg user on matangi
+  - Fixed throttled service configuration by adding mandatory `[GENERAL]`, `[BATTERY]`, and `[AC]` sections with `Update_Rate_s` parameters
+
 - **2026-03-06**: Restored pre-refactor packages to current module-based configuration
   - Added Android/APK development tools to `devtools.nix` (abootimg, android-tools, apkeep, apksigner, apktool, bundletool, dex2jar, simg2img) under new `androidDevelopment` option
   - Added Nix utilities to `devtools.nix` (manix, nix-index, nixos-generators) under new `nixUtilities` option (enabled by default)

@@ -18,6 +18,12 @@
       enable = true;
       higgs-boson = false; # strictly disabled for smg
     };
+    services = {
+      gnome-keyring = {
+        enable = true;
+        enableSSH = false; # Disable SSH agent for smg
+      };
+    };
   };
 
   nixpkgs = {

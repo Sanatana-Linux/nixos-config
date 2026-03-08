@@ -34,6 +34,10 @@
     services = {
       picom.enable = true;
       xscreensaver.enable = true;
+      gnome-keyring = {
+        enable = true;
+        enableSSH = true; # Enable SSH agent for tlh
+      };
     };
   };
 
@@ -65,10 +69,6 @@
     };
   };
 
-  services.gnome-keyring = {
-    enable = true;
-    components = ["secrets" "ssh" "pkcs11"];
-  };
   programs.home-manager.enable = true;
 
   home = {

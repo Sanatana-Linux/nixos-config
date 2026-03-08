@@ -53,11 +53,6 @@ in {
     # Additional security services
     security.polkit.enable = true;
     security.rtkit.enable = true;
-    security.tpm2 = {
-      enable = true;
-      pkcs11.enable = true;
-      abrmd.enable = true;
-    };
 
     # Kernel security hardening
     boot = {
@@ -128,19 +123,11 @@ in {
     environment.systemPackages = with pkgs; [
       bitwarden-desktop
       ghorg
-      libtpms
       linux-pam
       nmap
       openssl.dev
-      python312Packages.tpm2-pytss
-      ssh-tpm-agent
-      swtpm
       tor
       tor-browser
-      tpm2-abrmd
-      tpm2-tools
-      tpm2-tss
-      tpmmanager
     ];
   };
 }

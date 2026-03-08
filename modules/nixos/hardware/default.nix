@@ -6,6 +6,8 @@
     ./sound.nix
     ./networking.nix
     ./android.nix
+    ./iphone.nix
     ./openrgb.nix
+    ./tpm.nix
   ];
 }

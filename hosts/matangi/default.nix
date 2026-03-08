@@ -48,6 +48,12 @@
       xfce.enable = true;
     };
 
+    # Hardware
+    hardware = {
+      bluetooth.enable = true;
+      iphone.enable = true;
+    };
+
     power.laptop.enable = true;
     programs.nix-ld.enable = true; # Allow running dynamically linked binaries like opencode
     performance = {
@@ -61,7 +67,10 @@
       ssh.enable = true; # OpenSSH server
     };
 
-    security.doas.enable = true;
+    security = {
+      doas.enable = true;
+      fail2ban.enable = true;
+    };
   };
 
   # Allow unfree packages

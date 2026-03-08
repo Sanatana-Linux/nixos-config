@@ -41,11 +41,35 @@ in {
     services.throttled = {
       enable = true;
       extraConfig = ''
-        [POWER]
-        P1=${toString cfg.p1Limit}
-        window1=${toString cfg.p1Window}
-        P2=${toString cfg.p2Limit}
-        window2=${toString cfg.p2Window}
+        [GENERAL]
+        # Enable or disable the script execution
+        Enabled: True
+        # SYSFS path for checking if the system is running on AC power
+        Sysfs_Power_Path: /sys/class/power_supply/AC*/online
+
+        [BATTERY]
+        # Update the registers every this many seconds
+        Update_Rate_s: 30
+        # Max package power for time window #1
+        PL1_Tdp_W: ${toString cfg.p1Limit}
+        # Time window #1 duration
+        PL1_Duration_s: ${toString cfg.p1Window}
+        # Max package power for time window #2
+        PL2_Tdp_W: ${toString cfg.p2Limit}
+        # Time window #2 duration
+        PL2_Duration_S: ${toString cfg.p2Window}
+
+        [AC]
+        # Update the registers every this many seconds
+        Update_Rate_s: 5
+        # Max package power for time window #1
+        PL1_Tdp_W: ${toString cfg.p1Limit}
+        # Time window #1 duration
+        PL1_Duration_s: ${toString cfg.p1Window}
+        # Max package power for time window #2
+        PL2_Tdp_W: ${toString cfg.p2Limit}
+        # Time window #2 duration
+        PL2_Duration_S: ${toString cfg.p2Window}
       '';
     };
 

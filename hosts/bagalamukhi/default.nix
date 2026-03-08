@@ -88,6 +88,7 @@
       };
       intel.enable = true;
       bluetooth.enable = true;
+      tpm.enable = true;
       openrgb = {
         enable = true;
         motherboard = "intel";
@@ -112,7 +113,10 @@
     ai.ollama = {
       enable = true;
     };
-    security.doas.enable = true;
+    security = {
+      doas.enable = true;
+      fail2ban.enable = true;
+    };
   };
 
   # Host-specific display configuration
@@ -151,7 +155,7 @@
     };
 
     blacklistedKernelModules = ["nouveau"];
-    kernelModules = ["lenovo_legion" "phc-intel" "kvm-intel" "ideapad" "apci_call" "cpupower"];
+    kernelModules = ["lenovo_legion" "phc-intel" "ideapad" "apci_call" "cpupower"];
     tmp.cleanOnBoot = true;
     kernelPackages = pkgs.linuxPackages_latest;
 
@@ -164,7 +168,6 @@
 
     kernelParams = [
       "mitigations=off"
-      "dev.i915.perf_stream_paranoid=0"
       "preempt=full"
       "acpi_call"
       "fbcon=nodefer"

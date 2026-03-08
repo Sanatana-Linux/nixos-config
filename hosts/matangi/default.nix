@@ -55,6 +55,12 @@
       iphone.enable = true;
     };
 
+    # Printer
+    printer.brother = {
+      enable = true;
+      user = "smg";
+    };
+
     power.laptop.enable = true;
     programs.nix-ld.enable = true; # Allow running dynamically linked binaries like opencode
     performance = {

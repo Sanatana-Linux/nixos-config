@@ -11,6 +11,19 @@ Each entry follows this format:
 
 ## Changes
 
+- **2026-03-07**: Created Brother laser printer module for matangi
+  - Created `modules/nixos/printer/brother.nix` with CUPS and Brother driver support
+  - Refactored `modules/nixos/printer/default.nix` to use imports pattern instead of inline configuration
+  - Module includes options for: enable, drivers (default: brlaser), user, enableAvahi
+  - Default driver set to `brlaser` only (matching original configuration)
+  - Additional drivers can be added via `modules.printer.brother.drivers = [ pkgs.brlaser pkgs.otherdriver ];`
+  - Enables CUPS printing service with Brother-specific drivers
+  - Enables Avahi for network printer discovery (nssmdns4 + openFirewall)
+  - Adds configured user to `lp` and `scanner` groups
+  - Enabled on matangi with `modules.printer.brother.enable = true` and `user = "smg"`
+  - Verified evaluation: CUPS enabled with brlaser driver, all Avahi settings enabled
+  - Maintains all prior printer functionality while adding configurability
+
 - **2026-03-07**: Created centralized permitted insecure packages module for both hosts
   - Created `modules/nixos/base/permitted-packages.nix` with enable option and extensible packages list
   - Configured `qtwebengine-5.15.19` as permitted insecure package (required by Qt-based applications)

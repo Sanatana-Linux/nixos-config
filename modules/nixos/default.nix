@@ -1,20 +1,19 @@
 {
   imports = [
-    ./base
-    ./hardware
-    ./desktop
-    ./virtualization
-    ./packages
-    ./services
     ./ai
+    ./base
+    ./desktop
+    ./environment
+    ./hardware
+    ./packages
+    ./performance
+    ./power
+    ./printer
+    ./programs
     ./security
     ./shell
     ./system
     ./users
-    ./performance
-    ./power
-    ./programs
-    ./environment
-    ./printer
+    ./virtualization
   ];
 }

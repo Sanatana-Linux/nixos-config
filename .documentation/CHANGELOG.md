@@ -11,6 +11,12 @@ Each entry follows this format:
 
 ## Changes
 
+- **2026-03-08**: Remove redundant local gnome-keyring home-manager wrapper module
+  - Deleted `modules/home-manager/services/gnome-keyring.nix` — thin wrapper over upstream `services.gnome-keyring` that provided no added value and caused confusion (missing `enableSSH` option was added expecting the wrapper to handle it)
+  - Removed from `modules/home-manager/services/default.nix` imports
+  - `home/tlh` and `home/smg`: removed `modules.services.gnome-keyring` block; gnome-keyring is now managed directly via `services.gnome-keyring` in the host's NixOS module (already present in system config)
+  - `home/user` already used `services.gnome-keyring` directly — no change needed
+
 - **2026-03-08**: Overlay cleanup and synchronization across host and home-manager configs
   - Removed unused overlays: `master-packages`, `f2k-packages`, `chaotic-packages` from `overlays/default.nix`
   - Removed unused flake inputs: `master` (nixpkgs/master), `nixpkgs-f2k`, `antigravity-nix`

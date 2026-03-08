@@ -25,7 +25,6 @@
       yazi.enable = true;
     };
     services = {
-      gnome-keyring.enable = true;
       picom.enable = true;
       xscreensaver.enable = true;
     };

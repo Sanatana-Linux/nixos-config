@@ -57,7 +57,6 @@ in {
         pulsemixer
       ]
       ++ optionals cfg.pipewire [
-        helvum
         qpwgraph
       ]
       ++ cfg.extraPackages;

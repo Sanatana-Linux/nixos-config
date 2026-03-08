@@ -1,91 +1,183 @@
 {
   inputs,
   lib,
-  config,
-  pkgs,
-  bhairava-grub-theme,
+  outputs,
   ...
 }: {
   imports = [
-    # Hardware-specific configuration
     ./hardware-configuration.nix
   ];
 
-  # Enable modules using the new "activate by enable option" paradigm
+  # Overlays
+  nixpkgs.overlays = [
+    outputs.overlays.additions
+    outputs.overlays.modifications
+    outputs.overlays.stable-packages
+    outputs.overlays.master-packages
+    outputs.overlays.f2k-packages
+    outputs.overlays.chaotic-packages
+    inputs.antigravity-nix.overlays.default
+  ];
+
   modules = {
-    system.boot = {
-      enable = true;
-      theme.enable = true;
-      windowsDualBoot.enable = true;
-      advancedBios.enable = true;
+    # System
+    system = {
+      boot = {
+        enable = true;
+        theme.enable = true;
+        windowsDualBoot.enable = true;
+        advancedBios.enable = true;
+      };
+      kernel = {
+        enable = true;
+        lenovo-legion.enable = true; # Shared Lenovo Legion hardware profile
+        plymouth.enable = true;
+      };
     };
+
     base = {
       enable = true;
-      timezone = "America/New_York";
       nix.enable = true;
       permittedPackages.enable = true;
     };
 
+    # User
+    users.tlh.enable = true;
     shell = {
       enable = true;
       zsh = true;
     };
-    users.tlh.enable = true;
 
     # Programs
-    programs = {
-      nix-ld.enable = true; # Allow running dynamically linked binaries like opencode
-    };
+    programs.nix-ld.enable = true;
 
     # Virtualization
     virtualization = {
-      virt-manager.enable = true; # QEMU, libvirt, KVM
-      waydroid.enable = true; # Waydroid Android Apps
-      lxc.enable = true; # LXC containers + ethertypes
+      docker = {
+        enable = true;
+        rootless = true;
+        nvidia = true;
+      };
+      virt-manager.enable = true;
+      waydroid.enable = true;
+      lxc.enable = true;
     };
 
-    # Performance optimizations
+    # Performance
     performance = {
       default.enable = true;
-      undervolt.enable = true; # Intel CPU undervolting + P-State limits
+      undervolt.enable = true;
     };
 
     # Services
     services = {
-      core.enable = true; # FWUPD, fstrim, journald, dbus
-      ssh.enable = true; # OpenSSH server
-      udev.enable = true; # udisks2 and hardware udev rules
+      core.enable = true;
+      ssh.enable = true;
+      udev.enable = true;
     };
 
-    # Power management for laptop
+    # Power
     power.laptop.enable = true;
 
+    # Packages
     packages = {
-      archives.enable = true;
+      archives = {
+        enable = true;
+        basicFormats = true;
+        modernCompression = true;
+        parallelTools = true;
+        specializedFormats = true;
+        integrationLibs = true;
+      };
       core.enable = true;
-      devtools.enable = true;
-      fonts.enable = true;
-      gui.enable = true;
+      development = {
+        enable = true;
+        linters = true;
+        versionControl = true;
+        buildTools = true;
+        runtimeLanguages = true;
+        luaEcosystem = true;
+        rustEcosystem = true;
+        nixUtilities = true;
+        systemCompilers = true;
+        webDevelopment = true;
+        databases = true;
+        editors = true;
+        treeSitterGrammars = true;
+      };
+      fonts = {
+        enable = true;
+        nerdFonts = true;
+        iconFonts = true;
+        systemFonts = true;
+      };
+      gui = {
+        enable = true;
+        applicationLauncher = true;
+        mediaTools = true;
+        developmentTools = true;
+        windowManagement = true;
+        messaging = true;
+        extraPackages = true;
+        libs = {
+          enable = true;
+          coreGraphics = true;
+          gobjectSupport = true;
+          desktopIntegration = true;
+          xfceSupport = true;
+          audioTerminal = true;
+          pythonBindings = true;
+          fontSupport = true;
+        };
+      };
       multimedia = {
         enable = true;
-        creators = true; # gimp, olive-editor, etc.
+        videoTools = true;
+        imageTools = true;
+        streamingTools = true;
+        gstreamerPlugins = true;
+        creators = true;
       };
-      network.enable = true;
-      shell.enable = true;
+      network = {
+        enable = true;
+        gitTools = true;
+        wirelessTools = true;
+        downloadTools = true;
+        compressionLibs = true;
+      };
+      python = {
+        enable = true;
+        development = true;
+        webDevelopment = true;
+        dataProcessing = true;
+        systemIntegration = true;
+        graphics = true;
+      };
+      shell = {
+        enable = true;
+        modernTools = true;
+        systemUtils = true;
+        fileManagement = true;
+        downloadTools = true;
+        zshPlugins = true;
+        inputSupport = true;
+      };
       system = {
         enable = true;
-        performance.enable = true; # Includes sysz, htop, etc.
-        desktop.enable = true; # X11 utilities, dbus, etc.
-        hardware.enable = true; # Hardware monitoring tools
-        filesystem.enable = true; # Filesystem utilities
-        multimedia.enable = true; # Media processing tools
+        filesystem = true;
+        hardware = true;
+        network = true;
+        performance = true;
+        desktop = true;
+        multimedia = true;
       };
     };
+
+    # Hardware
     hardware = {
       nvidia = {
         enable = true;
-        cudaSupport = true;
-        gamingOptimizations = false;
+        cuda.enable = true;
       };
       intel.enable = true;
       bluetooth.enable = true;
@@ -98,22 +190,24 @@
         enable = true;
         pipewire = true;
       };
+      networking = {
+        enable = true;
+        hostName = "bagalamukhi";
+        firewall.enable = true;
+      };
+      android.enable = true;
     };
+
+    # Desktop
     desktop = {
       xorg.enable = true;
-      awesomewm = {
-        enable = true;
-        useGitVersion = true;
-      };
+      awesomewm.enable = true;
     };
-    virtualization.docker = {
-      enable = true;
-      rootless = true;
-      nvidia = true;
-    };
-    ai.ollama = {
-      enable = true;
-    };
+
+    # AI
+    ai.ollama.enable = true;
+
+    # Security
     security = {
       doas.enable = true;
       fail2ban.enable = true;
@@ -127,110 +221,19 @@
     dpi = lib.mkForce 96;
   };
 
-  # OpenGL configuration
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
   };
 
-  # Boot configuration
-  boot = {
-    # early boot settings
-    initrd = {
-      systemd.enable = true;
-      verbose = false;
-      compressor = "zstd";
-      compressorArgs = ["-19"];
-      kernelModules = [
-        "nvidia"
-        "nvidiafb"
-        "nvidia-drm"
-        "nvidia-uvm"
-        "nvidia-modeset"
-        "intel_cstate"
-        "aesni_intel"
-        "intel_uncore"
-        "intel_uncore_frequency"
-        "intel_powerclamp"
-      ];
-    };
-
-    blacklistedKernelModules = ["nouveau"];
-    kernelModules = ["lenovo_legion" "phc-intel" "ideapad" "apci_call" "cpupower"];
-    tmp.cleanOnBoot = true;
-    kernelPackages = pkgs.linuxPackages_latest;
-
-    extraModulePackages = [
-      config.boot.kernelPackages.acpi_call
-      config.boot.kernelPackages.cpupower
-      config.boot.kernelPackages.lenovo-legion-module
-      config.boot.kernelPackages.nvidiaPackages.stable
-    ];
-
-    kernelParams = [
-      "mitigations=off"
-      "preempt=full"
-      "acpi_call"
-      "fbcon=nodefer"
-      "splash"
-      "quiet"
-      "rd.udev.log_priority=3"
-      "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
-      "nvidia-drm.modeset=1"
-      "nvme_core.default_ps_max_latency_us=0"
-      "lenovo-legion.force=1"
-    ];
-  };
-
-  # Boot Plymouth configuration
-  boot.plymouth.enable = true;
-
-  # Hardware support
-  hardware = {
-    enableAllFirmware = true;
-    enableRedistributableFirmware = true;
-  };
-
-  # Networking
-  networking = {
-    hostName = "bagalamukhi";
-    networkmanager.enable = true;
-  };
-
-  # Service configuration
   services = {
-    logind = {
-      settings.Login.HandleLidSwitch = "suspend";
-      settings.Login.HandlePowerKey = "ignore";
-      settings.Login.HandlePowerKeyLongPress = "suspend";
+    logind.settings.Login = {
+      HandleLidSwitch = "suspend";
+      HandlePowerKey = "ignore";
+      HandlePowerKeyLongPress = "suspend";
     };
-    displayManager = {
-      defaultSession = "none+awesome";
-    };
+    displayManager.defaultSession = "none+awesome";
   };
 
-  # Host-specific packages
-  environment = {
-    pathsToLink = ["/share/zsh"];
-    systemPackages = with pkgs; [
-      cpufrequtils
-      config.boot.kernelPackages.acpi_call
-      nvme-cli
-      grub2
-      mesa
-      mesa-demos
-      plymouth
-      kdePackages.plymouth-kcm
-      lenovo-legion
-      i2c-tools
-      peakperf
-      intel-media-driver
-      linuxHeaders
-      luajitPackages.ldbus
-      xssproxy
-    ];
-  };
-
-  # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "24.11";
 }

@@ -11,6 +11,165 @@ Each entry follows this format:
 
 ## Changes
 
+- **2026-03-08**: Package sub-options no longer default enabled
+  - Removed `default = true` from all package module sub-options in `packages.nix`
+  - Host configs now explicitly enable each package sub-option they need
+  - Updated bagalamukhi with full package sub-option enablements
+  - Updated matangi with full package sub-option enablements
+  - Updated chhinamasta (live ISO) with minimal sub-options (fonts, network basics, shell basics)
+  - Added `ventoy-1.1.10` to permitted insecure packages
+  - Fixed garbage terminal output pasted into awesomewm.nix
+
+- **2026-03-08**: Moved host-specific packages to appropriate modules
+  - Added `grub2` to `boot.nix` module
+  - Added `i2c-tools` to `openrgb.nix` module
+  - Added `peakperf` to `performance/default.nix` module
+  - Added `xssproxy` to `awesomewm.nix` module (ldbus already present)
+  - Removed duplicate `intel-media-driver` from `nvidia.nix` (already in `intel.nix`)
+  - Consolidated `pathsToLink` in `environment/default.nix` (added /share/applications, /share/xdg-desktop-portal)
+  - Cleaned up bagalamukhi and matangi host configs - removed all packages now provided by modules
+  - Cleaned up nvidia.nix - removed useless `gamingOptimizations` option, nested CUDA under `.cuda.enable`, PRIME under `.prime.*`
+
+- **2026-03-08**: Consolidated kernel and networking configuration into proper modules
+  - Created `modules/nixos/system/kernel.nix` with `lenovo-legion.enable` profile option
+  - Lenovo Legion profile includes shared kernel params, modules, extraModulePackages for both bagalamukhi and matangi
+  - Updated `modules/nixos/hardware/networking.nix` with `hostName` option and firewall/wifi sub-options
+  - Refactored bagalamukhi and matangi host configs to use new module options instead of inline configuration
+  - Removed duplicate timezone/base settings from host configs (defaults in modules)
+  - Fixed duplicate `tcp_fastopen` sysctl definition (kept in doas.nix, removed from networking.nix)
+  - Fixed deprecated packages: neofetch→fastfetch, python312Full→python312, removed pandoc-cli, tree-sitter-jsonc, xorg.rgb, helvum
+  - Fixed missing `unstable-packages` overlay reference in home configs (changed to `stable-packages`)
+  - Live ISO (chhinamasta) unaffected - does not enable lenovo-legion profile
+
+- **2026-03-08**: Consolidated all package modules into single unified packages.nix
+  - Merged 12 separate package modules (archives, core, development, devtools, fonts, gui, guilibs, multimedia, network, python, shell, system) into `modules/nixos/packages/packages.nix`
+  - Implemented nested category structure under `modules.packages.*` with sensible groupings
+  - Merged redundant `development.nix` into `devtools` structure, renamed to `development`
+  - Moved `guilibs` under `gui.libs.*` for better organization
+  - Fixed misplaced packages in multimedia.creators:
+    - `beautysh` → development.linters
+    - `gi-docgen`, `gibo` → development.webDevelopment
+    - `gsettings-desktop-schemas`, `gnome.nixos-gsettings-overrides`, `pantheon.granite` → gui.libs.desktopIntegration
+    - `libdrm`, `libgee`, `libplacebo`, `libtheora`, `libvpl`, `libwebcam`, `lv2` → multimedia.videoTools / gui.libs
+    - `p7zip`, `lrzip` → archives.specializedFormats
+    - `imgpatchtools`, `lsix`, `redoflacs` → multimedia.imageTools
+    - `pygobject3` → gui.libs.pythonBindings
+  - Preserved fonts.fontconfig settings critical for font cache functionality
+  - Maintained minimal presets for live ISO (chhinamasta)
+  - Updated all host configurations to use new nested option structure
+  - Removed old individual module files
+
+- **2026-03-08**: Refactored multimedia module to use feature-based options instead of host checking
+  - Modified `modules/nixos/packages/multimedia.nix` to use `stableVideoEditors` option instead of checking `config.networking.hostName`
+  - Removed `isMatangi` and `isBagalamukhi` local variables from the module to align with "activate by enable option" paradigm
+  - Enabled `stableVideoEditors = true;` in `hosts/matangi/default.nix` to maintain existing functionality
+  - This change allows seamless integration of these stable video editing packages into future host configurations
+
+- **2026-03-08**: Cleaned up patches and removed android translation layer
+  - Removed `android-translation-layer-fixes.nix` overlay and associated patches
+  - Removed unused patches: `fix-bionic-arm64-tls*.patch` and `wolfssl-disable-tests.patch`
+  - Moved needed `olive-editor-qt610-fix.patch` directly to `modules/nixos/packages/` where it's conceptually required
+  - Updated `overlays/default.nix` to reference the new patch location
+  - Removed the now-empty top-level `patches` directory
+
+- **2026-03-08**: Refactored assets directories to be colocated with their respective modules
+  - Removed redundant `assets` directory from the repository root
+  - Moved EFI files from `assets/bios/` to `modules/nixos/system/assets/`
+  - Updated EFI file references in `modules/nixos/system/boot.nix`
+  - Moved wallpapers from `assets/wallpaper/` to `modules/nixos/desktop/assets/`
+  - Updated wallpaper references in `modules/nixos/desktop/xorg.nix`
+  - Kept `.assets` directory as it contains hidden installation and setup scripts
+
+- **2026-03-07**: Reorganized documentation with comprehensive sops-nix guide and restored post-installation steps
+  - Created `.documentation/sops-nix-guide.md` - comprehensive guide to secrets management with sops-nix
+  - Covers: how sops-nix works, key types (PGP/age), .sops.yaml structure, repository layout, NixOS integration
+  - Documents workflows: editing secrets, adding secrets, adding new hosts, user environment variables
+  - Includes security considerations, best practices, common pitfalls, and troubleshooting
+  - Updated `.documentation/quickstart.md` with restored post-installation steps from installation-not-encrypted.md
+  - Added: set ownership/git config, initialize own git repo, apply configuration changes
+  - Reorganized secrets section with "First Time Secrets Setup" and "Adding New Host to Existing Secrets Repository" subheaders
+  - Links to comprehensive sops-nix-guide.md for detailed information
+  - Removed `.assets/SECRETS_BOOTSTRAP_DESIGN.md` (converted to proper documentation)
+
+- **2026-03-07**: CRITICAL: Reverted NVIDIA configuration to PRIME sync mode
+  - Changed `modules/nixos/hardware/nvidia.nix` back to PRIME sync mode (offload.enable = false, sync.enable = true)
+  - Removed forceFullCompositionPipeline setting that was causing display issues
+  - Added "Hardware-Specific Rules" section to AGENTS.md with NVIDIA configuration warning
+  - **CRITICAL WARNING**: NEVER switch NVIDIA PRIME mode to offload - causes screen flashing, tearing, and compositor instability on both bagalamukhi and matangi
+
+- **2026-03-07**: Enhanced AGENTS.md with documentation management guidelines
+  - Added comprehensive "Documentation Management" section to AGENTS.md
+  - Renamed "Changelog Management" to subsection under "Documentation Management"
+  - Added "Documentation File Updates" guidelines: when to update existing docs, create new docs, or remove outdated docs
+  - Specified criteria for creating new documentation (installation workflows, significant features, complex patterns, troubleshooting)
+  - Specified criteria for updating existing documentation (module changes, installation changes, new commands, structure changes)
+  - Specified what NOT to document (minor internal changes, simple bug fixes, routine package updates)
+
+- **2026-03-07**: Created installation quickstart documentation
+  - Created `.documentation/quickstart.md` with single-command installation workflow from live ISO
+  - Documented complete post-installation secrets management setup with direct commands (no wrapper scripts)
+  - Includes: nix-shell environment setup, curl command to download install.sh from GitHub, step-by-step sops configuration
+  - Documented both sops-nix secrets management and GPG-encrypted .env alternatives
+  - Included troubleshooting section for common installation and secrets issues
+  - Added quick reference commands for daily workflow
+  - Removed redundant installation documentation files (installation-with-encryption.md, installation-not-encrypted.md)
+  - Updated README.md to link only to quickstart, encrypted-root, and live-usb docs
+
+- **2026-03-07**: CRITICAL FIX - Removed redundant unstable flake input and fixed NVIDIA hybrid graphics issues
+  - **Flake input cleanup**:
+    - Removed redundant `unstable` flake input (line 7) - nixpkgs is already nixos-unstable
+    - Removed `nixpkgs-unstable` input that pointed to master (nonsensical duplication)
+    - Default nixpkgs IS unstable, no need for separate pkgs.unstable namespace
+    - Removed `unstable-packages` overlay from overlays/default.nix
+    - Updated both host configs to remove unstable-packages overlay reference
+    - Kept stable and master overlays for specific package needs
+  - **Video editor packages corrected**:
+    - Fixed olive-editor to use `pkgs.stable.olive-editor` (not pkgs.unstable)
+    - Stable versions provide better reliability for long video editing sessions
+    - All matangi video packages (olive, shotcut, openshot) now use stable
+  - **NVIDIA hybrid graphics fixes** (affects both bagalamukhi and matangi with Intel + NVIDIA 4070):
+    - **Changed PRIME mode from sync to offload** - sync forces all rendering through NVIDIA causing compositor issues
+    - **Removed forceFullCompositionPipeline** - this was causing flashing windows and context menus in GIMP and other apps
+    - **Added PRIME offload environment variables**: `__NV_PRIME_RENDER_OFFLOAD=1`, `__VK_LAYER_NV_optimus=NVIDIA_only`
+    - **Enabled nvidia-offload command** for explicit GPU selection when needed
+    - Intel GPU now handles desktop/compositing (no tearing/flashing), NVIDIA available for demanding apps
+    - CUDA packages already included in nvidia module when cudaSupport=true
+    - Video editors can now properly utilize NVIDIA GPU via offload
+  - **Impact**: 
+    - Cleaner flake with no redundant inputs
+    - Fixes flashing windows/context menus in GIMP on bagalamukhi
+    - Video editors on matangi can now properly use NVIDIA GPU acceleration
+    - Better power efficiency with hybrid graphics
+    - Maintains identical hardware support for both hosts (14th gen i9 + RTX 4070 mobile)
+
+- **2026-03-07**: CRITICAL FIX - Restored feature parity for matangi configuration after module refactoring
+  - **Root cause**: matangi was missing critical packages and services that were present in original configuration before the module refactor
+  - **Missing critical services restored**:
+    - Added `networking.networkmanager.enable = true` (was completely missing - matangi had no network management!)
+    - Added `services.udev.enable = true` for hardware device management
+    - Added full networking configuration: nameservers [1.1.1.1, 8.8.8.8, 8.8.4.4, 9.9.9.9], NetworkManager settings (dns="default", unmanaged=["docker0","rndis0"], wifi.powersave=true), firewall disabled, TCP sysctl optimizations
+    - Disabled `systemd.services.NetworkManager-wait-online.enable` for faster boot
+  - **Missing critical packages restored**:
+    - Added `packages.archives.enable = true` for archive handling utilities
+    - Added `packages.system.performance.enable = true` (includes sysz, htop, iostat, etc.)
+    - Added `packages.system.desktop.enable = true` (X11 utilities, dbus tools)
+    - Added `packages.system.hardware.enable = true` (hardware monitoring tools)
+    - Added `packages.system.filesystem.enable = true` (filesystem utilities)
+    - Added `packages.system.multimedia.enable = true` (media processing tools)
+  - **Missing overlays configuration restored**:
+    - Added `nixpkgs.overlays` configuration to both matangi and bagalamukhi host files
+    - Overlays: additions, modifications, unstable-packages, stable-packages, f2k-packages, chaotic-packages, antigravity-nix
+    - Required for `pkgs.stable.*` and `pkgs.unstable.*` package references in modules
+  - **Home-manager module loading fixed**:
+    - Added `sharedModules = [./modules/home-manager]` to matangi's flake configuration
+    - Ensures home-manager modules are properly loaded for smg user
+  - **Video editing packages corrected for matangi**:
+    - Updated multimedia module to use `pkgs.unstable.olive-editor` (as in original config, not stable)
+    - Added `pkgs.stable.shotcut` and `pkgs.stable.openshot-qt` for matangi
+    - Packages are matangi-specific (not enabled on bagalamukhi)
+  - **Verified**: NetworkManager enabled, CUPS enabled, sysz available, all overlays loaded, configuration evaluates successfully
+  - **Impact**: Restores matangi to same functionality as BEFORE refactor (not matching bagalamukhi, maintaining host-specific differences)
+
 - **2026-03-07**: Created Brother laser printer module for matangi
   - Created `modules/nixos/printer/brother.nix` with CUPS and Brother driver support
   - Refactored `modules/nixos/printer/default.nix` to use imports pattern instead of inline configuration

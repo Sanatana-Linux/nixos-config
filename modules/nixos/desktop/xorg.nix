@@ -43,7 +43,7 @@ with lib; {
         displayManager = {
           lightdm = mkIf config.modules.desktop.xorg.displayManager.lightdm.enable {
             enable = true;
-            background = ../../../assets/wallpaper/monokaiprospectrum.png;
+            background = ./assets/monokaiprospectrum.png;
             greeters.gtk = {
               enable = true;
               theme = {

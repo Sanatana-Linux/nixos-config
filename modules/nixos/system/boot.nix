@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 with lib; {
@@ -51,6 +52,8 @@ with lib; {
   };
 
   config = mkIf config.modules.system.boot.enable {
+    environment.systemPackages = with pkgs; [grub2];
+
     boot.loader = {
       timeout = mkIf (config.modules.system.boot.timeoutStyle == "hidden") null;
       efi = {
@@ -70,17 +73,17 @@ with lib; {
         bhairava-grub-theme.enable = config.modules.system.boot.theme.enable;
 
         extraFiles = mkIf config.modules.system.boot.advancedBios.enable {
-          "DisplayEngine.efi" = ../../../assets/bios/DisplayEngine.efi;
-          "EFI/Boot/Bootx64.efi" = ../../../assets/bios/Bootx64.efi;
-          "Loader.efi" = ../../../assets/bios/Loader.efi;
-          "SREP_Config.cfg" = ../../../assets/bios/SREP_Config.cfg;
-          "SetupBrowser.efi" = ../../../assets/bios/SetupBrowser.efi;
-          "SuppressIFPatcher.efi" = ../../../assets/bios/SuppressIFPatcher.efi;
-          "UiApp.efi" = ../../../assets/bios/UiApp.efi;
+          "DisplayEngine.efi" = ./assets/DisplayEngine.efi;
+          "EFI/Boot/Bootx64.efi" = ./assets/Bootx64.efi;
+          "Loader.efi" = ./assets/Loader.efi;
+          "SREP_Config.cfg" = ./assets/SREP_Config.cfg;
+          "SetupBrowser.efi" = ./assets/SetupBrowser.efi;
+          "SuppressIFPatcher.efi" = ./assets/SuppressIFPatcher.efi;
+          "UiApp.efi" = ./assets/UiApp.efi;
         };
 
         # Combined extra entries for Windows Dual Boot and Advanced BIOS
-        extraEntries = 
+        extraEntries =
           optionalString config.modules.system.boot.windowsDualBoot.enable ''
             menuentry "Windows 11" --class windows --class os {
               insmod part_gpt
@@ -95,8 +98,8 @@ with lib; {
               search --no-floppy --fs-uuid --set=root 7443-B072
               chainloader /EFI/Boot/Bootx64.efi
             }
-          '' +
-          optionalString config.modules.system.boot.advancedBios.enable ''
+          ''
+          + optionalString config.modules.system.boot.advancedBios.enable ''
             menuentry 'Advanced UEFI Firmware Settings' --class settings {
               insmod fat
               insmod chain

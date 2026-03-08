@@ -28,7 +28,7 @@
     lz4
     mpc
     mpg123
-    neofetch
+    fastfetch
     pciutils
     perl
     procs

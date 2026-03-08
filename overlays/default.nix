@@ -14,24 +14,19 @@
       patches =
         (oldAttrs.patches or [])
         ++ [
-          ../patches/olive-editor-qt610-fix.patch
+          ../modules/nixos/packages/olive-editor-qt610-fix.patch
         ];
     });
   };
 
-  # When applied, the unstable nixpkgs set (declared in the flake inputs) will
-  # be accessible through 'pkgs.unstable'
-
-  unstable-packages = final: prev: {
-    unstable = import inputs.unstable {
+  # Master packages overlay (bleeding edge)
+  master-packages = final: prev: {
+    master = import inputs.master {
       system = final.stdenv.hostPlatform.system;
       config.allowUnfree = true;
-      overlays = [
-        # Fix olive-editor Qt 6.10 compatibility
-        (import ./olive-editor-qt610-fix.nix)
-      ];
     };
   };
+
   f2k-packages = final: prev: {
     f2k = import inputs.nixpkgs-f2k {
       system = final.stdenv.hostPlatform.system;
@@ -44,12 +39,7 @@
       config.allowUnfree = true;
     };
   };
-  master-packages = final: prev: {
-    master = import inputs.nixpkgs-master {
-      system = final.stdenv.hostPlatform.system;
-      config.allowUnfree = true;
-    };
-  };
+
   chaotic-packages = final: prev: {
     chaotic = import inputs.chaotic {
       system = final.stdenv.hostPlatform.system;

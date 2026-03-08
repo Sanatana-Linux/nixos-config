@@ -27,6 +27,9 @@ in {
       undervolt.enable = true;
     };
 
+    # Performance analysis tools
+    environment.systemPackages = with pkgs; [peakperf];
+
     # Additional kernel sysctl settings from historical config
     boot.kernel.sysctl = {
       "vm.oom_kill_allocating_task" = true;

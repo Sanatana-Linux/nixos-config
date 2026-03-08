@@ -100,10 +100,12 @@ in {
 
 <img width="150px" height="150px"  src="./assets/nix.svg" alt="prettier nixos label" align="right" />
 
+### Quickstart
+
+**[⚡ Installation Quickstart](../.documentation/quickstart.md)** - Single-command installation script + post-install secrets bootstrap
+
 ### Installation and Setup
 
-1. [Installation with Encryption](../.documentation/installation-with-encryption.md) - Full disk encryption bootstrap guide.
-1. [Installation without Encryption](../.documentation/installation-not-encrypted.md) - Standard installation reference.
 1. [Encrypted Root Setup](../.documentation/encrypted-root.md) - LUKS root partition details.
 1. [Live USB / ISO](../.documentation/live-usb.md) - Building and using the Chhinamasta live environment.
 

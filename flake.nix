@@ -4,12 +4,8 @@
   inputs = {
     master.url = "github:nixos/nixpkgs/master?shallow=1";
     stable.url = "github:nixos/nixpkgs/nixos-25.05?shallow=1";
-    unstable.url = "github:nixos/nixpkgs/nixos-unstable?shallow=1";
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable?shallow=1";
-    # TODO change this to master as well as the unstable.pkg(s) to
-    # master.pkg(s)
-    # "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/master?shallow=1";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable?shallow=1";
+    # nixpkgs is our default (unstable), no separate unstable input needed
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     zen-browser.url = "github:MarceColl/zen-browser-flake";
     nixpkgs-f2k.url = "github:moni-dz/nixpkgs-f2k";
@@ -52,7 +48,6 @@
     nixpkgs,
     master,
     stable,
-    unstable,
     home-manager,
     higgs-boson,
     fx-autoconfig,
@@ -185,6 +180,7 @@
               useUserPackages = true;
               backupFileExtension = "bak";
               extraSpecialArgs = {inherit inputs outputs;};
+              sharedModules = [./modules/home-manager];
               users = {
                 smg = {imports = [./home/smg/default.nix];};
               };

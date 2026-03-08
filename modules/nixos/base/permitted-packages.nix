@@ -23,6 +23,7 @@ in {
       permittedInsecurePackages =
         [
           "qtwebengine-5.15.19"
+          "ventoy-1.1.10"
         ]
         ++ cfg.packages;
     };

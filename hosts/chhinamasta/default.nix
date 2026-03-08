@@ -32,21 +32,37 @@ in {
     users.user.enable = true;
     packages = {
       core.enable = true;
-      devtools = {
+      development = {
         enable = true;
         minimal = true;
       };
-      fonts.enable = true;
+      fonts = {
+        enable = true;
+        nerdFonts = true;
+        iconFonts = true;
+        systemFonts = true;
+      };
       gui = {
         enable = true;
         minimal = true;
+        libs.enable = true;
       };
       multimedia = {
         enable = true;
         minimal = true;
       };
-      network.enable = true;
-      shell.enable = true;
+      network = {
+        enable = true;
+        wirelessTools = true;
+        downloadTools = true;
+      };
+      python.enable = true;
+      shell = {
+        enable = true;
+        modernTools = true;
+        systemUtils = true;
+        fileManagement = true;
+      };
       system = {
         enable = true;
         minimal = true;
@@ -58,10 +74,7 @@ in {
         pipewire = true;
       };
     };
-    desktop.awesomewm = {
-      enable = true;
-      useGitVersion = true;
-    };
+    desktop.awesomewm.enable = true;
   };
 
   services.xserver.enable = true;

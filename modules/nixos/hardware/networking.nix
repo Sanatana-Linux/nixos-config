@@ -4,46 +4,69 @@
   ...
 }:
 with lib; {
-  options.modules.hardware.networking.enable = mkEnableOption "Network hardware support";
+  options.modules.hardware.networking = {
+    enable = mkEnableOption "Network hardware support";
+
+    hostName = mkOption {
+      type = types.str;
+      description = "The hostname for this machine";
+    };
+
+    firewall = {
+      enable = mkOption {
+        type = types.bool;
+        default = false;
+        description = "Enable firewall";
+      };
+      allowedTCPPorts = mkOption {
+        type = types.listOf types.port;
+        default = [];
+        description = "Allowed TCP ports";
+      };
+      allowedUDPPorts = mkOption {
+        type = types.listOf types.port;
+        default = [];
+        description = "Allowed UDP ports";
+      };
+    };
+
+    wifi = {
+      powersave = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Enable WiFi power saving";
+      };
+      randomMac = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Randomize WiFi MAC address";
+      };
+    };
+  };
 
   config = mkIf config.modules.hardware.networking.enable {
+    # NOTE: tcp_fastopen and other sysctl settings are in security/doas.nix
     boot.kernel.sysctl = {
-      # Fast Open is a TCP extension that reduces network latency by packing
-      # data in the sender's initial TCP SYN.
-      # NOTE: Setting 3 = enable for both incoming and outgoing connections.
-      "net.ipv4.tcp_fastopen" = 3;
       "net.ipv4.ip_forward" = 0;
     };
 
     networking = {
+      hostName = config.modules.hardware.networking.hostName;
       nameservers = ["1.1.1.1" "8.8.8.8" "8.8.4.4" "9.9.9.9"];
-      # make sure DHCP received nameservers don't override above
       networkmanager = {
         enable = true;
         dns = "default";
         unmanaged = ["docker0" "rndis0"];
         wifi = {
-          # not while using hotel wifi at least
-          # macAddress = "random";
-          powersave = true;
+          macAddress = "random";
+          powersave = config.modules.hardware.networking.wifi.powersave;
         };
       };
 
       firewall = {
-        enable = false;
-        #   allowedTCPPorts = [22 53 69 80 443 3000 1087 3456 5572 11434];
-        #   allowedUDPPortRanges = [
-        #     {
-        #       from = 4000;
-        #       to = 4007;
-        #     }
-        #     {
-        #       from = 8000;
-        #       to = 8010;
-        #     }
-        #   ];
-        #   allowPing = false;
-        #   logReversePathDrops = true;
+        enable = config.modules.hardware.networking.firewall.enable;
+        allowedTCPPorts = config.modules.hardware.networking.firewall.allowedTCPPorts;
+        allowedUDPPorts = config.modules.hardware.networking.firewall.allowedUDPPorts;
       };
     };
 

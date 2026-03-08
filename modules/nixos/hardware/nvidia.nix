@@ -8,24 +8,33 @@ with lib; let
   cfg = config.modules.hardware.nvidia;
 in {
   options.modules.hardware.nvidia = {
-    enable = mkEnableOption "NVIDIA graphics hardware support with CUDA";
+    enable = mkEnableOption "NVIDIA graphics hardware support";
 
-    cudaSupport = mkOption {
-      type = types.bool;
-      default = true;
-      description = "Enable CUDA toolkit and related packages";
+    cuda = {
+      enable = mkOption {
+        type = types.bool;
+        default = false;
+        description = "Enable CUDA toolkit and related packages";
+      };
     };
 
-    gamingOptimizations = mkOption {
-      type = types.bool;
-      default = false;
-      description = "Enable gaming-specific optimizations";
+    prime = {
+      intelBusId = mkOption {
+        type = types.str;
+        default = "PCI:00:02:0";
+        description = "PCI bus ID of the Intel GPU (use 'lspci | grep VGA')";
+      };
+      nvidiaBusId = mkOption {
+        type = types.str;
+        default = "PCI:01:00:0";
+        description = "PCI bus ID of the NVIDIA GPU (use 'lspci | grep 3D')";
+      };
     };
 
     driver = mkOption {
-      type = types.str;
+      type = types.enum ["stable" "latest" "beta" "production"];
       default = "production";
-      description = "Which NVIDIA driver to use (stable, latest, beta, production)";
+      description = "Which NVIDIA driver to use";
     };
   };
 
@@ -33,7 +42,7 @@ in {
     environment = {
       variables =
         {
-          # Display scaling optimizations
+          # Display scaling
           GDK_SCALE = "1";
           GDK_DPI_SCALE = "1";
           _JAVA_OPTIONS = "-Dsun.java2d.uiScale=1";
@@ -49,12 +58,16 @@ in {
           # Firefox optimizations
           MOZ_DISABLE_RDD_SANDBOX = "1";
           NVD_BACKEND = "direct";
+
+          # PRIME sync mode variables
+          __NV_PRIME_RENDER_OFFLOAD = "1";
+          __VK_LAYER_NV_optimus = "NVIDIA_only";
         }
-        // (mkIf cfg.cudaSupport {
+        // optionalAttrs cfg.cuda.enable {
           CUDA_PATH = "${pkgs.cudatoolkit}";
           EXTRA_LDFLAGS = "-L/lib -L${config.boot.kernelPackages.nvidiaPackages.${cfg.driver}}/lib";
           EXTRA_CCFLAGS = "-I/usr/include";
-        });
+        };
 
       systemPackages = with pkgs;
         [
@@ -65,12 +78,11 @@ in {
           libglut
           libglvnd
 
-          # Mesa and related
+          # Mesa
           mesa
           mesa_glu
           mesa-gl-headers
           mesa-demos
-          intel-media-driver
 
           # NVIDIA specific
           nvidia-vaapi-driver
@@ -106,8 +118,7 @@ in {
           zenith-nvidia
           kompute
         ]
-        ++ optionals cfg.cudaSupport [
-          # CUDA packages
+        ++ optionals cfg.cuda.enable [
           cudatoolkit
           cudaPackages.libnvjitlink
           cudaPackages.nvidia_fs
@@ -123,7 +134,7 @@ in {
 
     nixpkgs.config = {
       allowUnfree = true;
-      cudaSupport = cfg.cudaSupport;
+      cudaSupport = cfg.cuda.enable;
       nvidia.acceptLicense = true;
       allowUnfreePredicate = pkg:
         builtins.elem (lib.getName pkg) [
@@ -136,7 +147,7 @@ in {
     };
 
     hardware = {
-      nvidia-container-toolkit.enable = cfg.cudaSupport;
+      nvidia-container-toolkit.enable = cfg.cuda.enable;
       graphics = {
         enable = true;
         enable32Bit = true;
@@ -158,26 +169,23 @@ in {
         modesetting.enable = true;
         nvidiaSettings = true;
         nvidiaPersistenced = true;
-        forceFullCompositionPipeline = true;
         dynamicBoost.enable = true;
 
         powerManagement = {
-          # Experimental power management
           enable = false;
           finegrained = false;
         };
 
-        # Use proprietary driver (open source driver is still alpha quality)
         open = false;
         package = config.boot.kernelPackages.nvidiaPackages.${cfg.driver};
 
         prime = {
+          # CRITICAL: Never change to offload mode - causes display issues
           sync.enable = mkForce true;
           offload.enable = mkForce false;
 
-          # Use "lspci | grep -E 'VGA|3D'" to get PCI-bus IDs
-          intelBusId = "PCI:00:02:0";
-          nvidiaBusId = "PCI:01:00:0";
+          intelBusId = cfg.prime.intelBusId;
+          nvidiaBusId = cfg.prime.nvidiaBusId;
         };
       };
     };

@@ -54,6 +54,6 @@ in {
     };
 
     # Install the package and extra system packages
-    environment.systemPackages = [cfg.package] ++ cfg.extraSystemPackages;
+    environment.systemPackages = with pkgs; [cfg.package i2c-tools] ++ cfg.extraSystemPackages;
   };
 }

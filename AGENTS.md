@@ -28,6 +28,24 @@ This repository manages three NixOS hosts, each with a specific primary user:
 - **Error handling:** Use `lib.mkIf` for conditionals; pass inputs via `specialArgs`.
 - **Testing:** Always run `nixos-rebuild test` before switching; check debugging/ for more.
 
+## Hardware-Specific Rules
+
+### NVIDIA Configuration
+**CRITICAL: NEVER SWITCH THE NVIDIA PRIME MODE TO OFFLOAD**
+
+The NVIDIA module (`modules/nixos/hardware/nvidia.nix`) uses PRIME sync mode. DO NOT change it to offload mode as this causes issues on both bagalamukhi and matangi hosts:
+- Screen flashing/tearing
+- Compositor instability
+- Display artifacts
+
+**Always keep:**
+```nix
+prime = {
+  offload.enable = mkForce false;
+  sync.enable = mkForce true;
+};
+```
+
 ## Architecture
 - Hosts: `hosts/` (machine configs)
 - Modules: `hosts/shared/`, `modules/` (reusable)
@@ -93,7 +111,9 @@ with lib; {
 - Add new modules to the appropriate `default.nix` imports list
 - Example: `modules/nixos/hardware/default.nix` imports `./iphone.nix`, `./bluetooth.nix`, etc.
 
-## Changelog Management
+## Documentation Management
+
+### Changelog Updates
 All significant changes to the configuration must be documented in `.documentation/CHANGELOG.md`. When making changes, add entries as unordered list items with the following format:
 - **YYYY-MM-DD**: Brief description of the change
   - Detailed sub-items for each specific change
@@ -106,3 +126,29 @@ Changes to document include:
 - Breaking changes or deprecations
 
 **IMPORTANT:** Always update the changelog IMMEDIATELY after making configuration changes. Add entries at the top of the "Changes" section, using today's date (Sat Mar 07 2026).
+
+### Documentation File Updates
+When making changes that affect existing functionality or add new features:
+
+1. **Review existing documentation** in `.documentation/` to identify files impacted by your changes
+2. **Update relevant documentation files** to reflect the new behavior, options, or configuration
+3. **Create new documentation files** for substantial new features, modules, or workflows that would benefit users
+4. **Remove outdated documentation** that has been superseded by new files or is no longer relevant
+5. **Update references** in `README.md` and other docs when files are added, removed, or renamed
+
+**When to create new documentation:**
+- New installation/setup workflows
+- Significant new features or module categories
+- Complex configuration patterns that need explanation
+- Troubleshooting guides for common issues
+
+**When to update existing documentation:**
+- Module options or APIs change
+- Installation steps are modified
+- New commands or workflows are introduced
+- Directory structure changes
+
+**Do not create documentation for:**
+- Minor internal code changes
+- Simple bug fixes without user-facing impact
+- Routine package version updates

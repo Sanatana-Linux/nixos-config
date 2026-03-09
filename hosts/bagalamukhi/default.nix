@@ -25,7 +25,6 @@
         theme.enable = true;
         windowsDualBoot.enable = true;
         advancedBios.enable = true;
-        useLatestKernel = true;
       };
 
     };

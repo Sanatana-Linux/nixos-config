@@ -118,6 +118,7 @@ in {
 
       variables = {
         GDK_BACKEND = "x11";
+        QT_QPA_PLATFORM = "xcb";
       };
 
       sessionVariables = {

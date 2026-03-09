@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 with lib; let
@@ -16,5 +17,14 @@ in {
       enable = true;
       enableGraphical = cfg.enableGraphical;
     };
+
+    environment.systemPackages = with pkgs; [
+      ltunify
+      solaar
+    ];
+
+    services.udev.packages = with pkgs; [
+      logitech-udev-rules
+    ];
   };
 }

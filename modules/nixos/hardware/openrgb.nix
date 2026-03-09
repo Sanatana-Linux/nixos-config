@@ -24,7 +24,16 @@ in {
 
     package = mkOption {
       type = types.package;
-      default = pkgs.openrgb-with-all-plugins;
+      default = pkgs.symlinkJoin {
+        name = "openrgb-wrapped";
+        paths = [pkgs.openrgb-with-all-plugins];
+        buildInputs = [pkgs.makeWrapper];
+        postBuild = ''
+          wrapProgram $out/bin/openrgb \
+            --set QT_QPA_PLATFORM xcb
+        '';
+        meta.mainProgram = "openrgb";
+      };
       description = "The OpenRGB package to use, typically with all plugins";
     };
 

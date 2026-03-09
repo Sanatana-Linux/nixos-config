@@ -11,6 +11,15 @@ Each entry follows this format:
 
 ## Changes
 
+- **2026-03-09**: Wrap OpenRGB package to force XCB backend on X11
+  - Modified `modules/nixos/hardware/openrgb.nix` to wrap the `openrgb` binary
+  - Sets `QT_QPA_PLATFORM=xcb` environment variable in the wrapper
+  - Fixes crash/error where Qt attempts to use Wayland backend on X11 systems
+  - Wrapped package `openrgb-wrapped` is used in `environment.systemPackages` and `services.hardware.openrgb`
+  - Added `meta.mainProgram = "openrgb"` to fix `getExe` warning
+  - Added `QT_QPA_PLATFORM=xcb` to `modules/nixos/desktop/awesomewm.nix` for system-wide X11 enforcement when using AwesomeWM
+  - Added `QT_QPA_PLATFORM=xcb` and `GDK_BACKEND=x11` to `modules/nixos/desktop/xfce.nix` for consistent X11 backend usage in XFCE environment
+
 - **2026-03-08**: Update NVIDIA configuration for Bagalamukhi
   - Enabled `forceFullCompositionPipeline = true` in `modules/nixos/hardware/nvidia.nix`
   - Enabled `dynamicBoost.enable = true`

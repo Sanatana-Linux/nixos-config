@@ -14,5 +14,10 @@ with lib; {
     services.devmon.enable = true;
     services.udisks2.enable = true;
     services.acpid.enable = true;
+
+    environment.variables = {
+      GDK_BACKEND = "x11";
+      QT_QPA_PLATFORM = "xcb";
+    };
   };
 }

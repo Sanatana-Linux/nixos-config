@@ -74,7 +74,7 @@ with lib; {
           "class_g = 'Gnome-screenshot'"
         ];
 
-        backend = "egl";
+        backend = "glx";
         vsync = true;
         mark-wmwin-focused = true;
         mark-ovredir-focused = true;
@@ -82,8 +82,11 @@ with lib; {
         detect-client-opacity = true;
         detect-transient = true;
         detect-client-leader = true;
-        use-damage = true;
+        use-damage = false;
         log-level = "info";
+
+        glx-no-stencil = true;
+        glx-copy-from-front = false;
 
         wintypes = {
           normal = {

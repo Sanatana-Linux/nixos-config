@@ -26,7 +26,6 @@
         windowsDualBoot.enable = true;
         advancedBios.enable = true;
       };
-
     };
 
     base = {

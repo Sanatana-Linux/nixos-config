@@ -11,5 +11,5 @@
   shrooms = import ./shrooms.nix {inherit pkgs;};
   mountbox = import ./mountbox.nix {inherit pkgs;};
 in {
-  home.packages = with pkgs; [om mountbox run shrooms gita ns nixfetch panes];
+  home.packages = with pkgs; [om mountbox run shrooms gita ns nixfetch panes nps];
 }

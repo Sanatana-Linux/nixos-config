@@ -1,40 +1,59 @@
 {
+  pkgs,
   config,
   lib,
-  pkgs,
   inputs,
   ...
 }:
-with lib; {
-  options.modules.programs.firefox = {
-    enable = mkEnableOption "Firefox browser with extensions";
-    defaultBrowser = mkOption {
-      type = types.bool;
-      default = true;
-      description = "Set Firefox as the default browser";
-    };
+with lib; let
+  # Firefox with https://github.com/MrOtherGuy/fx-autoconfig
+  firefox-custom =
+    (
+      pkgs.firefox.override {
+        extraPrefsFiles = [
+          (builtins.fetchurl {
+            url = "https://raw.githubusercontent.com/MrOtherGuy/fx-autoconfig/master/program/config.js";
+            sha256 = "1mx679fbc4d9x4bnqajqx5a95y1lfasvf90pbqkh9sm3ch945p40";
+          })
+        ];
+      }
+    )
+    .overrideAttrs (oldAttrs: {
+      buildCommand =
+        (oldAttrs.buildCommand or "")
+        + ''
+                    # Find firefox Dir
+                    firefoxDir=$(find "$out/lib/" -type d -name 'firefox*' -print -quit)
+
+                    # Function to replace symlink with destination file
+                    replaceSymlink() {
+                      local symlink_path="$firefoxDir/$1"
+                      local target_path=$(readlink -f "$symlink_path")
+                      rm "$symlink_path"
+                      cp "$target_path" "$symlink_path"
+                    }
+
+                    # Copy firefox binaries
+          #          replaceSymlink "firefox"
+          #          replaceSymlink "firefox-bin"
+        '';
+    });
+  profile = config.home.username;
+in {
+  options.modules.programs.higgs-boson-firefox = {
+    enable = mkEnableOption "Higgs Boson Firefox configuration";
   };
 
-  config = mkIf config.modules.programs.firefox.enable {
+  config = mkIf config.modules.programs.higgs-boson-firefox.enable {
     home.sessionVariables = {
       MOZ_USE_XINPUT2 = "1";
       MOZ_DISABLE_RDD_SANDBOX = "1";
     };
 
-    xdg.mimeApps = mkIf config.modules.programs.firefox.defaultBrowser {
-      enable = true;
-      defaultApplications = {
-        "text/html" = ["firefox.desktop"];
-        "text/xml" = ["firefox.desktop"];
-        "x-scheme-handler/http" = ["firefox.desktop"];
-        "x-scheme-handler/https" = ["firefox.desktop"];
-      };
-    };
-
     programs.firefox = {
       enable = true;
-      package = pkgs.firefox;
-      profiles.${config.home.username} = {
+      package = firefox-custom;
+      profiles.${profile} = {
         id = 0;
         extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
           about-sync
@@ -86,7 +105,7 @@ with lib; {
           "browser.display.use_system_colors" = true; # Use system colors for rendering
           "browser.display.windows.non_native_menus" = 1; # Use non-native menus on Windows
           "browser.download.autohideButton" = false; # Always show download button
-          "browser.download.dir" = "${config.home.homeDirectory}/Downloads"; # Set default download directory
+          "browser.download.dir" = "/home/tlh/Downloads"; # Set default download directory
           "browser.download.folderList" = 2; # Use custom download directory
           "browser.newtabpage.activity-stream.feeds.section.topstories" = false; # Disable top stories on new tab
           "browser.newtabpage.activity-stream.newtabWallpapers.v2.enabled" = false; # Disable new tab wallpapers
@@ -108,9 +127,7 @@ with lib; {
           "browser.startup.page" = "0"; # Start with blank page
           "browser.startup.preXulSkeletonUI" = true; # Enable pre-XUL skeleton UI for faster startup
           "browser.tabs.hoverPreview.enabled" = true; # Enable tab hover preview
-          "browser.tabs.splitView.enabled" = true; # Enable split view
           "browser.tabs.tabmanager.enabled" = true; # Enable tab manager
-          "browser.uiCustomization.navBarWhenVerticalTabs" = "[ \"alltabs-button\",\"firefox-view-button\",\"sync-button\",\"back-button\",\"forward-button\",\"urlbar-container\",\"unified-extensions-button\"]";
           "browser.uitour.enabled" = false; # Disable UI tour
           "browser.urlbar.suggest.calculator" = true; # Enable calculator in URL bar
           "browser.urlbar.suggest.quicksuggest.sponsored" = false; # Disable sponsored suggestions
@@ -181,7 +198,6 @@ with lib; {
           "xpinstall.signatures.required" = false; # Don't require signe extensions
           "extensions.webextensions.restrictedDomains" = " "; # Allow all domains for WebExtensions because I hate firefox's AMO not having a dark mode and its other sites being clunky and hideous
         };
-
         search = {
           default = "google";
           force = true;
@@ -291,6 +307,18 @@ with lib; {
           };
         };
       };
+    };
+    # Use higgs-boson for customizations but override utils with latest fx-autoconfig
+    home.file.".mozilla/firefox/${profile}/chrome" = {
+      source = "${inputs.higgs-boson}";
+      recursive = true;
+    };
+    # Override utils directory with latest fx-autoconfig to fix Firefox 147 compatibility
+    # Force override by explicitly setting each file
+    home.file.".mozilla/firefox/${profile}/chrome/utils" = {
+      source = "${inputs.fx-autoconfig}/profile/chrome/utils";
+      recursive = true;
+      force = true; # Force override of higgs-boson utils
     };
   };
 }

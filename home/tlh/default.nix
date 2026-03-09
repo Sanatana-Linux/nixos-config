@@ -21,10 +21,7 @@
       enable = true;
     };
     programs = {
-      firefox = {
-        enable = true;
-        higgs-boson = true; # Enable custom Firefox theme for tlh user
-      };
+      higgs-boson-firefox.enable = true;
       kitty.enable = true;
       gpg.enable = true;
       zathura.enable = true;

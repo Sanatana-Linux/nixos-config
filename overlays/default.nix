@@ -16,9 +16,11 @@
     });
 
     libvirt = prev.libvirt.overrideAttrs (old: {
-      postInstall = (old.postInstall or "") + ''
-        rm -f $out/lib/systemd/system/virt-secret-init-encryption.service
-      '';
+      postInstall =
+        (old.postInstall or "")
+        + ''
+          rm -f $out/lib/systemd/system/virt-secret-init-encryption.service
+        '';
     });
 
     # Override lenovo-legion-module to use a fork that adds the Legion 5

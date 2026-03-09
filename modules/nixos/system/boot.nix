@@ -57,7 +57,7 @@ with lib; {
 
       kernelPackages = pkgs.linuxPackages_latest;
 
-      blacklistedKernelModules = [ "nouveau" ];
+      blacklistedKernelModules = ["nouveau"];
 
       kernelModules = [
         "lenovo_legion"
@@ -97,7 +97,7 @@ with lib; {
         systemd.enable = true;
         verbose = false;
         compressor = "zstd";
-        compressorArgs = [ "-19" ];
+        compressorArgs = ["-19"];
         kernelModules = [
           "nvidia"
           "nvidiafb"

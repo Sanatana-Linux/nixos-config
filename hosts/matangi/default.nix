@@ -25,7 +25,6 @@
         theme.enable = true;
         advancedBios.enable = true;
       };
-
     };
 
     base = {

@@ -20,10 +20,7 @@
       x.enable = true;
     };
     programs = {
-      firefox = {
-        enable = true;
-        higgs-boson = false; # strictly disabled for smg
-      };
+      firefox.enable = true;
       yazi.enable = true;
       kitty.enable = true;
     };
@@ -68,6 +65,6 @@
   home.stateVersion = "24.11";
 
   # Force kitty installation
-  home.packages = [ pkgs.kitty ];
+  home.packages = [pkgs.kitty];
   programs.kitty.enable = true;
 }

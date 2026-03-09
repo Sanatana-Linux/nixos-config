@@ -8,7 +8,7 @@ with lib; {
   options.modules.services.picom = {
     enable = mkEnableOption "Picom compositor";
     backend = mkOption {
-      type = types.enum [ "glx" "egl" "xrender" ];
+      type = types.enum ["glx" "egl" "xrender"];
       default = "glx";
       description = "Picom rendering backend";
     };
@@ -92,7 +92,6 @@ with lib; {
         detect-client-leader = true;
         use-damage = false;
         log-level = "info";
-
 
         glx-copy-from-front = false;
 

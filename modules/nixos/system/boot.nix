@@ -57,6 +57,16 @@ with lib; {
 
       kernelPackages = pkgs.linuxPackages_latest;
 
+      blacklistedKernelModules = [ "nouveau" ];
+
+      kernelModules = [
+        "lenovo_legion"
+        "ideapad"
+        "phc-intel"
+        "cpupower"
+        "acpi_call"
+      ];
+
       extraModulePackages = [
         config.boot.kernelPackages.acpi_call
         config.boot.kernelPackages.cpupower
@@ -75,10 +85,18 @@ with lib; {
         "usbcore.autosuspend=-1"
         "nvidia_drm.fbdev=1"
         "lenovo-legion.force=1"
+        "rd.udev.log_priority=3"
+        "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
+        "nvidia-drm.modeset=1"
+        "nvme_core.default_ps_max_latency_us=0"
       ];
+
+      plymouth.enable = true;
 
       initrd = {
         systemd.enable = true;
+        verbose = false;
+        compressor = "zstd";
         compressorArgs = [ "-19" ];
         kernelModules = [
           "nvidia"
@@ -93,6 +111,11 @@ with lib; {
           "intel_powerclamp"
         ];
       };
+    };
+
+    hardware = {
+      enableAllFirmware = true;
+      enableRedistributableFirmware = true;
     };
 
     environment.systemPackages = with pkgs; [
@@ -141,7 +164,6 @@ with lib; {
           "UiApp.efi" = ./assets/UiApp.efi;
         };
 
-        # Combined extra entries for Windows Dual Boot and Advanced BIOS
         extraEntries =
           optionalString config.modules.system.boot.windowsDualBoot.enable ''
             menuentry "Windows 11" --class windows --class os {

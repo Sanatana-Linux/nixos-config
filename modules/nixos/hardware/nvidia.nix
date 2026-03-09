@@ -169,7 +169,7 @@ in {
         modesetting.enable = true;
         nvidiaSettings = true;
         nvidiaPersistenced = true;
-        dynamicBoost.enable = true;
+        dynamicBoost.enable = false;
 
         powerManagement = {
           enable = false;

@@ -33,7 +33,7 @@ in {
     hardware.nvidia-container-toolkit.enable = mkIf cfg.nvidia true;
     hardware.graphics.enable32Bit = mkIf cfg.nvidia true;
 
-    environment.etc."systemd/system/virt-secret-init-encryption.service".source = mkForce "/dev/null";
+    systemd.maskedUnits = [ "virt-secret-init-encryption.service" ];
 
     environment.systemPackages = with pkgs; [
       conmon

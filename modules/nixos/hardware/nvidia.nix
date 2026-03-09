@@ -168,11 +168,11 @@ in {
       nvidia = {
         modesetting.enable = true;
         nvidiaSettings = true;
-        nvidiaPersistenced = false;
+        nvidiaPersistenced = true;
         dynamicBoost.enable = false;
 
         powerManagement = {
-          enable = false;
+          enable = true;
           finegrained = false;
         };
 

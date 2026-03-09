@@ -35,6 +35,10 @@ in {
 
     systemd.suppressedSystemUnits = [ "virt-secret-init-encryption.service" ];
 
+    systemd.tmpfiles.rules = [
+      "f /var/lib/libvirt/secrets/secrets-encryption-key 0600 root root -"
+    ];
+
     environment.systemPackages = with pkgs; [
       conmon
       containerd

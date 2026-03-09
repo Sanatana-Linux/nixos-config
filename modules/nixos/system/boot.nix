@@ -42,10 +42,6 @@ with lib; {
       enable = mkEnableOption "Bhairava custom GRUB theme";
     };
 
-    windowsDualBoot = {
-      enable = mkEnableOption "Windows dual boot configuration";
-    };
-
     advancedBios = {
       enable = mkEnableOption "Advanced BIOS setup configuration";
     };
@@ -164,26 +160,13 @@ with lib; {
           "UiApp.efi" = ./assets/UiApp.efi;
         };
 
-        extraEntries =
-          optionalString config.modules.system.boot.windowsDualBoot.enable ''
-            menuentry "Windows 11" --class windows --class os {
-              insmod part_gpt
-              insmod fat
-              search --no-floppy --fs-uuid --set=root 7443-B072
-              chainloader /EFI/Microsoft/Boot/bootmgfw.efi
-            }
-            menuentry "Windows Recovery" --class windows --class settings {
-              search --no-floppy --fs-uuid --set=root 7443-B072
-              chainloader /EFI/Boot/Bootx64.efi
-            }
-          ''
-          + optionalString config.modules.system.boot.advancedBios.enable ''
-            menuentry 'Advanced UEFI Firmware Settings' --class settings {
-              insmod fat
-              insmod chain
-              chainloader @bootRoot@/EFI/Boot/Bootx64.efi
-            }
-          '';
+        extraEntries = optionalString config.modules.system.boot.advancedBios.enable ''
+          menuentry 'Advanced UEFI Firmware Settings' --class settings {
+            insmod fat
+            insmod chain
+            chainloader @bootRoot@/EFI/Boot/Bootx64.efi
+          }
+        '';
       };
     };
   };

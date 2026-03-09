@@ -23,7 +23,6 @@
       boot = {
         enable = true;
         theme.enable = true;
-        windowsDualBoot.enable = true;
         advancedBios.enable = true;
       };
     };

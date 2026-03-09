@@ -61,7 +61,7 @@ with lib; {
     boot = {
       tmp.cleanOnBoot = true;
 
-      kernelPackages = mkIf cfg.useLatestKernel pkgs.linuxPackages_xanmod_latest;
+      kernelPackages = mkIf config.modules.system.boot.useLatestKernel pkgs.linuxPackages_xanmod_latest;
 
       blacklistedKernelModules = [ "nouveau" ];
 

@@ -9,6 +9,7 @@
   imports = [
     ./desktop.nix
     ../../modules/home-manager/default.nix
+    ../../modules/home-manager/shell/home/bin/default.nix
   ];
 
   modules = {

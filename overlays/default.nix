@@ -15,6 +15,12 @@
       nativeBuildInputs = (oldAttrs.nativeBuildInputs or []) ++ [final.nodejs];
     });
 
+    libvirt = prev.libvirt.overrideAttrs (old: {
+      postInstall = (old.postInstall or "") + ''
+        rm -f $out/lib/systemd/system/virt-secret-init-encryption.service
+      '';
+    });
+
     # Override lenovo-legion-module to use a fork that adds the Legion 5
     # 16IRX9 83DG (NMCN BIOS) model to the driver allowlist.
     # https://github.com/jlbyh2o/LenovoLegionLinux/tree/add-legion-5-16irx9-83dg-nmcn

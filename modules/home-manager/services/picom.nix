@@ -5,7 +5,14 @@
   ...
 }:
 with lib; {
-  options.modules.services.picom.enable = mkEnableOption "Picom compositor";
+  options.modules.services.picom = {
+    enable = mkEnableOption "Picom compositor";
+    backend = mkOption {
+      type = types.enum [ "glx" "egl" "xrender" ];
+      default = "glx";
+      description = "Picom rendering backend";
+    };
+  };
 
   config = mkIf config.modules.services.picom.enable {
     services.picom = {
@@ -43,8 +50,7 @@ with lib; {
         frame-opacity = 0.9;
         inactive-opacity-override = false;
         active-opacity = 1.0;
-        focus-exclude = [
-        ];
+        focus-exclude = [];
 
         opacity-rule = [
           "100:class_g = 'i3lock'"
@@ -74,7 +80,7 @@ with lib; {
           "class_g = 'Gnome-screenshot'"
         ];
 
-        backend = "glx";
+        backend = config.modules.services.picom.backend;
         vsync = true;
         mark-wmwin-focused = true;
         mark-ovredir-focused = true;

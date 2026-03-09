@@ -32,7 +32,10 @@
       # Note: neovim was commented out in original config, not enabling
     };
     services = {
-      picom.enable = true;
+      picom = {
+        enable = true;
+        backend = "egl";
+      };
       xscreensaver.enable = true;
     };
   };

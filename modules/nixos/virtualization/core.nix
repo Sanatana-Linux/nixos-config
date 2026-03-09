@@ -35,19 +35,6 @@ in {
 
     systemd.suppressedSystemUnits = [ "virt-secret-init-encryption.service" ];
 
-    environment.etc."systemd/system/virt-secret-init-encryption.service" = {
-      text = ''
-        [Unit]
-        Description=disabled
-        ConditionPathExists=/dev/null
-
-        [Service]
-        ExecStart=
-        Type=oneshot
-      '';
-      mode = "0444";
-    };
-
     environment.systemPackages = with pkgs; [
       conmon
       containerd

@@ -108,10 +108,10 @@
       enable = true;
       enableZshIntegration = true;
     };
-    keychain = {
-      enable = true;
-      enableZshIntegration = true;
-    };
+    # keychain = {
+    #   enable = true;
+    #   enableZshIntegration = true;
+    # };
     nix-search-tv = {
       enable = true;
       enableTelevisionIntegration = true;

@@ -103,12 +103,7 @@
         editors = true;
         treeSitterGrammars = true;
       };
-      fonts = {
-        enable = true;
-        nerdFonts = true;
-        iconFonts = true;
-        systemFonts = true;
-      };
+      customFonts.enable = true;
       gui = {
         enable = true;
         applicationLauncher = true;

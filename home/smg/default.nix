@@ -35,7 +35,12 @@
   };
 
   services.picom.settings = {
-    shadow = lib.mkForce true;
+    shadow = lib.mkForce false;
+    rounded-corners-exclude = [
+      "window_type = 'dock'"
+      "window_type = 'desktop'"
+      "_GTK_FRAME_EXTENTS@:c"
+    ];
     blur-background-exclude = [
       "window_type = 'dock'"
       "window_type = 'desktop'"

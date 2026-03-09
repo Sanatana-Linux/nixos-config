@@ -67,7 +67,7 @@ in {
       # because both gnome-keyring and gnome.gnome-keyring exist
       gnome = {
         glib-networking.enable = true;
-        gnome-keyring.enable = true;
+        # gnome-keyring.enable = true;
       };
 
       # thumbnails

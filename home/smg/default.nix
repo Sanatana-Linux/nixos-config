@@ -65,4 +65,8 @@
 
   # Required by home-manager
   home.stateVersion = "24.11";
+
+  # Force kitty installation
+  home.packages = [ pkgs.kitty ];
+  programs.kitty.enable = true;
 }

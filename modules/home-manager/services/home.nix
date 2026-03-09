@@ -12,7 +12,6 @@ in {
   config = lib.mkIf cfg.enable {
     services = {
       poweralertd.enable = true;
-      ssh-agent.enable = true;
     };
   };
 }

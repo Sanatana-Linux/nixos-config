@@ -3,6 +3,7 @@
   pkgs,
   inputs,
   outputs,
+  lib,
   ...
 }: {
   imports = [
@@ -26,10 +27,14 @@
       kitty.enable = true;
     };
     services = {
-      picom.enable = true;
+      picom = {
+        enable = true;
+      };
       xscreensaver.enable = true;
     };
   };
+
+  services.picom.settings.shadow = lib.mkForce false;
 
   nixpkgs = {
     overlays = [

@@ -78,6 +78,7 @@ with lib; {
           "class_g = 'Cairo-clock'"
           "class_g = 'pop_report'"
           "class_g = 'Gnome-screenshot'"
+          "_GTK_FRAME_EXTENTS@:c"
         ];
 
         backend = config.modules.services.picom.backend;

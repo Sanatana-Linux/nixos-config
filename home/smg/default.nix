@@ -34,7 +34,14 @@
     };
   };
 
-  services.picom.settings.shadow = lib.mkForce false;
+  services.picom.settings = {
+    shadow = lib.mkForce true;
+    blur-background-exclude = [
+      "window_type = 'dock'"
+      "window_type = 'desktop'"
+      "_GTK_FRAME_EXTENTS@:c"
+    ];
+  };
 
   nixpkgs = {
     overlays = [

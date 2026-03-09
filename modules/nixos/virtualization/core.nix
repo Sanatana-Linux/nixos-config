@@ -33,6 +33,8 @@ in {
     hardware.nvidia-container-toolkit.enable = mkIf cfg.nvidia true;
     hardware.graphics.enable32Bit = mkIf cfg.nvidia true;
 
+    systemd.services.virt-secret-init-encryption.enable = false;
+
     environment.systemPackages = with pkgs; [
       conmon
       containerd

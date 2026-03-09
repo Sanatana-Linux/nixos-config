@@ -228,6 +228,8 @@
     enable32Bit = true;
   };
 
+  hardware.nvidia.forceFullCompositionPipeline = lib.mkForce false;
+
   services = {
     logind.settings.Login = {
       HandleLidSwitch = "suspend";

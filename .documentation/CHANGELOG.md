@@ -11,6 +11,12 @@ Each entry follows this format:
 
 ## Changes
 
+- **2026-03-08**: Update NVIDIA configuration for Bagalamukhi
+  - Enabled `forceFullCompositionPipeline = true` in `modules/nixos/hardware/nvidia.nix`
+  - Enabled `dynamicBoost.enable = true`
+  - Confirmed `modesetting.enable` and `package` settings are correct
+  - Note: This change modifies the shared NVIDIA module; users should verify compatibility before rebuilding other hosts (Matangi)
+
 - **2026-03-08**: Fix `node2nix` build failure — add `nodejs` to `nativeBuildInputs`
   - `node2nix-1.11.0` in nixpkgs-unstable fails to build in the Nix sandbox because `npm` is not available (nixpkgs bug: `nodejs` missing from outer derivation's `nativeBuildInputs`)
   - Added `node2nix` override in `modifications` overlay (`overlays/default.nix`) to append `nodejs` to `nativeBuildInputs`

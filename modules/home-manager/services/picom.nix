@@ -92,7 +92,7 @@ with lib; {
         use-damage = false;
         log-level = "info";
 
-        glx-no-stencil = true;
+
         glx-copy-from-front = false;
 
         wintypes = {

@@ -23,6 +23,7 @@
         higgs-boson = false; # strictly disabled for smg
       };
       yazi.enable = true;
+      kitty.enable = true;
     };
     services = {
       picom.enable = true;

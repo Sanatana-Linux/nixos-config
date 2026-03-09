@@ -25,11 +25,7 @@
         theme.enable = true;
         advancedBios.enable = true;
       };
-      kernel = {
-        enable = true;
-        lenovo-legion.enable = true; # Shared Lenovo Legion hardware profile
-        plymouth.enable = true;
-      };
+
     };
 
     base = {

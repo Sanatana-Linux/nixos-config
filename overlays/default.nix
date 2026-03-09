@@ -26,7 +26,7 @@
           rev = "4cc42952ad1b6a2d9d69a853ecd5aeb63eb2bcfe";
           hash = "sha256-fS2s+x163ATrgi2KW6m/pMeikRNAAInJ69GMBu1Sacs=";
         };
-        sourceRoot = "LenovoLegionLinux-4cc42952ad1b6a2d9d69a853ecd5aeb63eb2bcfe/kernel_module";
+        sourceRoot = "source/kernel_module";
       });
     });
   };

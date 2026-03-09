@@ -49,13 +49,19 @@ with lib; {
     advancedBios = {
       enable = mkEnableOption "Advanced BIOS setup configuration";
     };
+
+    useLatestKernel = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Use the xanmod latest kernel packages instead of the default stable kernel";
+    };
   };
 
   config = mkIf config.modules.system.boot.enable {
     boot = {
       tmp.cleanOnBoot = true;
 
-      kernelPackages = pkgs.linuxPackages_latest;
+      kernelPackages = mkIf cfg.useLatestKernel pkgs.linuxPackages_xanmod_latest;
 
       blacklistedKernelModules = [ "nouveau" ];
 

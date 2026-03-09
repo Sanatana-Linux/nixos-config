@@ -24,6 +24,7 @@
         enable = true;
         theme.enable = true;
         advancedBios.enable = true;
+        useLatestKernel = true;
       };
 
     };

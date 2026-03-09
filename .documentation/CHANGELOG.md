@@ -25,6 +25,7 @@ Each entry follows this format:
   - Created `modules/nixos/programs/shotcut.nix` to wrap Shotcut with `FREI0R_PATH` environment variable
   - Enables `frei0r` plugins for Shotcut (fixes "filters not loading" issue)
   - Added `programs.shotcut.enable = true` to `hosts/matangi/default.nix` (Matangi only)
+  - Improved `modules/nixos/performance/zram.nix` configuration: `lz4` compression, 100% memory, priority 999
 
 - **2026-03-08**: Update NVIDIA configuration for Bagalamukhi
   - Enabled `forceFullCompositionPipeline = true` in `modules/nixos/hardware/nvidia.nix`

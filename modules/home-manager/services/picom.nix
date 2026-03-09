@@ -82,6 +82,7 @@ with lib; {
 
         backend = config.modules.services.picom.backend;
         vsync = true;
+        unredirect-fullscreen = false;
         mark-wmwin-focused = true;
         mark-ovredir-focused = true;
         detect-rounded-corners = true;

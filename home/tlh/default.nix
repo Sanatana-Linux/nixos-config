@@ -34,7 +34,7 @@
     services = {
       picom = {
         enable = true;
-        backend = "egl";
+        # backend = "egl"; # Using default glx backend for consistency
       };
       xscreensaver.enable = true;
     };

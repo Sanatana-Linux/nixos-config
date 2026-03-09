@@ -17,8 +17,11 @@ Each entry follows this format:
   - Fixes crash/error where Qt attempts to use Wayland backend on X11 systems
   - Wrapped package `openrgb-wrapped` is used in `environment.systemPackages` and `services.hardware.openrgb`
   - Added `meta.mainProgram = "openrgb"` to fix `getExe` warning
+  - Removed kernel module loading from `modules/nixos/hardware/openrgb.nix` (delegated to system boot config)
+  - Added `i2c-dev` and `i2c-i801` (Intel SMBus) to `boot.kernelModules` in `modules/nixos/system/boot.nix`
   - Added `QT_QPA_PLATFORM=xcb` to `modules/nixos/desktop/awesomewm.nix` for system-wide X11 enforcement when using AwesomeWM
   - Added `QT_QPA_PLATFORM=xcb` and `GDK_BACKEND=x11` to `modules/nixos/desktop/xfce.nix` for consistent X11 backend usage in XFCE environment
+  - Added `sioyek` to `modules/nixos/packages/packages.nix` (core GUI package)
 
 - **2026-03-08**: Update NVIDIA configuration for Bagalamukhi
   - Enabled `forceFullCompositionPipeline = true` in `modules/nixos/hardware/nvidia.nix`

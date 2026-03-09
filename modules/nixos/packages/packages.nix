@@ -557,6 +557,7 @@ in {
             pastel
             pavucontrol
             poppler-utils
+            sioyek
             themechanger
             xarchiver
             xclip

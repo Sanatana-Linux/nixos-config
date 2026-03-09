@@ -45,9 +45,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    # Essential kernel modules for hardware communication
-    boot.kernelModules = ["i2c-dev"];
-
     # Enable I2C hardware support
     hardware.i2c.enable = true;
 

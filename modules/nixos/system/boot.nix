@@ -61,6 +61,8 @@ with lib; {
         "phc-intel"
         "cpupower"
         "acpi_call"
+        "i2c-dev"
+        "i2c-i801"
       ];
 
       extraModulePackages = [

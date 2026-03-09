@@ -141,7 +141,7 @@ in {
           "extensions.pocket.enabled" = false; # Disable Pocket integration
           "extensions.pocket.onSaveRecs" = false; # Disable Pocket recommendations
           "extensions.shield-recipe-client.enabled" = false; # Disable Shield recipe client
-          "general.config.filename" = "mozilla.cfg"; # Config filename (required for fx-autoconfig)
+          # "general.config.filename" = "mozilla.cfg"; # Config filename (required for fx-autoconfig)
           "general.config.obscure_value" = 0; # Don't obscure config file
           "general.config.sandbox_enabled" = false; # Disable config sandbox
           "general.smoothScroll" = true; # Enable smooth scrolling
@@ -307,6 +307,14 @@ in {
     home.file.".mozilla/firefox/${profile}/chrome" = {
       source = "${inputs.higgs-boson}";
       recursive = true;
+    };
+
+    # Override utils directory with latest fx-autoconfig to fix Firefox 147 compatibility
+    # Force override by explicitly setting each file
+    home.file.".mozilla/firefox/${profile}/chrome/utils" = {
+      source = "${inputs.fx-autoconfig}/profile/chrome/utils";
+      recursive = true;
+      force = true; # Force override of higgs-boson utils
     };
   };
 }

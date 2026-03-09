@@ -212,11 +212,11 @@
     "fx-autoconfig": {
       "flake": false,
       "locked": {
-        "lastModified": 1765622861,
-        "narHash": "sha256-xiCikg8c855w+PCy7Wmc3kPwIHr80pMkkK7mFQbPCs4=",
+        "lastModified": 1773035931,
+        "narHash": "sha256-vOsXpuU2XlbIfXGm1RJicY8ghbkU5FvnctQMBMXCXbs=",
         "owner": "MrOtherGuy",
         "repo": "fx-autoconfig",
-        "rev": "76232083171a8d609bf0258549d843b0536685e1",
+        "rev": "8da9268f7afcbf5d438b099e976fe8aa46a111d0",
         "type": "github"
       },
       "original": {
@@ -228,11 +228,11 @@
     "higgs-boson": {
       "flake": false,
       "locked": {
-        "lastModified": 1773030718,
-        "narHash": "sha256-KjVPf0CYkJ8A2aYAIJ4IATg7H+5vudAqz/NKAV8glKk=",
+        "lastModified": 1773042542,
+        "narHash": "sha256-8pF2nDveizbo/HEFV5NztgANXJmKUmswZA2sDKnKQKk=",
         "owner": "ThomasHighbaugh",
         "repo": "firefox",
-        "rev": "a05d0bd39aebb829ba754a22e70b10d24029ee13",
+        "rev": "8f0bb465f32b25db20402fc246edbaddba09e3ec",
         "type": "github"
       },
       "original": {

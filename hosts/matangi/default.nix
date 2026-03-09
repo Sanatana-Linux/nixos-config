@@ -45,6 +45,7 @@
     programs = {
       nix-ld.enable = true;
       appimage.enable = true;
+      shotcut.enable = true;
     };
 
     # Environment

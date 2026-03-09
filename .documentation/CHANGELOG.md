@@ -22,6 +22,9 @@ Each entry follows this format:
   - Added `QT_QPA_PLATFORM=xcb` to `modules/nixos/desktop/awesomewm.nix` for system-wide X11 enforcement when using AwesomeWM
   - Added `QT_QPA_PLATFORM=xcb` and `GDK_BACKEND=x11` to `modules/nixos/desktop/xfce.nix` for consistent X11 backend usage in XFCE environment
   - Added `sioyek` to `modules/nixos/packages/packages.nix` (core GUI package)
+  - Created `modules/nixos/programs/shotcut.nix` to wrap Shotcut with `FREI0R_PATH` environment variable
+  - Enables `frei0r` plugins for Shotcut (fixes "filters not loading" issue)
+  - Added `programs.shotcut.enable = true` to `hosts/matangi/default.nix` (Matangi only)
 
 - **2026-03-08**: Update NVIDIA configuration for Bagalamukhi
   - Enabled `forceFullCompositionPipeline = true` in `modules/nixos/hardware/nvidia.nix`

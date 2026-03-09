@@ -52,7 +52,66 @@ with lib; {
   };
 
   config = mkIf config.modules.system.boot.enable {
-    environment.systemPackages = with pkgs; [grub2];
+    boot = {
+      tmp.cleanOnBoot = true;
+
+      kernelPackages = pkgs.linuxPackages_latest;
+
+      extraModulePackages = [
+        config.boot.kernelPackages.acpi_call
+        config.boot.kernelPackages.cpupower
+        config.boot.kernelPackages.lenovo-legion-module
+        config.boot.kernelPackages.nvidiaPackages.stable
+      ];
+
+      kernelParams = [
+        "mitigations=off"
+        "dev.i915.perf_stream_paranoid=0"
+        "preempt=full"
+        "acpi_call"
+        "fbcon=nodefer"
+        "splash"
+        "quiet"
+        "usbcore.autosuspend=-1"
+        "nvidia_drm.fbdev=1"
+        "lenovo-legion.force=1"
+      ];
+
+      initrd = {
+        systemd.enable = true;
+        compressorArgs = [ "-19" ];
+        kernelModules = [
+          "nvidia"
+          "nvidiafb"
+          "nvidia-drm"
+          "nvidia-uvm"
+          "nvidia-modeset"
+          "intel_cstate"
+          "aesni_intel"
+          "intel_uncore"
+          "intel_uncore_frequency"
+          "intel_powerclamp"
+        ];
+      };
+    };
+
+    environment.systemPackages = with pkgs; [
+      cpufrequtils
+      config.boot.kernelPackages.acpi_call
+      nvme-cli
+      grub2
+      mesa
+      mesa-demos
+      plymouth
+      kdePackages.plymouth-kcm
+      lenovo-legion
+      i2c-tools
+      peakperf
+      intel-media-driver
+      linuxHeaders
+      luajitPackages.ldbus
+      xssproxy
+    ];
 
     boot.loader = {
       timeout = mkIf (config.modules.system.boot.timeoutStyle == "hidden") null;

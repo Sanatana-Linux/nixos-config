@@ -141,7 +141,7 @@ in {
           "extensions.pocket.enabled" = false; # Disable Pocket integration
           "extensions.pocket.onSaveRecs" = false; # Disable Pocket recommendations
           "extensions.shield-recipe-client.enabled" = false; # Disable Shield recipe client
-          # "general.config.filename" = "mozilla.cfg"; # Config filename (required for fx-autoconfig)
+          "general.config.filename" = "config.js"; # Config filename (required for fx-autoconfig)
           "general.config.obscure_value" = 0; # Don't obscure config file
           "general.config.sandbox_enabled" = false; # Disable config sandbox
           "general.smoothScroll" = true; # Enable smooth scrolling

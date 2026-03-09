@@ -17,7 +17,7 @@ with lib; {
   config = mkIf config.modules.services.picom.enable {
     services.picom = {
       enable = true;
-      package = pkgs.picom;
+      package = pkgs.picom-pijulius;
 
       settings = {
         animations = true;

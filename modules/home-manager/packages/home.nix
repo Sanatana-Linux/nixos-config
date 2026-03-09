@@ -26,6 +26,7 @@ in {
         hicolor-icon-theme
         pre-commit
         slurp
+        nps
         ;
       inherit
         (pkgs)

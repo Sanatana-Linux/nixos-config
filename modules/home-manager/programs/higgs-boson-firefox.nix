@@ -57,13 +57,10 @@ in {
         id = 0;
         extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
           about-sync
-
           absolute-enable-right-click
-          add-custom-search-engine
           auto-referer
           auto-tab-discard
           bitwarden
-          chrome-mask
           cookie-quick-manager
           copy-selection-as-markdown
           don-t-fuck-with-paste
@@ -73,20 +70,18 @@ in {
           form-history-control
           foxytab
           gaoptout
-          # header-editor
+          header-editor
           ipfs-companion
           istilldontcareaboutcookies
           justdeleteme
           link-gopher
           markdownload
           multi-account-containers
-          multiple-tab-handler
-          overview
           persistentpin
           raindropio
           refined-github
           tab-stash
-          # umatrix
+          umatrix
           ublock-origin
           view-image
         ];
@@ -103,7 +98,6 @@ in {
           "browser.ctrlTab.sortByRecentlyUsed" = true; # Ctrl+Tab sorts tabs by recent use
           "browser.discovery.enabled" = false; # Disable add-on discovery
           "browser.display.use_system_colors" = true; # Use system colors for rendering
-          "browser.display.windows.non_native_menus" = 1; # Use non-native menus on Windows
           "browser.download.autohideButton" = false; # Always show download button
           "browser.download.dir" = "/home/tlh/Downloads"; # Set default download directory
           "browser.download.folderList" = 2; # Use custom download directory
@@ -121,12 +115,14 @@ in {
           "browser.safebrowsing.downloads.remote.url" = false; # Disable remote Safe Browsing URL
           "browser.safebrowsing.enabled" = false; # Disable Safe Browsing
           "browser.safebrowsing.malware.enabled" = false; # Disable malware protection
-          "browser.shell.checkDefaultBrowser" = false; # Don't check if Firefox is default browser
+          "browser.shell.checkDefaultBrowser" = true; # Don't check if Firefox is default browser
           "browser.startup.blankWindow" = false; # Don't show blank window at startup
           "browser.startup.homepage_override.mstone" = "ignore"; # Ignore homepage override milestone
           "browser.startup.page" = "0"; # Start with blank page
           "browser.startup.preXulSkeletonUI" = true; # Enable pre-XUL skeleton UI for faster startup
           "browser.tabs.hoverPreview.enabled" = true; # Enable tab hover preview
+          "browser.uiCustomization.navBarWhenVerticalTabs" = "[ \"alltabs-button\",\"firefox-view-button\",\"sync-button\",\"back-button\",\"forward-button\",\"urlbar-container\",\"unified-extensions-button\"]";
+          "browser.tabs.splitView.enabled" = true; # Enable split view
           "browser.tabs.tabmanager.enabled" = true; # Enable tab manager
           "browser.uitour.enabled" = false; # Disable UI tour
           "browser.urlbar.suggest.calculator" = true; # Enable calculator in URL bar
@@ -140,7 +136,7 @@ in {
           "devtools.debugger.remote-enabled" = true; # Enable remote debugging
           "browser.dom.window.dump.enabled" = true; # Enable dump() for debugging userChrome.js
           "experiments.enabled" = true; #  experiments
-          "experiments.supported" = true; # Mark experiments as unsupported
+          "experiments.supported" = true; # Mark experiments as supported
           "extensions.autoDisableScopes" = 0; # Don't auto-disable extensions
           "extensions.pocket.enabled" = false; # Disable Pocket integration
           "extensions.pocket.onSaveRecs" = false; # Disable Pocket recommendations
@@ -153,7 +149,7 @@ in {
           "gfx.webrender.all" = true; # Force-enable WebRender for all GPUs
           "gfx.webrender.enabled" = true; # Enable WebRender
           "gfx.webrender.svg-images" = true; # Enable WebRender for SVG images
-          "gfx.x11-egl.force-enabled" = true; # Force-enable EGL on X11
+          "gfx.x11-egl.force-enabled" = false; # Force-enable EGL on X11
           "layers.acceleration.force-enabled" = true; # Force-enable layer acceleration
           "layout.css.backdrop-filter.enabled" = true; # Enable backdrop-filter (acrylic blur)
           "layout.css.cached-scrollbar-styles.enabled" = false; # Disable cached scrollbar styles
@@ -193,7 +189,6 @@ in {
           "widget.dmabuf.force-enabled" = true; # Force-enable DMABUF for buffer sharing
           "widget.gtk.rounded-bottom-corners.enabled" = true; # Enable rounded bottom corners in GTK
           "widget.content.gtk-theme-override" = "Materia-Dark-Compact"; # Override GTK theme
-          "widget.non-native-theme.win.scrollbar.use-system-size" = false; # Don't use system scrollbar size on Windows
           "widget.use-xdg-desktop-portal" = true; # Use XDG desktop portal integration
           "xpinstall.signatures.required" = false; # Don't require signe extensions
           "extensions.webextensions.restrictedDomains" = " "; # Allow all domains for WebExtensions because I hate firefox's AMO not having a dark mode and its other sites being clunky and hideous
@@ -312,13 +307,6 @@ in {
     home.file.".mozilla/firefox/${profile}/chrome" = {
       source = "${inputs.higgs-boson}";
       recursive = true;
-    };
-    # Override utils directory with latest fx-autoconfig to fix Firefox 147 compatibility
-    # Force override by explicitly setting each file
-    home.file.".mozilla/firefox/${profile}/chrome/utils" = {
-      source = "${inputs.fx-autoconfig}/profile/chrome/utils";
-      recursive = true;
-      force = true; # Force override of higgs-boson utils
     };
   };
 }

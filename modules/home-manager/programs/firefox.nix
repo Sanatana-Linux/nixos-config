@@ -84,7 +84,6 @@ with lib; {
           "browser.ctrlTab.sortByRecentlyUsed" = true; # Ctrl+Tab sorts tabs by recent use
           "browser.discovery.enabled" = false; # Disable add-on discovery
           "browser.display.use_system_colors" = true; # Use system colors for rendering
-          "browser.display.windows.non_native_menus" = 1; # Use non-native menus on Windows
           "browser.download.autohideButton" = false; # Always show download button
           "browser.download.dir" = "${config.home.homeDirectory}/Downloads"; # Set default download directory
           "browser.download.folderList" = 2; # Use custom download directory
@@ -104,7 +103,6 @@ with lib; {
           "browser.safebrowsing.malware.enabled" = false; # Disable malware protection
           "browser.shell.checkDefaultBrowser" = false; # Don't check if Firefox is default browser
           "browser.startup.blankWindow" = false; # Don't show blank window at startup
-          "browser.startup.homepage_override.mstone" = "ignore"; # Ignore homepage override milestone
           "browser.startup.page" = "0"; # Start with blank page
           "browser.startup.preXulSkeletonUI" = true; # Enable pre-XUL skeleton UI for faster startup
           "browser.tabs.hoverPreview.enabled" = true; # Enable tab hover preview
@@ -136,7 +134,6 @@ with lib; {
           "gfx.webrender.all" = true; # Force-enable WebRender for all GPUs
           "gfx.webrender.enabled" = true; # Enable WebRender
           "gfx.webrender.svg-images" = true; # Enable WebRender for SVG images
-          "gfx.x11-egl.force-enabled" = true; # Force-enable EGL on X11
           "layers.acceleration.force-enabled" = true; # Force-enable layer acceleration
           "layout.css.backdrop-filter.enabled" = true; # Enable backdrop-filter (acrylic blur)
           "layout.css.cached-scrollbar-styles.enabled" = false; # Disable cached scrollbar styles
@@ -151,7 +148,7 @@ with lib; {
           "layout.css.xul-display-values.content.enabled" = true; # Enable XUL display values in content
           "layout.css.xul-tree-pseudos.content.enabled" = true; # Allow stylesheets to modify XUL trees in tabs
           "loop.logDomains" = false; # Disable Loop logging
-          "media.av1.enabled" = false; # Disable AV1 codec
+          "media.av1.enabled" = true; # Disable AV1 codec
           "media.ffmpeg.vaapi.enabled" = true; # Enable VAAPI hardware decoding via FFmpeg
           "media.hardware-video-decoding.force-enabled" = true; # Force-enable hardware video decoding
           "media.rdd-ffmpeg.enabled" = true; # Enable FFmpeg in RDD process
@@ -162,7 +159,6 @@ with lib; {
           "privacy.popups.disable_from_plugins" = 0; # Allow popups from plugins
           "privacy.resistFingerprinting" = false; #  fingerprinting resistance
           "sidebar.revamp" = true; # Enable sidebar revamp
-          "sidebar.verticalTabs" = true; # Enable vertical tabs in sidebar
           "svg.context-properties.content.enabled" = true; # Enable SVG context properties in content
           "toolkit.legacyUserProfileCustomizations.stylesheets" = true; # Enable userChrome/userContent CSS
           "toolkit.tabbox.switchByScrolling" = false; # Disable tab switching by scrolling
@@ -175,8 +171,6 @@ with lib; {
           "gfx.webgpu.force-enabled" = true; # Force-enable WebGPU
           "widget.dmabuf.force-enabled" = true; # Force-enable DMABUF for buffer sharing
           "widget.gtk.rounded-bottom-corners.enabled" = true; # Enable rounded bottom corners in GTK
-          "widget.content.gtk-theme-override" = "Materia-Dark-Compact"; # Override GTK theme
-          "widget.non-native-theme.win.scrollbar.use-system-size" = false; # Don't use system scrollbar size on Windows
           "widget.use-xdg-desktop-portal" = true; # Use XDG desktop portal integration
           "xpinstall.signatures.required" = false; # Don't require signe extensions
           "extensions.webextensions.restrictedDomains" = " "; # Allow all domains for WebExtensions because I hate firefox's AMO not having a dark mode and its other sites being clunky and hideous

@@ -268,7 +268,6 @@ in {
             neovim
             # Additional core utilities
             any-nix-shell
-            boxes
             brotli
             cached-nix-shell
             direnv
@@ -925,6 +924,7 @@ in {
         # System utilities
         ++ optionals cfg.shell.systemUtils [
           beep
+          boxes
           clipster
           jdupes
           killall

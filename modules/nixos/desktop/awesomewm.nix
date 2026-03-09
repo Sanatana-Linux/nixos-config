@@ -13,8 +13,11 @@ in {
   };
 
   config = mkIf cfg.enable {
-    xdg.portal.enable = true;
-    xdg.portal.config.common.default = "*";
+    xdg.portal = {
+      enable = true;
+      extraPortals = [pkgs.xdg-desktop-portal-gtk];
+      config.common.default = "*";
+    };
 
     services = {
       displayManager.defaultSession = "none+awesome";

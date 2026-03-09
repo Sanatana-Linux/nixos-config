@@ -977,6 +977,7 @@ in {
             automake
             binutils
             comma
+            cowsay
             fd
             file
             gh

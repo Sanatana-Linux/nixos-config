@@ -69,7 +69,17 @@ in {
       '';
 
       # ZSH initialization
-      initContent = ''
+      initExtra = ''
+        # XC-Manager installation and initialization
+        if [[ ! -d "$HOME/.config/zsh/XC-Manager" ]]; then
+          git clone https://github.com/Rakosn1cek/XC-Manager.git "$HOME/.config/zsh/XC-Manager"
+        fi
+
+        fpath=("$HOME/.config/zsh/XC-Manager/autoload" $fpath)
+        autoload -Uz xc fzf-vault-widget
+        zle -N fzf-vault-widget
+        bindkey '^g' fzf-vault-widget
+
         # Home/End key bindings - cover all common escape sequences
         # Standard xterm sequences
         bindkey '^[[H' beginning-of-line
@@ -154,6 +164,12 @@ in {
 
         # Television fuzzy finder
         eval "$(tv init zsh)"
+
+        # Sanatana Linux Banner
+        SAY=$(echo -e "Sanatana \n Linux")
+        if command -v pnpx >/dev/null; then
+           pnpx cfonts "$SAY" --colors "#4FB0BE","#F25F89" --align center --font slick
+        fi
       '';
 
       # ZSH options

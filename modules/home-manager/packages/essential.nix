@@ -27,6 +27,9 @@ in {
         pre-commit
         slurp
         xev
+        nodejs
+        pnpm
+        fzf
         ;
       pylsp = pkgs.python312.withPackages (p:
         with p; [

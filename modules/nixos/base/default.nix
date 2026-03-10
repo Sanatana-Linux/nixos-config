@@ -64,5 +64,7 @@ in {
       timeZone = cfg.timezone;
       hardwareClockInLocalTime = cfg.hardwareClockInLocalTime;
     };
+    
+    environment.systemPackages = [ pkgs.dmidecode ];
   };
 }

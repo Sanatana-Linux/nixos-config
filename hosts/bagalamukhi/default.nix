@@ -188,7 +188,7 @@
       networking = {
         enable = true;
         hostName = "bagalamukhi";
-        firewall.enable = true;
+        firewall.enable = false;
       };
       android.enable = true;
     };

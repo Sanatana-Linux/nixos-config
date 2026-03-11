@@ -45,11 +45,6 @@ with lib; {
   };
 
   config = mkIf config.modules.hardware.networking.enable {
-    # NOTE: tcp_fastopen and other sysctl settings are in security/doas.nix
-    boot.kernel.sysctl = {
-      "net.ipv4.ip_forward" = 0;
-    };
-
     networking = {
       hostName = config.modules.hardware.networking.hostName;
       nameservers = ["1.1.1.1" "8.8.8.8" "8.8.4.4" "9.9.9.9"];
@@ -58,7 +53,7 @@ with lib; {
         dns = "default";
         unmanaged = ["docker0" "rndis0"];
         wifi = {
-          macAddress = "random";
+          #          macAddress = "random";
           powersave = config.modules.hardware.networking.wifi.powersave;
         };
       };

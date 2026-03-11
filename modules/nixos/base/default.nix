@@ -43,8 +43,8 @@ in {
 
   config = mkIf cfg.enable {
     console = let
-      normal = ["191919" "fc618d" "7bd88f" "fce566" "5ad4e6" "948ae5" "6ab0f3" "69676c"];
-      bright = ["2c2c2c" "d8557b" "6fbe81" "d9c65b" "53bbcc" "8179c6" "4a9cec" "dcd8e1"];
+      normal = ["191919" "fc618d" "7bd88f" "fce566" "5ad4e6" "948ae5" "6ab0f3" "555555"];
+      bright = ["3c3c3c" "d8557b" "6fbe81" "d9c65b" "53bbcc" "8179c6" "4a9cec" "dcdcdc"];
     in {
       colors = normal ++ bright;
       font = "${pkgs.terminus_font}/share/consolefonts/ter-c${cfg.consoleFontSize}b.psf.gz";
@@ -64,7 +64,7 @@ in {
       timeZone = cfg.timezone;
       hardwareClockInLocalTime = cfg.hardwareClockInLocalTime;
     };
-    
-    environment.systemPackages = [ pkgs.dmidecode ];
+
+    environment.systemPackages = [pkgs.dmidecode];
   };
 }

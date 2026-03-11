@@ -90,7 +90,7 @@
         editors = false;
         treeSitterGrammars = false;
       };
-      customFonts.enable = true;
+      # customFonts.enable = true;
       gui = {
         enable = true;
         applicationLauncher = true;

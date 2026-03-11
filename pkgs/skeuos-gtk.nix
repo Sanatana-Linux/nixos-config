@@ -3,10 +3,14 @@
   stdenv,
   fetchFromGitHub,
   gtk-engine-murrine,
+  sassc,
+  glib,
+  inkscape,
+  optipng,
 }:
 stdenv.mkDerivation rec {
   pname = "skeuos-gtk";
-  version = "2022-09-29"; # Using date of commit as version or similar
+  version = "2022-09-29";
 
   src = fetchFromGitHub {
     owner = "daniruiz";
@@ -15,9 +19,26 @@ stdenv.mkDerivation rec {
     sha256 = "0rwhbv4n1lfzz5cwq2qw73vqzzv61l1zz7cbb45jjvgrsi3ynxfl";
   };
 
+  nativeBuildInputs = [
+    sassc
+    glib
+    inkscape
+    optipng
+  ];
+
   propagatedUserEnvPkgs = [
     gtk-engine-murrine
   ];
+
+  patches = [
+    ./skeuos-theme-colors.patch
+  ];
+
+  enableParallelBuilding = true;
+
+  buildPhase = ''
+    make build
+  '';
 
   installPhase = ''
     mkdir -p $out/share/themes
@@ -29,6 +50,6 @@ stdenv.mkDerivation rec {
     homepage = "https://github.com/daniruiz/skeuos-gtk";
     license = licenses.gpl3;
     platforms = platforms.linux;
-    maintainers = with maintainers; [ ];
+    maintainers = with maintainers; [];
   };
 }

@@ -9,52 +9,119 @@ with lib; let
 in {
   options.modules.theme = {
     enable = mkEnableOption "user theme configuration with GTK, Qt, cursor, and font theming";
+
+    fonts = {
+      packages = mkOption {
+        type = types.listOf types.package;
+        default = [];
+        description = "List of font packages to install";
+      };
+      serif = mkOption {
+        type = types.listOf types.str;
+        default = ["FreeSerif"];
+        description = "Serif font families";
+      };
+      sansSerif = mkOption {
+        type = types.listOf types.str;
+        default = ["Ubuntu Nerd Font Medium"];
+        description = "Sans-serif font families";
+      };
+      monospace = mkOption {
+        type = types.listOf types.str;
+        default = ["Ubuntu Nerd Font Mono"];
+        description = "Monospace font families";
+      };
+      sizes = {
+        applications = mkOption {
+          type = types.int;
+          default = 12;
+          description = "Font size for applications";
+        };
+        terminal = mkOption {
+          type = types.int;
+          default = 12;
+          description = "Font size for terminal";
+        };
+        desktop = mkOption {
+          type = types.int;
+          default = 12;
+          description = "Font size for desktop";
+        };
+      };
+    };
+
+    gtk = {
+      theme = {
+        name = mkOption {
+          type = types.str;
+          description = "GTK theme name";
+        };
+        package = mkOption {
+          type = types.package;
+          description = "GTK theme package";
+        };
+      };
+      iconTheme = {
+        name = mkOption {
+          type = types.str;
+          description = "GTK icon theme name";
+        };
+        package = mkOption {
+          type = types.package;
+          description = "GTK icon theme package";
+        };
+      };
+    };
+
+    cursor = {
+      name = mkOption {
+        type = types.str;
+        default = "phinger-cursors-light";
+        description = "Cursor theme name";
+      };
+      package = mkOption {
+        type = types.package;
+        default = pkgs.phinger-cursors;
+        description = "Cursor theme package";
+      };
+      size = mkOption {
+        type = types.int;
+        default = 48;
+        description = "Cursor size";
+      };
+    };
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
-      colloid-icon-theme
-      emacs-all-the-icons-fonts
-      nerd-fonts.agave # Retain existing font just in case
-      # Note: Operator fonts are assumed to be available or manually installed if not in nixpkgs
+    home.packages = cfg.fonts.packages ++ [
+      cfg.gtk.theme.package
+      cfg.gtk.iconTheme.package
+      cfg.cursor.package
+      pkgs.adwaita-qt
+      pkgs.adwaita-qt6
     ];
 
     gtk = {
       enable = true;
       theme = {
-        name = "Skeuos-Grey-Dark";
-        package = pkgs.skeuos-gtk;
+        name = cfg.gtk.theme.name;
+        package = cfg.gtk.theme.package;
       };
       iconTheme = {
-        name = "Colloid-Dark";
-        package = pkgs.colloid-icon-theme;
+        name = cfg.gtk.iconTheme.name;
+        package = cfg.gtk.iconTheme.package;
       };
       cursorTheme = {
-        name = "phinger-cursors-light";
-        package = pkgs.phinger-cursors;
-        size = 48;
+        name = cfg.cursor.name;
+        package = cfg.cursor.package;
+        size = cfg.cursor.size;
       };
       font = {
-        name = "OperatorUltra Nerd Font Propo";
-        size = 12;
+        name = head cfg.fonts.sansSerif;
+        size = cfg.fonts.sizes.applications;
       };
-      gtk2.extraConfig = ''
-        gtk-application-prefer-dark-theme=1
-        gtk-font-name="OperatorUltra Nerd Font Propo 12"
-        gtk-toolbar-style=GTK_TOOLBAR_BOTH_HORIZ
-        gtk-toolbar-icon-size=GTK_ICON_SIZE_LARGE_TOOLBAR
-        gtk-button-images=1
-        gtk-menu-images=1
-        gtk-enable-event-sounds=1
-        gtk-enable-input-feedback-sounds=1
-        gtk-xft-antialias=1
-        gtk-xft-hinting=1
-        gtk-xft-hintstyle="hintslight"
-        gtk-xft-rgba="rgba"
-      '';
       gtk3.extraConfig = {
-        gtk-application-prefer-dark-theme = 1;
-        gtk-font-name = "OperatorUltra Nerd Font Propo 12";
+        gtk-application-prefer-dark-theme = true;
         gtk-decoration-layout = "menu:";
         gtk-button-images = 1;
         gtk-menu-images = 1;
@@ -64,84 +131,42 @@ in {
         gtk-xft-rgba = "rgba";
       };
       gtk4.extraConfig = {
-        gtk-application-prefer-dark-theme = 1;
-        gtk-font-name = "OperatorUltra Nerd Font Propo 12";
+        gtk-application-prefer-dark-theme = true;
         gtk-decoration-layout = "menu:";
       };
     };
 
     home.pointerCursor = {
-      package = pkgs.phinger-cursors;
-      name = "phinger-cursors-light";
-      size = 48;
+      package = cfg.cursor.package;
+      name = cfg.cursor.name;
+      size = cfg.cursor.size;
       gtk.enable = true;
       x11.enable = true;
     };
 
     qt = {
       enable = true;
-      platformTheme.name = "qt6ct";
-      style.name = "kvantum";
+      platformTheme.name = "gtk";
+      style.name = "adwaita-dark";
+    };
+
+    dconf.settings = {
+      "org/gnome/desktop/interface" = {
+        color-scheme = "prefer-dark";
+      };
     };
 
     home.sessionVariables = {
-      GTK_THEME = "Skeuos-Grey-Dark";
+      GTK_THEME = cfg.gtk.theme.name;
     };
 
-    xdg.configFile."fontconfig/fonts.conf".text = ''
-      <?xml version="1.0"?>
-      <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
-      <fontconfig>
-        <match target="pattern">
-          <test qual="any" name="family">
-            <string>serif</string>
-          </test>
-          <edit name="family" mode="prepend" binding="strong">
-            <string>OperatorUltra Nerd Font Propo</string>
-          </edit>
-        </match>
-        <match target="pattern">
-          <test qual="any" name="family">
-            <string>sans-serif</string>
-          </test>
-          <edit name="family" mode="prepend" binding="strong">
-            <string>OperatorUltra Nerd Font Propo</string>
-          </edit>
-        </match>
-        <match target="pattern">
-          <test qual="any" name="family">
-            <string>monospace</string>
-          </test>
-          <edit name="family" mode="prepend" binding="strong">
-            <string>Operator Mono Lig</string>
-            <string>all-the-icons</string>
-          </edit>
-        </match>
-        <match target="font">
-          <edit name="antialias" mode="assign">
-            <bool>true</bool>
-          </edit>
-          <edit name="hinting" mode="assign">
-            <bool>true</bool>
-          </edit>
-          <edit name="hintstyle" mode="assign">
-            <const>hintslight</const>
-          </edit>
-          <edit name="lcdfilter" mode="assign">
-            <const>lcddefault</const>
-          </edit>
-          <edit name="rgba" mode="assign">
-            <const>rgb</const>
-          </edit>
-        </match>
-      </fontconfig>
-    '';
-
-    home.file.".icons/default/index.theme".text = ''
-      [Icon Theme]
-      Name=Default
-      Comment=Default Cursor Theme
-      Inherits=phinger-cursors-light
-    '';
+    fonts.fontconfig = {
+      enable = true;
+      defaultFonts = {
+        serif = cfg.fonts.serif;
+        sansSerif = cfg.fonts.sansSerif;
+        monospace = cfg.fonts.monospace;
+      };
+    };
   };
 }

@@ -96,6 +96,10 @@
     #    file = {
     #      ".icons/default".source = "${pkgs.cosmic-icons}/share/icons/cosmic-icons";
     #    };
+
+    packages = with pkgs; [
+      nerd-fonts.agave
+    ];
   };
 
   fonts.fontconfig = {

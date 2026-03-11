@@ -45,6 +45,7 @@
     programs = {
       nix-ld.enable = true;
       appimage.enable = true;
+      thunar.enable = true;
     };
 
     # Environment
@@ -101,7 +102,7 @@
         editors = true;
         treeSitterGrammars = true;
       };
-      customFonts.enable = true;
+      # customFonts.enable = true;
       gui = {
         enable = true;
         applicationLauncher = true;

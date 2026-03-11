@@ -31,15 +31,15 @@ in {
 
       # GTK icon theme configuration
       iconTheme = {
-        name = "Papirus-Dark";
+        name = lib.mkDefault "Papirus-Dark";
         package = lib.mkDefault pkgs.papirus-icon-theme;
       };
 
       # GTK cursor theme configuration
       cursorTheme = {
-        name = "Phinger Cursors (light)";
+        name = lib.mkDefault "Phinger Cursors (light)";
         package = lib.mkDefault pkgs.phinger-cursors;
-        size = 48;
+        size = lib.mkDefault 48;
       };
 
       # GTK2 specific configurations
@@ -60,14 +60,14 @@ in {
 
       # GTK3 specific configurations
       gtk3.extraConfig = {
-        gtk-application-prefer-dark-theme = true;
-        gtk-decoration-layout = "menu:";
-        gtk-button-images = "1";
-        gtk-menu-images = "1";
-        gtk-xft-antialias = 1;
-        gtk-xft-hinting = 1;
-        gtk-xft-hintstyle = "hintslight";
-        gtk-xft-rgba = "rgba";
+        gtk-application-prefer-dark-theme = lib.mkDefault true;
+        gtk-decoration-layout = lib.mkDefault "menu:";
+        gtk-button-images = lib.mkDefault "1";
+        gtk-menu-images = lib.mkDefault "1";
+        gtk-xft-antialias = lib.mkDefault 1;
+        gtk-xft-hinting = lib.mkDefault 1;
+        gtk-xft-hintstyle = lib.mkDefault "hintslight";
+        gtk-xft-rgba = lib.mkDefault "rgba";
       };
 
       # GTK4 specific configurations
@@ -82,7 +82,7 @@ in {
       enable = true;
 
       # Set GTK3 as the platform theme for QT
-      platformTheme.name = "qt6ct";
+      platformTheme.name = "gtk";
     };
 
     # ─────────────────────────────────────────────────────────────────
@@ -91,14 +91,14 @@ in {
     home = {
       # Environment variables for session
       sessionVariables = {
-        GTK_THEME = "Materia-dark-compact";
+        GTK_THEME = lib.mkDefault "Materia-dark-compact";
       };
 
       # Pointer cursor configuration
       pointerCursor = {
         package = lib.mkDefault pkgs.phinger-cursors;
-        name = "Phinger Cursors (light)";
-        size = 48;
+        name = lib.mkDefault "Phinger Cursors (light)";
+        size = lib.mkDefault 48;
         gtk.enable = true;
       };
 

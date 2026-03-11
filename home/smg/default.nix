@@ -20,7 +20,6 @@
       nix.enable = true;
       xdg.enable = true;
       scripts.enable = true;
-      x.enable = true;
     };
     programs = {
       firefox.enable = true;

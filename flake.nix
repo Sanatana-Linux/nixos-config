@@ -203,6 +203,28 @@
           ./hosts/chhinamasta
         ];
       };
+
+      shodashi = nixpkgs.lib.nixosSystem {
+        specialArgs = {
+          inherit inputs outputs self;
+          format = "isoImage";
+        };
+        modules = [
+          inputs.nur.modules.nixos.default
+          inputs.bhairava-grub-theme.nixosModule
+          inputs.home-manager.nixosModules.home-manager
+          ./modules/nixos
+          {
+            home-manager = {
+              useUserPackages = true;
+              extraSpecialArgs = {inherit inputs outputs;};
+              sharedModules = [./modules/home-manager];
+              users.user = {imports = [./home/user/default.nix];};
+            };
+          }
+          ./hosts/shodashi
+        ];
+      };
     };
     # ┣━━━━━━━━━━━━━━━━━━━━━┫ Home Configurations ┣━━━━━━━━━━━━━━━━━━━━━┫
     homeConfigurations = {

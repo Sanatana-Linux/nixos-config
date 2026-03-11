@@ -142,10 +142,23 @@ with pkgs;
     }
 
     function build-iso() {
-      local dest="$2"
+      local host="$2"
+      local dest="$3"
+
+      if [ -z "$host" ]; then
+        echo -e "\e[38;2;191;97;106mError:\e[0m Please provide a host (chhinamasta or shodashi)."
+        echo -e "  Usage: \e[38;2;133;133;133mom\e[0m build-iso \e[38;2;133;133;133m<host> /path/to/output\e[0m"
+        exit 1
+      fi
+
+      if [[ "$host" != "chhinamasta" && "$host" != "shodashi" ]]; then
+         echo -e "\e[38;2;191;97;106mError:\e[0m Invalid host. Must be 'chhinamasta' or 'shodashi'."
+         exit 1
+      fi
+
       if [ -z "$dest" ]; then
         echo -e "\e[38;2;191;97;106mError:\e[0m Please provide a destination directory."
-        echo -e "  Usage: \e[38;2;133;133;133mom\e[0m build-iso \e[38;2;133;133;133m/path/to/output\e[0m"
+        echo -e "  Usage: \e[38;2;133;133;133mom\e[0m build-iso \e[38;2;133;133;133m$host /path/to/output\e[0m"
         exit 1
       fi
 
@@ -154,9 +167,9 @@ with pkgs;
         mkdir -p "$dest" || { echo -e "\e[38;2;191;97;106mError:\e[0m Failed to create directory $dest"; exit 1; }
       fi
 
-      echo -e "\e[38;2;136;192;208mBuilding chhinamasta ISO image...\e[0m"
+      echo -e "\e[38;2;136;192;208mBuilding $host ISO image...\e[0m"
       local build_result
-      build_result=$(nix build "$dots#nixosConfigurations.chhinamasta.config.system.build.isoImage" --no-link --print-out-paths 2>&1)
+      build_result=$(nix build "$dots#nixosConfigurations.$host.config.system.build.isoImage" --no-link --print-out-paths 2>&1)
 
       if [ $? -ne 0 ]; then
         echo -e "\e[38;2;191;97;106mError:\e[0m ISO build failed:"

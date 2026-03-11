@@ -5,6 +5,8 @@
   ...
 }:
 with lib; let
+  cfg = config.modules.shell.xdg;
+  
   browser = ["firefox.desktop"];
   fileRoller = ["file-roller.desktop"]; # Define file-roller application
   zathura = ["org.pwmt.zathura.desktop"]; # Define zathura application
@@ -79,39 +81,45 @@ with lib; let
     "application/x-pdf" = browser;
   };
 in {
-  home.packages = with pkgs; [
-    xdg-utils
-    xdg-desktop-portal-gtk
-    xdg-desktop-portal
-    xdg-launch
-    xdg-user-dirs
-    xdg-user-dirs-gtk
-    xdg-utils
-    xdg-utils-cxx
-    xdgmenumaker
-  ];
-  xdg = {
-    enable = true;
-    userDirs = {
-      enable = true;
-      createDirectories = true;
-    };
+  options.modules.shell.xdg = {
+    enable = mkEnableOption "Enable XDG user directories and associations";
+  };
 
-    portal = {
+  config = mkIf cfg.enable {
+    home.packages = with pkgs; [
+      xdg-utils
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal
+      xdg-launch
+      xdg-user-dirs
+      xdg-user-dirs-gtk
+      xdg-utils
+      xdg-utils-cxx
+      xdgmenumaker
+    ];
+    xdg = {
       enable = true;
-      config.common.default = "*";
-      xdgOpenUsePortal = true;
-      extraPortals = with pkgs; [
-        xdg-desktop-portal-gtk
-        xdg-desktop-portal-gnome
-        xdg-desktop-portal-xapp
-      ];
-    };
+      userDirs = {
+        enable = true;
+        createDirectories = true;
+      };
 
-    mimeApps = {
-      enable = true;
-      associations.added = associations;
-      defaultApplications = associations;
+      portal = {
+        enable = true;
+        config.common.default = "*";
+        xdgOpenUsePortal = true;
+        extraPortals = with pkgs; [
+          xdg-desktop-portal-gtk
+          xdg-desktop-portal-gnome
+          xdg-desktop-portal-xapp
+        ];
+      };
+
+      mimeApps = {
+        enable = true;
+        associations.added = associations;
+        defaultApplications = associations;
+      };
     };
   };
 }

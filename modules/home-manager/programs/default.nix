@@ -1,6 +1,6 @@
 {
   imports = [
-    ./aichat.nix
+    ./aichat
     ./editorconfig.nix
     ./firefox.nix
     ./higgs-boson-firefox.nix

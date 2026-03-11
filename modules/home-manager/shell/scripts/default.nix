@@ -1,8 +1,11 @@
 {
   config,
   pkgs,
+  lib,
   ...
-}: let
+}:
+with lib; let
+  cfg = config.modules.shell.scripts;
   gita = import ./gita.nix {inherit pkgs;};
   nixfetch = import ./nixfetch.nix {inherit pkgs;};
   om = import ./om.nix {inherit pkgs;};
@@ -11,5 +14,11 @@
   shrooms = import ./shrooms.nix {inherit pkgs;};
   mountbox = import ./mountbox.nix {inherit pkgs;};
 in {
-  home.packages = with pkgs; [om mountbox run shrooms gita ns nixfetch panes nps];
+  options.modules.shell.scripts = {
+    enable = mkEnableOption "Enable custom shell scripts";
+  };
+
+  config = mkIf cfg.enable {
+    home.packages = with pkgs; [om mountbox run shrooms gita ns nixfetch panes nps];
+  };
 }

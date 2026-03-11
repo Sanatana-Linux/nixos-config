@@ -1,5 +1,7 @@
 {
   imports = [
-    ./desktop.nix
+    ./gtk.nix
+    ./theme
+    ./x11
   ];
 }

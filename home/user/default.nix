@@ -14,16 +14,19 @@
       essential.enable = true;
     };
     shell = {
-      home.enable = true;
+      zsh.enable = true;
+      starship.enable = true;
+      cli-tools.enable = true;
+      nix.enable = true;
+      xdg.enable = true;
+      scripts.enable = true;
     };
     desktop = {
       enable = true;
     };
     programs = {
-      firefox = {
-        enable = true;
-        higgs-boson = true;
-      };
+      firefox.enable = true;
+      higgs-boson-firefox.enable = true;
       kitty.enable = true;
       gpg.enable = true;
       zathura.enable = true;

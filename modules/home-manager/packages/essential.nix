@@ -30,6 +30,7 @@ in {
         nodejs
         pnpm
         fzf
+        nps
         ;
       pylsp = pkgs.python312.withPackages (p:
         with p; [

@@ -7,8 +7,8 @@
 with lib; {
   # Import the aichat configuration and roles at top level
   imports = [
-    ./aichat/config.nix
-    ./aichat/roles.nix
+    ./config.nix
+    ./roles.nix
   ];
 
   options.modules.programs.aichat = {

@@ -9,14 +9,17 @@
   imports = [
     ./desktop.nix
     ../../modules/home-manager/default.nix
-    ../../modules/home-manager/shell/home/bin/default.nix
   ];
 
   modules = {
     packages.essential.enable = true;
     shell = {
-      home.enable = true;
+      zsh.enable = true;
       starship.enable = true;
+      cli-tools.enable = true;
+      nix.enable = true;
+      xdg.enable = true;
+      scripts.enable = true;
       x.enable = true;
     };
     programs = {

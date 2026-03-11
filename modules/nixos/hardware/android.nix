@@ -37,8 +37,5 @@ with lib; {
       android-tools
       payload-dumper-go # Tool for extracting all .img files from an Android OTA payload.bin file
     ];
-    
-    # Enable adb to ensure proper permissions and udev rules
-    programs.adb.enable = true;
   };
 }

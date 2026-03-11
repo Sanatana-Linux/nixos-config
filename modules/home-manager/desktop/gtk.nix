@@ -13,6 +13,10 @@ in {
   };
 
   config = mkIf cfg.enable {
+    home.packages = with pkgs; [
+      adwaita-qt
+      adwaita-qt6
+    ];
     # GTK Configuration
     gtk = {
       enable = true;
@@ -83,6 +87,10 @@ in {
 
       # Set GTK3 as the platform theme for QT
       platformTheme.name = "gtk";
+      style = {
+        name = "adwaita-dark";
+        package = pkgs.adwaita-qt;
+      };
     };
 
     # ─────────────────────────────────────────────────────────────────

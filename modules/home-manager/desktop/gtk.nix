@@ -16,6 +16,7 @@ in {
     home.packages = with pkgs; [
       adwaita-qt
       adwaita-qt6
+      libsForQt5.qtstyleplugins
     ];
     # GTK Configuration
     gtk = {

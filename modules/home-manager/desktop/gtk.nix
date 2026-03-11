@@ -17,6 +17,8 @@ in {
       adwaita-qt
       adwaita-qt6
       libsForQt5.qtstyleplugins
+      qadwaitadecorations
+      qadwaitadecorations-qt6
     ];
     # GTK Configuration
     gtk = {

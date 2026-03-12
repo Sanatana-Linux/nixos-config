@@ -184,6 +184,7 @@
         enable = true;
         motherboard = "intel";
       };
+      lenovo.enable = true;
       sound.enable = true;
       networking = {
         enable = true;

@@ -24,6 +24,7 @@ This repository manages three NixOS hosts, each with a specific primary user:
 - **Naming:** kebab-case for files/dirs, camelCase for Nix attrs.
 - **Function signatures:** Multi-line, named params in curly braces.
 - **Comments:** Use `#` for lines; prefer descriptive attribute names over comments.
+  - **CRITICAL:** Comments explaining kernel modules, parameters, or specific options MUST be preserved when moving code. If they are missing, recreate them based on context or knowledge. Do not delete explanatory comments.
 - **Types:** Use explicit types for Nix options and module arguments.
 - **Error handling:** Use `lib.mkIf` for conditionals; pass inputs via `specialArgs`.
 - **Testing:** Always run `nixos-rebuild test` before switching; check debugging/ for more.

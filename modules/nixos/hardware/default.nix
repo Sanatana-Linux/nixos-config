@@ -11,5 +11,6 @@
     ./logitech.nix
     ./tpm.nix
     ./udev.nix
+    ./lenovo.nix
   ];
 }

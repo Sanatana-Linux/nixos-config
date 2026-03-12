@@ -56,37 +56,20 @@ with lib; {
       blacklistedKernelModules = ["nouveau"];
 
       kernelModules = [
-        "lenovo_legion"
-        "ideapad"
-        "phc-intel"
-        "cpupower"
-        "acpi_call"
-        "i2c-dev"
-        "i2c-i801"
+        "i2c-dev" # Userspace I2C access (often needed by DDC/CI tools)
+        "i2c-i801" # Intel SMBus driver (common motherboard controller)
       ];
 
       extraModulePackages = [
-        config.boot.kernelPackages.acpi_call
-        config.boot.kernelPackages.cpupower
-        config.boot.kernelPackages.lenovo-legion-module
-        config.boot.kernelPackages.nvidiaPackages.stable
       ];
 
       kernelParams = [
-        "mitigations=off"
-        "dev.i915.perf_stream_paranoid=0"
-        "preempt=full"
-        "acpi_call"
-        "fbcon=nodefer"
-        "splash"
-        "quiet"
-        "usbcore.autosuspend=-1"
-        "nvidia_drm.fbdev=1"
-        "lenovo-legion.force=1"
-        "rd.udev.log_priority=3"
-        "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
-        "nvidia-drm.modeset=1"
-        "nvme_core.default_ps_max_latency_us=0"
+        "fbcon=nodefer" # Prevent framebuffer console deferral (faster boot display)
+        "splash" # Show splash screen during boot
+        "quiet" # Reduce kernel log verbosity
+        "usbcore.autosuspend=-1" # Disable USB autosuspend (fixes issues with some peripherals)
+        "rd.udev.log_priority=3" # Reduce udev log verbosity in initrd
+        "nvme_core.default_ps_max_latency_us=0" # Prevent NVMe power saving latency issues
       ];
 
       plymouth.enable = true;
@@ -97,16 +80,6 @@ with lib; {
         compressor = "zstd";
         compressorArgs = ["-19"];
         kernelModules = [
-          "nvidia"
-          "nvidiafb"
-          "nvidia-drm"
-          "nvidia-uvm"
-          "nvidia-modeset"
-          "intel_cstate"
-          "aesni_intel"
-          "intel_uncore"
-          "intel_uncore_frequency"
-          "intel_powerclamp"
         ];
       };
     };
@@ -118,7 +91,6 @@ with lib; {
 
     environment.systemPackages = with pkgs; [
       cpufrequtils
-      config.boot.kernelPackages.acpi_call
       nvme-cli
       grub2
       mesa

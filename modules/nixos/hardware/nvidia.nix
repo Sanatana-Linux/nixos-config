@@ -123,6 +123,23 @@ in {
         ];
     };
 
+    # Kernel params for NVIDIA
+    boot.kernelParams = [
+      "nvidia_drm.fbdev=1" # Enable framebuffer console for high-res boot output
+      "nvidia.NVreg_PreserveVideoMemoryAllocations=1" # Preserve VRAM across suspend/hibernate
+      "nvidia-drm.modeset=1" # Enable DRM KMS (Kernel Mode Setting) required for Wayland
+    ];
+
+    # Initrd kernel modules for NVIDIA
+    # Loaded early to ensure display works during boot/LUKS
+    boot.initrd.kernelModules = [
+      "nvidia" # Main NVIDIA kernel driver
+      "nvidiafb" # NVIDIA framebuffer driver
+      "nvidia-drm" # Direct Rendering Manager (DRM) interface
+      "nvidia-uvm" # Unified Virtual Memory (required for CUDA)
+      "nvidia-modeset" # Kernel modesetting support
+    ];
+
     nixpkgs.config = {
       allowUnfree = true;
       cudaSupport = cfg.cuda.enable;

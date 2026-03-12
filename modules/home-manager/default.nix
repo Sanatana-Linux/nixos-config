@@ -5,6 +5,5 @@
     ./programs
     ./services
     ./shell
-    ./theme.nix
   ];
 }

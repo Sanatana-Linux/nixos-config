@@ -42,6 +42,18 @@ in {
   };
 
   config = mkIf cfg.enable {
+    # Intel initrd modules
+    boot.initrd.kernelModules = [
+      "intel_cstate" # Intel CPU power states
+      "aesni_intel" # AES crypto acceleration
+      "intel_uncore" # Intel uncore events
+      "intel_uncore_frequency" # Uncore frequency control
+      "intel_powerclamp" # Intel Power Clamp driver for thermal throttling
+    ];
+
+    # Enable Intel CPU frequency driver
+    powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
+
     # Intel CPU microcode updates
     hardware.cpu.intel.updateMicrocode = true;
 
@@ -58,6 +70,9 @@ in {
     boot.kernelModules =
       [
         "i915" # Intel graphics
+      ]
+      ++ optionals cfg.powerManagement [
+        "phc-intel" # Intel PHC (Processor Hardware Control)
       ]
       ++ optionals cfg.virtualization [
         "kvm-intel" # Intel KVM virtualization

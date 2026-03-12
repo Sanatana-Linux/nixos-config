@@ -39,6 +39,9 @@ in {
       enable = true;
       powertop.enable = true; # Auto tune performance
     };
+    
+    boot.kernelModules = [ "cpupower" ];
+    environment.systemPackages = [ config.boot.kernelPackages.cpupower ];
 
     services = {
       # thermal sensors and controls

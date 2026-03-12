@@ -16,6 +16,7 @@ in {
     # Basic performance optimizations inspired by CachyOS
     boot.kernelParams = [
       "mitigations=off" # Disable CPU mitigations for performance
+      "preempt=full" # Enable full preemption
     ];
 
     # Enable BBR congestion control

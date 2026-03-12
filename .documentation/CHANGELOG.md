@@ -11,6 +11,27 @@ Each entry follows this format:
 
 ## Changes
 
+- **2026-03-12**: Improved kernel module and parameter documentation
+  - Added inline comments to `modules/nixos/hardware/intel.nix` explaining kernel modules (i915, intel_cstate, etc.) and parameters
+  - Added inline comments to `modules/nixos/hardware/nvidia.nix` explaining kernel params (modeset, fbdev) and initrd modules
+  - Added inline comments to `modules/nixos/hardware/lenovo.nix` for Legion-specific modules and parameters
+  - Added inline comments to `modules/nixos/hardware/openrgb.nix` explaining I2C modules
+  - Added inline comments to `modules/nixos/system/boot.nix` for remaining global kernel parameters
+  - Updated `AGENTS.md` to mandate inline comments for kernel modules/params
+
+- **2026-03-12**: Cleanup and fixes for pinentry and acpi_call
+  - Enabled `pinentry-tty` in `modules/home-manager/programs/gpg.nix` (uncommented and fixed option) to resolve "No pinentry" GPG error
+  - Removed `acpi_call` from `kernelParams` and `environment.systemPackages` in `modules/nixos/system/boot.nix` (redundant/incorrect)
+  - Verified `acpi_call` is correctly configured in `modules/nixos/hardware/lenovo.nix` (kernel module, package, and extra module package)
+  - This consolidates `acpi_call` configuration to the hardware module where it belongs
+
+- **2026-03-12**: Improved OpenRGB kernel module handling
+  - Modified `modules/nixos/hardware/openrgb.nix` to use `mkMerge` for conditional configuration
+  - Moved kernel module configuration from `modules/nixos/system/boot.nix` to `modules/nixos/hardware/openrgb.nix`
+  - Conditioned `i2c-i801` (Intel) and `i2c-piix4` (AMD) loading on `motherboard` option
+  - Removed hardcoded `i2c-dev` and `i2c-i801` from global boot configuration
+  - This resolves the "laughably bad" issue of centralized kernel module definitions
+
 - **2026-03-09**: Wrap OpenRGB package to force XCB backend on X11
   - Modified `modules/nixos/hardware/openrgb.nix` to wrap the `openrgb` binary
   - Sets `QT_QPA_PLATFORM=xcb` environment variable in the wrapper

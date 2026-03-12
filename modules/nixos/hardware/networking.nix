@@ -59,8 +59,7 @@ with lib; {
       };
 
       firewall = {
-        enable = false;
-        # enable = config.modules.hardware.networking.firewall.enable;
+        enable = config.modules.hardware.networking.firewall.enable;
         allowedTCPPorts = config.modules.hardware.networking.firewall.allowedTCPPorts;
         allowedUDPPorts = config.modules.hardware.networking.firewall.allowedUDPPorts;
       };

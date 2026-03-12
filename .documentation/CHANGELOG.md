@@ -25,6 +25,11 @@ Each entry follows this format:
   - Verified `acpi_call` is correctly configured in `modules/nixos/hardware/lenovo.nix` (kernel module, package, and extra module package)
   - This consolidates `acpi_call` configuration to the hardware module where it belongs
 
+- **2026-03-12**: Removed fail2ban
+  - Commented out `fail2ban.enable` in `hosts/bagalamukhi/default.nix`
+  - The module `modules/nixos/security/fail2ban.nix` remains available but disabled
+  - Disabled firewall in `modules/nixos/hardware/networking.nix` as requested
+
 - **2026-03-12**: Improved OpenRGB kernel module handling
   - Modified `modules/nixos/hardware/openrgb.nix` to use `mkMerge` for conditional configuration
   - Moved kernel module configuration from `modules/nixos/system/boot.nix` to `modules/nixos/hardware/openrgb.nix`

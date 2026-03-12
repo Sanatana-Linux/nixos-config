@@ -33,7 +33,7 @@ in {
     # System packages
     environment.systemPackages = with pkgs; [
       lenovo-legion
-      acpi_call
+      config.boot.kernelPackages.acpi_call
     ];
   };
 }

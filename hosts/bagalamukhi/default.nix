@@ -208,12 +208,11 @@
 
     # Security
     security = {
-      doas.enable = true;
-      fail2ban.enable = true;
-      ssh.enable = true;
-      sudo.enable = true;
-      pam.enable = true;
-      packages.enable = true;
+      # fail2ban.enable = true;
+      doas = {
+        enable = true;
+        adminUser = "tlh";
+      };
     };
   };
 

@@ -166,10 +166,8 @@ in {
         eval "$(tv init zsh)"
 
         # Sanatana Linux Banner
-        SAY=$(echo -e "Sanatana \n Linux")
-        if command -v pnpx >/dev/null; then
-           pnpx cfonts "$SAY" --colors "#4FB0BE","#F25F89" --align center --font slick
-        fi
+        clear
+        SAY=$(echo -e "Sanatana \n Linux") && pnpx cfonts $SAY -c "#4FB0BE","#F25F89" --align center --font slick
       '';
 
       # ZSH options

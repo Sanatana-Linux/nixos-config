@@ -6,7 +6,7 @@
 }:
 with lib; let
   cfg = config.modules.shell.xdg;
-  
+
   browser = ["firefox.desktop"];
   fileRoller = ["file-roller.desktop"]; # Define file-roller application
   zathura = ["org.pwmt.zathura.desktop"]; # Define zathura application

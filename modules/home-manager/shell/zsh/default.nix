@@ -69,7 +69,7 @@ in {
       '';
 
       # ZSH initialization
-      initExtra = ''
+      initContent = ''
         # XC-Manager installation and initialization
         if [[ ! -d "$HOME/.config/zsh/XC-Manager" ]]; then
           git clone https://github.com/Rakosn1cek/XC-Manager.git "$HOME/.config/zsh/XC-Manager"
@@ -167,7 +167,7 @@ in {
 
         # Sanatana Linux Banner
         clear
-        SAY=$(echo -e "Sanatana \n Linux") && pnpx cfonts $SAY -c "#4FB0BE","#F25F89" --align center --font slick
+        cfonts "Sanatana \n Linux" -c "#4FB0BE","#F25F89" --align center --font slick
       '';
 
       # ZSH options

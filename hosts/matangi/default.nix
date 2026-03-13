@@ -178,7 +178,7 @@
       networking = {
         enable = true;
         hostName = "matangi";
-        firewall.enable = true;
+        # firewall.enable = true;
       };
       iphone.enable = true;
     };

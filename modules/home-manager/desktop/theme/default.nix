@@ -93,13 +93,15 @@ in {
   };
 
   config = mkIf cfg.enable {
-    home.packages = cfg.fonts.packages ++ [
-      cfg.gtk.theme.package
-      cfg.gtk.iconTheme.package
-      cfg.cursor.package
-      pkgs.adwaita-qt
-      pkgs.adwaita-qt6
-    ];
+    home.packages =
+      cfg.fonts.packages
+      ++ [
+        cfg.gtk.theme.package
+        cfg.gtk.iconTheme.package
+        cfg.cursor.package
+        pkgs.adwaita-qt
+        pkgs.adwaita-qt6
+      ];
 
     gtk = {
       enable = true;

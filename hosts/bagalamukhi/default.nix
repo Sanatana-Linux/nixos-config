@@ -189,7 +189,6 @@
       networking = {
         enable = true;
         hostName = "bagalamukhi";
-        firewall.enable = false;
       };
       android.enable = true;
     };
@@ -208,7 +207,6 @@
 
     # Security
     security = {
-      # fail2ban.enable = true;
       doas = {
         enable = true;
         adminUser = "tlh";

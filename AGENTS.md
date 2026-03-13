@@ -28,6 +28,7 @@ This repository manages three NixOS hosts, each with a specific primary user:
 - **Types:** Use explicit types for Nix options and module arguments.
 - **Error handling:** Use `lib.mkIf` for conditionals; pass inputs via `specialArgs`.
 - **Testing:** Always run `nixos-rebuild test` before switching; check debugging/ for more.
+- **Documentation:** See `.documentation/ARCHITECTURE.md` for comprehensive architecture details.
 
 ## Hardware-Specific Rules
 
@@ -48,6 +49,57 @@ prime = {
 ```
 
 ## Architecture
+
+This is a **flake-based** NixOS configuration repository. The entire system configuration is declarative and reproducible.
+
+### Directory Structure
+```
+/home/tlh/nixos/
+├── .github/README.md          # Project documentation
+├── flake.nix                  # Flake entry point - defines all outputs
+├── hosts/                     # Host-specific machine configurations
+│   ├── bagalamukhi/          # Development workstation (Lenovo Legion)
+│   ├── matangi/              # Secondary workstation (Lenovo Legion)
+│   └── chhinamasta/          # Live ISO installer
+├── home/                     # Home Manager user configurations
+│   ├── tlh/                  # Primary user config
+│   ├── smg/                  # Secondary user config
+│   └── user/                 # Live ISO user config
+├── modules/                  # Reusable NixOS and Home Manager modules
+│   ├── nixos/               # System-level modules
+│   └── home-manager/        # User-level modules
+├── overlays/                # Package overlays (modifications to nixpkgs)
+└── templates/               # Development environment templates
+```
+
+### How Configuration Composition Works
+
+1. **Flake Entry (`flake.nix`)**: Defines `nixosConfigurations` for each host and `homeConfigurations` for each user.
+
+2. **Host Configuration (`hosts/<name>/default.nix`)**:
+   - Imports shared modules from `hosts/shared/`
+   - Imports NixOS modules from `modules/nixos/`
+   - Sets host-specific options via `modules.<category>.<module>.enable = true`
+   - Merges with base configuration in `modules/nixos/`
+
+3. **Module System (Activate-by-Enable-Option)**:
+   - Every module provides an `enable` option via `mkEnableOption`
+   - All configuration is wrapped in `mkIf config.modules.<category>.<module>.enable { ... }`
+   - This allows importing all modules unconditionally and only activating them when needed
+   - Enables modular composition: modules can depend on and configure each other
+
+4. **Home Manager Integration**:
+   - Each user has a configuration in `home/<username>/`
+   - Imports Home Manager modules from `modules/home-manager/`
+   - System and user configurations are built separately but work together
+
+### Key Concepts
+
+- **Kernel Modules & Parameters**: Distributed to hardware modules (e.g., `nvidia.nix`, `lenovo.nix`, `openrgb.nix`). Uses `lib.mkMerge` to append to `boot.kernelModules` and `boot.kernelParams` from individual modules.
+- **Package Collections**: Organized in `modules/nixos/packages/packages.nix` with nested category structure.
+- **Overlays**: Defined in `overlays/default.nix`, applied in flake and host configs.
+
+### Module Organization
 - Hosts: `hosts/` (machine configs)
 - Modules: `hosts/shared/`, `modules/` (reusable)
 - Home Manager: `home/` (user configs)
@@ -135,7 +187,13 @@ When making changes that affect existing functionality or add new features:
 2. **Update relevant documentation files** to reflect the new behavior, options, or configuration
 3. **Create new documentation files** for substantial new features, modules, or workflows that would benefit users
 4. **Remove outdated documentation** that has been superseded by new files or is no longer relevant
-5. **Update references** in `README.md` and other docs when files are added, removed, or renamed
+5. **Update references** in `README.md`, `AGENTS.md`, and other docs when files are added, removed, or renamed
+
+**Key documentation files:**
+- `.documentation/ARCHITECTURE.md` - Comprehensive architecture and module system guide
+- `.documentation/CHANGELOG.md` - Historical changes and versioning
+- `.github/README.md` - Project overview and quick start
+- `AGENTS.md` - Developer guidelines and rules
 
 **When to create new documentation:**
 - New installation/setup workflows

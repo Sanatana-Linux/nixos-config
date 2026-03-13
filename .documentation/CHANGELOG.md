@@ -11,6 +11,20 @@ Each entry follows this format:
 
 ## Changes
 
+- **2026-03-13**: Fixed `modules.security.doas.adminUser` error and cleaned up configuration warnings
+  - Added `adminUser` option to `modules/nixos/security/doas.nix` to allow per-host configuration of passwordless doas access
+  - Defaulted `adminUser` to `null`, which falls back to the legacy `["tlh" "smg"]` list for backward compatibility
+  - Fixed `programs.zsh.initExtra` deprecation warning in `modules/home-manager/shell/zsh/default.nix` by renaming to `initContent`
+  - Fixed `services.gpg-agent.pinentryPackage` rename warning in `modules/home-manager/programs/gpg.nix` by renaming to `services.gpg-agent.pinentry.package`
+  - Ran `nix fmt` to ensure repository-wide code style consistency
+
+- **2026-03-12**: Comprehensive architecture documentation
+  - Created `.documentation/ARCHITECTURE.md` - comprehensive guide to the project's architecture
+  - Covers: project structure, module system (activate-by-enable-option), configuration composition, host configurations, Home Manager integration, overlays and packages, kernel modules and parameters
+  - Includes examples, quick reference, and best practices
+  - Updated `AGENTS.md` architecture section with detailed directory structure and composition explanation
+  - Added `ARCHITECTURE.md` to key documentation files list in `AGENTS.md`
+
 - **2026-03-12**: Improved kernel module and parameter documentation
   - Added inline comments to `modules/nixos/hardware/intel.nix` explaining kernel modules (i915, intel_cstate, etc.) and parameters
   - Added inline comments to `modules/nixos/hardware/nvidia.nix` explaining kernel params (modeset, fbdev) and initrd modules
@@ -24,6 +38,10 @@ Each entry follows this format:
   - Removed `acpi_call` from `kernelParams` and `environment.systemPackages` in `modules/nixos/system/boot.nix` (redundant/incorrect)
   - Verified `acpi_call` is correctly configured in `modules/nixos/hardware/lenovo.nix` (kernel module, package, and extra module package)
   - This consolidates `acpi_call` configuration to the hardware module where it belongs
+
+- **2026-03-12**: Removed `pnpx` prefix from `cfonts` command in ZSH config
+  - Modified `modules/home-manager/shell/zsh/default.nix` to run `cfonts` directly
+  - `pnpx` was causing unnecessary delays; `cfonts` is already installed in the system
 
 - **2026-03-12**: Removed fail2ban
   - Commented out `fail2ban.enable` in `hosts/bagalamukhi/default.nix`

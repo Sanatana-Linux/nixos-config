@@ -25,7 +25,7 @@ in {
         enable = true;
         enableSshSupport = cfg.enableSshSupport;
         enableExtraSocket = true;
-        pinentryPackage = pkgs.pinentry-tty;
+        pinentry.package = pkgs.pinentry-curses;
         enableZshIntegration = true;
         enableBashIntegration = true;
         extraConfig = ''

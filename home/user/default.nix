@@ -6,7 +6,6 @@
   ...
 }: {
   imports = [
-    ./theme.nix
   ];
 
   modules = {

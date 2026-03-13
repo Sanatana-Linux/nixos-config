@@ -7,11 +7,13 @@
   ...
 }: {
   imports = [
-    ./desktop.nix
     ../../modules/home-manager/default.nix
   ];
 
   modules = {
+    desktop = {
+      orchisCosmic.enable = true;
+    };
     packages.essential.enable = true;
     shell = {
       zsh.enable = true;

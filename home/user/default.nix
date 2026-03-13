@@ -22,6 +22,7 @@
     };
     desktop = {
       enable = true;
+      monokaiProSkeudos.enable = true;
     };
     programs = {
       firefox.enable = true;

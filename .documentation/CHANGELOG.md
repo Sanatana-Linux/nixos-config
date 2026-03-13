@@ -11,6 +11,11 @@ Each entry follows this format:
 
 ## Changes
 
+- **2026-03-13**: Removed sea-greeter package and module
+  - Deleted `pkgs/sea-greeter.nix` and removed import from `pkgs/default.nix`
+  - Deleted `modules/nixos/sea-greeter.nix` module
+  - Deleted `.documentation/sea-greeter-setup.md` documentation
+  - Updated `.github/README.md` to remove sea-greeter references
 - **2026-03-13**: Enhanced security and hardware configuration
   - Enabled `sudo` with passwordless access for `wheel` group on `bagalamukhi` host
   - Defined `i2c` group in `modules/nixos/hardware/openrgb.nix` and ensured `hardware.i2c.enable` is set

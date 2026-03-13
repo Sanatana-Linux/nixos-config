@@ -67,10 +67,9 @@ modules/
     services/                   # Networking, systemd units, Android
     shell/                      # Shell configuration
     system/                     # Users, boot, locale
-    users/                      # User account declarations
-    virtualization/             # Waydroid, containers
-    sea-greeter.nix             # Custom greeter module
-  home-manager/                 # User-level modules (Home Manager)
+users/ # User account declarations
+virtualization/ # Waydroid, containers
+home-manager/ # User-level modules (Home Manager)
     desktop/                    # Per-user desktop config
     packages/                   # Per-user package sets
     programs/                   # Firefox, Neovim, etc.
@@ -121,7 +120,6 @@ in {
 ### Hardware and Desktop
 
 1. [NVIDIA Settings](../.documentation/nvidia-settings.md) - NVIDIA driver and CUDA configuration notes.
-1. [Sea Greeter Setup](../.documentation/sea-greeter-setup.md) - Custom display manager greeter.
 1. [Advanced BIOS for Lenovo Legion](../.documentation/lenovo-advanced-bios.md) - Access the unlocked "Advanced BIOS" firmware settings from the Grub boot menu.
 
 ### Secrets

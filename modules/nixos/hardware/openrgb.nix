@@ -49,6 +49,9 @@ in {
       # Enable I2C hardware support
       hardware.i2c.enable = true;
 
+      # Create i2c group for user access
+      users.groups.i2c = {};
+
       # Udev rules are needed so OpenRGB can access hardware without root
       services.udev.packages = [pkgs.openrgb];
 

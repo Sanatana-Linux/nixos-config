@@ -211,6 +211,7 @@
         enable = true;
         adminUser = "tlh";
       };
+      sudo.enable = true;
     };
   };
 

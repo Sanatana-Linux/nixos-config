@@ -11,6 +11,10 @@ Each entry follows this format:
 
 ## Changes
 
+- **2026-03-13**: Enhanced security and hardware configuration
+  - Enabled `sudo` with passwordless access for `wheel` group on `bagalamukhi` host
+  - Defined `i2c` group in `modules/nixos/hardware/openrgb.nix` and ensured `hardware.i2c.enable` is set
+  - This allows users (like `tlh` and `smg`) to automatically join the `i2c` group when OpenRGB is enabled
 - **2026-03-13**: Removed newline from Sanatana Linux banner
   - Modified `modules/home-manager/shell/zsh/default.nix` to print "Sanatana Linux" on a single line in the ZSH banner
 - **2026-03-13**: Fixed GPG decryption error by switching to `pinentry-tty`

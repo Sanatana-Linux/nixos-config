@@ -167,7 +167,7 @@ in {
 
         # Sanatana Linux Banner
         clear
-        cfonts "Sanatana \n Linux" -c "#4FB0BE","#F25F89" --align center --font slick
+        cfonts "Sanatana Linux" -c "#4FB0BE","#F25F89" --align center --font slick
       '';
 
       # ZSH options

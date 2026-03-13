@@ -11,6 +11,8 @@ Each entry follows this format:
 
 ## Changes
 
+- **2026-03-13**: Removed newline from Sanatana Linux banner
+  - Modified `modules/home-manager/shell/zsh/default.nix` to print "Sanatana Linux" on a single line in the ZSH banner
 - **2026-03-13**: Fixed GPG decryption error by switching to `pinentry-tty`
   - Updated `modules/home-manager/programs/gpg.nix` to use `pkgs.pinentry-tty` to resolve "No pinentry" error during decryption
 - **2026-03-13**: Fixed `modules.security.doas.adminUser` error and cleaned up configuration warnings

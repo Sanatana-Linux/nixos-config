@@ -11,6 +11,10 @@ Each entry follows this format:
 
 ## Changes
 
+- **2026-03-13**: Refactored theme configuration into proper module
+  - Moved `home/tlh/theme.nix` to `modules/home-manager/desktop/themes/monokai-pro-skeudos.nix`
+  - Refactored to use "activate module by enabling option" pattern under `modules.desktop.monokaiProSkeudos`
+  - Enabled in tlh user config via `desktop.monokaiProSkeudos.enable = true`
 - **2026-03-13**: Verified home-manager module structure
   - Confirmed all category directories (desktop, packages, programs, services, shell) have proper `default.nix` files
   - Structure is already well-organized and follows consistent patterns

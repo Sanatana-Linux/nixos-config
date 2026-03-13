@@ -6,7 +6,6 @@
   ...
 }: {
   imports = [
-    ./theme.nix
   ];
 
   # Restored modules configuration for feature parity - ONLY originally enabled modules
@@ -24,6 +23,7 @@
     };
     desktop = {
       enable = true;
+      monokaiProSkeudos.enable = true;
     };
     programs = {
       higgs-boson-firefox.enable = true;

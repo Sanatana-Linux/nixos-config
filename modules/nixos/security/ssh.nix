@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 with lib; let
@@ -29,6 +30,14 @@ in {
         PasswordAuthentication = lib.mkForce cfg.passwordAuthentication;
         PermitRootLogin = lib.mkForce cfg.permitRootLogin;
       };
+    };
+
+    programs.ssh.startAgent = true;
+
+    security.pam.services.sshd.rules.auth.rssh = {
+      order = config.security.pam.services.sshd.rules.auth.unix.order + 10;
+      control = "sufficient";
+      modulePath = "${pkgs.pam_rssh}/lib/libpam_rssh.so";
     };
   };
 }

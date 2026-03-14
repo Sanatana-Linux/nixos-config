@@ -7,22 +7,13 @@
 }: let
   cfg = config.modules.shell.home;
 in {
-  # Import the shell configuration modules at the top level
-  imports = [
-    ./home/xdg.nix
-    ./home/starship.nix
-    ./home/cli.nix
-    ./home/nix.nix
-    ./home/bin/default.nix
-    ./home/zsh.nix
-  ];
-
   options.modules.shell.home = {
     enable = lib.mkEnableOption "shared shell configuration";
   };
 
   config = lib.mkIf cfg.enable {
     home.sessionPath = [
+      "$HOME/.bun/bin"
       "$HOME/.config/emacs/bin"
       "$HOME/.local/bin"
       "$HOME/.local/share/pnpm"
@@ -50,17 +41,17 @@ in {
     ];
 
     home.sessionVariables = {
-      EDITOR = "nvim";
-      BROWSER = "firefox";
-      TERMINAL = "kitty";
-      GOPATH = "$HOME/go";
-      GOBIN = "$HOME/go/bin";
-      PNPM_HOME = "$HOME/.local/share/pnpm";
-      FNM_DIR = "$HOME/.fnm";
-      FNM_VERSION_FILE_STRATEGY = "local";
-      FNM_RESOLVE_ENGINES = "true";
-      FNM_COREPACK_ENABLED = "true";
-      FNM_NODE_DIST_MIRROR = "https://nodejs.org/dist";
+      EDITOR = lib.mkDefault "nvim";
+      BROWSER = lib.mkDefault "firefox";
+      TERMINAL = lib.mkDefault "kitty";
+      GOPATH = lib.mkDefault "$HOME/go";
+      GOBIN = lib.mkDefault "$HOME/go/bin";
+      PNPM_HOME = lib.mkDefault "$HOME/.local/share/pnpm";
+      FNM_DIR = lib.mkDefault "$HOME/.fnm";
+      FNM_VERSION_FILE_STRATEGY = lib.mkDefault "local";
+      FNM_RESOLVE_ENGINES = lib.mkDefault "true";
+      FNM_COREPACK_ENABLED = lib.mkDefault "true";
+      FNM_NODE_DIST_MIRROR = lib.mkDefault "https://nodejs.org/dist";
     };
   };
 }

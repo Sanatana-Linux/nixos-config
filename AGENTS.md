@@ -1,15 +1,19 @@
 # AGENTS.md - NixOS Configuration Codebase
 
 ## Repository Guidelines
+
 **IMPORTANT:** All modifications must be made to THIS repository (`/home/tlh/nixos`) only. Never modify files in `/etc/nixos` or system directories. This flake-based configuration is self-contained and manages the entire system configuration through this repository.
 
-## Host-Specific Information
+**IMPORTANT:** NEVER REBUILD OR TEST MATANGI+SMG ON THIS SYSTEM EVER. DO NOT PERFORM ACTIONS THAT RESTART THE DISPLAY MANAGER EITHER~!
+
 This repository manages three NixOS hosts, each with a specific primary user:
+
 - **bagalamukhi** - Primary user: `tlh` (current development system)
 - **matangi** - Primary user: `smg`
 - **chhinamasta** - Primary user: `user` (live ISO installer)
 
 ## Build, Lint, and Test Commands
+
 - **Build system config:** `sudo nixos-rebuild switch --flake .#<host>` (replace `<host>` with bagalamukhi, matangi, chhinamasta)
 - **Test config (no switch):** `sudo nixos-rebuild test --flake .#<host>`
 - **Run a single test:** Use `nixos-rebuild test --flake .#<host>` after editing relevant files; for module/unit tests, see documentation/debugging/
@@ -18,6 +22,7 @@ This repository manages three NixOS hosts, each with a specific primary user:
 - **Build ISO:** `nix build .#nixosConfigurations.<host>.config.system.build.isoImage`
 
 ## Code Style Guidelines
+
 - **Formatting:** Always run `nix fmt` before committing.
 - **Imports:** Inputs first, then local modules; see hosts/shared/default.nix:8-16.
 - **Attribute sets:** Multi-line, trailing semicolons.
@@ -33,14 +38,17 @@ This repository manages three NixOS hosts, each with a specific primary user:
 ## Hardware-Specific Rules
 
 ### NVIDIA Configuration
+
 **CRITICAL: NEVER SWITCH THE NVIDIA PRIME MODE TO OFFLOAD**
 
 The NVIDIA module (`modules/nixos/hardware/nvidia.nix`) uses PRIME sync mode. DO NOT change it to offload mode as this causes issues on both bagalamukhi and matangi hosts:
+
 - Screen flashing/tearing
 - Compositor instability
 - Display artifacts
 
 **Always keep:**
+
 ```nix
 prime = {
   offload.enable = mkForce false;
@@ -53,6 +61,7 @@ prime = {
 This is a **flake-based** NixOS configuration repository. The entire system configuration is declarative and reproducible.
 
 ### Directory Structure
+
 ```
 /home/tlh/nixos/
 ├── .github/README.md          # Project documentation
@@ -100,6 +109,7 @@ This is a **flake-based** NixOS configuration repository. The entire system conf
 - **Overlays**: Defined in `overlays/default.nix`, applied in flake and host configs.
 
 ### Module Organization
+
 - Hosts: `hosts/` (machine configs)
 - Modules: `hosts/shared/`, `modules/` (reusable)
 - Home Manager: `home/` (user configs)
@@ -107,13 +117,17 @@ This is a **flake-based** NixOS configuration repository. The entire system conf
 - Templates: `templates/` (dev envs)
 
 ## Module Structure and Organization
+
 **CRITICAL:** All modules MUST follow the "activate by enable option" paradigm. Every module must:
+
 1. **Provide an enable option** using `mkEnableOption` (e.g., `modules.hardware.iphone.enable`)
 2. **Wrap all configuration** in `mkIf config.modules.<category>.<name>.enable { ... }`
 3. **Be nested in the appropriate subdirectory** under `modules/nixos/` or `modules/home-manager/`
 
 ### Module Directory Structure
+
 NixOS modules belong in `modules/nixos/` with the following categories:
+
 - `ai/` - AI tools and services
 - `base/` - Core system configuration (timezone, nix settings)
 - `desktop/` - Desktop environment configurations (xorg, xfce, etc.)
@@ -132,6 +146,7 @@ NixOS modules belong in `modules/nixos/` with the following categories:
 - `virtualization/` - Virtualization support (docker, podman, libvirt)
 
 Home Manager modules belong in `modules/home-manager/` with categories:
+
 - `desktop/` - User desktop settings
 - `packages/` - User package collections
 - `programs/` - User program configurations
@@ -139,7 +154,9 @@ Home Manager modules belong in `modules/home-manager/` with categories:
 - `shell/` - User shell configurations
 
 ### Module Template
+
 When creating new modules, follow this template:
+
 ```nix
 {
   config,
@@ -160,6 +177,7 @@ with lib; {
 ```
 
 ### Module Import Rules
+
 - Each category directory MUST have a `default.nix` that imports all modules in that directory
 - Add new modules to the appropriate `default.nix` imports list
 - Example: `modules/nixos/hardware/default.nix` imports `./iphone.nix`, `./bluetooth.nix`, etc.
@@ -167,11 +185,14 @@ with lib; {
 ## Documentation Management
 
 ### Changelog Updates
+
 All significant changes to the configuration must be documented in `.documentation/CHANGELOG.md`. When making changes, add entries as unordered list items with the following format:
+
 - **YYYY-MM-DD**: Brief description of the change
   - Detailed sub-items for each specific change
 
 Changes to document include:
+
 - Package additions or removals
 - Module structure changes
 - Host configuration updates
@@ -181,6 +202,7 @@ Changes to document include:
 **IMPORTANT:** Always update the changelog IMMEDIATELY after making configuration changes. Add entries at the top of the "Changes" section, using today's date (Sat Mar 07 2026).
 
 ### Documentation File Updates
+
 When making changes that affect existing functionality or add new features:
 
 1. **Review existing documentation** in `.documentation/` to identify files impacted by your changes
@@ -190,24 +212,28 @@ When making changes that affect existing functionality or add new features:
 5. **Update references** in `README.md`, `AGENTS.md`, and other docs when files are added, removed, or renamed
 
 **Key documentation files:**
+
 - `.documentation/ARCHITECTURE.md` - Comprehensive architecture and module system guide
 - `.documentation/CHANGELOG.md` - Historical changes and versioning
 - `.github/README.md` - Project overview and quick start
 - `AGENTS.md` - Developer guidelines and rules
 
 **When to create new documentation:**
+
 - New installation/setup workflows
 - Significant new features or module categories
 - Complex configuration patterns that need explanation
 - Troubleshooting guides for common issues
 
 **When to update existing documentation:**
+
 - Module options or APIs change
 - Installation steps are modified
 - New commands or workflows are introduced
 - Directory structure changes
 
 **Do not create documentation for:**
+
 - Minor internal code changes
 - Simple bug fixes without user-facing impact
 - Routine package version updates

@@ -56,8 +56,6 @@ with lib; {
       blacklistedKernelModules = ["nouveau"];
 
       kernelModules = [
-        "i2c-dev" # Userspace I2C access (often needed by DDC/CI tools)
-        "i2c-i801" # Intel SMBus driver (common motherboard controller)
       ];
 
       extraModulePackages = [
@@ -90,17 +88,12 @@ with lib; {
     };
 
     environment.systemPackages = with pkgs; [
-      cpufrequtils
       nvme-cli
       grub2
       mesa
       mesa-demos
       plymouth
       kdePackages.plymouth-kcm
-      lenovo-legion
-      i2c-tools
-      peakperf
-      intel-media-driver
       linuxHeaders
       luajitPackages.ldbus
       xssproxy
@@ -135,7 +128,7 @@ with lib; {
         };
 
         extraEntries = optionalString config.modules.system.boot.advancedBios.enable ''
-          menuentry 'Advanced UEFI Firmware Settings' --class settings {
+          menuentry 'Advanced UEFI Firmware Settings' --class settings --class uefi  {
             insmod fat
             insmod chain
             chainloader @bootRoot@/EFI/Boot/Bootx64.efi

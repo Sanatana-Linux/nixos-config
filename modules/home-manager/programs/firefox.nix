@@ -40,11 +40,9 @@ with lib; {
           about-sync
 
           absolute-enable-right-click
-          add-custom-search-engine
           auto-referer
           auto-tab-discard
           bitwarden
-          chrome-mask
           cookie-quick-manager
           copy-selection-as-markdown
           don-t-fuck-with-paste
@@ -54,20 +52,16 @@ with lib; {
           form-history-control
           foxytab
           gaoptout
-          # header-editor
           ipfs-companion
           istilldontcareaboutcookies
           justdeleteme
           link-gopher
           markdownload
           multi-account-containers
-          multiple-tab-handler
-          overview
           persistentpin
           raindropio
           refined-github
           tab-stash
-          # umatrix
           ublock-origin
           view-image
         ];

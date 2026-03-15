@@ -13,8 +13,22 @@ in {
 
   config = mkIf cfg.enable {
     home = {
+      sessionPath = [
+        "${config.home.homeDirectory}/.bun/bin"
+        "${config.home.homeDirectory}/.local/bin"
+        "${config.home.homeDirectory}/.local/share/gem/ruby/3.1.0/bin"
+        "${config.home.homeDirectory}/.local/share/flatpak/exports/share"
+        "${config.home.homeDirectory}/Workspace/go/bin"
+        "$GOBIN"
+        "${config.home.homeDirectory}/.cargo/bin"
+        "${config.home.homeDirectory}/.yarn/bin"
+        "${config.home.homeDirectory}/.local/share/pnpm"
+        "${config.home.homeDirectory}/node_modules/.bin"
+        "${config.home.homeDirectory}/.local/share/flatpak/exports/share"
+        "/run/user/1000/fnm_multishells/87711_1736929409043/bin"
+      ];
+
       sessionVariables = {
-        PATH = "${config.home.homeDirectory}/.bun/bin:${config.home.homeDirectory}/.local/share/pnpm:${config.home.homeDirectory}/.local/bin:${config.home.homeDirectory}/.cargo/bin:${config.home.homeDirectory}/.yarn/bin:$PATH";
         GOPATH = "${config.home.homeDirectory}/Workspace/go";
         PERLPATH = "/run/current-system/sw/bin/perl";
         GOBIN = "${config.home.homeDirectory}/Workspace/go/bin";

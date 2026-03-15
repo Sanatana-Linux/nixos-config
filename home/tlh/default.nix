@@ -41,6 +41,10 @@
         # backend = "egl"; # Using default glx backend for consistency
       };
       xscreensaver.enable = true;
+      gnome-keyring = {
+        enable = true;
+        components = ["secrets" "ssh" "pkcs11"];
+      };
     };
   };
 

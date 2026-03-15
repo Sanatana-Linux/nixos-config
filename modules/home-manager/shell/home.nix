@@ -13,9 +13,14 @@ in {
 
   config = lib.mkIf cfg.enable {
     home.sessionPath = [
+      "$HOME/.bun/bin"
       "$HOME/.config/emacs/bin"
+      "$HOME/.local/bin"
+      "$HOME/.local/share/pnpm"
       "$HOME/.local/share/gem/ruby/3.1.0/bin"
       "$HOME/.local/share/flatpak/exports/share"
+      "$HOME/.cargo/bin"
+      "$HOME/.yarn/bin"
       "$HOME/.npm-global/bin"
       "$HOME/bin"
       "$HOME/go/bin"

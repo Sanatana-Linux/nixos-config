@@ -189,6 +189,8 @@
       networking = {
         enable = true;
         hostName = "bagalamukhi";
+        wifi.rtl88x2bu.enable = true;
+        quad9.enable = true;
       };
       android.enable = true;
     };

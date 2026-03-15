@@ -61,18 +61,15 @@ in {
       dbus = {
         enable = true;
         packages = with pkgs; [dconf gcr dbus-broker polkit_gnome];
-        implementation = "dbus"; # lock dbus impl to dbus-broker
+        implementation = "dbus";
       };
 
-      # because both gnome-keyring and gnome.gnome-keyring exist
       gnome = {
         glib-networking.enable = true;
-        # gnome-keyring.enable = true;
+        gnome-keyring.enable = true;
       };
 
-      # thumbnails
       tumbler.enable = true;
-      # drive mounting
       gvfs.enable = true;
     };
   };

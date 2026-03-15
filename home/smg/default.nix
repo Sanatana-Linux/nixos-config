@@ -27,6 +27,7 @@
     };
     programs = {
       firefox.enable = true;
+      higgs-boson-firefox.enable = true;
       yazi.enable = true;
       kitty.enable = true;
     };

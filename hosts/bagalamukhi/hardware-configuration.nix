@@ -34,12 +34,6 @@
     options = ["nofail"];
   };
 
-  # fileSystems."/home/tlh/Dropbox" =
-  # { device = "dropbox:";
-  #   fsType = "fuse.rclone";
-  #    options=["nofail"];
-  # };
-
   swapDevices = [
     {
       options = ["nofail"];

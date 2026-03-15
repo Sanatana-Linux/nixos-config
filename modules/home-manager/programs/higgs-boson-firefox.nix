@@ -42,12 +42,27 @@ with lib; let
 in {
   options.modules.programs.higgs-boson-firefox = {
     enable = mkEnableOption "Higgs Boson Firefox configuration";
+    defaultBrowser = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Set Firefox as the default browser";
+    };
   };
 
   config = mkIf config.modules.programs.higgs-boson-firefox.enable {
     home.sessionVariables = {
       MOZ_USE_XINPUT2 = "1";
       MOZ_DISABLE_RDD_SANDBOX = "1";
+    };
+
+    xdg.mimeApps = mkIf config.modules.programs.higgs-boson-firefox.defaultBrowser {
+      enable = true;
+      defaultApplications = {
+        "text/html" = ["firefox.desktop"];
+        "text/xml" = ["firefox.desktop"];
+        "x-scheme-handler/http" = ["firefox.desktop"];
+        "x-scheme-handler/https" = ["firefox.desktop"];
+      };
     };
 
     programs.firefox = {
@@ -70,7 +85,6 @@ in {
           form-history-control
           foxytab
           gaoptout
-          header-editor
           ipfs-companion
           istilldontcareaboutcookies
           justdeleteme
@@ -99,7 +113,7 @@ in {
           "browser.discovery.enabled" = false; # Disable add-on discovery
           "browser.display.use_system_colors" = true; # Use system colors for rendering
           "browser.download.autohideButton" = false; # Always show download button
-          "browser.download.dir" = "/home/tlh/Downloads"; # Set default download directory
+          "browser.download.dir" = "${config.home.homeDirectory}/Downloads"; # Set default download directory
           "browser.download.folderList" = 2; # Use custom download directory
           "browser.newtabpage.activity-stream.feeds.section.topstories" = false; # Disable top stories on new tab
           "browser.newtabpage.activity-stream.newtabWallpapers.v2.enabled" = false; # Disable new tab wallpapers
@@ -164,7 +178,7 @@ in {
           "layout.css.xul-display-values.content.enabled" = true; # Enable XUL display values in content
           "layout.css.xul-tree-pseudos.content.enabled" = true; # Allow stylesheets to modify XUL trees in tabs
           "loop.logDomains" = false; # Disable Loop logging
-          "media.av1.enabled" = false; # Disable AV1 codec
+          "media.av1.enabled" = true; # Disable AV1 codec
           "media.ffmpeg.vaapi.enabled" = true; # Enable VAAPI hardware decoding via FFmpeg
           "media.hardware-video-decoding.force-enabled" = true; # Force-enable hardware video decoding
           "media.rdd-ffmpeg.enabled" = true; # Enable FFmpeg in RDD process

@@ -51,6 +51,20 @@ in {
       "intel_powerclamp" # Intel Power Clamp driver for thermal throttling
     ];
 
+    boot.kernelModules =
+      [
+        "i2c-dev" # Userspace I2C access (often needed by DDC/CI tools)
+        "i2c-i801" # Intel SMBus driver (common motherboard controller)
+        "i915" # Intel graphics
+      ]
+      ++ optionals cfg.powerManagement [
+        "phc-intel" # Intel PHC (Processor Hardware Control)
+      ]
+      ++ optionals cfg.virtualization [
+        "kvm-intel" # Intel KVM virtualization
+        "vfio-pci" # VFIO PCI device assignment
+      ];
+
     # Enable Intel CPU frequency driver
     powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
 
@@ -65,19 +79,6 @@ in {
         intel-vaapi-driver
       ]);
     };
-
-    # Kernel modules for Intel hardware
-    boot.kernelModules =
-      [
-        "i915" # Intel graphics
-      ]
-      ++ optionals cfg.powerManagement [
-        "phc-intel" # Intel PHC (Processor Hardware Control)
-      ]
-      ++ optionals cfg.virtualization [
-        "kvm-intel" # Intel KVM virtualization
-        "vfio-pci" # VFIO PCI device assignment
-      ];
 
     # Kernel parameters for Intel hardware
     boot.kernelParams =
@@ -170,6 +171,7 @@ in {
         intelmetool
         inteltool
         inxi
+        i2c-tools
       ]
       ++ optionals cfg.vaapi [
         # Video acceleration

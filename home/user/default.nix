@@ -25,7 +25,7 @@
       monokaiProSkeudos.enable = true;
     };
     programs = {
-      firefox.enable = true;
+      # firefox.enable = true;
       higgs-boson-firefox.enable = true;
       kitty.enable = true;
       gpg.enable = true;

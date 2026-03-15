@@ -17,6 +17,13 @@ in {
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+      allowBroken = true;
+    };
+  };
+
   # Enable modules using the "activate by enable option" paradigm
   # Trimmed for live ISO — no hardware-specific drivers or unnecessary packages
   modules = {
@@ -131,6 +138,10 @@ in {
   services = {
     displayManager = {
       defaultSession = "none+awesome";
+    };
+    gnome = {
+      glib-networking.enable = true;
+      gnome-keyring.enable = true;
     };
   };
 

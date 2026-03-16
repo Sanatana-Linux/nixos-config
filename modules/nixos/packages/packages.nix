@@ -688,27 +688,37 @@ in {
           ]
           # Video tools
           ++ optionals cfg.multimedia.videoTools [
+            aom
             cheese
+            dav1d
+            easyeffects
             ffcast
             flowblade
             frei0r
             fswebcam
             gallery-dl
-            losslesscut-bin
-            mjpegtools
-            mp4v2
-            oggvideotools
-            peek
-            spotdl
-            vid-stab
-            vidmerger
-            vvenc
-            yt-dlp
-            xvidcore
+            gnome-video-effects
+            ladspa-sdk
             libtheora
             libvpl
             libwebcam
+            losslesscut-bin
+            lsp-plugins
             lv2
+            mjpegtools
+            mp4v2
+            ocamlPackages.frei0r
+            oggvideotools
+            peek
+            swh-plugins
+            svt-av1
+            vid-stab
+            vidmerger
+            vvenc
+            x264
+            x265
+            yt-dlp
+            xvidcore
           ]
           # Image tools
           ++ optionals cfg.multimedia.imageTools [
@@ -742,7 +752,10 @@ in {
             jp2a
             jpeginfo
             jpegoptim
+            libavif
             libexif
+            libheif
+            libjxl
             libjpeg
             libpng
             librsvg

@@ -45,6 +45,8 @@
         enable = true;
         components = ["secrets" "ssh" "pkcs11"];
       };
+      # Polkit authentication agent for GUI dialogs (mounting encrypted drives, etc.)
+      polkit-agent.enable = true;
     };
   };
 

@@ -181,6 +181,7 @@
         quad9.enable = true;
       };
       iphone.enable = true;
+      encrypted-storage.enable = true;
     };
 
     # Desktop

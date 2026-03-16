@@ -12,5 +12,6 @@
     ./tpm.nix
     ./udev.nix
     ./lenovo.nix
+    ./encrypted-storage.nix
   ];
 }

@@ -11,6 +11,34 @@ Each entry follows this format:
 
 ## Changes
 
+- **2026-03-16**: Added iso-open script for mounting ISO files
+  - Created `modules/home-manager/shell/scripts/iso-open.nix` with writeScriptBin
+  - Script mounts ISO files to ~/<iso-name> and opens with xdg-open
+  - Added to home-manager scripts module and available when scripts.enable = true
+- **2026-03-16**: Added polkit authentication agent for encrypted flash drive support
+  - Created `modules/home-manager/services/polkit-agent.nix` module with systemd user service for polkit-gnome-authentication-agent-1
+  - Required for GUI authentication dialogs (mounting encrypted drives, running privileged operations) in window managers like AwesomeWM
+  - Enabled `polkit-agent.enable = true` in both `home/tlh/default.nix` and `home/smg/default.nix`
+  - Note: `modules/nixos/hardware/encrypted-storage.nix` was already enabled on bagalamukhi - the issue was missing polkit agent for GUI auth dialogs
+- **2026-03-16**: Added UEFI development option to boot module
+  - Created `modules.system.boot.development.enable` nested option in `modules/nixos/system/boot.nix`
+  - Added UEFI development packages: efibootmgr, efivar, efitools, uefi-run, uefi-firmware-parser, fiano, efibooteditor, edk2-uefi-shell
+  - Enabled for bagalamukhi host only via `development.enable = true` in hosts/bagalamukhi/default.nix
+  - Follows "activate by enable option" paradigm with mkEnableOption + mkIf pattern
+- **2026-03-16**: Added image format libraries to multimedia.imageTools package group
+  - Added libavif (AVIF image format support) - modern high-efficiency format
+  - Added libheif (HEIF/HEIC image format support) - Apple/iOS photo format
+  - Added libjxl (JPEG XL image format support) - next-generation JPEG replacement
+  - These complement existing image tools: optipng, pngquant, jpegoptim, oxipng (optimization), and gimp, inkscape, imagemagick, graphicsmagick (editing)
+- **2026-03-16**: Added gst-plugins-base to nix-ld libraries for keyboard backlight control
+  - Added `gst_all_1.gst-plugins-base` to `modules/nixos/programs/nix-ld.nix`
+  - Provides `libgstvideo` required for running foreign binaries that control keyboard backlight colors
+  - Reorganized gstreamer package comments for clarity
+- **2026-03-16**: Added video effects and encoding packages to multimedia.videoTools
+  - Added `gnome-video-effects`, `easyeffects`, `ocamlPackages.frei0r` as requested
+  - Added additional video production packages: `aom` (AV1), `dav1d` (AV1 decoder), `ladspa-sdk`, `lsp-plugins`, `swh-plugins`, `svt-av1`, `x264`, `x265`
+  - Sorted video tools alphabetically for better maintainability
+  - These packages are in `multimedia.videoTools` which is enabled for matangi only (via `stableVideoEditors = true`)
 - **2026-03-13**: Refactored theme configuration into proper module
   - Moved `home/tlh/theme.nix` to `modules/home-manager/desktop/themes/monokai-pro-skeudos.nix`
   - Refactored to use "activate module by enabling option" pattern under `modules.desktop.monokaiProSkeudos`

@@ -45,6 +45,10 @@ with lib; {
     advancedBios = {
       enable = mkEnableOption "Advanced BIOS setup configuration";
     };
+
+    development = {
+      enable = mkEnableOption "UEFI development packages for working with and modifying UEFI firmware";
+    };
   };
 
   config = mkIf config.modules.system.boot.enable {
@@ -87,17 +91,28 @@ with lib; {
       enableRedistributableFirmware = true;
     };
 
-    environment.systemPackages = with pkgs; [
-      nvme-cli
-      grub2
-      mesa
-      mesa-demos
-      plymouth
-      kdePackages.plymouth-kcm
-      linuxHeaders
-      luajitPackages.ldbus
-      xssproxy
-    ];
+    environment.systemPackages = with pkgs;
+      [
+        nvme-cli
+        grub2
+        mesa
+        mesa-demos
+        plymouth
+        kdePackages.plymouth-kcm
+        linuxHeaders
+        luajitPackages.ldbus
+        xssproxy
+      ]
+      ++ optionals config.modules.system.boot.development.enable [
+        efibootmgr
+        efivar
+        efitools
+        uefi-run
+        uefi-firmware-parser
+        fiano
+        efibooteditor
+        edk2-uefi-shell
+      ];
 
     boot.loader = {
       timeout = mkIf (config.modules.system.boot.timeoutStyle == "hidden") null;

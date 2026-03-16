@@ -24,6 +24,7 @@
         enable = true;
         theme.enable = true;
         advancedBios.enable = true;
+        development.enable = true;
       };
     };
 
@@ -193,6 +194,7 @@
         quad9.enable = true;
       };
       android.enable = true;
+      encrypted-storage.enable = true;
     };
 
     # Desktop

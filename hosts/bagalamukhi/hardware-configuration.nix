@@ -38,7 +38,7 @@
     {
       options = ["nofail"];
       device = "/dev/disk/by-uuid/47c6e943-e3fe-4729-807a-9d5c8b70af24";
-      priority = 1000;
+      priority = null;
     }
   ];
 

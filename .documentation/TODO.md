@@ -1,1 +1,8 @@
+- [x] DONE while no longer claiming a need for org.freedesktop.secrets, there is still an issue with decrypted encrypted flashdrives with the bagalamukhi+tlh (and presumable the other) configurations that must be added to work with encrypted drives (system-wide I presume is best).
+- [x] DONE add all of the gstreamer related packages to the nix-ld function's available libraries as I need access to libgstvideo to run a package to operate a foreign binary that will enable me to change thecolor of my hardware's keyboard backlight to something tolerable.
+- [x] DONE add the gnome-video-effects, easyeffects, ocamlPackages.frei0r and any other video effects or driver related packages to the package group that contains olive-editor that are not already present in that group that would easy the create, transcoding, editing and general production with the editors present in it already (which only matangi enables and should remain that way)
+- [x] DONE add additional packages for libraries and image encoding formats not already present to the package group that provides Gimp and inkscape, including image optimization packages and other useful utilities for image editing and storage
+- [x] DONE create a nested option within the boot module called "development" that provides packages: ["efitoolos", "efivar", "efibootmgr", "uefitools", "uefi-run", "uefi-firmware-parser", "uefisettongs", "fiano"] and any other packages or pre-existing modules easing the process of working with and modifying UEFI functionality or .efi files. This should only be enabled for bagalamukhi+tlh
+- [x] DONE where the other scripts are made into bash scripts included in home-manager set up environment, write another .nix file that will build a script "iso-open" containing the following:
+
 

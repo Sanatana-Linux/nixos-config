@@ -98,15 +98,16 @@ in {
         nvtopPackages.nvidia # NVIDIA GPU monitoring tool
         peakperf # Performance analysis tool
         libva-vdpau-driver # VAAPI to VDPAU translation library
-        # GStreamer
-        gst_all_1.gst-plugins-ugly # GStreamer plugins for proprietary codecs
-        gst_all_1.gst-plugins-bad # GStreamer plugins that are not fully tested
-        gst_all_1.gst-plugins-good # GStreamer plugins that are well-tested
-        gst_all_1.gst-plugins-rs # GStreamer Rust plugins
-        gst_all_1.gst-editing-services # GStreamer editing services
-        gst_all_1.gstreamer
-        gst_all_1.gst-vaapi # GStreamer VAAPI plugins
-        gst_all_1.gst-libav # GStreamer libav plugins
+        # GStreamer - multimedia framework for audio/video processing
+        gst_all_1.gstreamer # Core GStreamer framework
+        gst_all_1.gst-plugins-base # Base plugins (libgstvideo, libgstaudio, etc.) - required for keyboard backlight control
+        gst_all_1.gst-plugins-good # Well-tested plugins
+        gst_all_1.gst-plugins-bad # Plugins needing more testing
+        gst_all_1.gst-plugins-ugly # Proprietary codec plugins
+        gst_all_1.gst-libav # FFmpeg-based plugins
+        gst_all_1.gst-vaapi # Hardware acceleration via VAAPI
+        gst_all_1.gst-plugins-rs # Rust-based plugins
+        gst_all_1.gst-editing-services # Non-linear editing support
         # Icons
         adwaita-icon-theme # Adwaita icon theme
         hicolor-icon-theme # High contrast icon

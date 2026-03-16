@@ -13,12 +13,13 @@ with lib; let
   panes = import ./panes.nix {inherit pkgs;};
   shrooms = import ./shrooms.nix {inherit pkgs;};
   mountbox = import ./mountbox.nix {inherit pkgs;};
+  iso-open = import ./iso-open.nix {inherit pkgs;};
 in {
   options.modules.shell.scripts = {
     enable = mkEnableOption "Enable custom shell scripts";
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [om mountbox run shrooms gita ns nixfetch panes nps];
+    home.packages = with pkgs; [om mountbox run shrooms gita ns nixfetch panes nps iso-open];
   };
 }

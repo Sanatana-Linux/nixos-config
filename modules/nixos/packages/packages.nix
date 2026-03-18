@@ -688,10 +688,9 @@ in {
           ]
           # Video tools
           ++ optionals cfg.multimedia.videoTools [
-            aom
+            libaom
             cheese
             dav1d
-            easyeffects
             ffcast
             flowblade
             frei0r
@@ -703,14 +702,13 @@ in {
             libvpl
             libwebcam
             losslesscut-bin
-            lsp-plugins
             lv2
             mjpegtools
             mp4v2
             ocamlPackages.frei0r
             oggvideotools
             peek
-            swh-plugins
+            swh
             svt-av1
             vid-stab
             vidmerger

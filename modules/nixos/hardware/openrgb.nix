@@ -6,6 +6,7 @@
 }:
 with lib; let
   cfg = config.modules.hardware.openrgb;
+  isX11 = config.modules.desktop.xorg.enable || config.modules.desktop.awesomewm.enable || config.modules.desktop.xfce.enable;
 in {
   options.modules.hardware.openrgb = {
     enable = mkEnableOption "OpenRGB hardware lighting control and server";
@@ -24,17 +25,21 @@ in {
 
     package = mkOption {
       type = types.package;
-      default = pkgs.symlinkJoin {
-        name = "openrgb-wrapped";
-        paths = [pkgs.openrgb-with-all-plugins];
-        buildInputs = [pkgs.makeWrapper];
-        postBuild = ''
-          wrapProgram $out/bin/openrgb \
-            --set QT_QPA_PLATFORM xcb
-        '';
-        meta.mainProgram = "openrgb";
-      };
-      description = "The OpenRGB package to use, typically with all plugins";
+      default =
+        if isX11
+        then
+          pkgs.symlinkJoin {
+            name = "openrgb-wrapped";
+            paths = [pkgs.openrgb-with-all-plugins];
+            buildInputs = [pkgs.makeWrapper];
+            postBuild = ''
+              wrapProgram $out/bin/openrgb \
+                --set QT_QPA_PLATFORM xcb
+            '';
+            meta.mainProgram = "openrgb";
+          }
+        else pkgs.openrgb-with-all-plugins;
+      description = "The OpenRGB package to use (wrapped for X11 xcb backend if needed)";
     };
 
     extraSystemPackages = mkOption {
@@ -46,16 +51,12 @@ in {
 
   config = mkIf cfg.enable (mkMerge [
     {
-      # Enable I2C hardware support
       hardware.i2c.enable = true;
 
-      # Create i2c group for user access
       users.groups.i2c = {};
 
-      # Udev rules are needed so OpenRGB can access hardware without root
       services.udev.packages = [pkgs.openrgb];
 
-      # Configure the OpenRGB service
       services.hardware.openrgb = {
         enable = true;
         package = cfg.package;
@@ -63,17 +64,15 @@ in {
         server.port = cfg.serverPort;
       };
 
-      # Install the package and extra system packages
       environment.systemPackages = with pkgs; [cfg.package i2c-tools] ++ cfg.extraSystemPackages;
 
-      # Basic kernel module for I2C access
-      boot.kernelModules = ["i2c-dev"]; # Userspace I2C interface
+      boot.kernelModules = ["i2c-dev"];
     }
     (mkIf (cfg.motherboard == "intel") {
-      boot.kernelModules = ["i2c-i801"]; # Intel SMBus controller driver
+      boot.kernelModules = ["i2c-i801"];
     })
     (mkIf (cfg.motherboard == "amd") {
-      boot.kernelModules = ["i2c-piix4"]; # AMD SMBus controller driver
+      boot.kernelModules = ["i2c-piix4"];
     })
   ]);
 }

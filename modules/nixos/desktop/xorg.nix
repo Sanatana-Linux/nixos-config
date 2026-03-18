@@ -37,7 +37,6 @@ with lib; {
         exportConfiguration = true;
         updateDbusEnvironment = true;
 
-        # Without this earlyoom won't start but is not documented anywhere
         desktopManager.runXdgAutostartIfNone = true;
 
         displayManager = {
@@ -64,6 +63,13 @@ with lib; {
           };
         };
       };
+    };
+
+    environment.variables = {
+      GDK_BACKEND = "x11";
+      QT_QPA_PLATFORM = "xcb";
+      SDL_VIDEODRIVER = "x11";
+      _JAVA_AWT_WM_NONREPETITIVE = "1";
     };
   };
 }

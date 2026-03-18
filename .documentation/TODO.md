@@ -6,3 +6,7 @@
 - [x] DONE where the other scripts are made into bash scripts included in home-manager set up environment, write another .nix file that will build a script "iso-open" containing the following:
 
 
+- In various modules, the enabling of the submodules is done in the form of importing only (without first creating enable scripts for each submodule then including the enable in the host/home-manager configuration for the host/user). This is not ideal and creates configuration blocks limiting customization and modularity. Instead, these submodules should themselves be made into nested sub-options requiring that they are enabled in the host/user configurations (which you must then do to maintain full functional parity afterwards)
+
+While this is from another configuration, it provides you with an example and idea for what these default files could look like in importing and then providing the options to enable the nested submodules 
+

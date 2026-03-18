@@ -11,6 +11,21 @@ Each entry follows this format:
 
 ## Changes
 
+- **2026-03-17**: Added easyeffects to matangi host only
+  - Added `easyeffects` to matangi's `environment.systemPackages` for audio effects
+  - Package excluded from bagalamukhi to reduce application launcher clutter
+- **2026-03-17**: Removed audio effects packages from videoTools to reduce application launcher clutter
+  - Removed `lsp-plugins` and `easyeffects` from `multimedia.videoTools` in `modules/nixos/packages/packages.nix`
+  - These packages were adding visible launcher entries that weren't being used
+- **2026-03-17**: Consolidated X11-specific settings into xorg.nix base module
+  - Moved `GDK_BACKEND=x11`, `QT_QPA_PLATFORM=xcb`, `SDL_VIDEODRIVER=x11`, and `_JAVA_AWT_WM_NONREPETITIVE=1` environment variables to `modules/nixos/desktop/xorg.nix`
+  - Removed duplicate X11 environment variables from `awesomewm.nix` and `xfce.nix`
+  - Made OpenRGB's `QT_QPA_PLATFORM=xcb` wrapper conditional on X11 desktop being enabled
+  - This refactoring prepares for future Wayland modules by isolating X11-specific configuration
+- **2026-03-17**: Changed kernel from linux-latest to xanmod-latest
+  - Updated `modules/nixos/system/boot.nix` to use `pkgs.linuxPackages_xanmod_latest`
+  - The `lenovo-legion-module` overlay in `overlays/default.nix` already supports xanmod-latest
+  - Overlay extends `linuxPackages_xanmod_latest` with the jlbyh2o fork for Legion 5 16IRX9 83DG support
 - **2026-03-16**: Added iso-open script for mounting ISO files
   - Created `modules/home-manager/shell/scripts/iso-open.nix` with writeScriptBin
   - Script mounts ISO files to ~/<iso-name> and opens with xdg-open

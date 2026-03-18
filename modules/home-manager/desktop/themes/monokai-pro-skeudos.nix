@@ -47,9 +47,9 @@ in {
     fonts.fontconfig = {
       enable = true;
       defaultFonts = {
-        serif = ["OperatorUltra Nerd Font Propo" "FreeSerif"];
-        sansSerif = ["OperatorUltra Nerd Font Propo" "Ubuntu Nerd Font Medium"];
-        monospace = ["Operator Mono Lig" "Ubuntu Nerd Font Mono"];
+        serif = ["OperatorUltra Nerd Font Propo" "DepartureMono Nerd Font Mono" "FreeSerif"];
+        sansSerif = ["OperatorUltra Nerd Font Propo" "DepartureMono Nerd Font Mono" "Ubuntu Nerd Font Medium"];
+        monospace = ["Operator Mono Lig" "DepartureMono Nerd Font Mono" "Ubuntu Nerd Font Mono"];
       };
     };
   };

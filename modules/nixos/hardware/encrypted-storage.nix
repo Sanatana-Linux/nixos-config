@@ -41,12 +41,10 @@ in {
     environment.systemPackages = with pkgs;
       [
         cryptsetup
-        cryptsetup-mux
-        libblockdev-crypto
+        libblockdev
       ]
       ++ optionals cfg.enableLvm [
         lvm2
-        libblockdev-lvm
       ];
 
     services = {
@@ -68,7 +66,6 @@ in {
 
       devmon = {
         enable = mkDefault true;
-        extraOptions = [];
       };
 
       gnome = {

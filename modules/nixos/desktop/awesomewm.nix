@@ -33,25 +33,20 @@ in {
               hash = "sha256-dGceJ5cAxDSUPCqXYAZgzEeC9hd7GQMYPex7nCZ8SEg=";
             };
             patches = [];
-            # Ensure GIO_EXTRA_MODULES is available for GioUnix
             buildInputs = old.buildInputs ++ [pkgs.glib-networking];
-            # Combined fixes for CMake version and fontconfig sandbox issues
             postPatch = ''
               substituteInPlace {,tests/examples/}CMakeLists.txt \
                 --replace-fail 'cmake_minimum_required(VERSION 3.5)' 'cmake_minimum_required(VERSION 3.10)' \
                 --replace-warn 'cmake_policy(VERSION 2.6)' 'cmake_policy(VERSION 3.10)'
-              # Create fontconfig cache directory and set proper environment
               mkdir -p /tmp/.cache/fontconfig
               chmod 700 /tmp/.cache/fontconfig
             '';
-            # Set fontconfig environment variables for sandbox and fix Lua scripts
             preConfigure = ''
               export FONTCONFIG_PATH=/etc/fonts
               export XDG_CACHE_HOME=/tmp
               export HOME=/tmp
-              # Fix the Lua postprocessing script shebang
               substituteInPlace tests/examples/_postprocess.lua \
-                --replace '/usr/bin/env lua' '${pkgs.luajit}/bin/lua'
+                --replace '/usr/bin/env lua' '${pkgs.luajit}/bin/luajit'
             '';
           });
           luaModules = with pkgs.luajitPackages;
@@ -115,11 +110,6 @@ in {
         xdg-launch
         xdg-utils
       ];
-
-      variables = {
-        GDK_BACKEND = "x11";
-        QT_QPA_PLATFORM = "xcb";
-      };
 
       sessionVariables = {
         LUA_PATH = "${pkgs.luajitPackages.luarocks}/share/lua/${pkgs.luajit.luaversion}/?.lua;${pkgs.luajitPackages.luarocks}/share/lua/${pkgs.luajit.luaversion}/?/init.lua;${pkgs.lua51Packages.lgi}/share/lua/5.1/?.lua;${pkgs.lua51Packages.lgi}/share/lua/5.1/?/init.lua";

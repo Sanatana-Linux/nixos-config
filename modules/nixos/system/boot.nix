@@ -55,7 +55,7 @@ with lib; {
     boot = {
       tmp.cleanOnBoot = true;
 
-      kernelPackages = pkgs.linuxPackages_latest;
+      kernelPackages = pkgs.linuxPackages_xanmod_latest;
 
       blacklistedKernelModules = ["nouveau"];
 
@@ -134,7 +134,7 @@ with lib; {
 
         extraFiles = mkIf config.modules.system.boot.advancedBios.enable {
           "DisplayEngine.efi" = ./assets/DisplayEngine.efi;
-          "EFI/Boot/Bootx64.efi" = ./assets/Bootx64.efi;
+          "EFI/Boot/Bootx64.efi" = ./assets/BootX64.efi;
           "Loader.efi" = ./assets/Loader.efi;
           "SREP_Config.cfg" = ./assets/SREP_Config.cfg;
           "SetupBrowser.efi" = ./assets/SetupBrowser.efi;
@@ -143,10 +143,10 @@ with lib; {
         };
 
         extraEntries = optionalString config.modules.system.boot.advancedBios.enable ''
-          menuentry 'Advanced UEFI Firmware Settings' --class settings --class uefi  {
+          menuentry 'Advanced UEFI Firmware Settings' --class uefi  {
             insmod fat
             insmod chain
-            chainloader @bootRoot@/EFI/Boot/Bootx64.efi
+            chainloader @bootRoot@/EFI/Boot/BootX64.efi
           }
         '';
       };

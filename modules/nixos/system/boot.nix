@@ -143,7 +143,7 @@ with lib; {
         };
 
         extraEntries = optionalString config.modules.system.boot.advancedBios.enable ''
-          menuentry 'Advanced UEFI Firmware Settings' --class uefi  {
+          menuentry 'Advanced UEFI Firmware Settings' --class efi --class uefi  {
             insmod fat
             insmod chain
             chainloader @bootRoot@/EFI/Boot/BootX64.efi

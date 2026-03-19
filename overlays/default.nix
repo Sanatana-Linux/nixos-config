@@ -9,6 +9,18 @@
   modifications = final: prev: {
     nps = inputs.nps.defaultPackage.${prev.stdenv.hostPlatform.system};
 
+    # what-size.yazi plugin - fetches from GitHub
+    what-size = prev.yaziPlugins.mkYaziPlugin {
+      pname = "what-size";
+      version = "2025-03-07";
+      src = final.fetchFromGitHub {
+        owner = "pirafrank";
+        repo = "what-size.yazi";
+        rev = "main";
+        hash = "sha256-7q/45TopqbojNRvYDmP9+hgSGPmiyLHBcV051qpOB2Y=";
+      };
+    };
+
     # node2nix fails to build in the nixpkgs sandbox because npm is not in
     # nativeBuildInputs of the outer derivation — add nodejs explicitly.
     node2nix = prev.node2nix.overrideAttrs (oldAttrs: {

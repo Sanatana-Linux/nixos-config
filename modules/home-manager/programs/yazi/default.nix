@@ -22,6 +22,7 @@ with lib; {
         sudo = pkgs.yaziPlugins.sudo;
         piper = pkgs.yaziPlugins.piper;
         yatline = pkgs.yaziPlugins.yatline;
+        what-size = pkgs.what-size;
       };
       initLua = ''
                require("git"):setup()

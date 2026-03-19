@@ -177,6 +177,10 @@ keymap = [
 
   # Copy
   { on = [
+    ".",
+    "s",
+  ], run = "plugin what-size", desc = "Calculate size of selection or cwd" },
+  { on = [
     "c",
     "c",
   ], run = "copy path", desc = "Copy the absolute path" },

@@ -462,7 +462,10 @@ in {
         # Nerd Fonts
           optionals cfg.fonts.nerdFonts [
             nerd-fonts.agave
+            nerd-fonts.symbols-only
+            nerd-fonts.recursive-mono
             nerd-fonts.d2coding
+            nerd-fonts.envy-code-r
             nerd-fonts.proggy-clean-tt
             nerd-fonts.ubuntu
             nerd-fonts.ubuntu-mono
@@ -484,9 +487,11 @@ in {
           ++ optionals cfg.fonts.systemFonts [
             annapurna-sil
             corefonts
+            get-google-fonts
             jost
             kanit-font
             mplus-outline-fonts.githubRelease
+            nerd-font-patcher
             norwester-font
             pixel-code
             terminus_font
@@ -941,13 +946,13 @@ in {
           killall
           trash-cli
         ]
-        # File management
-        ++ optionals cfg.shell.fileManagement [
-          deer
-          ranger
-          tree
-          walk
-        ]
+    # File management
+    ++ optionals cfg.shell.fileManagement [
+      deer
+      ranger
+      tree
+      walk
+    ]
         # Download tools
         ++ optionals cfg.shell.downloadTools [
           aria2

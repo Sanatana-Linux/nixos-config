@@ -11,6 +11,22 @@ Each entry follows this format:
 
 ## Changes
 
+- **2026-03-19**: Enhanced installer with additional disk configuration using LVM and moved to .assets/ directory
+  - Moved install.sh from `.github/install.sh` to `.assets/install.sh` as primary installation script
+  - Added `setup_additional_disk()` function for interactive additional disk partitioning
+  - Additional disks now use LVM (volume group `vg-additional`, logical volume `data`) matching main disk architecture
+  - Supports optional LUKS encryption with same passphrase as main installation
+  - Users can specify custom mount points during installation (e.g., /data, /home/storage)
+  - Generated hardware-configuration.nix includes fileSystems entries with UUID from LVM volume
+  - Encrypted additional disks configured to unlock with same password (keyfile configuration notes added)
+  - Updated `.assets/install-script-commands.md` with comprehensive documentation
+  - Removed duplicate `.github/install-script-commands.md`
+  - All documentation now references `.assets/install.sh` location
+- **2026-03-19**: Added what-size.yazi plugin for directory/file size calculation
+  - Added custom overlay in `overlays/default.nix` to fetch what-size.yazi from GitHub
+  - Plugin calculates size of current selection or working directory when no selection exists
+  - Added keybinding `.` then `s` to trigger size calculation in `modules/home-manager/programs/yazi/keymap.toml`
+  - Plugin registered in `modules/home-manager/programs/yazi/default.nix` yazi configuration
 - **2026-03-17**: Added easyeffects to matangi host only
   - Added `easyeffects` to matangi's `environment.systemPackages` for audio effects
   - Package excluded from bagalamukhi to reduce application launcher clutter

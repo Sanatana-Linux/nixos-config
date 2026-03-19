@@ -88,6 +88,12 @@
         integrationLibs = true;
       };
       core.enable = true;
+      fonts = {
+        enable = true;
+        nerdFonts = true;
+        iconFonts = true;
+        systemFonts = true;
+      };
       development = {
         enable = true;
         linters = true;

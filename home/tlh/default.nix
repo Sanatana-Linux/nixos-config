@@ -27,6 +27,7 @@
       enable = true;
       monokaiProSkeudos.enable = true;
     };
+    stylix.enable = true;
     programs = {
       higgs-boson-firefox.enable = true;
       kitty.enable = true;

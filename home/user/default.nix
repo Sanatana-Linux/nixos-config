@@ -24,6 +24,7 @@
       enable = true;
       monokaiProSkeudos.enable = true;
     };
+    stylix.enable = true;
     programs = {
       # firefox.enable = true;
       higgs-boson-firefox.enable = true;

@@ -25,6 +25,10 @@
     };
     lemonake.url = "github:passivelemon/lemonake";
 
+    stylix = {
+      url = "github:nix-community/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nps.url = "github:OleMussmann/Nix-Package-Search";
     bhairava-grub-theme = {
       url = "github:Sanatana-Linux/Bhairava-Grub-Theme";
@@ -43,6 +47,7 @@
     nixpkgs,
     stable,
     home-manager,
+    stylix,
     higgs-boson,
     fx-autoconfig,
     bhairava-grub-theme,
@@ -132,30 +137,31 @@
       #
       # ┣━━━━━━━━━━━━━━━━━━━━━━┫ My Lenovo Legion Pro ┣━━━━━━━━━━━━━━━━━━━━━━┫
 
-      bagalamukhi = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          inputs.nur.modules.nixos.default
-          inputs.nixos-hardware.nixosModules.lenovo-legion-16irx9h
-          inputs.bhairava-grub-theme.nixosModule
-          inputs.chaotic.nixosModules.default
-          inputs.nix-index-database.nixosModules.nix-index
-          inputs.home-manager.nixosModules.home-manager
-          ./modules/nixos
-          {
-            home-manager = {
-              useUserPackages = true;
-              backupFileExtension = "bak";
-              extraSpecialArgs = {inherit inputs outputs;};
-              sharedModules = [./modules/home-manager];
-              users = {
-                tlh = {imports = [./home/tlh/default.nix];};
-              };
+    bagalamukhi = nixpkgs.lib.nixosSystem {
+      specialArgs = {inherit inputs outputs;};
+      modules = [
+        inputs.stylix.nixosModules.stylix
+        inputs.nur.modules.nixos.default
+        inputs.nixos-hardware.nixosModules.lenovo-legion-16irx9h
+        inputs.bhairava-grub-theme.nixosModule
+        inputs.chaotic.nixosModules.default
+        inputs.nix-index-database.nixosModules.nix-index
+        inputs.home-manager.nixosModules.home-manager
+        ./modules/nixos
+        {
+          home-manager = {
+            useUserPackages = true;
+            backupFileExtension = "bak";
+            extraSpecialArgs = {inherit inputs outputs;};
+            sharedModules = [./modules/home-manager];
+            users = {
+              tlh = {imports = [./home/tlh/default.nix];};
             };
-          }
-          ./hosts/bagalamukhi
-        ];
-      };
+          };
+        }
+        ./hosts/bagalamukhi
+      ];
+    };
       # ┣━━━━━━━━━━━━━━━━━━┫ Sara's Lenovo Legion Pro ┣━━━━━━━━━━━━━━━━┫
       matangi = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
@@ -181,50 +187,52 @@
         ];
       };
 
-      # ┣━━━━━━━━━━━━━━━━━━━━━┫ NixOS Live USB ┣━━━━━━━━━━━━━━━━━━━━━┫
-      chhinamasta = nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit inputs outputs self;
-          format = "isoImage";
-        };
-        modules = [
-          inputs.nur.modules.nixos.default
-          inputs.bhairava-grub-theme.nixosModule
-          inputs.home-manager.nixosModules.home-manager
-          ./modules/nixos
-          {
-            home-manager = {
-              useUserPackages = true;
-              extraSpecialArgs = {inherit inputs outputs;};
-              sharedModules = [./modules/home-manager];
-              users.user = {imports = [./home/user/default.nix];};
-            };
-          }
-          ./hosts/chhinamasta
-        ];
+    # ┣━━━━━━━━━━━━━━━━━━━━━┫ NixOS Live USB ┣━━━━━━━━━━━━━━━━━━━━━┫
+    chhinamasta = nixpkgs.lib.nixosSystem {
+      specialArgs = {
+        inherit inputs outputs self;
+        format = "isoImage";
       };
+      modules = [
+        inputs.stylix.nixosModules.stylix
+        inputs.nur.modules.nixos.default
+        inputs.bhairava-grub-theme.nixosModule
+        inputs.home-manager.nixosModules.home-manager
+        ./modules/nixos
+        {
+          home-manager = {
+            useUserPackages = true;
+            extraSpecialArgs = {inherit inputs outputs;};
+            sharedModules = [./modules/home-manager];
+            users.user = {imports = [./home/user/default.nix];};
+          };
+        }
+        ./hosts/chhinamasta
+      ];
+    };
 
-      shodashi = nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit inputs outputs self;
-          format = "isoImage";
-        };
-        modules = [
-          inputs.nur.modules.nixos.default
-          inputs.bhairava-grub-theme.nixosModule
-          inputs.home-manager.nixosModules.home-manager
-          ./modules/nixos
-          {
-            home-manager = {
-              useUserPackages = true;
-              extraSpecialArgs = {inherit inputs outputs;};
-              sharedModules = [./modules/home-manager];
-              users.user = {imports = [./home/user/default.nix];};
-            };
-          }
-          ./hosts/shodashi
-        ];
+    shodashi = nixpkgs.lib.nixosSystem {
+      specialArgs = {
+        inherit inputs outputs self;
+        format = "isoImage";
       };
+      modules = [
+        inputs.stylix.nixosModules.stylix
+        inputs.nur.modules.nixos.default
+        inputs.bhairava-grub-theme.nixosModule
+        inputs.home-manager.nixosModules.home-manager
+        ./modules/nixos
+        {
+          home-manager = {
+            useUserPackages = true;
+            extraSpecialArgs = {inherit inputs outputs;};
+            sharedModules = [./modules/home-manager];
+            users.user = {imports = [./home/user/default.nix];};
+          };
+        }
+        ./hosts/shodashi
+      ];
+    };
     };
     # ┣━━━━━━━━━━━━━━━━━━━━━┫ Home Configurations ┣━━━━━━━━━━━━━━━━━━━━━┫
     homeConfigurations = {

@@ -56,7 +56,7 @@ in
       };
 
       # System-level targets
-      targets.grub.enable = true;
+      # targets.grub.enable = true;  # Disabled - using bhairava-grub-theme
       targets.plymouth.enable = true;
       targets.console.enable = true;
 

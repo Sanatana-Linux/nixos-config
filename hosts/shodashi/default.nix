@@ -29,6 +29,7 @@ in {
       enable = true;
       zsh = true;
     };
+    stylix.enable = true;
     users.user.enable = true;
     packages = {
       core.enable = true;

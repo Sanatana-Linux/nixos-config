@@ -35,6 +35,8 @@
       services.enable = true;
     };
 
+    stylix.enable = true;
+
     # User
     users.tlh.enable = true;
     shell = {
@@ -236,6 +238,9 @@
     enable = true;
     enable32Bit = true;
   };
+
+  # Disable Stylix GRUB theme - using bhairava-grub-theme instead
+  boot.loader.grub.theme = lib.mkForce null;
 
   services = {
     logind.settings.Login = {

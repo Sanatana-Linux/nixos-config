@@ -36,6 +36,7 @@ in {
       enable = true;
       zsh = true;
     };
+    stylix.enable = true;
     users.user.enable = true;
     packages = {
       core.enable = true;
@@ -75,12 +76,11 @@ in {
         minimal = true;
       };
     };
-    hardware = {
-      sound = {
-        enable = true;
-        pipewire = true;
-      };
+  hardware = {
+    sound = {
+      enable = true;
     };
+  };
     desktop.awesomewm.enable = true;
   };
 

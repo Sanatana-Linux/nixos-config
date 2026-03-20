@@ -23,11 +23,12 @@ in
       targets.tmux.enable = true;
       targets.vivid.enable = true;
 
-      # GUI applications
-      targets.nixcord.enable = true;
-      targets.feh.enable = true;
-      targets.sioyek.enable = true;
-      targets.zathura.enable = true;
+# GUI applications
+targets.nixcord.enable = true;
+targets.feh.enable = true;
+targets.sioyek.enable = true;
+targets.zathura.enable = true;
+targets.gtk.enable = true;
 
       # Development tools
       targets.vscode.enable = true;

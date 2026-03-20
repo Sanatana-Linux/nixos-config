@@ -156,12 +156,16 @@ keymap = [
   { on = [
     ":",
   ], run = "shell --block --interactive", desc = "Run a shell command (block the UI until the command finishes)" },
-  { on = [
-    ".",
-  ], run = "hidden toggle", desc = "Toggle the visibility of hidden files" },
-  { on = [
-    "s",
-  ], run = "search fd", desc = "Search files by name using fd" },
+    { on = [
+        ".",
+        "s",
+    ], run = "shell --block 'du -sh --apparent-size . 2>/dev/null | cut -f1'", desc = "Show size of current directory" },
+    { on = [
+        "s",
+    ], run = "search fd", desc = "Search files by name using fd" },
+    { on = [
+        ".",
+    ], run = "hidden toggle", desc = "Toggle the visibility of hidden files" },
   { on = [
     "S",
   ], run = "search rg", desc = "Search files by content using ripgrep" },

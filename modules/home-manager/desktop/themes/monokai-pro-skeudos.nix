@@ -27,8 +27,8 @@ in {
     gtk = {
       enable = true;
       theme = {
-        name = "Skeuos-Grey-Dark";
-        package = pkgs.skeuos-gtk;
+        name = lib.mkForce "Skeuos-Grey-Dark";
+        package = lib.mkForce pkgs.skeuos-gtk;
       };
       iconTheme = {
         name = "Colloid-Dark";

@@ -1,10 +1,10 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
-with lib; {
+{ config, lib, pkgs, ... }:
+with lib;
+let
+  isWayland = builtins.any (var: 
+    lib.getEnv var != "" && lib.getEnv var != "x11"
+  ) ["WAYLAND_DISPLAY" "XDG_SESSION_TYPE"];
+in {
   options.modules.desktop.xorg = {
     enable = mkEnableOption "X.Org Server and Input configuration";
 
@@ -20,9 +20,8 @@ with lib; {
   };
 
   config = mkIf config.modules.desktop.xorg.enable {
-    gtk.iconCache.enable = true;
-
-    services = {
+    # Set up X11 services only if we are using an X11 session
+    services = if !isWayland then {
       libinput = {
         enable = true;
         touchpad = {
@@ -63,13 +62,27 @@ with lib; {
           };
         };
       };
-    };
+    } else null;
 
-    environment.variables = {
-      GDK_BACKEND = "x11";
-      QT_QPA_PLATFORM = "xcb";
-      SDL_VIDEODRIVER = "x11";
-      _JAVA_AWT_WM_NONREPETITIVE = "1";
-    };
+    # Set environment variables only if the wayland module is not enabled
+    environment.variables = let
+      waylandEnabled = config.modules.desktop.wayland.enable;
+    in if !waylandEnabled then
+      if isWayland then {
+        # Wayland session without wayland module
+        GDK_BACKEND = "wayland";
+        QT_QPA_PLATFORM = "wayland";
+        SDL_VIDEODRIVER = "wayland";
+        _JAVA_AWT_WM_NONREPETITIVE = "1";
+        # Enable Ozone Wayland for Electron/Chromium
+        NIXOS_OZONE_WL = "1";
+      } else {
+        # X11 session without wayland module
+        GDK_BACKEND = "x11";
+        QT_QPA_PLATFORM = "xcb";
+        SDL_VIDEODRIVER = "x11";
+        _JAVA_AWT_WM_NONREPETITIVE = "1";
+      }
+    else null;
   };
 }

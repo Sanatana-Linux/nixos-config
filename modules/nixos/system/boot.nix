@@ -133,14 +133,14 @@ with lib; {
         bhairava-grub-theme.enable = config.modules.system.boot.theme.enable;
 
         extraFiles = mkIf config.modules.system.boot.advancedBios.enable {
-          "DisplayEngine.efi" = ./assets/DisplayEngine.efi;
-          "EFI/Boot/Bootx64.efi" = ./assets/BootX64.efi;
-          "Loader.efi" = ./assets/Loader.efi;
-          "SREP_Config.cfg" = ./assets/SREP_Config.cfg;
-          "SetupBrowser.efi" = ./assets/SetupBrowser.efi;
-          "SuppressIFPatcher.efi" = ./assets/SuppressIFPatcher.efi;
-          "UiApp.efi" = ./assets/UiApp.efi;
-        };
+           "DisplayEngine.efi" = ./assets/DisplayEngine.efi;
+           "EFI/Boot/Bootx64.efi" = ./assets/Bootx64.efi;
+           "Loader.efi" = ./assets/Loader.efi;
+           "SREP_Config.cfg" = ./assets/SREP_Config.cfg;
+           "SetupBrowser.efi" = ./assets/SetupBrowser.efi;
+           "SuppressIFPatcher.efi" = ./assets/SuppressIFPatcher.efi;
+           "UiApp.efi" = ./assets/UiApp.efi;
+         };
 
         extraEntries = optionalString config.modules.system.boot.advancedBios.enable ''
           menuentry 'Advanced UEFI Firmware Settings' --class efi --class uefi  {

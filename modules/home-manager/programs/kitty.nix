@@ -39,53 +39,55 @@ in {
     programs.kitty = {
       enable = true;
 
-    settings = {
-      # Window settings
-      window_padding_width = cfg.windowPadding;
-      confirm_os_window_close = -1;
-      focus_follows_mouse = "yes";
+      settings = {
+        # Window settings
+        window_padding_width = cfg.windowPadding;
+        confirm_os_window_close = -1;
+        focus_follows_mouse = "yes";
 
-      # Cursor and selection
-      cursor_shape = "block";
-      copy_on_select = "yes";
-      cursor_underline_thickness = "0.5";
+        # Cursor and selection
+        cursor_shape = "block";
+        copy_on_select = "yes";
+        cursor_underline_thickness = "0.5";
 
-      # Visual settings - background_opacity managed by Stylix
-      sync_to_monitor = "yes";
-      # background_opacity = toString cfg.backgroundOpacity;
+        # Visual settings - background_opacity managed by Stylix
+        sync_to_monitor = "yes";
+        # background_opacity = toString cfg.backgroundOpacity;
 
-      # Audio/visual bells
-      visual_bell_duration = 0;
-      window_alert_on_bell = "no";
-      enable_audio_bell = "no";
+        # Audio/visual bells
+        visual_bell_duration = 0;
+        window_alert_on_bell = "no";
+        enable_audio_bell = "no";
 
-      # Tab bar
-      tab_bar_style = "separator";
-      tab_separator = " ┇";
-      tab_bar_margin_width = "3";
-      tab_bar_margin_height = "3";
-      tab_bar_edge = "top";
+        # Tab bar
+        tab_bar_style = "separator";
+        tab_separator = " ┇";
+        tab_bar_margin_width = "3";
+        tab_bar_margin_height = "3";
+        tab_bar_edge = "top";
 
-      # Color override for better readability - use lighter gray for dim text
-      # Stylix uses color8 (bright black) for some text which is too dark (#69676c)
-      # Override with lighter base04 (#8b888f) for better readability
-      color8 = "#8b888f";  # base04 - lighter gray for dim text
-    };
+        # Color override for better readability - use lighter gray for dim text
+        # Stylix uses color8 (bright black) for some text which is too dark (#69676c)
+        # Override with lighter base04 (#8b888f) for better readability
+        color8 = "#8b888f"; # base04 - lighter gray for dim text
+      };
 
-     # Tab splitting keybindings
-     extraConfig = ''
-       # Vertical split: kitty_mod + /
-       map ctrl+shift+/ launch --location vsplit
-       
-       # Horizontal split: kitty_mod + -
-       map ctrl+shift+- launch --location hsplit
-     '';
+      # Tab splitting keybindings
+      extraConfig = ''
+        # https://www.reddit.com/r/KittyTerminal/comments/1ijwbo1/comment/mbsof9t/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
+        enabled_layouts splits
+        # Vertical split: kitty_mod + /
+        map ctrl+shift+/ launch --location vsplit
 
-    # Font configuration disabled - managed by Stylix for consistency
-    # font = {
-    #   size = cfg.fontSize;
-    #   name = cfg.fontFamily;
-    # };
+        # Horizontal split: kitty_mod + -
+        map ctrl+shift+- launch --location hsplit
+      '';
+
+      # Font configuration disabled - managed by Stylix for consistency
+      # font = {
+      #   size = cfg.fontSize;
+      #   name = cfg.fontFamily;
+      # };
 
       shellIntegration = {
         enableZshIntegration = true;

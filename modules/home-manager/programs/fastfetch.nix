@@ -35,7 +35,7 @@ in
       };
     };
 
-    # Copy custom Nix logo to user's fastfetch config directory
-    home.file.".config/fastfetch/nix.png".source = "${fastfetchDir}/nix.png";
+     # Copy custom Nix logo to user's fastfetch config directory
+      home.file.".config/fastfetch/nix.png".source = ./fastfetch/nix.png;
   };
 }

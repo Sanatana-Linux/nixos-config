@@ -72,6 +72,15 @@ in {
       color8 = "#8b888f";  # base04 - lighter gray for dim text
     };
 
+    # Tab splitting keybindings
+    extraConfig = ''
+      # Vertical split: kitty_mod + /
+      map ctrl+shift+/ new_window_with_same_layout --location vsplit
+      
+      # Horizontal split: kitty_mod + -
+      map ctrl+shift+- new_window_with_same_layout --location hsplit
+    '';
+
     # Font configuration disabled - managed by Stylix for consistency
     # font = {
     #   size = cfg.fontSize;

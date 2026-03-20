@@ -23,29 +23,14 @@ in
         };
 
         modules = [
-          "title"
-          "separator"
-          "os"
           "kernel"
+          "host"
           "uptime"
-          "packages"
-          "shell"
-          "de"
-          "wm"
-          "theme"
-          "icons"
-          "font"
-          "cursor"
-          "terminal"
-          "terminalfont"
           "cpu"
           "gpu"
-          "resolution"
           "memory"
           "disk"
-          "localip"
-          "break"
-          "colors"
+          "wm"
         ];
       };
     };

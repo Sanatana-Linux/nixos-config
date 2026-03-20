@@ -13,8 +13,8 @@ in
       enable = true;
       settings = {
         logo = {
-          source = "${config.home.homeDirectory}/.config/fastfetch/sanatana.txt";
-          type = "ascii";
+          source = "${config.home.homeDirectory}/.config/fastfetch/nix.png";
+          type = "png";
         };
         
         display = {
@@ -52,10 +52,7 @@ in
       };
     };
 
-    # Copy custom Sanatana Linux ASCII art to user's fastfetch config directory
-    home.file.".config/fastfetch/sanatana.txt".source = "${./sanatana.txt}";
-    
-    # Copy custom Nix logo as alternative
+    # Copy custom Nix logo to user's fastfetch config directory
     home.file.".config/fastfetch/nix.png".source = "${./nix.png}";
   };
 }

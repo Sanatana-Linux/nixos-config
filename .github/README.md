@@ -1,7 +1,10 @@
 <h1 align="center"> Sanatana Linux</h1>
 
+<div style="display: inline-bock; width: 100%;">
 <img width="300px" align="center"  src="./assets/om-glitch.gif" alt="Om Puurnnam-Adah Puurnnam-Idam Puurnnaat-Puurnnam-Udacyate | Puurnnasya Puurnnam-Aadaaya Puurnnam-Eva-Avashissyate || Om Shaantih Shaantih Shaantih "/>
-
+<img width="300px" align="center"  src="./assets/om-glitch.gif" alt="Om Puurnnam-Adah Puurnnam-Idam Puurnnaat-Puurnnam-Udacyate | Puurnnasya Puurnnam-Aadaaya Puurnnam-Eva-Avashissyate || Om Shaantih Shaantih Shaantih "/>
+<img width="300px" align="center"  src="./assets/om-glitch.gif" alt="Om Puurnnam-Adah Puurnnam-Idam Puurnnaat-Puurnnam-Udacyate | Puurnnasya Puurnnam-Aadaaya Puurnnam-Eva-Avashissyate || Om Shaantih Shaantih Shaantih "/>
+</div>div>
 <br>
 <br>
 <br> 

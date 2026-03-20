@@ -5,9 +5,6 @@
 <img width="300px" align="center"  src="./assets/om-glitch.gif" alt="Om Puurnnam-Adah Puurnnam-Idam Puurnnaat-Puurnnam-Udacyate | Puurnnasya Puurnnam-Aadaaya Puurnnam-Eva-Avashissyate || Om Shaantih Shaantih Shaantih "/>
 <img width="300px" align="center"  src="./assets/om-glitch.gif" alt="Om Puurnnam-Adah Puurnnam-Idam Puurnnaat-Puurnnam-Udacyate | Puurnnasya Puurnnam-Aadaaya Puurnnam-Eva-Avashissyate || Om Shaantih Shaantih Shaantih "/>
 </div>
-
-<br>
-<br>
 <br> 
 <strong><h3><em><big><b>सनातन (SANATANA)</b></big>: <br></em></h3>
 <pre style=" display: block; margin-left: 45px;"><q>Perpetual, constant, eternal, permanent; Firm, fixed, settled;Primeval, ancient.</q></strong>  - <a href="https://dsal.uchicago.edu/cgi-bin/app/apte_query.py?qs=Sanatana&matchtype=default">DSAL Online Sanskrit Dictionary</a></pre>
@@ -15,16 +12,9 @@
 <br>
 <br>
 
-<br>
-<br>
+<hr>
 
----
 
-<br>
-<br>
-<br>
-
-<br>
 
 [![built with nix](https://builtwithnix.org/badge.svg)](https://builtwithnix.org)
 

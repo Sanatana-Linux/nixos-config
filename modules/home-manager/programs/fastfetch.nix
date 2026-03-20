@@ -13,10 +13,7 @@ in
     programs.fastfetch = {
       enable = true;
       settings = {
-        logo = {
-          source = "${config.home.homeDirectory}/.config/fastfetch/nix.png";
-          type = "png";
-        };
+        logo = "${config.home.homeDirectory}/.config/fastfetch/nix.png";
         
         display = {
           separator = " ";

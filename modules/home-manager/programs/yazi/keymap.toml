@@ -175,11 +175,11 @@ keymap = [
     "Z",
   ], run = "jump fzf", desc = "Jump to a directory, or reveal a file using fzf" },
 
-  # Copy
-  { on = [
-    ".",
-    "s",
-  ], run = "plugin what-size", desc = "Calculate size of selection or cwd" },
+# Copy
+{ on = [
+".",
+"s",
+], run = "shell --block 'du -sh --apparent-size . 2>/dev/null | cut -f1'", desc = "Show size of current directory" },
   { on = [
     "c",
     "c",

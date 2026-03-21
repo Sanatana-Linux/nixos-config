@@ -209,7 +209,7 @@
     desktop = {
       xorg.enable = false;
       awesomewm.enable = false;
-      # mangowc.enable = true;
+      mangowc.enable = true;
     };
 
     # AI

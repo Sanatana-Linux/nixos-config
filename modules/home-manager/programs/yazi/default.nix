@@ -13,16 +13,16 @@ with lib; {
       shellWrapperName = "r";
       enableZshIntegration = true;
       enableBashIntegration = true;
-  plugins = {
-    "yazi-plugin-mount" = pkgs.yaziPlugins.mount;
-    "yazi-plugin-mime-ext" = pkgs.yaziPlugins.mime-ext;
-    "yazi-plugin-ouch" = pkgs.yaziPlugins.ouch;
-    "yazi-plugin-restore" = pkgs.yaziPlugins.restore;
-    git = pkgs.yaziPlugins.git;
-    sudo = pkgs.yaziPlugins.sudo;
-    piper = pkgs.yaziPlugins.piper;
-    yatline = pkgs.yaziPlugins.yatline;
-  };
+      plugins = {
+        "yazi-plugin-mount" = pkgs.yaziPlugins.mount;
+        "yazi-plugin-mime-ext" = pkgs.yaziPlugins.mime-ext;
+        "yazi-plugin-ouch" = pkgs.yaziPlugins.ouch;
+        "yazi-plugin-restore" = pkgs.yaziPlugins.restore;
+        git = pkgs.yaziPlugins.git;
+        sudo = pkgs.yaziPlugins.sudo;
+        piper = pkgs.yaziPlugins.piper;
+        yatline = pkgs.yaziPlugins.yatline;
+      };
       initLua = ''
                require("git"):setup()
                require("yatline"):setup({

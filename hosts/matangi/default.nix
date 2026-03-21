@@ -234,7 +234,7 @@
 
   hardware.nvidia.forceFullCompositionPipeline = lib.mkForce false;
 
-  environment.systemPackages = [ pkgs.easyeffects ];
+  environment.systemPackages = [pkgs.easyeffects];
 
   services = {
     logind.settings.Login = {

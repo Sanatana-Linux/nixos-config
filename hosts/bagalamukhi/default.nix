@@ -207,8 +207,9 @@
 
     # Desktop
     desktop = {
-      xorg.enable = true;
-      awesomewm.enable = true;
+      xorg.enable = false;
+      awesomewm.enable = false;
+      # mangowc.enable = true;
     };
 
     # AI
@@ -228,11 +229,11 @@
   };
 
   # Host-specific display configuration
-  services.xserver = {
-    enable = true;
-    videoDrivers = ["nvidia"];
-    dpi = lib.mkForce 96;
-  };
+  # services.xserver = {
+  #   enable = true;
+  #   videoDrivers = ["nvidia"];
+  #   dpi = lib.mkForce 96;
+  # };
 
   hardware.graphics = {
     enable = true;
@@ -248,7 +249,6 @@
       HandlePowerKey = "ignore";
       HandlePowerKeyLongPress = "suspend";
     };
-    displayManager.defaultSession = "none+awesome";
   };
 
   system.stateVersion = "24.11";

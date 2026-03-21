@@ -1,10 +1,10 @@
 {
-imports = [
-  ./desktop
-  ./packages
-  ./programs
-  ./services
-  ./shell
-  ./stylix
-];
+  imports = [
+    ./desktop
+    ./packages
+    ./programs
+    ./services
+    ./shell
+    ./stylix
+  ];
 }

@@ -1,9 +1,12 @@
-{ config, lib, pkgs, ... }:
-with lib;
-let
-  cfg = config.modules.stylix;
-in
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
+  cfg = config.modules.stylix;
+in {
   options.modules.stylix = {
     enable = mkEnableOption "Stylix theming at NixOS level";
   };
@@ -11,7 +14,7 @@ in
   config = mkIf cfg.enable {
     stylix = {
       enable = true;
-      
+
       # Define the Monokai Pro Spectrum theme inline
       base16Scheme = {
         scheme = "Monokai Pro Spectrum";
@@ -33,7 +36,7 @@ in
         base0E = "#948ae3";
         base0F = "#fd9353";
       };
-      
+
       polarity = "dark";
 
       fonts = {

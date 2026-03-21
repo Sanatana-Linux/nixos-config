@@ -946,13 +946,13 @@ in {
           killall
           trash-cli
         ]
-    # File management
-    ++ optionals cfg.shell.fileManagement [
-      deer
-      ranger
-      tree
-      walk
-    ]
+        # File management
+        ++ optionals cfg.shell.fileManagement [
+          deer
+          ranger
+          tree
+          walk
+        ]
         # Download tools
         ++ optionals cfg.shell.downloadTools [
           aria2

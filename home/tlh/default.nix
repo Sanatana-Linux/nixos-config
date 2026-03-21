@@ -28,15 +28,15 @@
       monokaiProSkeudos.enable = true;
     };
     stylix.enable = true;
-  programs = {
-    fastfetch.enable = true;
-    higgs-boson-firefox.enable = true;
-    kitty.enable = true;
-    gpg.enable = true;
-    zathura.enable = true;
-    yazi.enable = true;
-    # Note: neovim was commented out in original config, not enabling
-  };
+    programs = {
+      fastfetch.enable = true;
+      higgs-boson-firefox.enable = true;
+      kitty.enable = true;
+      gpg.enable = true;
+      zathura.enable = true;
+      yazi.enable = true;
+      # Note: neovim was commented out in original config, not enabling
+    };
     services = {
       picom = {
         enable = true;

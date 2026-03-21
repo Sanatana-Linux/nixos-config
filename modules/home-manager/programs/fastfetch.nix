@@ -1,10 +1,13 @@
-{ config, lib, pkgs, ... }:
-with lib;
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
   cfg = config.modules.programs.fastfetch;
   fastfetchDir = "/home/tlh/nixos/modules/home-manager/programs/fastfetch";
-in
-{
+in {
   options.modules.programs.fastfetch = {
     enable = mkEnableOption "Fastfetch system information tool";
   };
@@ -14,7 +17,7 @@ in
       enable = true;
       settings = {
         logo = "${config.home.homeDirectory}/.config/fastfetch/nix.png";
-        
+
         display = {
           separator = " ";
           key = {
@@ -35,7 +38,7 @@ in
       };
     };
 
-     # Copy custom Nix logo to user's fastfetch config directory
-      home.file.".config/fastfetch/nix.png".source = ./fastfetch/nix.png;
+    # Copy custom Nix logo to user's fastfetch config directory
+    home.file.".config/fastfetch/nix.png".source = ./fastfetch/nix.png;
   };
 }

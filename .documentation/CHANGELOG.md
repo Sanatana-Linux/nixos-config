@@ -11,6 +11,10 @@ Each entry follows this format:
 
 ## Changes
 
+- **2026-03-20**: Fixed Wayland module syntax and Xorg module attribute error
+  - Fixed invalid list syntax in `modules/nixos/desktop/wayland.nix` (`types.enum ["x11", "wayland"]` -> `["x11" "wayland"]`)
+  - Merged duplicate `environment.systemPackages` attribute in `modules/nixos/desktop/wayland.nix`
+  - Fixed `attribute 'getEnv' missing` error in `modules/nixos/desktop/xorg.nix` by switching to `builtins.getEnv`
 - **2026-03-19**: Enhanced installer with additional disk configuration using LVM and moved to .assets/ directory
   - Moved install.sh from `.github/install.sh` to `.assets/install.sh` as primary installation script
   - Added `setup_additional_disk()` function for interactive additional disk partitioning

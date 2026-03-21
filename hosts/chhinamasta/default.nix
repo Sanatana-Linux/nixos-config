@@ -76,15 +76,18 @@ in {
         minimal = true;
       };
     };
-  hardware = {
-    sound = {
-      enable = true;
+    hardware = {
+      sound = {
+        enable = true;
+      };
+    };
+    desktop = {
+      awesomewm.enable = false;
+      mangowc.enable = true;
     };
   };
-    desktop.awesomewm.enable = true;
-  };
 
-  services.xserver.enable = true;
+  # services.xserver.enable = true;
   boot.plymouth.enable = true;
 
   environment.systemPackages = with pkgs; [
@@ -136,9 +139,9 @@ in {
   };
 
   services = {
-    displayManager = {
-      defaultSession = "none+awesome";
-    };
+    # displayManager = {
+    #   defaultSession = "none+awesome";
+    # };
     gnome = {
       glib-networking.enable = true;
       gnome-keyring.enable = true;

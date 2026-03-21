@@ -1,20 +1,20 @@
 {
-imports = [
-  ./ai
-  ./base
-  ./desktop
-  ./environment
-  ./hardware
-  ./packages
-  ./performance
-  ./power
-  ./printer
-  ./programs
-  ./security
-  ./shell
-  ./stylix
-  ./system
-  ./users
-  ./virtualization
-];
+  imports = [
+    ./ai
+    ./base
+    ./desktop
+    ./environment
+    ./hardware
+    ./packages
+    ./performance
+    ./power
+    ./printer
+    ./programs
+    ./security
+    ./shell
+    ./stylix
+    ./system
+    ./users
+    ./virtualization
+  ];
 }

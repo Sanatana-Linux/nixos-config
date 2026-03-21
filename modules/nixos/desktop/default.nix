@@ -5,6 +5,5 @@
     ./newm.nix
     ./xorg.nix
     ./wayland.nix
-    ./mangowc.nix
   ];
 }

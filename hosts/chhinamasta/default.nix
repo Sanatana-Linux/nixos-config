@@ -83,9 +83,15 @@ in {
     };
     desktop = {
       awesomewm.enable = false;
-      mangowc.enable = true;
     };
   };
+
+  services.greetd.mangowc = {
+    enable = true;
+    quickshellGreeter.enable = true;
+  };
+
+  programs.quickshell.mangowc.enable = true;
 
   # services.xserver.enable = true;
   boot.plymouth.enable = true;

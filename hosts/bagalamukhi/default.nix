@@ -209,8 +209,8 @@
     desktop = {
       xorg.enable = false;
       awesomewm.enable = false;
-      mangowc.enable = true;
     };
+
 
     # AI
     ai = {
@@ -227,6 +227,14 @@
       sudo.enable = true;
     };
   };
+
+  # Enable PanchaKosha greetd/quickshell options for MangoWC
+  services.greetd.mangowc = {
+    enable = true;
+    quickshellGreeter.enable = true;
+  };
+
+  programs.quickshell.mangowc.enable = true;
 
   # Host-specific display configuration
   # services.xserver = {

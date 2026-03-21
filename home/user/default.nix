@@ -74,6 +74,7 @@
     stateVersion = "24.11";
     activation = {
       installConfig = ''
+        # Keep awesome clone for users that still use it
         if [ ! -d "${config.home.homeDirectory}/.config/awesome" ]; then
           ${pkgs.git}/bin/git clone https://github.com/Sanatana-Linux/nixos-awesomewm ${config.home.homeDirectory}/.config/awesome
         fi

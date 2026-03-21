@@ -152,24 +152,26 @@
           inputs.chaotic.nixosModules.default
           inputs.nix-index-database.nixosModules.nix-index
           inputs.home-manager.nixosModules.home-manager
-          inputs.panchakosha.nixosModules.default
+          inputs.panchakosha.nixosModules.greetd
+          inputs.panchakosha.nixosModules.quickshell
           ./modules/nixos
           {
             home-manager = {
               useUserPackages = true;
               backupFileExtension = "bak";
               extraSpecialArgs = {inherit inputs outputs;};
-            sharedModules = [
-              ./modules/home-manager
-              inputs.panchakosha.homeManagerModules.default
-            ];
-            users = {
-              tlh = {imports = [./home/tlh/default.nix];};
+              sharedModules = [
+                ./modules/home-manager
+                inputs.panchakosha.homeManagerModules.default
+              ];
+              users = {
+                tlh = {imports = [./home/tlh/default.nix];};
+              };
             };
-          };
-        }
-        ./hosts/bagalamukhi
-      ];
+          }
+          ./hosts/bagalamukhi
+        ];
+
     };
     # ┣━━━━━━━━━━━━━━━━━━┫ Sara's Lenovo Legion Pro ┣━━━━━━━━━━━━━━━━┫
     matangi = nixpkgs.lib.nixosSystem {
@@ -207,7 +209,8 @@
         inputs.nur.modules.nixos.default
         inputs.bhairava-grub-theme.nixosModule
         inputs.home-manager.nixosModules.home-manager
-        inputs.panchakosha.nixosModules.default
+        inputs.panchakosha.nixosModules.greetd
+        inputs.panchakosha.nixosModules.quickshell
         ./modules/nixos
         {
           home-manager = {

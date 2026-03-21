@@ -35,7 +35,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     panchakosha = {
-      url = "path:/home/tlh/PanchaKosha";
+      url = "github:Sanatana-Linux/PanchaKosha";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-index-database.url = "github:nix-community/nix-index-database";

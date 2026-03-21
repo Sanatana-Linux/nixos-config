@@ -273,13 +273,16 @@ ask_flake_config() {
 run_nixos_hardware_config() {
 	echo "[-] Configuring hardware for $FLAKE_CONFIG..."
 
-	# Remove any existing hardware-configuration files
-	rm -rf /mnt/etc/nixos/hosts/*
+	# Remove only the existing hardware-configuration.nix for this host
+	rm -f /mnt/etc/nixos/hosts/"$FLAKE_CONFIG"/hardware-configuration.nix
 	# Generate new hardware-configuration.nix
 	if ! nixos-generate-config --root /mnt; then
 		error "nixos-generate-config failed"
 		exit 1
 	fi
+
+	# Ensure host directory exists
+	mkdir -p /mnt/etc/nixos/hosts/"$FLAKE_CONFIG"
 
 	# Move generated hardware-configuration.nix to correct location
 	if ! mv /mnt/etc/nixos/hardware-configuration.nix /mnt/etc/nixos/hosts/"$FLAKE_CONFIG"/; then
@@ -528,13 +531,16 @@ setup_additional_disk() {
 run_nixos_hardware_config_with_additional_disk() {
 	echo "[-] Configuring hardware for $FLAKE_CONFIG..."
 
-	# Remove any existing hardware-configuration files
-	rm -rf /mnt/etc/nixos/hosts/*
+	# Remove only the existing hardware-configuration.nix for this host
+	rm -f /mnt/etc/nixos/hosts/"$FLAKE_CONFIG"/hardware-configuration.nix
 	# Generate new hardware-configuration.nix
 	if ! nixos-generate-config --root /mnt; then
 		error "nixos-generate-config failed"
 		exit 1
 	fi
+
+	# Ensure host directory exists
+	mkdir -p /mnt/etc/nixos/hosts/"$FLAKE_CONFIG"
 
 	# Move generated hardware-configuration.nix to correct location
 	if ! mv /mnt/etc/nixos/hardware-configuration.nix /mnt/etc/nixos/hosts/"$FLAKE_CONFIG"/; then

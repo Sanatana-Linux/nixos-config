@@ -38,17 +38,17 @@
     # Override lenovo-legion-module to use a fork that adds the Legion 5
     # 16IRX9 83DG (NMCN BIOS) model to the driver allowlist.
     # https://github.com/jlbyh2o/LenovoLegionLinux/tree/add-legion-5-16irx9-83dg-nmcn
-    linuxPackages_xanmod_latest = prev.linuxPackages_xanmod_latest.extend (_kFinal: kPrev: {
-      lenovo-legion-module = kPrev.lenovo-legion-module.overrideAttrs (_oldAttrs: {
-        src = final.fetchFromGitHub {
-          owner = "jlbyh2o";
-          repo = "LenovoLegionLinux";
-          rev = "4cc42952ad1b6a2d9d69a853ecd5aeb63eb2bcfe";
-          hash = "sha256-fS2s+x163ATrgi2KW6m/pMeikRNAAInJ69GMBu1Sacs=";
-        };
-        sourceRoot = "source/kernel_module";
-      });
-    });
+#    linuxPackages_xanmod_latest = prev.linuxPackages_xanmod_latest.extend (_kFinal: kPrev: {
+#       lenovo-legion-module = kPrev.lenovo-legion-module.overrideAttrs (_oldAttrs: {
+#         src = final.fetchFromGitHub {
+#           owner = "jlbyh2o";
+#           repo = "LenovoLegionLinux";
+#           rev = "4cc42952ad1b6a2d9d69a853ecd5aeb63eb2bcfe";
+#           hash = "sha256-fS2s+x163ATrgi2KW6m/pMeikRNAAInJ69GMBu1Sacs=";
+#         };
+#         sourceRoot = "source/kernel_module";
+#       });
+#     });
 
     linuxPackages_latest = prev.linuxPackages_latest.extend (_kFinal: kPrev: {
       lenovo-legion-module = kPrev.lenovo-legion-module.overrideAttrs (_oldAttrs: {

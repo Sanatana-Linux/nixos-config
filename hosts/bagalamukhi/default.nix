@@ -5,7 +5,9 @@
   ...
 }: {
   imports = [
-    ./hardware-configuration.nix
+  # TODO refactor zfs.nix into an option nested within the boot module's options and enable it 
+    ./hardware-configuration-zfs.nix
+    ./zfs.nix
   ];
 
   # Overlays
@@ -259,5 +261,6 @@
     };
   };
 
-  system.stateVersion = "24.11";
+# changed to functional zfs configuration that boot and bumped this up one year... oops.... 
+  system.stateVersion = "25.11";
 }

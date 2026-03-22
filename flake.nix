@@ -4,9 +4,7 @@
   inputs = {
     stable.url = "github:nixos/nixpkgs/nixos-25.05?shallow=1";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable?shallow=1";
-    # nixpkgs is our default (unstable), no separate unstable input needed
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
-    zen-browser.url = "github:MarceColl/zen-browser-flake";
     nur = {
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -24,7 +22,6 @@
       flake = false;
     };
     lemonake.url = "github:passivelemon/lemonake";
-
     stylix = {
       url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -95,10 +92,10 @@
         };
         extra-substituters = [
           "https://cache.nixos.org?priority=10" # nixos cache
+	   "https://cache.nixos-cuda.org" # CUDA packages
           "https://nix-community.cachix.org" # community cache
           "https://nixpkgs-unfree.cachix.org" # nixpkgs-unfree
           "https://pre-commit-hooks.cachix.org" # pre commit hooks
-          "https://cuda-maintainers.cachix.org" # cuda maintainers
           "https://ai.cachix.org" # nixified cache
           "https://stable-diff.cachix.org" # stable diffusion related cache
           "https://sanatanalinux.cachix.org" # sanatana linux
@@ -106,41 +103,18 @@
         ];
         extra-trusted-public-keys = [
           "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+	  "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="
           "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
           "nixpkgs-unfree.cachix.org-1:hqvoInulhbV4nJ9yJOEr+4wxhDV4xq2d1DK7S6Nj6rs="
           "pre-commit-hooks.cachix.org-1:Pkk3Panw5AW24TOv6kz3PvLhlH8puAsJTBbOPmBo7Rc="
-          "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
           "ai.cachix.org-1:N9dzRK+alWwoKXQlnn0H6aUx0lU/mspIoz8hMvGvbbc="
           "stable-diff.cachix.org-1:liYFm3f3q1dAoilj2Ag2IEKzW3Q9/HJcLlrAIytAcy0="
           "sanatanalinux.cachix.org-1:9WsJYECJ+Lt0HPTUI7+6f9uAaAUouaBUyTd9iAJbUEY="
           "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
         ];
       };
-      # ┣━━━━━━━━━━━━━━━━━━━━━━━┫ Dinosaur Laptop ┣━━━━━━━━━━━━━━━━━━━━━━━┫
 
-      # TODO this whole config needs to be updated to effectively interface with changes to repo
-      # TODO rename Chamunda and write appropiate README honoring the Mother like bagalamukhi and Matangi
-      # macbook-air = nixpkgs.lib.nixosSystem {
-      #   specialArgs = {inherit inputs outputs self;};
-      #   modules = [
-      #     nur.modules.nixos.default
-      #
-      #     nixos-hardware.nixosModules.apple-macbook-air-6
-      #     ./hosts/macbook-air
-      #     bhairava-grub-theme.nixosModule
-      #     home-manager.nixosModules.home-manager
-      #     chaotic.nixosModules.default
-      #     {
-      #       home-manager = {
-      #         useUserPackages = true;
-      #         backupFileExtension = "bak";
-      #         users.tlh = {imports = [./home/tlh/default.nix];};
-      #       };
-      #     }
-      #   ];
-      # };
-      #
-      # ┣━━━━━━━━━━━━━━━━━━━━━━┫ My Lenovo Legion Pro ┣━━━━━━━━━━━━━━━━━━━━━━┫
+      # ┣━━━━━━━━━━━━━━━━━━━━━━┫ My Lenovo Legion 5 Pro ┣━━━━━━━━━━━━━━━━━━━━━━┫
 
       bagalamukhi = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};

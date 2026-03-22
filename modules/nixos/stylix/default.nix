@@ -37,29 +37,38 @@ in {
         base0F = "#fd9353";
       };
 
-      polarity = "dark";
+      polarityL = "dark";
 
       fonts = {
+       sizes ={
+           terminal = 14;
+           desktop = 14;
+       };
         serif = {
-          package = pkgs.dejavu_fonts;
-          name = "DejaVu Serif";
+          package = pkgs.nerd-fonts.agave;
+          name = "Agave Nerd Font";
         };
         sansSerif = {
-          package = pkgs.dejavu_fonts;
-          name = "DejaVu Sans";
+          package = pkgs.nerd-fonts.agave;
+          name = "Agave Nerd Font Propo";
         };
         monospace = {
-          package = pkgs.dejavu_fonts;
-          name = "DejaVu Sans Mono";
+          package = pkgs.nerd-fonts.agave;
+          name = "Agave Nerd Font Mono";
         };
         emoji = {
           package = pkgs.noto-fonts-color-emoji;
           name = "Noto Color Emoji";
         };
       };
-
+       iconTheme = {
+		enable = true;
+ 		package = pkgs.reversal-icon-theme;
+ 		light = "Reversal";
+ 		dark = "Reversal";
+	};
       # System-level targets
-      # targets.grub.enable = true;  # Disabled - using bhairava-grub-theme
+       targets.grub.enable = mkForce false;  
       targets.plymouth.enable = true;
       targets.console.enable = true;
 

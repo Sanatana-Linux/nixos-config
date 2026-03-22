@@ -2,7 +2,7 @@
 
 <div style="display: inline-bock; width: 100%;">
 
-<img width="650px"  align="center"  src="https://github.com/Sanatana-Linux/nixos-config/blob/main/.github/assets/sanatana-linux-icon.png?raw=true" alt="Om Puurnnam-Adah Puurnnam-Idam Puurnnaat-Puurnnam-Udacyate | Puurnnasya Puurnnam-Aadaaya Puurnnam-Eva-Avashissyate || Om Shaantih Shaantih Shaantih "/>
+<img width="672px"  align="center"  src="https://github.com/Sanatana-Linux/nixos-config/blob/main/.github/assets/sanatana-linux-icon.png?raw=true" alt="Om Puurnnam-Adah Puurnnam-Idam Puurnnaat-Puurnnam-Udacyate | Puurnnasya Puurnnam-Aadaaya Puurnnam-Eva-Avashissyate || Om Shaantih Shaantih Shaantih "/>
 </div>
 <br> 
 <strong><h3><em><big><b>सनातन (SANATANA)</b></big>: <br></em></h3>

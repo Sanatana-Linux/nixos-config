@@ -77,6 +77,7 @@ in {
           "tss"
           "waydroid"
           "wireshark"
+          "zfs_member"
         ]
         ++ cfg.extraGroups;
 

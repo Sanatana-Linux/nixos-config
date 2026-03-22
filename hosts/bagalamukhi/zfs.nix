@@ -8,8 +8,14 @@
   boot.zfs.devNodes = "/dev/disk/by-id";
   boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
   swapDevices = [
-    { device = "/dev/disk/by-id/nvme-SKHynix_HFS001TEJ9X115N_AMD1N001811901C38_1-part4"; randomEncryption.enable = true; }
-    { device = "/dev/disk/by-id/nvme-SKHynix_HFS001TEJ9X115N_AMD1N001812601C3I_1-part4"; randomEncryption.enable = true; }
+    {
+      device = "/dev/disk/by-id/nvme-SKHynix_HFS001TEJ9X115N_AMD1N001811901C38_1-part4";
+      randomEncryption.enable = true;
+    }
+    {
+      device = "/dev/disk/by-id/nvme-SKHynix_HFS001TEJ9X115N_AMD1N001812601C3I_1-part4";
+      randomEncryption.enable = true;
+    }
   ];
   systemd.services.zfs-mount.enable = false;
   environment.etc."machine-id".source = "/state/etc/machine-id";
@@ -49,4 +55,3 @@
 
   users.users.root.initialHashedPassword = "$6$HufEFWjLszB/ymUM$U3Ow/ibzX7ORIjOSzAbjCz/AQ7IbQVxHnOlrPkmMdPK6b/ylW67asnPlUILiNgm6m6WKdu40Jd2fWuT4ziYcs1";
 }
-

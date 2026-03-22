@@ -5,9 +5,7 @@
   ...
 }: {
   imports = [
-  # TODO refactor zfs.nix into an option nested within the boot module's options and enable it 
     ./hardware-configuration-zfs.nix
-    ./zfs.nix
   ];
 
   # Overlays
@@ -27,6 +25,7 @@
         theme.enable = true;
         advancedBios.enable = true;
         development.enable = true;
+        zfs.enable = true;
       };
     };
 
@@ -174,6 +173,7 @@
         desktop = true;
         multimedia = true;
       };
+      wayland.enable = true;
     };
 
     # Hardware
@@ -204,7 +204,6 @@
         quad9.enable = true;
       };
       android.enable = true;
-      encrypted-storage.enable = true;
     };
 
     # Desktop
@@ -212,7 +211,6 @@
       xorg.enable = false;
       awesomewm.enable = false;
     };
-
 
     # AI
     ai = {
@@ -250,9 +248,6 @@
     enable32Bit = true;
   };
 
-  # Disable Stylix GRUB theme - using bhairava-grub-theme instead
-  boot.loader.grub.theme = lib.mkForce null;
-
   services = {
     logind.settings.Login = {
       HandleLidSwitch = "suspend";
@@ -261,6 +256,6 @@
     };
   };
 
-# changed to functional zfs configuration that boot and bumped this up one year... oops.... 
+  # changed to functional zfs configuration that and bumped this up one year... oops....
   system.stateVersion = "25.11";
 }

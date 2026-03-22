@@ -25,22 +25,10 @@ in {
       enable = true;
 
       # Font settings for GTK
-      font = {
-        name = lib.mkDefault "SFProText Nerd Font,  Bold  ";
-        size = lib.mkDefault 10;
-      };
 
-      # GTK theme configuration
-      # Disabled to avoid conflict with monokai-pro-skeudos theme
-      # theme = {
-      #   name = lib.mkDefault "Materia-dark-compact";
-      #   package = lib.mkDefault pkgs.materia-theme-transparent;
-      # };
-
-      # GTK icon theme configuration
-      iconTheme = {
-        name = lib.mkDefault "Papirus-Dark";
-        package = lib.mkDefault pkgs.papirus-icon-theme;
+      theme = {
+        name = lib.mkDefault "Materia-dark-compact";
+        package = lib.mkDefault pkgs.materia-theme-transparent;
       };
 
       # GTK cursor theme configuration
@@ -84,34 +72,9 @@ in {
         gtk-decoration-layout = "menu:";
       };
 
-      # Custom CSS for theme color customization
-      # This allows overriding theme colors to match Stylix/base16-spectrum
-      # Disabled for now due to Home Manager option conflict
-      # css = {
-      #   enable = lib.mkDefault true;
-      #   # If set to true, generates a CSS file to override theme colors
-      #   # using the base16-spectrum color palette
-      #   # Colors from base16-spectrum.yaml:
-      #   # base00: "#131313"  # Default Background
-      #   # base01: "#191919"  # Lighter Background
-      #   # base02: "#222222"  # Selection Background
-      #   # base03: "#69676c"  # Comments, Invisible
-      #   # base04: "#8b888f"  # Light Foreground
-      #   # base05: "#bab6c0"  # Default Foreground
-      #   # base06: "#f7f1ff"  # Light Accent Foreground
-      #   # base07: "#f7f1ff"  # Bright Accent Foreground
-      #   # base08: "#fc618d"  # Red
-      #   # base09: "#fd9353"  # Orange
-      #   # base0A: "#fce566"  # Yellow
-      #   # base0B: "#7bd88f"  # Green
-      #   # base0C: "#5ad4e6"  # Cyan
-      #   # base0D: "#948ae3"  # Blue
-      #   # base0E: "#948ae3"  # Magenta
-      #   # base0F: "#fd9353"  # Brown
-      # };
     };
 
-    # Home configuration
+    # nixCraftHome configuration
     home = {
       # Environment variables for session
       sessionVariables = {
@@ -126,38 +89,11 @@ in {
         gtk.enable = true;
       };
 
-      # Installation of AwesomeWM configuration if not present
-      activation.installAwesomeWMConfig = ''
-        if [ ! -d "${config.home.homeDirectory}/.config/awesome" ]; then
-          ${pkgs.git}/bin/git clone https://github.com/Sanatana-Linux/nixos-awesomewm "${config.home.homeDirectory}/.config/awesome"
-          chmod -R +w "${config.home.homeDirectory}/.config/awesome"
-          chown -R tlh "${config.home.homeDirectory}/.config/awesome"
-        fi
-      '';
-
-      # Installation of Neovim configuration if not present
-      activation.installNvimConfig = ''
-        if [ ! -d "${config.home.homeDirectory}/.config/nvim" ]; then
-          ${pkgs.git}/bin/git clone https://github.com/Thomashighbaugh/nvim-forge "${config.home.homeDirectory}/.config/nvim"
-          chmod -R +w "$HOME/.config/nvim"
-          chown -R tlh "${config.home.homeDirectory}/.config/nvim"
-        fi
-      '';
-
-      file = let
-        base = {
-          "awesome/lib/liblua_pam.so" = {source = "${inputs.lemonake.packages.${pkgs.stdenv.hostPlatform.system}.lua-pam-git}/lib/liblua_pam.so";};
-        };
-      in
-        base;
-    };
-
+};
     # QT Configuration
     qt = {
       enable = true;
 
-      # Set GTK3 as the platform theme for QT
-      platformTheme.name = "gtk";
       style = {
         name = "adwaita-dark";
         package = pkgs.adwaita-qt;

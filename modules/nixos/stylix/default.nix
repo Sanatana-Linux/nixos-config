@@ -37,13 +37,13 @@ in {
         base0F = "#fd9353";
       };
 
-      polarityL = "dark";
+      polarity = "dark";
 
       fonts = {
-       sizes ={
-           terminal = 14;
-           desktop = 14;
-       };
+        sizes = {
+          terminal = 14;
+          desktop = 14;
+        };
         serif = {
           package = pkgs.nerd-fonts.agave;
           name = "Agave Nerd Font";
@@ -61,20 +61,21 @@ in {
           name = "Noto Color Emoji";
         };
       };
-       iconTheme = {
-		enable = true;
- 		package = pkgs.reversal-icon-theme;
- 		light = "Reversal";
- 		dark = "Reversal";
-	};
+      icons = {
+        enable = true;
+        package = pkgs.kora-icon-theme;
+        light = "Kora";
+        dark = "Kora Grey";
+      };
       # System-level targets
-       targets.grub.enable = mkForce false;  
+      targets.grub.enable = mkForce false;
       targets.plymouth.enable = true;
       targets.console.enable = true;
 
       # Desktop environment targets
       targets.gtk.enable = true;
       targets.qt.enable = true;
+      targets.qt.platform = "qtct";
       targets.fontconfig.enable = true;
 
       # Icon theme

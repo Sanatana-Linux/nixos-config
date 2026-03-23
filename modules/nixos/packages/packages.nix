@@ -395,7 +395,6 @@ in {
           ++ optionals cfg.development.webDevelopment [
             node2nix # Node to Nix converter
             nodenv # Node version manager
-            sass # CSS preprocessor
             yarn # Node package manager
             gibo # Gitignore boilerplates
           ]

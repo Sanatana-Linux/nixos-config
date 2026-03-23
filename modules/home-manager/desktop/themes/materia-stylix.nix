@@ -10,23 +10,25 @@ with lib; let
   scheme = config.stylix.base16Scheme;
   slug = lib.strings.toLower (lib.strings.sanitizeDerivationName scheme.scheme);
 
+  stripHash = str: lib.strings.removePrefix "#" str;
+
   materiaTheme = {
     name = "Materia-${slug}";
     variant = "dark";
-    background = scheme.base00;
-    foreground = scheme.base05;
-    menuBackground = scheme.base01;
-    menuForeground = scheme.base05;
-    surface = scheme.base02;
-    view = scheme.base01;
+    background = stripHash scheme.base00;
+    foreground = stripHash scheme.base05;
+    menuBackground = stripHash scheme.base01;
+    menuForeground = stripHash scheme.base05;
+    surface = stripHash scheme.base02;
+    view = stripHash scheme.base01;
     accent =
       if (scheme ? accent)
-      then scheme.accent
-      else scheme.base0D;
-    visited = scheme.base0E;
-    error = scheme.base08;
-    success = scheme.base0B;
-    warning = scheme.base09;
+      then stripHash scheme.accent
+      else stripHash scheme.base0D;
+    visited = stripHash scheme.base0E;
+    error = stripHash scheme.base08;
+    success = stripHash scheme.base0B;
+    warning = stripHash scheme.base09;
   };
 
   rendersvg = pkgs.runCommand "rendersvg" {} ''
@@ -44,10 +46,11 @@ with lib; let
     };
     buildInputs = with pkgs; [
       bc
+      dart-sass
+      git
       gtk4.dev
       meson
       ninja
-      nodePackages.sass
       optipng
       rendersvg
       sassc

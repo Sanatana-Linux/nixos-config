@@ -864,8 +864,8 @@
         "nixpkgs": "nixpkgs_10"
       },
       "locked": {
-        "lastModified": 1774241809,
-        "narHash": "sha256-CcA2OG1FRt8/CAUHK+KoRZt0HQOrlLzEsYsGmvaFDzI=",
+        "lastModified": 1774246718,
+        "narHash": "sha256-X8s75pX03OPNEM714q2HzsGrf21Opu4La1+MNCMA/sA=",
         "path": "/home/tlh/PanchaKosha",
         "type": "path"
       },

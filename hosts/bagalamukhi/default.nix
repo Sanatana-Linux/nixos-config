@@ -235,14 +235,7 @@
     quickshellGreeter.enable = true;
   };
 
-  programs.quickshell.mangowc.enable = true;
-
-  # Host-specific display configuration
-  # services.xserver = {
-  #   enable = true;
-  #   videoDrivers = ["nvidia"];
-  #   dpi = lib.mkForce 96;
-  # };
+  programs.panchakosha.enable = true;
 
   hardware.graphics = {
     enable = true;

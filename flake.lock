@@ -847,41 +847,19 @@
         "home-manager": "home-manager_3",
         "nixpkgs": [
           "nixpkgs"
-        ],
-        "quickshell": "quickshell"
-      },
-      "locked": {
-        "lastModified": 1774070873,
-        "narHash": "sha256-Ib7CHdf6nUH7losJlkvYoCxj6s8w6xAMCx8R+TpfIhc=",
-        "owner": "Sanatana-Linux",
-        "repo": "PanchaKosha",
-        "rev": "a0f37fd6f73c741175ad236b55c21b87ac5873c3",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Sanatana-Linux",
-        "repo": "PanchaKosha",
-        "type": "github"
-      }
-    },
-    "quickshell": {
-      "inputs": {
-        "nixpkgs": [
-          "panchakosha",
-          "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1773988952,
-        "narHash": "sha256-XV/WgkkZ6OLJ+W0vrD4bXB7/ErQysc5R5lrkT2/VBVs=",
-        "owner": "quickshell-mirror",
-        "repo": "quickshell",
-        "rev": "6a244c3c560b45f3b860ed6c0fc54d0291ab6f57",
+        "lastModified": 1774237520,
+        "narHash": "sha256-QA5uBzt7gAEKuLORN8MOmiMAv+wN40BDgd5YJ+tFJlQ=",
+        "owner": "Sanatana-Linux",
+        "repo": "PanchaKosha",
+        "rev": "ecc2417c1903dd86bac1784b66d0219cda1e3f24",
         "type": "github"
       },
       "original": {
-        "owner": "quickshell-mirror",
-        "repo": "quickshell",
+        "owner": "Sanatana-Linux",
+        "repo": "PanchaKosha",
         "type": "github"
       }
     },

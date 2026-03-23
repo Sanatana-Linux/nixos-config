@@ -32,8 +32,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     panchakosha = {
-      url = "github:Sanatana-Linux/PanchaKosha";
-      inputs.nixpkgs.follows = "nixpkgs";
+      url = "path:/home/tlh/PanchaKosha";
     };
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
@@ -126,8 +125,7 @@
           inputs.chaotic.nixosModules.default
           inputs.nix-index-database.nixosModules.nix-index
           inputs.home-manager.nixosModules.home-manager
-          inputs.panchakosha.nixosModules.greetd
-          inputs.panchakosha.nixosModules.quickshell
+          inputs.panchakosha.nixosModules.default
           ./modules/nixos
           {
             home-manager = {

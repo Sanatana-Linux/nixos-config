@@ -613,6 +613,22 @@
     },
     "nixpkgs_10": {
       "locked": {
+        "lastModified": 1773821835,
+        "narHash": "sha256-TJ3lSQtW0E2JrznGVm8hOQGVpXjJyXY2guAxku2O9A4=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "b40629efe5d6ec48dd1efba650c797ddbd39ace0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_11": {
+      "locked": {
         "lastModified": 1744536153,
         "narHash": "sha256-awS2zRgF4uTwrOKwwiJcByDzDOdo3Q1rPZbiHQg/N38=",
         "owner": "NixOS",
@@ -845,22 +861,17 @@
     "panchakosha": {
       "inputs": {
         "home-manager": "home-manager_3",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
+        "nixpkgs": "nixpkgs_10"
       },
       "locked": {
-        "lastModified": 1774237520,
-        "narHash": "sha256-QA5uBzt7gAEKuLORN8MOmiMAv+wN40BDgd5YJ+tFJlQ=",
-        "owner": "Sanatana-Linux",
-        "repo": "PanchaKosha",
-        "rev": "ecc2417c1903dd86bac1784b66d0219cda1e3f24",
-        "type": "github"
+        "lastModified": 1774239322,
+        "narHash": "sha256-KI93YXYHE3DfiyASd5aHISX9tuaO2k2pSKn4BRCTUbE=",
+        "path": "/home/tlh/PanchaKosha",
+        "type": "path"
       },
       "original": {
-        "owner": "Sanatana-Linux",
-        "repo": "PanchaKosha",
-        "type": "github"
+        "path": "/home/tlh/PanchaKosha",
+        "type": "path"
       }
     },
     "root": {
@@ -924,7 +935,7 @@
     },
     "rust-overlay_2": {
       "inputs": {
-        "nixpkgs": "nixpkgs_10"
+        "nixpkgs": "nixpkgs_11"
       },
       "locked": {
         "lastModified": 1774149071,

@@ -180,8 +180,7 @@
           inputs.nur.modules.nixos.default
           inputs.bhairava-grub-theme.nixosModule
           inputs.home-manager.nixosModules.home-manager
-          inputs.panchakosha.nixosModules.greetd
-          inputs.panchakosha.nixosModules.quickshell
+          inputs.panchakosha.nixosModules.default
           ./modules/nixos
           {
             home-manager = {

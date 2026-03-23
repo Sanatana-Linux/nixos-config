@@ -229,12 +229,6 @@
     };
   };
 
-  # Enable PanchaKosha greetd/quickshell options for MangoWC
-  services.greetd.mangowc = {
-    enable = true;
-    quickshellGreeter.enable = true;
-  };
-
   programs.panchakosha.enable = true;
 
   hardware.graphics = {

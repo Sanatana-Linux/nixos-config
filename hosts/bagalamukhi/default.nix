@@ -5,6 +5,7 @@
   ...
 }: {
   imports = [
+    ./hardware-configuration.nix
     ./hardware-configuration-zfs.nix
   ];
 

@@ -101,14 +101,10 @@
       installConfig = ''
         # Ensure quickshell configuration is present for MangoWC sessions
         if [ ! -d "${config.home.homeDirectory}/.config/quickshell" ]; then
-          mkdir -p "${config.home.homeDirectory}/.config/quickshell"
-        fi
-        # Keep awesome clone for users that still use it
-        if [ ! -d "${config.home.homeDirectory}/.config/awesome" ]; then
-          ${pkgs.git}/bin/git clone https://github.com/Sanatana-Linux/nixos-awesomewm ${config.home.homeDirectory}/.config/awesome
+        mkdir -p "${config.home.homeDirectory}/.config/quickshell"
         fi
         if [ ! -d "${config.home.homeDirectory}/.config/nvim" ]; then
-          ${pkgs.git}/bin/git clone https://github.com/Thomashighbaugh/nvim-forge ${config.home.homeDirectory}/.config/nvim
+        ${pkgs.git}/bin/git clone https://github.com/Thomashighbaugh/nvim-forge ${config.home.homeDirectory}/.config/nvim
         fi
       '';
     };

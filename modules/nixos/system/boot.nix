@@ -181,16 +181,16 @@ with lib; {
         grub.zfsSupport = true;
         # for systemd-autofs
         grub.extraPrepareConfig = ''
-          mkdir -p /boot/efis
-          for i in /boot/efis/*; do mount $i ; done
+          ${pkgs.coreutils}/bin/mkdir -p /boot/efis
+          for i in /boot/efis/*; do ${pkgs.util-linux}/bin/mount $i ; done
         '';
         grub.extraInstallCommands = ''
-          export ESP_MIRROR=$(mktemp -d -p /tmp)
-          cp -r /boot/efis/nvme-SKHynix_HFS001TEJ9X115N_AMD1N001811901C38_1-part1/EFI $ESP_MIRROR
+          export ESP_MIRROR=$(${pkgs.coreutils}/bin/mktemp -d -p /tmp)
+          ${pkgs.coreutils}/bin/cp -r /boot/efis/nvme-SKHynix_HFS001TEJ9X115N_AMD1N001811901C38_1-part1/EFI $ESP_MIRROR
           for i in /boot/efis/*; do
-            cp -r $ESP_MIRROR/EFI $i
+          ${pkgs.coreutils}/bin/cp -r $ESP_MIRROR/EFI $i
           done
-          rm -rf $ESP_MIRROR
+          ${pkgs.coreutils}/bin/rm -rf $ESP_MIRROR
         '';
       };
     })

@@ -79,6 +79,7 @@
 
   fileSystems."/etc/nixos" = {
     device = "/state/etc/nixos";
+    ./hardware-configuration.nix
     fsType = "none";
     options = ["bind"];
   };
@@ -95,16 +96,22 @@
     options = ["x-systemd.idle-timeout=1min" "x-systemd.automount" "noauto" "fmask=0022" "dmask=0022"];
   };
 
-  fileSystems."/boot/efis/nvme-SKHynix_HFS001TEJ9X115N_AMD1N001812601C3I_1-part1" = {
-    device = "/dev/disk/by-uuid/12CE-A600";
-    fsType = "vfat";
-    options = ["x-systemd.idle-timeout=1min" "x-systemd.automount" "noauto" "fmask=0022" "dmask=0022"];
-  };
+  # fileSystems."/boot/efis/nvme-SKHynix_HFS001TEJ9X115N_AMD1N001812601C3I_1-part1" = {
+  #   device = "/dev/disk/by-uuid/12CE-A600";
+  #   fsType = "vfat";
+  #   options = ["x-systemd.idle-timeout=1min" "x-systemd.automount" "noauto" "fmask=0022" "dmask=0022"];
+  # };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-
+  networking.useDHCP = lib.mkDefault true;
   networking.hostId = "4a0aede8";
+
+
+
+
+
+
 
   environment.etc = {
     "machine-id".source = "/state/etc/machine-id";
@@ -117,16 +124,10 @@
       device = "/dev/disk/by-id/nvme-SKHynix_HFS001TEJ9X115N_AMD1N001811901C38_1-part4";
       randomEncryption.enable = true;
     }
-    {
-      device = "/dev/disk/by-id/nvme-SKHynix_HFS001TEJ9X115N_AMD1N001812601C3I_1-part4";
-      randomEncryption.enable = true;
-    }
   ];
 
   boot.loader.grub.devices = [
     "/dev/disk/by-id/nvme-SKHynix_HFS001TEJ9X115N_AMD1N001811901C38_1"
-    "/dev/disk/by-id/nvme-SKHynix_HFS001TEJ9X115N_AMD1N001812601C3I_1"
   ];
 
-  users.users.root.initialHashedPassword = "$6$HufEFWjLszB/ymUM$U3Ow/ibzX7ORIjOSzAbjCz/AQ7IbQVxHnOlrPkmMdPK6b/ylW67asnPlUILiNgm6m6WKdu40Jd2fWuT4ziYcs1";
 }

@@ -2,24 +2,30 @@
 set -e # Exit immediately if a command exits with a non-zero status
 set -u # Treat unset variables as an error and exit immediately
 
+# --- Output Formatting ---
+RED="\033[1;31m"
+GREEN="\033[1;32m"
+BOLD=$(tput bold)
+NORMAL=$(tput sgr0)
+error() { echo -e " ${RED}*${NORMAL}  $@"; }
+success() { echo -e " ${GREEN}*${NORMAL}  $@"; }
+
 # --- Root Privilege Check ---
 if [[ $EUID -ne 0 ]]; then
 	error "This script must be run as root. Use sudo."
 	exit 1
 fi
 
-# --- Output Formatting ---
-RED="\033[1;31m"
-GREEN="\033[1;32m"
-BOLD=$(tput bold)
-NORMAL=$(tput sgr0)
-error() { echo -e " ${RED}*${NORMAL}  $@"; }     # Print error messages in red
-success() { echo -e " ${GREEN}*${NORMAL}  $@"; } # Print success messages in green
+# --- Ensure we have needed dependencies ---
+if ! command -v git >/dev/null || ! command -v parted >/dev/null || ! command -v sgdisk >/dev/null || ! command -v systemd-cryptenroll >/dev/null; then
+	echo "Missing dependencies. Re-executing inside nix-shell..."
+	exec nix-shell -p git neovim parted gptfdisk cryptsetup lvm2 util-linux systemd --run "bash $0 $@"
+fi
 
 # --- Prompt user for Yes/No confirmation ---
 yesno_prompt() {
 	while true; do
-		read -p "$1 [Yes/No] " confirm
+		read -p "$1 [Yes/No] " confirm </dev/tty
 		case $confirm in
 		[yY][eE][sS]*) return 0 ;;
 		[nN][oO]*) return 1 ;;
@@ -30,6 +36,7 @@ yesno_prompt() {
 
 # --- Print installer banner and warning ---
 print_banner() {
+	clear
 	echo
 	echo " N)    nn  I)iiii  "
 	echo " N)n   nn    I)    "
@@ -39,11 +46,8 @@ print_banner() {
 	echo " N)   nnn    I)"
 	echo " N)    nn  I)iiii"
 	echo
-	echo
-	echo
 	echo " We are going to install NixOS on this computer."
-	echo "         !!! ALL DATA WILL BE LOST !!! "
-	echo
+	echo "         !!! ALL PREVIOUS DATA WILL BE LOST !!! "
 	echo
 	while true; do
 		if ! yesno_prompt "[?] Do you understand?"; then
@@ -53,625 +57,388 @@ print_banner() {
 			break
 		fi
 	done
+	echo
 }
 
-# --- Find and select installation device interactively ---
-find_install_device() {
+# --- 1. Ask for Password First ---
+ask_password() {
+	echo "=== 1. Setup Password ==="
+	echo "This password will be used for Disk Encryption AND the User/Root accounts."
+	while true; do
+		read -s -p "[?] Enter password: " INST_PASSWD </dev/tty
+		echo
+		read -s -p "[?] Confirm password: " INST_PASSWD2 </dev/tty
+		echo
+		if [[ "$INST_PASSWD" == "$INST_PASSWD2" ]] && [[ -n "$INST_PASSWD" ]]; then
+			export INST_PASSWD
+			success "Password accepted."
+			break
+		else
+			error "Passwords do not match or are empty. Please try again."
+		fi
+	done
+	echo
+}
+
+# Helper to find block devices
+choose_device() {
+	local prompt_text="$1"
+	local exclude_dev="$2"
 	local devices=()
 	local device
 	local i=1
 
-	# List block devices (excluding loop devices and partitions)
 	while read -r device; do
+		if [[ -n "$exclude_dev" ]] && [[ "/dev/$device" == "$exclude_dev" ]]; then
+			continue
+		fi
 		devices+=("$device")
-		echo "  $i) /dev/$device"
+		echo "  $i) /dev/$device" >&2
 		((i++))
 	done < <(lsblk -d -n -o NAME | grep -v '^loop')
 
-	if [ ${#devices[@]} -eq 0 ]; then
-		error "No suitable block devices found."
+	if [[ ${#devices[@]} -eq 0 ]]; then
+		error "No suitable block devices found." >&2
 		exit 1
 	fi
 
 	while true; do
-		read -p "[?] Choose a device number: " choice </dev/tty
-		if [[ "$choice" =~ ^[0-9]+$ ]]; then
-			if [[ "$choice" -ge 1 ]] && [[ "$choice" -le ${#devices[@]} ]]; then
-				export INST_DEVICE="/dev/${devices[$((choice - 1))]}"
-				success "Selected device: $INST_DEVICE"
-				break
-			else
-				echo "Invalid choice. Please select a number from the list."
-			fi
+		read -p "$prompt_text" choice </dev/tty >&2
+		if [[ "$choice" =~ ^[0-9]+$ ]] && [[ "$choice" -ge 1 ]] && [[ "$choice" -le ${#devices[@]} ]]; then
+			echo "/dev/${devices[$((choice - 1))]}"
+			break
 		else
-			echo "Invalid input. Please enter a number."
+			echo "Invalid choice. Please select a number from the list." >&2
 		fi
 	done
 }
 
-# --- Partition the selected device using parted ---
-run_parted() {
-	if ! yesno_prompt "[?] We are going to run parted on ${BOLD}$INST_DEVICE${NORMAL}.  This will erase ALL data on the device. Is this okay?"; then
-		echo "Terminating the installer. Bye!"
-		exit
-	fi
-
-	echo -n "[-] Partitioning $INST_DEVICE... "
-	if ! wipefs -a "$INST_DEVICE"; then
-		error "ERROR: wipefs failed.  Is the device mounted?"
-		exit 1
-	fi
-	if ! parted "$INST_DEVICE" -- mklabel gpt >/dev/null 2>&1; then
-		error "ERROR: parted mklabel failed."
-		exit 1
-	fi
-	if ! parted "$INST_DEVICE" -- mkpart ESP fat32 1MiB 512MiB set 1 boot on >/dev/null 2>&1; then
-		error "ERROR: parted mkpart ESP failed."
-		exit 1
-	fi
-	if ! parted "$INST_DEVICE" mkpart primary ext4 537M 100% set 2 lvm on >/dev/null 2>&1; then
-		error "ERROR: parted mkpart primary failed."
-		exit 1
-	fi
-
-	success "Partitioning complete."
+# --- 2. Ask which disk to encrypt for root ---
+ask_root_disk() {
+	echo "=== 2. Select Root Disk ==="
+	INST_DEVICE=$(choose_device "[?] Choose the ROOT device number to encrypt: " "")
+	export INST_DEVICE
+	success "Selected root device: $INST_DEVICE"
+	echo
 }
 
-# --- Ask user if disk encryption should be enabled, generate passwords ---
-setup_encryption() {
-	while true; do
-		if yesno_prompt "[?] Do you wish to ${BOLD}encrypt${NORMAL} your disk?"; then
-			ENCRYPTION=true
-			echo "Proceeding with encryption."
-			break
-		else
-			echo "Leaving your disk unencrypted."
-			ENCRYPTION=false
-			break
+# --- 3. Ask about an additional encrypted disk ---
+ask_additional_disk() {
+	echo "=== 3. Additional Disk Configuration ==="
+	if yesno_prompt "[?] Would you like to encrypt another disk?"; then
+		export ENCRYPT_ADDITIONAL="true"
+		echo "Available disks for additional storage:"
+		ADDITIONAL_DEVICE=$(choose_device "[?] Choose the ADDITIONAL device number: " "$INST_DEVICE")
+		export ADDITIONAL_DEVICE
+		success "Selected additional device: $ADDITIONAL_DEVICE"
+		
+		read -p "[?] What should the mount path on the final system be (e.g., /data)? " ADDITIONAL_MOUNT </dev/tty
+		if [[ ! "$ADDITIONAL_MOUNT" =~ ^/ ]]; then
+			ADDITIONAL_MOUNT="/$ADDITIONAL_MOUNT"
 		fi
-	done
-
-	# Generate root and encryption passwords
-	INST_PASSWD=$(diceware -n 3)
-	INST_PASSWD_SHA512=$(mkpasswd -m sha-512 -s <<<"${INST_PASSWD}")
-	export INST_PASSWD
-	export INST_PASSWD_SHA512
-	export ENCRYPTION
-}
-
-# --- Encrypt the partition using cryptsetup if enabled ---
-run_cryptsetup() {
-	if [ "$ENCRYPTION" = true ]; then
-		echo -n "[-] Encrypting the disk... "
-		local device="${INST_DEVICE}p2"
-		if ! echo -n "$INST_PASSWD" | cryptsetup -q --type luks1 luksFormat "$device" -; then
-			error "ERROR: cryptsetup luksFormat failed."
-			exit 1
-		fi
-		if ! echo -n "$INST_PASSWD" | cryptsetup luksOpen "$device" enc-pv -d -; then
-			error "ERROR: cryptsetup luksOpen failed."
-			exit 1
-		fi
-		success "Disk encryption complete."
-	fi
-}
-
-# --- Set up LVM, format filesystems, and mount them ---
-run_fssetup() {
-	echo -n "[-] Setting up LVM... "
-	local vg_device
-	if [ "$ENCRYPTION" = true ]; then
-		vg_device="/dev/mapper/enc-pv"
+		export ADDITIONAL_MOUNT
+		success "Additional device will be mounted at: $ADDITIONAL_MOUNT"
 	else
-		vg_device="${INST_DEVICE}2"
+		export ENCRYPT_ADDITIONAL="false"
+		export ADDITIONAL_MOUNT=""
+		echo "Skipping additional disk configuration."
 	fi
-
-	if ! pvcreate "$vg_device" >/dev/null 2>&1; then
-		error "ERROR: pvcreate failed."
-		exit 1
-	fi
-	if ! vgcreate vg "$vg_device" >/dev/null 2>&1; then
-		error "ERROR: vgcreate failed."
-		exit 1
-	fi
-	if ! lvcreate -n swap vg -L 8G >/dev/null 2>&1; then
-		error "ERROR: lvcreate swap failed."
-		exit 1
-	fi
-	if ! lvcreate -n root vg -l 100%FREE >/dev/null 2>&1; then
-		error "ERROR: lvcreate root failed."
-		exit 1
-	fi
-	success "LVM setup complete."
-
-	echo -n "[-] Formating filesystems... "
-	if ! mkfs.fat -F 32 -n boot "${INST_DEVICE}1" >/dev/null 2>&1; then
-		error "ERROR: mkfs.fat failed."
-		exit 1
-	fi
-	if ! mkfs.ext4 -L root /dev/vg/root >/dev/null 2>&1; then
-		error "ERROR: mkfs.ext4 failed."
-		exit 1
-	fi
-	if ! mkswap -L swap /dev/vg/swap >/dev/null 2>&1; then
-		error "ERROR: mkswap failed."
-		exit 1
-	fi
-	success "Filesystem formatting complete."
-
-	echo -n "[-] Mouting filesystems... "
-	if ! mount /dev/disk/by-label/root /mnt; then
-		error "ERROR: mount /dev/vg/root failed."
-		exit 1
-	fi
-	if ! mkdir -p /mnt/boot; then
-		error "ERROR: mkdir /mnt/boot failed."
-		exit 1
-	fi
-
-	if ! mount /dev/disk/by-label/boot /mnt/boot; then
-		error "ERROR: mount /dev/disk/by-label/boot failed."
-		exit 1
-	fi
-	if ! swapon /dev/disk/by-label/swap >/dev/null 2>&1; then
-		error "ERROR: swapon failed."
-		exit 1
-	fi
-	success "Filesystems mounted."
+	echo
 }
 
-# --- Clone NixOS configuration repository into target system ---
-run_nixos_config_setup() {
-	echo "[-] Setting up NixOS configuration directory... "
-	if ! mkdir -p /mnt/etc; then
-		error "Failed to create /mnt/etc"
-		exit 1
+# Helper for resolving partition paths depending on NVMe/MMC vs SATA
+get_part() {
+	local dev=$1
+	local partnum=$2
+	if [[ "$dev" =~ [0-9]$ ]]; then
+		echo "${dev}p${partnum}"
+	else
+		echo "${dev}${partnum}"
 	fi
-	if ! git clone https://github.com/Sanatana-Linux/nixos-config /mnt/etc/nixos; then
-		error "Failed to clone the NixOS config repository"
-		exit 1
-	fi
-	success "NixOS configuration directory setup complete."
 }
 
-# --- Ask user to select a configuration from flake.nix ---
+# Robust device wait loop to ensure the kernel has loaded the block device
+wait_for_dev() {
+	local dev=$1
+	local timeout=15
+	local count=0
+	echo -n "Waiting for $dev..."
+	while [[ ! -b "$dev" ]]; do
+		sleep 1
+		count=$((count + 1))
+		echo -n "."
+		if [[ $count -ge $timeout ]]; then
+			echo
+			error "Timeout waiting for block device: $dev. The kernel failed to register it in time."
+			exit 1
+		fi
+	done
+	echo " OK."
+}
+
+# Nuclear Cleanup helper to ensure partitions aren't locked "in use"
+cleanup_and_zap() {
+	local disk=$1
+	echo "[-] Safely unmounting and tearing down old structures on $disk..."
+
+	# Escape the /mnt directory just in case the shell is holding it open
+	cd / || true
+
+	# Aggressively unmount anything tied to previous attempts
+	if mountpoint -q /mnt/boot; then umount -l /mnt/boot 2>/dev/null || true; fi
+	if mountpoint -q /mnt; then umount -l /mnt 2>/dev/null || true; fi
+	if [[ -n "$ADDITIONAL_MOUNT" ]] && mountpoint -q "/mnt$ADDITIONAL_MOUNT"; then 
+		umount -l "/mnt$ADDITIONAL_MOUNT" 2>/dev/null || true
+	fi
+
+	# Disable swap completely
+	swapoff -a 2>/dev/null || true
+
+	# Deactivate any old LVM volume groups
+	vgchange -an 2>/dev/null || true
+
+	# Close LUKS containers
+	for crypt in enc-root enc-swap enc-additional; do
+		if [[ -e "/dev/mapper/$crypt" ]]; then
+			if ! cryptsetup close "$crypt" 2>/dev/null; then
+				error "CRITICAL: The device /dev/mapper/$crypt is locked and cannot be closed."
+				error "Make sure no other terminal is open in /mnt."
+				exit 1
+			fi
+		fi
+	done
+
+	# Wipe signatures of all existing partitions
+	for part in ${disk}p* ${disk}[0-9]*; do
+		if [[ -b "$part" ]]; then
+			wipefs -af "$part" >/dev/null 2>&1 || true
+		fi
+	done
+
+	# Zap the whole disk
+	wipefs -af "$disk" >/dev/null 2>&1 || true
+	sgdisk --zap-all "$disk" >/dev/null 2>&1 || true
+	
+	partprobe "$disk" 2>/dev/null || true
+	udevadm settle
+	sleep 2
+}
+
+# --- 4. Partition, Encrypt, and Mount the Root Drive ---
+setup_root_disk() {
+	echo "=== 4. Setting up Root Disk ==="
+	cleanup_and_zap "$INST_DEVICE"
+
+	echo "[-] Partitioning $INST_DEVICE..."
+	parted -s "$INST_DEVICE" -- mklabel gpt
+	parted -s "$INST_DEVICE" -- mkpart ESP fat32 1MiB 2049MiB
+	parted -s "$INST_DEVICE" -- set 1 boot on
+	parted -s "$INST_DEVICE" -- mkpart primary 2049MiB 34817MiB
+	parted -s "$INST_DEVICE" -- mkpart primary 34817MiB 100%
+	
+	partprobe "$INST_DEVICE" 2>/dev/null || true
+	udevadm settle
+
+	BOOT_PART=$(get_part "$INST_DEVICE" 1)
+	SWAP_PART=$(get_part "$INST_DEVICE" 2)
+	ROOT_PART=$(get_part "$INST_DEVICE" 3)
+
+	wait_for_dev "$BOOT_PART"
+	wait_for_dev "$SWAP_PART"
+	wait_for_dev "$ROOT_PART"
+
+	echo "[-] Encrypting SWAP partition ($SWAP_PART)..."
+	echo -n "$INST_PASSWD" | cryptsetup -q --type luks2 luksFormat "$SWAP_PART" - 
+	echo -n "$INST_PASSWD" | cryptsetup luksOpen "$SWAP_PART" enc-swap -d - 
+	wait_for_dev "/dev/mapper/enc-swap"
+
+	echo "[-] Encrypting ROOT partition ($ROOT_PART)..."
+	echo -n "$INST_PASSWD" | cryptsetup -q --type luks2 luksFormat "$ROOT_PART" - 
+	echo -n "$INST_PASSWD" | cryptsetup luksOpen "$ROOT_PART" enc-root -d - 
+	wait_for_dev "/dev/mapper/enc-root"
+
+	echo "[-] Formatting filesystems..."
+	mkfs.fat -F 32 -n boot "$BOOT_PART"
+	mkswap -L swap /dev/mapper/enc-swap
+	mkfs.ext4 -L root /dev/mapper/enc-root
+
+	echo "[-] Mounting filesystems..."
+	mount /dev/mapper/enc-root /mnt
+	mkdir -p /mnt/boot
+	mount "$BOOT_PART" /mnt/boot
+	swapon /dev/mapper/enc-swap
+
+	echo "[-] Enrolling TPM for Swap & Root..."
+	systemd-cryptenroll --wipe-slot=tpm2 "$SWAP_PART" --tpm2-device=auto --tpm2-pcrs=0+2+7 || error "TPM enrollment failed on Swap."
+	systemd-cryptenroll --wipe-slot=tpm2 "$ROOT_PART" --tpm2-device=auto --tpm2-pcrs=0+2+7 || error "TPM enrollment failed on Root."
+	
+	success "Root disk setup and mounting verified."
+	echo
+}
+
+# --- 5. Partition, Encrypt, and Mount the Additional Drive (if selected) ---
+setup_additional_disk() {
+	if [[ "$ENCRYPT_ADDITIONAL" == "true" ]]; then
+		echo "=== 5. Setting up Additional Disk ==="
+		cleanup_and_zap "$ADDITIONAL_DEVICE"
+
+		echo "[-] Partitioning $ADDITIONAL_DEVICE..."
+		parted -s "$ADDITIONAL_DEVICE" -- mklabel gpt
+		parted -s "$ADDITIONAL_DEVICE" -- mkpart primary ext4 1MiB 100%
+		
+		partprobe "$ADDITIONAL_DEVICE" 2>/dev/null || true
+		udevadm settle
+
+		ADD_PART=$(get_part "$ADDITIONAL_DEVICE" 1)
+		wait_for_dev "$ADD_PART"
+
+		echo "[-] Encrypting additional partition ($ADD_PART)..."
+		echo -n "$INST_PASSWD" | cryptsetup -q --type luks2 luksFormat "$ADD_PART" - 
+		echo -n "$INST_PASSWD" | cryptsetup luksOpen "$ADD_PART" enc-additional -d - 
+		wait_for_dev "/dev/mapper/enc-additional"
+
+		echo "[-] Formatting additional disk as ext4..."
+		mkfs.ext4 -L additional /dev/mapper/enc-additional
+
+		echo "[-] Mounting additional disk..."
+		mkdir -p "/mnt$ADDITIONAL_MOUNT"
+		mount /dev/mapper/enc-additional "/mnt$ADDITIONAL_MOUNT"
+
+		echo "[-] Enrolling TPM for additional disk..."
+		systemd-cryptenroll --wipe-slot=tpm2 "$ADD_PART" --tpm2-device=auto --tpm2-pcrs=0+2+7 || error "TPM enrollment failed on additional disk."
+		
+		success "Additional disk setup and mounting verified."
+		echo
+	fi
+}
+
+# --- 6. Clone NixOS Configuration Repo ---
+clone_nixos_config() {
+	echo "=== 6. Cloning NixOS Config ==="
+	mkdir -p /mnt/etc
+	rm -rf /mnt/etc/nixos
+	echo "[-] Cloning https://github.com/Sanatana-Linux/nixos-config..."
+	git clone --depth 1 https://github.com/Sanatana-Linux/nixos-config /mnt/etc/nixos
+	success "Repository successfully cloned."
+	echo
+}
+
+# --- 7. Ask Flake Config ---
 ask_flake_config() {
-	echo " "
+	echo "=== 7. Select Flake Configuration ==="
 	echo "Available configurations in flake.nix:"
-	# Extract configuration options from flake.nix
-	CONFIG_OPTIONS=$(grep -oP '(?<=self\.nixosConfigurations\.)[^.= ]+' /mnt/etc/nixos/flake.nix)
-
-	IFS=$'\n' read -r -d '' -a OPTIONS_ARRAY <<<"$CONFIG_OPTIONS"
-
-	if [ ${#OPTIONS_ARRAY[@]} -eq 0 ]; then
-		echo "No configurations found in flake.nix. Please check the file."
+	
+	CONFIG_OPTIONS=$(grep -oP '(?<=self\.nixosConfigurations\.)[^.= ]+' /mnt/etc/nixos/flake.nix || true)
+	if [[ -z "$CONFIG_OPTIONS" ]]; then
+		error "No configurations found in flake.nix. Check the repository."
 		exit 1
 	fi
 
+	IFS=$'\n' read -r -d '' -a OPTIONS_ARRAY <<<"$CONFIG_OPTIONS" || true
 	for i in "${!OPTIONS_ARRAY[@]}"; do
 		echo "  $((i + 1)) - ${OPTIONS_ARRAY[$i]}"
 	done
 
 	while true; do
 		read -p "[?] Choose a configuration number: " CONFIG_CHOICE </dev/tty
-		if [[ "$CONFIG_CHOICE" =~ ^[0-9]+$ ]]; then
-			if [[ "$CONFIG_CHOICE" -ge 1 ]] && [[ "$CONFIG_CHOICE" -le ${#OPTIONS_ARRAY[@]} ]]; then
-				FLAKE_CONFIG="${OPTIONS_ARRAY[$((CONFIG_CHOICE - 1))]}"
-				export FLAKE_CONFIG="${FLAKE_CONFIG}"
-				break
-			else
-				echo "Invalid choice. Please select a number from the list."
-			fi
+		if [[ "$CONFIG_CHOICE" =~ ^[0-9]+$ ]] && [[ "$CONFIG_CHOICE" -ge 1 ]] && [[ "$CONFIG_CHOICE" -le ${#OPTIONS_ARRAY[@]} ]]; then
+			FLAKE_CONFIG="${OPTIONS_ARRAY[$((CONFIG_CHOICE - 1))]}"
+			export FLAKE_CONFIG
+			break
 		else
-			echo "Invalid input. Please enter a number."
+			echo "Invalid choice. Please select a number from the list."
 		fi
 	done
-	echo "You have chosen configuration: ${FLAKE_CONFIG}"
+	success "Chosen configuration: ${FLAKE_CONFIG}"
+	echo
 }
 
-# --- Generate and move hardware configuration for selected flake ---
-run_nixos_hardware_config() {
-	echo "[-] Configuring hardware for $FLAKE_CONFIG..."
-
-	# Remove only the existing hardware-configuration.nix for this host
-	rm -f /mnt/etc/nixos/hosts/"$FLAKE_CONFIG"/hardware-configuration.nix
-	# Generate new hardware-configuration.nix
-	if ! nixos-generate-config --root /mnt; then
-		error "nixos-generate-config failed"
-		exit 1
-	fi
-
-	# Ensure host directory exists
+# --- 8. Generate Hardware Config ---
+generate_hardware_config() {
+	echo "=== 8. Generating Hardware Configuration ==="
+	echo "[-] Running nixos-generate-config..."
+	
 	mkdir -p /mnt/etc/nixos/hosts/"$FLAKE_CONFIG"
+	rm -f /mnt/etc/nixos/hosts/"$FLAKE_CONFIG"/hardware-configuration.nix
+	
+	nixos-generate-config --root /mnt
+	mv /mnt/etc/nixos/hardware-configuration.nix /mnt/etc/nixos/hosts/"$FLAKE_CONFIG"/
+	rm -f /mnt/etc/nixos/configuration.nix
 
-	# Move generated hardware-configuration.nix to correct location
-	if ! mv /mnt/etc/nixos/hardware-configuration.nix /mnt/etc/nixos/hosts/"$FLAKE_CONFIG"/; then
-		error "Failed to move hardware-configuration.nix"
-		exit 1
-	fi
+	echo "[-] Adding new hardware-configuration.nix to git tracking..."
+	git -C /mnt/etc/nixos add hosts/"$FLAKE_CONFIG"/hardware-configuration.nix
 
-	# Remove original configuration.nix
-	if ! rm /mnt/etc/nixos/configuration.nix; then
-		error "Failed to remove old config"
-		exit 1
-	fi
-	success "Hardware configuration complete."
+	success "Hardware configuration generated and staged successfully."
+	echo
 }
 
-# --- Run NixOS installation using the selected flake configuration ---
-run_nixos_flake_install() {
-	# Install the chosen configuration
-	echo "[-] Running nixos-install with flake configuration '.#${FLAKE_CONFIG}'... "
-	if ! nixos-install --flake ".#${FLAKE_CONFIG}" --impure; then
-		error "nixos-install failed"
-		exit 1
-	fi
-	success "NixOS installation complete."
+# --- 9. Install NixOS ---
+run_nixos_install() {
+	echo "=== 9. Installing NixOS ==="
+	echo "[-] Running nixos-install with flake configuration '.#${FLAKE_CONFIG}'..."
+	cd /mnt/etc/nixos
+	nixos-install --root /mnt --flake ".#${FLAKE_CONFIG}" --no-root-passwd --impure
+	cd /
+	success "NixOS base installation complete."
+	echo
 }
 
-# --- Print final instructions and passwords to user ---
-print_finish() {
+# --- 10. Set Passwords & Recommend Reboot ---
+post_install_and_reboot() {
+	echo "=== 10. Finalizing Installation ==="
+	echo "[-] Setting new root and user passwords..."
+
+	nixos-enter --root /mnt -c "echo 'root:$INST_PASSWD' | chpasswd" >/dev/null 2>&1
+
+	NEW_USER=$(nixos-enter --root /mnt -c "getent passwd" | awk -F: '$3 >= 1000 && $3 < 60000 {print $1}' | head -n 1)
+	if [[ -n "$NEW_USER" ]]; then
+		echo "[-] Setting password for standard user: $NEW_USER"
+		nixos-enter --root /mnt -c "echo '$NEW_USER:$INST_PASSWD' | chpasswd" >/dev/null 2>&1
+	fi
+
+	success "Passwords successfully set."
+	
 	clear
-	echo "Installation finished."
-	echo "Please take note of your password before reboot."
+	echo "======================================================"
+	echo "                 INSTALLATION COMPLETE                "
+	echo "======================================================"
+	echo " NixOS has been successfully installed!"
+	echo " The system has been configured with TPM2 auto-unlock."
+	echo ""
+	echo " ${BOLD}We highly recommend that you REBOOT your system now.${NORMAL}"
+	echo "======================================================"
 	echo
-	printf "!!! This is your initial ROOT PASSWORD"
-	if [ "$ENCRYPTION" = true ]; then
-		printf " and DISK ENCRYPTION PASSPHRASE"
-	fi
-	echo " !!!"
-	echo
-	echo "Password:${bold} $INST_PASSWD ${normal}"
-	echo
-	printf "!!! This is your initial ROOT PASSWORD"
-	if [ "$ENCRYPTION" = true ]; then
-		printf "and DISK ENCRYPTION PASSPHRASE"
-	fi
-	echo " !!!"
-	echo
-}
-
-# --- Prompt user to confirm password is saved, then reboot ---
-run_reboot() {
 	while true; do
-		read -p "[?] Have you written down the ${bold}password${normal} - continue with ${bold}REBOOT${normal} [Yes/No] " confirm
+		read -p "[?] Would you like to reboot now? [Yes/No] " confirm </dev/tty
 		case $confirm in
 		[yY][eE][sS]*)
-			echo "REBOOTING"
-			sleep 1
+			echo "Rebooting..."
+			sleep 2
 			reboot
 			break
 			;;
 		[nN][oO]*)
-			echo "Password:${bold} $INST_PASSWD ${normal}"
+			echo "You can reboot manually using the 'reboot' command when ready."
+			break
 			;;
 		*)
-			echo "Please write down your password, then reboot."
+			echo "Please answer Yes or No."
 			;;
 		esac
 	done
 }
 
-# --- Configure additional disk with optional encryption and mount points ---
-setup_additional_disk() {
-	if [ "$ADDITIONAL_DISK" != "true" ]; then
-		return 0
-	fi
-
-	echo
-	echo "=== Additional Disk Configuration ==="
-	echo
-
-	# Find available disks (excluding the installation disk)
-	local devices=()
-	local device
-	local i=1
-
-	while read -r device; do
-		if [ "/dev/$device" != "$INST_DEVICE" ]; then
-			devices+=("$device")
-			echo "  $i) /dev/$device"
-			((i++))
-		fi
-	done < <(lsblk -d -n -o NAME | grep -v '^loop')
-
-	if [ ${#devices[@]} -eq 0 ]; then
-		echo "No additional disks found. Skipping."
-		return 0
-	fi
-
-	while true; do
-		read -p "[?] Choose an additional disk number (or 'q' to skip): " choice </dev/tty
-		if [[ "$choice" == "q" ]] || [[ "$choice" == "Q" ]]; then
-			echo "Skipping additional disk configuration."
-			return 0
-		elif [[ "$choice" =~ ^[0-9]+$ ]]; then
-			if [[ "$choice" -ge 1 ]] && [[ "$choice" -le ${#devices[@]} ]]; then
-				export ADDITIONAL_DISK_DEVICE="/dev/${devices[$((choice - 1))]}"
-				success "Selected additional disk: $ADDITIONAL_DISK_DEVICE"
-				break
-			else
-				echo "Invalid choice. Please select a number from the list."
-			fi
-		else
-			echo "Invalid input. Please enter a number or 'q' to skip."
-		fi
-	done
-
-	# Ask about encryption for additional disk
-	local additional_encryption=false
-	if yesno_prompt "[?] Do you want to encrypt this additional disk?"; then
-		additional_encryption=true
-		echo "Additional disk will be encrypted with the same passphrase as the main disk."
-	else
-		echo "Additional disk will be unencrypted."
-	fi
-
-	# Ask for mount point
-	echo
-	echo "Enter the desired mount point for this disk (e.g., /data, /home/storage, /mnt/backup):"
-	read -p "[?] Mount point: " mount_point </dev/tty
-
-	# Validate mount point
-	if [[ ! "$mount_point" =~ ^/ ]]; then
-		error "Mount point must start with /"
-		mount_point="/mnt/$(basename "$mount_point")"
-		echo "Using default mount point: $mount_point"
-	fi
-
-	export ADDITIONAL_DISK_MOUNT="$mount_point"
-	export ADDITIONAL_DISK_ENCRYPTED="$additional_encryption"
-
-	# Partition the additional disk
-	echo -n "[-] Partitioning additional disk $ADDITIONAL_DISK_DEVICE... "
-	if ! wipefs -a "$ADDITIONAL_DISK_DEVICE"; then
-		error "ERROR: wipefs failed on additional disk."
-		exit 1
-	fi
-
-	if ! parted "$ADDITIONAL_DISK_DEVICE" -- mklabel gpt >/dev/null 2>&1; then
-		error "ERROR: parted mklabel failed on additional disk."
-		exit 1
-	fi
-
-	if ! parted "$ADDITIONAL_DISK_DEVICE" mkpart primary ext4 1MiB 100% >/dev/null 2>&1; then
-		error "ERROR: parted mkpart failed on additional disk."
-		exit 1
-	fi
-
-	success "Partitioning complete."
-
-	# Encrypt if requested
-	if [ "$additional_encryption" = true ]; then
-		echo -n "[-] Encrypting additional disk... "
-		local device="${ADDITIONAL_DISK_DEVICE}p1"
-		# Use the same passphrase as the main disk
-		if ! echo -n "$INST_PASSWD" | cryptsetup -q --type luks1 luksFormat "$device" -; then
-			error "ERROR: cryptsetup luksFormat failed on additional disk."
-			exit 1
-		fi
-		if ! echo -n "$INST_PASSWD" | cryptsetup luksOpen "$device" enc-additional-disk -d -; then
-			error "ERROR: cryptsetup luksOpen failed on additional disk."
-			exit 1
-		fi
-		success "Additional disk encryption complete."
-
-		# Set up LVM on encrypted volume (same as main disk)
-		echo -n "[-] Setting up LVM on additional disk... "
-		local vg_device="/dev/mapper/enc-additional-disk"
-
-		if ! pvcreate "$vg_device" >/dev/null 2>&1; then
-			error "ERROR: pvcreate failed on additional disk."
-			exit 1
-		fi
-		if ! vgcreate vg-additional "$vg_device" >/dev/null 2>&1; then
-			error "ERROR: vgcreate failed on additional disk."
-			exit 1
-		fi
-		if ! lvcreate -n data vg-additional -l 100%FREE >/dev/null 2>&1; then
-			error "ERROR: lvcreate failed on additional disk."
-			exit 1
-		fi
-		success "LVM setup complete."
-
-		# Format the logical volume
-		echo -n "[-] Formatting additional disk... "
-		if ! mkfs.ext4 -L additional_disk /dev/vg-additional/data >/dev/null 2>&1; then
-			error "ERROR: mkfs.ext4 failed on additional disk."
-			exit 1
-		fi
-		success "Formatting complete."
-	else
-		# For unencrypted disks, still use LVM for consistency
-		echo -n "[-] Setting up LVM on additional disk... "
-		local vg_device="${ADDITIONAL_DISK_DEVICE}p1"
-
-		if ! pvcreate "$vg_device" >/dev/null 2>&1; then
-			error "ERROR: pvcreate failed on additional disk."
-			exit 1
-		fi
-		if ! vgcreate vg-additional "$vg_device" >/dev/null 2>&1; then
-			error "ERROR: vgcreate failed on additional disk."
-			exit 1
-		fi
-		if ! lvcreate -n data vg-additional -l 100%FREE >/dev/null 2>&1; then
-			error "ERROR: lvcreate failed on additional disk."
-			exit 1
-		fi
-		success "LVM setup complete."
-
-		# Format the logical volume
-		echo -n "[-] Formatting additional disk... "
-		if ! mkfs.ext4 -L additional_disk /dev/vg-additional/data >/dev/null 2>&1; then
-			error "ERROR: mkfs.ext4 failed on additional disk."
-			exit 1
-		fi
-		success "Formatting complete."
-	fi
-
-	# Create mount point directory
-	if ! mkdir -p "/mnt$mount_point"; then
-		error "ERROR: Failed to create mount point directory."
-		exit 1
-	fi
-
-	# Mount the additional disk temporarily for hardware config generation
-	if ! mount /dev/disk/by-label/additional_disk "/mnt$mount_point"; then
-		error "ERROR: Failed to mount additional disk."
-		exit 1
-	fi
-
-	success "Additional disk mounted at $mount_point"
-
-	# Store configuration for later use in hardware-config generation
-	export ADDITIONAL_DISK_CONFIGURED=true
-}
-
-# --- Generate hardware configuration with additional disk support ---
-run_nixos_hardware_config_with_additional_disk() {
-	echo "[-] Configuring hardware for $FLAKE_CONFIG..."
-
-	# Remove only the existing hardware-configuration.nix for this host
-	rm -f /mnt/etc/nixos/hosts/"$FLAKE_CONFIG"/hardware-configuration.nix
-	# Generate new hardware-configuration.nix
-	if ! nixos-generate-config --root /mnt; then
-		error "nixos-generate-config failed"
-		exit 1
-	fi
-
-	# Ensure host directory exists
-	mkdir -p /mnt/etc/nixos/hosts/"$FLAKE_CONFIG"
-
-	# Move generated hardware-configuration.nix to correct location
-	if ! mv /mnt/etc/nixos/hardware-configuration.nix /mnt/etc/nixos/hosts/"$FLAKE_CONFIG"/; then
-		error "Failed to move hardware-configuration.nix"
-		exit 1
-	fi
-
-	# Remove original configuration.nix
-	if ! rm /mnt/etc/nixos/configuration.nix; then
-		error "Failed to remove old config"
-		exit 1
-	fi
-
-	# Add additional disk configuration to hardware-configuration.nix if configured
-	if [ "$ADDITIONAL_DISK_CONFIGURED" = true ]; then
-		echo "[-] Adding additional disk configuration to hardware-configuration.nix..."
-
-		local hw_config="/mnt/etc/nixos/hosts/$FLAKE_CONFIG/hardware-configuration.nix"
-		local uuid_label
-
-		# Get UUID of the LVM logical volume (same for both encrypted and unencrypted)
-		uuid_label=$(blkid -s UUID -o value /dev/vg-additional/data)
-
-		# Add file system entry before the closing brace of the main configuration
-		# Find the line with networking.useDHCP and insert before it
-		local insert_line=$(grep -n "networking.useDHCP" "$hw_config" | cut -d: -f1)
-
-		if [ -n "$insert_line" ]; then
-			# Create temporary file with additional disk configuration
-			local temp_file=$(mktemp)
-
-			# Read the file up to the insertion point
-			head -n $((insert_line - 1)) "$hw_config" >"$temp_file"
-
-			# Add additional disk filesystem configuration
-			cat >>"$temp_file" <<EOF
-
-  # Additional disk configuration
-  fileSystems."$ADDITIONAL_DISK_MOUNT" = {
-    device = "/dev/disk/by-uuid/$uuid_label";
-    fsType = "ext4";
-    options = [ "nofail" "x-systemd.device-timeout=30" ];
-  };
-EOF
-
-			# Add the rest of the file
-			tail -n +$insert_line "$hw_config" >>"$temp_file"
-
-			# Replace original file
-			mv "$temp_file" "$hw_config"
-
-			success "Additional disk configuration added to hardware-configuration.nix"
-		else
-			error "Could not find insertion point in hardware-configuration.nix"
-		fi
-
-		# If encrypted, add boot initrd configuration to unlock both disks with same password
-		if [ "$ADDITIONAL_DISK_ENCRYPTED" = true ] && [ "$ENCRYPTION" = true ]; then
-			echo "[-] Configuring LUKS keyfile for automatic unlocking of additional disk..."
-
-			# Create a keyfile that will be used to unlock the additional disk
-			# This keyfile will be stored in the initrd and removed after unlocking
-			local keyfile="/tmp/additional-disk.key"
-			echo -n "$INST_PASSWD" >"$keyfile"
-
-			# Add the keyfile to the additional disk's LUKS slot
-			if ! echo -n "$INST_PASSWD" | cryptsetup luksAddKey "${ADDITIONAL_DISK_DEVICE}p1" "$keyfile" -d -; then
-				error "ERROR: Failed to add keyfile to additional disk."
-				rm -f "$keyfile"
-				exit 1
-			fi
-
-			# The keyfile approach: we'll configure boot.initrd.luks.devices to use the same password
-			# by adding another luks device entry that uses the same password interactively
-			# For now, we'll note that manual configuration may be needed in the host config
-
-			# Add comment to hardware-configuration.nix about manual LUKS configuration
-			cat >>"$hw_config" <<EOF
-
-  # Note: Additional encrypted disk requires manual configuration in host-specific settings.
-  # Add the following to your host configuration (e.g., hosts/$FLAKE_CONFIG/default.nix):
-  #
-  # boot.initrd.luks.devices."enc-additional-disk" = {
-  #   device = "/dev/disk/by-uuid/$(blkid -s UUID -o value ${ADDITIONAL_DISK_DEVICE}p1)";
-  #   preLVM = true;
-  #   # Use the same passphrase as the main disk - it will be prompted during boot
-  # };
-  #
-  # Or configure keyfile-based unlocking for automatic unlock with the same password.
-EOF
-
-			rm -f "$keyfile"
-			success "LUKS configuration notes added to hardware-configuration.nix"
-		fi
-	fi
-
-	success "Hardware configuration complete."
-}
-
-# --- Main Script Execution ---
-
-clear
+# --- Main Script Execution Sequence ---
 print_banner
-
-# Run the script within a nix-shell to ensure dependencies are present
-if ! nix-shell -p git nixUnstable neovim git diceware --run '
-find_install_device
-setup_encryption
-run_parted
-run_cryptsetup
-run_fssetup
-
-# Ask about additional disks
-if yesno_prompt "[?] Do you want to configure an additional disk?"; then
-	export ADDITIONAL_DISK=true
-	echo "Proceeding with additional disk configuration."
-	setup_additional_disk
-else
-	export ADDITIONAL_DISK=false
-	echo "Skipping additional disk configuration."
-fi
-
-run_nixos_config_setup
+ask_password
+ask_root_disk
+ask_additional_disk
+setup_root_disk
+setup_additional_disk
+clone_nixos_config
 ask_flake_config
-run_nixos_hardware_config_with_additional_disk
-run_nixos_flake_install
-print_finish
-run_reboot
-'; then
-	error "Script execution failed within nix-shell."
-	exit 1
-fi
+generate_hardware_config
+run_nixos_install
+post_install_and_reboot
 
-exit 0 # Explicitly exit with success code
+exit 0

@@ -173,6 +173,7 @@ in {
         optionals cfg.archives.basicFormats [
           gnutar # GNU tar - standard archive utility
           zip # PKZIP archive format
+          minizip-ng # Zip library (ng version)
           unzip # PKZIP extraction
           cpio # Copy-in/copy-out archive format
         ]
@@ -205,7 +206,6 @@ in {
         ++ optionals cfg.archives.integrationLibs [
           advancecomp # Recompression tools
           archivemount # Mount archives as filesystems
-          dtrx # Do The Right eXtraction
           gnome-autoar # GNOME archive library
           libarchive # Multi-format archive library
           ouch # Painless archive extraction
@@ -235,9 +235,7 @@ in {
         fontforge-gtk # Font editor (GTK version)
         fontforge-fonttools # Python font manipulation
         gnome-themes-extra # Additional GNOME themes
-        komika-fonts # Komika font family
         libglibutil # GLib utilities
-        minizip-ng # Zip library (ng version)
         networkmanager # Network connection manager
         ngrok # Tunnel localhost to public URL
         nmap # Network security scanner
@@ -277,15 +275,11 @@ in {
         environment.systemPackages = with pkgs;
         # Core essentials (always included)
           [
-            git # Distributed version control
             jq # JSON processor
             neovim # Hyperextensible Vim-based editor
-            # Additional core utilities
             any-nix-shell # Nix shell indicator
-            brotli # Compression algorithm
             cached-nix-shell # Faster nix-shell
             direnv # Directory-specific environments
-            fuse3 # Userspace filesystem
             getopt # Command-line option parser
             glib # GLib utilities
             glow # Markdown renderer
@@ -302,8 +296,6 @@ in {
             squashfs-tools-ng # SquashFS utilities
             squashfuse # Mount SquashFS
             surfraw # Shell web search
-            tokei # Code statistics
-            fswatch # File system watcher
             lynx # Text web browser
             feather # Lightweight note-taking
             bc # Arbitrary precision calculator
@@ -325,6 +317,7 @@ in {
             stylua # Lua formatter
             dotenv-linter # .env file linter
             diagnostic-languageserver # LSP for linters
+            gopls # Go language server
             beautysh # Shell script beautifier
           ]
           # Version control
@@ -332,12 +325,9 @@ in {
             bfg-repo-cleaner # Git history cleaner
             gh # GitHub CLI
             gist # Gist CLI
-            git-extras # Git utilities
-            git-lfs # Git Large File Storage
+
             gource # Git history visualizer
             onefetch # Git repo summary
-            libgit2 # Git library
-            libgit2-glib # Git GLib bindings
           ]
           # Build tools
           ++ optionals cfg.development.buildTools [
@@ -403,14 +393,10 @@ in {
           ]
           # Web development
           ++ optionals cfg.development.webDevelopment [
-            cloudflare-cli # Cloudflare CLI
-            cloudflared # Cloudflare tunnel
             node2nix # Node to Nix converter
             nodenv # Node version manager
             sass # CSS preprocessor
             yarn # Node package manager
-            yarn-berry # Yarn v2+
-            gi-docgen # GNOME documentation generator
             gibo # Gitignore boilerplates
           ]
           # Databases
@@ -469,8 +455,6 @@ in {
         # Nerd Fonts - patched with icons
           optionals cfg.fonts.nerdFonts [
             nerd-fonts.agave # Agave Nerd Font
-            nerd-fonts.symbols-only # Nerd Font symbols
-            nerd-fonts.recursive-mono # Recursive Nerd Font
             nerd-fonts.d2coding # D2Coding Nerd Font
             nerd-fonts.envy-code-r # Envy Code R Nerd Font
             nerd-fonts.proggy-clean-tt # Proggy Clean Nerd Font
@@ -481,6 +465,7 @@ in {
           ]
           # Icon Fonts
           ++ optionals cfg.fonts.iconFonts [
+            nerd-fonts.symbols-only # Nerd Font symbols
             icomoon-feather # Feather icons font
             emacs-all-the-icons-fonts # Emacs icon fonts
             font-awesome_4 # Font Awesome 4
@@ -492,12 +477,9 @@ in {
           ]
           # System Fonts
           ++ optionals cfg.fonts.systemFonts [
-            annapurna-sil # SIL Annapurna font
             corefonts # Microsoft core fonts
             get-google-fonts # Google Fonts installer
             jost # Jost font family
-            kanit-font # Kanit Thai font
-            mplus-outline-fonts.githubRelease # M+ fonts
             nerd-font-patcher # Font patching tool
             norwester-font # Norwester display font
             pixel-code # Pixel Code font
@@ -547,8 +529,8 @@ in {
             gnome-disk-utility # Disk manager
             gnome-font-viewer # Font preview
             gnome-themes-extra # GNOME themes
+            ncurses # Terminal library
             gparted # Partition editor
-            gthumb # Image viewer
             hunspell # Spell checker
             hunspellDicts.en-us # English dictionary
             kdePackages.breeze-icons # KDE Breeze icons
@@ -557,14 +539,10 @@ in {
             libappindicator-gtk3 # System tray support
             libnotify # Desktop notifications
             mimetic # MIME library
-            mupdf # PDF viewer
             networkmanagerapplet # Network applet
             pastel # Color manipulation
             pavucontrol # Audio volume control
-            poppler-utils # PDF utilities
-            sioyek # PDF viewer with Vim keys
             themechanger # Theme switcher
-            xarchiver # Archive manager
             xdg-desktop-portal # Desktop portal
           ]
           # Application launcher
@@ -578,6 +556,11 @@ in {
           ++ optionals cfg.gui.mediaTools [
             transmission_4-gtk # BitTorrent client
             ocrmypdf # OCR for PDFs
+            poppler-utils # PDF utilities
+            sioyek # PDF viewer with Vim keys
+            ebook_tools # Calibre ebook utiities without calibre
+            lue # Terminal ebook reader application using EdgeTTS
+            mupdf # PDF viewer
             pdftk # PDF toolkit
           ]
           # Development tools
@@ -692,17 +675,14 @@ in {
             libaom # AV1 codec library
             cheese # Webcam application
             dav1d # AV1 decoder
-            ffcast # Screen recording
-            flowblade # Video editor
             frei0r # Video plugins
             fswebcam # Webcam capture
-            gallery-dl # Gallery downloader
             gnome-video-effects # Video effects
             ladspa-sdk # Audio plugins
             libtheora # Theora codec
             libvpl # Intel Video Processing
             libwebcam # Webcam library
-            losslesscut-bin # Lossless video cutting
+
             lv2 # Audio plugin standard
             mjpegtools # MJPEG tools
             mp4v2 # MP4 utilities
@@ -711,11 +691,6 @@ in {
             peek # GIF recorder
             swh # LADSPA plugins
             svt-av1 # AV1 encoder
-            vid-stab # Video stabilization
-            vidmerger # Video merging
-            vvenc # VVC encoder
-            x264 # H.264 encoder
-            x265 # H.265/HEVC encoder
             yt-dlp # YouTube downloader
             xvidcore # XviD codec
           ]
@@ -723,28 +698,22 @@ in {
           ++ optionals cfg.multimedia.imageTools [
             ascii-image-converter # Image to ASCII
             autotrace # Bitmap to vector
-            babl # Pixel format library
             cairosvg # SVG converter
-            colorz # Color extraction
+            gthumb # Image viewer
             curtail # Image compressor
             exiftool # Metadata editor
             feh # Image viewer
             figlet # ASCII art generator
             gdk-pixbuf # Image loading
             gegl # Generic graphics library
-            geticons # Icon theme utility
             giflib # GIF library
             gifsicle # GIF manipulation
-            giph # GIF recorder
             gmic # Image processing
-            gradia # Gradient editor
             graphicsmagick # Image processing
             image_optim # Image optimization
             imagemagick # Image manipulation
-            imlib2 # Image loading
             imlib2Full # Imlib2 (full)
             imgcat # Image in terminal
-            jp2a # JPEG to ASCII
             jpeginfo # JPEG information
             jpegoptim # JPEG optimizer
             libavif # AVIF library
@@ -775,23 +744,19 @@ in {
             python313Packages.svgwrite # SVG Python
             resvg # SVG renderer
             scour # SVG optimizer
-            smile # Emoji picker
             svgcleaner # SVG cleaner
             t1utils # Type 1 font tools
             termcolor # Terminal colors
             toilet # ASCII art
             uni # Unicode utility
             upscayl # AI image upscaler
-            ncurses # Terminal library
-            xcolor # Color picker
             emote # Emoji picker
           ]
           # Streaming tools
           ++ optionals cfg.multimedia.streamingTools [
-            menyoki # Screen capture
+            giph # GIF recorder
             megapixels # Camera app
             pipewire # Multimedia framework
-            switcheroo # GPU switcher
             traverso # Audio recorder
             webp-pixbuf-loader # WebP thumbnails
           ]
@@ -818,6 +783,12 @@ in {
             pkgs.stable.olive-editor # Video editor
             pkgs.stable.shotcut # Video editor
             pkgs.stable.openshot-qt # Video editor
+            vid-stab # Video stabilization
+            vidmerger # Video merging
+            vvenc # VVC encoder
+            x264 # H.264 encoder
+            x265 # H.265/HEVC encoder
+            losslesscut-bin # Lossless video cutting
           ];
       }
     ]))
@@ -830,6 +801,11 @@ in {
       # Git tools
         optionals cfg.network.gitTools [
           gh # GitHub CLI
+          libgit2 # Git library
+          libgit2-glib # Git GLib bindings
+          git-extras # Git utilities
+          git-lfs # Git Large File Storage
+          git # Distributed version control
           libgit2 # Git library
           libgit2-glib # Git GLib bindings
         ]
@@ -937,8 +913,6 @@ in {
         ]
         # File management
         ++ optionals cfg.shell.fileManagement [
-          deer # File manager
-          ranger # File manager
           tree # Directory tree
           walk # Directory navigator
         ]
@@ -1001,6 +975,7 @@ in {
             wirelesstools # Wireless tools
             yad # Dialogs
             zip # PKZIP archive
+            brotli # Compression algorithm
           ]
           # Filesystem utilities
           ++ optionals cfg.system.filesystem [
@@ -1019,7 +994,6 @@ in {
             exfatprogs # exFAT utilities
             ntfs3g # NTFS driver
             ntfsprogs # NTFS utilities
-            testdisk # Data recovery
             xorriso # ISO creation
           ]
           # Hardware monitoring
@@ -1034,6 +1008,7 @@ in {
             intel-media-driver # Intel media driver
             smartmontools # Disk health
             sysfsutils # sysfs utilities
+            testdisk # Data recovery
           ]
           # Performance monitoring
           ++ optionals cfg.system.performance [

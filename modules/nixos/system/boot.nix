@@ -60,7 +60,7 @@ with lib; {
       boot = {
         tmp.cleanOnBoot = true;
 
-        kernelPackages = mkDefault pkgs.linuxPackages_xanmod_latest;
+        kernelPackages = mkDefault pkgs.linuxPackages;
 
         blacklistedKernelModules = ["nouveau"];
 
@@ -157,7 +157,7 @@ with lib; {
     (mkIf config.modules.system.boot.zfs.enable {
       boot.supportedFilesystems = ["zfs"];
       boot.zfs.devNodes = "/dev/disk/by-id";
-      boot.kernelPackages = pkgs.linuxPackages;
+      boot.kernelPackages = pkgs.linuxPackages_6_6;
       boot.kernelParams = [
         "zfs.zfs_arc_max=12884901888" # 12GB Max ARC value
         "zfs.zfs_arc_min=4294967296" # 4GB Min ARC value

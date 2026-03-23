@@ -71,7 +71,6 @@ in {
         # gtk-application-prefer-dark-theme = true;
         gtk-decoration-layout = "menu:";
       };
-
     };
 
     # nixCraftHome configuration
@@ -88,8 +87,7 @@ in {
         size = lib.mkDefault 48;
         gtk.enable = true;
       };
-
-};
+    };
     # QT Configuration
     qt = {
       enable = true;

@@ -25,6 +25,7 @@
     };
     desktop = {
       enable = true;
+      materiaStylix.enable = true;
     };
     stylix.enable = true;
     programs = {

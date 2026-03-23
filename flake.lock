@@ -470,11 +470,11 @@
         "nvfetcher": "nvfetcher"
       },
       "locked": {
-        "lastModified": 1774152609,
-        "narHash": "sha256-ePiKUu6x0q3oFLGFpMyxpbkCM1ttCppA5tuqyOLiHWU=",
+        "lastModified": 1774239438,
+        "narHash": "sha256-9a7RELZ/Su5f2ZNU3RaFLdIYLktwCEX+MJWq5ZupGlE=",
         "owner": "passivelemon",
         "repo": "lemonake",
-        "rev": "d5d244ada41ba28c786c1969cdf1b02a397705c4",
+        "rev": "edaa9f5865cf55825a99bb94717b32f6b00db33c",
         "type": "github"
       },
       "original": {
@@ -800,11 +800,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1774208651,
-        "narHash": "sha256-41nJzk4o5WkSSPNmiMMmAFZB+Bhqf65GW0YFvXzm+ko=",
+        "lastModified": 1774240220,
+        "narHash": "sha256-8pdrEFaxrpdpte1yryuI31jNRgObjoQ8WJWmWzfzttI=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "02593ec95c256e3c3123e474c5d789b7643615a6",
+        "rev": "400e51905e20126c41a40a0c50690b2cf9d163da",
         "type": "github"
       },
       "original": {
@@ -864,8 +864,8 @@
         "nixpkgs": "nixpkgs_10"
       },
       "locked": {
-        "lastModified": 1774239322,
-        "narHash": "sha256-KI93YXYHE3DfiyASd5aHISX9tuaO2k2pSKn4BRCTUbE=",
+        "lastModified": 1774241809,
+        "narHash": "sha256-CcA2OG1FRt8/CAUHK+KoRZt0HQOrlLzEsYsGmvaFDzI=",
         "path": "/home/tlh/PanchaKosha",
         "type": "path"
       },
@@ -938,11 +938,11 @@
         "nixpkgs": "nixpkgs_11"
       },
       "locked": {
-        "lastModified": 1774149071,
-        "narHash": "sha256-SYp8NyzwfCO3Guqmu9hPRHR1hwESlQia5nNz3lYo2qA=",
+        "lastModified": 1774235565,
+        "narHash": "sha256-D8OOwvq3zDDCtIhMcNueb9tGSZaZUanKpWDleRgQ80U=",
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "rev": "6a031966eab3bfaa19be9e261eed5b8a79c04b18",
+        "rev": "dc00324a2438762582b49954373112b8eab29cab",
         "type": "github"
       },
       "original": {

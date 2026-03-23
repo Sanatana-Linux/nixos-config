@@ -6,7 +6,6 @@
 }: {
   imports = [
     ./hardware-configuration.nix
-    ./hardware-configuration-zfs.nix
   ];
 
   # Overlays
@@ -26,7 +25,6 @@
         theme.enable = true;
         advancedBios.enable = true;
         development.enable = true;
-        zfs.enable = true;
       };
     };
 

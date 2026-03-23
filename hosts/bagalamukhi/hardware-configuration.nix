@@ -14,77 +14,19 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "rpool/nixos/ROOT/default";
-      fsType = "zfs";
+    { device = "/dev/disk/by-uuid/b96ee90c-ed7b-4b0f-89be-3a7687fbf1ae";
+      fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    { device = "bpool/nixos/BOOT/default";
-      fsType = "zfs";
-    };
-
-  fileSystems."/nix" =
-    { device = "rpool/nixos/DATA/local/nix";
-      fsType = "zfs";
-    };
-
-  fileSystems."/home" =
-    { device = "rpool/nixos/DATA/default/home";
-      fsType = "zfs";
-    };
-
-  fileSystems."/root" =
-    { device = "rpool/nixos/DATA/default/root";
-      fsType = "zfs";
-    };
-
-  fileSystems."/srv" =
-    { device = "rpool/nixos/DATA/default/srv";
-      fsType = "zfs";
-    };
-
-  fileSystems."/usr/local" =
-    { device = "rpool/nixos/DATA/default/usr/local";
-      fsType = "zfs";
-    };
-
-  fileSystems."/var/log" =
-    { device = "rpool/nixos/DATA/default/var/log";
-      fsType = "zfs";
-    };
-
-  fileSystems."/var/spool" =
-    { device = "rpool/nixos/DATA/default/var/spool";
-      fsType = "zfs";
-    };
-
-  fileSystems."/state" =
-    { device = "rpool/nixos/DATA/default/state";
-      fsType = "zfs";
-    };
-
-  fileSystems."/etc/nixos" =
-    { device = "/state/etc/nixos";
-      fsType = "none";
-      options = [ "bind" ];
-    };
-
-  fileSystems."/etc/cryptkey.d" =
-    { device = "/state/etc/cryptkey.d";
-      fsType = "none";
-      options = [ "bind" ];
-    };
-
-  fileSystems."/boot/efis/nvme-SKHynix_HFS001TEJ9X115N_AMD1N001811901C38_1-part1" =
-    { device = "/dev/nvme1n1p1";
+    { device = "/dev/disk/by-uuid/B9E3-A2ED";
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
     };
 
-  fileSystems."/boot/efis/nvme-SKHynix_HFS001TEJ9X115N_AMD1N001812601C3I_1-part1" =
-    { device = "/dev/disk/by-uuid/12CE-A600";
-      fsType = "vfat";
-      options = [ "fmask=0022" "dmask=0022" ];
+  fileSystems."/home/tlh/Data" =
+    { device = "/dev/disk/by-uuid/ccb3cb85-757d-45aa-8506-468fed6f7e60";
+      fsType = "ext4";
     };
 
   swapDevices = [ ];

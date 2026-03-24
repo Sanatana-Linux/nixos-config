@@ -40,7 +40,7 @@ in {
     programs.zsh.enable = true;
     environment.variables.EDITOR = "nvim";
     users.mutableUsers = true;
-
+# xdg.userDirs.setSessionVariables = true;
     users.users.tlh = {
       name = "tlh";
       description = "Thomas Leon Highbaugh";

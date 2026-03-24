@@ -65,7 +65,7 @@ in {
         gtk-xft-hintstyle = lib.mkDefault "hintslight";
         gtk-xft-rgba = lib.mkDefault "rgba";
       };
-
+      gtk4.theme = config.gtk.theme;
       # GTK4 specific configurations
       gtk4.extraConfig = {
         # gtk-application-prefer-dark-theme = true;
@@ -88,6 +88,8 @@ in {
         gtk.enable = true;
       };
     };
+    
+    
     # QT Configuration
     qt = {
       enable = true;

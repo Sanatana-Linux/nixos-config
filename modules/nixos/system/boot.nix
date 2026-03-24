@@ -34,7 +34,7 @@ with lib; {
 
     useOSProber = mkOption {
       type = types.bool;
-      default = true;
+      default = false;
       description = "Whether to use OS prober to discover other operating systems";
     };
 
@@ -87,9 +87,11 @@ with lib; {
     };
 
     hardware = {
+      enableAllHardware = true;
       enableAllFirmware = true;
-      enableRedistributableFirmware = true;
-    };
+       enableRedistributableFirmware = true;
+  
+  };
 
     environment.systemPackages = with pkgs;
       [
@@ -116,9 +118,15 @@ with lib; {
 
     boot.loader = {
       timeout = mkIf (config.modules.system.boot.timeoutStyle == "hidden") null;
+
+
+
       efi = {
         canTouchEfiVariables = true;
-        efiSysMountPoint = config.modules.system.boot.efiMountPoint;
+
+
+
+        efiSysMountPoint = "/boot/efi"; 
       };
 
       systemd-boot.enable = config.modules.system.boot.loader == "systemd-boot";
@@ -129,7 +137,7 @@ with lib; {
         efiSupport = true;
         timeoutStyle = config.modules.system.boot.timeoutStyle;
         configurationLimit = config.modules.system.boot.configurationLimit;
-        useOSProber = config.modules.system.boot.useOSProber;
+        useOSProber = false; 
         bhairava-grub-theme.enable = config.modules.system.boot.theme.enable;
 
         extraFiles = mkIf config.modules.system.boot.advancedBios.enable {

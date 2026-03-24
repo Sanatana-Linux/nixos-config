@@ -9,7 +9,8 @@ with lib; let
 in {
   options.modules.base.services = {
     enable = mkEnableOption "core system services (fstrim, fwupd, journald, dbus, gnome services)";
-
+# FHS non-compliance work around 
+envfs.enable = true;
     fstrim.enable = mkOption {
       type = types.bool;
       default = true;

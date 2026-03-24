@@ -17,6 +17,7 @@
   ];
 
   modules = {
+  mangowc.enable = true;
     # System
     system = {
       systemd.enable = true;
@@ -209,12 +210,13 @@
     desktop = {
       xorg.enable = false;
       awesomewm.enable = false;
+      wayland.enable = true;
     };
 
     # AI
     ai = {
-      ollama.enable = true;
-      core.enable = true;
+      ollama.enable = false;
+      core.enable = false;
     };
 
     # Security
@@ -227,8 +229,28 @@
     };
   };
 
-  programs.panchakosha.enable = true;
-
+  # ENABLE CORE OPTIONS
+  panchakosha.mangowc.enable = true;
+  # panchakosha.quickshell.enable = true;
+  # panchakosha.greetd.enable = true;
+  #
+  # # AUTO-DETECTS NVIDIA, but can be forced
+  # panchakosha.nvidiaFixes = true;
+  #
+  # # CONFIGURE MONITORS
+  # panchakosha.mangowc.monitors = [
+  #   {
+  #     name = "eDP-1";
+  #     width = 2560;
+  #     height = 1440;
+  #     refreshRate = 60;
+  #     position = {
+  #       x = 0;
+  #       y = 0;
+  #     };
+  #   }
+  # ];
+  programs.mangowc.enable = true;
   hardware.graphics = {
     enable = true;
     enable32Bit = true;

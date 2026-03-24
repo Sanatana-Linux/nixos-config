@@ -14,7 +14,7 @@ in {
 
     maxJobs = mkOption {
       type = types.int;
-      default = 8;
+      default = 1;
       description = "Maximum number of build jobs to run simultaneously";
     };
 
@@ -168,7 +168,7 @@ in {
       nixPath = mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
 
       # Performance tuning
-      daemonCPUSchedPolicy = "idle";
+   #   daemonCPUSchedPolicy = "idle";
       daemonIOSchedPriority = 4;
     };
   };

@@ -44,6 +44,16 @@ in {
         FNM_COREPACK_ENABLED = "true";
         FNM_RESOLVE_ENGINES = "true";
         FNM_ARCH = "x64";
+    _JAVA_AWT_WM_NONREPARENTING = "1";
+    CLUTTER_BACKEND = "wayland";
+    GDK_BACKEND = "wayland";
+    MOZ_ENABLE_WAYLAND = "1";
+    QT_QPA_PLATFORM = "waylandi-egl";
+    # QT_QPA_PLATFORMTHEME = "qt5ct";
+    QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+    SDL_VIDEODRIVER = "wayland";
+    XDG_SESSION_TYPE = "wayland";
+    NIXOS_OZONE_WL = "1";
       };
     };
   };

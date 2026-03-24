@@ -172,10 +172,10 @@ in {
       # Basic archive formats
         optionals cfg.archives.basicFormats [
           gnutar # GNU tar - standard archive utility
-          zip # PKZIP archive format
-          minizip-ng # Zip library (ng version)
-          unzip # PKZIP extraction
           cpio # Copy-in/copy-out archive format
+          zip # PKZIP archive format
+          unzip # PKZIP extraction
+          minizip-ng # Zip library (ng version)
         ]
         # Modern compression tools
         ++ optionals cfg.archives.modernCompression [
@@ -195,19 +195,19 @@ in {
         # Specialized formats
         ++ optionals cfg.archives.specializedFormats [
           _7zz # 7-Zip console version
-          p7zip-rar # 7-Zip with RAR support
           p7zip # 7-Zip utilities
+          p7zip-rar # 7-Zip with RAR support
           rar # RAR archiver
+          lrzip # Long-range ZIP - for large files
           fastjar # Fast Java archive tool
           mozlz4a # Mozilla LZ4 archive tool
-          lrzip # Long-range ZIP - for large files
         ]
         # Integration libraries
         ++ optionals cfg.archives.integrationLibs [
-          advancecomp # Recompression tools
+          libarchive # Multi-format archive library
           archivemount # Mount archives as filesystems
           gnome-autoar # GNOME archive library
-          libarchive # Multi-format archive library
+          advancecomp # Recompression tools
           ouch # Painless archive extraction
         ];
     })
@@ -217,41 +217,55 @@ in {
     # ════════════════════════════════════════════════════════════════════════
     (mkIf cfg.core.enable {
       environment.systemPackages = with pkgs; [
+        # System & Performance
+        coreutils-full # GNU core utilities (full)
+        uutils-coreutils # Rust coreutils reimplementation
         OVMFFull # Full UEFI firmware for VMs
+        service-wrapper # systemd service wrapper
+        sssd # System Security Services Daemon
+
+        # Secrets & Encryption
         age # Modern encryption tool
         agenix-cli # Age-encrypted secrets CLI
+        sops # Secrets management
+        ssh-to-age # Convert SSH keys to age
+
+        # Network Utilities
+        networkmanager # Network connection manager
+        dnsutils # DNS diagnostic tools (dig, nslookup)
+        nmap # Network security scanner
+        ngrok # Tunnel localhost to public URL
+
+        # Font & Text Infrastructure
+        fontconfig # Font configuration library
+        font-util # X11 font utilities
+        font-alias # X11 font alias files
+        fcft # Font loading library
+        fontforge-gtk # Font editor (GTK version)
+        fontforge-fonttools # Python font manipulation
+        python312Packages.fonttools # Font manipulation library
+        python312Packages.compreffor # Font compression
+        webfontkitgenerator # Web font kit generator
+
+        # Multimedia & Sound
+        # ffmpeg-full # Complete multimedia framework
+        poppler_gi # PDF rendering library (GObject)
+        sox # Sound eXchange audio tool
+        espeak-ng # Text-to-speech synthesizer
+        pulseaudio # Sound server
+
+        # Appearance & Themes
+        gnome-themes-extra # Additional GNOME themes
+        papirus-folders # Papirus icon folder colors
+
+        # Misc Utilities
+        opencode
+        tealdeer # tldr pages in Rust
+        dmg2img # Convert DMG to IMG
         cbfmt # Clipboard formatter
         ccls # C/C++ language server
         commons-compress # Apache compression library
-        coreutils-full # GNU core utilities (full)
-        dmg2img # Convert DMG to IMG
-        dnsutils # DNS diagnostic tools (dig, nslookup)
-        espeak-ng # Text-to-speech synthesizer
-        fcft # Font loading library
-        ffmpeg-full # Complete multimedia framework
-        font-alias # X11 font alias files
-        font-util # X11 font utilities
-        fontconfig # Font configuration library
-        fontforge-gtk # Font editor (GTK version)
-        fontforge-fonttools # Python font manipulation
-        gnome-themes-extra # Additional GNOME themes
         libglibutil # GLib utilities
-        networkmanager # Network connection manager
-        ngrok # Tunnel localhost to public URL
-        nmap # Network security scanner
-        papirus-folders # Papirus icon folder colors
-        poppler_gi # PDF rendering library (GObject)
-        pulseaudio # Sound server
-        python312Packages.fonttools # Font manipulation library
-        python312Packages.compreffor # Font compression
-        service-wrapper # systemd service wrapper
-        sops # Secrets management
-        sox # Sound eXchange audio tool
-        ssh-to-age # Convert SSH keys to age
-        sssd # System Security Services Daemon
-        tealdeer # tldr pages in Rust
-        uutils-coreutils # Rust coreutils reimplementation
-        webfontkitgenerator # Web font kit generator
       ];
     })
 
@@ -275,32 +289,43 @@ in {
         environment.systemPackages = with pkgs;
         # Core essentials (always included)
           [
-            jq # JSON processor
+            # Editor
             neovim # Hyperextensible Vim-based editor
+
+            # Nix Tools
             any-nix-shell # Nix shell indicator
             cached-nix-shell # Faster nix-shell
-            direnv # Directory-specific environments
-            getopt # Command-line option parser
-            glib # GLib utilities
-            glow # Markdown renderer
-            grex # Regex generator
-            imlib2Full # Image loading library
-            inetutils # Network utilities (telnet, ftp)
-            libffi # Foreign function interface
-            libimobiledevice # iOS device communication
             nix-init # Generate Nix packages from URLs
             nix-tree # Nix store browser
             nvd # Nix version diff
+
+            # Data & Documentation
+            jq # JSON processor
+            glow # Markdown renderer
+            grex # Regex generator
+            bc # Arbitrary precision calculator
+            pandoc # Document converter
+
+            # Environment & Build Systems
+            direnv # Directory-specific environments
             poetry # Python dependency manager
+            getopt # Command-line option parser
+            cmake # Cross-platform build system
+            gettext # Internationalization tools
+            glib # GLib utilities
+            libffi # Foreign function interface
+
+            # System & Hardware Dev
+            libimobiledevice # iOS device communication
+            imlib2Full # Image loading library
             rmlint # Duplicate file finder
             squashfs-tools-ng # SquashFS utilities
             squashfuse # Mount SquashFS
+
+            # Browsing & Search
             surfraw # Shell web search
             lynx # Text web browser
             feather # Lightweight note-taking
-            bc # Arbitrary precision calculator
-            cmake # Cross-platform build system
-            gettext # Internationalization tools
           ]
           # Linters
           ++ optionals cfg.development.linters [
@@ -322,10 +347,9 @@ in {
           ]
           # Version control
           ++ optionals cfg.development.versionControl [
-            bfg-repo-cleaner # Git history cleaner
             gh # GitHub CLI
             gist # Gist CLI
-
+            bfg-repo-cleaner # Git history cleaner
             gource # Git history visualizer
             onefetch # Git repo summary
           ]
@@ -409,7 +433,6 @@ in {
           ++ optionals cfg.development.editors [
             lldb # LLVM debugger
             opencode # AI coding assistant
-            pandoc # Document converter
           ]
           # Tree-sitter grammars
           ++ optionals cfg.development.treeSitterGrammars [
@@ -477,13 +500,13 @@ in {
           # System Fonts
           ++ optionals cfg.fonts.systemFonts [
             corefonts # Microsoft core fonts
+            vista-fonts # Windows Vista fonts
             get-google-fonts # Google Fonts installer
             jost # Jost font family
-            nerd-font-patcher # Font patching tool
             norwester-font # Norwester display font
             pixel-code # Pixel Code font
             terminus_font # Terminus bitmap font
-            vista-fonts # Windows Vista fonts
+            nerd-font-patcher # Font patching tool
           ];
 
         # Font configuration - CRITICAL for fonts to work
@@ -521,63 +544,66 @@ in {
         environment.systemPackages = with pkgs;
         # Core GUI utilities
           [
+            # System Management
+            gnome-disk-utility # Disk manager
+            gparted # Partition editor
             bleachbit # System cleaner
             file-roller # Archive manager
-            gcolor3 # Color picker
-            gnome-characters # Character map
-            gnome-disk-utility # Disk manager
-            gnome-font-viewer # Font preview
-            gnome-themes-extra # GNOME themes
+
+            # Desktop Integration
+            libnotify # Desktop notifications
+            xdg-desktop-portal # Desktop portal
+            networkmanagerapplet # Network applet
+            libappindicator-gtk3 # System tray support
             ncurses # Terminal library
-            gparted # Partition editor
-            hunspell # Spell checker
-            hunspellDicts.en-us # English dictionary
-            kdePackages.breeze-icons # KDE Breeze icons
+
+            # Configuration & Appearance
             kdePackages.qt6ct # Qt6 configuration
             kdePackages.qtbase # Qt6 base
-            libappindicator-gtk3 # System tray support
-            libnotify # Desktop notifications
-            mimetic # MIME library
-            networkmanagerapplet # Network applet
-            pastel # Color manipulation
-            pavucontrol # Audio volume control
+            kdePackages.breeze-icons # KDE Breeze icons
+            gnome-themes-extra # GNOME themes
             themechanger # Theme switcher
-            xdg-desktop-portal # Desktop portal
+            pastel # Color manipulation
+            gcolor3 # Color picker
+
+            # Utilities
+            hunspell # Spell checker
+            hunspellDicts.en-us # English dictionary
+            mimetic # MIME library
+            pavucontrol # Audio volume control
           ]
           # Application launcher
           ++ optionals cfg.gui.applicationLauncher [
-            rofi # Window switcher/launcher
-            rofi-rbw # Bitwarden Rofi integration
             xdg-launch # XDG application launcher
             xdgmenumaker # Generate XDG menus
           ]
           # Media tools
           ++ optionals cfg.gui.mediaTools [
-            transmission_4-gtk # BitTorrent client
-            ocrmypdf # OCR for PDFs
-            poppler-utils # PDF utilities
+            # Document tools
             sioyek # PDF viewer with Vim keys
+            mupdf # PDF viewer
+            poppler-utils # PDF utilities
+            pdftk # PDF toolkit
             ebook_tools # Calibre ebook utiities without calibre
             lue # Terminal ebook reader application using EdgeTTS
-            mupdf # PDF viewer
-            pdftk # PDF toolkit
+
+            # Other
+            transmission_4-gtk # BitTorrent client
           ]
           # Development tools
           ++ optionals cfg.gui.developmentTools [
             appimage-run # Run AppImages
-            vscode-fhs # VS Code (FHS)
             ventoy-full # Bootable USB creator
           ]
           # Window management
           ++ optionals cfg.gui.windowManagement [
-            maim # Screenshot utility
             picom # Compositor
+            maim # Screenshot utility
             wmctrl # Window manager control
           ]
           # Messaging
           ++ optionals cfg.gui.messaging [
             telegram-desktop # Telegram client
-            element-desktop # Matrix client
             vesktop # Discord client
           ];
       }
@@ -607,12 +633,9 @@ in {
             dbus-broker # D-Bus message broker
             dconf # GNOME configuration
             gsettings-desktop-schemas # GNOME schemas
-            gnome.nixos-gsettings-overrides # GNOME overrides
             libnotify # Notifications library
             polkit_gnome # Polkit agent
             menu-cache # Menu caching
-            garcon # XFCE menu library
-            pantheon.granite # Elementary library
           ]
           # XFCE support
           ++ optionals cfg.gui.libs.xfceSupport [
@@ -671,110 +694,118 @@ in {
           ]
           # Video tools
           ++ optionals cfg.multimedia.videoTools [
+            # Codecs & Decoders
             libaom # AV1 codec library
-            cheese # Webcam application
             dav1d # AV1 decoder
-            frei0r # Video plugins
-            fswebcam # Webcam capture
-            gnome-video-effects # Video effects
-            ladspa-sdk # Audio plugins
             libtheora # Theora codec
             libvpl # Intel Video Processing
+
+            # Webcam tools
+            cheese # Webcam application
+            fswebcam # Webcam capture
             libwebcam # Webcam library
 
+            # Plugins & Effects
+            # frei0r # Video plugins
+            #           ocamlPackages.frei0r # Frei0r OCaml
+            #           gnome-video-effects # Video effects
+            ladspa-sdk # Audio plugins
             lv2 # Audio plugin standard
+            swh # LADSPA plugins
             mjpegtools # MJPEG tools
+
+            # Utilities
             mp4v2 # MP4 utilities
-            ocamlPackages.frei0r # Frei0r OCaml
             oggvideotools # Ogg video tools
             peek # GIF recorder
-            swh # LADSPA plugins
-            svt-av1 # AV1 encoder
             yt-dlp # YouTube downloader
-            xvidcore # XviD codec
+            svt-av1 # AV1 encoder
           ]
           # Image tools
           ++ optionals cfg.multimedia.imageTools [
-            ascii-image-converter # Image to ASCII
-            autotrace # Bitmap to vector
-            cairosvg # SVG converter
-            gthumb # Image viewer
-            curtail # Image compressor
-            exiftool # Metadata editor
-            feh # Image viewer
-            figlet # ASCII art generator
-            gdk-pixbuf # Image loading
-            gegl # Generic graphics library
-            giflib # GIF library
-            gifsicle # GIF manipulation
-            gmic # Image processing
+            # Image Processing & Manipulation
+            imagemagick # Image manipulation
             graphicsmagick # Image processing
             image_optim # Image optimization
-            imagemagick # Image manipulation
-            imlib2Full # Imlib2 (full)
-            imgcat # Image in terminal
-            jpeginfo # JPEG information
-            jpegoptim # JPEG optimizer
-            libavif # AVIF library
-            libexif # EXIF library
-            libheif # HEIF library
-            libjxl # JPEG XL library
-            libjpeg # JPEG library
-            libpng # PNG library
-            librsvg # SVG library
-            libspng # PNG library
-            libwebp # WebP library
-            lsix # Image thumbnails in terminal
-            metapixel # Photomosaics
-            mozjpeg # Mozilla JPEG encoder
+            gegl # Generic graphics library
+            #   gmic # Image processing
+            cairosvg # SVG converter
             svgo # SVG optimizer
+            svgcleaner # SVG cleaner
             optipng # PNG optimizer
             oxipng # PNG optimizer (Rust)
-            perlPackages.ImageMagick # ImageMagick Perl
-            perlPackages.PerlMagick # PerlMagick
             pngcrush # PNG optimizer
             pngquant # PNG quantization
-            pngtoico # PNG to ICO
+            jpegoptim # JPEG optimizer
+            jpeginfo # JPEG information
+
+            # Viewers & Metadata
+            gthumb # Image viewer
+            feh # Image viewer
+            exiftool # Metadata editor
+            libexif # EXIF library
+
+            # Formats & Codec Libs
+            libpng # PNG library
+            libjpeg # JPEG library
+            mozjpeg # Mozilla JPEG encoder
+            libwebp # WebP library
+            libjxl # JPEG XL library
+            libavif # AVIF library
+            libheif # HEIF library
+            librsvg # SVG library
+            giflib # GIF library
+            gifsicle # GIF manipulation
+            resvg # SVG renderer
             pngtools # PNG utilities
-            potrace # Bitmap to vector
-            python313Packages.colorthief # Color extraction
+            pngtoico # PNG to ICO
+            libspng # PNG library
+            t1utils # Type 1 font tools
+
+            # Terminal & ASCII Graphics
+            imgcat # Image in terminal
+            lsix # Image thumbnails in terminal
+            ascii-image-converter # Image to ASCII
+            cfonts # Modern Text to ASCII Banners
+            uni # Unicode utility
+            termcolor # Terminal colors
             python313Packages.pyfiglet # Figlet Python
+
+            # Specialty
+            autotrace # Bitmap to vector
+            potrace # Bitmap to vector
+            metapixel # Photomosaics
+            emote # Emoji picker
+            gdk-pixbuf # Image loading
+            perlPackages.ImageMagick # ImageMagick Perl
+            perlPackages.PerlMagick # PerlMagick
+            python313Packages.colorthief # Color extraction
             python313Packages.pystache # Mustache Python
             python313Packages.svgwrite # SVG Python
-            resvg # SVG renderer
-            scour # SVG optimizer
-            svgcleaner # SVG cleaner
-            t1utils # Type 1 font tools
-            termcolor # Terminal colors
-            toilet # ASCII art
-            uni # Unicode utility
-            upscayl # AI image upscaler
-            emote # Emoji picker
           ]
           # Streaming tools
           ++ optionals cfg.multimedia.streamingTools [
-            giph # GIF recorder
-            megapixels # Camera app
             pipewire # Multimedia framework
             traverso # Audio recorder
+            giph # GIF recorder
             webp-pixbuf-loader # WebP thumbnails
           ]
           # GStreamer plugins
           ++ optionals cfg.multimedia.gstreamerPlugins [
-            gst_all_1.gst-editing-services # GStreamer editing
-            gst_all_1.gst-libav # GStreamer libav
-            gst_all_1.gst-plugins-bad # GStreamer bad plugins
+            gst_all_1.gstreamer # GStreamer core
             gst_all_1.gst-plugins-base # GStreamer base plugins
             gst_all_1.gst-plugins-good # GStreamer good plugins
-            gst_all_1.gst-plugins-rs # GStreamer Rust plugins
+            gst_all_1.gst-plugins-bad # GStreamer bad plugins
             gst_all_1.gst-plugins-ugly # GStreamer ugly plugins
+            gst_all_1.gst-plugins-rs # GStreamer Rust plugins
+            gst_all_1.gst-libav # GStreamer libav
             gst_all_1.gst-vaapi # GStreamer VA-API
-            gst_all_1.gstreamer # GStreamer core
+            gst_all_1.gst-editing-services # GStreamer editing
           ]
-          # Content creators (gimp, inkscape only)
+          # Content creators
           ++ optionals cfg.multimedia.creators [
             gimp3-with-plugins # GNU Image Manipulation
-            gimp3Plugins.gmic # GIMP GMIC plugin
+            # gimp3Plugins.gmic # GIMP GMIC plugin
             inkscape-with-extensions # Vector graphics editor
           ]
           # Stable video editors
@@ -782,12 +813,12 @@ in {
             pkgs.stable.olive-editor # Video editor
             pkgs.stable.shotcut # Video editor
             pkgs.stable.openshot-qt # Video editor
+            losslesscut-bin # Lossless video cutting
             vid-stab # Video stabilization
             vidmerger # Video merging
             vvenc # VVC encoder
             x264 # H.264 encoder
             x265 # H.265/HEVC encoder
-            losslesscut-bin # Lossless video cutting
           ];
       }
     ]))
@@ -799,12 +830,10 @@ in {
       environment.systemPackages = with pkgs;
       # Git tools
         optionals cfg.network.gitTools [
-          gh # GitHub CLI
-          libgit2 # Git library
-          libgit2-glib # Git GLib bindings
+          git # Distributed version control
           git-extras # Git utilities
           git-lfs # Git Large File Storage
-          git # Distributed version control
+          gh # GitHub CLI
           libgit2 # Git library
           libgit2-glib # Git GLib bindings
         ]
@@ -832,6 +861,11 @@ in {
       # Core Python
         [
           python313 # Python 3.13 interpreter
+          pipenv # Python environment
+          virtualenv # Python environments
+          virtualenv-clone # Clone environments
+          streamlit # Web app framework
+          gobject-introspection # GObject introspection
         ]
         # Development tools
         ++ optionals cfg.python.development [
@@ -841,6 +875,9 @@ in {
           python313Packages.pipx # Run Python apps
           python313Packages.setuptoolsBuildHook # Build hook
           python313Packages.meson-python # Meson Python
+          black # Python formatter
+          ruff # Fast Python linter
+          pylint # Python linter
         ]
         # Web development
         ++ optionals cfg.python.webDevelopment [
@@ -867,17 +904,6 @@ in {
           python313Packages.pycairo # Cairo Python
           python313Packages.pygobject3 # GObject Python
           python313Packages.pylatex # LaTeX Python
-        ]
-        # External Python tools
-        ++ [
-          black # Python formatter
-          ruff # Fast Python linter
-          pylint # Python linter
-          pipenv # Python environment
-          streamlit # Web app framework
-          virtualenv # Python environments
-          virtualenv-clone # Clone environments
-          gobject-introspection # GObject introspection
         ];
     })
 
@@ -894,26 +920,25 @@ in {
         # Modern tools
         ++ optionals cfg.shell.modernTools [
           bat # Cat with syntax highlighting
-          btop # System monitor
           eza # Modern ls replacement
           fd # Modern find
           fzf # Fuzzy finder
           fzy # Fast fuzzy finder
           silver-searcher # Code search (ag)
+          btop # System monitor
         ]
         # System utilities
         ++ optionals cfg.shell.systemUtils [
-          beep # System beep
-          boxes # ASCII boxes
-          clipster # Clipboard manager
-          jdupes # Duplicate finder
           killall # Kill processes by name
           trash-cli # CLI trash can
+          jdupes # Duplicate finder
+          clipster # Clipboard manager
+          boxes # ASCII boxes
+          beep # System beep
         ]
         # File management
         ++ optionals cfg.shell.fileManagement [
           tree # Directory tree
-          walk # Directory navigator
         ]
         # Download tools
         ++ optionals cfg.shell.downloadTools [
@@ -922,7 +947,6 @@ in {
         ]
         # ZSH plugins
         ++ optionals cfg.shell.zshPlugins [
-          pure-prompt # Minimal ZSH prompt
           zsh-autocomplete # ZSH autocomplete
           zsh-edit # ZSH editing
           zsh-navigation-tools # ZSH navigation
@@ -930,9 +954,9 @@ in {
         ]
         # Input support
         ++ optionals cfg.shell.inputSupport [
+          libinput # Input device library
           libdbusmenu # DBus menu
           libdbusmenu-gtk3 # GTK DBus menu
-          libinput # Input device library
         ];
     })
 
@@ -951,63 +975,83 @@ in {
         environment.systemPackages = with pkgs;
         # Essential system utilities (always included)
           [
+            # Linux Standard utils
+            util-linux # Linux utilities
+            coreutils-full # Core utilities
+            file # File type identification
+            wget # Web downloader
+            jq # JSON processor
+            moreutils # More Unix utilities
+            parallel # Run jobs in parallel
+
+            # Help & Metadata
+            comma # Run commands from nixpkgs
+            gh # GitHub CLI
+            fastfetch # System info
+
+            # Misc
             acpi # Battery information
             automake # GNU automake
             binutils # Binary utilities
-            comma # Run commands from nixpkgs
-            cowsay # Speaking cow
             fd # Modern find
-            file # File type identification
-            gh # GitHub CLI
-            iw # Wireless configuration
-            jq # JSON processor
-            moreutils # More Unix utilities
-            fastfetch # System info
-            parallel # Run jobs in parallel
-            pciutils # PCI utilities
             ripgrep-all # ripgrep with everything
-            usbmuxd # USB multiplexer
-            usbutils # USB utilities
-            util-linux # Linux utilities
-            wget # Web downloader
-            whois # WHOIS client
-            wirelesstools # Wireless tools
             yad # Dialogs
-            zip # PKZIP archive
             brotli # Compression algorithm
+            zip # PKZIP archive
           ]
           # Filesystem utilities
           ++ optionals cfg.system.filesystem [
-            afuse # Auto-mounting FUSE
-            apfs-fuse # APFS filesystem
-            avfs # Virtual filesystem
-            dosfstools # FAT filesystem
+            # Base FUSE drivers
             fuse # FUSE filesystem
             fuse3 # FUSE v3
+            afuse # Auto-mounting FUSE
+            avfs # Virtual filesystem
             fuseiso # ISO mounting
-            fuse-ext2 # ext2/3/4 FUSE
-            fuse-7z-ng # 7z FUSE
+
+            # Archive / Storage mounting
             fuse-archive # Archive mounting
-            libcloudproviders # Cloud integration
-            ext4fuse # ext4 FUSE
+            fuse-7z-ng # 7z FUSE
             exfatprogs # exFAT utilities
             ntfs3g # NTFS driver
             ntfsprogs # NTFS utilities
+            dosfstools # FAT filesystem
+
+            # Linux/Mac specific
+            apfs-fuse # APFS filesystem
+            ext4fuse # ext4 FUSE
+            fuse-ext2 # ext2/3/4 FUSE
+
+            # Integration
+            libcloudproviders # Cloud integration
             xorriso # ISO creation
           ]
           # Hardware monitoring
           ++ optionals cfg.system.hardware [
-            brightnessctl # Backlight control
-            ddcui # Display control GUI
-            ddcutil # Display control CLI
-            efibootmgr # EFI boot manager
-            intel-graphics-compiler # Intel GPU compiler
-            lm_sensors # Hardware sensors
+            # Listing & Recovery
             lshw # Hardware lister
-            intel-media-driver # Intel media driver
-            smartmontools # Disk health
-            sysfsutils # sysfs utilities
+            pciutils # PCI utilities
+            usbutils # USB utilities
+            usbmuxd # USB multiplexer
             testdisk # Data recovery
+
+            # Display & Brightness
+            brightnessctl # Backlight control
+            ddcutil # Display control CLI
+            ddcui # Display control GUI
+
+            # Monitoring
+            lm_sensors # Hardware sensors
+            smartmontools # Disk health
+            efibootmgr # EFI boot manager
+            sysfsutils # sysfs utilities
+
+            # GPU / Media
+            intel-graphics-compiler # Intel GPU compiler
+            intel-media-driver # Intel media driver
+
+            # Network
+            iw # Wireless configuration
+            wirelesstools # Wireless tools
           ]
           # Performance monitoring
           ++ optionals cfg.system.performance [
@@ -1023,21 +1067,21 @@ in {
           ++ optionals cfg.system.desktop [
             dbus-broker # D-Bus broker
             dconf # GNOME config
+            xdg-utils # XDG utilities
+            xdg-user-dirs # User directories
+            xdg-desktop-portal-gtk # GTK portal
             gnome-keyring # Keyring daemon
             polkit_gnome # Polkit agent
             shared-mime-info # MIME database
             tumbler # Thumbnailer
-            xdg-desktop-portal-gtk # GTK portal
-            xdg-user-dirs # User directories
-            xdg-utils # XDG utilities
           ]
           # Multimedia system tools
           ++ optionals cfg.system.multimedia [
             cdrtools # CD recording
-            curtail # Image compressor
             ghostscript # PostScript interpreter
             lame # MP3 encoder
             portaudio # Audio I/O
+            curtail # Image compressor
           ];
       }
     ]))
@@ -1047,21 +1091,26 @@ in {
     # ════════════════════════════════════════════════════════════════════════
     (mkIf cfg.x11.enable {
       environment.systemPackages = with pkgs; [
-        xbacklight # Display backlight control
-        xclip # X11 clipboard
-        xdotool # X11 automation
-        xev # X event viewer
-        xfontsel # X font selector
-        xhost # X access control
+        # Session & Locks
         xinit # X server initializer
-        xkill # Kill X clients
-        xprop # X window properties
+        xrdb # X resource database
+        xhost # X access control
         xscreensaver # Screen saver
         xsecurelock # Screen locker
         xss-lock # Lock screen on suspend
         xsuspender # Suspend X clients
+
+        # Window & Info
+        xprop # X window properties
         xwininfo # X window info
-        xrdb # X resource database
+        xev # X event viewer
+        xfontsel # X font selector
+
+        # Input & Interaction
+        xclip # X11 clipboard
+        xdotool # X11 automation
+        xbacklight # Display backlight control
+        xkill # Kill X clients
       ];
     })
 
@@ -1070,28 +1119,38 @@ in {
     # ════════════════════════════════════════════════════════════════════════
     (mkIf cfg.wayland.enable {
       environment.systemPackages = with pkgs; [
-        brightnessctl # Backlight control
-        cliphist # Clipboard history
+        # Compositor Support & Management
+        wlr-randr # Output management
+        wdisplays # Display configurator
+        waypipe # Wayland proxy
+        xdg-desktop-portal-wlr # wlroots portal
+        wl-mirror # Output mirror
+        wlroots # libraries that dwl is based ob
+
+        # Bars & Launchers
+        waybar # Status bar
+        wofi # Application launcher
         fuzzel # Application launcher
+        wlogout # Logout menu
+
+        # Graphics & Screenshots
         grim # Screenshot tool
-        hyprpicker # Color picker
-        libinput # Input device library
-        libinput-gestures # Touchpad gestures
         slurp # Screen region selector
+        hyprpicker # Color picker
+
+        # System & Clipboard
+        wl-clipboard # Wayland clipboard
+        cliphist # Clipboard history
+        brightnessctl # Backlight control
         swaybg # Wallpaper utility
         swayidle # Idle manager
         swaylock # Screen locker
-        waybar # Status bar
-        waypipe # Wayland proxy
-        wdisplays # Display configurator
-        wev # Wayland event viewer
-        wlr-randr # Output management
-        wofi # Application launcher
+
+        # Input & Input Events
+        libinput # Input device library
+        libinput-gestures # Touchpad gestures
         wtype # Wayland keyboard input
-        xdg-desktop-portal-wlr # wlroots portal
-        wl-clipboard # Wayland clipboard
-        wl-mirror # Output mirror
-        wlogout # Logout menu
+        wev # Wayland event viewer
       ];
     })
   ];

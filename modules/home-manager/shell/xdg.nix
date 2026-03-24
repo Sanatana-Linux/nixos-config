@@ -8,10 +8,10 @@ with lib; let
   cfg = config.modules.shell.xdg;
 
   browser = ["firefox.desktop"];
-  fileRoller = ["file-roller.desktop"]; # Define file-roller application
-  zathura = ["org.pwmt.zathura.desktop"]; # Define zathura application
-  vlc = ["vlc.desktop"]; # VLC application
-  gthumb = ["applications/org.gnome.gThumb.desktop"];
+  archiveExtractor = ["file-roller.desktop"]; # Define file-roller application
+  pdfViewer = ["foliate.desktop"]; # Define pdfViewer application
+  videoPlayer = ["vlc.desktop"]; # VLC application
+  imageViewer = ["org.gnome.Loupe.desktop"];
   neovim = ["nvim.desktop"]; # Neovim for text files
 
   associations = {
@@ -28,11 +28,10 @@ with lib; let
     "x-scheme-handler/https" = browser;
     "x-scheme-handler/unknown" = browser;
 
-    "audio/*" = vlc;
-    "video/*" = vlc;
-    "image/*" = gthumb;
-    "image/svg+xml" = gthumb;
-
+    "audio/*" = videoPlayer;
+    "video/*" = videoPlayer;
+    "image/*" = imageViewer;
+    "image/svg+xml" = imageViewer;
     "application/json" = browser;
 
     "x-scheme-handler/discord" = ["discord.desktop"];
@@ -58,21 +57,21 @@ with lib; let
     "text/javascript" = neovim;
 
     # Archive Files
-    "application/x-7z-compressed" = fileRoller;
-    "application/x-ar" = fileRoller;
-    "application/x-bzip" = fileRoller;
-    "application/x-bzip2" = fileRoller;
-    "application/gzip" = fileRoller;
-    "application/x-lzip" = fileRoller;
-    "application/x-lzma" = fileRoller;
-    "application/x-lzma-compressed-tar" = fileRoller;
-    "application/x-rar" = fileRoller;
-    "application/x-rar-compressed" = fileRoller;
-    "application/x-tar" = fileRoller;
-    "application/x-tarz" = fileRoller;
-    "application/x-xz" = fileRoller;
-    "application/zip" = fileRoller;
-    "application/x-zip-compressed" = fileRoller;
+    "application/x-7z-compressed" = archiveExtractor;
+    "application/x-ar" = archiveExtractor;
+    "application/x-bzip" = archiveExtractor;
+    "application/x-bzip2" = archiveExtractor;
+    "application/gzip" = archiveExtractor;
+    "application/x-lzip" = archiveExtractor;
+    "application/x-lzma" = archiveExtractor;
+    "application/x-lzma-compressed-tar" = archiveExtractor;
+    "application/x-rar" = archiveExtractor;
+    "application/x-rar-compressed" = archiveExtractor;
+    "application/x-tar" = archiveExtractor;
+    "application/x-tarz" = archiveExtractor;
+    "application/x-xz" = archiveExtractor;
+    "application/zip" = archiveExtractor;
+    "application/x-zip-compressed" = archiveExtractor;
 
     # Ebook formats... Sorry but firefox just does it better!
     "application/epub+zip" = browser;
@@ -87,6 +86,9 @@ in {
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
+loupe
+      foliate
+wlr-protocols
       xdg-utils
       xdg-desktop-portal-gtk
       xdg-desktop-portal

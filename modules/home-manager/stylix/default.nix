@@ -34,7 +34,7 @@ in {
       targets.gtk.enable = true;
 
       # Development tools
-      targets.vscode.enable = true;
+      
       targets.opencode.enable = true;
 
       # Desktop integration

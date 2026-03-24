@@ -17,7 +17,7 @@
   ];
 
   modules = {
-  mangowc.enable = true;
+    mango.enable = true;
     # System
     system = {
       systemd.enable = true;
@@ -230,7 +230,7 @@
   };
 
   # ENABLE CORE OPTIONS
-  panchakosha.mangowc.enable = true;
+  # panchakosha.mangowc.enable = true;
   # panchakosha.quickshell.enable = true;
   # panchakosha.greetd.enable = true;
   #

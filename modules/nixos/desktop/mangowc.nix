@@ -4,12 +4,12 @@
   inputs,
   ...
 }: let
-  cfg = config.mod.wm.mangowc;
+  cfg = config.modules.mango;
 in {
   imports = [
     inputs.mango.nixosModules.mango
   ];
-  options.mod.wm.mangowc = {
+  options.modules.mango = {
     enable = lib.mkEnableOption "Enable the mangowc feature";
   };
 

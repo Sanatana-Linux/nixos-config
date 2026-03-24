@@ -2,7 +2,7 @@
   imports = [
     ./awesomewm.nix
     ./xfce.nix
-    ./mango.nix
+    ./mangowc.nix
     ./newm.nix
     ./xorg.nix
     ./wayland.nix

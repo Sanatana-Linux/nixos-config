@@ -63,7 +63,7 @@ This is a **flake-based** NixOS configuration repository. The entire system conf
 ### Directory Structure
 
 ```
-/home/tlh/nixos/
+/etc/nixos/
 ├── .github/README.md          # Project documentation
 ├── flake.nix                  # Flake entry point - defines all outputs
 ├── hosts/                     # Host-specific machine configurations

@@ -35,6 +35,7 @@
       gpg.enable = true;
       zathura.enable = true;
       yazi.enable = true;
+      vesktop.enable = true;
       # Note: neovim was commented out in original config, not enabling
     };
     services = {

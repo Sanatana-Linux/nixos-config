@@ -1,5 +1,5 @@
 {lib, ...}: {
-  options.mod.programs.mangowc.misc = {
+  options.modules.programs.mangowc.misc = {
     xwaylandPersistence = lib.mkOption {
       type = lib.types.bool;
       default = true;

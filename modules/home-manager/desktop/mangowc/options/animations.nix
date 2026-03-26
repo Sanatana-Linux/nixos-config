@@ -1,5 +1,5 @@
 {lib, ...}: {
-  options.mod.programs.mangowc.animations = {
+  options.modules.programs.mangowc.animations = {
     enable = lib.mkOption {
       type = lib.types.bool;
       default = true;

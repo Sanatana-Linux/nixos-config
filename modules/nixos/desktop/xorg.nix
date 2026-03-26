@@ -26,58 +26,54 @@ in {
 
   config = mkIf config.modules.desktop.xorg.enable {
     # Set up X11 services only if we are using an X11 session
-    services =
-      if !isWayland
-      then {
-        libinput = {
-          enable = true;
-          touchpad = {
-            naturalScrolling = false;
-            disableWhileTyping = true;
-          };
+    services = mkIf (!isWayland) {
+      libinput = {
+        enable = true;
+        touchpad = {
+          naturalScrolling = false;
+          disableWhileTyping = true;
         };
+      };
 
-        xserver = {
-          enable = true;
-          autorun = true;
-          exportConfiguration = true;
-          updateDbusEnvironment = true;
+      xserver = {
+        enable = true;
+        autorun = true;
+        exportConfiguration = true;
+        updateDbusEnvironment = true;
 
-          desktopManager.runXdgAutostartIfNone = true;
+        desktopManager.runXdgAutostartIfNone = true;
 
-          displayManager = {
-            lightdm = mkIf config.modules.desktop.xorg.displayManager.lightdm.enable {
+        displayManager = {
+          lightdm = mkIf config.modules.desktop.xorg.displayManager.lightdm.enable {
+            enable = true;
+            background = ./assets/monokaiprospectrum.png;
+            greeters.gtk = {
               enable = true;
-              background = ./assets/monokaiprospectrum.png;
-              greeters.gtk = {
-                enable = true;
-                theme = {
-                  package = pkgs.materia-theme;
-                  name = "Materia-dark-compact";
-                };
-                cursorTheme = {
-                  package = pkgs.phinger-cursors;
-                  name = "Phinger Cursors (light)";
-                  size = 48;
-                };
-                iconTheme = {
-                  package = pkgs.papirus-icon-theme;
-                  name = "Papirus-Dark";
-                };
-                indicators = ["~session" "~spacer" "~power"];
+              theme = {
+                package = pkgs.materia-theme;
+                name = "Materia-dark-compact";
               };
+              cursorTheme = {
+                package = pkgs.phinger-cursors;
+                name = "Phinger Cursors (light)";
+                size = 48;
+              };
+              iconTheme = {
+                package = pkgs.papirus-icon-theme;
+                name = "Papirus-Dark";
+              };
+              indicators = ["~session" "~spacer" "~power"];
             };
           };
         };
-      }
-      else null;
+      };
+    };
 
     # Set environment variables only if the wayland module is not enabled
     environment.variables = let
       waylandEnabled = config.modules.desktop.wayland.enable;
     in
-      if !waylandEnabled
-      then
+      mkIf (!waylandEnabled) (
         if isWayland
         then {
           # Wayland session without wayland module
@@ -95,6 +91,6 @@ in {
           SDL_VIDEODRIVER = "x11";
           _JAVA_AWT_WM_NONREPETITIVE = "1";
         }
-      else null;
+      );
   };
 }

@@ -56,7 +56,7 @@
     )
     bindList;
 in {
-  options.mod.programs.mangowc = {
+  options.modules.programs.mangowc = {
     mouseBindings = lib.mkOption {
       type = with lib.types;
         listOf (submodule {

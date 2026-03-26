@@ -493,6 +493,9 @@ in {
             font-awesome_4 # Font Awesome 4
             font-awesome_5 # Font Awesome 5
             font-awesome_6 # Font Awesome 6
+            font-awesome_7 # Font Awesome 7
+            font_awesome
+
             material-design-icons # Google Material Icons
             material-symbols # Material Symbols
             siji # Minimal icon font
@@ -549,7 +552,7 @@ in {
             gparted # Partition editor
             bleachbit # System cleaner
             file-roller # Archive manager
-
+            gnome-font-viewer
             # Desktop Integration
             libnotify # Desktop notifications
             xdg-desktop-portal # Desktop portal

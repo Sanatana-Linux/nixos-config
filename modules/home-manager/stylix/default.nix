@@ -14,7 +14,7 @@ in {
   config = mkIf cfg.enable {
     stylix = {
       enable = true;
-      autoEnable = false;
+      autoEnable = true;
 
       # Terminal emulators
       targets.kitty.enable = true;
@@ -34,7 +34,7 @@ in {
       targets.gtk.enable = true;
 
       # Development tools
-      
+
       targets.opencode.enable = true;
 
       # Desktop integration
@@ -43,8 +43,6 @@ in {
       # Disabled targets (external configs or conflicting)
       targets.neovim.enable = false;
       targets.firefox.enable = false;
-      targets.fish.enable = false;
-      targets.zed.enable = false;
       targets.yazi.enable = false;
     };
   };

@@ -1,5 +1,5 @@
 {lib, ...}: {
-  options.mod.programs.mangowc.input = {
+  options.modules.programs.mangowc.input = {
     keyboard = {
       repeatRate = lib.mkOption {
         type = lib.types.int;

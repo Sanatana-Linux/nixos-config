@@ -95,7 +95,7 @@ in {
       enable = true;
 
       style = {
-        name = "adwaita-dark";
+        name = lib.mkForce "adwaita-dark";
         package = pkgs.adwaita-qt;
       };
     };

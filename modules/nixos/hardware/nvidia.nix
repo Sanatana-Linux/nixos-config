@@ -33,7 +33,7 @@ in {
 
     driver = mkOption {
       type = types.enum ["stable" "latest" "beta" "production"];
-      default = "production";
+      default = "stable";
       description = "Which NVIDIA driver to use";
     };
   };
@@ -96,8 +96,6 @@ in {
 
           # Additional graphics libraries
           eglexternalplatform
-          egl-wayland
-          libGL
           freeglut
           ftgl
           gegl
@@ -107,14 +105,21 @@ in {
           libva-vdpau-driver
           libvdpau-va-gl
           mlx42
-          #          xorg_sys_opengl
+          xorg_sys_opengl
           zenith-nvidia
           kompute
         ]
         ++ optionals cfg.cuda.enable [
           cudatoolkit
+          cudaPackages.cuda_opencl
           cudaPackages.libnvjitlink
           cudaPackages.nvidia_fs
+          cudaPackages.cuda_nvcc
+          cudaPackages.libcutensor
+          python313Packages.cuda-bindings
+          python313Packages.pycuda
+          tiny-cuda-nn
+          cudaPackages.cudatoolkit
           blas
           peakperf
           python313Packages.numpy
@@ -163,7 +168,6 @@ in {
         enable32Bit = true;
         extraPackages = with pkgs; [
           glfw
-          egl-wayland
           libva-utils
           libvdpau-va-gl
           mesa
@@ -181,19 +185,21 @@ in {
         nvidiaSettings = true;
         nvidiaPersistenced = true;
         dynamicBoost.enable = true;
-        forceFullCompositionPipeline = false;
+        forceFullCompositionPipeline = true;
 
         powerManagement = {
-          enable = true;
-          finegrained = true;
+          enable = false;
+          finegrained = false;
         };
 
-        open = true;
+        open = false;
         package = config.boot.kernelPackages.nvidiaPackages.${cfg.driver};
 
         prime = {
-          offload.enable = mkForce true;
-          offload.enableOffloadCmd = true;
+          # CRITICAL: Never change to offload mode EVER
+          sync.enable = mkForce true;
+          offload.enable = mkForce false;
+
           intelBusId = cfg.prime.intelBusId;
           nvidiaBusId = cfg.prime.nvidiaBusId;
         };

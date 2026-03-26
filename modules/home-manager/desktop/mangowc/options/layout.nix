@@ -1,5 +1,5 @@
 {lib, ...}: {
-  options.mod.programs.mangowc.layout = {
+  options.modules.programs.mangowc.layout = {
     scroller = {
       structs = lib.mkOption {
         type = lib.types.int;

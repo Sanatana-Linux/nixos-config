@@ -1,5 +1,5 @@
 {lib, ...}: {
-  options.mod.programs.mangowc.appearance = {
+  options.modules.programs.mangowc.appearance = {
     gaps = {
       innerHorizontal = lib.mkOption {
         type = lib.types.int;

@@ -17,7 +17,6 @@ in {
         (pkgs)
         thunderbird-bin
         feh
-        i3lock-color
         imagemagick
         keychain
         kotatogram-desktop
@@ -32,7 +31,7 @@ in {
         fzf
         nps
         ;
-      pylsp = pkgs.python312.withPackages (p:
+      pylsp = pkgs.python314.withPackages (p:
         with p; [
           flake8
           python-lsp-server

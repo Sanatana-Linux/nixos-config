@@ -52,11 +52,11 @@ in {
         share = true; # Share history between sessions
       };
 
-      # History substring search
+      # History substring search - use Up/Down arrows to search history
       historySubstringSearch = {
         enable = true;
-        searchDownKey = "\\e[B"; # Keybinding for searching down in history
-        searchUpKey = "\\e[A"; # Keybinding for searching up in history
+        searchDownKey = "\\e[B"; # Down arrow - search forward in history
+        searchUpKey = "\\e[A"; # Up arrow - search backward in history
       };
 
       # Completion system initialization
@@ -70,17 +70,8 @@ in {
 
       # ZSH initialization
       initContent = ''
-        # XC-Manager installation and initialization
-        if [[ ! -d "$HOME/.config/zsh/XC-Manager" ]]; then
-          git clone https://github.com/Rakosn1cek/XC-Manager.git "$HOME/.config/zsh/XC-Manager"
-        fi
-
-        fpath=("$HOME/.config/zsh/XC-Manager/autoload" $fpath)
-        autoload -Uz xc fzf-vault-widget
-        zle -N fzf-vault-widget
-        bindkey '^g' fzf-vault-widget
-
-        # Home/End key bindings - cover all common escape sequences
+        # Home/End key bindings - Jump to beginning/end of line
+        # Cover all common terminal escape sequences for compatibility
         # Standard xterm sequences
         bindkey '^[[H' beginning-of-line
         bindkey '^[[F' end-of-line
@@ -93,7 +84,7 @@ in {
         # Application mode (used by some terminals)
         bindkey '^[OH' beginning-of-line
         bindkey '^[OF' end-of-line
-        # Bind for vi command mode as well
+        # Also bind for vi command mode
         bindkey -M vicmd '^[[H' beginning-of-line
         bindkey -M vicmd '^[[F' end-of-line
         bindkey -M vicmd '^[[1~' beginning-of-line
@@ -102,6 +93,23 @@ in {
         bindkey -M vicmd '^[[8~' end-of-line
         bindkey -M vicmd '^[OH' beginning-of-line
         bindkey -M vicmd '^[OF' end-of-line
+
+        # Ctrl+A / Ctrl+E - Emacs-style line navigation
+        bindkey '^A' vi-beginning-of-line
+        bindkey '^E' vi-end-of-line
+
+        # Ctrl+Right / Ctrl+Left - Word navigation
+        bindkey '^[[1;5C' forward-word
+        bindkey '^[[1;5D' backward-word
+
+        # Ctrl+Backspace - Delete word backward
+        bindkey '^H' backward-kill-word
+
+        # Vim-style navigation in completion menu (hjkl)
+        bindkey -M menuselect 'h' vi-backward-char
+        bindkey -M menuselect 'k' vi-up-line-or-history
+        bindkey -M menuselect 'l' vi-forward-char
+        bindkey -M menuselect 'j' vi-down-line-or-history
 
         export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense' # optional
         zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
@@ -137,19 +145,6 @@ in {
         function lk {
           cd "$(walk --icons  "$@")"
         }
-
-        # AIChat integration
-        _aichat_zsh() {
-            if [[ -n "$BUFFER" ]]; then
-                local _old=$BUFFER
-                BUFFER+="⌛"
-                zle -I && zle redisplay
-                BUFFER=$(aichat -e "$_old")
-                zle end-of-line
-            fi
-        }
-        zle -N _aichat_zsh
-        bindkey '\ee' _aichat_zsh
 
         # Node Version Management
         eval "$(fnm env --shell zsh --use-on-cd --corepack-enabled )" &

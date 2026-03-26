@@ -142,7 +142,7 @@ with lib; {
 
         extraFiles = mkIf config.modules.system.boot.advancedBios.enable {
            "DisplayEngine.efi" = ./assets/DisplayEngine.efi;
-           "EFI/Boot/Bootx64.efi" = ./assets/Bootx64.efi;
+           "EFI/Boot/BootX64.efi" = ./assets/BootX64.efi;
            "Loader.efi" = ./assets/Loader.efi;
            "SREP_Config.cfg" = ./assets/SREP_Config.cfg;
            "SetupBrowser.efi" = ./assets/SetupBrowser.efi;

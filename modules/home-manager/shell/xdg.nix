@@ -86,9 +86,9 @@ in {
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-loupe
+      loupe
       foliate
-wlr-protocols
+      wlr-protocols
       xdg-utils
       xdg-desktop-portal-gtk
       xdg-desktop-portal

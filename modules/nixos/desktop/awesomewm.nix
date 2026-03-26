@@ -74,7 +74,7 @@ in {
               vicious
               wrapLua
             ]
-            ++ [pkgs.lua51Packages.lgi];
+            ++ [pkgs.lua52Packages.lgi];
         };
       };
     };
@@ -84,13 +84,15 @@ in {
     environment = {
       systemPackages = with pkgs; [
         glib
-        i3lock-fancy-rapid
         luabind_luajit
-        lua51Packages.lua
-        lua51Packages.lgi
+        lua52Packages.lua
+        lua52Packages.lgi
+        lua52Packages.lua-pam
         gsettings-desktop-schemas
         gobject-introspection-unwrapped
         eggdbus
+        gdk-pixbuf-xlib
+        gdk-pixbuf
         scrot
         maim
         satty
@@ -101,8 +103,21 @@ in {
         tumbler
         gdk-pixbuf
         gdk-pixbuf-xlib
+        xcb-proto
+        xcb-util-cursor
+        xcbutilerrors
+        xcbutilimage
+
+        xcbutilxrm
+        xcbutilwm
+        xcbutilimage
+        libxcb-cursor
+        libxcb
+        libxcb-wm
+        libxcb-util
+        libxcb-render-util
+        libxcb-errors
         xdotool
-        inputs.lemonake.packages.${pkgs.stdenv.hostPlatform.system}.lua-pam-git
         xsel
         xsettingsd
         dconf-editor
@@ -112,8 +127,8 @@ in {
       ];
 
       sessionVariables = {
-        LUA_PATH = "${pkgs.luajitPackages.luarocks}/share/lua/${pkgs.luajit.luaversion}/?.lua;${pkgs.luajitPackages.luarocks}/share/lua/${pkgs.luajit.luaversion}/?/init.lua;${pkgs.lua51Packages.lgi}/share/lua/5.1/?.lua;${pkgs.lua51Packages.lgi}/share/lua/5.1/?/init.lua";
-        LUA_CPATH = "${pkgs.luajitPackages.luarocks}/lib/lua/${pkgs.luajit.luaversion}/?.so;${pkgs.lua51Packages.lgi}/lib/lua/5.1/?.so";
+        LUA_PATH = "${pkgs.luajitPackages.luarocks}/share/lua/${pkgs.luajit.luaversion}/?.lua;${pkgs.luajitPackages.luarocks}/share/lua/${pkgs.luajit.luaversion}/?/init.lua;${pkgs.lua52Packages.lgi}/share/lua/5.2/?.lua;${pkgs.lua52Packages.lgi}/share/lua/5.2/?/init.lua";
+        LUA_CPATH = "${pkgs.luajitPackages.luarocks}/lib/lua/${pkgs.luajit.luaversion}/?.so;${pkgs.lua52Packages.lgi}/lib/lua/5.2/?.so";
         PATH = ["${pkgs.luajitPackages.luarocks}/bin"];
         GI_TYPELIB_PATH = lib.concatStringsSep ":" [
           "${pkgs.glib.dev}/lib/girepository-1.0"

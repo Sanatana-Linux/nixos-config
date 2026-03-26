@@ -17,7 +17,6 @@
   ];
 
   modules = {
-    mango.enable = true;
     # System
     system = {
       systemd.enable = true;
@@ -35,8 +34,6 @@
       permittedPackages.enable = true;
       services.enable = true;
     };
-
-    stylix.enable = true;
 
     # User
     users.tlh.enable = true;
@@ -91,12 +88,6 @@
         integrationLibs = true;
       };
       core.enable = true;
-      fonts = {
-        enable = true;
-        nerdFonts = true;
-        iconFonts = true;
-        systemFonts = true;
-      };
       development = {
         enable = true;
         linters = true;
@@ -173,7 +164,6 @@
         desktop = true;
         multimedia = true;
       };
-      wayland.enable = true;
     };
 
     # Hardware
@@ -193,7 +183,6 @@
       logitech.enable = true;
       openrgb = {
         enable = true;
-        motherboard = "intel";
       };
       lenovo.enable = true;
       sound.enable = true;
@@ -206,17 +195,19 @@
       android.enable = true;
     };
 
+    # Stylix
+    stylix.enable = true;
+
     # Desktop
     desktop = {
-      xorg.enable = false;
-      awesomewm.enable = false;
-      wayland.enable = true;
+      xorg.enable = true;
+      awesomewm.enable = true;
     };
 
     # AI
     ai = {
-      ollama.enable = false;
-      core.enable = false;
+      ollama.enable = true;
+      core.enable = true;
     };
 
     # Security
@@ -229,28 +220,13 @@
     };
   };
 
-  # ENABLE CORE OPTIONS
-  # panchakosha.mangowc.enable = true;
-  # panchakosha.quickshell.enable = true;
-  # panchakosha.greetd.enable = true;
-  #
-  # # AUTO-DETECTS NVIDIA, but can be forced
-  # panchakosha.nvidiaFixes = true;
-  #
-  # # CONFIGURE MONITORS
-  # panchakosha.mangowc.monitors = [
-  #   {
-  #     name = "eDP-1";
-  #     width = 2560;
-  #     height = 1440;
-  #     refreshRate = 60;
-  #     position = {
-  #       x = 0;
-  #       y = 0;
-  #     };
-  #   }
-  # ];
-  programs.mangowc.enable = true;
+  # Host-specific display configuration
+  services.xserver = {
+    enable = true;
+    videoDrivers = ["nvidia"];
+    dpi = lib.mkForce 96;
+  };
+
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
@@ -262,8 +238,8 @@
       HandlePowerKey = "ignore";
       HandlePowerKeyLongPress = "suspend";
     };
+    displayManager.defaultSession = "none+awesome";
   };
 
-  # changed to functional zfs configuration that and bumped this up one year... oops....
-  system.stateVersion = "25.11";
+  system.stateVersion = "24.11";
 }

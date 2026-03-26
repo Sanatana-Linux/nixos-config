@@ -30,10 +30,6 @@ in {
         name = lib.mkForce "Skeuos-Grey-Dark";
         package = lib.mkForce pkgs.skeuos-gtk;
       };
-      iconTheme = {
-        name = "Colloid-Dark";
-        package = pkgs.colloid-icon-theme;
-      };
     };
 
     home.pointerCursor = {

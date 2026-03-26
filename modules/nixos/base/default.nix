@@ -8,6 +8,7 @@ with lib; let
   cfg = config.modules.base;
 in {
   imports = [
+    ./fhs.nix
     ./nix.nix
     ./permitted-packages.nix
     ./services.nix

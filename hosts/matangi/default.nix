@@ -191,11 +191,10 @@
       iphone.enable = true;
     };
 
-    # Desktop
-    desktop = {
-      xorg.enable = true;
-      xfce.enable = true;
-    };
+  # Desktop
+  desktop = {
+    xfce.enable = true;
+  };
 
     # Printer
     printer.brother = {

@@ -1,6 +1,5 @@
 {
   imports = [
-    ./aichat
     ./editorconfig.nix
     ./fastfetch.nix
     ./firefox.nix

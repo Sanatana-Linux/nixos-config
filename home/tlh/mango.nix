@@ -4,11 +4,23 @@
   pkgs,
   ...
 }: {
-
   home.packages = with pkgs; [grim slurp wl-clipboard];
 
   modules.programs.mangowc = let
-  windowrule=isnamedscratchpad:1,width:1000,height:700,title:kitty-scratch
+    #  windowrule=isnamedscratchpad:1,width:1000,height:700,title:kitty-scratch
+    monitors = [
+      {
+        name = "eDP-1";
+        width = 2560;
+        height = 1600;
+        refreshRate = 60;
+        position = {
+          x = 0;
+          y = 0;
+        };
+      }
+    ];
+
     horizontalLayouts = [
       "tile"
       "scroller"
@@ -150,14 +162,14 @@
           command = "spawn";
           params = "kitty";
         }
-        
-        {
-          mods = ["SUPER" ];
-          key = "Return";
-          command = "toggle_named_scratchpad";
-          params = "kitty -T kitty-scratch";
-        }
-        
+
+        #       {
+        #         mods = ["SUPER" ];
+        #         key = "Return";
+        #         command = "toggle_named_scratchpad";
+        #         params = "kitty -T kitty-scratch";
+        #       }
+
         {
           mods = ["SUPER"];
           key = "x";
@@ -249,7 +261,7 @@
           key = "Right";
           command = "exchange_stack_client";
           params = "next";
-        }scra
+        }
       ]
       ++ (lib.imap0 (i: layout: {
           mods = [

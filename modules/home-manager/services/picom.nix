@@ -57,7 +57,7 @@ with lib; {
           "60:class_g = 'Dunst'"
           "95:class_g = 'kitty' && focused"
           "90:class_g = 'kitty' && !focused"
-          "100:class_g = 'awesome'"
+          "95:class_g = 'awesome'"
         ];
 
         blur = {
@@ -110,11 +110,11 @@ with lib; {
           dock = {
             shadow = true;
             rounded-corners = false;
-            opacity = 1.0;
+            opacity = 0.95;
           };
           dnd = {shadow = false;};
-          popup_menu = {opacity = 1.0;};
-          dropdown_menu = {opacity = 1.0;};
+          popup_menu = {opacity = 0.95;};
+          dropdown_menu = {opacity = 0.95;};
         };
       };
     };

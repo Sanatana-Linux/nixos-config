@@ -5,7 +5,7 @@
   pkgs,
   ...
 }: let
-  cfg = config.mod.programs.mangowc;
+  cfg = config.modules.programs.mangowc;
   formatters = import ./lib/formatters.nix {inherit lib;};
 in {
   imports = [
@@ -20,7 +20,7 @@ in {
     ./options/overview.nix
   ];
 
-  options.mod.programs.mangowc = {
+  options.modules.programs.mangowc = {
     enable = lib.mkOption {
       type = lib.types.bool;
       default = false;
@@ -83,10 +83,11 @@ in {
       ];
       config = {
         common = {
-          default = ["wlr" "gtk"];
+          default = lib.mkForce ["wlr" "gtk"];
         };
         wlroots = {
           default = ["wlr" "gtk"];
+          "org.freedesktop.impl.portal.Inhibit" = lib.mkForce "gtk";
           "org.freedesktop.impl.portal.FileChooser.OpenFile" = "gtk";
           "org.freedesktop.impl.portal.FileChooser.SaveFile" = "gtk";
           "org.freedesktop.impl.portal.FileChooser.SaveFiles" = "gtk";
@@ -138,8 +139,6 @@ in {
         # Appearance
         ${formatters.generateAppearanceConfig cfg.appearance}
 
-        # Monitors
-        ${formatters.formatMonitors config.monitors}
 
         # Rules and Bindings
         ${formatters.formatTagRules cfg.tagRules}

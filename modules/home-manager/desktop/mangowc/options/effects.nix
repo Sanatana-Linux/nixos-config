@@ -1,5 +1,5 @@
 {lib, ...}: {
-  options.mod.programs.mangowc.effects = {
+  options.modules.programs.mangowc.effects = {
     blur = lib.mkOption {
       type = lib.types.bool;
       default = false;

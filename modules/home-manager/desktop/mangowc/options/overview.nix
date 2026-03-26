@@ -1,5 +1,5 @@
 {lib, ...}: {
-  options.mod.programs.mangowc.overview = {
+  options.modules.programs.mangowc.overview = {
     enableHotArea = lib.mkOption {
       type = lib.types.bool;
       default = true;

@@ -139,7 +139,7 @@
               extraSpecialArgs = {inherit inputs outputs;};
               sharedModules = [
                 ./modules/home-manager
-              inputs.panchakosha.homeManagerModules.default
+                inputs.panchakosha.homeManagerModules.default
               ];
               users = {
                 tlh = {imports = [./home/tlh/default.nix];};

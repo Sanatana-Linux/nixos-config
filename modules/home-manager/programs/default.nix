@@ -7,6 +7,7 @@
     ./gpg.nix
     ./kitty.nix
     ./neovim.nix
+    ./vesktop.nix
     ./yazi
     ./zathura.nix
   ];

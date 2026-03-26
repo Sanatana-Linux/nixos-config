@@ -604,11 +604,10 @@ in {
             maim # Screenshot utility
             wmctrl # Window manager control
           ]
-          # Messaging
-          ++ optionals cfg.gui.messaging [
-            telegram-desktop # Telegram client
-            vesktop # Discord client
-          ];
+  # Messaging
+  ++ optionals cfg.gui.messaging [
+    telegram-desktop # Telegram client
+  ];
       }
 
       # GUI Libraries

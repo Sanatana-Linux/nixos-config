@@ -28,33 +28,24 @@ in {
         "/run/user/1000/fnm_multishells/87711_1736929409043/bin"
       ];
 
-      sessionVariables = {
-        GOPATH = "${config.home.homeDirectory}/Workspace/go";
-        PERLPATH = "/run/current-system/sw/bin/perl";
-        GOBIN = "${config.home.homeDirectory}/Workspace/go/bin";
-        SHELL = "${pkgs.zsh}/bin/zsh";
-        EDITOR = "nvim";
-        VISUAL = "nvim";
-        PNPM_HOME = "${config.home.homeDirectory}/.local/share/pnpm";
-        FNM_MULTISHELL_PATH = "/run/user/1000/fnm_multishells/87711_1736929409043";
-        FNM_VERSION_FILE_STRATEGY = "local";
-        FNM_DIR = "/home/tlh/.local/share/fnm";
-        FNM_LOGLEVEL = "info";
-        FNM_NODE_DIST_MIRROR = "https://nodejs.org/dist";
-        FNM_COREPACK_ENABLED = "true";
-        FNM_RESOLVE_ENGINES = "true";
-        FNM_ARCH = "x64";
-    _JAVA_AWT_WM_NONREPARENTING = "1";
-    CLUTTER_BACKEND = "wayland";
-    GDK_BACKEND = "wayland";
-    MOZ_ENABLE_WAYLAND = "1";
-    QT_QPA_PLATFORM = "waylandi-egl";
-    # QT_QPA_PLATFORMTHEME = "qt5ct";
-    QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
-    SDL_VIDEODRIVER = "wayland";
-    XDG_SESSION_TYPE = "wayland";
-    NIXOS_OZONE_WL = "1";
-      };
+    sessionVariables = {
+      GOPATH = "${config.home.homeDirectory}/Workspace/go";
+      PERLPATH = "/run/current-system/sw/bin/perl";
+      GOBIN = "${config.home.homeDirectory}/Workspace/go/bin";
+      SHELL = "${pkgs.zsh}/bin/zsh";
+      EDITOR = "nvim";
+      VISUAL = "nvim";
+      PNPM_HOME = "${config.home.homeDirectory}/.local/share/pnpm";
+      FNM_MULTISHELL_PATH = "/run/user/1000/fnm_multishells/87711_1736929409043";
+      FNM_VERSION_FILE_STRATEGY = "local";
+      FNM_DIR = "/home/tlh/.local/share/fnm";
+      FNM_LOGLEVEL = "info";
+      FNM_NODE_DIST_MIRROR = "https://nodejs.org/dist";
+      FNM_COREPACK_ENABLED = "true";
+      FNM_RESOLVE_ENGINES = "true";
+      FNM_ARCH = "x64";
+      _JAVA_AWT_WM_NONREPARENTING = "1";
+    };
     };
   };
 }

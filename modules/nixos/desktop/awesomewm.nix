@@ -13,15 +13,46 @@ in {
   };
 
   config = mkIf cfg.enable {
-    xdg.portal = {
-      enable = true;
-      extraPortals = [pkgs.xdg-desktop-portal-gtk];
-      config.common.default = "*";
-    };
-
     services = {
+      libinput = {
+        enable = true;
+        touchpad = {
+          naturalScrolling = false;
+          disableWhileTyping = true;
+        };
+      };
+
       displayManager.defaultSession = "none+awesome";
+
       xserver = {
+        enable = true;
+        autorun = true;
+        exportConfiguration = true;
+        updateDbusEnvironment = true;
+        desktopManager.runXdgAutostartIfNone = true;
+
+        displayManager.lightdm = {
+          enable = true;
+          background = ./assets/monokaiprospectrum.png;
+          greeters.gtk = {
+            enable = true;
+            theme = {
+              package = pkgs.materia-theme;
+              name = "Materia-dark-compact";
+            };
+            cursorTheme = {
+              package = pkgs.phinger-cursors;
+              name = "Phinger Cursors (light)";
+              size = 48;
+            };
+            iconTheme = {
+              package = pkgs.papirus-icon-theme;
+              name = "Papirus-Dark";
+            };
+            indicators = ["~session" "~spacer" "~power"];
+          };
+        };
+
         windowManager.awesome = {
           enable = true;
           package = pkgs.awesome.overrideAttrs (old: rec {
@@ -126,12 +157,15 @@ in {
         xdg-utils
       ];
 
-  sessionVariables = {
-    LUA_PATH = "${pkgs.luajitPackages.luarocks}/share/lua/${pkgs.luajit.luaversion}/?.lua;${pkgs.luajitPackages.luarocks}/share/lua/${pkgs.luajit.luaversion}/?/init.lua;${pkgs.lua52Packages.lgi}/share/lua/5.2/?.lua;${pkgs.lua52Packages.lgi}/share/lua/5.2/?/init.lua";
-    LUA_CPATH = "${pkgs.luajitPackages.luarocks}/lib/lua/${pkgs.luajit.luaversion}/?.so;${pkgs.lua52Packages.lgi}/lib/lua/5.2/?.so";
-    PATH = ["${pkgs.luajitPackages.luarocks}/bin"];
-    QT_QPA_PLATFORM = mkForce "xcb";
-    GI_TYPELIB_PATH = lib.concatStringsSep ":" [
+    sessionVariables = {
+      LUA_PATH = "${pkgs.luajitPackages.luarocks}/share/lua/${pkgs.luajit.luaversion}/?.lua;${pkgs.luajitPackages.luarocks}/share/lua/${pkgs.luajit.luaversion}/?/init.lua;${pkgs.lua52Packages.lgi}/share/lua/5.2/?.lua;${pkgs.lua52Packages.lgi}/share/lua/5.2/?/init.lua";
+      LUA_CPATH = "${pkgs.luajitPackages.luarocks}/lib/lua/${pkgs.luajit.luaversion}/?.so;${pkgs.lua52Packages.lgi}/lib/lua/5.2/?.so";
+      PATH = ["${pkgs.luajitPackages.luarocks}/bin"];
+      QT_QPA_PLATFORM = mkForce "xcb";
+      GDK_BACKEND = "x11";
+      SDL_VIDEODRIVER = "x11";
+      _JAVA_AWT_WM_NONREPARENTING = "1";
+      GI_TYPELIB_PATH = lib.concatStringsSep ":" [
           "${pkgs.glib.dev}/lib/girepository-1.0"
           "${pkgs.gobject-introspection-unwrapped}/lib/girepository-1.0"
           "${pkgs.gobject-introspection}/lib/girepository-1.0"

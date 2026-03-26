@@ -6,7 +6,7 @@
 }:
 with lib; let
   cfg = config.modules.hardware.openrgb;
-  isX11 = config.modules.desktop.xorg.enable || config.modules.desktop.awesomewm.enable || config.modules.desktop.xfce.enable;
+  isX11 = config.modules.desktop.awesomewm.enable || config.modules.desktop.xfce.enable;
 in {
   options.modules.hardware.openrgb = {
     enable = mkEnableOption "OpenRGB hardware lighting control and server";

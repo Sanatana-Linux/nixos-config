@@ -75,10 +75,9 @@ in {
         pipewire = true;
       };
     };
-    desktop = {
-      awesomewm.enable = true;
-      xorg.enable = true;
-    };
+  desktop = {
+    awesomewm.enable = true;
+  };
   };
 
   # services.xserver.enable = true;

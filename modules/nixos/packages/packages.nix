@@ -468,6 +468,7 @@ in {
             tree-sitter-grammars.tree-sitter-typescript # TypeScript grammar
             tree-sitter-grammars.tree-sitter-vim # Vim grammar
             tree-sitter-grammars.tree-sitter-yaml # YAML grammar
+            python313Packages.tree-sitter-language-pack # Python tree-sitter bindings
           ];
       }
     ]))

@@ -4,7 +4,7 @@
   inputs = {
     stable.url = "github:nixos/nixpkgs/nixos-25.05?shallow=1";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable?shallow=1";
-    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable"; 
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     nur = {
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -12,11 +12,7 @@
     home-manager.url = "github:nix-community/home-manager";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixos-generators.url = "github:nix-community/nixos-generators";
-    rust-overlay.url = "github:oxalica/rust-overlay";    
-        mango = {
-      url = "github:DreamMaoMao/mango";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    rust-overlay.url = "github:oxalica/rust-overlay";
     higgs-boson = {
       url = "github:ThomasHighbaugh/firefox";
       flake = false;
@@ -37,7 +33,7 @@
     };
     panchakosha = {
       url = "github:Sanatana-Linux/PanchaKosha";
-        inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
@@ -56,7 +52,7 @@
     higgs-boson,
     fx-autoconfig,
     bhairava-grub-theme,
-   panchakosha,
+    panchakosha,
     ...
   } @ inputs: let
     inherit (self) outputs;

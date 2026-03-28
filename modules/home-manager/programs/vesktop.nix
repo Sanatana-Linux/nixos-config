@@ -1,9 +1,10 @@
-{ config, lib, ... }:
-
-let
-  cfg = config.modules.programs.vesktop;
-in
 {
+  config,
+  lib,
+  ...
+}: let
+  cfg = config.modules.programs.vesktop;
+in {
   options.modules.programs.vesktop = {
     enable = lib.mkEnableOption "Vesktop";
   };
@@ -22,7 +23,7 @@ in
           autoUpdate = false;
           autoUpdateNotification = false;
           useQuickCss = true;
-          themeLinks = [ ];
+          themeLinks = [];
           eagerPatches = false;
           enableReactDevtools = true;
           frameless = false;
@@ -31,24 +32,24 @@ in
           disableMinSize = true;
           winNativeTitleBar = false;
           plugins = {
-            CommandsAPI = { enabled = true; };
-            MessageAccessoriesAPI = { enabled = true; };
-            UserSettingsAPI = { enabled = true; };
-            AlwaysAnimate = { enabled = true; };
-            AlwaysExpandRoles = { enabled = true; };
-            AlwaysTrust = { enabled = true; };
-            BetterSessions = { enabled = true; };
-            CrashHandler = { enabled = true; };
-            FixImagesQuality = { enabled = true; };
-            PlatformIndicators = { enabled = true; };
-            ReplyTimestamp = { enabled = true; };
-            ShowHiddenChannels = { enabled = true; };
-            ShowHiddenThings = { enabled = true; };
-            VencordToolbox = { enabled = true; };
-            WebKeybinds = { enabled = true; };
-            WebScreenShareFixes = { enabled = true; };
-            YoutubeAdblock = { enabled = true; };
-            BadgeAPI = { enabled = true; };
+            CommandsAPI = {enabled = true;};
+            MessageAccessoriesAPI = {enabled = true;};
+            UserSettingsAPI = {enabled = true;};
+            AlwaysAnimate = {enabled = true;};
+            AlwaysExpandRoles = {enabled = true;};
+            AlwaysTrust = {enabled = true;};
+            BetterSessions = {enabled = true;};
+            CrashHandler = {enabled = true;};
+            FixImagesQuality = {enabled = true;};
+            PlatformIndicators = {enabled = true;};
+            ReplyTimestamp = {enabled = true;};
+            ShowHiddenChannels = {enabled = true;};
+            ShowHiddenThings = {enabled = true;};
+            VencordToolbox = {enabled = true;};
+            WebKeybinds = {enabled = true;};
+            WebScreenShareFixes = {enabled = true;};
+            YoutubeAdblock = {enabled = true;};
+            BadgeAPI = {enabled = true;};
             NoTrack = {
               enabled = true;
               disableAnalytics = true;

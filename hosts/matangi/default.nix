@@ -106,6 +106,7 @@
         windowManagement = true;
         messaging = true;
         extraPackages = true;
+        browsers = true;
         libs = {
           enable = true;
           coreGraphics = true;
@@ -191,10 +192,10 @@
       iphone.enable = true;
     };
 
-  # Desktop
-  desktop = {
-    xfce.enable = true;
-  };
+    # Desktop
+    desktop = {
+      xfce.enable = true;
+    };
 
     # Printer
     printer.brother = {

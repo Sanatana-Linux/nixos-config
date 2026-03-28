@@ -13,6 +13,7 @@ with lib; let
   videoPlayer = ["vlc.desktop"]; # VLC application
   imageViewer = ["org.gnome.Loupe.desktop"];
   neovim = ["nvim.desktop"]; # Neovim for text files
+  terminal = ["kitty.desktop"]; # Kitty terminal
 
   associations = {
     "application/x-extension-htm" = browser;
@@ -37,6 +38,9 @@ with lib; let
     "x-scheme-handler/discord" = ["discord.desktop"];
     "x-scheme-handler/spotify" = ["spotify.desktop"];
     "x-scheme-handler/tg" = ["telegramdesktop.desktop"];
+
+    # Terminal
+    "x-scheme-handler/terminal" = terminal;
 
     # Text files
     "text/plain" = neovim;

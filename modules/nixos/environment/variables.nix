@@ -4,9 +4,6 @@
   ...
 }:
 with lib; {
-
-
-
   options.modules.environment.variables = {
     enable = mkEnableOption "system environment variables";
   };

@@ -45,16 +45,16 @@ in {
           desktop = 14;
         };
         serif = {
-          package = pkgs.nerd-fonts.agave;
-          name = "Agave Nerd Font";
+          package = pkgs.emptyDirectory;
+          name = "Operator SSm";
         };
         sansSerif = {
-          package = pkgs.nerd-fonts.agave;
-          name = "Agave Nerd Font Propo";
+          package = pkgs.emptyDirectory;
+          name = "OperatorUltraNerdFontComplete Nerd Font Propo";
         };
         monospace = {
-          package = pkgs.nerd-fonts.agave;
-          name = "Agave Nerd Font Mono";
+          package = pkgs.emptyDirectory;
+          name = "OperatorMono Nerd Font";
         };
         emoji = {
           package = pkgs.noto-fonts-color-emoji;

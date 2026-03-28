@@ -30,7 +30,6 @@
 
     base = {
       enable = true;
-      fhs.enable = true;
       nix.enable = true;
       permittedPackages.enable = true;
       services.enable = true;
@@ -113,6 +112,7 @@
         windowManagement = true;
         messaging = true;
         extraPackages = true;
+        browsers = true;
         libs = {
           enable = true;
           coreGraphics = true;
@@ -199,10 +199,10 @@
     # Stylix
     stylix.enable = true;
 
-  # Desktop
-  desktop = {
-    awesomewm.enable = true;
-  };
+    # Desktop
+    desktop = {
+      awesomewm.enable = true;
+    };
 
     # AI
     ai = {

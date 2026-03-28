@@ -88,8 +88,7 @@ in {
         gtk.enable = true;
       };
     };
-    
-    
+
     # QT Configuration
     qt = {
       enable = true;

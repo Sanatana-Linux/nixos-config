@@ -89,9 +89,8 @@ with lib; {
     hardware = {
       enableAllHardware = true;
       enableAllFirmware = true;
-       enableRedistributableFirmware = true;
-  
-  };
+      enableRedistributableFirmware = true;
+    };
 
     environment.systemPackages = with pkgs;
       [
@@ -119,14 +118,10 @@ with lib; {
     boot.loader = {
       timeout = mkIf (config.modules.system.boot.timeoutStyle == "hidden") null;
 
-
-
       efi = {
         canTouchEfiVariables = true;
 
-
-
-        efiSysMountPoint = "/boot/efi"; 
+        efiSysMountPoint = "/boot/efi";
       };
 
       systemd-boot.enable = config.modules.system.boot.loader == "systemd-boot";
@@ -137,18 +132,18 @@ with lib; {
         efiSupport = true;
         timeoutStyle = config.modules.system.boot.timeoutStyle;
         configurationLimit = config.modules.system.boot.configurationLimit;
-        useOSProber = false; 
+        useOSProber = false;
         bhairava-grub-theme.enable = config.modules.system.boot.theme.enable;
 
         extraFiles = mkIf config.modules.system.boot.advancedBios.enable {
-           "DisplayEngine.efi" = ./assets/DisplayEngine.efi;
-           "EFI/Boot/BootX64.efi" = ./assets/BootX64.efi;
-           "Loader.efi" = ./assets/Loader.efi;
-           "SREP_Config.cfg" = ./assets/SREP_Config.cfg;
-           "SetupBrowser.efi" = ./assets/SetupBrowser.efi;
-           "SuppressIFPatcher.efi" = ./assets/SuppressIFPatcher.efi;
-           "UiApp.efi" = ./assets/UiApp.efi;
-         };
+          "DisplayEngine.efi" = ./assets/DisplayEngine.efi;
+          "EFI/Boot/BootX64.efi" = ./assets/BootX64.efi;
+          "Loader.efi" = ./assets/Loader.efi;
+          "SREP_Config.cfg" = ./assets/SREP_Config.cfg;
+          "SetupBrowser.efi" = ./assets/SetupBrowser.efi;
+          "SuppressIFPatcher.efi" = ./assets/SuppressIFPatcher.efi;
+          "UiApp.efi" = ./assets/UiApp.efi;
+        };
 
         extraEntries = optionalString config.modules.system.boot.advancedBios.enable ''
           menuentry 'Advanced UEFI Firmware Settings' --class efi --class uefi  {
@@ -161,4 +156,3 @@ with lib; {
     };
   };
 }
-

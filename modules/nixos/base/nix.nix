@@ -168,7 +168,7 @@ in {
       nixPath = mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
 
       # Performance tuning
-   #   daemonCPUSchedPolicy = "idle";
+      #   daemonCPUSchedPolicy = "idle";
       daemonIOSchedPriority = 4;
     };
   };

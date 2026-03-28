@@ -46,6 +46,7 @@ in {
       gui = {
         enable = true;
         minimal = true;
+        browsers = true;
         libs.enable = true;
       };
       multimedia = {
@@ -75,9 +76,9 @@ in {
         pipewire = true;
       };
     };
-  desktop = {
-    awesomewm.enable = true;
-  };
+    desktop = {
+      awesomewm.enable = true;
+    };
   };
 
   # services.xserver.enable = true;

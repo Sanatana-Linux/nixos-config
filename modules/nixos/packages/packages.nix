@@ -70,6 +70,7 @@ in {
       windowManagement = mkEnableOption "Window management utilities";
       messaging = mkEnableOption "Messaging applications";
       extraPackages = mkEnableOption "Extra GUI packages";
+      browsers = mkEnableOption "Web browsers";
 
       libs = {
         enable = mkEnableOption "GUI libraries";
@@ -266,6 +267,7 @@ in {
         ccls # C/C++ language server
         commons-compress # Apache compression library
         libglibutil # GLib utilities
+        sillytavern
       ];
     })
 
@@ -376,14 +378,16 @@ in {
             ruby # Ruby programming language
             typescript # TypeScript compiler
           ]
-          # Lua ecosystem
           ++ optionals cfg.development.luaEcosystem [
             lua51Packages.lua # Lua 5.1
+            lua51Packages.luarocks # Lua package manager for Lua 5.1
+            lua51Packages.lgi # Lua GObject introspection (GTK binding)
             lua52Packages.lua # Lua 5.2
             luajit # LuaJIT - fast Lua
             luajitPackages.luacheck # Lua linter
-            luajitPackages.luarocks # Lua package manager
+            luajitPackages.luarocks # Lua package manager for LuaJIT
             luajitPackages.luasocket # Lua networking
+            luajitPackages.lgi # Lua GObject introspection (GTK binding)
             luarocks # Lua package manager
           ]
           # Rust ecosystem
@@ -604,10 +608,14 @@ in {
             maim # Screenshot utility
             wmctrl # Window manager control
           ]
-  # Messaging
-  ++ optionals cfg.gui.messaging [
-    telegram-desktop # Telegram client
-  ];
+          # Messaging
+          ++ optionals cfg.gui.messaging [
+            telegram-desktop # Telegram client
+          ]
+          # Browsers
+          ++ optionals cfg.gui.browsers [
+            tor-browser # Tor Browser
+          ];
       }
 
       # GUI Libraries

@@ -124,6 +124,8 @@ in {
         eggdbus
         gdk-pixbuf-xlib
         gdk-pixbuf
+        luajitPackages.luarocks
+        clipse
         scrot
         maim
         satty
@@ -157,15 +159,15 @@ in {
         xdg-utils
       ];
 
-    sessionVariables = {
-      LUA_PATH = "${pkgs.luajitPackages.luarocks}/share/lua/${pkgs.luajit.luaversion}/?.lua;${pkgs.luajitPackages.luarocks}/share/lua/${pkgs.luajit.luaversion}/?/init.lua;${pkgs.lua52Packages.lgi}/share/lua/5.2/?.lua;${pkgs.lua52Packages.lgi}/share/lua/5.2/?/init.lua";
-      LUA_CPATH = "${pkgs.luajitPackages.luarocks}/lib/lua/${pkgs.luajit.luaversion}/?.so;${pkgs.lua52Packages.lgi}/lib/lua/5.2/?.so";
-      PATH = ["${pkgs.luajitPackages.luarocks}/bin"];
-      QT_QPA_PLATFORM = mkForce "xcb";
-      GDK_BACKEND = "x11";
-      SDL_VIDEODRIVER = "x11";
-      _JAVA_AWT_WM_NONREPARENTING = "1";
-      GI_TYPELIB_PATH = lib.concatStringsSep ":" [
+      sessionVariables = {
+        LUA_PATH = "${pkgs.luajitPackages.luarocks}/share/lua/${pkgs.luajit.luaversion}/?.lua;${pkgs.luajitPackages.luarocks}/share/lua/${pkgs.luajit.luaversion}/?/init.lua;${pkgs.lua52Packages.lgi}/share/lua/5.2/?.lua;${pkgs.lua52Packages.lgi}/share/lua/5.2/?/init.lua";
+        LUA_CPATH = "${pkgs.luajitPackages.luarocks}/lib/lua/${pkgs.luajit.luaversion}/?.so;${pkgs.lua52Packages.lgi}/lib/lua/5.2/?.so";
+        PATH = ["${pkgs.luajitPackages.luarocks}/bin"];
+        QT_QPA_PLATFORM = mkForce "xcb";
+        GDK_BACKEND = "x11";
+        SDL_VIDEODRIVER = "x11";
+        _JAVA_AWT_WM_NONREPARENTING = "1";
+        GI_TYPELIB_PATH = lib.concatStringsSep ":" [
           "${pkgs.glib.dev}/lib/girepository-1.0"
           "${pkgs.gobject-introspection-unwrapped}/lib/girepository-1.0"
           "${pkgs.gobject-introspection}/lib/girepository-1.0"

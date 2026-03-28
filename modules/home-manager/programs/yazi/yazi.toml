@@ -14,34 +14,40 @@ cache_dir = ""
 
 [opener]
 folder = [
-  { run = 'thunar "$@"', desc = "Reveal in Thunar" },
-  { run = '$EDITOR "$@"' },
+{ run = 'thunar "$@"', desc = "Reveal in Thunar" },
+{ run = '$EDITOR "$@"' },
 ]
 archive = [{ run = 'dtrx "$1"', desc = "Extract here" }]
 text = [{ run = '$EDITOR "$@"', block = true }]
 image = [
-  { run = 'feh "$@"' },
-  { run = 'imv "$@"' },
-  { run = '''exiftool "$1"; echo "Press enter to exit"; read''', block = true, desc = "Show EXIF" },
+{ run = 'feh "$@"' },
+{ run = 'imv "$@"' },
+{ run = '''exiftool "$1"; echo "Press enter to exit"; read''', block = true, desc = "Show EXIF" },
+]
+svg = [
+{ run = 'inkscape "$@"' },
+{ run = 'loupe "$@"' },
 ]
 video = [
-  { run = 'vlc "$@"' },
-  { run = '''mediainfo "$1"; echo "Press enter to exit"; read''', block = true, desc = "Show media info" },
+{ run = 'vlc "$@"' },
+{ run = '''mediainfo "$1"; echo "Press enter to exit"; read''', block = true, desc = "Show media info" },
 ]
 audio = [
-  { run = 'vlc "$@"' },
-  { run = '''mediainfo "$1"; echo "Press enter to exit"; read''', block = true, desc = "Show media info" },
+{ run = 'vlc "$@"' },
+{ run = '''mediainfo "$1"; echo "Press enter to exit"; read''', block = true, desc = "Show media info" },
 ]
 
 [open]
 rules = [
-  { name = "*/", use = "folder" },
+{ name = "*/", use = "folder" },
 
-  { mime = "text/*", use = "text" },
-  { mime = "image/*", use = "image" },
-  { mime = "video/*", use = "video" },
-  { mime = "audio/*", use = "audio" },
-  { mime = "inode/x-empty", use = "text" },
+{ name = "*.svg", use = "svg" },
+
+{ mime = "text/*", use = "text" },
+{ mime = "image/*", use = "image" },
+{ mime = "video/*", use = "video" },
+{ mime = "audio/*", use = "audio" },
+{ mime = "inode/x-empty", use = "text" },
 
   { mime = "application/json", use = "text" },
   { mime = "*/javascript", use = "text" },

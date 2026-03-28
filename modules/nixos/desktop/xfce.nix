@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib; {
   options.modules.desktop.xfce.enable = mkEnableOption "XFCE desktop environment";
 

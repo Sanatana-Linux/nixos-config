@@ -18,17 +18,17 @@ in {
       };
       serif = mkOption {
         type = types.listOf types.str;
-        default = ["FreeSerif"];
+        default = ["Operator SSm"];
         description = "Serif font families";
       };
       sansSerif = mkOption {
         type = types.listOf types.str;
-        default = ["Ubuntu Nerd Font Medium"];
+        default = ["OperatorUltraNerdFontComplete Nerd Font Propo"];
         description = "Sans-serif font families";
       };
       monospace = mkOption {
         type = types.listOf types.str;
-        default = ["Ubuntu Nerd Font Mono"];
+        default = ["OperatorMono Nerd Font"];
         description = "Monospace font families";
       };
       sizes = {

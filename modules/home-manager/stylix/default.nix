@@ -16,9 +16,19 @@ in {
       enable = true;
       autoEnable = true;
 
-      # Terminal emulators
-      targets.kitty.enable = true;
-      targets.ghostty.enable = true;
+      # Terminal emulators - override color8 (bright black) for readability
+      targets.kitty = {
+        enable = true;
+        colors.override = {
+          color8 = "#8b888f";
+        };
+      };
+      targets.ghostty = {
+        enable = true;
+        colors.override = {
+          color8 = "#8b888f";
+        };
+      };
 
       # Shell and CLI tools
       targets.bat.enable = true;
@@ -38,7 +48,12 @@ in {
       targets.opencode.enable = true;
 
       # Desktop integration
-      targets.xresources.enable = true;
+      targets.xresources = {
+        enable = true;
+        colors.override = {
+          color8 = "#8b888f";
+        };
+      };
 
       # Disabled targets (external configs or conflicting)
       targets.neovim.enable = false;

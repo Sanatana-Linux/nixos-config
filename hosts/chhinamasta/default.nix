@@ -38,6 +38,7 @@ in {
     };
     stylix.enable = true;
     users.user.enable = true;
+    environment.variables.enable = true;
     packages = {
       core.enable = true;
       development = {
@@ -70,6 +71,8 @@ in {
         modernTools = true;
         systemUtils = true;
         fileManagement = true;
+        zshPlugins = true;
+        inputSupport = true;
       };
       system = {
         enable = true;
@@ -82,11 +85,12 @@ in {
       };
     };
     desktop = {
-      awesomewm.enable = false;
+      awesomewm.enable = true;
     };
   };
 
-  # services.xserver.enable = true;
+  services.xserver.enable = true;
+  services.displayManager.defaultSession = "none+awesome";
   boot.plymouth.enable = true;
 
   environment.systemPackages = with pkgs; [
@@ -138,19 +142,13 @@ in {
   };
 
   services = {
-    # displayManager = {
-    #   defaultSession = "none+awesome";
-    # };
     gnome = {
       glib-networking.enable = true;
       gnome-keyring.enable = true;
     };
   };
 
-  # EFI booting
   isoImage.makeEfiBootable = true;
-
-  # USB booting
   isoImage.makeUsbBootable = true;
 
   services.qemuGuest.enable = mkDefault true;

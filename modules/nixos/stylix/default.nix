@@ -63,9 +63,9 @@ in {
       };
       icons = {
         enable = true;
-        package = pkgs.kora-icon-theme;
-        light = "Kora";
-        dark = "Kora Grey";
+        package = pkgs.qogir-icon-theme;
+        light = "Qogir";
+        dark = "Qogir-dark";
       };
       # System-level targets
       targets.grub.enable = mkForce false;

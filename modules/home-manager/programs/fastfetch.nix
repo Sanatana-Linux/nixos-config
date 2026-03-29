@@ -6,7 +6,6 @@
 }:
 with lib; let
   cfg = config.modules.programs.fastfetch;
-  fastfetchDir = "/home/tlh/nixos/modules/home-manager/programs/fastfetch";
 in {
   options.modules.programs.fastfetch = {
     enable = mkEnableOption "Fastfetch system information tool";

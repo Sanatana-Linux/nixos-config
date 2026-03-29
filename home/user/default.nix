@@ -13,6 +13,7 @@
       essential.enable = true;
     };
     shell = {
+      home.enable = true;
       zsh.enable = true;
       starship.enable = true;
       cli-tools.enable = true;
@@ -26,7 +27,7 @@
     };
     stylix.enable = true;
     programs = {
-      # firefox.enable = true;
+      fastfetch.enable = true;
       higgs-boson-firefox.enable = true;
       kitty.enable = true;
       gpg.enable = true;

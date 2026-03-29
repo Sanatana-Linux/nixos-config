@@ -19,7 +19,6 @@ in {
     };
 
     home.packages = with pkgs; [
-      colloid-icon-theme
       emacs-all-the-icons-fonts
       pkgs.skeuos-gtk
     ];

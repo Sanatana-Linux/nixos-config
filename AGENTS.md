@@ -2,7 +2,7 @@
 
 ## Repository Guidelines
 
-**IMPORTANT:** All modifications must be made to THIS repository (`/home/tlh/nixos`) only. Never modify files in `/etc/nixos` or system directories. This flake-based configuration is self-contained and manages the entire system configuration through this repository.
+**IMPORTANT**: NEVER DO ANYTHING CAUSING THE DISPLAY MANAGER TO RESTART,EVER
 
 **IMPORTANT:** NEVER REBUILD OR TEST MATANGI+SMG ON THIS SYSTEM EVER. DO NOT PERFORM ACTIONS THAT RESTART THE DISPLAY MANAGER EITHER~!
 

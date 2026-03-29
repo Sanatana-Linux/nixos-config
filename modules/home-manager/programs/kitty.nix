@@ -65,11 +65,6 @@ in {
         tab_bar_margin_width = "3";
         tab_bar_margin_height = "3";
         tab_bar_edge = "top";
-
-        # Color override for better readability - use lighter gray for dim text
-        # Stylix uses color8 (bright black) for some text which is too dark (#69676c)
-        # Override with lighter base04 (#8b888f) for better readability
-        color8 = "#8b888f"; # base04 - lighter gray for dim text
       };
 
       # Tab splitting keybindings

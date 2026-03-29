@@ -3,6 +3,7 @@
     ./editorconfig.nix
     ./fastfetch.nix
     ./firefox.nix
+    ./ghostty.nix
     ./higgs-boson-firefox.nix
     ./gpg.nix
     ./kitty.nix

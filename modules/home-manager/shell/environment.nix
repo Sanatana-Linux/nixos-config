@@ -24,8 +24,6 @@ in {
         "${config.home.homeDirectory}/.yarn/bin"
         "${config.home.homeDirectory}/.local/share/pnpm"
         "${config.home.homeDirectory}/node_modules/.bin"
-        "${config.home.homeDirectory}/.local/share/flatpak/exports/share"
-        "/run/user/1000/fnm_multishells/87711_1736929409043/bin"
       ];
 
       sessionVariables = {
@@ -36,9 +34,8 @@ in {
         EDITOR = "nvim";
         VISUAL = "nvim";
         PNPM_HOME = "${config.home.homeDirectory}/.local/share/pnpm";
-        FNM_MULTISHELL_PATH = "/run/user/1000/fnm_multishells/87711_1736929409043";
+        FNM_DIR = "${config.home.homeDirectory}/.local/share/fnm";
         FNM_VERSION_FILE_STRATEGY = "local";
-        FNM_DIR = "/home/tlh/.local/share/fnm";
         FNM_LOGLEVEL = "info";
         FNM_NODE_DIST_MIRROR = "https://nodejs.org/dist";
         FNM_COREPACK_ENABLED = "true";

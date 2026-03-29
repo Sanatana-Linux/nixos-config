@@ -43,7 +43,8 @@
         enable = true;
         components = ["secrets" "ssh" "pkcs11"];
       };
-      # Polkit authentication agent for GUI dialogs (mounting encrypted drives, etc.)
+      picom.enable = true;
+      xscreensaver.enable = true;
     };
   };
 

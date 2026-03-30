@@ -65,14 +65,17 @@ with lib; {
       extraModulePackages = [
       ];
 
-      kernelParams = [
-        "fbcon=nodefer" # Prevent framebuffer console deferral (faster boot display)
-        "splash" # Show splash screen during boot
-        "quiet" # Reduce kernel log verbosity
-        "usbcore.autosuspend=-1" # Disable USB autosuspend (fixes issues with some peripherals)
-        "rd.udev.log_priority=3" # Reduce udev log verbosity in initrd
-        "nvme_core.default_ps_max_latency_us=0" # Prevent NVMe power saving latency issues
-      ];
+    kernelParams = [
+      "fbcon=nodefer"
+      "splash"
+      "quiet"
+      "usbcore.autosuspend=-1"
+      "rd.udev.log_priority=3"
+      "nvme_core.default_ps_max_latency_us=0"
+      "nmi_watchdog=0"
+      "nowatchdog"
+      "nosoftlockup"
+    ];
 
       plymouth.enable = true;
 

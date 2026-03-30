@@ -88,9 +88,48 @@ with lib; {
       "rtw_switch_usb_mode=1"
     ];
 
-    boot.blacklistedKernelModules = mkIf config.modules.hardware.networking.wifi.rtl88x2bu.enable [
-      "rtw88_core"
-      "rtw_usb"
+  boot.blacklistedKernelModules = mkIf config.modules.hardware.networking.wifi.rtl88x2bu.enable [
+    "rtw88_core"
+    "rtw_usb"
     ];
+
+  boot.kernel.sysctl = {
+    "net.core.netdev_max_backlog" = 16384;
+    "net.core.somaxconn" = 8192;
+    "net.core.rmem_default" = 31457280;
+    "net.core.rmem_max" = 268435456;
+    "net.core.wmem_default" = 31457280;
+    "net.core.wmem_max" = 268435456;
+    "net.core.optmem_max" = 25165824;
+    "net.ipv4.tcp_rmem" = "8192 262144 536870912";
+    "net.ipv4.tcp_wmem" = "4096 65536 536870912";
+    "net.ipv4.tcp_adv_win_scale" = -2;
+    "net.ipv4.tcp_notsent_lowat" = 131072;
+    "net.ipv4.tcp_mtu_probing" = 1;
+    "net.ipv4.tcp_fastopen" = 3;
+    "net.ipv4.tcp_max_syn_backlog" = 8192;
+    "net.ipv4.tcp_max_tw_buckets" = 2000000;
+    "net.ipv4.tcp_tw_reuse" = 1;
+    "net.ipv4.tcp_fin_timeout" = 10;
+    "net.ipv4.tcp_slow_start_after_idle" = 0;
+    "net.ipv4.tcp_keepalive_time" = 60;
+    "net.ipv4.tcp_keepalive_intvl" = 10;
+    "net.ipv4.tcp_keepalive_probes" = 6;
+    "net.ipv4.tcp_syncookies" = 1;
+    "net.ipv4.tcp_rfc1337" = 1;
+    "net.ipv4.tcp_timestamps" = 0;
+    "net.ipv4.tcp_sack" = 1;
+    "net.ipv4.tcp_fack" = 1;
+    "net.ipv4.tcp_window_scaling" = 1;
+    "net.ipv4.tcp_no_metrics_save" = 1;
+    "net.ipv4.tcp_moderate_rcvbuf" = 1;
+    "net.core.busy_poll" = 50;
+    "net.core.busy_read" = 50;
+    "net.core.netdev_budget" = 600;
+    "net.ipv4.tcp_mem" = "1048576 1572864 2097152";
+    "net.ipv4.udp_mem" = "1048576 1572864 2097152";
+    "net.core.default_qdisc" = "fq";
+    "net.ipv4.tcp_congestion_control" = "bbr";
+  };
   };
 }

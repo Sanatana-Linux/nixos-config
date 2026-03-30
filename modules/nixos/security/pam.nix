@@ -12,21 +12,33 @@ in {
   };
 
   config = mkIf cfg.enable {
-    security = {
-      pam = {
-        sshAgentAuth.enable = true;
-        loginLimits = [
-          {
-            domain = "*";
-            type = "soft";
-            item = "nofile";
-            value = "81920";
-          }
-        ];
-      };
-      polkit.enable = true;
-      rtkit.enable = true;
+  security = {
+    pam = {
+      sshAgentAuth.enable = true;
+      loginLimits = [
+        {
+          domain = "*";
+          type = "soft";
+          item = "nofile";
+          value = "81920";
+        }
+        {
+          domain = "*";
+          type = "hard";
+          item = "nproc";
+          value = "unlimited";
+        }
+        {
+          domain = "*";
+          type = "soft";
+          item = "nproc";
+          value = "unlimited";
+        }
+      ];
     };
+    polkit.enable = true;
+    rtkit.enable = true;
+  };
 
     environment.systemPackages = [pkgs.linux-pam];
   };

@@ -12,12 +12,17 @@ in {
   };
 
   config = mkIf cfg.enable {
-    # Enable ZRAM swap for better performance
     zramSwap = {
       enable = true;
       algorithm = "lz4";
       memoryPercent = 33;
       priority = 999;
     };
+
+    boot.kernelParams = [
+      "zswap.enabled=1"
+      "zswap.compressor=zstd"
+      "zswap.max_pool_percent=10"
+    ];
   };
 }

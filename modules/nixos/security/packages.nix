@@ -12,6 +12,10 @@ in {
   };
 
   config = mkIf cfg.enable {
+    boot.kernel.sysctl = {
+      "kernel.unprivileged_bpf_disabled" = 1;
+    };
+
     environment.systemPackages = with pkgs; [
       bitwarden-desktop
       ghorg

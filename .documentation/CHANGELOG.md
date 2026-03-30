@@ -11,6 +11,16 @@ Each entry follows this format:
 
 ## Changes
 
+- **2026-03-29**: Fixed Legion longevity service for Intel CPUs and added ITE keyboard udev rules
+- Fixed `legion-longevity.service` to use `intel_pstate/no_turbo` instead of `cpufreq/boost` (Intel doesn't have boost file)
+- Service now properly disables turbo by writing `1` to `no_turbo`
+- Added udev rules for ITE keyboard controllers (048d:c995 and 048d:c106) with MODE="0666" for RGB control
+- Added `model_n0cn` configuration for Legion Pro 5 16IRX9 (2023) in `overlays/default.nix`
+- Configuration matches upstream `model_g8cn` (has_minifancurve=true)
+- Added N0CN BIOS version to the `optimistic_allowlist` in the kernel module
+- Removed incorrect `lenovo-legion.force=1` kernel parameter from `modules/nixos/hardware/lenovo.nix`
+- Fixed module name from `lenovo_legion` to `legion_laptop` in kernelModules list
+- Both bagalamukhi and matangi hosts (83DF/N0CN) now have proper kernel module support
 - **2026-03-20**: Fixed Wayland module syntax and Xorg module attribute error
   - Fixed invalid list syntax in `modules/nixos/desktop/wayland.nix` (`types.enum ["x11", "wayland"]` -> `["x11" "wayland"]`)
   - Merged duplicate `environment.systemPackages` attribute in `modules/nixos/desktop/wayland.nix`

@@ -1,15 +1,9 @@
-# This file defines overlays
 {inputs, ...}: {
-  # This one brings our custom packages from the 'pkgs' directory
   additions = final: _prev: import ../pkgs final.pkgs;
 
-  # This one contains whatever you want to overlay
-  # You can change versions, add patches, set compilation flags, anything really.
-  # https://nixos.wiki/wiki/Overlays
   modifications = final: prev: {
     nps = inputs.nps.defaultPackage.${prev.stdenv.hostPlatform.system};
 
-    # what-size.yazi plugin - fetches from GitHub
     what-size = prev.yaziPlugins.mkYaziPlugin {
       pname = "what-size";
       version = "2025-03-07";
@@ -21,8 +15,6 @@
       };
     };
 
-    # node2nix fails to build in the nixpkgs sandbox because npm is not in
-    # nativeBuildInputs of the outer derivation — add nodejs explicitly.
     node2nix = prev.node2nix.overrideAttrs (oldAttrs: {
       nativeBuildInputs = (oldAttrs.nativeBuildInputs or []) ++ [final.nodejs];
     });
@@ -35,32 +27,50 @@
         '';
     });
 
-    # Override lenovo-legion-module to use a fork that adds the Legion 5
-    # 16IRX9 83DG (NMCN BIOS) model to the driver allowlist.
-    # https://github.com/jlbyh2o/LenovoLegionLinux/tree/add-legion-5-16irx9-83dg-nmcn
-    #    linuxPackages_xanmod_latest = prev.linuxPackages_xanmod_latest.extend (_kFinal: kPrev: {
-    #       lenovo-legion-module = kPrev.lenovo-legion-module.overrideAttrs (_oldAttrs: {
-    #         src = final.fetchFromGitHub {
-    #           owner = "jlbyh2o";
-    #           repo = "LenovoLegionLinux";
-    #           rev = "4cc42952ad1b6a2d9d69a853ecd5aeb63eb2bcfe";
-    #           hash = "sha256-fS2s+x163ATrgi2KW6m/pMeikRNAAInJ69GMBu1Sacs=";
-    #         };
-    #         sourceRoot = "source/kernel_module";
-    #       });
-    #     });
+    linuxPackages_xanmod_latest = prev.linuxPackages_xanmod_latest.extend (_kFinal: kPrev: {
+      lenovo-legion-module = kPrev.lenovo-legion-module.overrideAttrs (oldAttrs: {
+        postPatch =
+          (oldAttrs.postPatch or "")
+          + ''
+            # Add Legion Pro 5 16IRX9 (N0CN) model config before denylist
+            sed -i '/^static const struct dmi_system_id denylist/i \
+            // Legion Pro 5 16IRX9 (2023) - Gen 8\
+            static const struct model_config model_n0cn = {\
+            .registers = \&ec_register_offsets_v0,\
+            .check_embedded_controller_id = true,\
+            .embedded_controller_id = 0x5507,\
+            .memoryio_physical_ec_start = 0xC400,\
+            .memoryio_size = 0x300,\
+            .has_minifancurve = true,\
+            .has_custom_powermode = true,\
+            .access_method_powermode = ACCESS_METHOD_WMI,\
+            .access_method_keyboard = ACCESS_METHOD_WMI,\
+            .access_method_fanspeed = ACCESS_METHOD_WMI3,\
+            .access_method_temperature = ACCESS_METHOD_WMI3,\
+            .access_method_fancurve = ACCESS_METHOD_WMI3,\
+            .access_method_fanfullspeed = ACCESS_METHOD_WMI,\
+            .acpi_check_dev = true,\
+            .ramio_physical_start = 0xFE0B0400,\
+            .ramio_size = 0x600\
+            };\
+            ' legion-laptop.c
 
-    #   linuxPackages_latest = prev.linuxPackages_latest.extend (_kFinal: kPrev: {
-    #     lenovo-legion-module = kPrev.lenovo-legion-module.overrideAttrs (_oldAttrs: {
-    #       src = final.fetchFromGitHub {
-    #         owner = "jlbyh2o";
-    #         repo = "LenovoLegionLinux";
-    #         rev = "4cc42952ad1b6a2d9d69a853ecd5aeb63eb2bcfe";
-    #         hash = "sha256-fS2s+x163ATrgi2KW6m/pMeikRNAAInJ69GMBu1Sacs=";
-    #       };
-    #       sourceRoot = "source/kernel_module";
-    #     });
-    #   });
+            # Add N0CN to the allowlist (before the sentinel {})
+            sed -i '/\.driver_data = (void \*)\&model_nzcn/,/^[[:space:]]*{[[:space:]]*}$/{
+            /^[[:space:]]*{[[:space:]]*}$/i\
+            {\
+            // e.g. Legion Pro 5 16IRX9 (2023) Gen 8\
+            .ident = "N0CN",\
+            .matches = {\
+            DMI_MATCH(DMI_SYS_VENDOR, "LENOVO"),\
+            DMI_MATCH(DMI_BIOS_VERSION, "N0CN"),\
+            },\
+            .driver_data = (void *)\&model_n0cn\
+            },
+            }' legion-laptop.c
+          '';
+      });
+    });
   };
 
   stable-packages = final: prev: {

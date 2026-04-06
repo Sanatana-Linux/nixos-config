@@ -91,26 +91,27 @@
           always-allow-substitutes = true;
         };
         extra-substituters = [
-          "https://cache.nixos.org?priority=10" # nixos cache
+          "https://ai.cachix.org" # nixified cache
+          "https://cache.garnix.io" #
           "https://cache.nixos-cuda.org" # CUDA packages
+          "https://cache.nixos-cuda.org" # They changed their cache
+          "https://cache.nixos.org?priority=10" # nixos cache
           "https://nix-community.cachix.org" # community cache
           "https://nixpkgs-unfree.cachix.org" # nixpkgs-unfree
           "https://pre-commit-hooks.cachix.org" # pre commit hooks
-          "https://ai.cachix.org" # nixified cache
           "https://stable-diff.cachix.org" # stable diffusion related cache
-          "https://sanatanalinux.cachix.org" # sanatana linux
-          "https://cache.garnix.io"
         ];
         extra-trusted-public-keys = [
-          "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+          "ai.cachix.org-1:N9dzRK+alWwoKXQlnn0H6aUx0lU/mspIoz8hMvGvbbc="
+          "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
           "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="
+          "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="
+          "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
           "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
           "nixpkgs-unfree.cachix.org-1:hqvoInulhbV4nJ9yJOEr+4wxhDV4xq2d1DK7S6Nj6rs="
           "pre-commit-hooks.cachix.org-1:Pkk3Panw5AW24TOv6kz3PvLhlH8puAsJTBbOPmBo7Rc="
-          "ai.cachix.org-1:N9dzRK+alWwoKXQlnn0H6aUx0lU/mspIoz8hMvGvbbc="
-          "stable-diff.cachix.org-1:liYFm3f3q1dAoilj2Ag2IEKzW3Q9/HJcLlrAIytAcy0="
           "sanatanalinux.cachix.org-1:9WsJYECJ+Lt0HPTUI7+6f9uAaAUouaBUyTd9iAJbUEY="
-          "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
+          "stable-diff.cachix.org-1:liYFm3f3q1dAoilj2Ag2IEKzW3Q9/HJcLlrAIytAcy0="
         ];
       };
 

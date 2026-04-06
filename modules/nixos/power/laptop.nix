@@ -9,6 +9,12 @@ in {
   options.modules.power.laptop = {
     enable = lib.mkEnableOption "laptop power management";
 
+    powerProfilesDaemon = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Use power-profiles-daemon instead of TLP";
+    };
+
     cpuBoostOnAc = lib.mkOption {
       type = lib.types.int;
       default = 1;
@@ -48,11 +54,11 @@ in {
       thermald.enable = true;
       # handle ACPI events
       acpid.enable = true;
-      # Disable Power Profiles
-      power-profiles-daemon.enable = false;
+      # Power Profiles
+      power-profiles-daemon.enable = cfg.powerProfilesDaemon;
 
       tlp = {
-        enable = true;
+        enable = !cfg.powerProfilesDaemon;
         settings = {
           CPU_BOOST_ON_AC = cfg.cpuBoostOnAc;
           CPU_BOOST_ON_BAT = cfg.cpuBoostOnBat;

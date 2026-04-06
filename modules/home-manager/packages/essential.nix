@@ -16,7 +16,6 @@ in {
       inherit
         (pkgs)
         thunderbird-bin
-        feh
         imagemagick
         keychain
         adwaita-icon-theme

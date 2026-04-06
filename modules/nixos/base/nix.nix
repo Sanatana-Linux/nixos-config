@@ -79,7 +79,7 @@ in {
       nixos-generators
       nixpacks
       nixt
-      node2nix
+      # node2nix # Removed - no longer maintained in nixpkgs
       nox
       nurl
       nvd
@@ -133,6 +133,7 @@ in {
             "https://nixpkgs-unfree.cachix.org"
             "https://pre-commit-hooks.cachix.org"
             "https://cuda-maintainers.cachix.org"
+            "https://cache.nixos-cuda.org"
             "https://ai.cachix.org"
             "https://nix-gaming.cachix.org"
           ]
@@ -147,6 +148,7 @@ in {
             "nixpkgs-unfree.cachix.org-1:hqvoInulhbV4nJ9yJOEr+4wxhDV4xq2d1DK7S6Nj6rs="
             "pre-commit-hooks.cachix.org-1:Pkk3Panw5AW24TOv6kz3PvLhlH8puAsJTBbOPmBo7Rc="
             "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
+            "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="
             "ai.cachix.org-1:N9dzRK+alWwoKXQlnn0H6aUx0lU/mspIoz8hMvGvbbc="
             "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
           ]

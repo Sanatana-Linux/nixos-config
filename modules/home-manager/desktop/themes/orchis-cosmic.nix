@@ -27,13 +27,13 @@ in {
       };
 
       theme = {
-        name = "Orchis-Dark";
-        package = pkgs.orchis-theme;
+        name = "Materia-dark-compact";
+        package = pkgs.materia-theme-transparent;
       };
 
       iconTheme = {
-        name = "Cosmic";
-        package = pkgs.cosmic-icons;
+        name = "Qogir-dark";
+        package = pkgs.qogir-icon-theme;
       };
 
       cursorTheme = {
@@ -78,7 +78,7 @@ in {
 
     home = {
       sessionVariables = {
-        GTK_THEME = "Orchis-Grey-Dark-Compact";
+        GTK_THEME = "Materia-dark-compact";
       };
 
       pointerCursor = {

@@ -78,6 +78,7 @@ in {
         enable = true;
         minimal = true;
       };
+      x11.enable = true;
     };
     hardware = {
       sound = {

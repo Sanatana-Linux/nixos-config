@@ -26,7 +26,7 @@
     };
     desktop = {
       enable = true;
-      monokaiProSkeudos.enable = true;
+      materiaStylix.enable = true;
     };
     programs = {
       fastfetch.enable = true;

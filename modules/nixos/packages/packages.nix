@@ -421,7 +421,7 @@ in {
           ]
           # Web development
           ++ optionals cfg.development.webDevelopment [
-            node2nix # Node to Nix converter
+            # node2nix # Removed - no longer maintained in nixpkgs
             nodenv # Node version manager
             yarn # Node package manager
             gibo # Gitignore boilerplates
@@ -499,7 +499,6 @@ in {
             font-awesome_5 # Font Awesome 5
             font-awesome_6 # Font Awesome 6
             font-awesome_7 # Font Awesome 7
-            font_awesome
 
             material-design-icons # Google Material Icons
             material-symbols # Material Symbols
@@ -752,7 +751,6 @@ in {
 
             # Viewers & Metadata
             gthumb # Image viewer
-            feh # Image viewer
             exiftool # Metadata editor
             libexif # EXIF library
 
@@ -856,6 +854,7 @@ in {
         # Download tools
         ++ optionals cfg.network.downloadTools [
           rclone # Cloud storage sync
+          transmission_4 # BitTorrent daemon
           yt-dlp # YouTube downloader
         ]
         # Compression libraries
@@ -1116,6 +1115,8 @@ in {
         xwininfo # X window info
         xev # X event viewer
         xfontsel # X font selector
+        xrandr # X Resize, Rotate and Reflect extension
+        arandr # GUI for xrandr
 
         # Input & Interaction
         xclip # X11 clipboard

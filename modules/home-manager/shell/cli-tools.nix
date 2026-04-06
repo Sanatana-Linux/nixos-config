@@ -30,7 +30,6 @@ in {
       fzf
       findutils
       file
-      imv
       jq
       killall
       lm_sensors

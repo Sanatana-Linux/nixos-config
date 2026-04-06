@@ -4,10 +4,18 @@
   pkgs,
   ...
 }:
-with lib; {
-  options.modules.desktop.xfce.enable = mkEnableOption "XFCE desktop environment";
+with lib; let
+  cfg = config.modules.desktop.xfce;
+in {
+  options.modules.desktop.xfce = {
+    enable = mkEnableOption "XFCE desktop environment";
+  };
 
-  config = mkIf config.modules.desktop.xfce.enable {
+  config = mkIf cfg.enable {
+    # Enable SDDM display manager
+    modules.desktop.sddm.enable = true;
+
+    # Common XFCE configuration
     services = {
       libinput = {
         enable = true;
@@ -24,28 +32,6 @@ with lib; {
         updateDbusEnvironment = true;
         desktopManager.runXdgAutostartIfNone = true;
         desktopManager.xfce.enable = true;
-
-        displayManager.lightdm = {
-          enable = true;
-          background = ./assets/monokaiprospectrum.png;
-          greeters.gtk = {
-            enable = true;
-            theme = {
-              package = pkgs.materia-theme;
-              name = "Materia-dark-compact";
-            };
-            cursorTheme = {
-              package = pkgs.phinger-cursors;
-              name = "Phinger Cursors (light)";
-              size = 48;
-            };
-            iconTheme = {
-              package = pkgs.papirus-icon-theme;
-              name = "Papirus-Dark";
-            };
-            indicators = ["~session" "~spacer" "~power"];
-          };
-        };
       };
 
       devmon.enable = true;

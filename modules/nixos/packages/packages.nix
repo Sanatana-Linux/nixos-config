@@ -853,6 +853,7 @@ in {
         ]
         # Download tools
         ++ optionals cfg.network.downloadTools [
+          aria2 # Multi-protocol download utility
           rclone # Cloud storage sync
           transmission_4 # BitTorrent daemon
           yt-dlp # YouTube downloader

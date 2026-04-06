@@ -11,6 +11,11 @@ Each entry follows this format:
 
 ## Changes
 
+- **2026-04-06**: Added aria2 multi-protocol download utility to network download tools
+  - **ADDED**: aria2 package to network.downloadTools section in packages.nix
+  - **ORGANIZED**: Placed alphabetically at beginning of download tools list
+  - **TESTED**: Verified configuration builds successfully without issues
+
 - **2026-04-06**: Added transmission_4 BitTorrent daemon package to network download tools
   - **ADDED**: transmission_4 package to network.downloadTools section in packages.nix
   - **CATEGORIZED**: Placed alongside other download utilities (rclone, yt-dlp) for logical organization

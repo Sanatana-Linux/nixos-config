@@ -75,7 +75,10 @@
 
     # Services
     # Power
-    power.laptop.enable = true;
+    power.laptop = {
+      enable = true;
+      powerProfilesDaemon = true;
+    };
 
     # Packages
     packages = {
@@ -165,6 +168,7 @@
         desktop = true;
         multimedia = true;
       };
+      x11.enable = true;
     };
 
     # Hardware
@@ -201,7 +205,9 @@
 
     # Desktop
     desktop = {
-      awesomewm.enable = true;
+      awesomewm = {
+        enable = true;
+      };
     };
 
     # AI

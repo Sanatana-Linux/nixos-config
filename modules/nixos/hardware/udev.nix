@@ -66,18 +66,18 @@ in {
 
     boot.supportedFilesystems = cfg.supportedFilesystems;
 
-  boot.kernelParams = [
-    "nvme_core.default_ps_max_latency_us=0"
-    "nvme.poll_queues=8"
-    "pcie_aspm.policy=performance"
-    "pci=pcie_bus_perf,realloc"
-  ];
+    boot.kernelParams = [
+      "nvme_core.default_ps_max_latency_us=0"
+      "nvme.poll_queues=8"
+      "pcie_aspm.policy=performance"
+      "pci=pcie_bus_perf,realloc"
+    ];
 
-  services.udev.extraRules = ''
-    ACTION=="add|change", KERNEL=="nvme[0-9]*n[0-9]*", ENV{DEVTYPE}=="disk", TEST=="queue", ATTR{queue/scheduler}="none"
-    ACTION=="add|change", KERNEL=="nvme[0-9]*n[0-9]*", ENV{DEVTYPE}=="disk", TEST=="queue", ATTR{queue/rq_affinity}="2"
-    ACTION=="add|change", KERNEL=="nvme[0-9]*n[0-9]*", ENV{DEVTYPE}=="disk", TEST=="queue", ATTR{queue/nomerges}="1"
-    ACTION=="add|change", KERNEL=="nvme[0-9]*n[0-9]*", ENV{DEVTYPE}=="disk", TEST=="queue", ATTR{queue/iostats}="0"
-  '';
-};
+    services.udev.extraRules = ''
+      ACTION=="add|change", KERNEL=="nvme[0-9]*n[0-9]*", ENV{DEVTYPE}=="disk", TEST=="queue", ATTR{queue/scheduler}="none"
+      ACTION=="add|change", KERNEL=="nvme[0-9]*n[0-9]*", ENV{DEVTYPE}=="disk", TEST=="queue", ATTR{queue/rq_affinity}="2"
+      ACTION=="add|change", KERNEL=="nvme[0-9]*n[0-9]*", ENV{DEVTYPE}=="disk", TEST=="queue", ATTR{queue/nomerges}="1"
+      ACTION=="add|change", KERNEL=="nvme[0-9]*n[0-9]*", ENV{DEVTYPE}=="disk", TEST=="queue", ATTR{queue/iostats}="0"
+    '';
+  };
 }

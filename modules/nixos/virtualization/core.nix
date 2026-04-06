@@ -33,7 +33,10 @@ in {
     hardware.nvidia-container-toolkit.enable = mkIf cfg.nvidia true;
     hardware.graphics.enable32Bit = mkIf cfg.nvidia true;
 
-    systemd.suppressedSystemUnits = ["virt-secret-init-encryption.service"];
+    systemd.suppressedSystemUnits = [
+      "virt-secret-init-encryption.service"
+      "libvirtd-ro.socket"
+    ];
 
     environment.systemPackages = with pkgs; [
       conmon
@@ -50,6 +53,8 @@ in {
       libvirt
       libvirt-glib
       libgovirt
+      quickemu
+      qemu-utils
     ];
   };
 }

@@ -81,35 +81,35 @@ in {
     };
 
     # Kernel parameters for Intel hardware
-  boot.kernelParams =
-  [
-    "i915.fastboot=1"
-    "dev.i915.perf_stream_paranoid=0"
-    "skew_tick=1"
-    "rcu_nocbs=all"
-    "rcutree.rcu_idle_gp_delay=0"
-    "rcupdate.rcu_expedited=1"
-    "threadirqs"
-    "preempt=voluntary"
-    "tsc=reliable"
-    "tsc=noirqtime"
-  ]
-  ++ optionals cfg.virtualization [
+    boot.kernelParams =
+      [
+        "i915.fastboot=1"
+        "dev.i915.perf_stream_paranoid=0"
+        "skew_tick=1"
+        "rcu_nocbs=all"
+        "rcutree.rcu_idle_gp_delay=0"
+        "rcupdate.rcu_expedited=1"
+        "threadirqs"
+        "preempt=voluntary"
+        "tsc=reliable"
+        "tsc=noirqtime"
+      ]
+      ++ optionals cfg.virtualization [
         "intel_iommu=on" # Enable Intel IOMMU for virtualization
         "iommu=pt" # Use passthrough mode for better performance
         "kvm.ignore_msrs=1" # Ignore unimplemented MSRs
         "kvm_intel.nested=1" # Enable nested virtualization
       ]
-  ++ optionals cfg.enableGVT [
-    "i915.enable_gvt=1"
-  ];
+      ++ optionals cfg.enableGVT [
+        "i915.enable_gvt=1"
+      ];
 
-  boot.kernel.sysctl = {
-    "kernel.sched_autogroup_enabled" = 0;
-    "kernel.sched_schedstats" = 0;
-  };
+    boot.kernel.sysctl = {
+      "kernel.sched_autogroup_enabled" = 0;
+      "kernel.sched_schedstats" = 0;
+    };
 
-  boot.kernelPatches = [
+    boot.kernelPatches = [
       {
         name = "intel-config";
         patch = null;

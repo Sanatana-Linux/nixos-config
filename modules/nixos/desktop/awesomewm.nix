@@ -13,6 +13,10 @@ in {
   };
 
   config = mkIf cfg.enable {
+    # Enable SDDM display manager
+    modules.desktop.sddm.enable = true;
+
+    # Common AwesomeWM configuration
     services = {
       libinput = {
         enable = true;
@@ -30,28 +34,6 @@ in {
         exportConfiguration = true;
         updateDbusEnvironment = true;
         desktopManager.runXdgAutostartIfNone = true;
-
-        displayManager.lightdm = {
-          enable = true;
-          background = ./assets/monokaiprospectrum.png;
-          greeters.gtk = {
-            enable = true;
-            theme = {
-              package = pkgs.materia-theme;
-              name = "Materia-dark-compact";
-            };
-            cursorTheme = {
-              package = pkgs.phinger-cursors;
-              name = "Phinger Cursors (light)";
-              size = 48;
-            };
-            iconTheme = {
-              package = pkgs.papirus-icon-theme;
-              name = "Papirus-Dark";
-            };
-            indicators = ["~session" "~spacer" "~power"];
-          };
-        };
 
         windowManager.awesome = {
           enable = true;

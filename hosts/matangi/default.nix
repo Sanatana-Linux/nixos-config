@@ -63,7 +63,10 @@
 
     # Services
     # Power
-    power.laptop.enable = true;
+    power.laptop = {
+      enable = true;
+      powerProfilesDaemon = true;
+    };
 
     # Packages
     packages = {

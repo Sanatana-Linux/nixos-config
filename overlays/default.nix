@@ -15,9 +15,9 @@
       };
     };
 
-    node2nix = prev.node2nix.overrideAttrs (oldAttrs: {
-      nativeBuildInputs = (oldAttrs.nativeBuildInputs or []) ++ [final.nodejs];
-    });
+    # node2nix = prev.node2nix.overrideAttrs (oldAttrs: {
+    #   nativeBuildInputs = (oldAttrs.nativeBuildInputs or []) ++ [final.nodejs];
+    # });
 
     libvirt = prev.libvirt.overrideAttrs (old: {
       postInstall =
@@ -25,6 +25,24 @@
         + ''
           rm -f $out/lib/systemd/system/virt-secret-init-encryption.service
         '';
+    });
+
+    # Update SillyTavern to latest staging branch commit
+    sillytavern = prev.sillytavern.overrideAttrs (oldAttrs: rec {
+      pname = "sillytavern";
+      version = "unstable-2026-04-04";
+      src = final.fetchFromGitHub {
+        owner = "SillyTavern";
+        repo = "SillyTavern";
+        rev = "0f4a0147fd101f7a756b82266bd591ac12a3c7a5";
+        hash = "sha256-KuRDnZt0rzb33MNoHCSgWoXa2Hlzl9+Hu8REgCtcN1Q=";
+      };
+      npmDepsHash = "sha256-pjBCwOtx5UiZWW7/Tir4KHZAkPgrM2sMDix/g2USDWk=";
+      # Force rebuild of npm dependencies
+      npmDeps = final.fetchNpmDeps {
+        inherit src;
+        hash = "sha256-pjBCwOtx5UiZWW7/Tir4KHZAkPgrM2sMDix/g2USDWk=";
+      };
     });
 
     linuxPackages_xanmod_latest = prev.linuxPackages_xanmod_latest.extend (_kFinal: kPrev: {

@@ -26,10 +26,10 @@ in {
 
       # Font settings for GTK
 
-      theme = {
-        name = lib.mkDefault "Materia-dark-compact";
-        package = lib.mkDefault pkgs.materia-theme-transparent;
-      };
+  theme = {
+      name = lib.mkDefault "Materia-dark-compact";
+      package = lib.mkDefault (pkgs.materia-theme-transparent.override { tweaks = [ "compact" ]; });
+    };
 
       # GTK cursor theme configuration
       cursorTheme = {

@@ -11,6 +11,64 @@ Each entry follows this format:
 
 ## Changes
 
+- **2026-04-06**: Added transmission_4 BitTorrent daemon package to network download tools
+  - **ADDED**: transmission_4 package to network.downloadTools section in packages.nix
+  - **CATEGORIZED**: Placed alongside other download utilities (rclone, yt-dlp) for logical organization
+  - **TESTED**: Verified configuration builds successfully without issues
+
+- **2026-04-06**: Enhanced virtualization modules with quickemu support and improved QEMU tooling
+  - **ADDED**: Created dedicated quickemu module (`modules/nixos/virtualization/quickemu.nix`) for lightweight VM management
+  - **ADDED**: quickemu package to core virtualization module alongside Docker and libvirt tools
+  - **ADDED**: qemu-utils to core virtualization module for enhanced QEMU functionality
+  - **CONFIGURED**: quickemu module with options for GUI (quickgui) and additional QEMU utilities
+  - **CONFIGURED**: KVM group setup for direct hardware acceleration access
+  - **OPTIONS**: quickemu module provides `enable`, `installUtils`, and `enableGUI` configuration options
+  - **FLEXIBILITY**: Users can now choose between full virt-manager stack, core virtualization, or lightweight quickemu-only setup
+  - **TESTED**: All configurations build successfully with proper package dependencies
+  - **AVAILABILITY**: quickemu now available through multiple virtualization module paths for different use cases
+- **2026-04-06**: Replaced LightDM GTK greeter with Sea-greeter (WebKit) using Litarvan theme
+  - **ADDED**: Created sea-greeter package (`pkgs/sea-greeter.nix`) with WebKit-based greeter support
+  - **ADDED**: Created lightdm-webkit-theme-litarvan package (`pkgs/lightdm-webkit-theme-litarvan.nix`) for modern HTML/CSS theming
+  - **ADDED**: Created various-nature-images package (`pkgs/various-nature-images.nix`) for background image collection
+  - **ADDED**: Created sea-greeter-litarvan wrapper package (`pkgs/sea-greeter-litarvan.nix`) combining greeter with theme and backgrounds
+  - **MODIFIED**: Updated LightDM module (`modules/nixos/desktop/lightdm.nix`) to use Sea-greeter instead of GTK greeter
+  - **REMOVED**: Replaced lightdm-gtk-greeter configuration with WebKit greeter configuration
+  - **CONFIGURED**: Set up web-greeter.yml configuration file for Sea-greeter settings
+  - **UPDATED**: Module options now focus on WebKit theme selection and debug mode instead of GTK themes
+  - **TESTED**: Configuration builds successfully with dry-build validation
+  - **READY**: System now provides modern web-based login interface with Litarvan theme and nature backgrounds
+- **2026-04-05**: Migrated from LightDM/nody-greeter to SDDM display manager with elegant theme
+  - **REMOVED**: Completely removed nody-greeter infrastructure (module and package files)
+  - **REMOVED**: Removed LightDM integration from AwesomeWM and XFCE modules
+  - **ADDED**: Created new SDDM display manager module (`modules/nixos/desktop/sddm.nix`) with comprehensive configuration options
+  - **ADDED**: Created elegant-sddm theme package (`pkgs/elegant-sddm.nix`) from GitHub repository
+  - **CONFIGURED**: Set elegant-sddm as default theme with proper installation paths
+  - **UPDATED**: Simplified AwesomeWM and XFCE modules to use SDDM directly without greeter selection
+  - **UPDATED**: Updated bagalamukhi host configuration to use new SDDM setup
+  - **TESTED**: Configuration builds and activates successfully with SDDM service running
+  - **READY**: System now uses modern QML-based SDDM theming with elegant design
+- **2026-04-04**: Successfully implemented nody-greeter as working LightDM greeter alternative
+  - **COMPLETED**: Created custom package `pkgs/nody-greeter.nix` using simplified Electron wrapper approach
+  - **COMPLETED**: Built and tested nody-greeter package successfully on NixOS
+  - **COMPLETED**: Added NixOS module `modules/nixos/desktop/nody-greeter.nix` with comprehensive configuration options
+  - **COMPLETED**: Updated XFCE and AwesomeWM desktop modules to support greeter selection via `greeter` option
+  - **ENABLED**: Configured bagalamukhi host to use nody-greeter with AwesomeWM
+  - **READY**: Nody-greeter now provides web-based themes, Electron-powered interface, and modern greeter experience
+  - **TESTED**: Configuration builds successfully and maintains AwesomeWM window manager functionality
+- **2026-04-04**: Standardized icon and GTK themes across all desktop environments  
+  - Updated XFCE and AwesomeWM modules to use Qogir-dark icons and materia-theme-transparent package
+  - Modified Orchis Cosmic theme to use Qogir icons and Materia Dark Compact GTK theme
+  - Ensured universal usage of materia-theme-transparent package for consistent theming
+  - Verified Stylix already uses Qogir icon theme (no changes needed)
+- **2026-03-31**: Added xrandr and arandr to X11 package collection
+  - Added `xrandr` and `arandr` to `modules/nixos/packages/packages.nix` in the `x11` section
+  - Enabled `modules.packages.x11.enable = true` for `bagalamukhi` and `chhinamasta` hosts
+  - This provides GUI and CLI display management tools for X11 environments
+- **2026-03-31**: Switched from TLP to power-profiles-daemon for laptop power management
+  - Updated `modules/nixos/power/laptop.nix` to include `powerProfilesDaemon` option
+  - When `powerProfilesDaemon` is enabled, TLP is automatically disabled to avoid conflicts
+  - Enabled `powerProfilesDaemon = true` for both `bagalamukhi` and `matangi` hosts
+  - This provides better integration with modern desktop environments and follows the user's request
 - **2026-03-29**: Fixed Legion longevity service for Intel CPUs and added ITE keyboard udev rules
 - Fixed `legion-longevity.service` to use `intel_pstate/no_turbo` instead of `cpufreq/boost` (Intel doesn't have boost file)
 - Service now properly disables turbo by writing `1` to `no_turbo`

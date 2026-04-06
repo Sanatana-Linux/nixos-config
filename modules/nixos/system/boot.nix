@@ -65,17 +65,17 @@ with lib; {
       extraModulePackages = [
       ];
 
-    kernelParams = [
-      "fbcon=nodefer"
-      "splash"
-      "quiet"
-      "usbcore.autosuspend=-1"
-      "rd.udev.log_priority=3"
-      "nvme_core.default_ps_max_latency_us=0"
-      "nmi_watchdog=0"
-      "nowatchdog"
-      "nosoftlockup"
-    ];
+      kernelParams = [
+        "fbcon=nodefer"
+        "splash"
+        "quiet"
+        "usbcore.autosuspend=-1"
+        "rd.udev.log_priority=3"
+        "nvme_core.default_ps_max_latency_us=0"
+        "nmi_watchdog=0"
+        "nowatchdog"
+        "nosoftlockup"
+      ];
 
       plymouth.enable = true;
 

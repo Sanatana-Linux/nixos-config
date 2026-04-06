@@ -65,14 +65,14 @@ in {
       timeZone = cfg.timezone;
       hardwareClockInLocalTime = cfg.hardwareClockInLocalTime;
     };
-  hardware.enableAllFirmware = true;
-  environment.systemPackages = [pkgs.dmidecode];
+    hardware.enableAllFirmware = true;
+    environment.systemPackages = [pkgs.dmidecode];
 
-  swapDevices = [
-    {
-      device = "/swapfile";
-      size = 16 * 1024;
-    }
-  ];
-};
+    swapDevices = [
+      {
+        device = "/swapfile";
+        size = 16 * 1024;
+      }
+    ];
+  };
 }

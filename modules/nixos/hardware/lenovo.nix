@@ -31,27 +31,27 @@ in {
       config.boot.kernelPackages.acpi_call
     ];
 
-  # Udev rules for CPU boost and platform profile
-  services.udev.extraRules = ''
-    KERNEL=="no_turbo", SUBSYSTEM=="intel_pstate", MODE="0664", GROUP="wheel"
-    KERNEL=="boost", SUBSYSTEM=="cpufreq", MODE="0664", GROUP="wheel"
-    KERNEL=="platform_profile", SUBSYSTEM=="acpi", MODE="0664", GROUP="wheel"
-    # ITE keyboard controller for RGB control
-    SUBSYSTEM=="usb", ATTR{idVendor}=="048d", ATTR{idProduct}=="c995", MODE="0666"
-    SUBSYSTEM=="usb", ATTR{idVendor}=="048d", ATTR{idProduct}=="c106", MODE="0666"
-  '';
+    # Udev rules for CPU boost and platform profile
+    services.udev.extraRules = ''
+      KERNEL=="no_turbo", SUBSYSTEM=="intel_pstate", MODE="0664", GROUP="wheel"
+      KERNEL=="boost", SUBSYSTEM=="cpufreq", MODE="0664", GROUP="wheel"
+      KERNEL=="platform_profile", SUBSYSTEM=="acpi", MODE="0664", GROUP="wheel"
+      # ITE keyboard controller for RGB control
+      SUBSYSTEM=="usb", ATTR{idVendor}=="048d", ATTR{idProduct}=="c995", MODE="0666"
+      SUBSYSTEM=="usb", ATTR{idVendor}=="048d", ATTR{idProduct}=="c106", MODE="0666"
+    '';
 
-  systemd.services.legion-longevity = {
-    description = "Set Legion laptop to longevity mode (boost off, fans max)";
-    wantedBy = ["multi-user.target"];
-    after = ["systemd-modules-load.service" "systemd-udevd.service" "sysinit.target"];
-    wants = ["systemd-udevd.service"];
-    serviceConfig = {
-      Type = "oneshot";
-      RemainAfterExit = true;
-      ExecStart = "${pkgs.bash}/bin/bash -c 'echo 1 > /sys/devices/system/cpu/intel_pstate/no_turbo && echo performance > /sys/firmware/acpi/platform_profile'";
+    systemd.services.legion-longevity = {
+      description = "Set Legion laptop to longevity mode (boost off, fans max)";
+      wantedBy = ["multi-user.target"];
+      after = ["systemd-modules-load.service" "systemd-udevd.service" "sysinit.target"];
+      wants = ["systemd-udevd.service"];
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = true;
+        ExecStart = "${pkgs.bash}/bin/bash -c 'echo 1 > /sys/devices/system/cpu/intel_pstate/no_turbo && echo performance > /sys/firmware/acpi/platform_profile'";
+      };
     };
-  };
 
     systemd.services.thermal-guard = {
       description = "Throttle CPU and manage fans when temperature exceeds 90C";

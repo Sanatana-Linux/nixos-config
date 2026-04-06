@@ -78,12 +78,12 @@ in {
           # NVIDIA specific
           nvidia-vaapi-driver
           nvidia-texture-tools
-          nvidia-container-toolkit
           libnvidia-container
           nv-codec-headers
           nvtopPackages.nvidia
           nvidia_cg_toolkit
 
+          nvidia-optical-flow-sdk # Optical flow SDK
           # Vulkan
           vulkan-headers
           vulkan-extension-layer
@@ -111,6 +111,7 @@ in {
         ]
         ++ optionals cfg.cuda.enable [
           cudatoolkit
+          nvidia-container-toolkit
           cudaPackages.cuda_opencl
           cudaPackages.libnvjitlink
           cudaPackages.nvidia_fs
@@ -131,12 +132,12 @@ in {
     };
 
     # Kernel params for NVIDIA
-  boot.kernelParams = [
-    "nvidia_drm.fbdev=1"
-    "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
-    "nvidia-drm.modeset=1"
-    "nvidia.NVreg_EnableResizableBar=1"
-  ];
+    boot.kernelParams = [
+      "nvidia_drm.fbdev=1"
+      "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
+      "nvidia-drm.modeset=1"
+      "nvidia.NVreg_EnableResizableBar=1"
+    ];
 
     # Initrd kernel modules for NVIDIA
     # Loaded early to ensure display works during boot/LUKS
@@ -189,11 +190,11 @@ in {
         forceFullCompositionPipeline = true;
 
         powerManagement = {
-          enable = false;
+          enable = true;
           finegrained = false;
         };
 
-        open = false;
+        open = true;
         package = config.boot.kernelPackages.nvidiaPackages.${cfg.driver};
 
         prime = {

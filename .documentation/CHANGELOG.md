@@ -11,6 +11,14 @@ Each entry follows this format:
 
 ## Changes
 
+- **2026-04-06**: Fixed persistent cursor theme configuration to prevent reversion to Adwaita
+  - **FIXED**: Mouse cursor theme reverting to Adwaita after window manager reset, sleep, or random conditions
+  - **ENHANCED**: materia-stylix module with forced cursor theme configuration using lib.mkForce
+  - **ADDED**: Multiple persistence mechanisms: GTK settings, dconf configuration, X11 environment variables
+  - **ADDED**: .Xdefaults file creation for additional X11 cursor persistence
+  - **CONFIGURED**: phinger-cursors-light theme with size 32 as persistent cursor theme
+  - **RESOLVED**: Gap in cursor theming when stylix is enabled (stylix doesn't handle cursor themes)
+
 - **2026-04-06**: Added aria2 multi-protocol download utility to network download tools
   - **ADDED**: aria2 package to network.downloadTools section in packages.nix
   - **ORGANIZED**: Placed alphabetically at beginning of download tools list

@@ -12,7 +12,7 @@
 
   modules = {
     desktop = {
-      orchisCosmic.enable = true;
+      gtk.enable = true; # Use the consolidated gtk module instead of orchisCosmic
     };
     packages.essential.enable = true;
     shell = {
@@ -27,7 +27,7 @@
     };
     programs = {
       firefox.enable = true;
-      higgs-boson-firefox.enable = true;
+      higgs-boson-firefox.enable = false;
       yazi.enable = true;
       kitty.enable = true;
     };

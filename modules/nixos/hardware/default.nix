@@ -7,7 +7,6 @@
     ./networking.nix
     ./android.nix
     ./iphone.nix
-    ./openrgb.nix
     ./logitech.nix
     ./tpm.nix
     ./udev.nix

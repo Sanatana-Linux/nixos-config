@@ -244,8 +244,8 @@ in {
         fcft # Font loading library
         fontforge-gtk # Font editor (GTK version)
         fontforge-fonttools # Python font manipulation
-        python314Packages.fonttools # Font manipulation library
-        python314Packages.compreffor # Font compression
+        python312Packages.fonttools # Font manipulation library
+        python312Packages.compreffor # Font compression
         webfontkitgenerator # Web font kit generator
 
         # Multimedia & Sound
@@ -500,6 +500,7 @@ in {
             font-awesome_5 # Font Awesome 5
             font-awesome_6 # Font Awesome 6
             font-awesome_7 # Font Awesome 7
+
             material-design-icons # Google Material Icons
             material-symbols # Material Symbols
             siji # Minimal icon font

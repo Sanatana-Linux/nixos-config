@@ -186,9 +186,6 @@
       tpm.enable = true;
       udev.enable = true;
       logitech.enable = true;
-      openrgb = {
-        enable = true;
-      };
       lenovo.enable = true;
       sound.enable = true;
       networking = {
@@ -207,6 +204,7 @@
     desktop = {
       awesomewm = {
         enable = true;
+        displayManager = "lightdm";
       };
     };
 

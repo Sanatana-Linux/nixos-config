@@ -26,7 +26,7 @@
     };
     desktop = {
       enable = true;
-      materiaStylix.enable = true;
+      gtk.enable = true; # Use the consolidated gtk module
     };
     programs = {
       fastfetch.enable = true;

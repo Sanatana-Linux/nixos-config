@@ -1,6 +1,7 @@
 { lib, stdenv, fetchFromGitHub, meson, ninja, pkg-config, gtk3, webkitgtk_4_1
-, lightdm, glib, libyaml, typescript, makeWrapper, cmake, theme ? null
-, backgrounds ? null, enableHWAcceleration ? false }:
+, lightdm, glib, libyaml, typescript, makeWrapper, cmake
+, theme ? null, themes ? [], backgrounds ? null, selectedTheme ? "gruvbox"
+, enableHWAcceleration ? false }:
 
 stdenv.mkDerivation rec {
   pname = "sea-greeter";
@@ -16,7 +17,9 @@ stdenv.mkDerivation rec {
 
   nativeBuildInputs = [ meson ninja pkg-config typescript makeWrapper ];
 
-  buildInputs = [ gtk3 webkitgtk_4_1 lightdm glib libyaml theme cmake ];
+  buildInputs = [ gtk3 webkitgtk_4_1 lightdm glib libyaml cmake ] 
+    ++ lib.optional (theme != null) theme
+    ++ themes;
 
   configurePhase = ''
     runHook preConfigure
@@ -33,10 +36,23 @@ stdenv.mkDerivation rec {
     substituteInPlace data/web-greeter.yml \
     --replace '/usr/share/' \
               "$out/usr/share/"
-    ${lib.optionalString (theme != null) ''
+    
+    # Configure selected theme
+    ${if (theme != null) then ''
       substituteInPlace data/web-greeter.yml \
       --replace 'theme: gruvbox' \
                 "theme: ${theme.pname}"
+    '' else if (themes != []) then ''
+      substituteInPlace data/web-greeter.yml \
+      --replace 'theme: gruvbox' \
+                "theme: ${selectedTheme}"
+    '' else ""}
+    
+    # Configure background path
+    ${lib.optionalString (backgrounds != null) ''
+      substituteInPlace data/web-greeter.yml \
+      --replace 'background_images_dir: /usr/share/backgrounds' \
+                "background_images_dir: $out/usr/share/backgrounds"
     ''}
 
     runHook postConfigure
@@ -50,17 +66,13 @@ stdenv.mkDerivation rec {
   installPhase = ''
     meson install -C build --destdir=$out
 
-    # So, for some reason, if I either don't do destdir=$out or prefix=$out for
-    # the build, what happens is that either the bin/ or the config files copied
-    # over from the setup don't appear in the final nix pkg. This means the only
-    # way I've found to guarantee that every file is there to do both. This has
-    # the problem that part of the files is double-"indented", meaning that the
-    # nix store path is repeated with /nix/store/.../nix/store/.../bin. But
-    # these files you can just move.
-    NESTED_DIR=$(ls -d $out/nix/store/*)
-    shopt -s dotglob
-    mv $NESTED_DIR/* $out/
-    rm -rf $out/nix
+    # Fix double-nested directory issue
+    NESTED_DIR=$(ls -d $out/nix/store/* 2>/dev/null || echo "")
+    if [ -n "$NESTED_DIR" ]; then
+      shopt -s dotglob
+      mv $NESTED_DIR/* $out/
+      rm -rf $out/nix
+    fi
 
     ${lib.optionalString (enableHWAcceleration == false) ''
       wrapProgram $out/bin/sea-greeter --set WEBKIT_DISABLE_DMABUF_RENDERER 1
@@ -69,21 +81,32 @@ stdenv.mkDerivation rec {
     substituteInPlace $out/usr/share/xgreeters/sea-greeter.desktop \
       --replace "Exec=sea-greeter" "Exec=$out/bin/sea-greeter"
 
-    # the xserver.lightdm.greeter.package options expects the .desktop file to 
+    # The xserver.lightdm.greeter.package option expects the .desktop file to 
     # be on the root level. 
     ln -s $out/usr/share/xgreeters/sea-greeter.desktop $out/sea-greeter.desktop
 
+    # Install themes
+    mkdir -p "$out/usr/share/web-greeter/themes"
+    
     ${lib.optionalString (theme != null) ''
-      echo "Installing theme: ${theme.pname}"
-      mkdir -p "$out/usr/share/web-greeter/themes"
+      echo "Installing single theme: ${theme.pname}"
       ln -s ${theme} "$out/usr/share/web-greeter/themes/${theme.pname}"
     ''}
+    
+    ${lib.optionalString (themes != []) ''
+      echo "Installing multiple themes"
+      ${lib.concatMapStringsSep "\n" (t: ''
+        echo "Installing theme: ${t.pname}"
+        ln -s ${t} "$out/usr/share/web-greeter/themes/${t.pname}"
+      '') themes}
+    ''}
+    
+    # Install backgrounds
     ${lib.optionalString (backgrounds != null) ''
       echo "Installing backgrounds from: ${backgrounds}" 
-      local backgrounds_dir="$out/usr/share/backgrounds"
-      mkdir -p "$backgrounds_dir"
-      ln -s "${backgrounds}"/* "$backgrounds_dir/"
-      ls "$backgrounds_dir"
+      mkdir -p "$out/usr/share/backgrounds"
+      ln -s "${backgrounds}"/* "$out/usr/share/backgrounds/"
+      ls "$out/usr/share/backgrounds"
     ''}
   '';
 

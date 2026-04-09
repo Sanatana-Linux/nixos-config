@@ -9,9 +9,33 @@ with lib; {
     enable = mkEnableOption "LightDM display manager with Sea greeter (webkit)";
     
     theme = mkOption {
+      type = types.nullOr types.package;
+      default = pkgs.lightdm-webkit-theme-litarvan;
+      description = "WebKit theme package for the greeter (if null, uses built-in themes)";
+    };
+    
+    themes = mkOption {
+      type = types.listOf types.package;
+      default = [];
+      description = "List of additional WebKit theme packages to install";
+    };
+    
+    selectedTheme = mkOption {
       type = types.str;
-      default = "lightdm-webkit-theme-litarvan";
-      description = "WebKit theme for the greeter";
+      default = "litarvan";
+      description = "Name of the theme to use (must match theme package pname)";
+    };
+    
+    backgrounds = mkOption {
+      type = types.nullOr types.package;
+      default = null;
+      description = "Package containing background images (if null, uses local assets)";
+    };
+    
+    backgroundsPath = mkOption {
+      type = types.nullOr types.path;
+      default = ../assets;
+      description = "Local path to background images directory";
     };
     
     debug = mkOption {
@@ -25,48 +49,83 @@ with lib; {
       default = false;
       description = "Enable numlock automatically";
     };
+    
+    enableHWAcceleration = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Enable hardware acceleration for webkit";
+    };
   };
 
   config = mkIf config.modules.desktop.lightdm.enable {
+    
+    # Build sea-greeter with the specified configuration
+    environment.systemPackages = with pkgs; let
+      # Use backgrounds package or create one from local path
+      effectiveBackgrounds = 
+        if config.modules.desktop.lightdm.backgrounds != null 
+        then config.modules.desktop.lightdm.backgrounds
+        else if config.modules.desktop.lightdm.backgroundsPath != null
+        then pkgs.stdenv.mkDerivation {
+          pname = "local-lightdm-backgrounds";
+          version = "1.0";
+          src = config.modules.desktop.lightdm.backgroundsPath;
+          installPhase = ''
+            mkdir -p $out
+            cp -r $src/* $out/ 2>/dev/null || true
+          '';
+        }
+        else null;
+      
+      # Determine themes to install
+      allThemes = 
+        (lib.optional (config.modules.desktop.lightdm.theme != null) config.modules.desktop.lightdm.theme)
+        ++ config.modules.desktop.lightdm.themes;
+      
+      # Build configured sea-greeter
+      configuredSeaGreeter = pkgs.callPackage ../../../pkgs/sea-greeter-configurable.nix {
+        themes = allThemes;
+        selectedTheme = config.modules.desktop.lightdm.selectedTheme;
+        backgrounds = effectiveBackgrounds;
+        enableHWAcceleration = config.modules.desktop.lightdm.enableHWAcceleration;
+      };
+    in [
+      configuredSeaGreeter
+    ] ++ allThemes;
+    
     services.xserver.displayManager.lightdm = {
       enable = true;
       greeter = {
         enable = true;
-        package = pkgs.sea-greeter-litarvan;
+        package = (pkgs.callPackage ../../../pkgs/sea-greeter-configurable.nix {
+          themes = 
+            (lib.optional (config.modules.desktop.lightdm.theme != null) config.modules.desktop.lightdm.theme)
+            ++ config.modules.desktop.lightdm.themes;
+          selectedTheme = config.modules.desktop.lightdm.selectedTheme;
+          backgrounds = 
+            if config.modules.desktop.lightdm.backgrounds != null 
+            then config.modules.desktop.lightdm.backgrounds
+            else if config.modules.desktop.lightdm.backgroundsPath != null
+            then pkgs.stdenv.mkDerivation {
+              pname = "local-lightdm-backgrounds";
+              version = "1.0";
+              src = config.modules.desktop.lightdm.backgroundsPath;
+              installPhase = ''
+                mkdir -p $out
+                cp -r $src/* $out/ 2>/dev/null || true
+              '';
+            }
+            else null;
+          enableHWAcceleration = config.modules.desktop.lightdm.enableHWAcceleration;
+        });
         name = "sea-greeter";
       };
     };
 
-    # Configure sea-greeter settings
-    environment.etc."lightdm/web-greeter.yml".text = ''
-      branding:
-        background_images_dir: /usr/share/backgrounds
-        logo_image: ""
-        user_image: ""
-      greeter:
-        debug_mode: ${if config.modules.desktop.lightdm.debug then "true" else "false"}
-        detect_theme_errors: true
-        screensaver_timeout: 300
-        secure_mode: true
-        time_format: "%H:%M"
-        time_language: ""
-        theme: ${config.modules.desktop.lightdm.theme}
-      layouts:
-        - name: "us"
-          short_name: "en"
-      features:
-        battery: false
-        backlight:
-          enabled: false
-          value: 10
-          steps: 0
+    # Configure LightDM settings if numlock is enabled
+    services.xserver.displayManager.lightdm.extraConfig = lib.mkIf config.modules.desktop.lightdm.autoNumlock ''
+      [Seat:*]
+      greeter-setup-script=${pkgs.numlockx}/bin/numlockx on
     '';
-
-    # Additional packages needed for sea-greeter with litarvan theme
-    environment.systemPackages = with pkgs; [
-      sea-greeter-litarvan
-      lightdm-webkit-theme-litarvan
-      various-nature-images
-    ];
   };
 }

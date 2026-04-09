@@ -150,6 +150,7 @@
       matangi = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [
+          inputs.stylix.nixosModules.stylix
           inputs.nur.modules.nixos.default
           inputs.nixos-hardware.nixosModules.lenovo-legion-16irx9h
           inputs.bhairava-grub-theme.nixosModule

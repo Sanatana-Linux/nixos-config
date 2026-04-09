@@ -49,25 +49,12 @@ with lib; {
       
       [Theme]
       Current=${config.modules.desktop.sddm.theme}
+      ThemeDir=/run/current-system/sw/share/sddm/themes
       
       [Users]
       MaximumUid=60000
       MinimumUid=1000
     '';
-
-    # Ensure proper permissions for SDDM
-    users.groups.sddm = {};
-    users.users.sddm = {
-      isSystemUser = true;
-      group = "sddm";
-      home = "/var/lib/sddm";
-      createHome = true;
-    };
-
-    # Security configuration
-    security.pam.services.sddm = {
-      enableGnomeKeyring = mkDefault true;
-    };
 
     # Systemd tmpfiles for SDDM directories
     systemd.tmpfiles.rules = [

@@ -46,7 +46,7 @@ rules = [
   { mime = "application/x-tar", fg = "#CD9EFC" },
   { mime = "application/x-bzip", fg = "#CD9EFC" },
   { mime = "application/x-bzip2", fg = "#CD9EFC" },
-  { mime = "application/x-home/tlh/programs/yazi/default.nix7z-compressed", fg = "#CD9EFC" },
+  { mime = "application/x-7z-compressed", fg = "#CD9EFC" },
   { mime = "application/x-rar", fg = "#CD9EFC" },
 
   # Fallback

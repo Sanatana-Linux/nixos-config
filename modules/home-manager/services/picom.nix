@@ -42,11 +42,11 @@ with lib; {
         round-borders-rule = [];
         shadow = true;
         shadow-radius = 8;
-        shadow-opacity = 0.4;
-        shadow-offset-x = -8;
-        shadow-offset-y = -8;
+        shadow-opacity = 0.6;
+        shadow-offset-x = 12;
+        shadow-offset-y = 12;
         fading = false;
-        inactive-opacity = 0.95;
+        inactive-opacity = 0.90;
         frame-opacity = 0.9;
         inactive-opacity-override = false;
         active-opacity = 1.0;
@@ -55,8 +55,8 @@ with lib; {
         opacity-rule = [
           "100:class_g = 'i3lock'"
           "60:class_g = 'Dunst'"
-          "95:class_g = 'kitty' && focused"
-          "90:class_g = 'kitty' && !focused"
+          "85:class_g = 'kitty' && focused"
+          "80:class_g = 'kitty' && !focused"
           "95:class_g = 'awesome'"
         ];
 
@@ -99,22 +99,23 @@ with lib; {
           normal = {
             fade = true;
             shadow = true;
+            opacity = 0.95;
           };
           tooltip = {
             fade = true;
             shadow = true;
             opacity = 1;
             focus = true;
-            full-shadow = false;
+            full-shadow = true;
           };
           dock = {
             shadow = true;
             rounded-corners = false;
-            opacity = 0.95;
+            opacity = 1;
           };
           dnd = {shadow = false;};
           popup_menu = {opacity = 0.95;};
-          dropdown_menu = {opacity = 0.95;};
+          dropdown_menu = {opacity = 0.9;};
         };
       };
     };

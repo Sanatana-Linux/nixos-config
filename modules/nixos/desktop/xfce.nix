@@ -9,11 +9,18 @@ with lib; let
 in {
   options.modules.desktop.xfce = {
     enable = mkEnableOption "XFCE desktop environment";
+    
+    displayManager = mkOption {
+      type = types.enum ["sddm" "lightdm"];
+      default = "sddm";
+      description = "Display manager to use with XFCE";
+    };
   };
 
   config = mkIf cfg.enable {
-    # Enable SDDM display manager
-    modules.desktop.sddm.enable = true;
+    # Enable appropriate display manager based on configuration
+    modules.desktop.sddm.enable = mkIf (cfg.displayManager == "sddm") true;
+    modules.desktop.lightdm.enable = mkIf (cfg.displayManager == "lightdm") true;
 
     # Common XFCE configuration
     services = {

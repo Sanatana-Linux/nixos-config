@@ -10,11 +10,25 @@ with lib; let
 in {
   options.modules.desktop.awesomewm = {
     enable = mkEnableOption "AwesomeWM window manager";
+    
+    displayManager = mkOption {
+      type = types.enum ["sddm" "ly" "lightdm"];
+      default = "lightdm";
+      description = "Display manager to use with AwesomeWM";
+    };
+
+    lySession = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Create xinitrc session support when using ly display manager";
+    };
   };
 
   config = mkIf cfg.enable {
-    # Enable SDDM display manager
-    modules.desktop.sddm.enable = true;
+    # Enable appropriate display manager based on configuration
+    modules.desktop.sddm.enable = mkIf (cfg.displayManager == "sddm") true;
+    modules.desktop.ly.enable = mkIf (cfg.displayManager == "ly") true;
+    modules.desktop.lightdm.enable = mkIf (cfg.displayManager == "lightdm") true;
 
     # Common AwesomeWM configuration
     services = {
@@ -26,7 +40,7 @@ in {
         };
       };
 
-      displayManager.defaultSession = "none+awesome";
+      displayManager.defaultSession = if (cfg.displayManager == "ly") then "xinitrc" else "none+awesome";
 
       xserver = {
         enable = true;
@@ -139,7 +153,11 @@ in {
         xwininfo
         xdg-launch
         xdg-utils
-      ];
+      ] ++ (lib.optionals (cfg.displayManager == "ly" && cfg.lySession) [
+        # Additional packages for ly display manager
+        pkgs.xauth
+        pkgs.xset
+      ]);
 
       sessionVariables = {
         LUA_PATH = "${pkgs.luajitPackages.luarocks}/share/lua/${pkgs.luajit.luaversion}/?.lua;${pkgs.luajitPackages.luarocks}/share/lua/${pkgs.luajit.luaversion}/?/init.lua;${pkgs.lua52Packages.lgi}/share/lua/5.2/?.lua;${pkgs.lua52Packages.lgi}/share/lua/5.2/?/init.lua";
@@ -167,5 +185,30 @@ in {
     };
 
     security.pam.services.i3lock.enable = true;
+
+    # Create xinitrc for ly display manager support
+    environment.etc."X11/xinit/xinitrc" = mkIf (cfg.displayManager == "ly" && cfg.lySession) {
+      text = ''
+        #!/bin/sh
+        # Simple xinitrc that just starts AwesomeWM
+        # X11 resources and authentication are handled by the display manager
+        exec ${pkgs.awesome}/bin/awesome
+      '';
+      mode = "0755";
+    };
+
+    # Create desktop session files for LY in custom-sessions directory  
+    environment.etc."ly/custom-sessions/awesome.desktop" = mkIf (cfg.displayManager == "ly") {
+      text = ''
+        [Desktop Entry]
+        Version=1.0
+        Type=XSession
+        Name=AwesomeWM
+        Comment=Highly configurable framework window manager
+        Exec=${pkgs.awesome}/bin/awesome
+        Icon=awesome
+        DesktopNames=awesome
+      '';
+    };
   };
 }

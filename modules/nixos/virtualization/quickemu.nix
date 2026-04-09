@@ -15,12 +15,20 @@ in {
       default = true;
       description = "Install additional QEMU utilities alongside quickemu";
     };
+    
+    enableGUI = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Install quickgui (graphical interface for quickemu)";
+    };
   };
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs;
       [
         quickemu
+      ]
+      ++ optionals cfg.enableGUI [
         quickgui
       ]
       ++ optionals cfg.installUtils [

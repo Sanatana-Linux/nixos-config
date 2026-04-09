@@ -78,10 +78,11 @@ with lib; let
     "application/x-zip-compressed" = archiveExtractor;
 
     # Ebook formats... Sorry but firefox just does it better!
-    "application/epub+zip" = browser;
-    "application/epub" = browser; # .epub
-    "application/pdf" = browser;
-    "application/x-pdf" = browser;
+    "application/epub+zip" = pdfViewer;
+    "application/epub" = pdfViewer; # .epub
+    "application/pdf" = pdfViewer;
+    "application/x-pdf" = pdfViewer;
+    "application/mobi" = pdfViewer;
   };
 in {
   options.modules.shell.xdg = {
@@ -92,7 +93,6 @@ in {
     home.packages = with pkgs; [
       loupe
       foliate
-      wlr-protocols
       xdg-utils
       xdg-desktop-portal-gtk
       xdg-desktop-portal

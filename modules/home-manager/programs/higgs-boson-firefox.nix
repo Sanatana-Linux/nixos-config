@@ -6,7 +6,7 @@
   ...
 }:
 with lib; let
-  # Firefox with https://github.com/MrOtherGuy/fx-autoconfig
+  # Firefox with https://github.com/MrOtherGuy/fx-autoconfig and my custom setup that puts customizable addons on the status bar and popover windows on the right bar that can also have addons thrown in with them
   firefox-custom =
     (
       pkgs.firefox.override {
@@ -293,8 +293,8 @@ in {
               definedAliases = ["b"];
             };
             "Anna's Archive" = {
-              urls = [{template = "https://annas-archive.org/search?q={searchTerms}";}];
-              icon = "https://annas-archive.org/favicon-32x32.png?hash=989ac03e6b8daade6d2d";
+              urls = [{template = "https://annas-archive.gl/search?q={searchTerms}";}];
+              icon = "https://annas-archive.gl/favicon-32x32.png?hash=989ac03e6b8daade6d2d";
               definedAliases = ["a"];
             };
             "youtube" = {

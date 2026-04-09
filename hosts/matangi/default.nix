@@ -181,10 +181,6 @@
       tpm.enable = true;
       udev.enable = true;
       logitech.enable = true;
-      openrgb = {
-        enable = true;
-        motherboard = "intel";
-      };
       lenovo.enable = true;
       sound.enable = true;
       networking = {
@@ -195,9 +191,15 @@
       iphone.enable = true;
     };
 
+    # Stylix
+    stylix.enable = true;
+
     # Desktop
     desktop = {
-      xfce.enable = true;
+      xfce = {
+        enable = true;
+        displayManager = "lightdm";
+      };
     };
 
     # Printer

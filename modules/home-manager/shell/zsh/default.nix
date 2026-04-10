@@ -146,9 +146,6 @@ in {
           cd "$(walk --icons  "$@")"
         }
 
-        # Node Version Management
-        eval "$(fnm env --shell zsh --use-on-cd --corepack-enabled )" &
-
         # Ollama update function
         ollama_update() {
             ollama list | awk 'NR>1 {print $1}' | while read package; do
@@ -222,7 +219,6 @@ in {
 
         # Miscellaneous
         c = "clear";
-        nvm = "${lib.getBin fnm}/bin/fnm";
         m = "mkdir -p"; # create directory if not exists
         ytmp3 = "${lib.getBin yt-dlp}/bin/yt-dlp -x --continue --add-metadata --embed-thumbnail --audio-format mp3 --audio-quality 0 --metadata-from-title=\"%(artist)s - %(title)s\" --prefer-ffmpeg -o \"%(title)s.%(ext)s\""; # Download YouTube videos as MP3
       });

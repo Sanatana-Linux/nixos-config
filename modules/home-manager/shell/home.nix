@@ -47,11 +47,6 @@ in {
       GOPATH = lib.mkDefault "$HOME/go";
       GOBIN = lib.mkDefault "$HOME/go/bin";
       PNPM_HOME = lib.mkDefault "$HOME/.local/share/pnpm";
-      FNM_DIR = lib.mkDefault "$HOME/.fnm";
-      FNM_VERSION_FILE_STRATEGY = lib.mkDefault "local";
-      FNM_RESOLVE_ENGINES = lib.mkDefault "true";
-      FNM_COREPACK_ENABLED = lib.mkDefault "true";
-      FNM_NODE_DIST_MIRROR = lib.mkDefault "https://nodejs.org/dist";
     };
   };
 }

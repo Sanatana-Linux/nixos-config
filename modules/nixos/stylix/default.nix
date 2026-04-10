@@ -67,13 +67,15 @@ in {
         light = "Qogir";
         dark = "Qogir-dark";
       };
+      
       # System-level targets
       targets.grub.enable = mkForce false;
       targets.plymouth.enable = true;
       targets.console.enable = true;
 
-      # Desktop environment targets
+      # Desktop environment targets - just enable GTK, theme will be overridden by home-manager
       targets.gtk.enable = true;
+      
       targets.qt.enable = true;
       targets.qt.platform = "qtct";
       targets.fontconfig.enable = true;
@@ -81,5 +83,11 @@ in {
       # Icon theme
       targets.nixos-icons.enable = true;
     };
+
+    # Ensure materia-theme is available system-wide
+    environment.systemPackages = with pkgs; [
+      materia-theme
+      qogir-icon-theme
+    ];
   };
 }

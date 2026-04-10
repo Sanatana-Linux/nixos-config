@@ -44,10 +44,9 @@ with pkgs;
           local target_font="$1"
           local temp_dir=$(mktemp -d)
           local temp_ttx="$temp_dir/temp.ttx"
-
           # Convert font to XML temporarily
           ttx -o "$temp_ttx" "$target_font" >/dev/null 2>&1
-          if[ $? -ne 0 ]; then
+          if [ $? -ne 0 ]; then
               echo "Error: Failed to convert font to XML using ttx." >&2
               rm -rf "$temp_dir"
               return 1
@@ -132,17 +131,17 @@ with pkgs;
           local b64_font=$(base64 "$FONT" | tr -d '\n')
 
           # 1. Output HTML Head & CSS
-          cat <<EOF > "$out"
+          cat > "$out" << 'HTMLEOF'
       <!DOCTYPE html>
       <html lang="en">
       <head>
           <meta charset="UTF-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>Icon Reference: $FONT_BASENAME</title>
+          <title>Icon Reference: FONT_BASENAME_PLACEHOLDER</title>
           <style>
               @font-face {
                   font-family: 'EmbeddedFont';
-                  src: url('data:font/$ext;charset=utf-8;base64,$b64_font') format('$format');
+                  src: url('data:font/FONT_EXT_PLACEHOLDER;charset=utf-8;base64,FONT_B64_PLACEHOLDER') format('FONT_FORMAT_PLACEHOLDER');
                   font-weight: normal; font-style: normal;
               }
               :root {
@@ -187,9 +186,47 @@ with pkgs;
           </script>
       </head>
       <body>
-          <h1>Icon Reference: $FONT_BASENAME</h1>
-          <div class="grid">
-      EOF
+          <h1>Icon Reference: FONT_BASENAME_PLACEHOLDER</h1>
+           <div class="grid">
+HTMLEOF
+
+           # Replace placeholders with actual values using a safer method
+           sed -i "s/FONT_BASENAME_PLACEHOLDER/$FONT_BASENAME/g" "$out"
+           sed -i "s/FONT_EXT_PLACEHOLDER/$ext/g" "$out"
+           sed -i "s/FONT_FORMAT_PLACEHOLDER/$format/g" "$out"
+           
+           # Handle base64 font data separately to avoid "Argument list too long"
+           # Write base64 data to a temporary file and use it for replacement
+           local temp_script=$(mktemp)
+           cat > "$temp_script" << 'EOF'
+import sys
+import re
+
+# Read the HTML file
+with open(sys.argv[1], 'r') as f:
+    content = f.read()
+
+# Read the base64 data  
+with open(sys.argv[2], 'r') as f:
+    b64_data = f.read().strip()
+
+# Replace the placeholder
+content = content.replace('FONT_B64_PLACEHOLDER', b64_data)
+
+# Write back
+with open(sys.argv[1], 'w') as f:
+    f.write(content)
+EOF
+           
+           # Create temp file with base64 data
+           local temp_b64=$(mktemp)
+           echo -n "$b64_font" > "$temp_b64"
+           
+           # Use python to do the replacement
+           python3 "$temp_script" "$out" "$temp_b64"
+           
+           # Clean up
+           rm -f "$temp_script" "$temp_b64"
 
           # 2. Extract Data & Append HTML Cards
           extract_codepoints "$FONT" | grep '^U+' | awk -F '\t' '
@@ -239,12 +276,12 @@ with pkgs;
               }
           }' >> "$out"
 
-          # 3. Close HTML Tags
-          cat <<EOF >> "$out"
-          </div>
-      </body>
-      </html>
-      EOF
+           # 3. Close HTML Tags
+           cat >> "$out" << 'HTMLEOF2'
+           </div>
+       </body>
+       </html>
+HTMLEOF2
 
           echo "Done! Saved to $out."
 

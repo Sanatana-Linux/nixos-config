@@ -28,6 +28,7 @@ in {
         pnpm
         fzf
         nps
+        rofi
         ;
       pylsp = pkgs.python314.withPackages (p:
         with p; [

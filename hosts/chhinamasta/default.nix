@@ -17,6 +17,14 @@ in {
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
+  # Overlays - same as bagalamukhi but limited to what's needed for live ISO
+  nixpkgs.overlays = [
+    # outputs.overlays.additions  # Not adding these to keep ISO size manageable
+    # outputs.overlays.modifications
+    # outputs.overlays.stable-packages
+    inputs.nur.overlays.default
+  ];
+
   nixpkgs = {
     config = {
       allowUnfree = true;
@@ -25,25 +33,55 @@ in {
   };
 
   # Enable modules using the "activate by enable option" paradigm
-  # Trimmed for live ISO — no hardware-specific drivers or unnecessary packages
+  # Live ISO configuration with essential features
   modules = {
+    # System
+    system = {
+      systemd.enable = true;
+      boot = {
+        enable = true;
+        theme.enable = true;
+        development.enable = true;
+      };
+    };
+
     base = {
       enable = true;
       timezone = "America/New_York";
       nix.enable = true;
+      permittedPackages.enable = true;
+      services.enable = true;
     };
+
+    # User
+    users.user.enable = true;
     shell = {
       enable = true;
       zsh = true;
     };
-    stylix.enable = true;
-    users.user.enable = true;
+
+    # Programs - essential for live ISO
+    programs = {
+      nix-ld.enable = true;
+      appimage.enable = true;
+      thunar.enable = true;
+    };
+
+    # Environment
     environment.variables.enable = true;
+
+    # Performance - basic for live environment
+    performance = {
+      default.enable = true;
+      zram.enable = true; # Good for live ISO with limited RAM
+    };
+
+    # Packages - configured for live ISO use
     packages = {
       core.enable = true;
       development = {
         enable = true;
-        minimal = true;
+        minimal = true; # Keep minimal for ISO size
       };
       fonts = {
         enable = true;
@@ -53,12 +91,12 @@ in {
       };
       gui = {
         enable = true;
-        minimal = true;
+        minimal = true; # Keep minimal for ISO size
         libs.enable = true;
       };
       multimedia = {
         enable = true;
-        minimal = true;
+        minimal = true; # Keep minimal for ISO size
       };
       network = {
         enable = true;
@@ -76,17 +114,48 @@ in {
       };
       system = {
         enable = true;
-        minimal = true;
+        minimal = true; # Keep minimal for ISO size
       };
       x11.enable = true;
     };
+
+    # Hardware - essential for live ISO
     hardware = {
-      sound = {
+      bluetooth.enable = true; # Common hardware support
+      sound.enable = true;
+      udev.enable = true;
+      tpm.enable = true; # Modern hardware support
+      intel.enable = true; # Intel graphics/CPU support (common)
+      networking = {
         enable = true;
+        hostName = "chhinamasta";
+        wifi.rtl88x2bu.enable = true; # Same WiFi support as bagalamukhi
       };
+      android.enable = true; # Mobile device support
+      # Note: Not adding NVIDIA, Logitech, or Lenovo as these are too specific for a live ISO
     };
+
+    # Stylix
+    stylix.enable = true;
+
+    # Desktop
     desktop = {
       awesomewm.enable = true;
+    };
+
+    # Security - essential
+    security = {
+      doas = {
+        enable = true;
+        adminUser = "user"; # Note: user instead of tlh
+      };
+      sudo.enable = true;
+    };
+
+    # AI - optional but good for demonstration
+    ai = {
+      ollama.enable = true;
+      core.enable = true;
     };
   };
 
@@ -120,7 +189,7 @@ in {
     blacklistedKernelModules = [];
     kernelModules = [];
     tmp.cleanOnBoot = true;
-    kernelPackages = pkgs.linuxPackages_xanmod_latest;
+    kernelPackages = lib.mkForce pkgs.linuxPackages_xanmod_latest;
 
     kernelParams = [
       "mitigations=off"

@@ -64,6 +64,12 @@ in {
         package = pkgs.qogir-icon-theme;
       };
 
+      # Explicitly set GTK4 theme to keep legacy behavior and silence warning
+      gtk4.theme = mkForce {
+        name = "Materia-dark-compact";
+        package = pkgs.materia-theme;
+      };
+
       # GTK2 configuration
       gtk2.extraConfig = ''
         gtk-theme-name="Materia-dark-compact"

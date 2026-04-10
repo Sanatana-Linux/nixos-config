@@ -121,7 +121,8 @@ with lib; {
     home.file = {
       ".config/yazi/yazi.toml".source = ./yazi.toml;
       ".config/yazi/keymap.toml".source = ./keymap.toml;
-      ".config/yazi/theme.toml".source = ./theme.toml;
+      # Don't install theme file to avoid conflicts with stylix
+      # ".config/yazi/theme.toml".source = ./theme.toml;
     };
   };
 }

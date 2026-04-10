@@ -83,37 +83,6 @@
     );
 
     nixosConfigurations = {
-      nixos = {
-        settings = {
-          # Use Binary Cache because we don't want to wait our lives away
-          builders-use-substitutes = true;
-          # No Seriously, Use the Binary Caches
-          always-allow-substitutes = true;
-        };
-        extra-substituters = [
-          "https://ai.cachix.org" # nixified cache
-          "https://cache.garnix.io" #
-          "https://cache.nixos-cuda.org" # CUDA packages
-          "https://cache.nixos-cuda.org" # They changed their cache
-          "https://cache.nixos.org?priority=10" # nixos cache
-          "https://nix-community.cachix.org" # community cache
-          "https://nixpkgs-unfree.cachix.org" # nixpkgs-unfree
-          "https://pre-commit-hooks.cachix.org" # pre commit hooks
-          "https://stable-diff.cachix.org" # stable diffusion related cache
-        ];
-        extra-trusted-public-keys = [
-          "ai.cachix.org-1:N9dzRK+alWwoKXQlnn0H6aUx0lU/mspIoz8hMvGvbbc="
-          "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
-          "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="
-          "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="
-          "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-          "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-          "nixpkgs-unfree.cachix.org-1:hqvoInulhbV4nJ9yJOEr+4wxhDV4xq2d1DK7S6Nj6rs="
-          "pre-commit-hooks.cachix.org-1:Pkk3Panw5AW24TOv6kz3PvLhlH8puAsJTBbOPmBo7Rc="
-          "sanatanalinux.cachix.org-1:9WsJYECJ+Lt0HPTUI7+6f9uAaAUouaBUyTd9iAJbUEY="
-          "stable-diff.cachix.org-1:liYFm3f3q1dAoilj2Ag2IEKzW3Q9/HJcLlrAIytAcy0="
-        ];
-      };
 
       # ┣━━━━━━━━━━━━━━━━━━━━━━┫ My Lenovo Legion 5 Pro ┣━━━━━━━━━━━━━━━━━━━━━━┫
 
@@ -199,29 +168,6 @@
           ./hosts/chhinamasta
         ];
       };
-
-      shodashi = nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit inputs outputs self;
-          format = "isoImage";
-        };
-        modules = [
-          inputs.stylix.nixosModules.stylix
-          inputs.nur.modules.nixos.default
-          inputs.bhairava-grub-theme.nixosModule
-          inputs.home-manager.nixosModules.home-manager
-          ./modules/nixos
-          {
-            home-manager = {
-              useUserPackages = true;
-              extraSpecialArgs = {inherit inputs outputs;};
-              sharedModules = [./modules/home-manager];
-              users.user = {imports = [./home/user/default.nix];};
-            };
-          }
-          ./hosts/shodashi
-        ];
-      };
     };
     # ┣━━━━━━━━━━━━━━━━━━━━━┫ Home Configurations ┣━━━━━━━━━━━━━━━━━━━━━┫
     homeConfigurations = {
@@ -239,7 +185,5 @@
       };
     };
     # ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-    matangi = self.nixosConfigurations.matangi.config.system.build.toplevel;
-    bagalamukhi = self.nixosConfigurations.bagalamukhi.config.system.build.toplevel;
   };
 }

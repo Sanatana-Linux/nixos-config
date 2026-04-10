@@ -11,6 +11,7 @@
   ];
 
   modules = {
+    stylix.enable = false;
     desktop = {
       enable = true; # This automatically enables gtk.enable via mkDefault
     };

@@ -10,6 +10,7 @@ with lib; let
   nixfetch = import ./nixfetch.nix {inherit pkgs;};
   om = import ./om.nix {inherit pkgs;};
   ns = pkgs.writeShellScriptBin "ns" (builtins.readFile ./nixpkgs.sh);
+  icon-viewer = import ./icon-viewer.nix {inherit pkgs;};
   panes = import ./panes.nix {inherit pkgs;};
   shrooms = import ./shrooms.nix {inherit pkgs;};
   mountbox = import ./mountbox.nix {inherit pkgs;};
@@ -20,6 +21,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [om mountbox run shrooms gita ns nixfetch panes nps iso-open];
+    home.packages = with pkgs; [om mountbox run shrooms icon-viewer gita ns nixfetch panes nps iso-open];
   };
 }

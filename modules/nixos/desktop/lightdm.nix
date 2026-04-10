@@ -34,7 +34,7 @@ with lib; {
     
     backgroundsPath = mkOption {
       type = types.nullOr types.path;
-      default = ../assets;
+      default = ./assets;
       description = "Local path to background images directory";
     };
     
@@ -54,6 +54,12 @@ with lib; {
       type = types.bool;
       default = false;
       description = "Enable hardware acceleration for webkit";
+    };
+    
+    defaultWallpaper = mkOption {
+      type = types.nullOr types.str;
+      default = "sanatana_topographic.png";
+      description = "Default wallpaper filename from the backgrounds directory";
     };
   };
 
@@ -88,6 +94,7 @@ with lib; {
         selectedTheme = config.modules.desktop.lightdm.selectedTheme;
         backgrounds = effectiveBackgrounds;
         enableHWAcceleration = config.modules.desktop.lightdm.enableHWAcceleration;
+        defaultWallpaper = config.modules.desktop.lightdm.defaultWallpaper;
       };
     in [
       configuredSeaGreeter
@@ -117,6 +124,7 @@ with lib; {
             }
             else null;
           enableHWAcceleration = config.modules.desktop.lightdm.enableHWAcceleration;
+          defaultWallpaper = config.modules.desktop.lightdm.defaultWallpaper;
         });
         name = "sea-greeter";
       };

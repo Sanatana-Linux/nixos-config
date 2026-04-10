@@ -25,8 +25,7 @@
       scripts.enable = true;
     };
     desktop = {
-      enable = true;
-      gtk.enable = true; # Use the consolidated gtk module
+      enable = true; # This automatically enables gtk.enable via mkDefault
     };
     programs = {
       fastfetch.enable = true;

@@ -33,6 +33,10 @@ in {
   config = mkIf cfg.enable {
     # Essential GTK and Qt packages for proper theming support
     home.packages = with pkgs; [
+      # Theme packages
+      materia-theme
+      qogir-icon-theme
+      
       # Qt theme integration packages
       adwaita-qt
       adwaita-qt6
@@ -44,12 +48,25 @@ in {
       cfg.cursor.package
     ];
 
-    # GTK Configuration - only settings not handled by Stylix
+    # GTK Configuration - FORCE Materia-dark-compact theme
     gtk = {
       enable = true;
 
-      # GTK2/3/4 specific configurations that Stylix doesn't handle
+      # Force Materia theme - override Stylix completely
+      theme = mkForce {
+        name = "Materia-dark-compact";
+        package = pkgs.materia-theme;
+      };
+
+      # Force icon theme 
+      iconTheme = mkForce {
+        name = "Qogir-dark";
+        package = pkgs.qogir-icon-theme;
+      };
+
+      # GTK2 configuration
       gtk2.extraConfig = ''
+        gtk-theme-name="Materia-dark-compact"
         gtk-toolbar-style=GTK_TOOLBAR_BOTH_HORIZ
         gtk-toolbar-icon-size=GTK_ICON_SIZE_LARGE_TOOLBAR
         gtk-button-images=1
@@ -62,8 +79,9 @@ in {
         gtk-xft-rgba="rgba"
       '';
 
+      # GTK3 configuration
       gtk3.extraConfig = {
-        # These settings are typically not handled by Stylix
+        gtk-theme-name = mkForce "Materia-dark-compact";
         gtk-decoration-layout = mkDefault "menu:";
         gtk-button-images = mkDefault "1";
         gtk-menu-images = mkDefault "1";
@@ -73,21 +91,20 @@ in {
         gtk-xft-rgba = mkDefault "rgba";
       };
 
+      # GTK4 configuration - force the theme
       gtk4.extraConfig = {
+        gtk-theme-name = mkForce "Materia-dark-compact";
         gtk-decoration-layout = mkDefault "menu:";
       };
-      
-      # Explicitly set GTK4 theme to match GTK3 theme for consistency
-      # This silences the deprecation warning about the default changing from config.gtk.theme to null
-      gtk4.theme = mkDefault config.gtk.theme;
-
-      # Fallback cursor configuration when Stylix is not enabled
-      cursorTheme = mkIf (!config.stylix.enable or false) {
-        name = cfg.cursor.name;
-        package = cfg.cursor.package;
-        size = cfg.cursor.size;
-      };
     };
+
+    # Force environment variables for GTK theme
+    home.sessionVariables = {
+      GTK_THEME = mkForce "Materia-dark-compact";
+    } // (mkIf (!config.stylix.enable or false) {
+      XCURSOR_THEME = cfg.cursor.name;
+      XCURSOR_SIZE = toString cfg.cursor.size;
+    });
 
     # Pointer cursor configuration - fallback when Stylix is not enabled
     home.pointerCursor = mkIf (!config.stylix.enable or false) {
@@ -114,16 +131,12 @@ in {
       xdg-desktop-portal-gtk
     ];
 
-    # Session variables for cursor persistence (when not using Stylix)
-    home.sessionVariables = mkIf (!config.stylix.enable or false) {
-      XCURSOR_THEME = cfg.cursor.name;
-      XCURSOR_SIZE = toString cfg.cursor.size;
-    };
-
     # dconf settings for dark theme preference
     dconf.settings = {
       "org/gnome/desktop/interface" = {
-        color-scheme = mkDefault "prefer-dark";
+        gtk-theme = mkForce "Materia-dark-compact";
+        icon-theme = mkForce "Qogir-dark";
+        color-scheme = mkForce "prefer-dark";
       };
     };
   };

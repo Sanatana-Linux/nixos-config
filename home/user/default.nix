@@ -9,11 +9,13 @@
   ];
 
   modules = {
+    stylix.enable = true;
     packages = {
       essential.enable = true;
     };
     shell = {
       home.enable = true;
+      environment.enable = true; # Added for feature parity
       zsh.enable = true;
       starship.enable = true;
       cli-tools.enable = true;
@@ -24,7 +26,6 @@
     desktop = {
       enable = true; # This automatically enables gtk.enable via mkDefault
     };
-    stylix.enable = true;
     programs = {
       fastfetch.enable = true;
       higgs-boson-firefox.enable = true;
@@ -32,8 +33,13 @@
       gpg.enable = true;
       zathura.enable = true;
       yazi.enable = true;
+      vesktop.enable = true; # Added for feature parity
     };
     services = {
+      gnome-keyring = {
+        enable = true;
+        components = ["secrets" "ssh" "pkcs11"];
+      };
       picom.enable = true;
       xscreensaver.enable = true;
     };
@@ -62,10 +68,6 @@
     };
   };
 
-  services.gnome-keyring = {
-    enable = true;
-    components = ["secrets" "ssh" "pkcs11"];
-  };
   programs.home-manager.enable = true;
 
   home = {

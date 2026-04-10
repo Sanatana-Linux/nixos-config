@@ -34,12 +34,6 @@ in {
         EDITOR = "nvim";
         VISUAL = "nvim";
         PNPM_HOME = "${config.home.homeDirectory}/.local/share/pnpm";
-        FNM_DIR = "${config.home.homeDirectory}/.local/share/fnm";
-        FNM_VERSION_FILE_STRATEGY = "local";
-        FNM_LOGLEVEL = "info";
-        FNM_NODE_DIST_MIRROR = "https://nodejs.org/dist";
-        FNM_COREPACK_ENABLED = "true";
-        FNM_RESOLVE_ENGINES = "true";
         FNM_ARCH = "x64";
         _JAVA_AWT_WM_NONREPARENTING = "1";
       };

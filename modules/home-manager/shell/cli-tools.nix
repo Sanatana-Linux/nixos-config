@@ -25,7 +25,6 @@ in {
       editorconfig-core-c
       eza
       fd
-      fnm
       fzf-obc
       fzf
       findutils

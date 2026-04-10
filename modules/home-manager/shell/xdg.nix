@@ -104,9 +104,14 @@ in {
       xdgmenumaker
     ];
     
-    # Ensure terminal environment variable is set for all applications
+    # Ensure application environment variables are set for all applications
     home.sessionVariables = {
       TERMINAL = "kitty";
+      BROWSER = "firefox";
+      EDITOR = "nvim";
+      VISUAL = "nvim";
+      PAGER = "less";
+      FILE_MANAGER = "thunar";
     };
     
     # XFCE configuration for preferred applications (needed for Thunar integration)

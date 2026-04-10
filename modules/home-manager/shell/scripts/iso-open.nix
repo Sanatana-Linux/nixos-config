@@ -6,5 +6,5 @@ with pkgs;
     file="$1"
     name=$(basename "$file" .iso)
     dest="$HOME/$name"
-    sudo mkdir -p "$dest" && sudo mount -o loop "$file" "$dest" && xdg-open "$dest"
+    sudo mkdir -p "$dest" && sudo mount -o loop "$file" "$dest" && cd "$dest" && ls -alhF
   ''

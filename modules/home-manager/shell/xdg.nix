@@ -103,6 +103,87 @@ in {
       xdg-utils-cxx
       xdgmenumaker
     ];
+    
+    # Ensure terminal environment variable is set for all applications
+    home.sessionVariables = {
+      TERMINAL = "kitty";
+    };
+    
+    # XFCE configuration for preferred applications (needed for Thunar integration)
+    xfconf.settings = {
+      "xfce4-session" = {
+        "general/TerminalEmulator" = "kitty";
+      };
+      "exo" = {
+        # Terminal applications
+        "preferred/TerminalEmulator" = "kitty";
+        
+        # Web browser
+        "preferred/WebBrowser" = "firefox";
+        
+        # File manager (Thunar itself)
+        "preferred/FileManager" = "thunar";
+        
+        # Mail reader
+        "preferred/MailReader" = "firefox"; # Use browser for web mail
+        
+        # Text editor
+        "preferred/TextEditor" = "nvim";
+        
+        # Image viewer
+        "preferred/ImageViewer" = "org.gnome.Loupe";
+        
+        # Video player
+        "preferred/VideoPlayer" = "vlc";
+        
+        # Music player
+        "preferred/MusicPlayer" = "vlc";
+        
+        # Archive manager
+        "preferred/ArchiveManager" = "file-roller";
+        
+        # PDF viewer
+        "preferred/DocumentViewer" = "foliate";
+      };
+      
+      # Additional XFCE mime associations for better integration
+      "mimeapps" = {
+        # Web browser associations
+        "default/text/html" = "firefox.desktop";
+        "default/application/xhtml+xml" = "firefox.desktop";
+        "default/x-scheme-handler/http" = "firefox.desktop";
+        "default/x-scheme-handler/https" = "firefox.desktop";
+        "default/x-scheme-handler/ftp" = "firefox.desktop";
+        
+        # Terminal
+        "default/x-scheme-handler/terminal" = "kitty.desktop";
+        
+        # Text files
+        "default/text/plain" = "nvim.desktop";
+        "default/application/x-shellscript" = "nvim.desktop";
+        "default/text/x-python" = "nvim.desktop";
+        "default/text/x-c" = "nvim.desktop";
+        "default/text/x-c++" = "nvim.desktop";
+        "default/text/markdown" = "nvim.desktop";
+        "default/application/json" = "firefox.desktop";
+        
+        # Media files
+        "default/video/*" = "vlc.desktop";
+        "default/audio/*" = "vlc.desktop";
+        "default/image/*" = "org.gnome.Loupe.desktop";
+        
+        # Documents
+        "default/application/pdf" = "foliate.desktop";
+        "default/application/epub+zip" = "foliate.desktop";
+        
+        # Archives
+        "default/application/zip" = "file-roller.desktop";
+        "default/application/x-tar" = "file-roller.desktop";
+        "default/application/x-rar" = "file-roller.desktop";
+        "default/application/x-7z-compressed" = "file-roller.desktop";
+      };
+    };
+    
     xdg = {
       enable = true;
       userDirs = {

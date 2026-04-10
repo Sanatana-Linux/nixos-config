@@ -11,7 +11,7 @@ let
     
     installPhase = ''
       mkdir -p $out
-      cp -r $src/* $out/
+      cp -r $src/* $out/ 2>/dev/null || true
     '';
   };
 in

@@ -12,7 +12,7 @@
 
   modules = {
     desktop = {
-      gtk.enable = true; # Use the consolidated gtk module instead of orchisCosmic
+      enable = true; # This automatically enables gtk.enable via mkDefault
     };
     packages.essential.enable = true;
     shell = {

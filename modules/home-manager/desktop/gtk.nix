@@ -76,6 +76,10 @@ in {
       gtk4.extraConfig = {
         gtk-decoration-layout = mkDefault "menu:";
       };
+      
+      # Explicitly set GTK4 theme to match GTK3 theme for consistency
+      # This silences the deprecation warning about the default changing from config.gtk.theme to null
+      gtk4.theme = mkDefault config.gtk.theme;
 
       # Fallback cursor configuration when Stylix is not enabled
       cursorTheme = mkIf (!config.stylix.enable or false) {

@@ -30,12 +30,12 @@
     # Update SillyTavern to latest staging branch commit
     sillytavern = prev.sillytavern.overrideAttrs (oldAttrs: rec {
       pname = "sillytavern";
-      version = "unstable-2026-04-04";
+      version = "unstable-2026-04-09";
       src = final.fetchFromGitHub {
         owner = "SillyTavern";
         repo = "SillyTavern";
-        rev = "0f4a0147fd101f7a756b82266bd591ac12a3c7a5";
-        hash = "sha256-KuRDnZt0rzb33MNoHCSgWoXa2Hlzl9+Hu8REgCtcN1Q=";
+        rev = "64e8c8d964c74b72b421ed06f1d5706713edb804";
+        hash = "sha256-8xY0ngf4nCqPqGMsnUQWkhHfOgZSBM08NvL/bnVIqCg=";
       };
       npmDepsHash = "sha256-pjBCwOtx5UiZWW7/Tir4KHZAkPgrM2sMDix/g2USDWk=";
       # Force rebuild of npm dependencies

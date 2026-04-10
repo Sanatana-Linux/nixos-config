@@ -22,8 +22,7 @@
       scripts.enable = true;
     };
     desktop = {
-      enable = true;
-      gtk.enable = true; # Use the consolidated gtk module instead of monokaiProSkeudos
+      enable = true; # This automatically enables gtk.enable via mkDefault
     };
     stylix.enable = true;
     programs = {

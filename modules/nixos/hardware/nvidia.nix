@@ -137,6 +137,7 @@ in {
       "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
       "nvidia-drm.modeset=1"
       "nvidia.NVreg_EnableResizableBar=1"
+      "pcie_aspm=off"
     ];
 
     # Initrd kernel modules for NVIDIA
@@ -207,5 +208,11 @@ in {
         };
       };
     };
+
+    # NVIDIA power management udev rule
+    # Ensures NVIDIA GPU power control is set to "on" when the device is added
+    services.udev.extraRules = ''
+      ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", TEST=="power/control", ATTR{power/control}="on"
+    '';
   };
 }

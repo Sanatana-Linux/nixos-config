@@ -1,6 +1,6 @@
 { lib, stdenv, fetchFromGitHub, meson, ninja, pkg-config, gtk3, webkitgtk_4_1
 , lightdm, glib, libyaml, typescript, makeWrapper, cmake
-, theme ? null, themeList ? [], backgrounds ? null, selectedTheme ? "gruvbox"
+, themes ? [], backgrounds ? null, selectedTheme ? "gruvbox"
 , enableHWAcceleration ? false, defaultWallpaper ? null }:
 
 stdenv.mkDerivation rec {
@@ -18,8 +18,7 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [ meson ninja pkg-config typescript makeWrapper ];
 
   buildInputs = [ gtk3 webkitgtk_4_1 lightdm glib libyaml cmake ] 
-    ++ lib.optional (theme != null) theme
-    ++ lib.optionals (themeList != []) themeList;
+    ++ lib.optionals (themes != []) themes;
 
   configurePhase = ''
     runHook preConfigure
@@ -38,11 +37,7 @@ stdenv.mkDerivation rec {
               "$out/usr/share/"
     
     # Configure selected theme
-    ${if (theme != null) then ''
-      substituteInPlace data/web-greeter.yml \
-      --replace 'theme: gruvbox' \
-                "theme: ${theme.pname}"
-    '' else if (themeList != []) then ''
+    ${if (themes != [] && selectedTheme != "gruvbox") then ''
       substituteInPlace data/web-greeter.yml \
       --replace 'theme: gruvbox' \
                 "theme: ${selectedTheme}"
@@ -100,17 +95,12 @@ EOF
     # Install themes
     mkdir -p "$out/usr/share/web-greeter/themes"
     
-    ${lib.optionalString (theme != null) ''
-      echo "Installing single theme: ${theme.pname}"
-      ln -s ${theme} "$out/usr/share/web-greeter/themes/${theme.pname}"
-    ''}
-    
-    ${lib.optionalString (themeList != []) ''
-      echo "Installing multiple themes"
+    ${lib.optionalString (themes != []) ''
+      echo "Installing themes"
       ${lib.concatMapStringsSep "\n" (t: ''
         echo "Installing theme: ${t.pname}"
         ln -s ${t} "$out/usr/share/web-greeter/themes/${t.pname}"
-      '') themeList}
+      '') themes}
     ''}
     
     # Install backgrounds

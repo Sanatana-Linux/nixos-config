@@ -80,7 +80,7 @@ in {
           nvidia-texture-tools
           libnvidia-container
           nv-codec-headers
-          nvtopPackages.nvidia
+          nvtopPackages.full
           nvidia_cg_toolkit
 
           nvidia-optical-flow-sdk # Optical flow SDK
@@ -191,7 +191,7 @@ in {
         forceFullCompositionPipeline = true;
 
         powerManagement = {
-          enable = true;
+          enable = false;
           finegrained = false;
         };
 
@@ -213,6 +213,8 @@ in {
     # Ensures NVIDIA GPU power control is set to "on" when the device is added
     services.udev.extraRules = ''
       ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", TEST=="power/control", ATTR{power/control}="on"
+      KERNEL=="nvidia*", GROUP="video", MODE="0666"
+      KERNEL=="nvidiactl", GROUP="video", MODE="0666"
     '';
   };
 }

@@ -52,6 +52,20 @@ with lib; {
   };
 
   config = mkIf config.modules.system.boot.enable {
+    # Copy EFI files to ESP for UEFI firmware access
+    system.activationScripts.advancedBiosFiles = mkIf config.modules.system.boot.advancedBios.enable ''
+      mkdir -p /boot/efi/EFI/Boot
+      cp ${./assets/BootX64.efi} /boot/efi/EFI/Boot/BootX64.efi
+      cp ${./assets/DisplayEngine.efi} /boot/efi/DisplayEngine.efi
+      cp ${./assets/Loader.efi} /boot/efi/Loader.efi
+      cp ${./assets/SREP_Config.cfg} /boot/efi/SREP_Config.cfg
+      cp ${./assets/SetupBrowser.efi} /boot/efi/SetupBrowser.efi
+      cp ${./assets/SuppressIFPatcher.efi} /boot/efi/SuppressIFPatcher.efi
+      cp ${./assets/UiApp.efi} /boot/efi/UiApp.efi
+      chmod 644 /boot/efi/EFI/Boot/BootX64.efi
+      chmod 644 /boot/efi/*.efi /boot/efi/*.cfg
+    '';
+
     boot = {
       tmp.cleanOnBoot = true;
 
@@ -137,16 +151,6 @@ with lib; {
         configurationLimit = config.modules.system.boot.configurationLimit;
         useOSProber = false;
         bhairava-grub-theme.enable = config.modules.system.boot.theme.enable;
-
-        extraFiles = mkIf config.modules.system.boot.advancedBios.enable {
-          "DisplayEngine.efi" = ./assets/DisplayEngine.efi;
-          "EFI/Boot/BootX64.efi" = ./assets/BootX64.efi;
-          "Loader.efi" = ./assets/Loader.efi;
-          "SREP_Config.cfg" = ./assets/SREP_Config.cfg;
-          "SetupBrowser.efi" = ./assets/SetupBrowser.efi;
-          "SuppressIFPatcher.efi" = ./assets/SuppressIFPatcher.efi;
-          "UiApp.efi" = ./assets/UiApp.efi;
-        };
 
         extraEntries = optionalString config.modules.system.boot.advancedBios.enable ''
           menuentry 'Advanced UEFI Firmware Settings' --class efi --class uefi  {

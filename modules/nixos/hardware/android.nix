@@ -8,6 +8,12 @@ with lib; {
   options.modules.hardware.android.enable = mkEnableOption "Android development tools";
 
   config = mkIf config.modules.hardware.android.enable {
+    # Create plugdev group for Android device access
+    users.groups.plugdev = {};
+
+    # Enable ADB users group for Android debugging
+    users.groups.adbusers = {};
+
     environment.systemPackages = with pkgs; [
       abootimg
 

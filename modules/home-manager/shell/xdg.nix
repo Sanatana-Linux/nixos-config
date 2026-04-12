@@ -213,6 +213,25 @@ in {
         associations.added = associations;
         defaultApplications = associations;
       };
+
+      # Desktop entry overrides for optimal libadwaita app behavior
+      desktopEntries = {
+        foliate = {
+          name = "Foliate";
+          comment = "Read e-books in style";
+          exec = "env ADW_DEBUG_COLOR_SCHEME=prefer-dark GSETTINGS_SCHEMA_DIR=${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}/glib-2.0/schemas foliate %F";
+          icon = "com.github.johnfactotum.Foliate";
+          mimeType = [ 
+            "application/epub+zip" 
+            "application/x-mobipocket-ebook" 
+            "application/x-fictionbook" 
+            "text/plain"
+            "application/pdf"
+          ];
+          categories = [ "Office" "Viewer" ];
+          startupNotify = true;
+        };
+      };
     };
   };
 }

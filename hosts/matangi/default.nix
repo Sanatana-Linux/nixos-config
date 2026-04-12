@@ -26,6 +26,7 @@
         theme.enable = true;
         advancedBios.enable = true;
       };
+      plymouth.enable = true; # Enable Sanatana Plymouth theme
     };
 
     base = {

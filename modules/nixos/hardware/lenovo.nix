@@ -87,7 +87,8 @@ in {
         while true; do
           temp=""
           for hwmon in /sys/class/hwmon/hwmon*; do
-            if [ "$(cat "$hwmon/name" 2>/dev/null)" = "k10temp" ]; then
+            # Check for Intel coretemp sensor instead of AMD k10temp
+            if [ "$(cat "$hwmon/name" 2>/dev/null)" = "coretemp" ]; then
               temp=$(cat "$hwmon/temp1_input" 2>/dev/null)
               break
             fi

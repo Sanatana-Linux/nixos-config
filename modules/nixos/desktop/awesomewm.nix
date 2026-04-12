@@ -10,7 +10,7 @@ with lib; let
 in {
   options.modules.desktop.awesomewm = {
     enable = mkEnableOption "AwesomeWM window manager";
-    
+
     displayManager = mkOption {
       type = types.enum ["sddm" "ly" "lightdm"];
       default = "lightdm";
@@ -40,7 +40,10 @@ in {
         };
       };
 
-      displayManager.defaultSession = if (cfg.displayManager == "ly") then "xinitrc" else "none+awesome";
+      displayManager.defaultSession =
+        if (cfg.displayManager == "ly")
+        then "xinitrc"
+        else "none+awesome";
 
       xserver = {
         enable = true;
@@ -107,57 +110,61 @@ in {
     };
 
     programs.dconf.enable = true;
+    gtk.iconCache.enable = true;
+    xdg.icons.enable = true;
 
     environment = {
-      systemPackages = with pkgs; [
-        glib
-        luabind_luajit
-        lua52Packages.lua
-        lua52Packages.lgi
-        lua52Packages.lua-pam
-        gsettings-desktop-schemas
-        gobject-introspection-unwrapped
-        eggdbus
-        gdk-pixbuf-xlib
-        gdk-pixbuf
-        luajitPackages.luarocks
-        clipse
-        scrot
-        maim
-        satty
-        menu-cache
-        garcon
-        libxfce4ui
-        libxfce4util
-        tumbler
-        gdk-pixbuf
-        gdk-pixbuf-xlib
-        xcb-proto
-        xcb-util-cursor
-        xcbutilerrors
-        xcbutilimage
+      systemPackages = with pkgs;
+        [
+          glib
+          luabind_luajit
+          lua52Packages.lua
+          lua52Packages.lgi
+          lua52Packages.lua-pam
+          gsettings-desktop-schemas
+          gobject-introspection-unwrapped
+          eggdbus
+          gdk-pixbuf-xlib
+          gdk-pixbuf
+          luajitPackages.luarocks
+          clipse
+          scrot
+          maim
+          satty
+          menu-cache
+          garcon
+          libxfce4ui
+          libxfce4util
+          tumbler
+          gdk-pixbuf
+          gdk-pixbuf-xlib
+          xcb-proto
+          xcb-util-cursor
+          xcbutilerrors
+          xcbutilimage
 
-        xcbutilxrm
-        xcbutilwm
-        xcbutilimage
-        libxcb-cursor
-        libxcb
-        libxcb-wm
-        libxcb-util
-        libxcb-render-util
-        libxcb-errors
-        xdotool
-        xsel
-        xsettingsd
-        dconf-editor
-        xwininfo
-        xdg-launch
-        xdg-utils
-      ] ++ (lib.optionals (cfg.displayManager == "ly" && cfg.lySession) [
-        # Additional packages for ly display manager
-        pkgs.xauth
-        pkgs.xset
-      ]);
+          xcbutilxrm
+          xcbutilwm
+          xcbutilimage
+          libxcb-cursor
+          libxcb
+          libxcb-wm
+          libxcb-util
+          libxcb-render-util
+          libxcb-errors
+          xdotool
+          xsel
+          xsettingsd
+          dconf-editor
+          xwininfo
+          xdg-launch
+          xdg-utils
+        ]
+        ++ (lib.optionals (cfg.displayManager == "ly" && cfg.lySession) [
+          # Additional packages for ly display manager
+          pkgs.xauth
+          pkgs.xset
+        ]);
 
       sessionVariables = {
         LUA_PATH = "${pkgs.luajitPackages.luarocks}/share/lua/${pkgs.luajit.luaversion}/?.lua;${pkgs.luajitPackages.luarocks}/share/lua/${pkgs.luajit.luaversion}/?/init.lua;${pkgs.lua52Packages.lgi}/share/lua/5.2/?.lua;${pkgs.lua52Packages.lgi}/share/lua/5.2/?/init.lua";
@@ -197,7 +204,7 @@ in {
       mode = "0755";
     };
 
-    # Create desktop session files for LY in custom-sessions directory  
+    # Create desktop session files for LY in custom-sessions directory
     environment.etc."ly/custom-sessions/awesome.desktop" = mkIf (cfg.displayManager == "ly") {
       text = ''
         [Desktop Entry]

@@ -247,8 +247,8 @@ in {
         zlib # Compression library
         zsh # Z shell
 
-        python313Packages.pygobject3
-        python313Packages.pyqt6
+        python312Packages.pygobject3
+        python312Packages.pyqt6
         python312Packages.pyqt6
 
         lua51Packages.lua # Lua interpreter

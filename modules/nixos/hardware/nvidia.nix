@@ -117,17 +117,19 @@ in {
           cudaPackages.nvidia_fs
           cudaPackages.cuda_nvcc
           cudaPackages.libcutensor
-          python313Packages.cuda-bindings
-          python313Packages.pycuda
+          # python312Packages.cuda-bindings  # Let torch-bin handle its own CUDA dependencies
+          # python312Packages.pycuda         # Let torch-bin handle its own CUDA dependencies
           tiny-cuda-nn
           cudaPackages.cudatoolkit
           blas
           peakperf
-          python313Packages.numpy
-          (python312.withPackages (p:
-            with p; [
-              tensorflowWithCuda
-            ]))
+          python312Packages.numpy
+          # (python312.withPackages (p:
+          #   with p; [
+          #     # tensorflowWithCuda  # Temporarily disabled - may be pulling in regular torch
+          #     torch-bin # Use binary torch instead of building from source
+          #     torchvision-bin # Use binary torchvision instead of building from source  
+          #   ]))
         ];
     };
 

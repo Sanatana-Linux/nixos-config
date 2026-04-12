@@ -43,6 +43,7 @@ in {
         theme.enable = true;
         development.enable = true;
       };
+      plymouth.enable = true; # Enable Sanatana Plymouth theme
     };
 
     base = {
@@ -161,7 +162,6 @@ in {
 
   services.xserver.enable = true;
   services.displayManager.defaultSession = "none+awesome";
-  boot.plymouth.enable = true;
 
   environment.systemPackages = with pkgs; [
     dbus

@@ -34,8 +34,14 @@ in {
     # Essential GTK and Qt packages for proper theming support
     home.packages = with pkgs; [
       # Theme packages
-      materia-theme
+      materia-theme-transparent
       qogir-icon-theme
+      
+      # Libadwaita and schema support packages
+      libadwaita
+      gsettings-desktop-schemas
+      adwaita-icon-theme  # Essential for libadwaita apps
+      hicolor-icon-theme  # Icon theme fallback
       
       # Qt theme integration packages
       adwaita-qt
@@ -55,7 +61,7 @@ in {
       # Force Materia theme - override Stylix completely
       theme = mkForce {
         name = "Materia-dark-compact";
-        package = pkgs.materia-theme;
+        package = pkgs.materia-theme-transparent;
       };
 
       # Force icon theme 
@@ -64,10 +70,10 @@ in {
         package = pkgs.qogir-icon-theme;
       };
 
-      # Explicitly set GTK4 theme to keep legacy behavior and silence warning
-      gtk4.theme = mkForce {
+      # Explicitly set GTK4 theme preference but allow libadwaita override
+      gtk4.theme = mkDefault {
         name = "Materia-dark-compact";
-        package = pkgs.materia-theme;
+        package = pkgs.materia-theme-transparent;
       };
 
       # GTK2 configuration
@@ -97,16 +103,22 @@ in {
         gtk-xft-rgba = mkDefault "rgba";
       };
 
-      # GTK4 configuration - force the theme
+      # GTK4 configuration - allow libadwaita apps to use native theming
       gtk4.extraConfig = {
-        gtk-theme-name = mkForce "Materia-dark-compact";
+        # Use default for libadwaita apps, Materia for others
         gtk-decoration-layout = mkDefault "menu:";
+        gtk-enable-animations = mkDefault true;
       };
     };
 
     # Force environment variables for GTK theme
     home.sessionVariables = {
-      GTK_THEME = mkForce "Materia-dark-compact";
+      # Use Materia theme for most GTK apps, but allow libadwaita apps to override
+      GTK_THEME = mkDefault "Materia-dark-compact";
+      # Ensure proper schema loading for GSettings/dconf
+      GSETTINGS_SCHEMA_DIR = "${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}/glib-2.0/schemas";
+      # Allow libadwaita apps to use native theming
+      ADW_DISABLE_PORTAL = "0";
     } // (mkIf (!config.stylix.enable or false) {
       XCURSOR_THEME = cfg.cursor.name;
       XCURSOR_SIZE = toString cfg.cursor.size;
@@ -140,9 +152,16 @@ in {
     # dconf settings for dark theme preference
     dconf.settings = {
       "org/gnome/desktop/interface" = {
-        gtk-theme = mkForce "Materia-dark-compact";
-        icon-theme = mkForce "Qogir-dark";
+        gtk-theme = mkDefault "Materia-dark-compact";
+        icon-theme = mkDefault "Qogir-dark";
         color-scheme = mkForce "prefer-dark";
+        # Ensure icon theme fallbacks work properly
+        gtk-enable-animations = mkDefault true;
+      };
+      
+      # Ensure libadwaita apps can access their styling
+      "org/gnome/desktop/wm/preferences" = {
+        button-layout = mkDefault "appmenu:minimize,maximize,close";
       };
     };
   };

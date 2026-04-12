@@ -70,7 +70,7 @@ in {
       
       # System-level targets
       targets.grub.enable = mkForce false;
-      targets.plymouth.enable = true;
+      targets.plymouth.enable = mkForce false; # Disabled in favor of custom theme
       targets.console.enable = true;
 
       # Desktop environment targets - just enable GTK, theme will be overridden by home-manager

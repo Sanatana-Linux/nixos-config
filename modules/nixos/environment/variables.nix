@@ -20,6 +20,10 @@ with lib; {
       OLLAMA_API_BASE = "http://127.0.0.1:11434";
       OPENAI_API_BASE = "http://localhost:11434";
       # QT_QPA_PLATFORMTHEME = "qt6ct";  # Managed by Stylix Qt module
+      
+      # Libadwaita and modern GTK4 support
+      GSK_RENDERER = "gl"; # Use OpenGL renderer for better performance
+      ADW_DEBUG_COLOR_SCHEME = "prefer-dark"; # Default to dark theme for libadwaita
     };
   };
 }

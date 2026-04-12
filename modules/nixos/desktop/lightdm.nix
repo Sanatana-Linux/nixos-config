@@ -10,7 +10,7 @@ with lib; {
     
     theme = mkOption {
       type = types.nullOr types.package;
-      default = pkgs.lightdm-webkit-theme-litarvan;
+      default = null; # Use built-in themes
       description = "WebKit theme package for the greeter (if null, uses built-in themes)";
     };
     

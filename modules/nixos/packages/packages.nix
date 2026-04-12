@@ -230,6 +230,7 @@ in {
         agenix-cli # Age-encrypted secrets CLI
         sops # Secrets management
         ssh-to-age # Convert SSH keys to age
+        ente-auth # 2FA Secrets
 
         # Network Utilities
         networkmanager # Network connection manager
@@ -469,7 +470,7 @@ in {
             tree-sitter-grammars.tree-sitter-typescript # TypeScript grammar
             tree-sitter-grammars.tree-sitter-vim # Vim grammar
             tree-sitter-grammars.tree-sitter-yaml # YAML grammar
-            python313Packages.tree-sitter-language-pack # Python tree-sitter bindings
+            python312Packages.tree-sitter-language-pack # Python tree-sitter bindings
           ];
       }
     ]))
@@ -591,8 +592,7 @@ in {
             mupdf # PDF viewer
             poppler-utils # PDF utilities
             pdftk # PDF toolkit
-            ebook_tools # Calibre ebook utiities without calibre
-            lue # Terminal ebook reader application using EdgeTTS
+            calibre # Comprehensive e-book software with ebook-convert
 
             # Other
             transmission_4-gtk # BitTorrent client
@@ -646,6 +646,10 @@ in {
             libnotify # Notifications library
             polkit_gnome # Polkit agent
             menu-cache # Menu caching
+            # Libadwaita and modern GTK4 support
+            libadwaita # Modern GNOME applications library
+            adwaita-icon-theme # Essential icons for libadwaita
+            hicolor-icon-theme # Icon theme fallback system
           ]
           # XFCE support
           ++ optionals cfg.gui.libs.xfceSupport [
@@ -662,11 +666,11 @@ in {
           ]
           # Python bindings
           ++ optionals cfg.gui.libs.pythonBindings [
-            python313Packages.pycairo # Cairo Python bindings
-            python313Packages.pygobject3 # GObject Python bindings
-            python313Packages.pyqt6 # Qt6 Python bindings
-            python313Packages.pyqt6-charts # Qt Charts
-            python313Packages.pyqt6-webengine # Qt WebEngine
+            python312Packages.pycairo # Cairo Python bindings
+            python312Packages.pygobject3 # GObject Python bindings
+            python312Packages.pyqt6 # Qt6 Python bindings
+            python312Packages.pyqt6-charts # Qt Charts
+            python312Packages.pyqt6-webengine # Qt WebEngine
           ]
           # Ruby bindings
           ++ optionals cfg.gui.libs.rubyBindings [
@@ -778,7 +782,7 @@ in {
             cfonts # Modern Text to ASCII Banners
             uni # Unicode utility
             termcolor # Terminal colors
-            python313Packages.pyfiglet # Figlet Python
+            python312Packages.pyfiglet # Figlet Python
 
             # Specialty
             autotrace # Bitmap to vector
@@ -788,9 +792,9 @@ in {
             gdk-pixbuf # Image loading
             perlPackages.ImageMagick # ImageMagick Perl
             perlPackages.PerlMagick # PerlMagick
-            python313Packages.colorthief # Color extraction
-            python313Packages.pystache # Mustache Python
-            python313Packages.svgwrite # SVG Python
+            python312Packages.colorthief # Color extraction
+            python312Packages.pystache # Mustache Python
+            python312Packages.svgwrite # SVG Python
           ]
           # Streaming tools
           ++ optionals cfg.multimedia.streamingTools [
@@ -871,7 +875,7 @@ in {
       environment.systemPackages = with pkgs;
       # Core Python
         [
-          python313 # Python 3.13 interpreter
+          python312 # Python 3.12 interpreter
           pipenv # Python environment
           virtualenv # Python environments
           virtualenv-clone # Clone environments
@@ -880,41 +884,41 @@ in {
         ]
         # Development tools
         ++ optionals cfg.python.development [
-          python313Packages.flake8 # Python linter
-          python313Packages.pylint # Python linter
-          python313Packages.pip-tools # Pip requirements
-          python313Packages.pipx # Run Python apps
-          python313Packages.setuptoolsBuildHook # Build hook
-          python313Packages.meson-python # Meson Python
+          python312Packages.flake8 # Python linter
+          python312Packages.pylint # Python linter
+          python312Packages.pip-tools # Pip requirements
+          python312Packages.pipx # Run Python apps
+          python312Packages.setuptoolsBuildHook # Build hook
+          python312Packages.meson-python # Meson Python
           black # Python formatter
           ruff # Fast Python linter
           pylint # Python linter
         ]
         # Web development
         ++ optionals cfg.python.webDevelopment [
-          python313Packages.beautifulsoup4 # Web scraping
-          python313Packages.websockets # WebSocket library
-          python313Packages.python-dotenv # Environment variables
+          python312Packages.beautifulsoup4 # Web scraping
+          python312Packages.websockets # WebSocket library
+          python312Packages.python-dotenv # Environment variables
         ]
         # Data processing
         ++ optionals cfg.python.dataProcessing [
-          python313Packages.pydantic # Data validation
-          python313Packages.pydantic-core # Pydantic core
-          python313Packages.levenshtein # String similarity
-          python313Packages.pylatexenc # LaTeX encoding
+          python312Packages.pydantic # Data validation
+          python312Packages.pydantic-core # Pydantic core
+          python312Packages.levenshtein # String similarity
+          python312Packages.pylatexenc # LaTeX encoding
         ]
         # System integration
         ++ optionals cfg.python.systemIntegration [
-          python313Packages.gitpython # Git Python
-          python313Packages.gitdb # Git database
-          python313Packages.youtube-transcript-api # YouTube transcripts
-          python313Packages.playsound # Play audio
+          python312Packages.gitpython # Git Python
+          python312Packages.gitdb # Git database
+          python312Packages.youtube-transcript-api # YouTube transcripts
+          python312Packages.playsound # Play audio
         ]
         # Graphics
         ++ optionals cfg.python.graphics [
-          python313Packages.pycairo # Cairo Python
-          python313Packages.pygobject3 # GObject Python
-          python313Packages.pylatex # LaTeX Python
+          python312Packages.pycairo # Cairo Python
+          python312Packages.pygobject3 # GObject Python
+          python312Packages.pylatex # LaTeX Python
         ];
     })
 

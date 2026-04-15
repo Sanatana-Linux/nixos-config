@@ -107,7 +107,9 @@ with pkgs;
 
     function clean() {
       echo "Cleaning the Nix Store"
-      echo "Finding SymLinks into the Store & Deleting"
+      echo "Deleting all historical versions older than 7 days"
+      doas nix profile wipe-history --older-than 7d --profile /nix/var/nix/profiles/system
+      echo "Finding SymLinks into the Store & Deleting Them Now"
       doas find ~/* -lname '/nix/store/*' -delete
       echo "Run the Garbage Collector"
       doas nix-store --gc

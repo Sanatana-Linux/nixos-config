@@ -4,7 +4,6 @@
   inputs = {
     stable.url = "github:nixos/nixpkgs/nixos-25.05?shallow=1";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable?shallow=1";
-    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     nur = {
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -13,10 +12,6 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixos-generators.url = "github:nix-community/nixos-generators";
     rust-overlay.url = "github:oxalica/rust-overlay";
-    higgs-boson = {
-      url = "github:ThomasHighbaugh/firefox";
-      flake = false;
-    };
     fx-autoconfig = {
       url = "github:MrOtherGuy/fx-autoconfig";
       flake = false;
@@ -29,10 +24,6 @@
     nps.url = "github:OleMussmann/Nix-Package-Search";
     bhairava-grub-theme = {
       url = "github:Sanatana-Linux/Bhairava-Grub-Theme";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    panchakosha = {
-      url = "github:Sanatana-Linux/PanchaKosha";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-index-database.url = "github:nix-community/nix-index-database";
@@ -49,10 +40,8 @@
     stable,
     home-manager,
     stylix,
-    higgs-boson,
     fx-autoconfig,
     bhairava-grub-theme,
-    panchakosha,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -83,7 +72,6 @@
     );
 
     nixosConfigurations = {
-
       # ┣━━━━━━━━━━━━━━━━━━━━━━┫ My Lenovo Legion 5 Pro ┣━━━━━━━━━━━━━━━━━━━━━━┫
 
       bagalamukhi = nixpkgs.lib.nixosSystem {
@@ -93,10 +81,8 @@
           inputs.nur.modules.nixos.default
           inputs.nixos-hardware.nixosModules.lenovo-legion-16irx9h
           inputs.bhairava-grub-theme.nixosModule
-          inputs.chaotic.nixosModules.default
           inputs.nix-index-database.nixosModules.nix-index
           inputs.home-manager.nixosModules.home-manager
-          inputs.panchakosha.nixosModules.default
           ./modules/nixos
           {
             home-manager = {
@@ -105,7 +91,6 @@
               extraSpecialArgs = {inherit inputs outputs;};
               sharedModules = [
                 ./modules/home-manager
-                inputs.panchakosha.homeManagerModules.default
               ];
               users = {
                 tlh = {imports = [./home/tlh/default.nix];};
@@ -123,7 +108,6 @@
           inputs.nur.modules.nixos.default
           inputs.nixos-hardware.nixosModules.lenovo-legion-16irx9h
           inputs.bhairava-grub-theme.nixosModule
-          inputs.chaotic.nixosModules.default
           inputs.home-manager.nixosModules.home-manager
           ./modules/nixos
           {
@@ -152,7 +136,6 @@
           inputs.nur.modules.nixos.default
           inputs.bhairava-grub-theme.nixosModule
           inputs.home-manager.nixosModules.home-manager
-          inputs.panchakosha.nixosModules.default
           ./modules/nixos
           {
             home-manager = {
@@ -160,7 +143,6 @@
               extraSpecialArgs = {inherit inputs outputs;};
               sharedModules = [
                 ./modules/home-manager
-                inputs.panchakosha.homeManagerModules.default
               ];
               users.user = {imports = [./home/user/default.nix];};
             };

@@ -79,6 +79,7 @@ with lib; {
           "class_g = 'pop_report'"
           "class_g = 'Gnome-screenshot'"
           "_GTK_FRAME_EXTENTS@:c"
+          "AWESOME_BACKDROP@:s"
         ];
 
         backend = config.modules.services.picom.backend;
@@ -111,6 +112,7 @@ with lib; {
           dock = {
             shadow = true;
             rounded-corners = false;
+            blur = false;
             opacity = 1;
           };
           dnd = {shadow = false;};

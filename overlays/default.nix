@@ -3,27 +3,29 @@
 
   modifications = final: prev: {
     # Completely remove torch packages from python312Packages to force use of torch-bin
-    python312Packages = prev.python312Packages.overrideScope (python-final: python-prev: 
-      builtins.removeAttrs python-prev [
-        "pytorch-lightning"
-        "lightning" 
-        "onnxruntime"
-        "torch"
-        "torchvision"
-        "torchmetrics"
-      ]
+    python312Packages = prev.python312Packages.overrideScope (
+      python-final: python-prev:
+        builtins.removeAttrs python-prev [
+          "pytorch-lightning"
+          "lightning"
+          "onnxruntime"
+          "torch"
+          "torchvision"
+          "torchmetrics"
+        ]
     );
 
     # Disable Python 3.13 ML packages that cause compatibility issues
-    python313Packages = prev.python313Packages.overrideScope (python-final: python-prev: 
-      builtins.removeAttrs python-prev [
-        "pytorch-lightning"
-        "lightning" 
-        "onnxruntime"
-        "torch"
-        "torchvision"
-        "torchmetrics"
-      ]
+    python313Packages = prev.python313Packages.overrideScope (
+      python-final: python-prev:
+        builtins.removeAttrs python-prev [
+          "pytorch-lightning"
+          "lightning"
+          "onnxruntime"
+          "torch"
+          "torchvision"
+          "torchmetrics"
+        ]
     );
 
     nps = inputs.nps.defaultPackage.${prev.stdenv.hostPlatform.system};

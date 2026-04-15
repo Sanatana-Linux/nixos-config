@@ -30,6 +30,10 @@ in {
   };
 
   config = mkIf cfg.enable {
+    xdg.configFile."nvim" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos/external/nvim";
+    };
+
     programs.neovim = {
       enable = true;
       defaultEditor = true;

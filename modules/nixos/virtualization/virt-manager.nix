@@ -18,7 +18,7 @@ in {
       group = "tss";
       description = "TPM software stack user";
     };
-    
+
     users.groups.tss = {};
 
     environment.systemPackages = with pkgs; [

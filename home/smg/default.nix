@@ -13,7 +13,7 @@
   modules = {
     stylix.enable = false;
     desktop = {
-      enable = true; # This automatically enables gtk.enable via mkDefault
+      enable = true;
     };
     packages.essential.enable = true;
     shell = {
@@ -28,16 +28,15 @@
     };
     programs = {
       firefox.enable = true;
-      higgs-boson-firefox.enable = false;
       yazi.enable = true;
       kitty.enable = true;
+      neovim.enable = true;
     };
     services = {
       picom = {
         enable = true;
       };
       xscreensaver.enable = true;
-      # Polkit authentication agent for GUI dialogs (mounting encrypted drives, etc.)
       polkit-agent.enable = true;
     };
   };

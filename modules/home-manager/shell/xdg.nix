@@ -103,7 +103,7 @@ in {
       xdg-utils-cxx
       xdgmenumaker
     ];
-    
+
     # Ensure application environment variables are set for all applications
     home.sessionVariables = {
       TERMINAL = "kitty";
@@ -113,7 +113,7 @@ in {
       PAGER = "less";
       FILE_MANAGER = "thunar";
     };
-    
+
     # XFCE configuration for preferred applications (needed for Thunar integration)
     xfconf.settings = {
       "xfce4-session" = {
@@ -122,35 +122,35 @@ in {
       "exo" = {
         # Terminal applications
         "preferred/TerminalEmulator" = "kitty";
-        
+
         # Web browser
         "preferred/WebBrowser" = "firefox";
-        
+
         # File manager (Thunar itself)
         "preferred/FileManager" = "thunar";
-        
+
         # Mail reader
         "preferred/MailReader" = "firefox"; # Use browser for web mail
-        
+
         # Text editor
         "preferred/TextEditor" = "nvim";
-        
+
         # Image viewer
         "preferred/ImageViewer" = "org.gnome.Loupe";
-        
+
         # Video player
         "preferred/VideoPlayer" = "vlc";
-        
+
         # Music player
         "preferred/MusicPlayer" = "vlc";
-        
+
         # Archive manager
         "preferred/ArchiveManager" = "file-roller";
-        
+
         # PDF viewer
         "preferred/DocumentViewer" = "foliate";
       };
-      
+
       # Additional XFCE mime associations for better integration
       "mimeapps" = {
         # Web browser associations
@@ -159,10 +159,10 @@ in {
         "default/x-scheme-handler/http" = "firefox.desktop";
         "default/x-scheme-handler/https" = "firefox.desktop";
         "default/x-scheme-handler/ftp" = "firefox.desktop";
-        
+
         # Terminal
         "default/x-scheme-handler/terminal" = "kitty.desktop";
-        
+
         # Text files
         "default/text/plain" = "nvim.desktop";
         "default/application/x-shellscript" = "nvim.desktop";
@@ -171,16 +171,16 @@ in {
         "default/text/x-c++" = "nvim.desktop";
         "default/text/markdown" = "nvim.desktop";
         "default/application/json" = "firefox.desktop";
-        
+
         # Media files
         "default/video/*" = "vlc.desktop";
         "default/audio/*" = "vlc.desktop";
         "default/image/*" = "org.gnome.Loupe.desktop";
-        
+
         # Documents
         "default/application/pdf" = "foliate.desktop";
         "default/application/epub+zip" = "foliate.desktop";
-        
+
         # Archives
         "default/application/zip" = "file-roller.desktop";
         "default/application/x-tar" = "file-roller.desktop";
@@ -188,7 +188,7 @@ in {
         "default/application/x-7z-compressed" = "file-roller.desktop";
       };
     };
-    
+
     xdg = {
       enable = true;
       userDirs = {
@@ -221,14 +221,14 @@ in {
           comment = "Read e-books in style";
           exec = "env ADW_DEBUG_COLOR_SCHEME=prefer-dark GSETTINGS_SCHEMA_DIR=${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}/glib-2.0/schemas foliate %F";
           icon = "com.github.johnfactotum.Foliate";
-          mimeType = [ 
-            "application/epub+zip" 
-            "application/x-mobipocket-ebook" 
-            "application/x-fictionbook" 
+          mimeType = [
+            "application/epub+zip"
+            "application/x-mobipocket-ebook"
+            "application/x-fictionbook"
             "text/plain"
             "application/pdf"
           ];
-          categories = [ "Office" "Viewer" ];
+          categories = ["Office" "Viewer"];
           startupNotify = true;
         };
       };

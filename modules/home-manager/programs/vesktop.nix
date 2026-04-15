@@ -20,11 +20,11 @@ in {
       };
       vencord = {
         settings = {
-          autoUpdate = false;
+          autoUpdate = true;
           autoUpdateNotification = false;
           useQuickCss = true;
           themeLinks = [];
-          eagerPatches = false;
+          eagerPatches = true;
           enableReactDevtools = true;
           frameless = false;
           transparent = true;
@@ -49,6 +49,7 @@ in {
             WebKeybinds = {enabled = true;};
             WebScreenShareFixes = {enabled = true;};
             YoutubeAdblock = {enabled = true;};
+
             BadgeAPI = {enabled = true;};
             NoTrack = {
               enabled = true;

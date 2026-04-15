@@ -1,8 +1,24 @@
-{ lib, stdenv, fetchFromGitHub, meson, ninja, pkg-config, gtk3, webkitgtk_4_1
-, lightdm, glib, libyaml, typescript, makeWrapper, cmake
-, themes ? [], backgrounds ? null, selectedTheme ? "gruvbox"
-, enableHWAcceleration ? false, defaultWallpaper ? null }:
-
+{
+  lib,
+  stdenv,
+  fetchFromGitHub,
+  meson,
+  ninja,
+  pkg-config,
+  gtk3,
+  webkitgtk_4_1,
+  lightdm,
+  glib,
+  libyaml,
+  typescript,
+  makeWrapper,
+  cmake,
+  themes ? [],
+  backgrounds ? null,
+  selectedTheme ? "gruvbox",
+  enableHWAcceleration ? false,
+  defaultWallpaper ? null,
+}:
 stdenv.mkDerivation rec {
   pname = "sea-greeter";
   version = "unstable-2024-02-03";
@@ -15,9 +31,10 @@ stdenv.mkDerivation rec {
     fetchSubmodules = true;
   };
 
-  nativeBuildInputs = [ meson ninja pkg-config typescript makeWrapper ];
+  nativeBuildInputs = [meson ninja pkg-config typescript makeWrapper];
 
-  buildInputs = [ gtk3 webkitgtk_4_1 lightdm glib libyaml cmake ] 
+  buildInputs =
+    [gtk3 webkitgtk_4_1 lightdm glib libyaml cmake]
     ++ lib.optionals (themes != []) themes;
 
   configurePhase = ''
@@ -35,31 +52,35 @@ stdenv.mkDerivation rec {
     substituteInPlace data/web-greeter.yml \
     --replace '/usr/share/' \
               "$out/usr/share/"
-    
+
     # Configure selected theme
-    ${if (themes != [] && selectedTheme != "gruvbox") then ''
-      substituteInPlace data/web-greeter.yml \
-      --replace 'theme: gruvbox' \
-                "theme: ${selectedTheme}"
-    '' else ""}
-    
+    ${
+      if (themes != [] && selectedTheme != "gruvbox")
+      then ''
+        substituteInPlace data/web-greeter.yml \
+        --replace 'theme: gruvbox' \
+                  "theme: ${selectedTheme}"
+      ''
+      else ""
+    }
+
     # Configure background path
     ${lib.optionalString (backgrounds != null) ''
       substituteInPlace data/web-greeter.yml \
       --replace 'background_images_dir: /usr/share/backgrounds' \
                 "background_images_dir: $out/usr/share/backgrounds"
     ''}
-    
+
     # Configure default wallpaper if specified
     ${lib.optionalString (defaultWallpaper != null) ''
-      echo "Configuring default wallpaper: ${defaultWallpaper}"
-      # Add custom configuration for default wallpaper
-      # This creates a configuration override that themes can read
-      mkdir -p build/config
-      cat > build/config/default-wallpaper.conf << EOF
-# Default wallpaper configuration for sea-greeter
-default_wallpaper=${defaultWallpaper}
-EOF
+            echo "Configuring default wallpaper: ${defaultWallpaper}"
+            # Add custom configuration for default wallpaper
+            # This creates a configuration override that themes can read
+            mkdir -p build/config
+            cat > build/config/default-wallpaper.conf << EOF
+      # Default wallpaper configuration for sea-greeter
+      default_wallpaper=${defaultWallpaper}
+      EOF
     ''}
 
     runHook postConfigure
@@ -88,83 +109,84 @@ EOF
     substituteInPlace $out/usr/share/xgreeters/sea-greeter.desktop \
       --replace "Exec=sea-greeter" "Exec=$out/bin/sea-greeter"
 
-    # The xserver.lightdm.greeter.package option expects the .desktop file to 
-    # be on the root level. 
+    # The xserver.lightdm.greeter.package option expects the .desktop file to
+    # be on the root level.
     ln -s $out/usr/share/xgreeters/sea-greeter.desktop $out/sea-greeter.desktop
 
     # Install themes
     mkdir -p "$out/usr/share/web-greeter/themes"
-    
+
     ${lib.optionalString (themes != []) ''
       echo "Installing themes"
       ${lib.concatMapStringsSep "\n" (t: ''
-        echo "Installing theme: ${t.pname}"
-        ln -s ${t} "$out/usr/share/web-greeter/themes/${t.pname}"
-      '') themes}
+          echo "Installing theme: ${t.pname}"
+          ln -s ${t} "$out/usr/share/web-greeter/themes/${t.pname}"
+        '')
+        themes}
     ''}
-    
+
     # Install backgrounds
     ${lib.optionalString (backgrounds != null) ''
-      echo "Installing backgrounds from: ${backgrounds}" 
+      echo "Installing backgrounds from: ${backgrounds}"
       mkdir -p "$out/usr/share/backgrounds"
       ln -s "${backgrounds}"/* "$out/usr/share/backgrounds/"
       ls "$out/usr/share/backgrounds"
     ''}
-    
+
     # Install default wallpaper configuration
     ${lib.optionalString (defaultWallpaper != null) ''
-      echo "Installing default wallpaper configuration: ${defaultWallpaper}"
-      mkdir -p "$out/etc/lightdm"
-      cat > "$out/etc/lightdm/default-wallpaper.conf" << EOF
-# Default wallpaper configuration for sea-greeter themes
-default_wallpaper=${defaultWallpaper}
-EOF
-      
-      # Create a JavaScript override for web-greeter themes to use default wallpaper
-      mkdir -p "$out/usr/share/web-greeter"
-      cat > "$out/usr/share/web-greeter/default-wallpaper.js" << 'EOF'
-// Default wallpaper override for web-greeter themes
-(function() {
-    // Read the default wallpaper configuration
-    const defaultWallpaper = '${defaultWallpaper}';
-    
-    // Override the wallpaper selection when page loads
-    if (window.lightdm && typeof window.lightdm === 'object') {
-        // Store the original wallpaper method if it exists
-        const originalSetWallpaper = window.lightdm.set_wallpaper || function() {};
-        
-        // Override or set the wallpaper
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                // Try different common methods themes use to set wallpapers
-                if (typeof setWallpaper === 'function') {
-                    setWallpaper('/usr/share/backgrounds/' + defaultWallpaper);
-                } else if (typeof changeWallpaper === 'function') {
-                    changeWallpaper('/usr/share/backgrounds/' + defaultWallpaper);
-                } else {
-                    // Direct DOM manipulation fallback
-                    const body = document.body || document.documentElement;
-                    if (body) {
-                        body.style.backgroundImage = 'url(/usr/share/backgrounds/' + defaultWallpaper + ')';
-                        body.style.backgroundSize = 'cover';
-                        body.style.backgroundPosition = 'center';
-                        body.style.backgroundRepeat = 'no-repeat';
-                    }
-                }
-            }, 100);
-        });
-    }
-})();
-EOF
-      
-      # Create a theme configuration override for litarvan theme if it exists
-      if [ -d "$out/usr/share/web-greeter/themes/litarvan" ] || [ -L "$out/usr/share/web-greeter/themes/litarvan" ]; then
-        echo "Configuring litarvan theme with default wallpaper"
-        mkdir -p "$out/usr/share/web-greeter/themes/litarvan/config"
-        cat > "$out/usr/share/web-greeter/themes/litarvan/config/default.conf" << EOF
-default_wallpaper=${defaultWallpaper}
-EOF
-      fi
+            echo "Installing default wallpaper configuration: ${defaultWallpaper}"
+            mkdir -p "$out/etc/lightdm"
+            cat > "$out/etc/lightdm/default-wallpaper.conf" << EOF
+      # Default wallpaper configuration for sea-greeter themes
+      default_wallpaper=${defaultWallpaper}
+      EOF
+
+            # Create a JavaScript override for web-greeter themes to use default wallpaper
+            mkdir -p "$out/usr/share/web-greeter"
+            cat > "$out/usr/share/web-greeter/default-wallpaper.js" << 'EOF'
+      // Default wallpaper override for web-greeter themes
+      (function() {
+          // Read the default wallpaper configuration
+          const defaultWallpaper = '${defaultWallpaper}';
+
+          // Override the wallpaper selection when page loads
+          if (window.lightdm && typeof window.lightdm === 'object') {
+              // Store the original wallpaper method if it exists
+              const originalSetWallpaper = window.lightdm.set_wallpaper || function() {};
+
+              // Override or set the wallpaper
+              window.addEventListener('load', function() {
+                  setTimeout(function() {
+                      // Try different common methods themes use to set wallpapers
+                      if (typeof setWallpaper === 'function') {
+                          setWallpaper('/usr/share/backgrounds/' + defaultWallpaper);
+                      } else if (typeof changeWallpaper === 'function') {
+                          changeWallpaper('/usr/share/backgrounds/' + defaultWallpaper);
+                      } else {
+                          // Direct DOM manipulation fallback
+                          const body = document.body || document.documentElement;
+                          if (body) {
+                              body.style.backgroundImage = 'url(/usr/share/backgrounds/' + defaultWallpaper + ')';
+                              body.style.backgroundSize = 'cover';
+                              body.style.backgroundPosition = 'center';
+                              body.style.backgroundRepeat = 'no-repeat';
+                          }
+                      }
+                  }, 100);
+              });
+          }
+      })();
+      EOF
+
+            # Create a theme configuration override for litarvan theme if it exists
+            if [ -d "$out/usr/share/web-greeter/themes/litarvan" ] || [ -L "$out/usr/share/web-greeter/themes/litarvan" ]; then
+              echo "Configuring litarvan theme with default wallpaper"
+              mkdir -p "$out/usr/share/web-greeter/themes/litarvan/config"
+              cat > "$out/usr/share/web-greeter/themes/litarvan/config/default.conf" << EOF
+      default_wallpaper=${defaultWallpaper}
+      EOF
+            fi
     ''}
   '';
 
@@ -182,6 +204,6 @@ EOF
     homepage = "https://github.com/JezerM/sea-greeter";
     license = licenses.gpl3;
     platforms = platforms.linux;
-    maintainers = [ ];
+    maintainers = [];
   };
 }

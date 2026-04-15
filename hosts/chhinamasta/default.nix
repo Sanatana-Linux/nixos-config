@@ -222,6 +222,6 @@ in {
   isoImage.makeUsbBootable = true;
 
   services.qemuGuest.enable = mkDefault true;
-  nixpkgs.hostPlatform = "x86_64-linux";
+  nixpkgs.system = "x86_64-linux";
   system.stateVersion = "24.11";
 }

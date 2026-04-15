@@ -67,7 +67,7 @@ in {
         light = "Qogir";
         dark = "Qogir-dark";
       };
-      
+
       # System-level targets
       targets.grub.enable = mkForce false;
       targets.plymouth.enable = mkForce false; # Disabled in favor of custom theme
@@ -75,7 +75,7 @@ in {
 
       # Desktop environment targets - just enable GTK, theme will be overridden by home-manager
       targets.gtk.enable = true;
-      
+
       targets.qt.enable = true;
       targets.qt.platform = "qtct";
       targets.fontconfig.enable = true;

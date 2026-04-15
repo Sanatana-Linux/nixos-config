@@ -128,7 +128,7 @@ in {
           #   with p; [
           #     # tensorflowWithCuda  # Temporarily disabled - may be pulling in regular torch
           #     torch-bin # Use binary torch instead of building from source
-          #     torchvision-bin # Use binary torchvision instead of building from source  
+          #     torchvision-bin # Use binary torchvision instead of building from source
           #   ]))
         ];
     };

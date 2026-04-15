@@ -10,25 +10,11 @@ with lib; let
 in {
   options.modules.desktop.awesomewm = {
     enable = mkEnableOption "AwesomeWM window manager";
-
-    displayManager = mkOption {
-      type = types.enum ["sddm" "ly" "lightdm"];
-      default = "lightdm";
-      description = "Display manager to use with AwesomeWM";
-    };
-
-    lySession = mkOption {
-      type = types.bool;
-      default = true;
-      description = "Create xinitrc session support when using ly display manager";
-    };
   };
 
   config = mkIf cfg.enable {
-    # Enable appropriate display manager based on configuration
-    modules.desktop.sddm.enable = mkIf (cfg.displayManager == "sddm") true;
-    modules.desktop.ly.enable = mkIf (cfg.displayManager == "ly") true;
-    modules.desktop.lightdm.enable = mkIf (cfg.displayManager == "lightdm") true;
+    # Enable LightDM display manager
+    modules.desktop.lightdm.enable = true;
 
     # Common AwesomeWM configuration
     services = {
@@ -40,10 +26,7 @@ in {
         };
       };
 
-      displayManager.defaultSession =
-        if (cfg.displayManager == "ly")
-        then "xinitrc"
-        else "none+awesome";
+      displayManager.defaultSession = "none+awesome";
 
       xserver = {
         enable = true;
@@ -160,11 +143,11 @@ in {
           xdg-launch
           xdg-utils
         ]
-        ++ (lib.optionals (cfg.displayManager == "ly" && cfg.lySession) [
-          # Additional packages for ly display manager
-          pkgs.xauth
-          pkgs.xset
-        ]);
+        ++ [
+          # Additional packages for cursor theme initialization
+          pkgs.xrdb
+          pkgs.xsetroot
+        ];
 
       sessionVariables = {
         LUA_PATH = "${pkgs.luajitPackages.luarocks}/share/lua/${pkgs.luajit.luaversion}/?.lua;${pkgs.luajitPackages.luarocks}/share/lua/${pkgs.luajit.luaversion}/?/init.lua;${pkgs.lua52Packages.lgi}/share/lua/5.2/?.lua;${pkgs.lua52Packages.lgi}/share/lua/5.2/?/init.lua";
@@ -193,29 +176,27 @@ in {
 
     security.pam.services.i3lock.enable = true;
 
-    # Create xinitrc for ly display manager support
-    environment.etc."X11/xinit/xinitrc" = mkIf (cfg.displayManager == "ly" && cfg.lySession) {
+    # Create cursor theme initialization script for all sessions
+    environment.etc."X11/Xsession.d/90-cursor-theme" = {
       text = ''
-        #!/bin/sh
-        # Simple xinitrc that just starts AwesomeWM
-        # X11 resources and authentication are handled by the display manager
-        exec ${pkgs.awesome}/bin/awesome
+                # Initialize cursor theme for AwesomeWM sessions
+                # This ensures cursor theme is properly set regardless of display manager
+                if [ -n "$XCURSOR_THEME" ] && [ -n "$XCURSOR_SIZE" ]; then
+                  # Set X11 cursor resources
+                  if command -v xrdb >/dev/null 2>&1; then
+                    xrdb -merge <<EOF
+        Xcursor.theme: $XCURSOR_THEME
+        Xcursor.size: $XCURSOR_SIZE
+        EOF
+                  fi
+
+                  # Set default X11 cursor
+                  if command -v xsetroot >/dev/null 2>&1; then
+                    xsetroot -cursor_name left_ptr
+                  fi
+                fi
       '';
       mode = "0755";
-    };
-
-    # Create desktop session files for LY in custom-sessions directory
-    environment.etc."ly/custom-sessions/awesome.desktop" = mkIf (cfg.displayManager == "ly") {
-      text = ''
-        [Desktop Entry]
-        Version=1.0
-        Type=XSession
-        Name=AwesomeWM
-        Comment=Highly configurable framework window manager
-        Exec=${pkgs.awesome}/bin/awesome
-        Icon=awesome
-        DesktopNames=awesome
-      '';
     };
   };
 }

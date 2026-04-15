@@ -1,0 +1,9 @@
+[submodule "external/nvim"]
+	path = external/nvim
+	url = https://github.com/Thomashighbaugh/nvim-forge
+[submodule "external/firefox"]
+	path = external/firefox
+	url = https://github.com/Thomashighbaugh/firefox
+[submodule "external/awesome"]
+	path = external/awesome
+	url = https://github.com/Sanatana-Linux/nixos-awesomewm

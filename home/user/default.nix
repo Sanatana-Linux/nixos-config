@@ -15,7 +15,7 @@
     };
     shell = {
       home.enable = true;
-      environment.enable = true; # Added for feature parity
+      environment.enable = true;
       zsh.enable = true;
       starship.enable = true;
       cli-tools.enable = true;
@@ -24,16 +24,21 @@
       scripts.enable = true;
     };
     desktop = {
-      enable = true; # This automatically enables gtk.enable via mkDefault
+      enable = true;
+      awesome.enable = true;
     };
     programs = {
       fastfetch.enable = true;
-      higgs-boson-firefox.enable = true;
+      firefox = {
+        enable = true;
+        withAutoconfig = true;
+      };
       kitty.enable = true;
       gpg.enable = true;
       zathura.enable = true;
       yazi.enable = true;
-      vesktop.enable = true; # Added for feature parity
+      vesktop.enable = true;
+      neovim.enable = true;
     };
     services = {
       gnome-keyring = {
@@ -74,16 +79,5 @@
     username = "user";
     homeDirectory = "/home/user";
     stateVersion = "24.11";
-    activation = {
-      installConfig = ''
-        # Keep awesome clone for users that still use it
-        if [ ! -d "${config.home.homeDirectory}/.config/awesome" ]; then
-          ${pkgs.git}/bin/git clone https://github.com/Sanatana-Linux/nixos-awesomewm ${config.home.homeDirectory}/.config/awesome
-        fi
-        if [ ! -d "${config.home.homeDirectory}/.config/nvim" ]; then
-          ${pkgs.git}/bin/git clone https://github.com/Thomashighbaugh/nvim-forge ${config.home.homeDirectory}/.config/nvim
-        fi
-      '';
-    };
   };
 }

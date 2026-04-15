@@ -205,7 +205,6 @@
     desktop = {
       awesomewm = {
         enable = true;
-        displayManager = "lightdm";
       };
     };
 
@@ -222,6 +221,38 @@
         adminUser = "tlh";
       };
       sudo.enable = true;
+
+      # Firewall configuration
+      firewall = {
+        enable = true;
+        allowSSH = true;
+        allowHTTP = true; # Port 80 as requested
+        allowDevelopment = true; # Port 8000 and other dev ports
+        customTcpPorts = [
+          # Add any other specific ports you need
+        ];
+        logRefusedConnections = true;
+        trustedInterfaces = ["lo"]; # localhost (127.0.0.1)
+      };
+
+      # SSH configuration with password authentication enabled
+      ssh = {
+        enable = true;
+        passwordAuthentication = true; # Allow password login as requested
+        permitRootLogin = "no"; # Keep root login disabled for security
+        maxAuthTries = 3;
+        port = 22;
+      };
+
+      # Fail2ban for intrusion prevention
+      fail2ban = {
+        enable = true;
+        maxRetry = 5;
+        banTime = "1h";
+        findTime = "10m";
+        enableSSH = true;
+        ignoreIPs = ["127.0.0.1/8" "::1" "192.168.1.0/24"]; # Add your local network
+      };
     };
   };
 

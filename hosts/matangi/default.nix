@@ -199,7 +199,6 @@
     desktop = {
       xfce = {
         enable = true;
-        displayManager = "lightdm";
       };
     };
 

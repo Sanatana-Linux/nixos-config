@@ -1,7 +1,22 @@
-{ lib, stdenv, fetchFromGitHub, meson, ninja, pkg-config, gtk3, webkitgtk_4_1
-, lightdm, glib, libyaml, typescript, makeWrapper, cmake, theme ? null
-, backgrounds ? null, enableHWAcceleration ? false }:
-
+{
+  lib,
+  stdenv,
+  fetchFromGitHub,
+  meson,
+  ninja,
+  pkg-config,
+  gtk3,
+  webkitgtk_4_1,
+  lightdm,
+  glib,
+  libyaml,
+  typescript,
+  makeWrapper,
+  cmake,
+  theme ? null,
+  backgrounds ? null,
+  enableHWAcceleration ? false,
+}:
 stdenv.mkDerivation rec {
   pname = "sea-greeter";
   version = "unstable-2024-02-03";
@@ -14,9 +29,9 @@ stdenv.mkDerivation rec {
     fetchSubmodules = true;
   };
 
-  nativeBuildInputs = [ meson ninja pkg-config typescript makeWrapper ];
+  nativeBuildInputs = [meson ninja pkg-config typescript makeWrapper];
 
-  buildInputs = [ gtk3 webkitgtk_4_1 lightdm glib libyaml theme cmake ];
+  buildInputs = [gtk3 webkitgtk_4_1 lightdm glib libyaml theme cmake];
 
   configurePhase = ''
     runHook preConfigure
@@ -69,8 +84,8 @@ stdenv.mkDerivation rec {
     substituteInPlace $out/usr/share/xgreeters/sea-greeter.desktop \
       --replace "Exec=sea-greeter" "Exec=$out/bin/sea-greeter"
 
-    # the xserver.lightdm.greeter.package options expects the .desktop file to 
-    # be on the root level. 
+    # the xserver.lightdm.greeter.package options expects the .desktop file to
+    # be on the root level.
     ln -s $out/usr/share/xgreeters/sea-greeter.desktop $out/sea-greeter.desktop
 
     ${lib.optionalString (theme != null) ''
@@ -79,7 +94,7 @@ stdenv.mkDerivation rec {
       ln -s ${theme} "$out/usr/share/web-greeter/themes/${theme.pname}"
     ''}
     ${lib.optionalString (backgrounds != null) ''
-      echo "Installing backgrounds from: ${backgrounds}" 
+      echo "Installing backgrounds from: ${backgrounds}"
       local backgrounds_dir="$out/usr/share/backgrounds"
       mkdir -p "$backgrounds_dir"
       ln -s "${backgrounds}"/* "$backgrounds_dir/"
@@ -101,6 +116,6 @@ stdenv.mkDerivation rec {
     homepage = "https://github.com/JezerM/sea-greeter";
     license = licenses.gpl3;
     platforms = platforms.linux;
-    maintainers = [ ];
+    maintainers = [];
   };
 }

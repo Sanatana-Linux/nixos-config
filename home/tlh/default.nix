@@ -25,17 +25,21 @@
       scripts.enable = true;
     };
     desktop = {
-      enable = true; # This automatically enables gtk.enable via mkDefault
+      enable = true;
+      awesome.enable = true;
     };
     programs = {
       fastfetch.enable = true;
-      higgs-boson-firefox.enable = true;
+      firefox = {
+        enable = true;
+        withAutoconfig = true;
+      };
       kitty.enable = true;
       gpg.enable = true;
       zathura.enable = true;
       yazi.enable = true;
       vesktop.enable = true;
-      # Note: neovim was commented out in original config, not enabling
+      neovim.enable = true;
     };
     services = {
       gnome-keyring = {
@@ -77,16 +81,5 @@
     username = "tlh";
     homeDirectory = "/home/tlh";
     stateVersion = "24.11";
-    activation = {
-      installConfig = ''
-           if [ ! -d "${config.home.homeDirectory}/.config/awesome" ]; then
-          ${pkgs.git}/bin/git clone https://github.com/Sanatana-Linux/nixos-awesomewm ${config.home.homeDirectory}/.config/awesome
-        fi
-
-        if [ ! -d "${config.home.homeDirectory}/.config/nvim" ]; then
-        ${pkgs.git}/bin/git clone https://github.com/Thomashighbaugh/nvim-forge ${config.home.homeDirectory}/.config/nvim
-        fi
-      '';
-    };
   };
 }

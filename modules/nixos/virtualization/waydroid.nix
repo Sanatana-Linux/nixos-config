@@ -21,7 +21,7 @@ in {
     # Required kernel modules for Waydroid networking
     boot.kernelModules = [
       "nf_tables"
-      "nf_conntrack" 
+      "nf_conntrack"
       "nf_nat"
       "xt_MASQUERADE"
       "xt_conntrack"
@@ -104,18 +104,18 @@ in {
         fi
 
         echo "Starting Waydroid container in no-network mode..."
-        
+
         # Start container with minimal networking
         WAYDROID_NET_DISABLE=1 sudo systemctl start waydroid-container.service || {
           echo "Failed to start container, trying alternative approach..."
-          
+
           # Try to start waydroid manually without the network script
           sudo waydroid container start --disable-network 2>/dev/null || {
             echo "Manual start also failed. Trying with minimal setup..."
             sudo -E waydroid container start 2>/dev/null || true
           }
         }
-        
+
         sleep 3
 
         # Check if waydroid is initialized

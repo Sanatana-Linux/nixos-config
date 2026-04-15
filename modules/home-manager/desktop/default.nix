@@ -7,6 +7,7 @@ with lib; let
   cfg = config.modules.desktop;
 in {
   imports = [
+    ./awesome.nix
     ./gtk.nix
     ./x11
   ];

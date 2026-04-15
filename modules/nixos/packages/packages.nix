@@ -308,6 +308,10 @@ in {
             grex # Regex generator
             bc # Arbitrary precision calculator
             pandoc # Document converter
+            tectonic # Modern LaTeX/PDF typesetting engine
+
+            # Diagrams & Documentation
+            mermaid-cli # Mermaid diagram CLI (mmdc)
 
             # Environment & Build Systems
             direnv # Directory-specific environments
@@ -356,6 +360,7 @@ in {
             bfg-repo-cleaner # Git history cleaner
             gource # Git history visualizer
             onefetch # Git repo summary
+            lazygit # Terminal UI for git
           ]
           # Build tools
           ++ optionals cfg.development.buildTools [
@@ -442,7 +447,7 @@ in {
           ]
           # Tree-sitter grammars
           ++ optionals cfg.development.treeSitterGrammars [
-            tree-sitter # Incremental parsing
+            tree-sitter # Incremental parsing (includes CLI tools)
             tree-sitter-grammars.tree-sitter-bash # Bash grammar
             tree-sitter-grammars.tree-sitter-c # C grammar
             tree-sitter-grammars.tree-sitter-comment # Comment grammar
@@ -456,19 +461,24 @@ in {
             tree-sitter-grammars.tree-sitter-jsdoc # JSDoc grammar
             tree-sitter-grammars.tree-sitter-json # JSON grammar
             tree-sitter-grammars.tree-sitter-json5 # JSON5 grammar
+            tree-sitter-grammars.tree-sitter-latex # LaTeX grammar
             tree-sitter-grammars.tree-sitter-lua # Lua grammar
             tree-sitter-grammars.tree-sitter-make # Makefile grammar
             tree-sitter-grammars.tree-sitter-markdown # Markdown grammar
             tree-sitter-grammars.tree-sitter-nix # Nix grammar
+            tree-sitter-grammars.tree-sitter-norg # Norg grammar
             tree-sitter-grammars.tree-sitter-python # Python grammar
             tree-sitter-grammars.tree-sitter-regex # Regex grammar
             tree-sitter-grammars.tree-sitter-ruby # Ruby grammar
             tree-sitter-grammars.tree-sitter-rust # Rust grammar
             tree-sitter-grammars.tree-sitter-scss # SCSS grammar
+            tree-sitter-grammars.tree-sitter-svelte # Svelte grammar
             tree-sitter-grammars.tree-sitter-toml # TOML grammar
             tree-sitter-grammars.tree-sitter-tsx # TSX grammar
             tree-sitter-grammars.tree-sitter-typescript # TypeScript grammar
+            tree-sitter-grammars.tree-sitter-typst # Typst grammar
             tree-sitter-grammars.tree-sitter-vim # Vim grammar
+            tree-sitter-grammars.tree-sitter-vue # Vue grammar
             tree-sitter-grammars.tree-sitter-yaml # YAML grammar
             python312Packages.tree-sitter-language-pack # Python tree-sitter bindings
           ];

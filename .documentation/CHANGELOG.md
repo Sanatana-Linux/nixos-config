@@ -11,6 +11,73 @@ Each entry follows this format:
 
 ## Changes
 
+- **2026-04-14**: Refactored Firefox module with nested withAutoconfig option
+  - **REMOVED**: `higgs-boson` flake input from flake.nix
+  - **REMOVED**: `modules/home-manager/programs/higgs-boson-firefox.nix` module
+  - **ENHANCED**: `modules/home-manager/programs/firefox.nix` - Added `withAutoconfig` option for fx-autoconfig support
+  - **ADDED**: Chrome symlink from `external/firefox` when `withAutoconfig = true`
+  - **ADDED**: Utils override from fx-autoconfig flake input for Firefox 147+ compatibility
+  - **UPDATED**: `home/tlh/default.nix` - Firefox with withAutoconfig enabled
+  - **UPDATED**: `home/user/default.nix` - Firefox with withAutoconfig enabled
+  - **UNCHANGED**: `home/smg/default.nix` - Standard Firefox (no autoconfig) for matangi host
+
+- **2026-04-14**: Implemented external config symlinks for awesome, nvim, and firefox
+  - **NEW**: `modules/home-manager/desktop/awesome.nix` - Home Manager module for AwesomeWM user config symlink
+  - **ENHANCED**: `modules/home-manager/programs/neovim.nix` - Added symlink to external nvim config
+  - **ENHANCED**: `modules/home-manager/programs/higgs-boson-firefox.nix` - Changed from flake input to external symlink for firefox chrome
+  - **UPDATED**: `modules/home-manager/desktop/default.nix` - Import new awesome module
+  - **UPDATED**: `home/tlh/default.nix` - Enabled awesome and neovim modules, removed activation script
+  - **UPDATED**: `home/smg/default.nix` - Enabled neovim module for matangi host
+  - **UPDATED**: `home/user/default.nix` - Enabled awesome and neovim modules, removed activation script
+  - **REMOVED**: Git clone activation scripts from tlh and user home configs (replaced by symlinks)
+  - Symlinks: awesome → ~/.config/awesome, nvim → ~/.config/nvim, firefox → ~/.mozilla/firefox/{profile}/chrome
+
+- **2026-04-13**: Added development tools package collection to NixOS configuration
+  - **ADDED**: `lazygit` to version control tools section for enhanced git repository management
+  - **ADDED**: `tectonic` (LaTeX/PDF typesetting engine) to core development tools
+  - **ADDED**: `mermaid-cli` (mmdc) to core development tools for diagram generation
+  - **ADDED**: Tree-sitter grammars for `latex`, `norg`, `svelte`, `typst`, and `vue` languages
+  - **CLARIFIED**: tree-sitter package comment to indicate CLI tools are included
+  - **VERIFIED**: All requested development packages (tree-sitter-cli, luarocks, lua, sqlite3, various parsers) are available in configuration
+  - **TESTED**: Configuration builds successfully and packages are accessible system-wide
+
+- **2026-04-13**: Implemented comprehensive security configuration with firewall, SSH hardening, and fail2ban
+  - **NEW**: `modules/nixos/security/firewall.nix` - Complete firewall module with nftables support and localhost exceptions
+  - **ENHANCED**: `modules/nixos/security/ssh.nix` - Added password authentication support and security hardening options
+  - **ENHANCED**: `modules/nixos/security/fail2ban.nix` - Updated to use nftables actions and systemd journal backend
+  - **ENABLED**: Firewall protection on bagalamukhi host with trusted localhost interface and development port access
+  - **ENABLED**: Enhanced SSH security with modern cipher suites and authentication methods
+  - **ENABLED**: Fail2ban intrusion prevention system with SSH jail protection
+  - **FIXED**: Deprecated package references (hostPlatform → system, xorg.* → standalone packages)
+
+- **2026-04-12**: Removed SDDM and ly display manager configurations (standardized on LightDM Sea Greeter)
+  - **REMOVED**: `modules/nixos/desktop/sddm.nix` module and all SDDM configuration options
+  - **REMOVED**: `modules/nixos/desktop/ly.nix` module and ly display manager support
+  - **REMOVED**: `pkgs/elegant-sddm.nix` custom SDDM theme package
+  - **CLEANED**: AwesomeWM module simplified to use only LightDM (removed displayManager and lySession options)
+  - **CLEANED**: XFCE module simplified to use only LightDM (removed displayManager option)
+  - **UPDATED**: Module imports and package definitions to remove SDDM/ly references
+  - **STANDARDIZED**: All desktop environments now use LightDM with Sea Greeter for consistent login experience
+
+- **2026-04-12**: Enhanced Sea Greeter with MonokaiPro Spectrum theme and Sanatana branding
+  - **CREATED**: Custom litarvan theme package with MonokaiPro Spectrum color scheme (`pkgs/lightdm-webkit-theme-litarvan-sanatana.nix`)
+  - **APPLIED**: MonokaiPro Spectrum color palette to login window interface (background: #131313, accents: #948ae3, cyan: #5ad4e6)
+  - **REPLACED**: Default user avatar with Sanatana Linux logo (`sanatana-linux-icon.png`)
+  - **ENHANCED**: Login interface styling with gradient buttons, focused input borders, and hover effects
+  - **CONFIGURED**: Automatic wallpaper override system for `sanatana_topographic.png` background
+  - **UPDATED**: LightDM module to use custom Sanatana theme as default across all hosts (bagalamukhi, matangi, chhinamasta)
+
+- **2026-04-12**: Fixed cursor theme not being set in AwesomeWM sessions
+  - **PROBLEM**: Cursor theme reverting to system default (Adwaita) when logging into AwesomeWM via LightDM
+  - **ROOT CAUSE**: Stylix enabled but not explicitly configuring cursor theme, GTK fallback disabled when Stylix active
+  - **FIXED**: GTK module cursor configuration to force `phinger-cursors-light` even with Stylix enabled
+  - **ADDED**: `mkForce` directives for `home.pointerCursor`, `XCURSOR_THEME`, and `XCURSOR_SIZE` environment variables
+  - **ENHANCED**: GTK2/GTK3 configurations with explicit `gtk-cursor-theme-name` settings
+  - **CONFIGURED**: dconf settings for persistent cursor theme in GNOME/GTK applications
+  - **ADDED**: X11 session initialization script (`90-cursor-theme`) for cursor theme setup across all display managers
+  - **IMPROVED**: xinitrc script for ly display manager with cursor theme initialization using xrdb and xsetroot
+  - **RESOLVED**: Configuration build error related to misplaced environment.etc configuration in AwesomeWM module
+
 - **2026-04-06**: Fixed persistent cursor theme configuration to prevent reversion to Adwaita
   - **FIXED**: Mouse cursor theme reverting to Adwaita after window manager reset, sleep, or random conditions
   - **ENHANCED**: materia-stylix module with forced cursor theme configuration using lib.mkForce

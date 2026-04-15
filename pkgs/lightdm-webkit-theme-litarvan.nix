@@ -1,5 +1,8 @@
-{ lib, fetchFromGitHub, buildNpmPackage }:
-
+{
+  lib,
+  fetchFromGitHub,
+  buildNpmPackage,
+}:
 buildNpmPackage rec {
   pname = "lightdm-webkit-theme-litarvan";
   version = "unstable-2023-03-10";
@@ -25,6 +28,6 @@ buildNpmPackage rec {
     homepage = "https://github.com/dragonfly1033/lightdm-webkit-theme-litarvan";
     license = licenses.bsd3;
     platforms = platforms.linux;
-    maintainers = [ ];
+    maintainers = [];
   };
 }

@@ -21,6 +21,7 @@ in {
         adwaita-icon-theme
         adwaita-icon-theme-legacy
         hicolor-icon-theme
+        numix-icon-theme-circle # for honor theme
         pre-commit
         slurp
         xev

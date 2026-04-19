@@ -342,7 +342,11 @@ in {
             eslint_d # ESLint daemon
             hlint # Haskell linter
             nixpkgs-fmt # Nix formatter
+            shellcheck #  Shell script analysis tool
+            shellharden # Corrective bash syntax highlighter
+            shfmt # bash format tool
             prettier # Multi-language formatter
+            yamlfmt # Extensible command line tool or library to format yaml files
             rust-analyzer # Rust language server
             shellcheck # Shell script linter
             shfmt # Shell formatter
@@ -656,7 +660,7 @@ in {
             libnotify # Notifications library
             polkit_gnome # Polkit agent
             menu-cache # Menu caching
-            # Libadwaita and modern GTK4 support
+            skeuos-gtk # customized
             libadwaita # Modern GNOME applications library
             adwaita-icon-theme # Essential icons for libadwaita
             hicolor-icon-theme # Icon theme fallback system

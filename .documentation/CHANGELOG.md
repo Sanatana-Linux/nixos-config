@@ -11,6 +11,15 @@ Each entry follows this format:
 
 ## Changes
 
+- **2026-04-16**: Replaced Qogir icon theme with Honor grey icon theme
+- **NEW**: `pkgs/honor-icon-theme.nix` - Custom package for Honor icon theme with grey folder variant
+- **UPDATED**: `modules/nixos/stylix/default.nix` - Changed icon theme from Qogir to Honor-grey/Honor-grey-dark
+- **UPDATED**: `modules/home-manager/desktop/gtk.nix` - Changed all icon theme references to Honor-grey-dark
+- **UPDATED**: `external/awesome/themes/kailash/theme.lua` - Changed icon theme to Honor-grey-dark
+- **UPDATED**: `external/awesome/modules/icon-lookup/init.lua` - Changed default icon theme to Honor-grey-dark
+- **UPDATED**: `external/awesome/modules/icon-lookup/README.md` - Updated examples to use Honor theme
+- **ADDED**: honor-icon-theme to pkgs/default.nix package exports
+
 - **2026-04-14**: Refactored Firefox module with nested withAutoconfig option
   - **REMOVED**: `higgs-boson` flake input from flake.nix
   - **REMOVED**: `modules/home-manager/programs/higgs-boson-firefox.nix` module

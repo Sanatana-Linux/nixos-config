@@ -56,22 +56,20 @@ in {
 
     # User
     users.user.enable = true;
-    shell = {
-      enable = true;
-      zsh = true;
-    };
+  shell = {
+    enable = true;
+    zsh = true;
+    variables.enable = true;
+  };
 
     # Programs - essential for live ISO
     programs = {
       nix-ld.enable = true;
       appimage.enable = true;
-      thunar.enable = true;
-    };
+    thunar.enable = true;
+  };
 
-    # Environment
-    environment.variables.enable = true;
-
-    # Performance - basic for live environment
+  # Performance - basic for live environment
     performance = {
       default.enable = true;
       zram.enable = true; # Good for live ISO with limited RAM

@@ -1,12 +1,9 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ config, lib, pkgs, ... }:
 with lib; let
   cfg = config.modules.shell;
 in {
+  imports = [./variables.nix];
+
   options.modules.shell = {
     enable = mkEnableOption "Shell environment configuration";
 

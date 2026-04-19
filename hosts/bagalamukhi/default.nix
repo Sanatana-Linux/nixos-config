@@ -38,22 +38,20 @@
 
     # User
     users.tlh.enable = true;
-    shell = {
-      enable = true;
-      zsh = true;
-    };
+  shell = {
+    enable = true;
+    zsh = true;
+    variables.enable = true;
+  };
 
     # Programs
     programs = {
       nix-ld.enable = true;
       appimage.enable = true;
-      thunar.enable = true;
-    };
+    thunar.enable = true;
+  };
 
-    # Environment
-    environment.variables.enable = true;
-
-    # Virtualization
+  # Virtualization
     virtualization = {
       docker = {
         enable = true;

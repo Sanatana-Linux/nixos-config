@@ -113,6 +113,8 @@ in {
           cudatoolkit
           nvidia-container-toolkit
           cudaPackages.cuda_opencl
+          cudaPackages.cuda_nvcc 
+          cudaPackages.libcublas
           cudaPackages.libnvjitlink
           cudaPackages.nvidia_fs
           cudaPackages.cuda_nvcc

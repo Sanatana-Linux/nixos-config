@@ -317,14 +317,8 @@ in {
       };
     };
 
-    home.file.".mozilla/firefox/${profile}/chrome" = mkIf cfg.withAutoconfig {
-      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos/external/firefox";
-    };
-
-    home.file.".mozilla/firefox/${profile}/chrome/utils" = mkIf cfg.withAutoconfig {
-      source = "${inputs.fx-autoconfig}/profile/chrome/utils";
-      recursive = true;
-      force = true;
-    };
+  home.file.".mozilla/firefox/${profile}/chrome" = mkIf cfg.withAutoconfig {
+    source = config.lib.file.mkOutOfStoreSymlink /etc/nixos/external/firefox;
+  };
   };
 }

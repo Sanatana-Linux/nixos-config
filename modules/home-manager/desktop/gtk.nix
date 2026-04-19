@@ -31,11 +31,11 @@ in {
   };
 
   config = mkIf cfg.enable {
-    # Essential GTK and Qt packages for proper theming support
-    home.packages = with pkgs; [
-      # Theme packages
-      materia-theme-transparent
-      qogir-icon-theme
+  # Essential GTK and Qt packages for proper theming support
+  home.packages = with pkgs; [
+    # Theme packages
+    materia-theme-transparent
+    honor-icon-theme
 
       # Libadwaita and schema support packages
       libadwaita
@@ -64,11 +64,11 @@ in {
         package = pkgs.materia-theme-transparent;
       };
 
-      # Force icon theme
-      iconTheme = mkForce {
-        name = "Qogir-dark";
-        package = pkgs.qogir-icon-theme;
-      };
+  # Force icon theme
+  iconTheme = mkForce {
+    name = "Honor-grey-dark";
+    package = pkgs.honor-icon-theme;
+  };
 
       # Force cursor theme (override stylix)
       cursorTheme = mkForce {
@@ -83,11 +83,11 @@ in {
         package = pkgs.materia-theme-transparent;
       };
 
-      # GTK2 configuration
-      gtk2.extraConfig = ''
-        gtk-theme-name="Materia-dark-compact"
-        gtk-icon-theme-name="Qogir-dark"
-        gtk-cursor-theme-name="${cfg.cursor.name}"
+  # GTK2 configuration
+  gtk2.extraConfig = ''
+    gtk-theme-name="Materia-dark-compact"
+    gtk-icon-theme-name="Honor-grey-dark"
+    gtk-cursor-theme-name="${cfg.cursor.name}"
         gtk-cursor-theme-size=${toString cfg.cursor.size}
         gtk-toolbar-style=GTK_TOOLBAR_BOTH_HORIZ
         gtk-toolbar-icon-size=GTK_ICON_SIZE_LARGE_TOOLBAR
@@ -101,11 +101,11 @@ in {
         gtk-xft-rgba="rgba"
       '';
 
-      # GTK3 configuration
-      gtk3.extraConfig = {
-        gtk-theme-name = mkForce "Materia-dark-compact";
-        gtk-icon-theme-name = mkForce "Qogir-dark";
-        gtk-cursor-theme-name = mkForce cfg.cursor.name;
+  # GTK3 configuration
+  gtk3.extraConfig = {
+    gtk-theme-name = mkForce "Materia-dark-compact";
+    gtk-icon-theme-name = mkForce "Honor-grey-dark";
+    gtk-cursor-theme-name = mkForce cfg.cursor.name;
         gtk-cursor-theme-size = mkForce cfg.cursor.size;
         gtk-decoration-layout = mkDefault "menu:";
         gtk-button-images = mkDefault "1";
@@ -163,12 +163,12 @@ in {
       xdg-desktop-portal-gtk
     ];
 
-    # dconf settings for dark theme preference and cursor theme
-    dconf.settings = {
-      "org/gnome/desktop/interface" = {
-        gtk-theme = mkDefault "Materia-dark-compact";
-        icon-theme = mkDefault "Qogir-dark";
-        color-scheme = mkForce "prefer-dark";
+  # dconf settings for dark theme preference and cursor theme
+  dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      gtk-theme = mkDefault "Materia-dark-compact";
+      icon-theme = mkDefault "Honor-grey-dark";
+      color-scheme = mkForce "prefer-dark";
         # Force cursor theme in GNOME/GTK settings
         cursor-theme = mkForce cfg.cursor.name;
         cursor-size = mkForce cfg.cursor.size;

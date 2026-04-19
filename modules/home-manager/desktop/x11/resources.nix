@@ -29,8 +29,8 @@ in {
       *color3: #fce566
       *color11: #e6db74
       ! blue
-      *color4: #5ad4e6
-      *color12: #66d9ef
+      *color4: #6b9ce8
+      *color12: #6b9ce8
       ! magenta
       *color5: #948ae3
       *color13: #ae81ff

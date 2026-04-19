@@ -46,7 +46,7 @@ with lib; let
       BackgroundStartColor=0x131313
       BackgroundEndColor=0x131313
       ProgressBarBackgroundColor=0x222222
-      ProgressBarForegroundColor=0x948ae3
+      ProgressBarForegroundColor=0x6b9ce8
       MessageBelowAnimation=true
       UseEndAnimation=false
 

@@ -19,7 +19,7 @@ in {
 
     p1Window = mkOption {
       type = types.int;
-      default = 300;
+      default = 28;
       description = "P1 state power limit window in seconds";
     };
 
@@ -31,7 +31,7 @@ in {
 
     p2Window = mkOption {
       type = types.int;
-      default = 224;
+      default = 24;
       description = "P2 state power limit window in seconds";
     };
   };
@@ -77,8 +77,8 @@ in {
     services.undervolt = {
       enable = true;
       tempBat = 85; # Maximum battery temperature
-      uncoreOffset = -50; # in mV
-      coreOffset = -50; # in mV
+      uncoreOffset = -40; # in mV
+      coreOffset = -90; # in mV
       package = pkgs.undervolt;
       verbose = true; # More logging
       turbo = 0; # Keep Intel Turbo feature enabled (1 for disabled)

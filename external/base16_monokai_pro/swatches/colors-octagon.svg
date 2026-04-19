@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="600" viewBox="0 0 520 600">
+  <rect width="100%" height="100%" fill="#1a1a1a"/>
+  <style>
+    .hex-label { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; font-size: 11px; text-anchor: middle; }
+  </style>
+
+  <rect x="30" y="20" width="100" height="100" rx="8" fill="#161821"/>
+  <text x="80" y="140" class="hex-label" fill="#e0e0e0">#161821</text>
+
+  <rect x="150" y="20" width="100" height="100" rx="8" fill="#1e1f2b"/>
+  <text x="200" y="140" class="hex-label" fill="#e0e0e0">#1e1f2b</text>
+
+  <rect x="270" y="20" width="100" height="100" rx="8" fill="#282a3a"/>
+  <text x="320" y="140" class="hex-label" fill="#e0e0e0">#282a3a</text>
+
+  <rect x="390" y="20" width="100" height="100" rx="8" fill="#696d77"/>
+  <text x="440" y="140" class="hex-label" fill="#e0e0e0">#696d77</text>
+
+  <rect x="30" y="160" width="100" height="100" rx="8" fill="#888d94"/>
+  <text x="80" y="280" class="hex-label" fill="#e0e0e0">#888d94</text>
+
+  <rect x="150" y="160" width="100" height="100" rx="8" fill="#b2b9bd"/>
+  <text x="200" y="280" class="hex-label" fill="#e0e0e0">#b2b9bd</text>
+
+  <rect x="270" y="160" width="100" height="100" rx="8" fill="#d0d6d7"/>
+  <text x="320" y="280" class="hex-label" fill="#e0e0e0">#d0d6d7</text>
+
+  <rect x="390" y="160" width="100" height="100" rx="8" fill="#eaf2f1"/>
+  <text x="440" y="280" class="hex-label" fill="#e0e0e0">#eaf2f1</text>
+
+  <rect x="30" y="300" width="100" height="100" rx="8" fill="#ff657a"/>
+  <text x="80" y="420" class="hex-label" fill="#e0e0e0">#ff657a</text>
+
+  <rect x="150" y="300" width="100" height="100" rx="8" fill="#ff9b5e"/>
+  <text x="200" y="420" class="hex-label" fill="#e0e0e0">#ff9b5e</text>
+
+  <rect x="270" y="300" width="100" height="100" rx="8" fill="#ffd76d"/>
+  <text x="320" y="420" class="hex-label" fill="#e0e0e0">#ffd76d</text>
+
+  <rect x="390" y="300" width="100" height="100" rx="8" fill="#bad761"/>
+  <text x="440" y="420" class="hex-label" fill="#e0e0e0">#bad761</text>
+
+  <rect x="30" y="440" width="100" height="100" rx="8" fill="#9cd1bb"/>
+  <text x="80" y="560" class="hex-label" fill="#e0e0e0">#9cd1bb</text>
+
+  <rect x="150" y="440" width="100" height="100" rx="8" fill="#9cb8d9"/>
+  <text x="200" y="560" class="hex-label" fill="#e0e0e0">#9cb8d9</text>
+
+  <rect x="270" y="440" width="100" height="100" rx="8" fill="#c39ac9"/>
+  <text x="320" y="560" class="hex-label" fill="#e0e0e0">#c39ac9</text>
+
+  <rect x="390" y="440" width="100" height="100" rx="8" fill="#ff9b5e"/>
+  <text x="440" y="560" class="hex-label" fill="#e0e0e0">#ff9b5e</text>
+
+</svg>

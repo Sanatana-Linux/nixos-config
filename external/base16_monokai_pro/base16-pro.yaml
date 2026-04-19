@@ -1,0 +1,18 @@
+scheme: Monokai Pro Pro
+author: Monokai
+base00: "#19181a"  # Default Background
+base01: "#221f22"  # Lighter Background (used for status bars, line highlighting, etc.)
+base02: "#2d2a2e"  # Selection Background
+base03: "#727072"  # Comments, Invisible
+base04: "#939293"  # Light Foreground (Carets, selection, etc.)
+base05: "#c1c0c0"  # Default Foreground
+base06: "#dedddd"  # Light Accent Foreground
+base07: "#fcfcfa"  # Bright Accent Foreground
+base08: "#ff6188"  # Red
+base09: "#fc9867"  # Orange
+base0A: "#ffd866"  # Yellow
+base0B: "#a9dc76"  # Green
+base0C: "#78dce8"  # Cyan
+base0D: "#78b3f2"  # Blue
+base0E: "#ab9df2"  # Magenta
+base0F: "#fc9867"  # Brown

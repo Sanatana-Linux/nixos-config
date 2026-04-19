@@ -1,0 +1,5 @@
+swatch-html:
+    python3 swatch_generator.py
+
+swatch-svg:
+    python3 svg_generator.py

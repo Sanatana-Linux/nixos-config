@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monokai Pro Spectrum - Color Swatch</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: #1a1a1a;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            font-weight: 300;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        .color-card {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .color-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+        }
+        .card-header {
+            padding: 1.25rem;
+        }
+        .base-name {
+            display: block;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+        }
+        .label {
+            display: block;
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+        .color-values {
+            padding: 1.25rem;
+            background: rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(10px);
+        }
+        .value-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.4rem 0;
+            font-size: 0.9rem;
+        }
+        .value-row:not(:last-child) {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .value-type {
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            opacity: 0.7;
+        }
+        .value {
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Monokai Pro Spectrum</h1>
+        <div class="grid">
+
+        <div class="color-card" style="background-color: #131313;">
+            <div class="card-header" style="color: #ffffff;">
+                <span class="base-name">base00</span>
+                <span class="label">Default Background</span>
+            </div>
+            <div class="color-values" style="color: #ffffff;">
+                <div class="value-row">
+                    <span class="value-type">HEX</span>
+                    <span class="value">#131313</span>
+                </div>
+                <div class="value-row">
+                    <span class="value-type">RGB</span>
+                    <span class="value">rgb(19, 19, 19)</span>
+                </div>
+                <div class="value-row">
+                    <span class="value-type">HSL</span>
+                    <span class="value">hsl(0, 0%, 7%)</span>
+                </div>
+            </div>
+        </div>
+        <div class="color-card" style="background-color: #191919;">
+            <div class="card-header" style="color: #ffffff;">
+                <span class="base-name">base01</span>
+                <span class="label">Lighter Background</span>
+            </div>
+            <div class="color-values" style="color: #ffffff;">
+                <div class="value-row">
+                    <span class="value-type">HEX</span>
+                    <span class="value">#191919</span>
+                </div>
+                <div class="value-row">
+                    <span class="value-type">RGB</span>
+                    <span class="value">rgb(25, 25, 25)</span>
+                </div>
+                <div class="value-row">
+                    <span class="value-type">HSL</span>
+                    <span class="value">hsl(0, 0%, 10%)</span>
+                </div>
+            </div>
+        </div>
+        <div class="color-card" style="background-color: #222222;">
+            <div class="card-header" style="color: #ffffff;">
+                <span class="base-name">base02</span>
+                <span class="label">Selection Background</span>
+            </div>
+            <div class="color-values" style="color: #ffffff;">
+                <div class="value-row">
+                    <span class="value-type">HEX</span>
+                    <span class="value">#222222</span>
+                </div>
+                <div class="value-row">
+                    <span class="value-type">RGB</span>
+                    <span class="value">rgb(34, 34, 34)</span>
+                </div>
+                <div class="value-row">
+                    <span class="value-type">HSL</span>
+                    <span class="value">hsl(0, 0%, 13%)</span>
+                </div>
+            </div>
+        </div>
+        <div class="color-card" style="background-color: #69676c;">
+            <div class="card-header" style="color: #ffffff;">
+                <span class="base-name">base03</span>
+                <span class="label">Comments, Invisible</span>
+            </div>
+            <div class="color-values" style="color: #ffffff;">
+                <div class="value-row">
+                    <span class="value-type">HEX</span>
+                    <span class="value">#69676c</span>
+                </div>
+                <div class="value-row">
+                    <span class="value-type">RGB</span>
+                    <span class="value">rgb(105, 103, 108)</span>
+                </div>
+                <div class="value-row">
+                    <span class="value-type">HSL</span>
+                    <span class="value">hsl(264, 2%, 41%)</span>
+                </div>
+            </div>
+        </div>
+        <div class="color-card" style="background-color: #8b888f;">
+            <div class="card-header" style="color: #000000;">
+                <span class="base-name">base04</span>
+                <span class="label">Light Foreground</span>
+            </div>
+            <div class="color-values" style="color: #000000;">
+                <div class="value-row">
+                    <span class="value-type">HEX</span>
+                    <span class="value">#8b888f</span>
+                </div>
+                <div class="value-row">
+                    <span class="value-type">RGB</span>
+                    <span class="value">rgb(139, 136, 143)</span>
+                </div>
+                <div class="value-row">
+                    <span class="value-type">HSL</span>
+                    <span class="value">hsl(266, 3%, 55%)</span>
+                </div>
+            </div>
+        </div>
+        <div class="color-card" style="background-color: #bab6c0;">
+            <div class="card-header" style="color: #000000;">
+                <span class="base-name">base05</span>
+                <span class="label">Default Foreground</span>
+            </div>
+            <div class="color-values" style="color: #000000;">
+                <div class="value-row">
+                    <span class="value-type">HEX</span>
+                    <span class="value">#bab6c0</span>
+                </div>
+                <div class="value-row">
+                    <span class="value-type">RGB</span>
+                    <span class="value">rgb(186, 182, 192)</span>
+                </div>
+                <div class="value-row">
+                    <span class="value-type">HSL</span>
+                    <span class="value">hsl(264, 7%, 73%)</span>
+                </div>
+            </div>
+        </div>
+        <div class="color-card" style="background-color: #d9d5df;">
+            <div class="card-header" style="color: #000000;">
+                <span class="base-name">base06</span>
+                <span class="label">Light Accent Foreground</span>
+            </div>
+            <div class="color-values" style="color: #000000;">
+                <div class="value-row">
+                    <span class="value-type">HEX</span>
+                    <span class="value">#d9d5df</span>
+                </div>
+                <div class="value-row">
+                    <span class="value-type">RGB</span>
+                    <span class="value">rgb(217, 213, 223)</span>
+                </div>
+                <div class="value-row">
+                    <span class="value-type">HSL</span>
+                    <span class="value">hsl(264, 14%, 85%)</span>
+                </div>
+            </div>
+        </div>
+        <div class="color-card" style="background-color: #f7f1ff;">
+            <div class="card-header" style="color: #000000;">
+                <span class="base-name">base07</span>
+                <span class="label">Bright Accent Foreground</span>
+            </div>
+            <div class="color-values" style="color: #000000;">
+                <div class="value-row">
+                    <span class="value-type">HEX</span>
+                    <span class="value">#f7f1ff</span>
+                </div>
+                <div class="value-row">
+                    <span class="value-type">RGB</span>
+                    <span class="value">rgb(247, 241, 255)</span>
+                </div>
+                <div class="value-row">
+                    <span class="value-type">HSL</span>
+                    <span class="value">hsl(266, 100%, 97%)</span>
+                </div>
+            </div>
+        </div>
+        <div class="color-card" style="background-color: #fc618d;">
+            <div class="card-header" style="color: #000000;">
+                <span class="base-name">base08</span>
+                <span class="label">Red</span>
+            </div>
+            <div class="color-values" style="color: #000000;">
+                <div class="value-row">
+                    <span class="value-type">HEX</span>
+                    <span class="value">#fc618d</span>
+                </div>
+                <div class="value-row">
+                    <span class="value-type">RGB</span>
+                    <span class="value">rgb(252, 97, 141)</span>
+                </div>
+                <div class="value-row">
+                    <span class="value-type">HSL</span>
+                    <span class="value">hsl(343, 96%, 68%)</span>
+                </div>
+            </div>
+        </div>
+        <div class="color-card" style="background-color: #fd9353;">
+            <div class="card-header" style="color: #000000;">
+                <span class="base-name">base09</span>
+                <span class="label">Orange</span>
+            </div>
+            <div class="color-values" style="color: #000000;">
+                <div class="value-row">
+                    <span class="value-type">HEX</span>
+                    <span class="value">#fd9353</span>
+                </div>
+                <div class="value-row">
+                    <span class="value-type">RGB</span>
+                    <span class="value">rgb(253, 147, 83)</span>
+                </div>
+                <div class="value-row">
+                    <span class="value-type">HSL</span>
+                    <span class="value">hsl(23, 98%, 66%)</span>
+                </div>
+            </div>
+        </div>
+        <div class="color-card" style="background-color: #fce566;">
+            <div class="card-header" style="color: #000000;">
+                <span class="base-name">base0A</span>
+                <span class="label">Yellow</span>
+            </div>
+            <div class="color-values" style="color: #000000;">
+                <div class="value-row">
+                    <span class="value-type">HEX</span>
+                    <span class="value">#fce566</span>
+                </div>
+                <div class="value-row">
+                    <span class="value-type">RGB</span>
+                    <span class="value">rgb(252, 229, 102)</span>
+                </div>
+                <div class="value-row">
+                    <span class="value-type">HSL</span>
+                    <span class="value">hsl(51, 96%, 69%)</span>
+                </div>
+            </div>
+        </div>
+        <div class="color-card" style="background-color: #7bd88f;">
+            <div class="card-header" style="color: #000000;">
+                <span class="base-name">base0B</span>
+                <span class="label">Green</span>
+            </div>
+            <div class="color-values" style="color: #000000;">
+                <div class="value-row">
+                    <span class="value-type">HEX</span>
+                    <span class="value">#7bd88f</span>
+                </div>
+                <div class="value-row">
+                    <span class="value-type">RGB</span>
+                    <span class="value">rgb(123, 216, 143)</span>
+                </div>
+                <div class="value-row">
+                    <span class="value-type">HSL</span>
+                    <span class="value">hsl(133, 54%, 66%)</span>
+                </div>
+            </div>
+        </div>
+        <div class="color-card" style="background-color: #5ad4e6;">
+            <div class="card-header" style="color: #000000;">
+                <span class="base-name">base0C</span>
+                <span class="label">Cyan</span>
+            </div>
+            <div class="color-values" style="color: #000000;">
+                <div class="value-row">
+                    <span class="value-type">HEX</span>
+                    <span class="value">#5ad4e6</span>
+                </div>
+                <div class="value-row">
+                    <span class="value-type">RGB</span>
+                    <span class="value">rgb(90, 212, 230)</span>
+                </div>
+                <div class="value-row">
+                    <span class="value-type">HSL</span>
+                    <span class="value">hsl(188, 74%, 63%)</span>
+                </div>
+            </div>
+        </div>
+        <div class="color-card" style="background-color: #6b9ce8;">
+            <div class="card-header" style="color: #000000;">
+                <span class="base-name">base0D</span>
+                <span class="label">Blue</span>
+            </div>
+            <div class="color-values" style="color: #000000;">
+                <div class="value-row">
+                    <span class="value-type">HEX</span>
+                    <span class="value">#6b9ce8</span>
+                </div>
+                <div class="value-row">
+                    <span class="value-type">RGB</span>
+                    <span class="value">rgb(107, 156, 232)</span>
+                </div>
+                <div class="value-row">
+                    <span class="value-type">HSL</span>
+                    <span class="value">hsl(216, 73%, 66%)</span>
+                </div>
+            </div>
+        </div>
+        <div class="color-card" style="background-color: #948ae3;">
+            <div class="card-header" style="color: #000000;">
+                <span class="base-name">base0E</span>
+                <span class="label">Magenta</span>
+            </div>
+            <div class="color-values" style="color: #000000;">
+                <div class="value-row">
+                    <span class="value-type">HEX</span>
+                    <span class="value">#948ae3</span>
+                </div>
+                <div class="value-row">
+                    <span class="value-type">RGB</span>
+                    <span class="value">rgb(148, 138, 227)</span>
+                </div>
+                <div class="value-row">
+                    <span class="value-type">HSL</span>
+                    <span class="value">hsl(247, 61%, 72%)</span>
+                </div>
+            </div>
+        </div>
+        <div class="color-card" style="background-color: #fd9353;">
+            <div class="card-header" style="color: #000000;">
+                <span class="base-name">base0F</span>
+                <span class="label">Brown</span>
+            </div>
+            <div class="color-values" style="color: #000000;">
+                <div class="value-row">
+                    <span class="value-type">HEX</span>
+                    <span class="value">#fd9353</span>
+                </div>
+                <div class="value-row">
+                    <span class="value-type">RGB</span>
+                    <span class="value">rgb(253, 147, 83)</span>
+                </div>
+                <div class="value-row">
+                    <span class="value-type">HSL</span>
+                    <span class="value">hsl(23, 98%, 66%)</span>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</body>
+</html>

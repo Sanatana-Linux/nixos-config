@@ -5,7 +5,7 @@
  // it gets @if ed depending on $variant
  
 -$_dark_base_color: #272a34;
-+$_dark_base_color: #22222c;
++$_dark_base_color: #131313;
  
  $base_color: if($variant == 'light', darken(#ffffff, 2%), $_dark_base_color);
  $text_color: if($variant == 'light', black, white);
@@ -15,7 +15,7 @@
  
  $selected_fg_color: #ffffff!default;
 -$selected_bg_color: saturate(#367bf0, 20%)!default;
-+$selected_bg_color: #6ab0f3!default;
++$selected_bg_color: #6b9ce8!default;
  $selected_borders_color: if($variant== 'light', darken($selected_bg_color, 15%), darken($selected_bg_color, 30%));
  $borders_color: if($variant == 'light', darken($bg_color, 15%), darken($bg_color, 10%));
  $alt_borders_color: if($variant == 'light', darken($bg_color, 24%), darken($bg_color, 18%));
@@ -27,10 +27,10 @@
 -$error_color: #bf1717;
 -$success_color: if($variant == 'light', #3db47e, darken(#3db47e, 10%));
 -$destructive_color: if($variant == 'light', #d41919, darken(#d41919, 10%));
-+$warning_color: #fce566;
++$warning_color: #fd9353;
 +$error_color: #fc618d;
 +$success_color: #7bd88f;
-+$destructive_color: #d8557b;
++$destructive_color: #fc618d;
  
  $osd_fg_color: white;
  $osd_text_color: white;
@@ -41,11 +41,11 @@
  UNWANTED_VARIANTS ?= White-Light Black-Dark
  
 -COLOR_Black?=\#000000
-+COLOR_Black?=\#000000
- TEXT_COLOR_Black?=\#ffffff
++COLOR_Black?=\#131313
+ TEXT_COLOR_Black?=\#f7f1ff
  
 -COLOR_Blue?=\#2777ff
-+COLOR_Blue?=\#6ab0f3
++COLOR_Blue?=\#6b9ce8
  TEXT_COLOR_Blue?=\#ffffff
  
  COLOR_Brown?=\#c37837
@@ -53,18 +53,18 @@
  
 -COLOR_Cyan?=\#0ccfd9
 +COLOR_Cyan?=\#5ad4e6
- TEXT_COLOR_Cyan?=\#000000
+ TEXT_COLOR_Cyan?=\#131313
  
 -COLOR_Green?=\#06a284
 +COLOR_Green?=\#7bd88f
- TEXT_COLOR_Green?=\#ffffff
+ TEXT_COLOR_Green?=\#131313
  
 -COLOR_Grey?=\#737680
 +COLOR_Grey?=\#69676c
- TEXT_COLOR_Grey?=\#ffffff
+ TEXT_COLOR_Grey?=\#f7f1ff
  
 -COLOR_Magenta?=\#cd0245
-+COLOR_Magenta?=\#948ae5
++COLOR_Magenta?=\#948ae3
  TEXT_COLOR_Magenta?=\#ffffff
  
  COLOR_Orange?=\#fd7d00
@@ -78,14 +78,14 @@
  TEXT_COLOR_Teal?=\#ffffff
  
 -COLOR_Violet?=\#962ac3
-+COLOR_Violet?=\#948ae5
++COLOR_Violet?=\#948ae3
  TEXT_COLOR_Violet?=\#ffffff
  
 -COLOR_White?=\#ffffff
-+COLOR_White?=\#dcdcdc
- TEXT_COLOR_White?=\#000000
++COLOR_White?=\#f7f1ff
+ TEXT_COLOR_White?=\#131313
  
 -COLOR_Yellow?=\#ffd86e
 +COLOR_Yellow?=\#fce566
- TEXT_COLOR_Yellow?=\#000000
+ TEXT_COLOR_Yellow?=\#131313
  

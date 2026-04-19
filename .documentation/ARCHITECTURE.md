@@ -474,6 +474,105 @@ modules.hardware.nvidia.cudaSupport = true;
 
 ---
 
+## Git Submodules and Out-of-Store Symlinks
+
+This repository uses Git submodules to manage external configuration files (Neovim, Firefox, AwesomeWM) that are developed in separate repositories. These are linked to their expected locations using Home Manager's `mkOutOfStoreSymlink` function.
+
+### Why Submodules?
+
+External configurations like Neovim and AwesomeWM are often developed and versioned independently. Using Git submodules allows:
+
+1. **Independent versioning** - Each config has its own commit history
+2. **Separate repositories** - Configs can be shared across machines or projects
+3. **Direct editing** - Changes are made directly in the submodule, then pushed
+
+### Submodule Locations
+
+All submodules are stored in `/etc/nixos/external/`:
+
+| Submodule | Path | Target Location |
+|-----------|------|-----------------|
+| `nvim` | `/etc/nixos/external/nvim` | `~/.config/nvim` |
+| `firefox` | `/etc/nixos/external/firefox` | `~/.mozilla/firefox/<profile>/chrome` |
+| `awesome` | `/etc/nixos/external/awesome` | `~/.config/awesome` |
+
+### How Symlinking Works
+
+Home Manager provides `config.lib.file.mkOutOfStoreSymlink` to create symlinks pointing outside the Nix store. This enables live editing of configuration files without rebuilding:
+
+```nix
+# modules/home-manager/programs/neovim.nix
+xdg.configFile."nvim" = {
+  source = config.lib.file.mkOutOfStoreSymlink /etc/nixos/external/nvim;
+};
+```
+
+When Home Manager activates, it creates a symlink:
+- `~/.config/nvim` → `/etc/nixos/external/nvim`
+
+This means editing files in `/etc/nixos/external/nvim/` immediately affects Neovim without any rebuild.
+
+### Module Configuration
+
+Each submodule has a corresponding Home Manager module that sets up the symlink:
+
+```nix
+# modules/home-manager/desktop/awesome.nix
+{ config, lib, ... }:
+with lib; let
+  cfg = config.modules.desktop.awesome;
+in {
+  options.modules.desktop.awesome = {
+    enable = mkEnableOption "AwesomeWM user configuration";
+  };
+
+  config = mkIf cfg.enable {
+    xdg.configFile."awesome" = {
+      source = config.lib.file.mkOutOfStoreSymlink /etc/nixos/external/awesome;
+    };
+  };
+}
+```
+
+### Updating Submodules
+
+To update a submodule to the latest commit from its remote:
+
+```bash
+# Update specific submodule
+git submodule update --remote external/nvim
+
+# Update all submodules
+git submodule update --remote
+
+# Commit the update
+git add external/nvim
+git commit -m "update nvim submodule"
+```
+
+### Initial Setup
+
+After cloning the repository, initialize and update submodules:
+
+```bash
+git submodule init
+git submodule update
+```
+
+Or clone with submodules in one step:
+
+```bash
+git clone --recurse-submodules <repo-url>
+```
+
+### Resource
+
+For more information on this approach and debugging dotfiles with Nix:
+
+- [Accelerating Dotfiles Debugging - NixOS and Flakes](https://nixos-and-flakes.thiscute.world/best-practices/accelerating-dotfiles-debugging)
+
+---
+
 ## Further Reading
 
 - [NixOS Modules](https://nixos.org/manual/nixos/stable/#ch-modules)
@@ -481,3 +580,4 @@ modules.hardware.nvidia.cudaSupport = true;
 - [Home Manager Options](https://nix-community.github.io/home-manager/options.html)
 - [Nix Flakes](https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake.html)
 - [Nixpkgs Overlays](https://nixos.org/manual/nixpkgs/stable/#chap-overlays)
+- [Accelerating Dotfiles Debugging](https://nixos-and-flakes.thiscute.world/best-practices/accelerating-dotfiles-debugging)

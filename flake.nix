@@ -16,7 +16,6 @@
       url = "github:MrOtherGuy/fx-autoconfig";
       flake = false;
     };
-    lemonake.url = "github:passivelemon/lemonake";
     stylix = {
       url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -122,6 +121,30 @@
             };
           }
           ./hosts/matangi
+        ];
+      };
+
+      bhairavi = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        modules = [
+          inputs.stylix.nixosModules.stylix
+          inputs.nur.modules.nixos.default
+          inputs.bhairava-grub-theme.nixosModule
+          inputs.home-manager.nixosModules.home-manager
+          inputs.nixos-generators.nixosModules.all-formats
+          ./modules/nixos
+          {
+            home-manager = {
+              useUserPackages = true;
+              backupFileExtension = "bak";
+              extraSpecialArgs = {inherit inputs outputs;};
+              sharedModules = [./modules/home-manager];
+              users = {
+                tlh = {imports = [./home/tlh/default.nix];};
+              };
+            };
+          }
+          ./hosts/bhairavi
         ];
       };
 

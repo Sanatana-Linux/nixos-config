@@ -1,12 +1,4 @@
-{
-  lib,
-  pkgs,
-  ...
-}: {
-  imports = [./variables.nix];
-
-  # execute shebangs that assume hardcoded shell paths
-
+{ lib, pkgs, ... }: {
   programs.zsh.enable = true;
   environment = with pkgs; {
     shells = [bash zsh];

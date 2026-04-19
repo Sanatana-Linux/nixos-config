@@ -28,7 +28,6 @@ with pkgs;
       echo -e "$GREEN Available commands: $SPECIAL_END"
       echo
       echo -e "            $SKY_BLUE help $SPECIAL_END               show this text"
-      echo -e "            $SKY_BLUE repair $SPECIAL_END             repair the Nix Store"
       echo -e "            $SKY_BLUE clean $SPECIAL_END              clean and garbage collect store"
       echo -e "            $SKY_BLUE rebuild $SPECIAL_END            rebuild configuration for host"
       echo -e "            $SKY_BLUE optimize $SPECIAL_END           clean then optimize the Nix Store"
@@ -36,28 +35,14 @@ with pkgs;
       echo -e "            $SKY_BLUE rollback $SPECIAL_END           rollback to previous generation"
       echo -e "            $SKY_BLUE search $SPECIAL_END             search packages available"
       echo -e "            $SKY_BLUE options $SPECIAL_END            search nixos and home-manager options"
-      echo -e "            $SKY_BLUE sync $SPECIAL_END               pull config from git repo, then commit and push"
+      echo -e "            $SKY_BLUE sync $SPECIAL_END               sync external repos and main config with commit message"
       echo -e "            $SKY_BLUE update $SPECIAL_END             update flake"
       echo -e "            $SKY_BLUE format $SPECIAL_END             format nix files in configuration"
       echo -e "            $SKY_BLUE vm $SPECIAL_END                 build a vm"
       echo -e "            $SKY_BLUE health $SPECIAL_END             run nix-health check"
       echo -e "            $SKY_BLUE tree $SPECIAL_END               show dependency tree for a host (nix-tree)"
-      echo -e "            $SKY_BLUE build-iso $SPECIAL_END          build chhinamasta ISO and copy to $DIRTY<dest-dir>$SPECIAL_END"
-    }
-
-    function repair() {
-      echo "Repairing the Nix Store Now"
-      doas nix-store --verify --repair
-      doas nix-store --verify --check-contents --repair
-      doas nix store verify --all
-      doas nix store repair --all
-      doas nix-collect-garbage -d
-      echo "Finding SymLinks into the Store & Deleting"
-      doas find ~/* -lname '/nix/store/*' -delete
-      echo "Run the Garbage Collector"
-      doas nix-store --gc
-
-      echo "Repair Process Finished"
+      echo -e "            $SKY_BLUE build-iso $SPECIAL_END          build ISO (chhinamasta or bhairavi) and copy to $DIRTY<dest-dir>$SPECIAL_END"
+      echo -e "            $SKY_BLUE build-qcow $SPECIAL_END         build bhairavi qcow2 image with custom size (GB)"
     }
 
     function format() {
@@ -73,8 +58,57 @@ with pkgs;
     }
 
     function sync() {
-      echo "Syncing Nix Configuration Now"
-      cd $dots && git add . && git commit && git push && echo "Sync Completed!" || echo "Error With Git, See Output Above" && exit
+      local commit_msg="$2"
+      
+      if [ -z "$commit_msg" ]; then
+        echo -e "\e[38;2;191;97;106mError:\e[0m Please provide a commit message."
+        echo -e "  Usage: \e[38;2;133;133;133mom\e[0m sync \e[38;2;133;133;133m\"commit message\"\e[0m"
+        exit 1
+      fi
+
+      local external_dir="$dots/external"
+      local failed=0
+
+      if [ -d "$external_dir" ]; then
+        echo -e "\e[38;2;136;192;208mSyncing external repositories...\e[0m"
+        for dir in "$external_dir"/*/; do
+          if [ -d "$dir/.git" ]; then
+            local dirname=$(basename "$dir")
+            echo -e "\e[38;2;134;239;172mProcessing:\e[0m $dirname"
+            cd "$dir" || { echo -e "\e[38;2;191;97;106mError:\e[0m Cannot enter $dir"; continue; }
+            
+            if git diff-index --quiet HEAD -- 2>/dev/null; then
+              echo -e "  \e[38;2;133;133;133mNo changes in $dirname\e[0m"
+            else
+              git add . && \
+              git commit -m "$commit_msg" && \
+              git push && \
+              echo -e "  \e[38;2;134;239;172mSynced $dirname\e[0m" || \
+              { echo -e "  \e[38;2;191;97;106mError syncing $dirname\e[0m"; failed=1; }
+            fi
+          fi
+        done
+      fi
+
+      echo -e "\e[38;2;136;192;208mSyncing main NixOS configuration...\e[0m"
+      cd "$dots" || { echo -e "\e[38;2;191;97;106mError:\e[0m Cannot enter $dots"; exit 1; }
+      
+      if git diff-index --quiet HEAD -- 2>/dev/null; then
+        echo -e "\e[38;2;133;133;133mNo changes in main configuration\e[0m"
+      else
+        git add . && \
+        git commit -m "$commit_msg" && \
+        git push && \
+        echo -e "\e[38;2;134;239;172mSynced main configuration\e[0m" || \
+        { echo -e "\e[38;2;191;97;106mError syncing main configuration\e[0m"; failed=1; }
+      fi
+
+      if [ $failed -eq 0 ]; then
+        echo -e "\e[38;2;134;239;172mAll repositories synced successfully!\e[0m"
+      else
+        echo -e "\e[38;2;219;245;76mSome repositories had errors. Check output above.\e[0m"
+        exit 1
+      fi
     }
 
     function rebuild() {
@@ -144,23 +178,23 @@ with pkgs;
     }
 
     function build-iso() {
-      local host="$2"
-      local dest="$3"
-
-      if [ -z "$host" ]; then
-        echo -e "\e[38;2;191;97;106mError:\e[0m Please provide a host (chhinamasta or shodashi)."
-        echo -e "  Usage: \e[38;2;133;133;133mom\e[0m build-iso \e[38;2;133;133;133m<host> /path/to/output\e[0m"
-        exit 1
-      fi
-
-      if [[ "$host" != "chhinamasta" && "$host" != "shodashi" ]]; then
-         echo -e "\e[38;2;191;97;106mError:\e[0m Invalid host. Must be 'chhinamasta' or 'shodashi'."
-         exit 1
-      fi
+      local dest="$2"
+      local host="$3"
 
       if [ -z "$dest" ]; then
         echo -e "\e[38;2;191;97;106mError:\e[0m Please provide a destination directory."
-        echo -e "  Usage: \e[38;2;133;133;133mom\e[0m build-iso \e[38;2;133;133;133m$host /path/to/output\e[0m"
+        echo -e "  Usage: \e[38;2;133;133;133mom\e[0m build-iso \e[38;2;133;133;133m/path/to/output [chhinamasta|bhairavi]\e[0m"
+        exit 1
+      fi
+
+      if [ -z "$host" ]; then
+        echo -e "\e[38;2;219;245;76mNo host specified, defaulting to chhinamasta\e[0m"
+        host="chhinamasta"
+      fi
+
+      if [[ "$host" != "chhinamasta" && "$host" != "bhairavi" ]]; then
+        echo -e "\e[38;2;191;97;106mError:\e[0m Invalid host. Must be 'chhinamasta' or 'bhairavi'."
+        echo -e "  Usage: \e[38;2;133;133;133mom\e[0m build-iso \e[38;2;133;133;133m/path/to/output [chhinamasta|bhairavi]\e[0m"
         exit 1
       fi
 
@@ -198,12 +232,105 @@ with pkgs;
       echo -e "\e[38;2;134;239;172mDone!\e[0m ISO copied to $dest/$iso_name ($iso_size)"
     }
 
+    function build-qcow() {
+      local dest="$2"
+      local disk_size="$3"
+
+      if [ -z "$dest" ]; then
+        echo -e "\e[38;2;191;97;106mError:\e[0m Please provide a destination directory."
+        echo -e "  Usage: \e[38;2;133;133;133mom\e[0m build-qcow \e[38;2;133;133;133m/path/to/output [disk-size-GB]\e[0m"
+        echo -e "  Example: \e[38;2;133;133;133mom\e[0m build-qcow /tmp/vms 80"
+        exit 1
+      fi
+
+      if [ -z "$disk_size" ]; then
+        echo -e "\e[38;2;219;245;76mNo disk size specified, defaulting to 50 GB\e[0m"
+        disk_size=50
+      fi
+
+      if ! [[ "$disk_size" =~ ^[0-9]+$ ]]; then
+        echo -e "\e[38;2;191;97;106mError:\e[0m Disk size must be a number (in GB)."
+        exit 1
+      fi
+
+      if [ ! -d "$dest" ]; then
+        echo -e "\e[38;2;219;245;76mDirectory does not exist, creating:\e[0m $dest"
+        mkdir -p "$dest" || { echo -e "\e[38;2;191;97;106mError:\e[0m Failed to create directory $dest"; exit 1; }
+      fi
+
+      echo -e "\e[38;2;136;192;208mBuilding bhairavi qcow2 image (${disk_size}GB)...\e[0m"
+      echo -e "\e[38;2;133;133;133mThis may take several minutes...\e[0m"
+      
+      cd "$dots" || { echo -e "\e[38;2;191;97;106mError:\e[0m Cannot enter $dots"; exit 1; }
+      
+      # Build qcow2 image using nixos-generators via flake
+      local build_result
+      build_result=$(nix build ".#nixosConfigurations.bhairavi.config.system.build.images.qcow" \
+        --no-link --print-out-paths 2>&1)
+
+      local build_status=$?
+      
+      if [ $build_status -ne 0 ]; then
+        echo -e "\e[38;2;191;97;106mError:\e[0m qcow2 build failed:"
+        echo "$build_result"
+        exit 1
+      fi
+
+      # Find the qcow2 file
+      local qcow_path
+      qcow_path=$(find "$build_result" -name "*.qcow2" -type f 2>/dev/null | head -n 1)
+
+      if [ -z "$qcow_path" ]; then
+        # Try listing directly
+        qcow_path=$(ls "$build_result"/*.qcow2 2>/dev/null | head -n 1)
+      fi
+
+      if [ -z "$qcow_path" ]; then
+        echo -e "\e[38;2;191;97;106mError:\e[0m No .qcow2 file found in build output"
+        echo -e "\e[38;2;133;133;133mBuild directory: $build_result\e[0m"
+        ls -la "$build_result" 2>/dev/null || true
+        exit 1
+      fi
+
+      local qcow_name="bhairavi-${disk_size}G.qcow2"
+      local final_path="$dest/$qcow_name"
+      
+      echo -e "\e[38;2;134;239;172mBuild complete, copying to destination\e[0m"
+      cp "$qcow_path" "$final_path" || { 
+        echo -e "\e[38;2;191;97;106mError:\e[0m Failed to copy qcow2 to destination"; 
+        exit 1; 
+      }
+
+      # Resize if needed
+      echo -e "\e[38;2;136;192;208mResizing image to ${disk_size}GB...\e[0m"
+      if command -v qemu-img &> /dev/null; then
+        qemu-img resize "$final_path" "${disk_size}G" 2>/dev/null || {
+          echo -e "\e[38;2;219;245;76mWarning:\e[0m Could not resize image. Image may have fixed size."
+        }
+      else
+        echo -e "\e[38;2;219;245;76mNote:\e[0m qemu-img not found, skipping resize"
+      fi
+      
+      local qcow_size
+      qcow_size=$(du -h "$final_path" | cut -f1)
+      
+      echo -e ""
+      echo -e "\e[38;2;134;239;172m╔══════════════════════════════════════════════════════════╗\e[0m"
+      echo -e "\e[38;2;134;239;172m║                    Build Complete!                      ║\e[0m"
+      echo -e "\e[38;2;134;239;172m╚══════════════════════════════════════════════════════════╝\e[0m"
+      echo -e ""
+      echo -e "  \e[38;2;136;192;208mImage:\e[0m $final_path"
+      echo -e "  \e[38;2;136;192;208mSize:\e[0m  $qcow_size on disk (${disk_size}GB virtual)"
+      echo -e ""
+      echo -e "  \e[38;2;219;245;76mRun with:\e[0m"
+      echo -e "    qemu-system-x86_64 -m 8G -smp 4 \\\\"
+      echo -e "      -drive file=$final_path,format=qcow2 \\\\"
+      echo -e "      -enable-kvm"
+    }
+
     case "$1" in
     sync)
-      sync
-      ;;
-    repair)
-      repair
+      sync "$@"
       ;;
     rebuild)
       rebuild "$@"
@@ -243,6 +370,9 @@ with pkgs;
       ;;
     build-iso)
       build-iso "$@"
+      ;;
+    build-qcow)
+      build-qcow "$@"
       ;;
     help)
       help

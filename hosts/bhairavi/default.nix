@@ -1,15 +1,13 @@
 {
-  lib,
   inputs,
+  lib,
   outputs,
-  pkgs,
   ...
 }: {
   imports = [
     ./hardware-configuration.nix
   ];
 
-  # Overlays
   nixpkgs.overlays = [
     outputs.overlays.additions
     outputs.overlays.modifications
@@ -18,15 +16,15 @@
   ];
 
   modules = {
-    # System
     system = {
       systemd.enable = true;
       boot = {
         enable = true;
         theme.enable = true;
-        advancedBios.enable = true;
+        advancedBios.enable = false;
+        development.enable = true;
       };
-      plymouth.enable = true; # Enable Sanatana Plymouth theme
+      plymouth.enable = true;
     };
 
     base = {
@@ -36,38 +34,44 @@
       services.enable = true;
     };
 
-    # User
-    users.smg.enable = true;
-  shell = {
-    enable = true;
-    zsh = true;
-    variables.enable = true;
-  };
+    users.tlh.enable = true;
 
-    # Programs
+    shell = {
+      enable = true;
+      zsh = true;
+      variables.enable = true;
+    };
+
     programs = {
       nix-ld.enable = true;
       appimage.enable = true;
-    shotcut.enable = true;
-  };
+      thunar.enable = true;
+    };
 
-  # Performance
+    virtualization = {
+      docker = {
+        enable = true;
+        rootless = true;
+        nvidia = false;
+      };
+      virt-manager.enable = false;
+      waydroid.enable = false;
+      lxc.enable = false;
+    };
+
     performance = {
       default.enable = true;
-      undervolt.enable = true;
+      undervolt.enable = false;
       cachy.enable = true;
       oomd.enable = true;
       zram.enable = true;
     };
 
-    # Services
-    # Power
     power.laptop = {
-      enable = true;
-      powerProfilesDaemon = true;
+      enable = false;
+      powerProfilesDaemon = false;
     };
 
-    # Packages
     packages = {
       archives = {
         enable = true;
@@ -78,33 +82,26 @@
         integrationLibs = true;
       };
       core.enable = true;
-      fonts = {
-        enable = true;
-        nerdFonts = true;
-        iconFonts = true;
-        systemFonts = true;
-      };
       development = {
-        enable = false;
-        linters = false;
-        versionControl = false;
-        buildTools = false;
-        runtimeLanguages = false;
-        luaEcosystem = false;
-        rustEcosystem = false;
+        enable = true;
+        linters = true;
+        versionControl = true;
+        buildTools = true;
+        runtimeLanguages = true;
+        luaEcosystem = true;
+        rustEcosystem = true;
         nixUtilities = true;
         systemCompilers = true;
-        webDevelopment = false;
-        databases = false;
-        editors = false;
-        treeSitterGrammars = false;
+        webDevelopment = true;
+        databases = true;
+        editors = true;
+        treeSitterGrammars = true;
       };
-      # customFonts.enable = true;
       gui = {
         enable = true;
         applicationLauncher = true;
         mediaTools = true;
-        developmentTools = false;
+        developmentTools = true;
         windowManagement = true;
         messaging = true;
         extraPackages = true;
@@ -127,19 +124,18 @@
         streamingTools = true;
         gstreamerPlugins = true;
         creators = true;
-        stableVideoEditors = true;
       };
       network = {
         enable = true;
         gitTools = true;
-        wirelessTools = true;
+        wirelessTools = false;
         downloadTools = true;
         compressionLibs = true;
       };
       python = {
         enable = true;
         development = true;
-        webDevelopment = false;
+        webDevelopment = true;
         dataProcessing = true;
         systemIntegration = true;
         graphics = true;
@@ -165,68 +161,76 @@
       x11.enable = true;
     };
 
-    # Hardware
     hardware = {
-      nvidia = {
-        enable = true;
-        cuda.enable = true;
-        prime = {
-          intelBusId = "PCI:00:02:0";
-          nvidiaBusId = "PCI:01:00:0";
-        };
-      };
-      intel.enable = true;
-      bluetooth.enable = true;
-      tpm.enable = true;
+      nvidia.enable = false;
+      intel.enable = false;
+      bluetooth.enable = false;
+      tpm.enable = false;
       udev.enable = true;
-      logitech.enable = true;
-      lenovo.enable = true;
+      logitech.enable = false;
+      lenovo.enable = false;
       sound.enable = true;
       networking = {
         enable = true;
-        hostName = "matangi";
+        hostName = "bhairavi";
+        wifi.rtl88x2bu.enable = false;
         quad9.enable = true;
       };
-      iphone.enable = true;
+      android.enable = false;
     };
 
-    # Stylix
     stylix.enable = true;
 
-    # Desktop
     desktop = {
-      xfce = {
+      awesomewm = {
         enable = true;
       };
     };
 
-    # Printer
-    printer.brother = {
-      enable = true;
-      user = "smg";
-    };
-
-    # AI
     ai = {
-      ollama.enable = true;
+      ollama.enable = false;
       core.enable = true;
     };
 
-    # Security
     security = {
-      doas.enable = true;
-      fail2ban.enable = true;
-      ssh.enable = true;
+      doas = {
+        enable = true;
+        adminUser = "tlh";
+      };
       sudo.enable = true;
-      pam.enable = true;
-      packages.enable = true;
+
+      firewall = {
+        enable = true;
+        allowSSH = true;
+        allowHTTP = true;
+        allowDevelopment = true;
+        customTcpPorts = [];
+        logRefusedConnections = true;
+        trustedInterfaces = ["lo"];
+      };
+
+      ssh = {
+        enable = true;
+        passwordAuthentication = true;
+        permitRootLogin = "no";
+        maxAuthTries = 3;
+        port = 22;
+      };
+
+      fail2ban = {
+        enable = true;
+        maxRetry = 5;
+        banTime = "1h";
+        findTime = "10m";
+        enableSSH = true;
+        ignoreIPs = ["127.0.0.1/8" "::1" "192.168.1.0/24"];
+      };
     };
   };
 
-  # Host-specific display configuration
   services.xserver = {
     enable = true;
-    videoDrivers = ["nvidia"];
+    videoDrivers = ["modesetting"];
     dpi = lib.mkForce 96;
   };
 
@@ -235,17 +239,18 @@
     enable32Bit = true;
   };
 
-  hardware.nvidia.forceFullCompositionPipeline = lib.mkForce false;
-
-  environment.systemPackages = [pkgs.easyeffects];
-
   services = {
     logind.settings.Login = {
-      HandleLidSwitch = "suspend";
+      HandleLidSwitch = "ignore";
       HandlePowerKey = "ignore";
-      HandlePowerKeyLongPress = "suspend";
+      HandlePowerKeyLongPress = "ignore";
     };
-    displayManager.defaultSession = "xfce";
+    displayManager.defaultSession = "none+awesome";
+    qemuGuest.enable = true;
+  };
+
+  virtualisation = {
+    diskSize = lib.mkDefault (50 * 1024);
   };
 
   system.stateVersion = "24.11";

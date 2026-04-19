@@ -14,7 +14,7 @@ in {
   config = mkIf cfg.enable {
     zramSwap = {
       enable = true;
-      algorithm = "lz4";
+      algorithm = "zstd";
       memoryPercent = 33;
       priority = 999;
     };
@@ -22,7 +22,7 @@ in {
     boot.kernelParams = [
       "zswap.enabled=1"
       "zswap.compressor=zstd"
-      "zswap.max_pool_percent=10"
+      "zswap.max_pool_percent=25"
     ];
   };
 }

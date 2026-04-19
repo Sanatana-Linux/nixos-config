@@ -12,7 +12,7 @@ in {
 
   config = mkIf cfg.enable {
     xdg.configFile."awesome" = {
-      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos/external/awesome";
+      source = config.lib.file.mkOutOfStoreSymlink /etc/nixos/external/awesome;
     };
   };
 }

@@ -45,10 +45,11 @@ in {
     environment.variables =
       {
         BROWSER = cfg.browser;
-        QT_QPA_PLATFORMTHEME = "qt6ct";
       }
       // optionalAttrs cfg.enableOpenGLOptimizations {
         LIBGL_DRI3_DISABLE = "1";
+        GSK_RENDERER = "gl";
+        ADW_DEBUG_COLOR_SCHEME = "prefer-dark";
       }
       // optionalAttrs cfg.enableJavaOptimizations {
         _JAVA_AWT_WM_NONREPARENTING = "1";
@@ -56,15 +57,6 @@ in {
       }
       // optionalAttrs cfg.enableZshAsync {
         ZSH_AUTOSUGGEST_USE_ASYNC = "true";
-      }
-      // {
-        # Virtualization paths
-        G2TP_OVMF_IMAGE = "/run/libvirt/nix-ovmf/OVMF_CODE.fd";
-        G2TP_GRUB_LIB = "/nix/store/77r7pkdhylp119m32lhh349yqc5dyig6-grub-2.12/lib/grub";
-
-        # AI API endpoints
-        OLLAMA_API_BASE = "http://127.0.0.1:11434";
-        OPENAI_API_BASE = "http://localhost:11434";
       }
       // cfg.extraVariables;
   };

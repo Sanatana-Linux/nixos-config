@@ -25,14 +25,14 @@ stdenv.mkDerivation rec {
       --fg-comment: #69676c;      /* base03 - Comments, Invisible */
       --fg-light: #8b888f;        /* base04 - Light Foreground */
       --fg-primary: #bab6c0;      /* base05 - Default Foreground */
-      --fg-accent: #f7f1ff;       /* base06 - Light Accent Foreground */
+      --fg-accent: #d9d5df;       /* base06 - Light Accent Foreground */
       --fg-bright: #f7f1ff;       /* base07 - Bright Accent Foreground */
       --color-red: #fc618d;       /* base08 - Red */
       --color-orange: #fd9353;    /* base09 - Orange */
       --color-yellow: #fce566;    /* base0A - Yellow */
       --color-green: #7bd88f;     /* base0B - Green */
       --color-cyan: #5ad4e6;      /* base0C - Cyan */
-      --color-blue: #948ae3;      /* base0D - Blue */
+      --color-blue: #6b9ce8;      /* base0D - Blue */
       --color-magenta: #948ae3;   /* base0E - Magenta */
       --color-brown: #fd9353;     /* base0F - Brown */
     }

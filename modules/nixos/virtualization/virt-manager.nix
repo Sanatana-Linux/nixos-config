@@ -12,6 +12,11 @@ in {
   };
 
   config = mkIf cfg.enable {
+    environment.variables = {
+      G2TP_OVMF_IMAGE = "/run/libvirt/nix-ovmf/OVMF_CODE.fd";
+      G2TP_GRUB_LIB = "/nix/store/77r7pkdhylp119m32lhh349yqc5dyig6-grub-2.12/lib/grub";
+    };
+
     # Ensure tss user exists for swtpm operations
     users.users.tss = {
       isSystemUser = true;

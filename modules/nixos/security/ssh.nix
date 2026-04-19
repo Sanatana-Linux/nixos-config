@@ -56,11 +56,11 @@ in {
           if cfg.passwordAuthentication
           then "publickey password"
           else "publickey";
-        KbdInteractiveAuthentication = false;
+        KbdInteractiveAuthentication = true;
         UsePAM = cfg.passwordAuthentication;
-        X11Forwarding = false;
-        AllowAgentForwarding = false;
-        AllowTcpForwarding = false;
+        X11Forwarding = true;
+        AllowAgentForwarding = true;
+        AllowTcpForwarding = true;
         GatewayPorts = "no";
         PermitTunnel = "no";
       };

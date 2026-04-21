@@ -14,7 +14,6 @@
     ./shell
     ./stylix
     ./system
-    ./users
     ./virtualization
   ];
 }

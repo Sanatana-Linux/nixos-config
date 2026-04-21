@@ -660,7 +660,7 @@ in {
             libnotify # Notifications library
             polkit_gnome # Polkit agent
             menu-cache # Menu caching
-            skeuos-gtk # customized
+
             libadwaita # Modern GNOME applications library
             adwaita-icon-theme # Essential icons for libadwaita
             hicolor-icon-theme # Icon theme fallback system

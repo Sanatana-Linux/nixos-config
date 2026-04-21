@@ -43,9 +43,9 @@ in {
       };
       icons = {
         enable = true;
-        package = pkgs.honor-icon-theme;
-        light = "Honor-grey";
-        dark = "Honor-grey-dark";
+        package = pkgs.colloid-icon-theme;
+        light = "Colloid";
+        dark = "Colloid-dark";
       };
 
       # System-level targets
@@ -62,12 +62,15 @@ in {
 
       # Icon theme
       targets.nixos-icons.enable = true;
+
+      # Disable GNOME target - we use AwesomeWM, not GNOME
+      targets.gnome.enable = false;
     };
 
     # Ensure materia-theme is available system-wide
     environment.systemPackages = with pkgs; [
       materia-theme
-      honor-icon-theme
+      colloid-icon-theme
     ];
   };
 }

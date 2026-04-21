@@ -92,6 +92,5 @@ CustomizableUI.sys.mjs:4319:17
 *.orig
 *.tmp
 
-
-edStatusbar.uc.js:221
-CustomizableUI.sys.mjs:4319:17
+# OpenCode session state (gitignored)
+.opencode/state/

@@ -1,4 +1,8 @@
-{ lib, pkgs, ... }: {
+{
+  lib,
+  pkgs,
+  ...
+}: {
   programs.zsh.enable = true;
   environment = with pkgs; {
     shells = [bash zsh];

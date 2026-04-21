@@ -2,10 +2,12 @@
   inputs,
   lib,
   outputs,
+  pkgs,
   ...
 }: {
   imports = [
     ./hardware-configuration.nix
+    ../../modules/nixos/users/tlh.nix
   ];
 
   # Overlays
@@ -38,20 +40,20 @@
 
     # User
     users.tlh.enable = true;
-  shell = {
-    enable = true;
-    zsh = true;
-    variables.enable = true;
-  };
+    shell = {
+      enable = true;
+      zsh = true;
+      variables.enable = true;
+    };
 
     # Programs
     programs = {
       nix-ld.enable = true;
       appimage.enable = true;
-    thunar.enable = true;
-  };
+      thunar.enable = true;
+    };
 
-  # Virtualization
+    # Virtualization
     virtualization = {
       docker = {
         enable = true;
@@ -203,6 +205,12 @@
     desktop = {
       awesomewm = {
         enable = true;
+      };
+      lightdm = {
+        enable = true;
+        theme = pkgs.lightdm-webkit-theme-litarvan;
+        selectedTheme = "lightdm-webkit-theme-litarvan";
+        defaultWallpaper = "wallpaper.png";
       };
     };
 

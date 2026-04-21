@@ -142,8 +142,16 @@ stdenv.mkDerivation rec {
 
     install -d $out
 
-    # Copy source files to output
-    cp -r $src/* $out/
+    # Copy source files to output, flattening public/ into root
+    # so sea-greeter finds index.yml at the theme root
+    for item in $src/*; do
+      name=$(basename "$item")
+      if [ "$name" = "public" ]; then
+        cp -r "$item"/* $out/
+      else
+        cp -r "$item" "$out/$name"
+      fi
+    done
 
     # Inject custom MonokaiPro colors
     echo "Injecting MonokaiPro Spectrum color scheme..."

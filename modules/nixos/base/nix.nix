@@ -167,7 +167,7 @@ in {
 
       # Registry and nixPath
       registry = mapAttrs (_: value: {flake = value;}) inputs;
-      nixPath = mapAttrsToList (key: value: "${key}=${valuhttps://xdaforums.com/t/carrier-variants-pixel-10-series-bootloader-unlock-status.4757180/post-90501605e.to.path}") config.nix.registry;
+      nixPath = mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
 
       # Performance tuning
       #   daemonCPUSchedPolicy = "idle";

@@ -7,6 +7,7 @@
 }: {
   imports = [
     ./hardware-configuration.nix
+    ../../modules/nixos/users/smg.nix
   ];
 
   # Overlays
@@ -38,20 +39,20 @@
 
     # User
     users.smg.enable = true;
-  shell = {
-    enable = true;
-    zsh = true;
-    variables.enable = true;
-  };
+    shell = {
+      enable = true;
+      zsh = true;
+      variables.enable = true;
+    };
 
     # Programs
     programs = {
       nix-ld.enable = true;
       appimage.enable = true;
-    shotcut.enable = true;
-  };
+      shotcut.enable = true;
+    };
 
-  # Performance
+    # Performance
     performance = {
       default.enable = true;
       undervolt.enable = true;

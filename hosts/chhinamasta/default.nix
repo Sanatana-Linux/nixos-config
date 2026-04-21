@@ -15,6 +15,7 @@ in {
     (modulesPath + "/profiles/base.nix")
     (modulesPath + "/installer/scan/detected.nix")
     (modulesPath + "/installer/scan/not-detected.nix")
+    ../../modules/nixos/users/user.nix
   ];
 
   # Overlays - same as bagalamukhi but limited to what's needed for live ISO
@@ -56,20 +57,20 @@ in {
 
     # User
     users.user.enable = true;
-  shell = {
-    enable = true;
-    zsh = true;
-    variables.enable = true;
-  };
+    shell = {
+      enable = true;
+      zsh = true;
+      variables.enable = true;
+    };
 
     # Programs - essential for live ISO
     programs = {
       nix-ld.enable = true;
       appimage.enable = true;
-    thunar.enable = true;
-  };
+      thunar.enable = true;
+    };
 
-  # Performance - basic for live environment
+    # Performance - basic for live environment
     performance = {
       default.enable = true;
       zram.enable = true; # Good for live ISO with limited RAM

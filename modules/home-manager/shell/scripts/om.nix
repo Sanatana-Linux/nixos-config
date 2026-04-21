@@ -59,7 +59,7 @@ with pkgs;
 
     function sync() {
       local commit_msg="$2"
-      
+
       if [ -z "$commit_msg" ]; then
         echo -e "\e[38;2;191;97;106mError:\e[0m Please provide a commit message."
         echo -e "  Usage: \e[38;2;133;133;133mom\e[0m sync \e[38;2;133;133;133m\"commit message\"\e[0m"
@@ -76,7 +76,7 @@ with pkgs;
             local dirname=$(basename "$dir")
             echo -e "\e[38;2;134;239;172mProcessing:\e[0m $dirname"
             cd "$dir" || { echo -e "\e[38;2;191;97;106mError:\e[0m Cannot enter $dir"; continue; }
-            
+
             if git diff-index --quiet HEAD -- 2>/dev/null; then
               echo -e "  \e[38;2;133;133;133mNo changes in $dirname\e[0m"
             else
@@ -92,7 +92,7 @@ with pkgs;
 
       echo -e "\e[38;2;136;192;208mSyncing main NixOS configuration...\e[0m"
       cd "$dots" || { echo -e "\e[38;2;191;97;106mError:\e[0m Cannot enter $dots"; exit 1; }
-      
+
       if git diff-index --quiet HEAD -- 2>/dev/null; then
         echo -e "\e[38;2;133;133;133mNo changes in main configuration\e[0m"
       else
@@ -258,18 +258,18 @@ with pkgs;
         mkdir -p "$dest" || { echo -e "\e[38;2;191;97;106mError:\e[0m Failed to create directory $dest"; exit 1; }
       fi
 
-      echo -e "\e[38;2;136;192;208mBuilding bhairavi qcow2 image (${disk_size}GB)...\e[0m"
+      echo -e "\e[38;2;136;192;208mBuilding bhairavi qcow2 image ($${disk_size}GB)...\e[0m"
       echo -e "\e[38;2;133;133;133mThis may take several minutes...\e[0m"
-      
+
       cd "$dots" || { echo -e "\e[38;2;191;97;106mError:\e[0m Cannot enter $dots"; exit 1; }
-      
+
       # Build qcow2 image using nixos-generators via flake
       local build_result
       build_result=$(nix build ".#nixosConfigurations.bhairavi.config.system.build.images.qcow" \
         --no-link --print-out-paths 2>&1)
 
       local build_status=$?
-      
+
       if [ $build_status -ne 0 ]; then
         echo -e "\e[38;2;191;97;106mError:\e[0m qcow2 build failed:"
         echo "$build_result"
@@ -292,35 +292,35 @@ with pkgs;
         exit 1
       fi
 
-      local qcow_name="bhairavi-${disk_size}G.qcow2"
+      local qcow_name="bhairavi-$${disk_size}G.qcow2"
       local final_path="$dest/$qcow_name"
-      
+
       echo -e "\e[38;2;134;239;172mBuild complete, copying to destination\e[0m"
-      cp "$qcow_path" "$final_path" || { 
-        echo -e "\e[38;2;191;97;106mError:\e[0m Failed to copy qcow2 to destination"; 
-        exit 1; 
+      cp "$qcow_path" "$final_path" || {
+        echo -e "\e[38;2;191;97;106mError:\e[0m Failed to copy qcow2 to destination";
+        exit 1;
       }
 
       # Resize if needed
-      echo -e "\e[38;2;136;192;208mResizing image to ${disk_size}GB...\e[0m"
+      echo -e "\e[38;2;136;192;208mResizing image to $${disk_size}GB...\e[0m"
       if command -v qemu-img &> /dev/null; then
-        qemu-img resize "$final_path" "${disk_size}G" 2>/dev/null || {
+        qemu-img resize "$final_path" "$${disk_size}G" 2>/dev/null || {
           echo -e "\e[38;2;219;245;76mWarning:\e[0m Could not resize image. Image may have fixed size."
         }
       else
         echo -e "\e[38;2;219;245;76mNote:\e[0m qemu-img not found, skipping resize"
       fi
-      
+
       local qcow_size
       qcow_size=$(du -h "$final_path" | cut -f1)
-      
+
       echo -e ""
       echo -e "\e[38;2;134;239;172m╔══════════════════════════════════════════════════════════╗\e[0m"
       echo -e "\e[38;2;134;239;172m║                    Build Complete!                      ║\e[0m"
       echo -e "\e[38;2;134;239;172m╚══════════════════════════════════════════════════════════╝\e[0m"
       echo -e ""
       echo -e "  \e[38;2;136;192;208mImage:\e[0m $final_path"
-      echo -e "  \e[38;2;136;192;208mSize:\e[0m  $qcow_size on disk (${disk_size}GB virtual)"
+      echo -e "  \e[38;2;136;192;208mSize:\e[0m  $qcow_size on disk ($${disk_size}GB virtual)"
       echo -e ""
       echo -e "  \e[38;2;219;245;76mRun with:\e[0m"
       echo -e "    qemu-system-x86_64 -m 8G -smp 4 \\\\"

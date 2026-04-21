@@ -79,7 +79,11 @@ with lib; {
           "class_g = 'pop_report'"
           "class_g = 'Gnome-screenshot'"
           "_GTK_FRAME_EXTENTS@:c"
-          "AWESOME_BACKDROP@:s"
+        ];
+
+        # Window rules for blur
+        blur-background-rule = [
+          "name = 'awesome-backdrop'"
         ];
 
         backend = config.modules.services.picom.backend;
@@ -112,8 +116,11 @@ with lib; {
           dock = {
             shadow = true;
             rounded-corners = false;
-            blur = false;
             opacity = 1;
+          };
+          utility = {
+            shadow = false;
+            blur = true;
           };
           dnd = {shadow = false;};
           popup_menu = {opacity = 0.95;};

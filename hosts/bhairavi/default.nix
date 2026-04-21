@@ -6,6 +6,7 @@
 }: {
   imports = [
     ./hardware-configuration.nix
+    ../../modules/nixos/users/tlh.nix
   ];
 
   nixpkgs.overlays = [

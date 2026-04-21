@@ -317,8 +317,8 @@ in {
       };
     };
 
-  home.file.".mozilla/firefox/${profile}/chrome" = mkIf cfg.withAutoconfig {
-    source = config.lib.file.mkOutOfStoreSymlink /etc/nixos/external/firefox;
-  };
+    home.file.".mozilla/firefox/${profile}/chrome" = mkIf cfg.withAutoconfig {
+      source = config.lib.file.mkOutOfStoreSymlink /etc/nixos/external/firefox;
+    };
   };
 }

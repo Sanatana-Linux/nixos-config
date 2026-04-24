@@ -578,6 +578,7 @@ in {
             networkmanagerapplet # Network applet
             libappindicator-gtk3 # System tray support
             ncurses # Terminal library
+            gtk3 # need gtk-update-icon-path utility
 
             # Configuration & Appearance
             kdePackages.qt6ct # Qt6 configuration

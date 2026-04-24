@@ -11,8 +11,14 @@ in {
   };
 
   config = mkIf cfg.enable {
-    xdg.configFile."awesome" = {
-      source = config.lib.file.mkOutOfStoreSymlink /etc/nixos/external/awesome;
-    };
+    home.activation.linkAwesomeConfig = lib.hm.dag.entryAfter ["writeBoundary"] ''
+      if [ -L ${config.home.homeDirectory}/.config/awesome ]; then
+        rm -f ${config.home.homeDirectory}/.config/awesome
+      elif [ -d ${config.home.homeDirectory}/.config/awesome ]; then
+        rm -rf ${config.home.homeDirectory}/.config/awesome
+      fi
+      mkdir -p ${config.home.homeDirectory}/.config
+      $DRY_RUN_CMD ln -sfn /etc/nixos/external/awesome ${config.home.homeDirectory}/.config/awesome
+    '';
   };
 }

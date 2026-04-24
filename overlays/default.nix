@@ -28,6 +28,35 @@
         ]
     );
 
+    opencode = final.stdenv.mkDerivation rec {
+      pname = "opencode";
+      version = "1.14.23";
+
+      src = final.fetchurl {
+        url = "https://github.com/anomalyco/opencode/releases/download/v${version}/opencode-linux-x64.tar.gz";
+        hash = "sha256-dlgb6qeFtukUmZUqoOsRhaF7FcnGa5Qxu+Rh+KipiTY=";
+      };
+
+      sourceRoot = ".";
+
+      dontStrip = true;
+      dontPatchELF = true;
+
+      installPhase = ''
+        runHook preInstall
+        install -Dm755 opencode $out/bin/opencode
+        runHook postInstall
+      '';
+
+      meta = with final.lib; {
+        description = "AI coding agent built for the terminal";
+        homepage = "https://github.com/anomalyco/opencode";
+        license = licenses.asl20;
+        platforms = [ "x86_64-linux" ];
+        mainProgram = "opencode";
+      };
+    };
+
     nps = inputs.nps.defaultPackage.${prev.stdenv.hostPlatform.system};
 
     what-size = prev.yaziPlugins.mkYaziPlugin {

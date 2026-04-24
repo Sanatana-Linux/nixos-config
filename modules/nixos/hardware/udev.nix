@@ -69,7 +69,6 @@ in {
     boot.kernelParams = [
       "nvme_core.default_ps_max_latency_us=0"
       "nvme.poll_queues=8"
-      "pcie_aspm.policy=performance"
       "pci=pcie_bus_perf,realloc"
     ];
 

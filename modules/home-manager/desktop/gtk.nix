@@ -42,6 +42,7 @@ in {
       gsettings-desktop-schemas
       adwaita-icon-theme # Essential for libadwaita apps
       hicolor-icon-theme # Icon theme fallback
+      kdePackages.breeze-icons # Colloid fallback icons
 
       # Qt theme integration packages
       adwaita-qt
@@ -146,6 +147,13 @@ in {
       gtk.enable = true;
       x11.enable = true;
     };
+
+    # Ensure X11 can find cursor files — Xcursor doesn't reliably follow Inherits=
+    # in index.theme, so we symlink the cursors directory into the default theme
+    home.activation.fixCursorSymlinks = hm.dag.entryAfter ["writeBoundary"] ''
+      $DRY_RUN_CMD ln -sfn ${cfg.cursor.package}/share/icons/${cfg.cursor.name}/cursors $VERBOSE_ARG \
+        ~/.icons/default/cursors
+    '';
 
     # Qt Configuration - force consistent theming
     qt = {

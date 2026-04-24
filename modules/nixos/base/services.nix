@@ -9,7 +9,6 @@ with lib; let
 in {
   options.modules.base.services = {
     enable = mkEnableOption "core system services (fstrim, fwupd, journald, dbus, gnome services)";
-    # FHS non-compliance work around
     envfs.enable = true;
     fstrim.enable = mkOption {
       type = types.bool;
@@ -46,13 +45,9 @@ in {
 
   config = mkIf cfg.enable {
     services = {
-      # discard blocks that are not in use by the filesystem, good for SSDs
       fstrim.enable = cfg.fstrim.enable;
-
-      # firmware updater for machine hardware
       fwupd.enable = cfg.fwupd.enable;
 
-      # limit systemd journal size
       journald.extraConfig = ''
         SystemMaxUse=${cfg.journald.systemMaxUse}
         RuntimeMaxUse=${cfg.journald.runtimeMaxUse}

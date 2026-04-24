@@ -29,6 +29,7 @@ in {
     environment.systemPackages = with pkgs; [
       lenovo-legion
       config.boot.kernelPackages.acpi_call
+      legion-kb-rgb
     ];
 
     # Udev rules for CPU boost and platform profile
@@ -39,6 +40,8 @@ in {
       # ITE keyboard controller for RGB control
       SUBSYSTEM=="usb", ATTR{idVendor}=="048d", ATTR{idProduct}=="c995", MODE="0666"
       SUBSYSTEM=="usb", ATTR{idVendor}=="048d", ATTR{idProduct}=="c106", MODE="0666"
+      # HID device for Spectrum keyboard (legion-kb-rgb)
+      KERNEL=="hidraw*", SUBSYSTEM=="hidraw", KERNELS=="0003:048D:C195.*", MODE="0666", TAG+="uaccess"
     '';
 
     systemd.services.legion-longevity = {

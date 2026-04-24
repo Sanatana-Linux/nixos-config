@@ -28,7 +28,7 @@ with lib; {
 
     configurationLimit = mkOption {
       type = types.int;
-      default = 5;
+      default = 10;
       description = "Maximum number of generations in the boot menu";
     };
 
@@ -71,7 +71,7 @@ with lib; {
 
       kernelPackages = pkgs.linuxPackages_xanmod_latest;
 
-      blacklistedKernelModules = ["nouveau"];
+      blacklistedKernelModules = ["nouveau" "nvidiafb"];
 
       kernelModules = [
       ];

@@ -18,11 +18,5 @@ in {
       memoryPercent = 33;
       priority = 999;
     };
-
-    boot.kernelParams = [
-      "zswap.enabled=1"
-      "zswap.compressor=zstd"
-      "zswap.max_pool_percent=25"
-    ];
   };
 }

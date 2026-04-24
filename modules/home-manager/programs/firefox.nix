@@ -278,7 +278,7 @@ in {
             };
             "Yandex" = {
               urls = [{template = "https://yandex.com/search/?text={searchTerms}";}];
-              icon = "https://yastatic.net/s3/home/branding/favicon.ico";
+              icon = "https://i.pinimg.com/474x/64/cf/8b/64cf8bb59b5339f8c309dfc0368bf4ea.jpg";
               definedAliases = ["ya"];
             };
             "StartPage" = {
@@ -317,8 +317,15 @@ in {
       };
     };
 
-    home.file.".mozilla/firefox/${profile}/chrome" = mkIf cfg.withAutoconfig {
-      source = config.lib.file.mkOutOfStoreSymlink /etc/nixos/external/firefox;
-    };
+    home.activation.linkFirefoxChrome = mkIf cfg.withAutoconfig (lib.hm.dag.entryAfter ["writeBoundary"] ''
+      chrome_dir="${config.home.homeDirectory}/.mozilla/firefox/${profile}/chrome"
+      if [ -L "$chrome_dir" ]; then
+        rm -f "$chrome_dir"
+      elif [ -d "$chrome_dir" ]; then
+        rm -rf "$chrome_dir"
+      fi
+      mkdir -p "$(dirname "$chrome_dir")"
+      $DRY_RUN_CMD ln -sfn /etc/nixos/external/firefox "$chrome_dir"
+    '');
   };
 }

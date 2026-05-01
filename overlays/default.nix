@@ -52,7 +52,7 @@
         description = "AI coding agent built for the terminal";
         homepage = "https://github.com/anomalyco/opencode";
         license = licenses.asl20;
-        platforms = [ "x86_64-linux" ];
+        platforms = ["x86_64-linux"];
         mainProgram = "opencode";
       };
     };
@@ -73,6 +73,8 @@
     # node2nix = prev.node2nix.overrideAttrs (oldAttrs: {
     #   nativeBuildInputs = (oldAttrs.nativeBuildInputs or []) ++ [final.nodejs];
     # });
+
+    efitools = final.stable.efitools;
 
     libvirt = prev.libvirt.overrideAttrs (old: {
       postInstall =

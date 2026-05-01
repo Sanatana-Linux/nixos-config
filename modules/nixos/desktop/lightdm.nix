@@ -94,10 +94,12 @@ with lib; {
       defaultWallpaper = config.modules.desktop.lightdm.defaultWallpaper;
     };
   in {
-    environment.systemPackages = [
-      configuredSeaGreeter
-      pkgs.phinger-cursors
-    ] ++ allThemes;
+    environment.systemPackages =
+      [
+        configuredSeaGreeter
+        pkgs.phinger-cursors
+      ]
+      ++ allThemes;
 
     services.xserver.displayManager.lightdm = {
       enable = true;
@@ -111,17 +113,17 @@ with lib; {
     # Cursor theme for the display manager (login screen)
     environment.etc."X11/Xsession.d/00-cursor-theme" = {
       text = ''
-        export XCURSOR_THEME=phinger-cursors-light
-        export XCURSOR_SIZE=32
-        if command -v xrdb >/dev/null 2>&1; then
-          xrdb -merge <<EOF
-      Xcursor.theme: phinger-cursors-light
-      Xcursor.size: 32
-      EOF
-        fi
-        if command -v xsetroot >/dev/null 2>&1; then
-          xsetroot -cursor_name left_ptr
-        fi
+          export XCURSOR_THEME=phinger-cursors-light
+          export XCURSOR_SIZE=32
+          if command -v xrdb >/dev/null 2>&1; then
+            xrdb -merge <<EOF
+        Xcursor.theme: phinger-cursors-light
+        Xcursor.size: 32
+        EOF
+          fi
+          if command -v xsetroot >/dev/null 2>&1; then
+            xsetroot -cursor_name left_ptr
+          fi
       '';
       mode = "0755";
     };

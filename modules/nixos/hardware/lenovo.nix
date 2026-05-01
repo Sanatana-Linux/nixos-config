@@ -12,27 +12,25 @@ in {
   };
 
   config = mkIf cfg.enable {
-    # Kernel modules for Lenovo hardware
+    boot.kernelParams = ["acpi_osi=Linux"];
+
     boot.kernelModules = [
-      "legion_laptop" # Fan and power control for Lenovo Legion laptops
-      "ideapad_laptop" # Keyboard hotkeys and ACPI support for Lenovo laptops
-      "acpi_call" # Allows calling ACPI methods from userspace
+      "legion_laptop"
+      "ideapad_laptop"
+      "acpi_call"
     ];
 
-    # Extra module packages
     boot.extraModulePackages = with config.boot.kernelPackages; [
       lenovo-legion-module
       acpi_call
     ];
 
-    # System packages
     environment.systemPackages = with pkgs; [
       lenovo-legion
       config.boot.kernelPackages.acpi_call
       legion-kb-rgb
     ];
 
-    # Udev rules for CPU boost and platform profile
     services.udev.extraRules = ''
       KERNEL=="no_turbo", SUBSYSTEM=="intel_pstate", MODE="0664", GROUP="wheel"
       KERNEL=="boost", SUBSYSTEM=="cpufreq", MODE="0664", GROUP="wheel"
@@ -42,23 +40,36 @@ in {
       SUBSYSTEM=="usb", ATTR{idVendor}=="048d", ATTR{idProduct}=="c106", MODE="0666"
       # HID device for Spectrum keyboard (legion-kb-rgb)
       KERNEL=="hidraw*", SUBSYSTEM=="hidraw", KERNELS=="0003:048D:C195.*", MODE="0666", TAG+="uaccess"
+      # Detect Fn+Q platform profile changes and set manual override marker
+      ACTION=="change", SUBSYSTEM=="acpi", KERNEL=="platform_profile", RUN+="${pkgs.bash}/bin/bash -c 'touch /var/run/legion-profile-override'"
     '';
 
-    systemd.services.legion-longevity = {
-      description = "Set Legion laptop to longevity mode (boost off, fans max)";
+    services = {
+      auto-cpufreq = {
+        enable = true;
+        settings = {
+          battery = {
+            governor = "powersave";
+            turbo = "never";
+            energy_performance_preference = "power";
+          };
+          charger = {
+            governor = "performance";
+            turbo = "auto";
+          };
+        };
+      };
+      tlp.enable = mkForce false;
+      power-profiles-daemon.enable = mkForce false;
+    };
+
+    hardware.sensor.iio.enable = true;
+
+    systemd.services.thermal-guard = {
+      description = "Throttle CPU and manage fans when temperature exceeds 90C (respects manual override)";
       wantedBy = ["multi-user.target"];
       after = ["systemd-modules-load.service" "systemd-udevd.service" "sysinit.target"];
       wants = ["systemd-udevd.service"];
-      serviceConfig = {
-        Type = "oneshot";
-        RemainAfterExit = true;
-        ExecStart = "${pkgs.bash}/bin/bash -c 'echo 1 > /sys/devices/system/cpu/intel_pstate/no_turbo && echo performance > /sys/firmware/acpi/platform_profile'";
-      };
-    };
-
-    systemd.services.thermal-guard = {
-      description = "Throttle CPU and manage fans when temperature exceeds 90C";
-      wantedBy = ["multi-user.target"];
       serviceConfig = {
         Type = "simple";
         Restart = "always";
@@ -71,6 +82,8 @@ in {
         FREQ_THROTTLE=2400000
         FREQ_NORMAL=5461000
         PLATFORM_PROFILE="/sys/firmware/acpi/platform_profile"
+        MANUAL_OVERRIDE="/var/run/legion-profile-override"
+        OVERRIDE_TTL=300
         throttled=0
 
         set_freq() {
@@ -87,10 +100,31 @@ in {
           cat "$PLATFORM_PROFILE" 2>/dev/null || echo "unknown"
         }
 
+        is_manual_override() {
+          if [ -f "$MANUAL_OVERRIDE" ]; then
+            local mtime=$(stat -c %Y "$MANUAL_OVERRIDE" 2>/dev/null || echo 0)
+            local now=$(date +%s)
+            local age=$(( now - mtime ))
+            if [ "$age" -lt "$OVERRIDE_TTL" ]; then
+              return 0
+            else
+              rm -f "$MANUAL_OVERRIDE"
+              return 1
+            fi
+          fi
+          return 1
+        }
+
         while true; do
+          # Skip all profile changes if user has manually set a profile via Fn+Q
+          if is_manual_override; then
+            echo "Manual profile override active, skipping automatic changes"
+            sleep 30
+            continue
+          fi
+
           temp=""
           for hwmon in /sys/class/hwmon/hwmon*; do
-            # Check for Intel coretemp sensor instead of AMD k10temp
             if [ "$(cat "$hwmon/name" 2>/dev/null)" = "coretemp" ]; then
               temp=$(cat "$hwmon/temp1_input" 2>/dev/null)
               break
@@ -119,6 +153,13 @@ in {
           sleep 2
         done
       '';
+    };
+
+    systemd.services.set-cpu-governor = {
+      description = "Set CPU governor to performance on boot";
+      wantedBy = ["multi-user.target"];
+      serviceConfig.Type = "oneshot";
+      script = "echo performance > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor";
     };
   };
 }

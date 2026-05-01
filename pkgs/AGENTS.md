@@ -1,5 +1,5 @@
-<!-- Parent: ../.opencode/AGENTS.md -->
-<!-- Generated: 2026-04-21 | Updated: 2026-04-22 -->
+<!-- Parent: ../AGENTS.md -->
+<!-- Generated: 2026-04-21 | Updated: 2026-04-27 -->
 
 # pkgs/
 
@@ -20,8 +20,9 @@ Custom Nix package definitions (derivations) not available in nixpkgs or needing
 
 | Directory | Purpose |
 |-----------|---------|
-| `legion-rgb-control/` | Lenovo Legion RGB keyboard control tool |
-| `material-symbols/` | Material Symbols icon font package |
+| `legion-kb-rgb/` | Lenovo Legion keyboard RGB backlight control (see `legion-kb-rgb/AGENTS.md`) |
+| `legion-rgb-control/` | Lenovo Legion RGB keyboard control tool (see `legion-rgb-control/AGENTS.md`) |
+| `material-symbols/` | Material Symbols icon font package (see `material-symbols/AGENTS.md`) |
 
 ## For AI Agents
 

@@ -12,6 +12,8 @@ in {
     ./nix.nix
     ./permitted-packages.nix
     ./services.nix
+    ./shell.nix
+    ./variables.nix
   ];
 
   options.modules.base = {
@@ -62,6 +64,7 @@ in {
       timeZone = cfg.timezone;
       hardwareClockInLocalTime = cfg.hardwareClockInLocalTime;
     };
+
     hardware.enableAllFirmware = true;
     environment.systemPackages = [pkgs.dmidecode];
 
@@ -71,5 +74,20 @@ in {
         size = 16 * 1024;
       }
     ];
+
+    # Formerly in environment/default.nix
+    programs.zsh.enable = true;
+
+    environment = with pkgs; {
+      shells = [bash zsh];
+      pathsToLink = [
+        "/share/bash"
+        "/share/zsh"
+        "/share/applications"
+        "/share/xdg-desktop-portal"
+      ];
+    };
+
+    users.defaultUserShell = pkgs.zsh;
   };
 }

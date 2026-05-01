@@ -4,9 +4,9 @@
   ...
 }:
 with lib; let
-  cfg = config.modules.shell.x;
+  cfg = config.modules.desktop.x11;
 in {
-  options.modules.shell.x = {
+  options.modules.desktop.x11 = {
     enable = mkEnableOption "X resources configuration";
   };
 

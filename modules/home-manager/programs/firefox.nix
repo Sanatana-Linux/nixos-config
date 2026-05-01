@@ -71,6 +71,8 @@ in {
         then firefox-with-autoconfig
         else pkgs.firefox;
 
+      configPath = "${config.home.homeDirectory}/.mozilla/firefox";
+
       profiles.${profile} = {
         id = 0;
         extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [

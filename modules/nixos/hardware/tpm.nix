@@ -12,8 +12,8 @@ in {
 
     enableAbrmd = mkOption {
       type = types.bool;
-      default = false;
-      description = "Enable Trusted Platform 2 userspace resource manager daemon";
+      default = true;
+      description = "Enable TPM2 Access Broker and Resource Manager Daemon (tabrmd/TCSM service)";
     };
 
     enableTctiEnvironment = mkOption {
@@ -45,10 +45,9 @@ in {
 
     boot.initrd.kernelModules = mkIf cfg.initrdSupport ["tpm"];
 
-    # TPM-related packages
     environment.systemPackages = with pkgs; [
       libtpms
-      python312Packages.tpm2-pytss
+      python313Packages.tpm2-pytss
       ssh-tpm-agent
       swtpm
       tpm2-abrmd

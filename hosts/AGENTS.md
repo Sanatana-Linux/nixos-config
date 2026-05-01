@@ -1,5 +1,5 @@
-<!-- Parent: ../.opencode/AGENTS.md -->
-<!-- Generated: 2026-04-21 | Updated: 2026-04-22 -->
+<!-- Parent: ../AGENTS.md -->
+<!-- Generated: 2026-04-21 | Updated: 2026-04-27 -->
 
 # hosts/
 
@@ -19,10 +19,10 @@ Per-host NixOS configuration directories. Each host has its own `default.nix` th
 
 | Directory | Purpose |
 |-----------|---------|
-| `bagalamukhi/` | Primary desktop with NVIDIA, LightDM+litarvan, xanmod kernel |
-| `bhairavi/` | VM configuration |
-| `matangi/` | Sara's laptop with NVIDIA |
-| `chhinamasta/` | Live ISO builder |
+| `bagalamukhi/` | Primary desktop with NVIDIA, LightDM+litarvan, xanmod kernel (see `bagalamukhi/AGENTS.md`) |
+| `bhairavi/` | VM configuration (see `bhairavi/AGENTS.md`) |
+| `matangi/` | Sara's laptop with NVIDIA (see `matangi/AGENTS.md`) |
+| `chhinamasta/` | Live ISO builder (see `chhinamasta/AGENTS.md`) |
 
 ## For AI Agents
 

@@ -1,6 +1,7 @@
 {
   imports = [
     ./desktop
+    ./environment
     ./packages
     ./programs
     ./services

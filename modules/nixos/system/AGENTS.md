@@ -1,5 +1,5 @@
 <!-- Parent: ../AGENTS.md -->
-<!-- Generated: 2026-04-21 | Updated: 2026-04-22 -->
+<!-- Generated: 2026-04-21 | Updated: 2026-04-27 -->
 
 # modules/nixos/system/
 
@@ -18,8 +18,8 @@ Boot, systemd, and plymouth (boot splash) configuration.
 
 | Directory | Purpose |
 |-----------|---------|
-| `plymouth/` | Plymouth boot splash themes |
-| `assets/` | Boot-related assets |
+| `plymouth/` | Plymouth boot splash themes (see `plymouth/AGENTS.md`) |
+| `assets/` | Boot-related assets (EFI binaries, icons) |
 
 ## For AI Agents
 

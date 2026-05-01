@@ -1,5 +1,5 @@
 <!-- Parent: ../AGENTS.md -->
-<!-- Generated: 2026-04-22 | Updated: 2026-04-22 -->
+<!-- Generated: 2026-04-22 | Updated: 2026-04-27 -->
 
 # desktop/
 
@@ -25,7 +25,7 @@ Home-manager desktop environment modules. Configures AwesomeWM symlink to the ex
 ### Working In This Directory
 - `gtk.nix` intentionally uses `mkForce` to **override Stylix** for theme/cursor/icon — this is by design, not a bug
 - `awesome.nix` uses `home.activation` with `hm.dag.entryAfter` to create a symlink after writeBoundary — it removes existing dirs/symlinks first
-- The `x11/` subdirectory has two modules: `xresources` (raw X resource config) and `shell.x` (structured X properties) — both set Monokai Pro colors
+- The `x11/` subdirectory has two modules: `desktop.xresources` (raw X resource config) and `desktop.x11` (structured X properties) — both set Monokai Pro colors
 - Adding a new desktop module: create `<name>.nix` with `options.modules.desktop.<name>.enable`, add to `default.nix` imports
 
 <!-- MANUAL: Any manually added notes below this line are preserved on regeneration -->

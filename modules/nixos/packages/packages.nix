@@ -267,6 +267,7 @@ in {
         cbfmt # Clipboard formatter
         ccls # C/C++ language server
         commons-compress # Apache compression library
+        libapparmor # AppArmor security library
         libglibutil # GLib utilities
         sillytavern
       ];
@@ -681,11 +682,17 @@ in {
           ]
           # Python bindings
           ++ optionals cfg.gui.libs.pythonBindings [
-            python312Packages.pycairo # Cairo Python bindings
-            python312Packages.pygobject3 # GObject Python bindings
-            python312Packages.pyqt6 # Qt6 Python bindings
-            python312Packages.pyqt6-charts # Qt Charts
-            python312Packages.pyqt6-webengine # Qt WebEngine
+            python313Packages.pycairo # Cairo Python bindings
+            python313Packages.pygobject3 # GObject Python bindings
+            python313Packages.pyqt6 # Qt6 Python bindings
+            python313Packages.pyqt6-charts # Qt Charts
+            python313Packages.pyqt6-webengine # Qt WebEngine
+            python313Packages.pyqt5 # Qt5 Python bindings
+            python313Packages.qt-material # Qt Material Design
+            python313Packages.qstylizer # Qt CSS-like styling
+            python313Packages.anyqt # Qt compatibility layer
+            python313Packages.pyqtdarktheme # Dark theme for Qt apps
+            python313Packages.qtpy # Qt abstraction layer
           ]
           # Ruby bindings
           ++ optionals cfg.gui.libs.rubyBindings [
@@ -965,6 +972,9 @@ in {
           clipster # Clipboard manager
           boxes # ASCII boxes
           beep # System beep
+          viu #image viewer on terminal
+          chafa # image cli
+          ueberzugpp # cli images
         ]
         # File management
         ++ optionals cfg.shell.fileManagement [

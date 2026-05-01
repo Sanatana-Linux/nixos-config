@@ -9,6 +9,7 @@
     ./iphone.nix
     ./logitech.nix
     ./tpm.nix
+    ./thunderbolt.nix
     ./udev.nix
     ./lenovo.nix
   ];

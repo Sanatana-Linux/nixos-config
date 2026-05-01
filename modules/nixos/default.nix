@@ -1,17 +1,15 @@
 {
   imports = [
     ./ai
+    ./apps
     ./base
     ./desktop
-    ./environment
     ./hardware
     ./packages
     ./performance
     ./power
     ./printer
-    ./programs
     ./security
-    ./shell
     ./stylix
     ./system
     ./virtualization

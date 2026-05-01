@@ -31,6 +31,10 @@
       url = "github:AniviaFlome/cachy-tweaks-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -51,7 +55,7 @@
     ];
     # This is a function that generates an attribute by calling a function you
     # pass to it, with each system as an argument
-    forAllSystems = nixpkgs.lib.genAttrs systems;
+    forAllSystems =     nixpkgs.lib.genAttrs systems;
   in {
     # Alejandra formatting
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
@@ -60,7 +64,24 @@
     # Flake Templates Easing the  Development Process and Taking Advantage of Nix in It
     templates = import ./templates;
     # Packages themselves
-    packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
+    packages = forAllSystems (system: let
+      pkgs = nixpkgs.legacyPackages.${system};
+    in
+      (import ./pkgs pkgs)
+      // {
+        # secrets-menu: interactive CLI for managing sops-encrypted secrets
+        secrets-menu = pkgs.runCommand "secrets-menu"
+          {
+            nativeBuildInputs = [ pkgs.makeBinaryWrapper ];
+            meta.mainProgram = "secrets-menu";
+          }
+          ''
+            mkdir -p "$out/bin"
+            cp ${./pkgs/secrets-menu/secrets-menu.sh} "$out/bin/secrets-menu"
+            chmod +x "$out/bin/secrets-menu"
+          '';
+      }
+    );
 
     # Development Environment for This Project, Most Useful During Fresh Installs
     devShells = forAllSystems (
@@ -76,6 +97,7 @@
       bagalamukhi = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [
+          inputs.sops-nix.nixosModules.sops
           inputs.stylix.nixosModules.stylix
           inputs.nur.modules.nixos.default
           inputs.nixos-hardware.nixosModules.lenovo-legion-16irx9h
@@ -103,6 +125,7 @@
       matangi = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [
+          inputs.sops-nix.nixosModules.sops
           inputs.stylix.nixosModules.stylix
           inputs.nur.modules.nixos.default
           inputs.nixos-hardware.nixosModules.lenovo-legion-16irx9h
@@ -127,6 +150,7 @@
       bhairavi = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [
+          inputs.sops-nix.nixosModules.sops
           inputs.stylix.nixosModules.stylix
           inputs.nur.modules.nixos.default
           inputs.bhairava-grub-theme.nixosModule
@@ -155,6 +179,7 @@
           format = "isoImage";
         };
         modules = [
+          inputs.sops-nix.nixosModules.sops
           inputs.stylix.nixosModules.stylix
           inputs.nur.modules.nixos.default
           inputs.bhairava-grub-theme.nixosModule

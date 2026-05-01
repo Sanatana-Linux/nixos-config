@@ -4,7 +4,11 @@
   pkgs,
   ...
 }:
-with lib; {
+with lib; let
+  efiMount = config.modules.system.boot.efiMountPoint;
+  efiDevice = config.fileSystems."${efiMount}".device;
+  efiUuid = strings.removePrefix "/dev/disk/by-uuid/" efiDevice;
+in {
   options.modules.system.boot = {
     enable = mkEnableOption "System bootloader configuration";
 
@@ -54,22 +58,21 @@ with lib; {
   config = mkIf config.modules.system.boot.enable {
     # Copy EFI files to ESP for UEFI firmware access
     system.activationScripts.advancedBiosFiles = mkIf config.modules.system.boot.advancedBios.enable ''
-      mkdir -p /boot/efi/EFI/Boot
-      cp ${./assets/BootX64.efi} /boot/efi/EFI/Boot/BootX64.efi
-      cp ${./assets/DisplayEngine.efi} /boot/efi/DisplayEngine.efi
-      cp ${./assets/Loader.efi} /boot/efi/Loader.efi
-      cp ${./assets/SREP_Config.cfg} /boot/efi/SREP_Config.cfg
-      cp ${./assets/SetupBrowser.efi} /boot/efi/SetupBrowser.efi
-      cp ${./assets/SuppressIFPatcher.efi} /boot/efi/SuppressIFPatcher.efi
-      cp ${./assets/UiApp.efi} /boot/efi/UiApp.efi
-      chmod 644 /boot/efi/EFI/Boot/BootX64.efi
-      chmod 644 /boot/efi/*.efi /boot/efi/*.cfg
+      mkdir -p ${efiMount}/EFI/Boot
+      cp ${./assets/BootX64.efi} ${efiMount}/EFI/Boot/BootX64.efi
+      cp ${./assets/DisplayEngine.efi} ${efiMount}/EFI/Boot/DisplayEngine.efi
+      cp ${./assets/Loader.efi} ${efiMount}/EFI/Boot/Loader.efi
+      cp ${./assets/SREP_Config.cfg} ${efiMount}/EFI/Boot/SREP_Config.cfg
+      cp ${./assets/SetupBrowser.efi} ${efiMount}/EFI/Boot/SetupBrowser.efi
+      cp ${./assets/SuppressIFPatcher.efi} ${efiMount}/EFI/Boot/SuppressIFPatcher.efi
+      cp ${./assets/UiApp.efi} ${efiMount}/EFI/Boot/UiApp.efi
+      chmod 644 ${efiMount}/EFI/Boot/*.efi ${efiMount}/EFI/Boot/*.cfg
     '';
 
     boot = {
       tmp.cleanOnBoot = true;
 
-      kernelPackages = pkgs.linuxPackages_xanmod_latest;
+      kernelPackages = pkgs.linuxPackages_latest;
 
       blacklistedKernelModules = ["nouveau" "nvidiafb"];
 
@@ -138,7 +141,7 @@ with lib; {
       efi = {
         canTouchEfiVariables = true;
 
-        efiSysMountPoint = "/boot/efi";
+        efiSysMountPoint = efiMount;
       };
 
       systemd-boot.enable = config.modules.system.boot.loader == "systemd-boot";
@@ -156,7 +159,9 @@ with lib; {
           menuentry 'Advanced UEFI Firmware Settings' --class efi --class uefi  {
             insmod fat
             insmod chain
-            chainloader @bootRoot@/EFI/Boot/BootX64.efi
+            insmod search_fs_uuid
+            search --set=root --fs-uuid ${efiUuid}
+            chainloader /EFI/Boot/BootX64.efi
           }
         '';
       };

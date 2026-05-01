@@ -1,20 +1,22 @@
 <!-- Parent: ../AGENTS.md -->
-<!-- Generated: 2026-04-21 | Updated: 2026-04-22 -->
+<!-- Generated: 2026-04-21 | Updated: 2026-04-27 -->
 
 # modules/nixos/base/
 
 ## Purpose
-Core NixOS system configuration — nix daemon settings, FHS compatibility, essential services, and permitted package set for unprivileged users.
+Core NixOS system configuration — nix daemon settings, FHS compatibility, essential services, permitted package set, shell environment, and system environment variables.
 
 ## Key Files
 
 | File | Description |
 |------|-------------|
-| `default.nix` | Re-exports base submodules |
+| `default.nix` | Re-exports base submodules (includes zsh enable, shells, pathsToLink, defaultUserShell) |
 | `nix.nix` | Nix daemon config (flakes, nix-command, substituters, auto-optimise) |
 | `fhs.nix` | FHS compatibility environment (nix-ld) for running non-Nix binaries |
 | `services.nix` | Essential system services (dbus, gvfs, polkit, etc.) |
 | `permitted-packages.nix` | Packages allowed for unprivileged users via doas/sudo |
+| `shell.nix` | Shell environment (ZSH config, default shell selection) — formerly in `shell/` |
+| `variables.nix` | System environment variables (browser, Java/OpenGL/ZSH optimizations) — formerly in `shell/` |
 
 ## For AI Agents
 

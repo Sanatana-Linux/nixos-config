@@ -29,43 +29,11 @@ with lib; let
       [Plymouth Theme]
       Name=Sanatana Linux
       Description=Sanatana Linux Plymouth theme with custom logo
-      ModuleName=two-step
+      ModuleName=script
 
-      [two-step]
+      [script]
       ImageDir=$out/share/plymouth/themes/sanatana
-      DialogHorizontalAlignment=.5
-      DialogVerticalAlignment=.382
-      TitleHorizontalAlignment=.5
-      TitleVerticalAlignment=.382
-      HorizontalAlignment=.5
-      VerticalAlignment=.5
-      WatermarkHorizontalAlignment=.5
-      WatermarkVerticalAlignment=.96
-      Transition=none
-      TransitionDuration=0.0
-      BackgroundStartColor=0x131313
-      BackgroundEndColor=0x131313
-      ProgressBarBackgroundColor=0x222222
-      ProgressBarForegroundColor=0x6b9ce8
-      MessageBelowAnimation=true
-      UseEndAnimation=false
-
-      [boot-up]
-      UseFirmwareBackground=false
-
-      [shutdown]
-      UseFirmwareBackground=false
-
-      [reboot]
-      UseFirmwareBackground=false
-
-      [updates]
-      SuppressMessages=true
-      ProgressBarShowPercentComplete=true
-
-      [system-upgrade]
-      SuppressMessages=true
-      ProgressBarShowPercentComplete=true
+      ScriptFile=$out/share/plymouth/themes/sanatana/sanatana.script
       EOF
 
             # Create the script file
@@ -89,24 +57,26 @@ with lib; let
       progress_box.y = Window.GetHeight() * 0.75;
       progress_box.sprite.SetPosition(progress_box.x, progress_box.y);
 
-      # Progress bar styling
-      progress_bar.original_image = Image("progress_bar.png");
-      if (!progress_bar.original_image) {
-          # Fallback: create a simple progress bar
-          progress_bar.original_image = Image.Text("████████████████████", 1, 1, 1);
-      }
+      # Progress bar styling - draw programmatically
+      progress_bar.width = 400;
+      progress_bar.height = 4;
 
+      progress_bar.bg_image = Image.Text(" ", 0, 0, 0);
+      progress_bar.bg_image = progress_bar.bg_image.Scale(progress_bar.width, progress_bar.height);
+      progress_bar.bg_sprite = Sprite(progress_bar.bg_image);
+      progress_bar.x = Window.GetWidth() / 2 - progress_bar.width / 2;
+      progress_bar.y = Window.GetHeight() * 0.75;
+      progress_bar.bg_sprite.SetPosition(progress_bar.x, progress_bar.y);
+      progress_bar.bg_sprite.SetOpacity(0.3);
+
+      progress_bar.fg_image = Image.Text(" ", 0.42, 0.61, 0.91);
       progress_bar.sprite = Sprite();
-      progress_bar.x = Window.GetWidth() / 2 - progress_bar.original_image.GetWidth() / 2;
-      progress_bar.y = Window.GetHeight() * 0.8;
       progress_bar.sprite.SetPosition(progress_bar.x, progress_bar.y);
 
       fun progress_callback(duration, progress) {
-          if (progress_bar.image.GetWidth() != Math.Int(progress_bar.original_image.GetWidth() * progress)) {
-              progress_bar.image = progress_bar.original_image.Scale(
-                  Math.Int(progress_bar.original_image.GetWidth() * progress),
-                  progress_bar.original_image.GetHeight()
-              );
+          new_width = Math.Int(progress_bar.width * progress);
+          if (new_width > 0) {
+              progress_bar.image = progress_bar.fg_image.Scale(new_width, progress_bar.height);
               progress_bar.sprite.SetImage(progress_bar.image);
           }
       }

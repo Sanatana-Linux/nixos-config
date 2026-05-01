@@ -1,3 +1,5 @@
+<!-- Generated: 2026-04-21 | Updated: 2026-04-27 -->
+
 # The ShizNix
 
 > Flake-based NixOS configuration with 4 hosts, home-manager as NixOS module, enable-by-option module system, and system-wide Stylix theming.
@@ -17,14 +19,14 @@
 | Directory | Purpose |
 |-----------|---------|
 | `flake.nix` | Flake entry — 14 inputs, 4 hosts, overlays, templates, packages |
-| `modules/nixos/` | System-level modules — 16 categories (hardware, desktop, security, AI, etc.) |
-| `modules/home-manager/` | User-level modules — 6 categories (programs, shell, desktop, etc.) |
-| `home/` | Per-user home-manager configs — tlh, smg, user |
-| `hosts/` | Per-host NixOS configs — bagalamukhi, matangi, bhairavi, chhinamasta |
-| `overlays/` | Nixpkgs overlays — additions, modifications, stable-packages |
-| `pkgs/` | Custom packages — 7 derivations |
-| `external/` | Git submodules — awesome, nvim, firefox, base16 scheme |
-| `templates/` | 40+ dev environment flake templates |
+| `modules/nixos/` | System-level modules — 15 categories (see `modules/nixos/AGENTS.md`) |
+| `modules/home-manager/` | User-level modules — 7 categories (see `modules/home-manager/AGENTS.md`) |
+| `home/` | Per-user home-manager configs — tlh, smg, user (see `home/AGENTS.md`) |
+| `hosts/` | Per-host NixOS configs — 4 hosts (see `hosts/AGENTS.md`) |
+| `overlays/` | Nixpkgs overlays (see `overlays/AGENTS.md`) |
+| `pkgs/` | Custom packages — 7 derivations (see `pkgs/AGENTS.md`) |
+| `external/` | Git submodules — awesome, nvim, firefox, base16 scheme (see `external/AGENTS.md`) |
+| `templates/` | 42 dev environment flake templates (see `templates/AGENTS.md`) |
 
 ## Hosts
 
@@ -76,6 +78,7 @@ nix develop  # enter project dev shell
 - **New Nix files:** Must `git add` before building — Nix flake only sees tracked files
 - **External configs:** Managed as git submodules in `external/`, linked via `mkOutOfStoreSymlink`
 - **Stylix:** Sets theme for most apps automatically — avoid duplicating color/font config in individual modules
+- **CRITICAL — Do NOT modify `external/` directory:** The `external/` directory contains git submodules (awesome, nvim, firefox, base16_monokai_pro) that are managed in their own repos. Only modify files in `external/` when explicitly instructed to do so. All NixOS configuration changes should be made in `modules/`, `home/`, `hosts/`, `pkgs/`, or `overlays/`.
 
 ## Flake Inputs
 

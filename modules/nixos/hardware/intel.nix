@@ -138,6 +138,7 @@ in {
         powertop
         intel-undervolt
         undervolt
-      ];
+      ]
+      ++ optional cfg.vaapi intel-gpu-tools;
   };
 }

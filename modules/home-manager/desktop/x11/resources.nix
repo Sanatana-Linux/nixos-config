@@ -4,9 +4,9 @@
   ...
 }:
 with lib; let
-  cfg = config.modules.xresources;
+  cfg = config.modules.desktop.xresources;
 in {
-  options.modules.xresources = {
+  options.modules.desktop.xresources = {
     enable = mkEnableOption "X resources configuration with Monokai Pro theme";
   };
 

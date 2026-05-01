@@ -7,7 +7,6 @@
   ...
 }: {
   imports = [
-    ../../modules/home-manager/default.nix
   ];
 
   modules = {
@@ -17,14 +16,16 @@
     };
     packages.essential.enable = true;
     shell = {
-      home.enable = true;
-      environment.enable = true;
       zsh.enable = true;
       starship.enable = true;
       cli-tools.enable = true;
+      scripts.enable = true;
+    };
+    environment = {
+      home.enable = true;
+      environment.enable = true;
       nix.enable = true;
       xdg.enable = true;
-      scripts.enable = true;
     };
     programs = {
       firefox.enable = true;
@@ -72,6 +73,9 @@
 
   # Required by home-manager
   home.stateVersion = "24.11";
+  home.username = "smg";
+  home.homeDirectory = "/home/smg";
+  programs.home-manager.enable = true;
 
   # Force kitty installation
   home.packages = [pkgs.kitty];

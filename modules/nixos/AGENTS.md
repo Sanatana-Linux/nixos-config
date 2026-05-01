@@ -1,5 +1,5 @@
 <!-- Parent: ../AGENTS.md -->
-<!-- Generated: 2026-04-21 | Updated: 2026-04-22 -->
+<!-- Generated: 2026-04-21 | Updated: 2026-04-27 -->
 
 # modules/nixos/
 
@@ -11,17 +11,15 @@ NixOS system-level modules. Each module declares an enable option under `modules
 | Directory | Purpose |
 |-----------|---------|
 | `ai/` | AI/ML tools (ollama, comfyui) |
-| `base/` | Base system config (nix, fhs, services, permitted packages) |
+| `apps/` | System apps (appimage, java, nix-ld, network-manager-applet, shotcut, thunar) |
+| `base/` | Base system config (nix, fhs, services, permitted packages, shell, environment variables) |
 | `desktop/` | Desktop environment (awesomewm, LightDM/sea-greeter, XFCE, wallpapers) |
-| `environment/` | System environment variables |
 | `hardware/` | Hardware support (NVIDIA, Intel, bluetooth, networking, sound, tpm, udev) |
 | `packages/` | System package sets |
 | `performance/` | Performance tuning (cachy scheduler, oomd, undervolt, zram) |
 | `power/` | Power management (laptop) |
 | `printer/` | Printer drivers (Brother) |
-| `programs/` | System programs (appimage, java, nix-ld, shotcut, thunar) |
 | `security/` | Security (doas, sudo, firewall, fail2ban, pam, ssh) |
-| `shell/` | System shell configuration and variables |
 | `stylix/` | System-wide theming (colors, fonts, cursor via stylix) |
 | `system/` | Boot, systemd, plymouth |
 | `users/` | User account modules (tlh, smg, user) — **import per-host only** |

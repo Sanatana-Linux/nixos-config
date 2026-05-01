@@ -6,6 +6,7 @@
 }: {
   imports = [
     ./hardware-configuration.nix
+    ./sops.nix
     ../../modules/nixos/users/tlh.nix
   ];
 
@@ -37,13 +38,13 @@
 
     users.tlh.enable = true;
 
-    shell = {
+    base.shell = {
       enable = true;
       zsh = true;
       variables.enable = true;
     };
 
-    programs = {
+    apps = {
       nix-ld.enable = true;
       appimage.enable = true;
       thunar.enable = true;

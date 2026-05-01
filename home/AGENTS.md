@@ -1,5 +1,5 @@
-<!-- Parent: ../.opencode/AGENTS.md -->
-<!-- Generated: 2026-04-21 | Updated: 2026-04-22 -->
+<!-- Parent: ../AGENTS.md -->
+<!-- Generated: 2026-04-21 | Updated: 2026-04-27 -->
 
 # home/
 
@@ -13,6 +13,14 @@ Per-user home-manager configurations. Each user gets a `default.nix` imported by
 | `tlh/default.nix` | tlh's home-manager config (primary user) |
 | `smg/default.nix` | smg's home-manager config |
 | `user/default.nix` | Generic user home-manager config (for live ISO) |
+
+## Subdirectories
+
+| Directory | Purpose |
+|-----------|---------|
+| `tlh/` | Primary user config — awesome WM, Stylix, 8 programs (see `tlh/AGENTS.md`) |
+| `smg/` | Secondary user config — XFCE, 4 programs (see `smg/AGENTS.md`) |
+| `user/` | Generic live-user config for chhinamasta ISO (see `user/AGENTS.md`) |
 
 ## For AI Agents
 

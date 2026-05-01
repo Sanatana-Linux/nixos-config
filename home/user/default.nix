@@ -14,14 +14,16 @@
       essential.enable = true;
     };
     shell = {
-      home.enable = true;
-      environment.enable = true;
       zsh.enable = true;
       starship.enable = true;
       cli-tools.enable = true;
+      scripts.enable = true;
+    };
+    environment = {
+      home.enable = true;
+      environment.enable = true;
       nix.enable = true;
       xdg.enable = true;
-      scripts.enable = true;
     };
     desktop = {
       enable = true;

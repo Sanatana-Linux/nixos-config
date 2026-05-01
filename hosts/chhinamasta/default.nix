@@ -15,6 +15,7 @@ in {
     (modulesPath + "/profiles/base.nix")
     (modulesPath + "/installer/scan/detected.nix")
     (modulesPath + "/installer/scan/not-detected.nix")
+    ./sops.nix
     ../../modules/nixos/users/user.nix
   ];
 
@@ -57,14 +58,14 @@ in {
 
     # User
     users.user.enable = true;
-    shell = {
+    base.shell = {
       enable = true;
       zsh = true;
       variables.enable = true;
     };
 
-    # Programs - essential for live ISO
-    programs = {
+    # Apps - essential for live ISO
+    apps = {
       nix-ld.enable = true;
       appimage.enable = true;
       thunar.enable = true;

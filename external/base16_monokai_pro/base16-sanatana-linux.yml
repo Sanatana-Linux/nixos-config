@@ -1,0 +1,18 @@
+scheme: "Sanatana Linux"
+author: "Thomas Leon Highbaugh"
+base00: "#0c0c0c" # Default Background
+base01: "#1c1c1c" # Lighter Background (used for status bars, line highlighting, etc.)
+base02: "#2c2c2c" # Selection Background
+base03: "#59575f" # Comments, Invisible
+base04: "#8b888f" # Light Foreground (Carets, selection, etc.)
+base05: "#bab6c0" # Default Foreground
+base06: "#d9d5df" # Light Accent Foreground
+base07: "#f7f1ff" # Bright Accent Foreground
+base08: "#fc618d" # Red
+base09: "#fda953" # Orange
+base0A: "#f1fc65" # Yellow
+base0B: "#6dc1a9" # Green
+base0C: "#59bbe5" # Cyan
+base0D: "#6b9ce8" # Blue
+base0E: "#948ae3" # Magenta
+base0F: "#555566" # Alt Grey Tone

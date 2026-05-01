@@ -7,6 +7,7 @@
 }: {
   imports = [
     ./hardware-configuration.nix
+    ./sops.nix
     ../../modules/nixos/users/smg.nix
   ];
 
@@ -26,6 +27,7 @@
         enable = true;
         theme.enable = true;
         advancedBios.enable = true;
+        efiMountPoint = "/boot";
       };
       plymouth.enable = true; # Enable Sanatana Plymouth theme
     };
@@ -39,14 +41,14 @@
 
     # User
     users.smg.enable = true;
-    shell = {
+    base.shell = {
       enable = true;
       zsh = true;
       variables.enable = true;
     };
 
-    # Programs
-    programs = {
+    # Apps
+    apps = {
       nix-ld.enable = true;
       appimage.enable = true;
       shotcut.enable = true;

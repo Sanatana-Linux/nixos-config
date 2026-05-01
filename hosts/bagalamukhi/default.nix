@@ -7,6 +7,7 @@
 }: {
   imports = [
     ./hardware-configuration.nix
+    ./sops.nix
     ../../modules/nixos/users/tlh.nix
   ];
 
@@ -40,14 +41,14 @@
 
     # User
     users.tlh.enable = true;
-    shell = {
+    base.shell = {
       enable = true;
       zsh = true;
       variables.enable = true;
     };
 
-    # Programs
-    programs = {
+    # Apps
+    apps = {
       nix-ld.enable = true;
       appimage.enable = true;
       thunar.enable = true;
@@ -78,7 +79,7 @@
     # Power
     power.laptop = {
       enable = true;
-      powerProfilesDaemon = true;
+      powerProfilesDaemon = false;
     };
 
     # Packages

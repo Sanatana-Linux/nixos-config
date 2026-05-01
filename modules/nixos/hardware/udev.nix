@@ -13,7 +13,6 @@ in {
     packages = mkOption {
       type = with types; listOf package;
       default = with pkgs; [
-        gnome-settings-daemon
         xsettingsd
         xfce4-settings
         logitech-udev-rules

@@ -56,6 +56,7 @@ in {
       };
 
       # Disabled targets (external configs or conflicting)
+      targets.gnome.enable = false;
       targets.neovim.enable = false;
       targets.firefox.enable = false;
       targets.yazi.enable = false;

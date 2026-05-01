@@ -1,5 +1,5 @@
-<!-- Parent: ../.opencode/AGENTS.md -->
-<!-- Generated: 2026-04-21 | Updated: 2026-04-22 -->
+<!-- Parent: ../AGENTS.md -->
+<!-- Generated: 2026-04-21 | Updated: 2026-04-24 -->
 
 # modules/
 

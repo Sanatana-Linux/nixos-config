@@ -320,6 +320,33 @@ clone_nixos_config() {
 	echo "[-] Cloning https://github.com/Sanatana-Linux/nixos-config..."
 	git clone --depth 1 https://github.com/Sanatana-Linux/nixos-config /mnt/etc/nixos
 	success "Repository successfully cloned."
+
+	if yesno_prompt "[?] Configure GitHub SSH access for private secrets repo?"; then
+		echo "[-] Setting up GitHub SSH access..."
+		if [[ -f /root/.ssh/id_ed25519 ]]; then
+			success "Found existing SSH key at /root/.ssh/id_ed25519"
+			cp /root/.ssh/id_ed25519 /tmp/github_key 2>/dev/null || true
+		else
+			ssh-keygen -t ed25519 -N "" -f /tmp/github_key >/dev/null 2>&1
+		fi
+		chmod 600 /tmp/github_key
+		echo "[-] Testing GitHub SSH access..."
+		SSH_AGENT_PID="" ssh-agent bash -c 'ssh-add /tmp/github_key 2>/dev/null; ssh -o StrictHostKeyChecking=accept-new -T git@github.com 2>&1 | head -1' || true
+		echo ""
+		while ! yesno_prompt "[?] SSH key configured and added to GitHub. Continue cloning secrets submodule?"; do
+			echo "Waiting for GitHub SSH key setup..."
+			sleep 2
+		done
+		echo "[-] Initializing secrets submodule..."
+		GIT_SSH_COMMAND="ssh -i /tmp/github_key -o StrictHostKeyChecking=accept-new" \
+			git -C /mnt/etc/nixos submodule update --init --recursive external/secrets 2>/dev/null || \
+			error "Failed to clone secrets submodule. Check GitHub SSH access."
+		rm -f /tmp/github_key
+		success "Secrets submodule initialized."
+	else
+		echo "Skipping secrets submodule. You can add it post-install with:"
+		echo "  git -C /mnt/etc/nixos submodule update --init --recursive external/secrets"
+	fi
 	echo
 }
 

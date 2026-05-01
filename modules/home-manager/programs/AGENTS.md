@@ -1,5 +1,5 @@
 <!-- Parent: ../AGENTS.md -->
-<!-- Generated: 2026-04-21 | Updated: 2026-04-22 -->
+<!-- Generated: 2026-04-21 | Updated: 2026-04-27 -->
 
 # modules/home-manager/programs/
 
@@ -26,8 +26,8 @@ User-level program configurations managed via home-manager. Each module configur
 
 | Directory | Purpose |
 |-----------|---------|
-| `fastfetch/` | Fastfetch config files |
-| `yazi/` | Yazi keymap and theme config |
+| `fastfetch/` | Fastfetch config files (logo image) |
+| `yazi/` | Yazi keymap and theme config (see `yazi/AGENTS.md`) |
 
 ## For AI Agents
 

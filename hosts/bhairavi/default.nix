@@ -26,7 +26,6 @@
         advancedBios.enable = false;
         development.enable = true;
       };
-      plymouth.enable = true;
     };
 
     base = {

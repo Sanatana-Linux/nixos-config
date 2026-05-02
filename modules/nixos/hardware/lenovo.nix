@@ -83,8 +83,9 @@ in {
         FREQ_NORMAL=5461000
         PLATFORM_PROFILE="/sys/firmware/acpi/platform_profile"
         MANUAL_OVERRIDE="/var/run/legion-profile-override"
-        OVERRIDE_TTL=300
+        OVERRIDE_TTL=1800
         throttled=0
+        saved_profile=""
 
         set_freq() {
           for cpu in /sys/devices/system/cpu/cpu*/cpufreq/scaling_max_freq; do
@@ -116,9 +117,11 @@ in {
         }
 
         while true; do
-          # Skip all profile changes if user has manually set a profile via Fn+Q
           if is_manual_override; then
-            echo "Manual profile override active, skipping automatic changes"
+            if [ "$throttled" -eq 1 ]; then
+              set_freq $FREQ_NORMAL
+              throttled=0
+            fi
             sleep 30
             continue
           fi
@@ -134,20 +137,23 @@ in {
           current_profile=$(get_fan_profile)
           if [ "$current_profile" = "quiet" ]; then
             set_fan_profile "balanced"
-            echo "Fan profile: quiet -> balanced (quiet not allowed)"
           fi
 
           if [ -n "$temp" ]; then
             if [ "$temp" -ge "$TEMP_HIGH" ] && [ "$throttled" -eq 0 ]; then
+              saved_profile=$(get_fan_profile)
               set_freq $FREQ_THROTTLE
               set_fan_profile "performance"
               throttled=1
               echo "Throttling: $((temp/1000))C >= 90C, fans -> performance"
             elif [ "$temp" -lt "$TEMP_LOW" ] && [ "$throttled" -eq 1 ]; then
               set_freq $FREQ_NORMAL
-              set_fan_profile "balanced"
+              if [ -n "$saved_profile" ] && [ "$saved_profile" != "performance" ]; then
+                set_fan_profile "$saved_profile"
+              fi
               throttled=0
-              echo "Restored: $((temp/1000))C < 80C, fans -> balanced"
+              saved_profile=""
+              echo "Cooled: $((temp/1000))C < 80C, restoring max freq"
             fi
           fi
           sleep 2

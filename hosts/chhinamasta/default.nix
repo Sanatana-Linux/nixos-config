@@ -45,7 +45,6 @@ in {
         theme.enable = true;
         development.enable = true;
       };
-      plymouth.enable = true; # Enable Sanatana Plymouth theme
     };
 
     base = {

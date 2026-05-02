@@ -66,19 +66,10 @@ in {
     };
 
     hardware.enableAllFirmware = true;
-    environment.systemPackages = [pkgs.dmidecode];
-
-    swapDevices = [
-      {
-        device = "/swapfile";
-        size = 16 * 1024;
-      }
-    ];
 
     # Formerly in environment/default.nix
-    programs.zsh.enable = true;
-
     environment = with pkgs; {
+      systemPackages = [dmidecode];
       shells = [bash zsh];
       pathsToLink = [
         "/share/bash"
@@ -88,6 +79,11 @@ in {
       ];
     };
 
-    users.defaultUserShell = pkgs.zsh;
+    swapDevices = [
+      {
+        device = "/swapfile";
+        size = 16 * 1024;
+      }
+    ];
   };
 }

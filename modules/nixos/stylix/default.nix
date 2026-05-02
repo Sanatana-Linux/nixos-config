@@ -15,7 +15,7 @@ in {
     stylix = {
       enable = true;
 
-      base16Scheme = "${./../../../external/base16_monokai_pro/base16-spectrum.yaml}";
+      base16Scheme = "${./../../../external/base16_monokai_pro/base16-sanatana-linux.yml}";
 
       polarity = "dark";
 
@@ -50,7 +50,7 @@ in {
 
       # System-level targets
       targets.grub.enable = mkForce false;
-      targets.plymouth.enable = mkForce false; # Disabled in favor of custom theme
+      targets.plymouth.enable = true;
       targets.console.enable = true;
 
       # Desktop environment targets - just enable GTK, theme will be overridden by home-manager

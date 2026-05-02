@@ -55,7 +55,7 @@
     ];
     # This is a function that generates an attribute by calling a function you
     # pass to it, with each system as an argument
-    forAllSystems =     nixpkgs.lib.genAttrs systems;
+    forAllSystems = nixpkgs.lib.genAttrs systems;
   in {
     # Alejandra formatting
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
@@ -64,24 +64,7 @@
     # Flake Templates Easing the  Development Process and Taking Advantage of Nix in It
     templates = import ./templates;
     # Packages themselves
-    packages = forAllSystems (system: let
-      pkgs = nixpkgs.legacyPackages.${system};
-    in
-      (import ./pkgs pkgs)
-      // {
-        # secrets-menu: interactive CLI for managing sops-encrypted secrets
-        secrets-menu = pkgs.runCommand "secrets-menu"
-          {
-            nativeBuildInputs = [ pkgs.makeBinaryWrapper ];
-            meta.mainProgram = "secrets-menu";
-          }
-          ''
-            mkdir -p "$out/bin"
-            cp ${./pkgs/secrets-menu/secrets-menu.sh} "$out/bin/secrets-menu"
-            chmod +x "$out/bin/secrets-menu"
-          '';
-      }
-    );
+    packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
 
     # Development Environment for This Project, Most Useful During Fresh Installs
     devShells = forAllSystems (

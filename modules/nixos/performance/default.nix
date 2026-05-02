@@ -21,10 +21,10 @@ in {
   config = mkIf cfg.enable {
     # Enable all performance modules
     modules.performance = {
-      zram.enable = true;
-      oomd.enable = true;
-      cachy.enable = true;
-      undervolt.enable = true;
+      zram.enable = mkDefault true;
+      oomd.enable = mkDefault true;
+      cachy.enable = mkDefault true;
+      undervolt.enable = mkDefault true;
     };
 
     # Performance analysis tools

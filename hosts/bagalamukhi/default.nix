@@ -29,7 +29,6 @@
         advancedBios.enable = true;
         development.enable = true;
       };
-      plymouth.enable = true; # Enable Sanatana Plymouth theme
     };
 
     base = {
@@ -92,6 +91,7 @@
         specializedFormats = true;
         integrationLibs = true;
       };
+      browser.enable = true;
       core.enable = true;
       development = {
         enable = true;
@@ -189,6 +189,11 @@
       udev.enable = true;
       logitech.enable = true;
       lenovo.enable = true;
+      fan-control = {
+        enable = true;
+        profile = "auto";
+        onAc = "performance";
+      };
       sound.enable = true;
       networking = {
         enable = true;

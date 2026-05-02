@@ -8,75 +8,317 @@ with lib; let
   cfg = config.modules.hardware.fan-control;
 
   # Fan curve point: { cpu_temp, gpu_temp, ic_temp, fan1_rpm, fan2_rpm, accel, decel }
-  # Temperature in °C, RPM as absolute values, accel/decel as multiplier (1-5)
+  # Temperature in °C, RPM as absolute values, accel/decel as multiplier (1-5, lower = faster)
 
-  # Quiet: fans barely spin until 60°C, gradual ramp-up. Targets idle/browsing.
+  # Quiet: reduced noise at idle but steeper ramp once temps rise.
   quietCurve = {
     points = [
       # point  cpu_temp  gpu_temp  ic_temp  fan1_rpm  fan2_rpm  accel  decel
-      {         cpu=0;   gpu=0;    ic=0;    f1=0;     f2=0;     a=5;   d=5; }
-      {         cpu=45;  gpu=45;   ic=45;   f1=1500;  f2=1500;  a=5;   d=5; }
-      {         cpu=52;  gpu=52;   ic=50;   f1=1700;  f2=1600;  a=5;   d=4; }
-      {         cpu=58;  gpu=56;   ic=53;   f1=1900;  f2=1800;  a=4;   d=4; }
-      {         cpu=64;  gpu=60;   ic=56;   f1=2100;  f2=2000;  a=3;   d=3; }
-      {         cpu=72;  gpu=65;   ic=60;   f1=2400;  f2=2300;  a=2;   d=2; }
-      {         cpu=78;  gpu=70;   ic=64;   f1=2700;  f2=2600;  a=2;   d=2; }
-      {         cpu=84;  gpu=75;   ic=68;   f1=3100;  f2=3000;  a=1;   d=1; }
-      {         cpu=90;  gpu=80;   ic=72;   f1=3600;  f2=3500;  a=1;   d=1; }
-      {         cpu=95;  gpu=85;   ic=76;   f1=4200;  f2=4100;  a=1;   d=1; }
+      {
+        cpu = 0;
+        gpu = 0;
+        ic = 0;
+        f1 = 0;
+        f2 = 0;
+        a = 4;
+        d = 4;
+      }
+      {
+        cpu = 40;
+        gpu = 40;
+        ic = 40;
+        f1 = 1600;
+        f2 = 1500;
+        a = 4;
+        d = 4;
+      }
+      {
+        cpu = 47;
+        gpu = 47;
+        ic = 45;
+        f1 = 1900;
+        f2 = 1800;
+        a = 3;
+        d = 3;
+      }
+      {
+        cpu = 53;
+        gpu = 51;
+        ic = 48;
+        f1 = 2200;
+        f2 = 2100;
+        a = 3;
+        d = 2;
+      }
+      {
+        cpu = 59;
+        gpu = 55;
+        ic = 51;
+        f1 = 2500;
+        f2 = 2400;
+        a = 2;
+        d = 2;
+      }
+      {
+        cpu = 67;
+        gpu = 60;
+        ic = 55;
+        f1 = 2900;
+        f2 = 2800;
+        a = 2;
+        d = 2;
+      }
+      {
+        cpu = 73;
+        gpu = 65;
+        ic = 59;
+        f1 = 3300;
+        f2 = 3200;
+        a = 1;
+        d = 1;
+      }
+      {
+        cpu = 79;
+        gpu = 70;
+        ic = 63;
+        f1 = 3800;
+        f2 = 3700;
+        a = 1;
+        d = 1;
+      }
+      {
+        cpu = 85;
+        gpu = 75;
+        ic = 68;
+        f1 = 4400;
+        f2 = 4300;
+        a = 1;
+        d = 1;
+      }
+      {
+        cpu = 90;
+        gpu = 80;
+        ic = 73;
+        f1 = 5000;
+        f2 = 4900;
+        a = 1;
+        d = 1;
+      }
     ];
   };
 
-  # Balanced: moderate fan response, good for general use. Similar to Lenovo's default.
+  # Balanced: cooling-first, faster response, moderate idle noise.
   balancedCurve = {
     points = [
       # point  cpu_temp  gpu_temp  ic_temp  fan1_rpm  fan2_rpm  accel  decel
-      {         cpu=0;   gpu=0;    ic=0;    f1=0;     f2=0;     a=5;   d=5; }
-      {         cpu=46;  gpu=56;   ic=56;   f1=1500;  f2=1600;  a=5;   d=4; }
-      {         cpu=52;  gpu=57;   ic=57;   f1=1900;  f2=2000;  a=5;   d=4; }
-      {         cpu=56;  gpu=58;   ic=58;   f1=2100;  f2=2200;  a=4;   d=3; }
-      {         cpu=58;  gpu=59;   ic=59;   f1=2200;  f2=2300;  a=4;   d=3; }
-      {         cpu=67;  gpu=60;   ic=60;   f1=2500;  f2=2500;  a=3;   d=2; }
-      {         cpu=74;  gpu=65;   ic=62;   f1=2900;  f2=2800;  a=2;   d=2; }
-      {         cpu=80;  gpu=70;   ic=66;   f1=3400;  f2=3300;  a=2;   d=1; }
-      {         cpu=86;  gpu=76;   ic=70;   f1=4000;  f2=3900;  a=1;   d=1; }
-      {         cpu=95;  gpu=85;   ic=78;   f1=4500;  f2=4400;  a=1;   d=1; }
+      {
+        cpu = 0;
+        gpu = 0;
+        ic = 0;
+        f1 = 0;
+        f2 = 0;
+        a = 3;
+        d = 3;
+      }
+      {
+        cpu = 41;
+        gpu = 51;
+        ic = 51;
+        f1 = 1700;
+        f2 = 1700;
+        a = 3;
+        d = 3;
+      }
+      {
+        cpu = 47;
+        gpu = 52;
+        ic = 52;
+        f1 = 2100;
+        f2 = 2000;
+        a = 3;
+        d = 2;
+      }
+      {
+        cpu = 51;
+        gpu = 53;
+        ic = 53;
+        f1 = 2400;
+        f2 = 2300;
+        a = 2;
+        d = 2;
+      }
+      {
+        cpu = 53;
+        gpu = 54;
+        ic = 54;
+        f1 = 2600;
+        f2 = 2500;
+        a = 2;
+        d = 2;
+      }
+      {
+        cpu = 62;
+        gpu = 55;
+        ic = 55;
+        f1 = 3000;
+        f2 = 2900;
+        a = 2;
+        d = 1;
+      }
+      {
+        cpu = 69;
+        gpu = 60;
+        ic = 58;
+        f1 = 3500;
+        f2 = 3400;
+        a = 1;
+        d = 1;
+      }
+      {
+        cpu = 75;
+        gpu = 65;
+        ic = 62;
+        f1 = 4100;
+        f2 = 4000;
+        a = 1;
+        d = 1;
+      }
+      {
+        cpu = 81;
+        gpu = 71;
+        ic = 66;
+        f1 = 4700;
+        f2 = 4600;
+        a = 1;
+        d = 1;
+      }
+      {
+        cpu = 90;
+        gpu = 80;
+        ic = 74;
+        f1 = 5200;
+        f2 = 5100;
+        a = 1;
+        d = 1;
+      }
     ];
   };
 
-  # Performance: aggressive cooling, fans spin up early. For gaming/heavy workloads.
+  # Performance: maximum cooling, fast spin-up, aggressive ramp.
   performanceCurve = {
     points = [
       # point  cpu_temp  gpu_temp  ic_temp  fan1_rpm  fan2_rpm  accel  decel
-      {         cpu=0;   gpu=0;    ic=0;    f1=0;     f2=0;     a=4;   d=4; }
-      {         cpu=40;  gpu=40;   ic=40;   f1=1800;  f2=1800;  a=4;   d=3; }
-      {         cpu=48;  gpu=48;   ic=46;   f1=2200;  f2=2100;  a=3;   d=3; }
-      {         cpu=54;  gpu=54;   ic=50;   f1=2500;  f2=2400;  a=3;   d=2; }
-      {         cpu=60;  gpu=58;   ic=54;   f1=2800;  f2=2700;  a=2;   d=2; }
-      {         cpu=66;  gpu=62;   ic=58;   f1=3200;  f2=3100;  a=2;   d=2; }
-      {         cpu=72;  gpu=67;   ic=62;   f1=3700;  f2=3600;  a=1;   d=1; }
-      {         cpu=78;  gpu=72;   ic=66;   f1=4200;  f2=4100;  a=1;   d=1; }
-      {         cpu=84;  gpu=78;   ic=70;   f1=4700;  f2=4600;  a=1;   d=1; }
-      {         cpu=92;  gpu=85;   ic=76;   f1=5200;  f2=5100;  a=1;   d=1; }
+      {
+        cpu = 0;
+        gpu = 0;
+        ic = 0;
+        f1 = 0;
+        f2 = 0;
+        a = 2;
+        d = 2;
+      }
+      {
+        cpu = 35;
+        gpu = 35;
+        ic = 35;
+        f1 = 2000;
+        f2 = 1900;
+        a = 2;
+        d = 2;
+      }
+      {
+        cpu = 43;
+        gpu = 43;
+        ic = 41;
+        f1 = 2500;
+        f2 = 2400;
+        a = 2;
+        d = 1;
+      }
+      {
+        cpu = 49;
+        gpu = 49;
+        ic = 45;
+        f1 = 2900;
+        f2 = 2800;
+        a = 1;
+        d = 1;
+      }
+      {
+        cpu = 55;
+        gpu = 53;
+        ic = 49;
+        f1 = 3300;
+        f2 = 3200;
+        a = 1;
+        d = 1;
+      }
+      {
+        cpu = 61;
+        gpu = 57;
+        ic = 53;
+        f1 = 3800;
+        f2 = 3700;
+        a = 1;
+        d = 1;
+      }
+      {
+        cpu = 67;
+        gpu = 62;
+        ic = 57;
+        f1 = 4400;
+        f2 = 4300;
+        a = 1;
+        d = 1;
+      }
+      {
+        cpu = 73;
+        gpu = 67;
+        ic = 61;
+        f1 = 5000;
+        f2 = 4900;
+        a = 1;
+        d = 1;
+      }
+      {
+        cpu = 79;
+        gpu = 73;
+        ic = 65;
+        f1 = 5400;
+        f2 = 5300;
+        a = 1;
+        d = 1;
+      }
+      {
+        cpu = 87;
+        gpu = 80;
+        ic = 71;
+        f1 = 5800;
+        f2 = 5700;
+        a = 1;
+        d = 1;
+      }
     ];
   };
 
   # Generate a shell function that writes a fan curve to hwmon
   writeCurveScript = name: curve: let
-    writePoints = imap1 (i: p: ''
-      echo ${toString p.f1} > "$HWMON/pwm1_auto_point${toString i}_pwm"
-      echo ${toString p.f2} > "$HWMON/pwm2_auto_point${toString i}_pwm"
-      echo ${toString p.cpu} > "$HWMON/pwm1_auto_point${toString i}_temp"
-      echo ${toString p.cpu} > "$HWMON/pwm1_auto_point${toString i}_temp_hyst"
-      echo ${toString p.gpu} > "$HWMON/pwm2_auto_point${toString i}_temp"
-      echo ${toString p.gpu} > "$HWMON/pwm2_auto_point${toString i}_temp_hyst"
-      echo ${toString p.ic}  > "$HWMON/pwm3_auto_point${toString i}_temp"
-      echo ${toString p.ic}  > "$HWMON/pwm3_auto_point${toString i}_temp_hyst"
-      echo ${toString p.a}   > "$HWMON/pwm1_auto_point${toString i}_accel"
-      echo ${toString p.d}   > "$HWMON/pwm1_auto_point${toString i}_decel"
-    '') curve.points;
+    writePoints =
+      imap1 (i: p: ''
+        echo ${toString p.f1} > "$HWMON/pwm1_auto_point${toString i}_pwm"
+        echo ${toString p.f2} > "$HWMON/pwm2_auto_point${toString i}_pwm"
+        echo ${toString p.cpu} > "$HWMON/pwm1_auto_point${toString i}_temp"
+        echo ${toString p.cpu} > "$HWMON/pwm1_auto_point${toString i}_temp_hyst"
+        echo ${toString p.gpu} > "$HWMON/pwm2_auto_point${toString i}_temp"
+        echo ${toString p.gpu} > "$HWMON/pwm2_auto_point${toString i}_temp_hyst"
+        echo ${toString p.ic}  > "$HWMON/pwm3_auto_point${toString i}_temp"
+        echo ${toString p.ic}  > "$HWMON/pwm3_auto_point${toString i}_temp_hyst"
+        echo ${toString p.a}   > "$HWMON/pwm1_auto_point${toString i}_accel"
+        echo ${toString p.d}   > "$HWMON/pwm1_auto_point${toString i}_decel"
+      '')
+      curve.points;
   in
-    writePoints;
+    concatStringsSep "\n" writePoints;
 
   applyQuiet = writeCurveScript "quiet" quietCurve;
   applyBalanced = writeCurveScript "balanced" balancedCurve;
@@ -93,7 +335,7 @@ in {
 
     onBattery = mkOption {
       type = types.enum ["quiet" "balanced"];
-      default = "quiet";
+      default = "balanced";
       description = "Fan profile when on battery power (auto mode only).";
     };
 
@@ -101,12 +343,6 @@ in {
       type = types.enum ["balanced" "performance"];
       default = "performance";
       description = "Fan profile when on AC power (auto mode only).";
-    };
-
-    thermalGuardIntegration = mkOption {
-      type = types.bool;
-      default = true;
-      description = "Signal thermal-guard to re-apply fan curve after throttling events.";
     };
   };
 
@@ -142,10 +378,12 @@ in {
     systemd.services.legion-fan-control = {
       description = "Lenovo Legion fan curve daemon — applies fan curves and monitors power/profile changes";
       wantedBy = ["multi-user.target"];
-      after = ["systemd-modules-load.service" "systemd-udevd.service" "sysinit.target"];
-      wants = ["systemd-udevd.service"];
-      wants = mkIf config.services.auto-cpufreq.enable ["auto-cpufreq.service"];
-      after = mkIf config.services.auto-cpufreq.enable ["auto-cpufreq.service"];
+      after =
+        ["systemd-modules-load.service" "systemd-udevd.service" "sysinit.target"]
+        ++ lib.optional config.services.auto-cpufreq.enable "auto-cpufreq.service";
+      wants =
+        ["systemd-udevd.service"]
+        ++ lib.optional config.services.auto-cpufreq.enable "auto-cpufreq.service";
       serviceConfig = {
         Type = "simple";
         Restart = "always";
@@ -382,23 +620,5 @@ in {
         esac
       '')
     ];
-
-    # Coordinate with thermal-guard: after thermal recovery, signal fan daemon
-    # to re-apply the correct curve instead of leaving it on "performance"
-    systemd.services.thermal-guard = mkIf cfg.thermalGuardIntegration {
-      script = mkBefore ''
-        THERMAL_SIGNAL="/var/run/legion-thermal-recovery"
-      '' + mkAfter ''
-        # After restoring from throttle, signal the fan daemon
-        # so it re-applies the correct curve instead of staying on performance
-        if [ -f "$THERMAL_SIGNAL" ]; then
-          rm -f "$THERMAL_SIGNAL"
-        fi
-        if [ "$throttled" -eq 0 ] && [ -n "$saved_profile" ]; then
-          # We just recovered from throttle — tell the fan daemon
-          touch "$THERMAL_SIGNAL"
-        fi
-      '';
-    };
   };
 }

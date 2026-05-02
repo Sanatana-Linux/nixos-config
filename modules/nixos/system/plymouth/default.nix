@@ -25,7 +25,7 @@ with lib; let
             cp ${./sanatana-linux-icon.png} $out/share/plymouth/themes/sanatana/logo.png
 
             # Create the theme configuration file
-            cat > $out/share/plymouth/themes/sanatana/sanatana.plymouth << 'EOF'
+            cat > $out/share/plymouth/themes/sanatana/sanatana.plymouth << EOF
       [Plymouth Theme]
       Name=Sanatana Linux
       Description=Sanatana Linux Plymouth theme with custom logo

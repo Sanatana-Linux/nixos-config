@@ -1,4 +1,4 @@
 {
-  sops.defaultSopsFile = ../../external/secrets/hosts/bagalamukhi/secrets.yaml;
+  sops.defaultSopsFile = /etc/nixos/external/secrets/hosts/bagalamukhi/secrets.yaml;
   sops.age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
 }

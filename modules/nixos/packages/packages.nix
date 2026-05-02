@@ -21,6 +21,18 @@ in {
     };
 
     # ══════════════════════════════════════════════════════════════════════════
+    # BROWSER
+    # ══════════════════════════════════════════════════════════════════════════
+    browser = {
+      enable = mkEnableOption "Browser packages";
+      chromium = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Chromium web browser";
+      };
+    };
+
+    # ══════════════════════════════════════════════════════════════════════════
     # CORE
     # ══════════════════════════════════════════════════════════════════════════
     core = {
@@ -147,6 +159,11 @@ in {
       performance = mkEnableOption "Performance monitoring tools";
       desktop = mkEnableOption "Desktop integration utilities";
       multimedia = mkEnableOption "System multimedia tools";
+      document = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Document and PDF generation tools";
+      };
     };
 
     # ══════════════════════════════════════════════════════════════════════════
@@ -210,6 +227,16 @@ in {
           gnome-autoar # GNOME archive library
           advancecomp # Recompression tools
           ouch # Painless archive extraction
+        ];
+    })
+
+    # ════════════════════════════════════════════════════════════════════════
+    # BROWSER CONFIG
+    # ════════════════════════════════════════════════════════════════════════
+    (mkIf cfg.browser.enable {
+      environment.systemPackages = with pkgs;
+        optionals cfg.browser.chromium [
+          chromium # Open-source web browser
         ];
     })
 
@@ -1021,6 +1048,7 @@ in {
             file # File type identification
             wget # Web downloader
             jq # JSON processor
+            yq-go # YAML processor (used by secrets management)
             moreutils # More Unix utilities
             parallel # Run jobs in parallel
 
@@ -1122,6 +1150,11 @@ in {
             lame # MP3 encoder
             portaudio # Audio I/O
             curtail # Image compressor
+          ]
+          # Document and PDF generation
+          ++ optionals cfg.system.document [
+            wkhtmltopdf # HTML to PDF converter
+            python313Packages.weasyprint # Python HTML/CSS to PDF
           ];
       }
     ]))
@@ -1178,15 +1211,11 @@ in {
         # Graphics & Screenshots
         grim # Screenshot tool
         slurp # Screen region selector
-        hyprpicker # Color picker
+        gpick # Color picker
 
         # System & Clipboard
-        wl-clipboard # Wayland clipboard
         cliphist # Clipboard history
         brightnessctl # Backlight control
-        swaybg # Wallpaper utility
-        swayidle # Idle manager
-        swaylock # Screen locker
 
         # Input & Input Events
         libinput # Input device library

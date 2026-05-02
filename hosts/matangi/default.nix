@@ -29,7 +29,6 @@
         advancedBios.enable = true;
         efiMountPoint = "/boot";
       };
-      plymouth.enable = true; # Enable Sanatana Plymouth theme
     };
 
     base = {

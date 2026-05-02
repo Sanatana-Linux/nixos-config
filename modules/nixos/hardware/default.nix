@@ -12,5 +12,6 @@
     ./thunderbolt.nix
     ./udev.nix
     ./lenovo.nix
+    ./fan-control.nix
   ];
 }

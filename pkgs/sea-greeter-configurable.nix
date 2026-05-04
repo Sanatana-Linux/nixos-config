@@ -13,7 +13,7 @@
   typescript,
   makeWrapper,
   cmake,
-  themes ? [],
+  greeterThemes ? [],
   backgrounds ? null,
   selectedTheme ? "gruvbox",
   enableHWAcceleration ? false,
@@ -35,27 +35,27 @@ stdenv.mkDerivation rec {
 
   buildInputs =
     [gtk3 webkitgtk_4_1 lightdm glib libyaml cmake]
-    ++ lib.optionals (themes != []) themes;
+    ++ lib.optionals (greeterThemes != []) greeterThemes;
 
   configurePhase = ''
     runHook preConfigure
 
     substituteInPlace src/theme.c \
-    --replace '/usr/share/web-greeter/themes/' \
-              "$out/usr/share/web-greeter/themes/"
+    --replace '/usr/share/web-greeter/greeterThemes/' \
+              "$out/usr/share/web-greeter/greeterThemes/"
     substituteInPlace src/settings.c \
     --replace '/etc/lightdm/web-greeter.yml' \
               "$out/etc/lightdm/web-greeter.yml"
     substituteInPlace src/settings.c \
-    --replace '/usr/share/web-greeter/themes/' \
-              "$out/usr/share/web-greeter/themes/"
+    --replace '/usr/share/web-greeter/greeterThemes/' \
+              "$out/usr/share/web-greeter/greeterThemes/"
     substituteInPlace data/web-greeter.yml \
     --replace '/usr/share/' \
               "$out/usr/share/"
 
     # Configure selected theme
     ${
-      if (themes != [] && selectedTheme != "gruvbox")
+      if (greeterThemes != [] && selectedTheme != "gruvbox")
       then ''
         substituteInPlace data/web-greeter.yml \
         --replace 'theme: gruvbox' \
@@ -75,7 +75,7 @@ stdenv.mkDerivation rec {
     ${lib.optionalString (defaultWallpaper != null) ''
             echo "Configuring default wallpaper: ${defaultWallpaper}"
             # Add custom configuration for default wallpaper
-            # This creates a configuration override that themes can read
+            # This creates a configuration override that greeterThemes can read
             mkdir -p build/config
             cat > build/config/default-wallpaper.conf << EOF
       # Default wallpaper configuration for sea-greeter
@@ -113,16 +113,16 @@ stdenv.mkDerivation rec {
     # be on the root level.
     ln -s $out/usr/share/xgreeters/sea-greeter.desktop $out/sea-greeter.desktop
 
-    # Install themes
-    mkdir -p "$out/usr/share/web-greeter/themes"
+    # Install greeterThemes
+    mkdir -p "$out/usr/share/web-greeter/greeterThemes"
 
-    ${lib.optionalString (themes != []) ''
-      echo "Installing themes"
+    ${lib.optionalString (greeterThemes != []) ''
+      echo "Installing greeterThemes"
       ${lib.concatMapStringsSep "\n" (t: ''
           echo "Installing theme: ${t.pname}"
-          ln -s ${t} "$out/usr/share/web-greeter/themes/${t.pname}"
+          ln -s ${t} "$out/usr/share/web-greeter/greeterThemes/${t.pname}"
         '')
-        themes}
+        greeterThemes}
     ''}
 
     # Install backgrounds
@@ -138,14 +138,14 @@ stdenv.mkDerivation rec {
             echo "Installing default wallpaper configuration: ${defaultWallpaper}"
             mkdir -p "$out/etc/lightdm"
             cat > "$out/etc/lightdm/default-wallpaper.conf" << EOF
-      # Default wallpaper configuration for sea-greeter themes
+      # Default wallpaper configuration for sea-greeter greeterThemes
       default_wallpaper=${defaultWallpaper}
       EOF
 
-            # Create a JavaScript override for web-greeter themes to use default wallpaper
+            # Create a JavaScript override for web-greeter greeterThemes to use default wallpaper
             mkdir -p "$out/usr/share/web-greeter"
             cat > "$out/usr/share/web-greeter/default-wallpaper.js" << 'EOF'
-      // Default wallpaper override for web-greeter themes
+      // Default wallpaper override for web-greeter greeterThemes
       (function() {
           // Read the default wallpaper configuration
           const defaultWallpaper = '${defaultWallpaper}';
@@ -158,7 +158,7 @@ stdenv.mkDerivation rec {
               // Override or set the wallpaper
               window.addEventListener('load', function() {
                   setTimeout(function() {
-                      // Try different common methods themes use to set wallpapers
+                      // Try different common methods greeterThemes use to set wallpapers
                       if (typeof setWallpaper === 'function') {
                           setWallpaper('/usr/share/backgrounds/' + defaultWallpaper);
                       } else if (typeof changeWallpaper === 'function') {
@@ -180,10 +180,10 @@ stdenv.mkDerivation rec {
       EOF
 
             # Create a theme configuration override for litarvan theme if it exists
-            if [ -d "$out/usr/share/web-greeter/themes/litarvan" ] || [ -L "$out/usr/share/web-greeter/themes/litarvan" ]; then
+            if [ -d "$out/usr/share/web-greeter/greeterThemes/litarvan" ] || [ -L "$out/usr/share/web-greeter/greeterThemes/litarvan" ]; then
               echo "Configuring litarvan theme with default wallpaper"
-              mkdir -p "$out/usr/share/web-greeter/themes/litarvan/config"
-              cat > "$out/usr/share/web-greeter/themes/litarvan/config/default.conf" << EOF
+              mkdir -p "$out/usr/share/web-greeter/greeterThemes/litarvan/config"
+              cat > "$out/usr/share/web-greeter/greeterThemes/litarvan/config/default.conf" << EOF
       default_wallpaper=${defaultWallpaper}
       EOF
             fi

@@ -26,9 +26,8 @@ in {
       settings = {
         scan_timeout = 10;
         add_newline = true;
-        line_break.disabled = true;
 
-        format = "$directory$git_branch$git_metrics$git_commit$git_state$git_status$all";
+        format = "$directory$git_branch$git_metrics$git_commit$git_state$git_status$all$line_break$character";
 
         character = {
           success_symbol = "[🕉](green)";

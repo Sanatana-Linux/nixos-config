@@ -9,8 +9,8 @@ base05: "#bab6c0" # Default Foreground
 base06: "#d9d5df" # Light Accent Foreground
 base07: "#f7f1ff" # Bright Accent Foreground
 base08: "#fc618d" # Red
-base09: "#fda953" # Orange
-base0A: "#f1fc65" # Yellow
+base09: "#ff9e64" # Orange
+base0A: "#fce566" # Yellow
 base0B: "#7dca99" # Green
 base0C: "#59bbe5" # Cyan
 base0D: "#6b9ce8" # Blue

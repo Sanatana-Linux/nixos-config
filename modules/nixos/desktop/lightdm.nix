@@ -87,7 +87,7 @@ with lib; {
       ++ config.modules.desktop.lightdm.themes;
 
     configuredSeaGreeter = pkgs.callPackage ../../../pkgs/sea-greeter-configurable.nix {
-      themes = allThemes;
+      greeterThemes = allThemes;
       selectedTheme = effectiveTheme;
       backgrounds = effectiveBackgrounds;
       enableHWAcceleration = config.modules.desktop.lightdm.enableHWAcceleration;

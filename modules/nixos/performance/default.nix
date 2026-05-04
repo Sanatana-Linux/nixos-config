@@ -37,6 +37,8 @@ in {
       "kernel.sysrq" = lib.mkForce 438; # Magic SysRq key
       "lenovo-legion.force" = 1; # Laptop module
       "vm.overcommit_memory" = 1;
+      "vm.swappiness" = 100;
+      "vm.vfs_cache_pressure" = 50;
     };
 
     # BPF performance tuning

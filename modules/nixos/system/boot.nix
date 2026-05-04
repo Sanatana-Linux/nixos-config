@@ -72,7 +72,7 @@ in {
     boot = {
       tmp.cleanOnBoot = true;
 
-      kernelPackages = pkgs.linuxPackages_latest;
+      kernelPackages = pkgs.linuxPackages_xanmod_latest;
 
       blacklistedKernelModules = ["nouveau" "nvidiafb"];
 

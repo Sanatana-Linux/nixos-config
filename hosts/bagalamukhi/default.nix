@@ -23,6 +23,14 @@
     # System
     system = {
       systemd.enable = true;
+      cron = {
+        enable = true;
+        jobs = [
+          {
+            command = "nix profile wipe-history --older-than 7d --profile /nix/var/nix/profiles/system; find /home/* -lname '/nix/store/*' -delete; nix-store --gc; nix-env --delete-generations old; nix-collect-garbage -d; nix profile wipe-history";
+          }
+        ];
+      };
       boot = {
         enable = true;
         theme.enable = true;

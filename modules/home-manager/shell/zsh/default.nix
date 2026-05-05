@@ -199,6 +199,7 @@ in {
         gz = "gzip -l"; # list contents of gzipped files
         rm = "rm -rvf"; # remove files and directories recursively and forcefully
         trm = "${lib.getBin trash-cli}/bin/trash-cli"; # Move files to trash
+        tgpt = "tgpt --provider sky";
         firefox = "firefox";
         less = "moor";
 

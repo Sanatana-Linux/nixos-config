@@ -25,6 +25,10 @@
       url = "github:Sanatana-Linux/Bhairava-Grub-Theme";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    lightdm-webkit2-sanatana = {
+      url = "git+https://github.com/Sanatana-Linux/lightdm-webkit2-sanatana.git?ref=main";
+      flake = false;
+    };
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
     cachy-tweaks = {
@@ -64,7 +68,7 @@
     # Flake Templates Easing the  Development Process and Taking Advantage of Nix in It
     templates = import ./templates;
     # Packages themselves
-    packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
+    packages = forAllSystems (system: import ./pkgs {pkgs = nixpkgs.legacyPackages.${system}; inherit inputs;});
 
     # Development Environment for This Project, Most Useful During Fresh Installs
     devShells = forAllSystems (

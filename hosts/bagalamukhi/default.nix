@@ -222,8 +222,8 @@
       };
       lightdm = {
         enable = true;
-        theme = pkgs.lightdm-webkit-theme-litarvan;
-        selectedTheme = "lightdm-webkit-theme-litarvan";
+        theme = pkgs.lightdm-webkit2-sanatana;
+        selectedTheme = "lightdm-webkit2-sanatana";
         defaultWallpaper = "wallpaper.png";
       };
     };
@@ -290,9 +290,11 @@
 
   services = {
     logind.settings.Login = {
-      HandleLidSwitch = "suspend";
-      HandlePowerKey = "ignore";
+      HandleLidSwitch = "lock";
+      HandlePowerKey = "lock";
       HandlePowerKeyLongPress = "suspend";
+      IdleAction = "suspend";
+      IdleActionSec = "15min";
     };
     displayManager.defaultSession = "none+awesome";
   };

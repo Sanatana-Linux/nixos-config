@@ -40,15 +40,16 @@ stdenv.mkDerivation rec {
   configurePhase = ''
     runHook preConfigure
 
+    # Fix 1: Theme directory path — C source uses "themes/" not "greeterThemes/"
     substituteInPlace src/theme.c \
-    --replace '/usr/share/web-greeter/greeterThemes/' \
-              "$out/usr/share/web-greeter/greeterThemes/"
+    --replace '/usr/share/web-greeter/themes/' \
+              "$out/usr/share/web-greeter/themes/"
+    substituteInPlace src/settings.c \
+    --replace '/usr/share/web-greeter/themes/' \
+              "$out/usr/share/web-greeter/themes/"
     substituteInPlace src/settings.c \
     --replace '/etc/lightdm/web-greeter.yml' \
               "$out/etc/lightdm/web-greeter.yml"
-    substituteInPlace src/settings.c \
-    --replace '/usr/share/web-greeter/greeterThemes/' \
-              "$out/usr/share/web-greeter/greeterThemes/"
     substituteInPlace data/web-greeter.yml \
     --replace '/usr/share/' \
               "$out/usr/share/"
@@ -113,14 +114,14 @@ stdenv.mkDerivation rec {
     # be on the root level.
     ln -s $out/usr/share/xgreeters/sea-greeter.desktop $out/sea-greeter.desktop
 
-    # Install greeterThemes
-    mkdir -p "$out/usr/share/web-greeter/greeterThemes"
+    # Install themes — C source reads from "themes/" not "greeterThemes/"
+    mkdir -p "$out/usr/share/web-greeter/themes"
 
     ${lib.optionalString (greeterThemes != []) ''
-      echo "Installing greeterThemes"
+      echo "Installing themes"
       ${lib.concatMapStringsSep "\n" (t: ''
           echo "Installing theme: ${t.pname}"
-          ln -s ${t} "$out/usr/share/web-greeter/greeterThemes/${t.pname}"
+          ln -s ${t} "$out/usr/share/web-greeter/themes/${t.pname}"
         '')
         greeterThemes}
     ''}
@@ -142,7 +143,7 @@ stdenv.mkDerivation rec {
       default_wallpaper=${defaultWallpaper}
       EOF
 
-            # Create a JavaScript override for web-greeter greeterThemes to use default wallpaper
+            # Create a JavaScript override for web-greeter themes to use default wallpaper
             mkdir -p "$out/usr/share/web-greeter"
             cat > "$out/usr/share/web-greeter/default-wallpaper.js" << 'EOF'
       // Default wallpaper override for web-greeter greeterThemes
@@ -180,10 +181,10 @@ stdenv.mkDerivation rec {
       EOF
 
             # Create a theme configuration override for litarvan theme if it exists
-            if [ -d "$out/usr/share/web-greeter/greeterThemes/litarvan" ] || [ -L "$out/usr/share/web-greeter/greeterThemes/litarvan" ]; then
+            if [ -d "$out/usr/share/web-greeter/themes/litarvan" ] || [ -L "$out/usr/share/web-greeter/themes/litarvan" ]; then
               echo "Configuring litarvan theme with default wallpaper"
-              mkdir -p "$out/usr/share/web-greeter/greeterThemes/litarvan/config"
-              cat > "$out/usr/share/web-greeter/greeterThemes/litarvan/config/default.conf" << EOF
+              mkdir -p "$out/usr/share/web-greeter/themes/litarvan/config"
+              cat > "$out/usr/share/web-greeter/themes/litarvan/config/default.conf" << EOF
       default_wallpaper=${defaultWallpaper}
       EOF
             fi
@@ -197,6 +198,14 @@ stdenv.mkDerivation rec {
       --replace "webkit2gtk-web-extension-4.0" "webkit2gtk-web-extension-4.1"
 
     sed -i 's/libsoup-2.4/libsoup-3.0/g' src/meson.build
+
+    # Fix NULL file crash in load_theme_config (theme.c).
+    # When a theme lacks index.yml, fopen returns NULL but the code still
+    # calls yaml_parser_set_input_file(NULL), causing an assertion failure.
+    # Add early return to prevent the crash.
+    substituteInPlace src/theme.c \
+      --replace 'logger_warn("Theme config was not loaded:\n\t%s", strerror(errno));' \
+                'logger_warn("Theme config was not loaded:\n\t%s", strerror(errno)); g_free(path_to_theme_config); return;'
   '';
 
   meta = with lib; {

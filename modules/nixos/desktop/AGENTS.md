@@ -19,12 +19,12 @@ Desktop environment and display manager configuration. Controls the greeter, win
 
 | Directory | Purpose |
 |-----------|---------|
-| `assets/` | Wallpapers and visual assets (wallpaper.png, monokaiprospectrum.png, sanatana_topographic.png) |
+| `assets/` | Wallpapers and visual assets (wallpaper.png, wallpaper-branded.png, wallpaper-memphis.png) |
 
 ## For AI Agents
 
 ### Working In This Directory
-- `lightdm.nix` uses sea-greeter (NOT lightdm-gtk-greeter) — the litarvan theme must be explicitly passed via the `theme` option
+- `lightdm.nix` uses sea-greeter (NOT lightdm-gtk-greeter) — the theme must be explicitly passed via the `theme` option (e.g., `pkgs.lightdm-webkit2-sanatana` or `pkgs.lightdm-webkit-theme-litarvan`)
 - The `configuredSeaGreeter` and related `let` bindings must be in the outer module scope (not inside `environment.systemPackages`'s let block)
 - Cursor theme on the greeter requires phinger-cursors in systemPackages + Xsession.d script
 - `defaultWallpaper` option sets the background image; wallpapers live in `assets/`

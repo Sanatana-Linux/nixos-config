@@ -12,6 +12,7 @@ Boot, systemd, and plymouth (boot splash) configuration.
 |------|-------------|
 | `default.nix` | Re-exports system submodules |
 | `boot.nix` | Bootloader (systemd-boot), kernel packages, kernel params |
+| `cron.nix` | Cron job management |
 | `systemd.nix` | Custom systemd configuration |
 
 ## Subdirectories

@@ -141,7 +141,9 @@ in {
       "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
       "nvidia-drm.modeset=1"
       "nvidia.NVreg_EnableResizableBar=1"
-      "pcie_aspm=off"
+      "nvidia.NVreg_EnableGpuFirmware=0"
+      "pcie_aspm=on"
+      "pcie_aspm.policy=balanced"
     ];
 
     # Initrd kernel modules for NVIDIA
@@ -195,7 +197,7 @@ in {
         forceFullCompositionPipeline = true;
 
         powerManagement = {
-          enable = false;
+          enable = true;
           finegrained = false;
         };
 

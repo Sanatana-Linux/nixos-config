@@ -15,6 +15,7 @@ Custom Nix package definitions (derivations) not available in nixpkgs or needing
 | `sea-greeter-configurable.nix` | Configurable sea-greeter wrapper with theme/font options |
 | `lightdm-webkit-theme-litarvan.nix` | Litarvan webkit theme for sea-greeter/LightDM |
 | `lightdm-webkit-theme-litarvan-sanatana.nix` | Sanatana-themed litarvan variant |
+| `lightdm-webkit2-sanatana.nix` | Sanatana glassmorphism greeter theme for sea-greeter |
 
 ## Subdirectories
 

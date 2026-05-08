@@ -22,6 +22,8 @@ Hardware support and driver configuration. Each module enables specific hardware
 | `iphone.nix` | iPhone/libimobiledevice support |
 | `lenovo.nix` | Lenovo-specific hardware (legion-rgb-control) |
 | `logitech.nix` | Logitech device support (Solaar) |
+| `fan-control.nix` | Fan control profiles (auto, performance, quiet) |
+| `thunderbolt.nix` | Thunderbolt/USB4 port configuration |
 
 ## For AI Agents
 

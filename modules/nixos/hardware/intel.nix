@@ -66,6 +66,7 @@ in {
       ];
 
     # Enable Intel CPU frequency driver
+    # powersave = dynamic scaling on intel_pstate (the balanced/default mode)
     powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
 
     # Intel CPU microcode updates

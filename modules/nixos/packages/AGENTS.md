@@ -1,7 +1,7 @@
 <!-- Parent: ../AGENTS.md -->
 <!-- Generated: 2026-04-22 | Updated: 2026-04-22 -->
 
-# packages/
+# modules/nixos/packages/
 
 ## Purpose
 System-level package sets organized by category (archives, core, development, fonts, GUI, multimedia, network, python, shell, system, X11, Wayland). Each category has an enable option and fine-grained sub-options for selectively including package groups. Hosts opt-in by setting `modules.packages.<category>.enable = true` and toggling sub-features.

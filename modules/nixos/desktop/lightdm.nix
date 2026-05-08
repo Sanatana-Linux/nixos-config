@@ -56,6 +56,12 @@ with lib; {
       description = "Enable hardware acceleration for webkit";
     };
 
+    detectThemeErrors = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Enable sea-greeter's built-in theme error detection on startup (adds startup latency)";
+    };
+
     defaultWallpaper = mkOption {
       type = types.nullOr types.str;
       default = "sanatana_topographic.png";
@@ -92,6 +98,8 @@ with lib; {
       backgrounds = effectiveBackgrounds;
       enableHWAcceleration = config.modules.desktop.lightdm.enableHWAcceleration;
       defaultWallpaper = config.modules.desktop.lightdm.defaultWallpaper;
+      debug = config.modules.desktop.lightdm.debug;
+      detectThemeErrors = config.modules.desktop.lightdm.detectThemeErrors;
     };
   in {
     environment.systemPackages =

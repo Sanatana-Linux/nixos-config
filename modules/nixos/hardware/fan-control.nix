@@ -391,7 +391,7 @@ in {
         User = "root";
         ExecStartPre = "${pkgs.coreutils}/bin/sleep 5";
       };
-      path = with pkgs; [coreutils gnugrep findutils];
+      path = with pkgs; [coreutils gnugrep findutils inotify-tools];
 
       script = ''
         HWMON=""

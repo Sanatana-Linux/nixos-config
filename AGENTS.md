@@ -18,13 +18,13 @@
 
 | Directory | Purpose |
 |-----------|---------|
-| `flake.nix` | Flake entry — 14 inputs, 4 hosts, overlays, templates, packages |
+| `flake.nix` | Flake entry — 16 inputs, 4 hosts, overlays, templates, packages |
 | `modules/nixos/` | System-level modules — 15 categories (see `modules/nixos/AGENTS.md`) |
 | `modules/home-manager/` | User-level modules — 7 categories (see `modules/home-manager/AGENTS.md`) |
 | `home/` | Per-user home-manager configs — tlh, smg, user (see `home/AGENTS.md`) |
 | `hosts/` | Per-host NixOS configs — 4 hosts (see `hosts/AGENTS.md`) |
 | `overlays/` | Nixpkgs overlays (see `overlays/AGENTS.md`) |
-| `pkgs/` | Custom packages — 7 derivations (see `pkgs/AGENTS.md`) |
+| `pkgs/` | Custom packages — 8 derivations (see `pkgs/AGENTS.md`) |
 | `external/` | Git submodules — awesome, nvim, firefox, base16 scheme (see `external/AGENTS.md`) |
 | `templates/` | 42 dev environment flake templates (see `templates/AGENTS.md`) |
 
@@ -97,7 +97,8 @@ nix develop  # enter project dev shell
 | fx-autoconfig | Firefox autoconfig (non-flake) |
 | nixos-generators | VM/ISO/cloud image builder |
 | nps | Nix package search |
-| nixpkgs.lib.genAttrs | Per-system outputs (aarch64-linux, x86_64-linux) |
+| sops-nix | Secrets management (sops + age) |
+| lightdm-webkit2-sanatana | Sanatana glassmorphism sea-greeter theme (non-flake) |
 
 ## Agent Routing
 

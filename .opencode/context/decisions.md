@@ -43,6 +43,13 @@
   4. `detect_theme_errors` is set to `False` by default, skipping the startup scan
 - **Consequences**: The `debug` option now actually enables debug mode. Theme error detection is disabled by default, reducing startup latency. Users can opt-in to error detection with `detectThemeErrors = true` if they encounter theme problems.
 
+## ADR-007: Enable WebKit HW acceleration for sea-greeter
+
+- **Date**: 2026-05-08
+- **Context**: The sea-greeter (WebKitGTK-based LightDM greeter) had a ~1 minute delay between showing the background theme and rendering the login form. The sanatana theme uses heavy CSS `backdrop-filter` chains: `blur(8px) saturate(150%) contrast(140%) brightness(150%)` on the clock glass effect, plus `blur(9px) saturate(180%)` on the login container. The bagalamukhi host config did not enable hardware acceleration, causing the sea-greeter package to wrap the binary with `WEBKIT_DISABLE_DMABUF_RENDERER=1`, forcing CPU-only software rasterization.
+- **Decision**: Added `enableHWAcceleration = true` to bagalamukhi's lightdm config. This removes the `WEBKIT_DISABLE_DMABUF_RENDERER=1` wrapper, allowing WebKitGTK to use the Intel integrated GPU for rendering via DMABUF. The Intel GPU on the Legion 5 Pro (i7-13700HX) has full DMABUF support — no NVIDIA Prime conflict since LightDM runs on the Intel GPU.
+- **Consequences**: WebKitGTK now renders CSS backdrop-filters with GPU acceleration instead of CPU. The ~1 minute delay should drop to ~1-2 seconds. If graphical glitches occur (unlikely on Intel), the CSS filters can be simplified as a fallback: reduce the glass-effect filter chain to just `blur(8px)`, add `font-display: swap`, or remove the login container's backdrop-filter.
+
 ## ADR-006: Bump lenovo-legion kernel module to latest upstream
 
 - **Date**: 2026-05-07

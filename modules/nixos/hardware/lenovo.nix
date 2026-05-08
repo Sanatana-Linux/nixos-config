@@ -54,7 +54,7 @@ in {
             energy_performance_preference = "power";
           };
           charger = {
-            governor = "performance";
+            governor = "ondemand";
             turbo = "auto";
           };
         };
@@ -78,7 +78,7 @@ in {
       };
       script = ''
         TEMP_HIGH=90000
-        TEMP_LOW=80000
+        TEMP_LOW=65000
         FREQ_THROTTLE=2400000
         FREQ_NORMAL=5461000
         PLATFORM_PROFILE="/sys/firmware/acpi/platform_profile"
@@ -162,10 +162,22 @@ in {
     };
 
     systemd.services.set-cpu-governor = {
-      description = "Set CPU governor to performance on boot";
+      description = "Set CPU governor to powersave (intel_pstate dynamic scaling) on boot";
       wantedBy = ["multi-user.target"];
+      after = ["sysinit.target"];
       serviceConfig.Type = "oneshot";
-      script = "echo performance > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor";
+      script = ''
+        # Wait for cpufreq interface to be ready
+        for i in $(seq 1 10); do
+          if [ -f /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor ]; then
+            echo powersave > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+            exit 0
+          fi
+          sleep 0.5
+        done
+        echo "ERROR: cpufreq interface not available" >&2
+        exit 1
+      '';
     };
   };
 }

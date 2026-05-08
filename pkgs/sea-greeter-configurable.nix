@@ -18,6 +18,8 @@
   selectedTheme ? "gruvbox",
   enableHWAcceleration ? false,
   defaultWallpaper ? null,
+  debug ? false,
+  detectThemeErrors ? false,
 }:
 stdenv.mkDerivation rec {
   pname = "sea-greeter";
@@ -53,6 +55,20 @@ stdenv.mkDerivation rec {
     substituteInPlace data/web-greeter.yml \
     --replace '/usr/share/' \
               "$out/usr/share/"
+
+    # Configure debug mode
+    ${lib.optionalString debug ''
+      substituteInPlace data/web-greeter.yml \
+        --replace 'debug_mode: False' \
+                  'debug_mode: True'
+    ''}
+
+    # Configure theme error detection (off by default — adds startup latency)
+    ${lib.optionalString (!detectThemeErrors) ''
+      substituteInPlace data/web-greeter.yml \
+        --replace 'detect_theme_errors: True' \
+                  'detect_theme_errors: False'
+    ''}
 
     # Configure selected theme
     ${

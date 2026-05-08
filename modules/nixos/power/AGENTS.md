@@ -1,7 +1,7 @@
 <!-- Parent: ../AGENTS.md -->
 <!-- Generated: 2026-04-22 | Updated: 2026-04-22 -->
 
-# power/
+# modules/nixos/power/
 
 ## Purpose
 Power management modules for laptop systems. Configures TLP or power-profiles-daemon (mutually exclusive), thermald, acpid, upower, and powertop. Exposes options for CPU boost thresholds, battery charge thresholds, and scaling governors.

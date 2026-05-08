@@ -1,7 +1,7 @@
 <!-- Parent: ../AGENTS.md -->
 <!-- Generated: 2026-04-22 | Updated: 2026-04-22 -->
 
-# printer/
+# modules/nixos/printer/
 
 ## Purpose
 Printer driver modules. Currently provides Brother laser printer support via CUPS with the `brlaser` driver, Avahi network discovery, and user group membership for printing/scanning.

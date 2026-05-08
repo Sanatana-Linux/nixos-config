@@ -36,6 +36,7 @@ nix flake show .#templates         # list all available templates
 | `gleam` | Gleam development environment |
 | `go` | Go (Golang) development environment |
 | `hashi` | HashiCorp DevOps tools development environment |
+| `haxe` | Haxe development environment |
 | `haskell` | Haskell development environment |
 | `java` | Java development environment |
 | `jupyter` | Jupyter development environment |

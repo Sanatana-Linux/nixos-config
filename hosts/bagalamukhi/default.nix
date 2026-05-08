@@ -225,6 +225,7 @@
         theme = pkgs.lightdm-webkit2-sanatana;
         selectedTheme = "lightdm-webkit2-sanatana";
         defaultWallpaper = "wallpaper.png";
+        enableHWAcceleration = true;
       };
     };
 

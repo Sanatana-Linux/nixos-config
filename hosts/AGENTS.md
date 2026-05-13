@@ -19,7 +19,7 @@ Per-host NixOS configuration directories. Each host has its own `default.nix` th
 
 | Directory | Purpose |
 |-----------|---------|
-| `bagalamukhi/` | Primary desktop with NVIDIA, LightDM+litarvan, xanmod kernel (see `bagalamukhi/AGENTS.md`) |
+| `bagalamukhi/` | Primary desktop with NVIDIA, LightDM+slick-greeter, xanmod kernel (see `bagalamukhi/AGENTS.md`) |
 | `bhairavi/` | VM configuration (see `bhairavi/AGENTS.md`) |
 | `matangi/` | Sara's laptop with NVIDIA (see `matangi/AGENTS.md`) |
 | `chhinamasta/` | Live ISO builder (see `chhinamasta/AGENTS.md`) |

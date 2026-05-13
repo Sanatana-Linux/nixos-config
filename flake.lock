@@ -289,23 +289,6 @@
         "type": "github"
       }
     },
-    "lightdm-webkit2-sanatana": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1778004043,
-        "narHash": "sha256-6O+WHLTub741tqw/2A6nc0u6znLtM/lI5FETvnExxDM=",
-        "ref": "main",
-        "rev": "c6717ff89e04a1fe1cf7739485030ba7b2fd33d4",
-        "revCount": 5,
-        "type": "git",
-        "url": "https://github.com/Sanatana-Linux/lightdm-webkit2-sanatana.git"
-      },
-      "original": {
-        "ref": "main",
-        "type": "git",
-        "url": "https://github.com/Sanatana-Linux/lightdm-webkit2-sanatana.git"
-      }
-    },
     "naersk": {
       "inputs": {
         "fenix": "fenix",
@@ -580,7 +563,6 @@
         "cachy-tweaks": "cachy-tweaks",
         "fx-autoconfig": "fx-autoconfig",
         "home-manager": "home-manager",
-        "lightdm-webkit2-sanatana": "lightdm-webkit2-sanatana",
         "nix-index-database": "nix-index-database",
         "nixos-generators": "nixos-generators",
         "nixos-hardware": "nixos-hardware",

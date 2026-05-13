@@ -12,7 +12,7 @@ Desktop environment and display manager configuration. Controls the greeter, win
 |------|-------------|
 | `default.nix` | Re-exports desktop submodules |
 | `awesomewm.nix` | AwesomeWM window manager config |
-| `lightdm.nix` | LightDM display manager with sea-greeter and theme support |
+| `lightdm.nix` | LightDM display manager with slick-greeter |
 | `xfce.nix` | XFCE desktop environment (alternate) |
 
 ## Subdirectories
@@ -24,9 +24,8 @@ Desktop environment and display manager configuration. Controls the greeter, win
 ## For AI Agents
 
 ### Working In This Directory
-- `lightdm.nix` uses sea-greeter (NOT lightdm-gtk-greeter) — the theme must be explicitly passed via the `theme` option (e.g., `pkgs.lightdm-webkit2-sanatana` or `pkgs.lightdm-webkit-theme-litarvan`)
-- The `configuredSeaGreeter` and related `let` bindings must be in the outer module scope (not inside `environment.systemPackages`'s let block)
-- Cursor theme on the greeter requires phinger-cursors in systemPackages + Xsession.d script
-- `defaultWallpaper` option sets the background image; wallpapers live in `assets/`
+- `lightdm.nix` uses lightdm-slick-greeter — background is set via `services.xserver.displayManager.lightdm.background`
+- Theme/icon/cursor are configured via `greeters.slick.{theme,iconTheme,cursorTheme}`
+- Wallpaper lives in `assets/wallpaper.png`
 
 <!-- MANUAL: Any manually added notes below this line are preserved on regeneration -->

@@ -20,172 +20,75 @@ with lib; let
         ic = 0;
         f1 = 0;
         f2 = 0;
-        a = 4;
+        a = 3;
         d = 4;
       }
       {
-        cpu = 40;
-        gpu = 40;
-        ic = 40;
-        f1 = 1600;
-        f2 = 1500;
-        a = 4;
+        cpu = 38;
+        gpu = 38;
+        ic = 38;
+        f1 = 1800;
+        f2 = 1700;
+        a = 3;
         d = 4;
       }
       {
-        cpu = 47;
-        gpu = 47;
-        ic = 45;
-        f1 = 1900;
-        f2 = 1800;
+        cpu = 44;
+        gpu = 44;
+        ic = 42;
+        f1 = 2200;
+        f2 = 2100;
         a = 3;
         d = 3;
       }
       {
-        cpu = 53;
-        gpu = 51;
-        ic = 48;
-        f1 = 2200;
-        f2 = 2100;
-        a = 3;
-        d = 2;
-      }
-      {
-        cpu = 59;
-        gpu = 55;
-        ic = 51;
+        cpu = 50;
+        gpu = 49;
+        ic = 46;
         f1 = 2500;
         f2 = 2400;
         a = 2;
         d = 2;
       }
       {
-        cpu = 67;
-        gpu = 60;
-        ic = 55;
+        cpu = 56;
+        gpu = 53;
+        ic = 49;
         f1 = 2900;
         f2 = 2800;
         a = 2;
         d = 2;
       }
       {
-        cpu = 73;
-        gpu = 65;
-        ic = 59;
+        cpu = 63;
+        gpu = 58;
+        ic = 53;
         f1 = 3300;
         f2 = 3200;
-        a = 1;
-        d = 1;
+        a = 2;
+        d = 2;
       }
       {
-        cpu = 79;
-        gpu = 70;
-        ic = 63;
+        cpu = 70;
+        gpu = 63;
+        ic = 57;
         f1 = 3800;
         f2 = 3700;
         a = 1;
         d = 1;
       }
       {
-        cpu = 85;
-        gpu = 75;
-        ic = 68;
-        f1 = 4400;
-        f2 = 4300;
+        cpu = 77;
+        gpu = 68;
+        ic = 61;
+        f1 = 4200;
+        f2 = 4100;
         a = 1;
         d = 1;
       }
       {
-        cpu = 90;
-        gpu = 80;
-        ic = 73;
-        f1 = 5000;
-        f2 = 4900;
-        a = 1;
-        d = 1;
-      }
-    ];
-  };
-
-  # Balanced: cooling-first, faster response, moderate idle noise.
-  balancedCurve = {
-    points = [
-      # point  cpu_temp  gpu_temp  ic_temp  fan1_rpm  fan2_rpm  accel  decel
-      {
-        cpu = 0;
-        gpu = 0;
-        ic = 0;
-        f1 = 0;
-        f2 = 0;
-        a = 3;
-        d = 3;
-      }
-      {
-        cpu = 41;
-        gpu = 51;
-        ic = 51;
-        f1 = 1700;
-        f2 = 1700;
-        a = 3;
-        d = 3;
-      }
-      {
-        cpu = 47;
-        gpu = 52;
-        ic = 52;
-        f1 = 2100;
-        f2 = 2000;
-        a = 3;
-        d = 2;
-      }
-      {
-        cpu = 51;
-        gpu = 53;
-        ic = 53;
-        f1 = 2400;
-        f2 = 2300;
-        a = 2;
-        d = 2;
-      }
-      {
-        cpu = 53;
-        gpu = 54;
-        ic = 54;
-        f1 = 2600;
-        f2 = 2500;
-        a = 2;
-        d = 2;
-      }
-      {
-        cpu = 62;
-        gpu = 55;
-        ic = 55;
-        f1 = 3000;
-        f2 = 2900;
-        a = 2;
-        d = 1;
-      }
-      {
-        cpu = 69;
-        gpu = 60;
-        ic = 58;
-        f1 = 3500;
-        f2 = 3400;
-        a = 1;
-        d = 1;
-      }
-      {
-        cpu = 75;
-        gpu = 65;
-        ic = 62;
-        f1 = 4100;
-        f2 = 4000;
-        a = 1;
-        d = 1;
-      }
-      {
-        cpu = 81;
-        gpu = 71;
+        cpu = 83;
+        gpu = 73;
         ic = 66;
         f1 = 4700;
         f2 = 4600;
@@ -195,9 +98,106 @@ with lib; let
       {
         cpu = 90;
         gpu = 80;
-        ic = 74;
+        ic = 73;
         f1 = 5200;
         f2 = 5100;
+        a = 1;
+        d = 1;
+      }
+    ];
+  };
+
+  # Balanced: good cooling, moderate idle.
+  balancedCurve = {
+    points = [
+      # point  cpu_temp  gpu_temp  ic_temp  fan1_rpm  fan2_rpm  accel  decel
+      {
+        cpu = 0;
+        gpu = 0;
+        ic = 0;
+        f1 = 0;
+        f2 = 0;
+        a = 2;
+        d = 3;
+      }
+      {
+        cpu = 38;
+        gpu = 48;
+        ic = 48;
+        f1 = 2000;
+        f2 = 1900;
+        a = 2;
+        d = 3;
+      }
+      {
+        cpu = 44;
+        gpu = 49;
+        ic = 49;
+        f1 = 2400;
+        f2 = 2300;
+        a = 2;
+        d = 2;
+      }
+      {
+        cpu = 49;
+        gpu = 50;
+        ic = 50;
+        f1 = 2800;
+        f2 = 2700;
+        a = 2;
+        d = 2;
+      }
+      {
+        cpu = 52;
+        gpu = 51;
+        ic = 51;
+        f1 = 3100;
+        f2 = 3000;
+        a = 2;
+        d = 2;
+      }
+      {
+        cpu = 58;
+        gpu = 53;
+        ic = 52;
+        f1 = 3500;
+        f2 = 3400;
+        a = 1;
+        d = 1;
+      }
+      {
+        cpu = 65;
+        gpu = 58;
+        ic = 56;
+        f1 = 4000;
+        f2 = 3900;
+        a = 1;
+        d = 1;
+      }
+      {
+        cpu = 72;
+        gpu = 63;
+        ic = 60;
+        f1 = 4600;
+        f2 = 4500;
+        a = 1;
+        d = 1;
+      }
+      {
+        cpu = 79;
+        gpu = 69;
+        ic = 64;
+        f1 = 5200;
+        f2 = 5100;
+        a = 1;
+        d = 1;
+      }
+      {
+        cpu = 87;
+        gpu = 77;
+        ic = 72;
+        f1 = 5600;
+        f2 = 5500;
         a = 1;
         d = 1;
       }
@@ -214,87 +214,87 @@ with lib; let
         ic = 0;
         f1 = 0;
         f2 = 0;
-        a = 2;
+        a = 1;
         d = 2;
       }
       {
-        cpu = 35;
-        gpu = 35;
-        ic = 35;
-        f1 = 2000;
-        f2 = 1900;
-        a = 2;
+        cpu = 32;
+        gpu = 32;
+        ic = 32;
+        f1 = 2400;
+        f2 = 2300;
+        a = 1;
         d = 2;
       }
       {
-        cpu = 43;
-        gpu = 43;
-        ic = 41;
-        f1 = 2500;
-        f2 = 2400;
-        a = 2;
-        d = 1;
-      }
-      {
-        cpu = 49;
-        gpu = 49;
-        ic = 45;
+        cpu = 39;
+        gpu = 39;
+        ic = 38;
         f1 = 2900;
         f2 = 2800;
         a = 1;
         d = 1;
       }
       {
-        cpu = 55;
-        gpu = 53;
-        ic = 49;
-        f1 = 3300;
-        f2 = 3200;
+        cpu = 45;
+        gpu = 45;
+        ic = 43;
+        f1 = 3400;
+        f2 = 3300;
         a = 1;
         d = 1;
       }
       {
-        cpu = 61;
-        gpu = 57;
-        ic = 53;
-        f1 = 3800;
-        f2 = 3700;
+        cpu = 51;
+        gpu = 50;
+        ic = 47;
+        f1 = 4000;
+        f2 = 3900;
         a = 1;
         d = 1;
       }
       {
-        cpu = 67;
-        gpu = 62;
-        ic = 57;
-        f1 = 4400;
-        f2 = 4300;
+        cpu = 57;
+        gpu = 54;
+        ic = 51;
+        f1 = 4600;
+        f2 = 4500;
         a = 1;
         d = 1;
       }
       {
-        cpu = 73;
-        gpu = 67;
-        ic = 61;
-        f1 = 5000;
-        f2 = 4900;
+        cpu = 63;
+        gpu = 59;
+        ic = 55;
+        f1 = 5200;
+        f2 = 5100;
         a = 1;
         d = 1;
       }
       {
-        cpu = 79;
-        gpu = 73;
-        ic = 65;
-        f1 = 5400;
-        f2 = 5300;
+        cpu = 69;
+        gpu = 64;
+        ic = 59;
+        f1 = 5600;
+        f2 = 5500;
         a = 1;
         d = 1;
       }
       {
-        cpu = 87;
-        gpu = 80;
-        ic = 71;
+        cpu = 75;
+        gpu = 70;
+        ic = 63;
         f1 = 5800;
         f2 = 5700;
+        a = 1;
+        d = 1;
+      }
+      {
+        cpu = 84;
+        gpu = 78;
+        ic = 69;
+        f1 = 6000;
+        f2 = 5900;
         a = 1;
         d = 1;
       }
@@ -397,10 +397,25 @@ in {
         HWMON=""
         PROFILE_FILE="/var/run/legion-fan-profile"
         OVERRIDE_FILE="/var/run/legion-fan-override"
+        FNQ_EVENT="/var/run/legion-fnq-event"
         THERMAL_SIGNAL="/var/run/legion-thermal-recovery"
         DEFAULT_PROFILE="${cfg.profile}"
         ON_BATTERY="${cfg.onBattery}"
         ON_AC="${cfg.onAc}"
+
+        # ---- Translate platform_profile values to our curated profile names ----
+        # Fn+Q blue (blue LED)  -> "quiet"
+        # Fn+Q white (no LED)   -> "balanced"
+        # Fn+Q red (red LED)    -> "performance"
+        # Also: low-power=quiet, balanced=balanced, performance=performance
+        translate_profile() {
+          case "$1" in
+            low-power|quiet)     echo "quiet" ;;
+            balanced)            echo "balanced" ;;
+            performance)         echo "performance" ;;
+            *)                   echo "balanced" ;;  # fallback
+          esac
+        }
 
         # ---- Find the legion hwmon device ----
         find_hwmon() {
@@ -476,8 +491,9 @@ in {
         }
 
         # ---- Resolve which profile should be active ----
+        # Priority: manual override > Fn+Q event > thermal recovery > power source based
         resolve_profile() {
-          # Check for manual override (set by user via Fn+Q or legion_cli)
+          # 1. Check for manual override (set by user via legion-fan command)
           if [ -f "$OVERRIDE_FILE" ]; then
             local mtime
             mtime=$(stat -c %Y "$OVERRIDE_FILE" 2>/dev/null || echo 0)
@@ -493,14 +509,37 @@ in {
             fi
           fi
 
-          # Check for thermal-guard recovery signal
+          # 2. Check for recent Fn+Q event (set by udev rule when platform_profile changes)
+          if [ -f "$FNQ_EVENT" ]; then
+            local mtime
+            mtime=$(stat -c %Y "$FNQ_EVENT" 2>/dev/null || echo 0)
+            local now
+            now=$(date +%s)
+            local age=$(( now - mtime ))
+            # Fn+Q overrides expire after 30 minutes
+            if [ "$age" -lt 1800 ]; then
+              local raw_profile
+              raw_profile=$(cat /sys/firmware/acpi/platform_profile 2>/dev/null || echo "balanced")
+              local translated
+              translated=$(translate_profile "$raw_profile")
+              # Update the event file mtime so it stays active
+              touch "$FNQ_EVENT"
+              echo "Fn+Q active: $raw_profile -> $translated"
+              echo "$translated"
+              return
+            else
+              rm -f "$FNQ_EVENT"
+            fi
+          fi
+
+          # 3. Check for thermal-guard recovery signal
           if [ -f "$THERMAL_SIGNAL" ]; then
             rm -f "$THERMAL_SIGNAL"
             echo "performance"
             return
           fi
 
-          # Auto mode: switch based on power source
+          # 4. Auto mode: switch based on power source
           if [ "$DEFAULT_PROFILE" = "auto" ]; then
             local pw
             pw=$(get_power_source)
@@ -515,18 +554,9 @@ in {
           echo "$DEFAULT_PROFILE"
         }
 
-        # ---- Watch for platform profile changes (Fn+Q) ----
-        watch_profile_changes() {
-          # Use inotifywait if available, otherwise poll
-          if command -v inotifywait &>/dev/null; then
-            inotifywait -m -e modify /sys/firmware/acpi/platform_profile 2>/dev/null | while read -r _; do
-              local new_profile
-              new_profile=$(cat /sys/firmware/acpi/platform_profile 2>/dev/null || echo "unknown")
-              echo "Platform profile changed to: $new_profile"
-              # Fn+Q pressed — set override so our daemon doesn't fight it
-              echo "$new_profile" > "$OVERRIDE_FILE"
-            done
-          fi
+        # ---- Read current platform_profile from sysfs ----
+        read_platform_profile() {
+          cat /sys/firmware/acpi/platform_profile 2>/dev/null || echo "unknown"
         }
 
         # ---- Initialize ----
@@ -552,20 +582,30 @@ in {
         # Initial apply
         active_profile=""
         desired_profile=""
+        last_platform_profile=""
 
         # ---- Main loop ----
-        # Start profile change watcher in background
-        watch_profile_changes &
-
         while true; do
           desired_profile=$(resolve_profile)
+
+          # Also detect Fn+Q changes by polling platform_profile directly
+          current_pp=$(read_platform_profile)
+          if [ "$current_pp" != "$last_platform_profile" ] && [ "$last_platform_profile" != "" ]; then
+            # Fn+Q was pressed — update the override
+            local translated
+            translated=$(translate_profile "$current_pp")
+            echo "$translated" > "$OVERRIDE_FILE" 2>/dev/null || true
+            touch "$FNQ_EVENT" 2>/dev/null || true
+            echo "Fn+Q change detected via poll: $current_pp -> $translated"
+          fi
+          last_platform_profile="$current_pp"
 
           if [ "$desired_profile" != "$active_profile" ]; then
             apply_curve "$desired_profile"
             active_profile="$desired_profile"
           fi
 
-          sleep 10
+          sleep 5
         done
       '';
     };
@@ -586,6 +626,7 @@ in {
             ;;
           auto)
             rm -f /var/run/legion-fan-override
+            rm -f /var/run/legion-fnq-event
             echo "Fan profile override cleared. Returning to auto mode."
             ;;
           status)
@@ -607,6 +648,10 @@ in {
             else
               echo "No manual override active"
             fi
+            if [ -f /var/run/legion-fnq-event ]; then
+              echo "Fn+Q override active"
+            fi
+            echo "Platform profile: $(cat /sys/firmware/acpi/platform_profile 2>/dev/null || echo 'N/A')"
             ;;
           *)
             echo "Usage: legion-fan {quiet|balanced|performance|auto|status}"

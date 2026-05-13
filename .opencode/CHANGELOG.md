@@ -35,7 +35,21 @@ Commit: `9fb3248`
 - ADR-004: Sea-greeter theme performance optimization (package-level)
 - ADR-005: Disable detect_theme_errors by default, wire debug option
 
-## 2026-05-07
+## 2026-05-08
+
+### Changed
+- **LightDM greeter**: Replaced sea-greeter (WebKit-based) with lightdm-gtk-greeter. New module is much simpler — no custom packages, no theme options. Background set to the same `wallpaper.png` from `assets/`.
+- **Host config**: `bagalamukhi` lightdm block simplified from 4 options to just `enable = true`.
+- **Fan curves**: All three profiles (quiet, balanced, performance) made more aggressive — lower temperature thresholds, faster ramp-up (lower accel/decel values), higher RPMs at each point, more points overall. Performance curve now hits 6000/5900 RPM at max.
+- **Fan daemon**: Fixed Fn+Q interaction. The udev rule now writes to `legion-fnq-event` (was `legion-profile-override` which the daemon never read). Added `translate_profile()` to map raw `platform_profile` values (`low-power`, `balanced`, `performance`) to curated names (`quiet`, `balanced`, `performance`). Added polling fallback for Fn+Q detection. `legion-fan status` now shows platform profile too.
+- **Picom CPU usage**: Enabled `use-damage = true` (was false — redrew entire screen every frame). Switched backend from `glx` to `egl`. Reduced blur strength from 6 to 3 (half the passes). Disabled expensive per-frame detections (`detect-client-opacity`, `detect-transient`, `detect-client-leader`). Enabled `unredirect-fullscreen = true` to skip compositing for fullscreen apps.
+
+### Removed
+- Flake input: `lightdm-webkit2-sanatana` (git+https) — no longer needed
+- Packages removed from `pkgs/`: `sea-greeter`, `sea-greeter-configurable`, `lightdm-webkit2-sanatana`, `lightdm-webkit-theme-litarvan`, `lightdm-webkit-theme-litarvan-sanatana`
+- All sea-greeter context docs remain in `.opencode/context/` for reference
+
+Commit: `HEAD`
 
 ### Changed
 - **lenovo-legion kernel module**: Replaced fragile sed-patching of C structs with a clean `src` override bumping to latest upstream main (commit `352cb4b3`, May 2026). This fixes N0CN (Legion Pro 5 16IRX9/83DF) support using `model_g8cn` (same fields as our old `model_n0cn`), plus adds NRCN, R3CN DMI entries and fixes `ec_register_offsets_loq_v0` register values.

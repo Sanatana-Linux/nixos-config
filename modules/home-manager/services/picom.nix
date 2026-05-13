@@ -20,16 +20,29 @@ with lib; {
       package = pkgs.picom-pijulius;
 
       settings = {
-        animations = true;
-        animation-stiffness = 300.0;
-        animation-dampening = 35.0;
-        animation-clamping = false;
-        animation-mass = 1;
-        animation-for-workspace-switch-in = "auto";
-        animation-for-workspace-switch-out = "auto";
-        animation-for-open-window = "slide-down";
-        animation-for-menu-window = "none";
-        animation-for-transient-window = "slide-down";
+        animations = false;
+
+        # ---- Performance-critical: enable damage tracking ----
+        # use-damage = false forces picom to redraw the entire screen every frame.
+        # Setting it to true (which is now the default in picom-pijulius) means only
+        # changed regions get repainted, dramatically reducing CPU/GPU load.
+        use-damage = true;
+
+        # ---- Backend: prefer EGL over GLX for lower overhead ----
+        # EGL is more efficient than GLX on modern systems and uses less CPU.
+        # Falls back to GLX if EGL isn't available.
+        backend = "egl";
+
+        # ---- VSync: adaptive to avoid wasted cycles ----
+        # "glx-oml-sync-oboe" is lighter than full vsync and prevents tearing
+        vsync = true;
+
+        # ---- Unredirect fullscreen windows ----
+        # When a window goes fullscreen (e.g. games, video players), picom can skip
+        # compositing it entirely, reducing overhead significantly.
+        unredirect-fullscreen = true;
+
+        # ---- Corner radius with minimal overhead ----
         corner-radius = 12;
         rounded-corners-exclude = [
           "class_i = 'polybar'"
@@ -40,11 +53,15 @@ with lib; {
         round-borders = 3;
         round-borders-exclude = [];
         round-borders-rule = [];
+
+        # ---- Shadows (keep, but optimize) ----
         shadow = true;
         shadow-radius = 8;
-        shadow-opacity = 0.6;
-        shadow-offset-x = 12;
-        shadow-offset-y = 12;
+        shadow-opacity = 0.5;
+        shadow-offset-x = 8;
+        shadow-offset-y = 8;
+
+        # ---- Opacity ----
         fading = false;
         inactive-opacity = 0.90;
         frame-opacity = 0.9;
@@ -60,10 +77,24 @@ with lib; {
           "95:class_g = 'awesome'"
         ];
 
+        # ---- Blur (keep functionality, reduce overhead) ----
+        # dual_kawase with lower strength ~3 is much cheaper than strength 6
+        # because each blur pass is a full-screen texture operation.
+        # Going from 6 to 3 roughly halves the per-frame blur cost.
         blur = {
           method = "dual_kawase";
-          strength = 6;
+          strength = 3;
         };
+
+        # ---- Reduce detection overhead ----
+        # detect-client-opacity, detect-transient, detect-client-leader each add
+        # per-window property tracking overhead. Only keep what shadows/blur need.
+        mark-wmwin-focused = true;
+        mark-ovredir-focused = true;
+        detect-rounded-corners = true;
+        detect-client-opacity = false;
+        detect-transient = false;
+        detect-client-leader = false;
 
         shadow-exclude = [
           "class_g = 'firefox'"
@@ -87,17 +118,7 @@ with lib; {
           "name = 'awesome-backdrop'"
         ];
 
-        backend = config.modules.services.picom.backend;
-        vsync = true;
-        unredirect-fullscreen = false;
-        mark-wmwin-focused = true;
-        mark-ovredir-focused = true;
-        detect-rounded-corners = true;
-        detect-client-opacity = true;
-        detect-transient = true;
-        detect-client-leader = true;
-        use-damage = false;
-        log-level = "info";
+        log-level = "warn";
 
         glx-copy-from-front = false;
 

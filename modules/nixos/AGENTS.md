@@ -13,7 +13,7 @@ NixOS system-level modules. Each module declares an enable option under `modules
 | `ai/` | AI/ML tools (ollama, comfyui) |
 | `apps/` | System apps (appimage, java, nix-ld, network-manager-applet, shotcut, thunar) |
 | `base/` | Base system config (nix, fhs, services, permitted packages, shell, environment variables) |
-| `desktop/` | Desktop environment (awesomewm, LightDM/sea-greeter, XFCE, wallpapers) |
+| `desktop/` | Desktop environment (awesomewm, LightDM/GTK greeter, XFCE, wallpapers) |
 | `hardware/` | Hardware support (NVIDIA, Intel, bluetooth, networking, sound, tpm, udev) |
 | `packages/` | System package sets |
 | `performance/` | Performance tuning (cachy scheduler, oomd, undervolt, zram) |

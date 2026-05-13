@@ -4,7 +4,7 @@
 # bagalamukhi
 
 ## Purpose
-Primary laptop — Lenovo Legion 5 Pro with Intel+NVIDIA Prime hybrid graphics, user tlh, running AwesomeWM with LightDM (litarvan theme) on xanmod kernel. Full development workstation with Docker (rootless+NVIDIA), virt-manager, waydroid, LXC, Ollama AI, zram, undervolt, cachy scheduler patches, and comprehensive security (firewall, SSH, fail2ban, doas).
+Primary laptop — Lenovo Legion 5 Pro with Intel+NVIDIA Prime hybrid graphics, user tlh, running AwesomeWM with LightDM (slick-greeter) on xanmod kernel. Full development workstation with Docker (rootless+NVIDIA), virt-manager, waydroid, LXC, Ollama AI, zram, undervolt, cachy scheduler patches, and comprehensive security (firewall, SSH, fail2ban, doas).
 
 ## Key Files
 

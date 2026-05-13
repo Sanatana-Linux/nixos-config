@@ -1,5 +1,5 @@
 {inputs, ...}: {
-  additions = final: _prev: import ../pkgs {pkgs = final.pkgs; inherit inputs;};
+  additions = final: _prev: import ../pkgs {pkgs = final.pkgs;};
 
   modifications = final: prev: {
     # Completely remove torch packages from python312Packages to force use of torch-bin

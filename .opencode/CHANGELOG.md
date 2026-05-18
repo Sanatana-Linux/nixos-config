@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-05-18
+
+### Fixes
+- **ACPI boot errors**: Added `acpi_osi=` (empty string) to `boot.kernelParams` in the Lenovo hardware module (`modules/nixos/hardware/lenovo.nix`). This strips the kernel's built-in `_OSI` strings, preventing Lenovo UEFI firmware from attempting Windows-specific ACPI methods that don't exist on Linux — eliminating harmless but noisy `AE_NOT_FOUND` / `AE_AML` errors during boot without Plymouth. (Commit `4301ae1`)
+
 ## 2026-05-05
 
 ### Fixes

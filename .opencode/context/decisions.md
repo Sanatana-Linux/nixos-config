@@ -50,6 +50,13 @@
 - **Decision**: Added `enableHWAcceleration = true` to bagalamukhi's lightdm config. This removes the `WEBKIT_DISABLE_DMABUF_RENDERER=1` wrapper, allowing WebKitGTK to use the Intel integrated GPU for rendering via DMABUF. The Intel GPU on the Legion 5 Pro (i7-13700HX) has full DMABUF support — no NVIDIA Prime conflict since LightDM runs on the Intel GPU.
 - **Consequences**: WebKitGTK now renders CSS backdrop-filters with GPU acceleration instead of CPU. The ~1 minute delay should drop to ~1-2 seconds. If graphical glitches occur (unlikely on Intel), the CSS filters can be simplified as a fallback: reduce the glass-effect filter chain to just `blur(8px)`, add `font-display: swap`, or remove the login container's backdrop-filter.
 
+## ADR-008: Suppress ACPI _OSI errors on Lenovo Legion boot
+
+- **Date**: 2026-05-18
+- **Context**: Without Plymouth (or when Plymouth isn't available/hidden), the Lenovo Legion laptops showed noisy ACPI errors during boot: `AE_NOT_FOUND`, `AE_AML`, etc. These occur because the Lenovo UEFI firmware contains Windows-specific ACPI methods (DSDT tables) that Linux doesn't implement. The kernel's ACPI driver, by default, responds to Windows `_OSI` queries, causing the firmware to attempt Windows methods that fail.
+- **Decision**: In `modules/nixos/hardware/lenovo.nix`, changed `boot.kernelParams` from `["acpi_osi=Linux"]` to `["acpi_osi=Linux", "acpi_osi="]`. The key is `acpi_osi=` (empty string), which tells the kernel to strip its built-in `_OSI` strings. This prevents the kernel from claiming Windows compatibility, which stops the firmware from attempting Windows-specific methods that don't exist on Linux.
+- **Consequences**: All hosts using the lenovo module (bagalamukhi, matangi) will have cleaner boot logs. The empty `acpi_osi=` doesn't disable ACPI entirely — it only stops the kernel from pretending to be Windows. ACPI power management, thermal control, platform profiles, and all other ACPI features continue to work normally since `acpi_osi=Linux` is still set, telling the firmware we're Linux.
+
 ## ADR-006: Bump lenovo-legion kernel module to latest upstream
 
 - **Date**: 2026-05-07

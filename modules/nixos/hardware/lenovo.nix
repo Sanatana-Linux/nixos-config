@@ -12,7 +12,16 @@ in {
   };
 
   config = mkIf cfg.enable {
-    boot.kernelParams = ["acpi_osi=Linux"];
+    boot.kernelParams = [
+      "acpi_osi=Linux"
+      # Strip the built-in _OSI strings the kernel adds automatically.
+      # This prevents the kernel from claiming Windows compatibility,
+      # which stops Lenovo firmware from attempting Windows-specific
+      # ACPI methods (DSDT) that don't exist on Linux — the source of
+      # harmless but noisy ACPI errors (AE_NOT_FOUND, AE_AML, etc.)
+      # visible during boot, especially without Plymouth.
+      "acpi_osi="
+    ];
 
     boot.kernelModules = [
       "legion_laptop"
@@ -45,22 +54,11 @@ in {
     '';
 
     services = {
-      auto-cpufreq = {
-        enable = true;
-        settings = {
-          battery = {
-            governor = "powersave";
-            turbo = "never";
-            energy_performance_preference = "power";
-          };
-          charger = {
-            governor = "ondemand";
-            turbo = "auto";
-          };
-        };
-      };
+      # Power management is handled by power-profiles-daemon + platform_profile (Fn+Q).
+      # No userland governor polling — let intel_pstate and the kernel manage it.
+      power-profiles-daemon.enable = mkForce true;
       tlp.enable = mkForce false;
-      power-profiles-daemon.enable = mkForce false;
+      auto-cpufreq.enable = mkForce false;
     };
 
     hardware.sensor.iio.enable = true;
@@ -136,7 +134,7 @@ in {
 
           current_profile=$(get_fan_profile)
           if [ "$current_profile" = "quiet" ]; then
-            set_fan_profile "balanced"
+            set_fan_profile "performance"
           fi
 
           if [ -n "$temp" ]; then
@@ -161,23 +159,6 @@ in {
       '';
     };
 
-    systemd.services.set-cpu-governor = {
-      description = "Set CPU governor to powersave (intel_pstate dynamic scaling) on boot";
-      wantedBy = ["multi-user.target"];
-      after = ["sysinit.target"];
-      serviceConfig.Type = "oneshot";
-      script = ''
-        # Wait for cpufreq interface to be ready
-        for i in $(seq 1 10); do
-          if [ -f /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor ]; then
-            echo powersave > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-            exit 0
-          fi
-          sleep 0.5
-        done
-        echo "ERROR: cpufreq interface not available" >&2
-        exit 1
-      '';
-    };
+    systemd.services.set-cpu-governor.enable = mkForce false;
   };
 }

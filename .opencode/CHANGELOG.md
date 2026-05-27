@@ -4,6 +4,7 @@
 
 ### Fixes
 - **ACPI boot errors**: Added `acpi_osi=` (empty string) to `boot.kernelParams` in the Lenovo hardware module (`modules/nixos/hardware/lenovo.nix`). This strips the kernel's built-in `_OSI` strings, preventing Lenovo UEFI firmware from attempting Windows-specific ACPI methods that don't exist on Linux — eliminating harmless but noisy `AE_NOT_FOUND` / `AE_AML` errors during boot without Plymouth. (Commit `4301ae1`)
+- **NVMe drive heat**: Removed `pcie_aspm=on` (global ASPM force) and changed `pcie_aspm.policy` from `balanced` → `performance` in `modules/nixos/hardware/nvidia.nix`. The balanced policy caused NVMe drives to constantly cycle L0↔L1 PCIe link states, generating excess heat. Performance policy keeps links active; NVIDIA GPU power management is unaffected (handled at driver level). (Commit `a134e5c`)
 
 ## 2026-05-05
 

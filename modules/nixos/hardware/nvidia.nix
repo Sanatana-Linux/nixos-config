@@ -142,8 +142,13 @@ in {
       "nvidia-drm.modeset=1"
       "nvidia.NVreg_EnableResizableBar=1"
       "nvidia.NVreg_EnableGpuFirmware=0"
-      "pcie_aspm=on"
-      "pcie_aspm.policy=balanced"
+      # Use performance PCIe ASPM policy to prevent NVMe drives from
+      # constantly cycling L0↔L1 power states, which generates heat.
+      # "balanced" causes frequent link state transitions on NVMe,
+      # and forcing ASPM globally with "pcie_aspm=on" makes it worse.
+      # The NVIDIA GPU handles its own power management separately
+      # via nvidia.powerManagement.enable = true.
+      "pcie_aspm.policy=performance"
     ];
 
     # Initrd kernel modules for NVIDIA
@@ -191,10 +196,10 @@ in {
 
       nvidia = {
         modesetting.enable = true;
-        nvidiaSettings = true;
+        nvidiaSettings = false;
         nvidiaPersistenced = true;
-        dynamicBoost.enable = true;
-        forceFullCompositionPipeline = true;
+        dynamicBoost.enable = false;
+        forceFullCompositionPipeline = false;
 
         powerManagement = {
           enable = true;
@@ -215,10 +220,8 @@ in {
       };
     };
 
-    # NVIDIA power management udev rule
-    # Ensures NVIDIA GPU power control is set to "on" when the device is added
+    # NVIDIA udev rules for permission management
     services.udev.extraRules = ''
-      ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", TEST=="power/control", ATTR{power/control}="on"
       KERNEL=="nvidia*", GROUP="video", MODE="0666"
       KERNEL=="nvidiactl", GROUP="video", MODE="0666"
     '';

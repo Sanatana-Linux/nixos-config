@@ -69,3 +69,15 @@
   5. New `ec_register_offsets_loq_v1` variant
   6. `has_extreme_powermode` support for NRCN and R3CN models
 - **Consequences**: The lenovo-legion kernel module now tracks upstream main directly. All new model support comes for free. The fragile sed patches are eliminated entirely. The version string updates from `0.0.20-unstable-2025-07-11` to `unstable-2026-05-07`. Since this is a kernel module, a reboot is required to load the new version.
+
+## ADR-009: PCIe ASPM performance policy to reduce NVMe heat
+
+- **Date**: 2026-05-18
+- **Context**: NVMe drives on the Lenovo Legion laptops were running too hot. The kernel was configured with `pcie_aspm=on` (force ASPM on all PCIe devices) and `pcie_aspm.policy=balanced`. Two problems:
+  1. `pcie_aspm=on` globally forces PCIe Active State Power Management on all devices including NVMe, overriding firmware defaults
+  2. `balanced` policy causes NVMe drives to constantly cycle between L0 (active) and L1 (low-power) PCIe link states — each transition generates heat from link reinitialization, and the cycling itself produces more thermal load than leaving the link in L0
+- **Decision**: In `modules/nixos/hardware/nvidia.nix`:
+  1. Removed `pcie_aspm=on` — no longer globally force ASPM; let devices use their firmware defaults
+  2. Changed `pcie_aspm.policy=balanced` → `pcie_aspm.policy=performance` — keeps PCIe links in L0 active state, eliminating the heat-generating L0↔L1 transitions on NVMe drives
+  3. The NVIDIA GPU still manages its own PCIe power via `nvidia.powerManagement.enable = true` — this is a separate mechanism
+- **Consequences**: NVMe drives stay in L0 active state rather than cycling, reducing heat. NVIDIA GPU power management is unaffected (handled at driver level). Slightly higher idle power consumption from NVMe (negligible for a laptop that's usually plugged in).

@@ -21,7 +21,7 @@ with lib; {
       timers.systemd-tmpfiles-clean.enable = true;
       coredump = {
         enable = true;
-        extraConfig = "Storage=none";
+        storage = "none";
       };
     };
   };

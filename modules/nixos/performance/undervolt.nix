@@ -13,7 +13,7 @@ in {
     # P-State power limits (missing from current implementation)
     p1Limit = mkOption {
       type = types.int;
-      default = 150;
+      default = 65;
       description = "P1 state power limit in watts";
     };
 
@@ -25,7 +25,7 @@ in {
 
     p2Limit = mkOption {
       type = types.int;
-      default = 150;
+      default = 100;
       description = "P2 state power limit in watts";
     };
 

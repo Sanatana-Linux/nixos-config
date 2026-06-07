@@ -141,7 +141,8 @@ in {
       "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
       "nvidia-drm.modeset=1"
       "nvidia.NVreg_EnableResizableBar=1"
-      "nvidia.NVreg_EnableGpuFirmware=0"
+      "nvidia.NVreg_EnableGpuFirmware=1"
+      "nvidia.NVreg_DynamicPowerManagement=0x02"
       "pcie_aspm=on"
       "pcie_aspm.policy=balanced"
     ];
@@ -194,7 +195,7 @@ in {
         nvidiaSettings = true;
         nvidiaPersistenced = true;
         dynamicBoost.enable = true;
-        forceFullCompositionPipeline = true;
+        forceFullCompositionPipeline = false;
 
         powerManagement = {
           enable = true;
@@ -214,13 +215,6 @@ in {
         };
       };
     };
+};
 
-    # NVIDIA power management udev rule
-    # Ensures NVIDIA GPU power control is set to "on" when the device is added
-    services.udev.extraRules = ''
-      ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", TEST=="power/control", ATTR{power/control}="on"
-      KERNEL=="nvidia*", GROUP="video", MODE="0666"
-      KERNEL=="nvidiactl", GROUP="video", MODE="0666"
-    '';
-  };
 }

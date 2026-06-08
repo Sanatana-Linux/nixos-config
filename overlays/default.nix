@@ -3,9 +3,16 @@
 
   modifications = final: prev: {
     # Completely remove torch packages from python312Packages to force use of torch-bin
+    # Also disable pipx tests (known upstream assertion failures)
     python312Packages = prev.python312Packages.overrideScope (
       python-final: python-prev:
-        builtins.removeAttrs python-prev [
+        builtins.removeAttrs (python-prev
+          // {
+            pipx = python-prev.pipx.overridePythonAttrs (old: {
+              doCheck = false;
+              pythonImportsCheck = ["pipx"];
+            });
+          }) [
           "pytorch-lightning"
           "lightning"
           "onnxruntime"

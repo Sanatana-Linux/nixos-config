@@ -66,10 +66,9 @@
       docker = {
         enable = true;
         rootless = true;
-        nvidia = true;
       };
       virt-manager.enable = true;
-      waydroid.enable = true;
+      # waydroid.enable = true;
       lxc.enable = true;
     };
 
@@ -86,7 +85,7 @@
     # Power
     power.laptop = {
       enable = true;
-      powerProfilesDaemon = false;
+      powerProfilesDaemon = true;
     };
 
     # Packages

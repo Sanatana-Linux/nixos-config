@@ -14,9 +14,10 @@ in {
   # TODO: Integrate cachy-tweaks flake properly through specialArgs
   config = mkIf cfg.enable {
     # Basic performance optimizations inspired by CachyOS
-    boot.kernelParams = [
-      "preempt=full" # Enable full preemption
-    ];
+    # NOTE: preempt=full is intentionally NOT set — it prevents the CPU from
+    # entering deep C-states (idle power savings), generating excess heat.
+    # intel_pstate + powersave governor handles dynamic scaling better.
+    boot.kernelParams = [];
 
     # Enable BBR congestion control
     boot.kernel.sysctl = {

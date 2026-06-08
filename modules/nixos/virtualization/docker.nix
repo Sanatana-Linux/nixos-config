@@ -48,7 +48,7 @@ in {
         enableOnBoot = cfg.enableOnBoot;
         rootless = mkIf cfg.rootless {
           enable = true;
-          daemon.settings.features.cdi = cfg.nvidia;
+          daemon.settings.features.cdi = mkForce cfg.nvidia;
         };
         extraOptions =
           cfg.extraOptions

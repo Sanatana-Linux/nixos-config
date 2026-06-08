@@ -95,11 +95,6 @@
               extraSpecialArgs = {inherit inputs outputs;};
               sharedModules = [
                 ./modules/home-manager
-                {
-                  nixpkgs.config.permittedInsecurePackages = [
-                    "nodejs-20.20.2"
-                  ];
-                }
               ];
               users = {
                 tlh = {imports = [./home/tlh/default.nix];};
@@ -125,13 +120,7 @@
               useUserPackages = true;
               backupFileExtension = "bak";
               extraSpecialArgs = {inherit inputs outputs;};
-              sharedModules = [./modules/home-manager
-                {
-                  nixpkgs.config.permittedInsecurePackages = [
-                    "nodejs-20.20.2"
-                  ];
-                }
-              ];
+              sharedModules = [./modules/home-manager];
               users = {
                 smg = {imports = [./home/smg/default.nix];};
               };
@@ -156,14 +145,7 @@
               useUserPackages = true;
               backupFileExtension = "bak";
               extraSpecialArgs = {inherit inputs outputs;};
-              sharedModules = [
-                ./modules/home-manager
-                {
-                  nixpkgs.config.permittedInsecurePackages = [
-                    "nodejs-20.20.2"
-                  ];
-                }
-              ];
+              sharedModules = [./modules/home-manager];
               users = {
                 tlh = {imports = [./home/tlh/default.nix];};
               };
@@ -192,11 +174,6 @@
               extraSpecialArgs = {inherit inputs outputs;};
               sharedModules = [
                 ./modules/home-manager
-                {
-                  nixpkgs.config.permittedInsecurePackages = [
-                    "nodejs-20.20.2"
-                  ];
-                }
               ];
               users.user = {imports = [./home/user/default.nix];};
             };
@@ -211,22 +188,12 @@
         extraSpecialArgs = {inherit inputs outputs self;};
         modules = [
           ./home/tlh/default.nix
-          {
-            nixpkgs.config.permittedInsecurePackages = [
-              "nodejs-20.20.2"
-            ];
-          }
         ];
       };
       smg = inputs.home-manager.lib.homeManagerConfiguration {
         extraSpecialArgs = {inherit inputs outputs self;};
         modules = [
           ./home/smg/default.nix
-          {
-            nixpkgs.config.permittedInsecurePackages = [
-              "nodejs-20.20.2"
-            ];
-          }
         ];
       };
     };

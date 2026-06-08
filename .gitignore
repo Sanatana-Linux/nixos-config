@@ -97,3 +97,7 @@ CustomizableUI.sys.mjs:4319:17
 .opencode/node_modules/
 .opencode/package.json
 .opencode/package-lock.json
+node_modules/
+pnpm-lock.yaml
+package.json
+pnpm-workspace.yaml

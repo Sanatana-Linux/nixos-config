@@ -12,8 +12,8 @@ in {
 
     enableSshSupport = mkOption {
       type = types.bool;
-      default = true;
-      description = "Enable SSH agent support via gpg-agent";
+      default = false;
+      description = "Enable SSH agent support via gpg-agent (disabled by default to avoid systemd ordering cycle with set-SSH_AUTH_SOCK.service)";
     };
   };
 

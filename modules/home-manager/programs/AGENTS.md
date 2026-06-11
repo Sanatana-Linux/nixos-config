@@ -1,5 +1,5 @@
 <!-- Parent: ../AGENTS.md -->
-<!-- Generated: 2026-04-21 | Updated: 2026-04-27 -->
+<!-- Generated: 2026-04-21 | Updated: 2026-06-09 -->
 
 # modules/home-manager/programs/
 

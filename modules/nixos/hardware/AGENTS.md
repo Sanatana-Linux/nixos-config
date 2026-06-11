@@ -1,5 +1,5 @@
 <!-- Parent: ../AGENTS.md -->
-<!-- Generated: 2026-04-21 | Updated: 2026-04-22 -->
+<!-- Generated: 2026-04-21 | Updated: 2026-06-09 -->
 
 # modules/nixos/hardware/
 
@@ -11,7 +11,7 @@ Hardware support and driver configuration. Each module enables specific hardware
 | File | Description |
 |------|-------------|
 | `default.nix` | Re-exports hardware submodules |
-| `nvidia.nix` | NVIDIA driver config (PRIME offload, power management) |
+| `nvidia.nix` | NVIDIA driver config (PRIME sync, GPU firmware, dynamic power management) |
 | `intel.nix` | Intel CPU features (undervolt kernel patch, microcode) |
 | `bluetooth.nix` | Bluetooth support |
 | `networking.nix` | Network configuration and NetworkManager |
@@ -28,7 +28,8 @@ Hardware support and driver configuration. Each module enables specific hardware
 ## For AI Agents
 
 ### Working In This Directory
-- NVIDIA module uses PRIME offload mode by default for hybrid GPU laptops
+- NVIDIA module uses PRIME **sync** mode (not offload) for hybrid GPU laptops, with GPU firmware enabled (`NVreg_EnableGpuFirmware=1`) and Dynamic Power Management (`NVreg_DynamicPowerManagement=0x02`)
+- No udev rules are needed for NVIDIA — GPU firmware handles runtime PM transitions
 - Intel module applies kernel patches via `boot.kernelPatches` with `structuredExtraConfig` using `lib.kernel` types
 - Kernel module packages must use `config.boot.kernelPackages` (NOT `pkgs.linuxPackages`) to match the running kernel
 - `boot.extraModulePackages` for out-of-tree drivers (e.g., rtl88x2bu, acpi_call)

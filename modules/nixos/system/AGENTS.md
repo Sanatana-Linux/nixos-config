@@ -1,5 +1,5 @@
 <!-- Parent: ../AGENTS.md -->
-<!-- Generated: 2026-04-21 | Updated: 2026-04-27 -->
+<!-- Generated: 2026-04-21 | Updated: 2026-06-09 -->
 
 # modules/nixos/system/
 
@@ -13,7 +13,7 @@ Boot, systemd, and plymouth (boot splash) configuration.
 | `default.nix` | Re-exports system submodules |
 | `boot.nix` | Bootloader (systemd-boot), kernel packages, kernel params |
 | `cron.nix` | Cron job management |
-| `systemd.nix` | Custom systemd configuration |
+| `systemd.nix` | systemd tuning — timeout reduction, coredump disabled via `settings.Coredump.Storage = "none"` |
 
 ## Subdirectories
 

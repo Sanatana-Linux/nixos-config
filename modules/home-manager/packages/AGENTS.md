@@ -1,5 +1,5 @@
 <!-- Parent: ../AGENTS.md -->
-<!-- Generated: 2026-04-22 | Updated: 2026-04-22 -->
+<!-- Generated: 2026-04-22 | Updated: 2026-06-09 -->
 
 # packages/
 
@@ -10,8 +10,9 @@ User-level package sets managed through home-manager. Provides essential package
 
 | File | Description |
 |------|-------------|
-| `default.nix` | Re-exports `essential.nix` via imports |
+| `default.nix` | Re-exports `essential.nix` and `permitted-insecure-packages.nix` via imports |
 | `essential.nix` | Essential user packages: email, image tools, VCS hooks, Wayland tools, JS runtime, fuzzy finder, launcher, Python LSP |
+| `permitted-insecure-packages.nix` | Home-manager-level `nixpkgs.config.permittedInsecurePackages` for nodejs-20.20.2 variants |
 
 ## Subdirectories
 

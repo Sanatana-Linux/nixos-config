@@ -1,5 +1,5 @@
 <!-- Parent: ../AGENTS.md -->
-<!-- Generated: 2026-04-21 | Updated: 2026-04-22 -->
+<!-- Generated: 2026-04-21 | Updated: 2026-06-09 -->
 
 # modules/nixos/performance/
 
@@ -13,7 +13,7 @@ System performance tuning — CPU scheduler, memory management, OOM handling, an
 | `default.nix` | Re-exports performance submodules |
 | `cachy.nix` | CachyOS BORE scheduler kernel patch for better desktop responsiveness |
 | `oomd.nix` | Out-of-memory daemon configuration |
-| `undervolt.nix` | Intel CPU undervolting (via kernel patch in hardware/intel.nix) |
+| `undervolt.nix` | Intel CPU undervolting with P-State power limits (65W PL1 / 100W PL2 for laptop thermals) |
 | `zram.nix` | ZRAM compressed swap for memory efficiency |
 
 ## For AI Agents

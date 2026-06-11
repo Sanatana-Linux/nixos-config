@@ -40,7 +40,6 @@ in {
       targets.nixcord.enable = true;
       targets.feh.enable = true;
       targets.sioyek.enable = true;
-      targets.zathura.enable = true;
       targets.gtk.enable = false; # Disabled - using custom GTK config
 
       # Development tools

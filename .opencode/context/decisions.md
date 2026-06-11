@@ -62,3 +62,12 @@
   5. New `ec_register_offsets_loq_v1` variant
   6. `has_extreme_powermode` support for NRCN and R3CN models
 - **Consequences**: The lenovo-legion kernel module now tracks upstream main directly. All new model support comes for free. The fragile sed patches are eliminated entirely. The version string updates from `0.0.20-unstable-2025-07-11` to `unstable-2026-05-07`. Since this is a kernel module, a reboot is required to load the new version.
+
+## ADR-008: Purge Zathura, fix Firefox MIME handling
+
+- **Date**: 2026-06-11
+- **Context**: Zathura (PDF viewer) was installed on all user profiles (tlh, user) and enabled in Stylix theming targets. Despite being a PDF viewer, it was registering itself as a handler for zip/archive MIME types — causing Firefox to try opening `.zip` downloads with Zathura instead of file-roller. Firefox's built-in PDF viewer (`pdfjs`) was also intercepting PDF downloads instead of delegating to the system handler (foliate).
+- **Decision**:
+  1. **Removed Zathura entirely**: Disabled `zathura.enable` in `home/tlh/default.nix` and `home/user/default.nix`, removed `targets.zathura.enable` from Stylix config, removed `./zathura.nix` from the programs import list, deleted the module file.
+  2. **Forced Firefox to use system MIME handlers**: Added `widget.use-xdg-desktop-portal.mime-handler = true` to use the portal for MIME dispatch, `browser.download.forbid_open_with = false` to allow external handlers, `browser.download.open_pdf_attachments_inline = false` and `pdfjs.enabled = false` to disable built-in PDF viewer, and `browser.download.viewableInternally.enabledFor = ""` to prevent Firefox from claiming any MIME type as viewable internally.
+- **Consequences**: Zathura is completely gone from all profiles. Firefox now delegates all file downloads to the system XDG MIME handler (file-roller for archives, foliate for PDFs, etc.). The XDG MIME associations in `modules/home-manager/environment/xdg.nix` already correctly mapped archives to `file-roller.desktop` and PDFs to `foliate.desktop` — the issue was Firefox overriding these with its own internal handlers.

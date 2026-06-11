@@ -37,7 +37,6 @@
       };
       kitty.enable = true;
       gpg.enable = true;
-      zathura.enable = true;
       yazi.enable = true;
       vesktop.enable = true;
       neovim.enable = true;

@@ -206,6 +206,7 @@ in {
           "widget.gtk.rounded-bottom-corners.enabled" = true;
           "widget.content.gtk-theme-override" = "Materia-Dark-Compact";
           "widget.use-xdg-desktop-portal" = true;
+          "widget.use-xdg-desktop-portal.mime-handler" = true;
           "xpinstall.signatures.required" = false;
           "extensions.webextensions.restrictedDomains" = " ";
         };

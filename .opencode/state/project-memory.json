@@ -5,11 +5,15 @@
     "undervolt PL1=65W PL2=100W",
     "systemd.coredump via settings.Coredump.Storage",
     "yazi open rules fixed for 0.4+",
-    "opencode 1.17.3 source-built overlay"
+    "opencode 1.17.3 source-built overlay",
+    "permittedInsecurePackages moved to home-manager module",
+    "pipx tests disabled via overlay"
   ],
-  "home_manager_version": "0-unstable-2026-04-24",
-  "last_refresh": "2026-06-09",
+  "home_manager_version": "0-unstable-2026-06-05",
+  "last_refresh": "2026-06-11",
   "nix_version": "2.34.7",
-  "nixpkgs_version": "26.11.20260531.331800d",
-  "opencode_version": "1.17.3"
+  "nixpkgs_rev": "cab778239e705082fe97bb4990e0d24c50924c04",
+  "nixpkgs_version": "26.11pre-git",
+  "opencode_version": "1.17.3",
+  "git_head": "ad2ace0"
 }

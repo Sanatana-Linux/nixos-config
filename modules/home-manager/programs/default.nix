@@ -9,6 +9,5 @@
     ./neovim.nix
     ./vesktop.nix
     ./yazi
-    ./zathura.nix
   ];
 }

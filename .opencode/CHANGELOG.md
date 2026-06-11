@@ -55,13 +55,11 @@ Commit: `9fb3248`
 - Packages removed from `pkgs/`: `sea-greeter`, `sea-greeter-configurable`, `lightdm-webkit2-sanatana`, `lightdm-webkit-theme-litarvan`, `lightdm-webkit-theme-litarvan-sanatana`
 - All sea-greeter context docs remain in `.opencode/context/` for reference
 
-Commit: `HEAD`
+Commit: `9fb3248`
 
-### Changed
-- **lenovo-legion kernel module**: Replaced fragile sed-patching of C structs with a clean `src` override bumping to latest upstream main (commit `352cb4b3`, May 2026). This fixes N0CN (Legion Pro 5 16IRX9/83DF) support using `model_g8cn` (same fields as our old `model_n0cn`), plus adds NRCN, R3CN DMI entries and fixes `ec_register_offsets_loq_v0` register values.
+## 2026-06-11
 
 ### Removed
-- `overlays/default.nix` — removed the sed-based `model_n0cn` struct patch and DMI allowlist entry injection. Entirely replaced by `src` override of the full upstream source.
+- **Zathura purged completely**: Removed from `home/tlh/default.nix`, `home/user/default.nix`, Stylix targets, and deleted the module file `modules/home-manager/programs/zathura.nix`. Zathura was registering itself as a handler for zip/archive MIME types, causing Firefox to open `.zip` downloads with a PDF viewer.
 
-### Added
-- ADR-006: Bump lenovo-legion kernel module to latest upstream
+Commit: `26ad8ee`

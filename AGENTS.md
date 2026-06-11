@@ -1,4 +1,4 @@
-<!-- Generated: 2026-04-21 | Updated: 2026-04-27 -->
+<!-- Generated: 2026-04-21 | Updated: 2026-06-11 -->
 
 # The ShizNix
 
@@ -100,7 +100,18 @@ nix develop  # enter project dev shell
 | sops-nix | Secrets management (sops + age) |
 | lightdm-webkit2-sanatana | Sanatana glassmorphism sea-greeter theme (non-flake) |
 
-## Agent Routing
+## OpenCode Configuration
+
+This project uses OpenCode with Hubs orchestration. Configuration lives in `.opencode/`:
+
+| Path | Purpose | Git |
+|------|---------|-----|
+| `.opencode/opencode.jsonc` | Project-level OpenCode config | ✓ |
+| `.opencode/rules/` | Project-specific rules (nix-flake-strategy, shell_strategy, context-strategy) | ✓ |
+| `.opencode/context/` | Durable knowledge — frameworks, patterns, research, decisions | ✓ |
+| `.opencode/state/` | Session state — checkpoints, todos, artifacts | ✗ (gitignored) |
+
+### Agent Routing
 
 For this Nix/NixOS configuration project:
 - **NixOS module changes** → `executor` (default for .nix edits)
@@ -115,3 +126,6 @@ For this Nix/NixOS configuration project:
 Project context is stored in `.opencode/context/`:
 - `nix-nixos-home-manager-ecosystem.md` — Full repo survey of Nix features
 - `nix-nixos-home-manager-official-docs.md` — Official docs reference (Context7)
+- `decisions.md` — Architecture Decision Records (ADRs)
+- `frameworks/sea-greeter-display-manager.md` — Sea greeter display manager integration
+- `research/` — External research and references

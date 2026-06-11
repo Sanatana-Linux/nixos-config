@@ -11,6 +11,12 @@
   ],
   "home_manager_version": "0-unstable-2026-06-05",
   "last_refresh": "2026-06-11",
+  "opencode_config": {
+    "opencode_jsonc": true,
+    "project_agents_md": true,
+    "rules_dir": true,
+    "nix_flake_strategy": true
+  },
   "nix_version": "2.34.7",
   "nixpkgs_rev": "cab778239e705082fe97bb4990e0d24c50924c04",
   "nixpkgs_version": "26.11pre-git",

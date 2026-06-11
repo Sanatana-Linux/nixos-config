@@ -57,9 +57,23 @@ Commit: `9fb3248`
 
 Commit: `9fb3248`
 
+## 2026-06-11 (Init Project Refresh)
+
+### Added
+- `.opencode/opencode.jsonc` — Project-level OpenCode configuration with NixOS stack detection
+- `.opencode/rules/nix-flake-strategy.md` — Project-specific Nix flake strategy rule
+- `.opencode/state/init/` — Init checkpoint and detection results for future idempotent refreshes
+- **AGENTS.md** — OpenCode Configuration section documenting `.opencode/` structure and agent routing
+
+### Changed
+- `AGENTS.md` — Updated timestamp, added OpenCode config table and agent routing for this project
+- `project-memory.json` — Added `opencode_config` tracking field
+
+Commit: `TBD`
+
 ## 2026-06-11
 
 ### Removed
 - **Zathura purged completely**: Removed from `home/tlh/default.nix`, `home/user/default.nix`, Stylix targets, and deleted the module file `modules/home-manager/programs/zathura.nix`. Zathura was registering itself as a handler for zip/archive MIME types, causing Firefox to open `.zip` downloads with a PDF viewer.
 
-Commit: `26ad8ee`
+Commit: `1dbc70f`

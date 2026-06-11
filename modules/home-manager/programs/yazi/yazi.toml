@@ -39,9 +39,9 @@ audio = [
 
 [open]
 rules = [
-{ name = "*/", use = "folder" },
+   { mime = "inode/directory", use = "folder" },
 
-{ name = "*.svg", use = "svg" },
+   { url = "*.svg", use = "svg" },
 
 { mime = "text/*", use = "text" },
 { mime = "image/*", use = "image" },

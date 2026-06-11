@@ -3,3 +3,6 @@ package.json
 package-lock.json
 bun.lock
 .gitignore
+state/*
+!state/init/
+!state/project-memory.json

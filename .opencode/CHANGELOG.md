@@ -69,7 +69,7 @@ Commit: `9fb3248`
 - `AGENTS.md` — Updated timestamp, added OpenCode config table and agent routing for this project
 - `project-memory.json` — Added `opencode_config` tracking field
 
-Commit: `TBD`
+Commit: `5966f8b`
 
 ## 2026-06-11
 

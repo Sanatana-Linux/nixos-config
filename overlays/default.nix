@@ -35,6 +35,8 @@
         ]
     );
 
+    opencode = final.callPackage ./opencode.nix {};
+
     nps = inputs.nps.defaultPackage.${prev.stdenv.hostPlatform.system};
 
     what-size = prev.yaziPlugins.mkYaziPlugin {

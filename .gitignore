@@ -101,3 +101,4 @@ node_modules/
 pnpm-lock.yaml
 package.json
 pnpm-workspace.yaml
+external/.opencode

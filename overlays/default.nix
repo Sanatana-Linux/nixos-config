@@ -35,7 +35,8 @@
         ]
     );
 
-    opencode = final.callPackage ./opencode.nix {};
+    # opencode removed — using nixpkgs version instead (embedded bun segfault issues)
+    # opencode = final.callPackage ./opencode.nix {};
 
     nps = inputs.nps.defaultPackage.${prev.stdenv.hostPlatform.system};
 

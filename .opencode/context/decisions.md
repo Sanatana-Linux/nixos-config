@@ -82,3 +82,11 @@
   3. **2 TypeScript tools** (`tools/`) — `nix-build` (orchestrate build/switch/test across hosts), `nix-info` (project metadata lookup).
   4. **3 rules** (`rules/`) — 00-nix-conventions (Nix idioms), 01-architecture (config layering diagram), nix-flake-strategy (build/debug commands).
 - **Consequences**: Subagents now have deep project context on invocation. Skills provide repeatable workflows without asking. Tools give programmatic access to project metadata. The Hubs orchestrator can delegate NixOS tasks with confidence that subagents understand ShizNix conventions. All artifacts registered in `opencode.jsonc` so they load automatically.
+
+## ADR-010: REVERTED — Provisioned artifacts broke OpenCode (invalid config keys)
+
+- **Date**: 2026-06-12
+- **Context**: The provisioned artifacts (ADR-009) registered invalid config keys (`"agents"`, `"skills"`, `"tools"`, `"project"`, `"rules"."paths"`) in `.opencode/opencode.jsonc` that do not exist in the OpenCode schema. Additionally, TypeScript tool files required `@opencode-ai/plugin` npm dependencies (58MB of `node_modules/`) with a version mismatch vs the installed opencode binary (plugin 1.14.25 vs opencode 1.15.13). The embedded bun runtime inside opencode's nixpkgs binary likely segfaulted on the unknown config keys.
+- **Decision**: **REVERTED**. All 16 provisioned artifacts deleted. `opencode.jsonc` restored to a minimal valid config with only known keys: `$schema`, `default_agent`, `permission`, `instructions`. `node_modules/`, `package.json`, `package-lock.json` removed. ADR-009 consequences invalidated.
+- **Root cause of failure**: Reckless provisioning without validating config schema. OpenCode's nixpkgs build embeds a bun runtime that is sensitive to unknown config keys.
+- **Lesson learned**: Never create config keys that haven't been validated against the real OpenCode schema. The valid config keys are: `$schema`, `model`, `default_agent`, `provider`, `permission`, `instructions`, `mcp`, `plugin`. Everything else will break opencode's embedded bun runtime.

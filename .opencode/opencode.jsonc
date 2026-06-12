@@ -1,62 +1,18 @@
 {
-  // Project-level OpenCode configuration for ShizNix
-  // Auto-generated on 2026-06-11 — <!-- MANUAL sections preserved on refresh -->
-  // Provisioned: agent-wrappers, skills, tools, rules
-
-  "name": "ShizNix",
-  "description": "Flake-based NixOS configuration with 4 hosts, home-manager as NixOS module, enable-by-option module system, and system-wide Stylix theming",
-
-  "project": {
-    "language": "nix",
-    "framework": "nixos",
-    "buildSystem": "flake",
-    "packageManager": "nix",
-    "hosts": ["bagalamukhi", "matangi", "bhairavi", "chhinamasta"],
-    "users": ["tlh", "smg", "user"],
-    "nixVersion": "2.34.7",
-    "nixpkgsRev": "cab778239e705082fe97bb4990e0d24c50924c04",
-    "homeManagerVersion": "0-unstable-2026-06-05"
-  },
-
-  "agents": {
-    "paths": ["./.opencode/agents"]
-  },
-
-  "skills": {
-    "paths": ["./.opencode/skills"]
-  },
-
-  "rules": {
-    "paths": ["./.opencode/rules"],
-    "alwaysApply": [
-      "shell_strategy.md",
-      "context-strategy.md",
-      "nix-flake-strategy.md",
-      "00-nix-conventions.md",
-      "01-architecture.md"
+    "$schema": "https://opencode.ai/config.json",
+    "default_agent": "hubs",
+    "permission": {
+        "edit": {
+            ".opencode/**": "allow",
+            "modules/**": "allow",
+            "hosts/**": "allow",
+            "home/**": "allow",
+            "pkgs/**": "allow",
+            "overlays/**": "allow",
+            "flake.nix": "allow"
+        }
+    },
+    "instructions": [
+        "AGENTS.md"
     ]
-  },
-
-  "tools": {
-    "listAgents": {},
-    "hubMenu": {},
-    "loadSkill": {},
-    "modeState": {},
-    "taskTodos": {},
-    "todowrite": {},
-    "artifacts": {},
-    "btw_status": {},
-    "nix-build": "./.opencode/tools/nix-build.ts",
-    "nix-info": "./.opencode/tools/nix-info.ts"
-  },
-
-  "git": {
-    "conventionalCommits": true
-  },
-
-  "plugins": [],
-
-  "mcpServers": {},
-
-  "commands": {}
 }

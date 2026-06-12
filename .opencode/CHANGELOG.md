@@ -69,11 +69,19 @@ Commit: `9fb3248`
 - `AGENTS.md` — Updated timestamp, added OpenCode config table and agent routing for this project
 - `project-memory.json` — Added `opencode_config` tracking field
 
-Commit: `5966f8b`
+Commit: `5966f8b` / `2ec4d82`
 
-## 2026-06-11
+## 2026-06-11 (Provisioned Nix Ecosystem)
 
-### Removed
-- **Zathura purged completely**: Removed from `home/tlh/default.nix`, `home/user/default.nix`, Stylix targets, and deleted the module file `modules/home-manager/programs/zathura.nix`. Zathura was registering itself as a handler for zip/archive MIME types, causing Firefox to open `.zip` downloads with a PDF viewer.
+### Added
+- **5 agent wrappers**: executor, planner, architect, debugger, code-reviewer — NixOS-aware with deep ShizNix project context injected via `extends`
+- **6 Nix skills**: nix-build (build+switch), nix-module (module pattern), nix-flake (input mgmt), nix-test (VM testing), nix-host (per-host mgmt), nix-secrets (sops-nix)
+- **2 TypeScript tools**: `nix-build` (build/switch/test/check any host), `nix-info` (project metadata + host info)
+- **3 rules**: 00-nix-conventions (Nix idioms, types, mkIf patterns), 01-architecture (config layering diagram)
+- **Registration**: All artifacts registered in `.opencode/opencode.jsonc` with agent/skill/tool paths
+
+Commit: `TBD`
+
+## 2026-06-11 (Zathura Purge)**: Removed from `home/tlh/default.nix`, `home/user/default.nix`, Stylix targets, and deleted the module file `modules/home-manager/programs/zathura.nix`. Zathura was registering itself as a handler for zip/archive MIME types, causing Firefox to open `.zip` downloads with a PDF viewer.
 
 Commit: `1dbc70f`

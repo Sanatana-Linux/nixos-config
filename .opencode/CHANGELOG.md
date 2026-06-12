@@ -80,8 +80,11 @@ Commit: `5966f8b` / `2ec4d82`
 - **3 rules**: 00-nix-conventions (Nix idioms, types, mkIf patterns), 01-architecture (config layering diagram)
 - **Registration**: All artifacts registered in `.opencode/opencode.jsonc` with agent/skill/tool paths
 
-Commit: `45e8957`
+Commit: `45e8957` / `a3fa831`
 
-## 2026-06-11 (Zathura Purge)**: Removed from `home/tlh/default.nix`, `home/user/default.nix`, Stylix targets, and deleted the module file `modules/home-manager/programs/zathura.nix`. Zathura was registering itself as a handler for zip/archive MIME types, causing Firefox to open `.zip` downloads with a PDF viewer.
+## 2026-06-11 (Zathura Purge)
+
+### Removed
+- **Zathura purged completely**: Removed from `home/tlh/default.nix`, `home/user/default.nix`, Stylix targets, and deleted the module file `modules/home-manager/programs/zathura.nix`. Zathura was registering itself as a handler for zip/archive MIME types, causing Firefox to open `.zip` downloads with a PDF viewer.
 
 Commit: `1dbc70f`

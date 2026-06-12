@@ -71,3 +71,14 @@
   1. **Removed Zathura entirely**: Disabled `zathura.enable` in `home/tlh/default.nix` and `home/user/default.nix`, removed `targets.zathura.enable` from Stylix config, removed `./zathura.nix` from the programs import list, deleted the module file.
   2. **Forced Firefox to use system MIME handlers**: Added `widget.use-xdg-desktop-portal.mime-handler = true` to use the portal for MIME dispatch, `browser.download.forbid_open_with = false` to allow external handlers, `browser.download.open_pdf_attachments_inline = false` and `pdfjs.enabled = false` to disable built-in PDF viewer, and `browser.download.viewableInternally.enabledFor = ""` to prevent Firefox from claiming any MIME type as viewable internally.
 - **Consequences**: Zathura is completely gone from all profiles. Firefox now delegates all file downloads to the system XDG MIME handler (file-roller for archives, foliate for PDFs, etc.). The XDG MIME associations in `modules/home-manager/environment/xdg.nix` already correctly mapped archives to `file-roller.desktop` and PDFs to `foliate.desktop` — the issue was Firefox overriding these with its own internal handlers.
+
+## ADR-009: Provision Nix ecosystem artifacts for subagent orchestration
+
+- **Date**: 2026-06-11
+- **Context**: The ShizNix repo has `.opencode/` configured with durable context but no project-specific agents, skills, tools, or rules. When orchestrating subagents (`@executor`, `@planner`, `@architect`, etc.) via Hubs, the subagents have no awareness of ShizNix-specific conventions — the enable-by-option module pattern, 4-host topology, Nix flake input structure, or common failure modes. This forces subagents to re-derive project context from scratch each session.
+- **Decision**: Created 16 provisioned artifacts in `.opencode/`:
+  1. **5 agent wrappers** (`agents/`) — executor, planner, architect, debugger, code-reviewer — each `extends` the global agent and injects ShizNix-specific project context (host matrix, module pattern, build commands, common errors) so subagents are immediately productive.
+  2. **6 skills** (`skills/`) — nix-build (build/switch/test), nix-module (enable-by-option pattern), nix-flake (input mgmt), nix-test (VM testing), nix-host (per-host mgmt), nix-secrets (sops-nix).
+  3. **2 TypeScript tools** (`tools/`) — `nix-build` (orchestrate build/switch/test across hosts), `nix-info` (project metadata lookup).
+  4. **3 rules** (`rules/`) — 00-nix-conventions (Nix idioms), 01-architecture (config layering diagram), nix-flake-strategy (build/debug commands).
+- **Consequences**: Subagents now have deep project context on invocation. Skills provide repeatable workflows without asking. Tools give programmatic access to project metadata. The Hubs orchestrator can delegate NixOS tasks with confidence that subagents understand ShizNix conventions. All artifacts registered in `opencode.jsonc` so they load automatically.

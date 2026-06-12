@@ -15,7 +15,11 @@
     "opencode_jsonc": true,
     "project_agents_md": true,
     "rules_dir": true,
-    "nix_flake_strategy": true
+    "nix_flake_strategy": true,
+    "agents": ["executor", "planner", "architect", "debugger", "code-reviewer"],
+    "skills": ["nix-build", "nix-module", "nix-flake", "nix-test", "nix-host", "nix-secrets"],
+    "tools": ["nix-build", "nix-info"],
+    "rules": ["00-nix-conventions", "01-architecture", "nix-flake-strategy"]
   },
   "nix_version": "2.34.7",
   "nixpkgs_rev": "cab778239e705082fe97bb4990e0d24c50924c04",

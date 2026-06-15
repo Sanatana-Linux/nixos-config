@@ -28,12 +28,6 @@ in {
       default = "password";
       description = "Initial password for user smg";
     };
-
-    homeManagerConfig = mkOption {
-      type = types.path;
-      default = ../../../home/smg/default.nix;
-      description = "Path to home-manager configuration";
-    };
   };
 
   config = mkIf cfg.enable {
@@ -78,6 +72,9 @@ in {
       packages = [pkgs.home-manager];
     };
 
-    home-manager.users.smg = import cfg.homeManagerConfig;
+    # home-manager.users.smg is configured in flake.nix via:
+    #   home-manager.users.smg = {imports = [./home/smg/default.nix];}
+    # Do NOT set it here — double-wiring causes home-manager generation
+    # conflicts where zsh init files fail to symlink on fresh shells.
   };
 }

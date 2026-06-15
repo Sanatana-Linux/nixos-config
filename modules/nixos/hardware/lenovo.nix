@@ -9,6 +9,30 @@ with lib; let
 in {
   options.modules.hardware.lenovo = {
     enable = mkEnableOption "Lenovo Legion hardware support";
+
+    keyboardBacklight = mkOption {
+      type = types.nullOr (types.submodule {
+        options = {
+          color = mkOption {
+            type = types.str;
+            default = "FFFFFF";
+            description = "Hex color for keyboard backlight (e.g. FFFFFF for white)";
+          };
+          brightness = mkOption {
+            type = types.enum ["Low" "High"];
+            default = "High";
+            description = "Keyboard backlight brightness";
+          };
+          effect = mkOption {
+            type = types.enum ["static" "rainbow" "wave" "breath" "rain" "ripple" "smooth" "cycle" "rainbow_wave"];
+            default = "static";
+            description = "Keyboard lighting effect";
+          };
+        };
+      });
+      default = null;
+      description = "Set keyboard backlight at boot (requires legion-kb-rgb). null = disabled.";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -45,8 +69,40 @@ in {
       SUBSYSTEM=="usb", ATTR{idVendor}=="048d", ATTR{idProduct}=="c995", MODE="0666"
       SUBSYSTEM=="usb", ATTR{idVendor}=="048d", ATTR{idProduct}=="c106", MODE="0666"
       # HID device for Spectrum keyboard (legion-kb-rgb)
-      KERNEL=="hidraw*", SUBSYSTEM=="hidraw", KERNELS=="0003:048D:C195.*", MODE="0666", TAG+="uaccess"
+      KERNEL=="hidraw*", SUBSYSTEM=="hidraw", KERNELS=="0003:048D:C995.*", MODE="0666", TAG+="uaccess"
     '';
+
+    # Keyboard backlight at boot
+    systemd.services.legion-kb-backlight = mkIf (cfg.keyboardBacklight != null) {
+      description = "Set Lenovo Legion keyboard backlight to ${cfg.keyboardBacklight.color}";
+      wantedBy = ["multi-user.target"];
+      after = ["systemd-udev-settle.service"];
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = true;
+      };
+      path = with pkgs; [ legion-kb-rgb ];
+      script = ''
+        echo "Setting keyboard backlight to #${cfg.keyboardBacklight.color}..."
+
+        # Wait for the ITE keyboard device to appear
+        for i in $(seq 1 30); do
+          if legion-kb-rgb status 2>&1 | grep -q "Device:"; then
+            break
+          fi
+          echo "Waiting for ITE keyboard device (attempt $i/30)..."
+          sleep 1
+        done
+
+        # Set brightness first
+        legion-kb-rgb brightness 9 2>/dev/null || true
+
+        # Apply static white color
+        legion-kb-rgb color "${cfg.keyboardBacklight.color}" 2>&1 || true
+
+        echo "Keyboard backlight applied: static #${cfg.keyboardBacklight.color}"
+      '';
+    };
 
     # auto-cpufreq, power-profiles-daemon, and tlp are ALL disabled here.
     # intel_pstate handles CPU governor scaling dynamically via HWP.

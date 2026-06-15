@@ -90,3 +90,31 @@
 - **Decision**: **REVERTED**. All 16 provisioned artifacts deleted. `opencode.jsonc` restored to a minimal valid config with only known keys: `$schema`, `default_agent`, `permission`, `instructions`. `node_modules/`, `package.json`, `package-lock.json` removed. ADR-009 consequences invalidated.
 - **Root cause of failure**: Reckless provisioning without validating config schema. OpenCode's nixpkgs build embeds a bun runtime that is sensitive to unknown config keys.
 - **Lesson learned**: Never create config keys that haven't been validated against the real OpenCode schema. The valid config keys are: `$schema`, `model`, `default_agent`, `provider`, `permission`, `instructions`, `mcp`, `plugin`. Everything else will break opencode's embedded bun runtime.
+
+## ADR-004: Fan curve PWM values and accel/decel range fix
+
+- **Date**: 2026-06-14
+- **Context**: The `fan-control.nix` module was writing raw RPM values (1800-6000) to `pwm*_auto_point*_pwm` sysfs files, but the kernel module expects PWM 0-255. The kernel's `fancurve_set_speed_pwm()` function for `FAN_SPEED_UNIT_RPM_HUNDRED` converts the PWM value to RPM/100 internally via `clamp_t(u8, (value * MAX_RPM + (100 * 255) - 1) / (100 * 255), 0, 255)`. Additionally, `accel` and `decel` values of 1 were being written, but the kernel rejects values < 2 (valid range is 2-5).
+- **Decision**: Converted all fan curve values from RPM to PWM 0-255. Changed accel/decel from 1-5 to 2-5 range. Added an "extreme" profile with aggressive ramp (fans at 100% PWM by 80°C).
+- **Consequences**: Fan curves now actually write to the EC. The daemon's `apply_curve` function will no longer silently fail with `EOPNOTSUPP` from the kernel.
+
+## ADR-005: Legion cooling module for EC thermal/power modes
+
+- **Date**: 2026-06-14
+- **Context**: The `lenovo-legion-module` exposes `thermalmode` (0-4) and `powermode` (0-4) sysfs controls, but these were not being set at boot. The system was running at thermalmode=3 (extreme) and powermode=3 (turbo) instead of 4 (full speed / custom).
+- **Decision**: Created `modules/nixos/performance/cooling.nix` — a oneshot systemd service that sets thermalmode=4, powermode=4, and platform-profile=performance at boot. Optionally supports `fanFullSpeed=true` for immediate max fans.
+- **Consequences**: Maximum EC cooling is now applied at boot. The system will run cooler under load.
+
+## ADR-006: Fix lenovo-legion GUI — hardcoded PNP0C09:00 driver path
+
+- **Date**: 2026-06-14
+- **Context**: The `legion_gui` / `legion_cli` from nixpkgs (`lenovo-legion-app-0.0.20`) hardcodes `LEGION_SYS_BASEPATH = '/sys/module/legion_laptop/drivers/platform:legion/PNP0C09:00'`, but on kernel 7.x (xanmod), the driver registers as `/sys/module/legion_laptop/drivers/platform:legion/legion`. Every feature search returned `path: None` with warnings like "Feature does not exist", making the GUI completely unable to read or write any Legion-specific sysfs attributes.
+- **Decision**: Added a `substituteInPlace` patch in the overlay to replace the hardcoded path.
+- **Consequences**: The GUI now finds all Legion sysfs attributes correctly. No need to bump the entire package to a newer upstream rev — the single path fix resolves all feature discovery failures.
+
+## ADR-007: Bagalamukhi default fan profile set to "extreme" on AC
+
+- **Date**: 2026-06-14
+- **Context**: The bagalamukhi host was using "performance" as the AC fan profile, but the performance curve was too conservative (max 153 PWM / ~60% fan speed at 86°C). The new "extreme" profile ramps to 100% PWM by 80°C.
+- **Decision**: Changed `onAc` from "performance" to "extreme" for bagalamukhi.
+- **Consequences**: Fans will run faster under load, keeping the laptop cooler. Slightly more noise but significantly better thermal performance.

@@ -31,9 +31,21 @@ python3.pkgs.buildPythonApplication rec {
 
   propagatedBuildInputs = [
     python3.pkgs.pygobject3
+    python3.pkgs.pyqt6   # GUI needs PyQt6
   ];
 
   dontBuild = true;
+
+  # Fix PID detection: mask (0xC100) excludes 048d:c995 keyboards.
+  # Remove the PID pre-filter — the HID report descriptor check is the real test.
+  postPatch = ''
+    substituteInPlace legion_kb_rgb/__init__.py \
+      --replace-fail 'PRODUCT_ID_MATCH = 0xC100' 'PRODUCT_ID_MATCH = 0xC000'
+    # Also remove the PID mask check entirely — rely on report descriptor
+    substituteInPlace legion_kb_rgb/__init__.py \
+      --replace-fail 'if bus == 3 and vid == VENDOR_ID and (pid & PRODUCT_ID_MASK) == PRODUCT_ID_MATCH:' \
+      'if bus == 3 and vid == VENDOR_ID:'
+  '';
 
   installPhase = ''
     runHook preInstall

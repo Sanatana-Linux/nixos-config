@@ -12,6 +12,7 @@ in {
     ./oomd.nix
     ./cachy.nix
     ./undervolt.nix
+    ./cooling.nix
   ];
 
   options.modules.performance.default = {

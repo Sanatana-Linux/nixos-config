@@ -23,9 +23,14 @@
     );
 
     # Disable Python 3.13 ML packages that cause compatibility issues
+    # Also fix qemu python package: add missing qemu-qmp runtime dependency
     python313Packages = prev.python313Packages.overrideScope (
       python-final: python-prev:
-        builtins.removeAttrs python-prev [
+        builtins.removeAttrs (python-prev // {
+          qemu = python-prev.qemu.overrideAttrs (old: {
+            propagatedBuildInputs = (old.propagatedBuildInputs or []) ++ [python-prev.qemu-qmp];
+          });
+        }) [
           "pytorch-lightning"
           "lightning"
           "onnxruntime"
@@ -63,6 +68,36 @@
         + ''
           rm -f $out/lib/systemd/system/virt-secret-init-encryption.service
         '';
+    });
+
+    # Fix uefi-firmware-parser: missing setuptools-scm build dependency
+    uefi-firmware-parser = prev.uefi-firmware-parser.overridePythonAttrs (old: {
+      nativeBuildInputs = (old.nativeBuildInputs or []) ++ [final.python313Packages.setuptools-scm];
+    });
+
+    # Fix lenovo-legion: hardcoded PNP0C09:00 doesn't exist on kernel 7.x+
+    # The driver registers as platform:legion/legion instead
+    # Also: handle IOError on sysfs reads gracefully (firmware WMI failures return EINVAL
+    # for features like rapidcharge, cpu_oc, power limits that the BIOS doesn't fully implement)
+    lenovo-legion = prev.lenovo-legion.overrideAttrs (old: {
+      postPatch = (old.postPatch or "") + ''
+        substituteInPlace ./legion_linux/legion.py \
+          --replace-fail "LEGION_SYS_BASEPATH = '/sys/module/legion_laptop/drivers/platform:legion/PNP0C09:00'" \
+          "LEGION_SYS_BASEPATH = '/sys/module/legion_laptop/drivers/platform:legion/legion'"
+        # Don't crash the GUI when sysfs reads fail — some features exist but the EC
+        # returns EINVAL (Errno 22) because the BIOS doesn't fully implement the WMI method
+        ${final.python313.interpreter} -c "
+import re
+with open('./legion_linux/legion.py') as f:
+    content = f.read()
+# Wrap _read_file_int in try/except
+old = '    def _read_file_int(self, file_path) -> int:\n        return int(self._read_file_str(file_path))'
+new = '    def _read_file_int(self, file_path) -> int:\n        try:\n            return int(self._read_file_str(file_path))\n        except (IOError, ValueError):\n            log.warning(\"Feature _read_file_int failed for %s, returning 0\", file_path)\n            return 0'
+content = content.replace(old, new)
+with open('./legion_linux/legion.py', 'w') as f:
+    f.write(content)
+"
+      '';
     });
 
     # Update SillyTavern to latest staging branch commit

@@ -9,7 +9,7 @@
       nixVersions.latest
       alejandra
       neovim
-      silver-searcher
+      ripgrep # Code search (rg) — replacement for silver-searcher
       nodejs
       pnpm
       zsh

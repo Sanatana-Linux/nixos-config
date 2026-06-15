@@ -28,12 +28,6 @@ in {
       default = "password";
       description = "Initial password for user tlh";
     };
-
-    homeManagerConfig = mkOption {
-      type = types.path;
-      default = ../../../home/tlh/default.nix;
-      description = "Path to home-manager configuration";
-    };
   };
 
   config = mkIf cfg.enable {
@@ -84,6 +78,10 @@ in {
       packages = [pkgs.home-manager];
     };
 
-    home-manager.users.tlh = import cfg.homeManagerConfig;
+    # home-manager.users.tlh is configured in flake.nix via:
+    #   home-manager.users.tlh = {imports = [./home/tlh/default.nix];}
+    # Do NOT set it here — double-wiring causes home-manager generation
+    # conflicts where zsh init files (.zshrc, .zshenv, .zprofile) fail to
+    # symlink into ~/.config/zsh/ on fresh shells.
   };
 }

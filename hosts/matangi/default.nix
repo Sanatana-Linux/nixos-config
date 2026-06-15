@@ -176,13 +176,21 @@
           intelBusId = "PCI:00:02:0";
           nvidiaBusId = "PCI:01:00:0";
         };
+        gpuTempLimit = 80;
       };
       intel.enable = true;
       bluetooth.enable = true;
       tpm.enable = true;
       udev.enable = true;
       logitech.enable = true;
-      lenovo.enable = true;
+      lenovo = {
+        enable = true;
+        keyboardBacklight = {
+          color = "FFFFFF";
+          brightness = "High";
+          effect = "static";
+        };
+      };
       sound.enable = true;
       networking = {
         enable = true;
@@ -190,6 +198,10 @@
         quad9.enable = true;
       };
       iphone.enable = true;
+      keyboard = {
+        enable = true;
+        copilotKeyAsRightCtrl = true;
+      };
     };
 
     # Stylix

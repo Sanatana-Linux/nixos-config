@@ -3,6 +3,7 @@
     ./nvidia.nix
     ./intel.nix
     ./bluetooth.nix
+    ./keyboard.nix
     ./sound.nix
     ./networking.nix
     ./android.nix

@@ -36,6 +36,12 @@ in {
       default = "stable";
       description = "Which NVIDIA driver to use";
     };
+
+    gpuTempLimit = mkOption {
+      type = types.nullOr (types.ints.between 30 100);
+      default = null;
+      description = "GPU temperature target in °C, set via nvidia-smi -gtt at boot. null = disabled. Recommended: 75-85°C.";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -215,6 +221,40 @@ in {
         };
       };
     };
-};
+
+    # Apply GPU temperature limit via nvidia-smi at boot
+    systemd.services.nvidia-temp-limit = mkIf (cfg.gpuTempLimit != null) {
+      description = "Set NVIDIA GPU temperature limit to +${toString cfg.gpuTempLimit}°C";
+      wantedBy = ["multi-user.target"];
+      after = ["nvidia-persistenced.service" "systemd-modules-load.service"];
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = true;
+      };
+      path = with pkgs; [ config.boot.kernelPackages.nvidiaPackages.${cfg.driver} ];
+      script = ''
+        TEMP_LIMIT=${toString cfg.gpuTempLimit}
+        echo "Setting GPU temperature limit to $TEMP_LIMIT°C..."
+
+        # Wait up to 30s for nvidia-smi to become available
+        for i in $(seq 1 30); do
+          if nvidia-smi -L >/dev/null 2>&1; then
+            break
+          fi
+          echo "Waiting for nvidia-smi (attempt $i/30)..."
+          sleep 1
+        done
+
+        if nvidia-smi -L >/dev/null 2>&1; then
+          nvidia-smi -gtt "$TEMP_LIMIT"
+          echo "GPU temperature limit set to $TEMP_LIMIT°C"
+        else
+          echo "ERROR: nvidia-smi not available after 30s — GPU temp limit NOT applied"
+          exit 1
+        fi
+      '';
+    };
+  };
+
 
 }

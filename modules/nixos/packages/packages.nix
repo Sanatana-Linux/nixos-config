@@ -988,7 +988,7 @@ in {
           fd # Modern find
           fzf # Fuzzy finder
           fzy # Fast fuzzy finder
-          silver-searcher # Code search (ag)
+          ripgrep # Code search (rg) — replacement for silver-searcher
           btop # System monitor
         ]
         # System utilities
@@ -1072,13 +1072,13 @@ in {
             # Base FUSE drivers
             fuse # FUSE filesystem
             fuse3 # FUSE v3
-            afuse # Auto-mounting FUSE
+            # afuse removed from nixpkgs (deprecated fuse2 dependency)
             avfs # Virtual filesystem
-            fuseiso # ISO mounting
+            xorriso # ISO/optical disk tool — replacement for removed fuseiso
 
             # Archive / Storage mounting
             fuse-archive # Archive mounting
-            fuse-7z-ng # 7z FUSE
+            # fuse-7z-ng removed from nixpkgs (unmaintained, fuse2 dep) — fuse-archive covers this
             exfatprogs # exFAT utilities
             ntfs3g # NTFS driver
             ntfsprogs # NTFS utilities

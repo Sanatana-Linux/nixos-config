@@ -79,6 +79,7 @@
       cachy.enable = true;
       oomd.enable = true;
       zram.enable = true;
+      cooling.enable = true;
     };
 
     # Services
@@ -189,17 +190,25 @@
           intelBusId = "PCI:00:02:0";
           nvidiaBusId = "PCI:01:00:0";
         };
+        gpuTempLimit = 80;
       };
       intel.enable = true;
       bluetooth.enable = true;
       tpm.enable = true;
       udev.enable = true;
       logitech.enable = true;
-      lenovo.enable = true;
+      lenovo = {
+        enable = true;
+        keyboardBacklight = {
+          color = "FFFFFF";
+          brightness = "High";
+          effect = "static";
+        };
+      };
       fan-control = {
         enable = true;
         profile = "auto";
-        onAc = "performance";
+        onAc = "extreme";
       };
       sound.enable = true;
       networking = {
@@ -209,6 +218,10 @@
         quad9.enable = true;
       };
       android.enable = true;
+      keyboard = {
+        enable = true;
+        copilotKeyAsRightCtrl = true;
+      };
     };
 
     # Stylix

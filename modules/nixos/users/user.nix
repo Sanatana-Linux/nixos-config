@@ -28,12 +28,6 @@ in {
       default = "password";
       description = "Initial password for user";
     };
-
-    homeManagerConfig = mkOption {
-      type = types.path;
-      default = ../../../home/user/default.nix;
-      description = "Path to home-manager configuration";
-    };
   };
 
   config = mkIf cfg.enable {
@@ -72,6 +66,8 @@ in {
       packages = [pkgs.home-manager];
     };
 
-    home-manager.users.user = import cfg.homeManagerConfig;
+    # home-manager.users.user is configured in flake.nix via:
+    #   home-manager.users.user = {imports = [./home/user/default.nix];}
+    # Do NOT set it here — double-wiring causes home-manager generation conflicts.
   };
 }

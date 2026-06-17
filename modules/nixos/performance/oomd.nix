@@ -27,7 +27,6 @@ in {
     # Additional memory management services
     services = {
       irqbalance.enable = true; # Distributes hardware interrupts to processors
-      earlyoom.enable = true; # Early OOM killer before it gets bad
     };
   };
 }

@@ -69,11 +69,10 @@ with lib; {
       "fbcon=nodefer"
       "splash"
       "quiet"
-      "usbcore.autosuspend=-1"
       "rd.udev.log_priority=3"
-      "nmi_watchdog=0"
-      "nowatchdog"
-      "nosoftlockup"
+      # reboot=acpi prevents hangs on reboot by using ACPI reset instead of
+      # the default EFI/PCI reset mechanisms, which can hang on some hardware
+      "reboot=acpi"
     ];
 
       plymouth.enable = true;

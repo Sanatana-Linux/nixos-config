@@ -56,11 +56,11 @@ in {
           if cfg.passwordAuthentication
           then "publickey password"
           else "publickey";
-        KbdInteractiveAuthentication = true;
+        KbdInteractiveAuthentication = cfg.passwordAuthentication;
         UsePAM = cfg.passwordAuthentication;
-        X11Forwarding = true;
-        AllowAgentForwarding = true;
-        AllowTcpForwarding = true;
+        X11Forwarding = false;
+        AllowAgentForwarding = false;
+        AllowTcpForwarding = false;
         GatewayPorts = "no";
         PermitTunnel = "no";
       };
@@ -68,7 +68,7 @@ in {
       # Additional security settings
       extraConfig = ''
         # Only allow specific users (can be overridden by hosts)
-        AllowUsers *
+        AllowUsers tlh smg
 
         # Protocol and cipher restrictions
         Protocol 2

@@ -48,8 +48,6 @@ in {
         SDL2_gfx # SDL2 graphics extensions
         SDL2_image # Image loading for SDL2
         SDL2_mixer # Audio mixing for SDL2
-        SDL2_image # Image loading for SDL1
-        SDL2_mixer # Audio mixing for SDL1
         SDL2_net
         SDL2_sound # Sound library for SDL2
         SDL2_ttf # TrueType font rendering for SDL2
@@ -192,7 +190,6 @@ in {
         luajitPackages.luarocks-nix # Nix integration for luarocks
         luajitPackages.luarocks # LuaRocks package manager
         lua51Packages.luarocks-nix # Nix integration for LuaRocks
-        lua51Packages.luarocks # LuaRocks package manager for Lua 5.1
         dbus # Message bus system
         dbus-glib # GLib bindings for DBus
         e2fsprogs # Ext2/3/4 filesystem utilities
@@ -208,7 +205,6 @@ in {
         libcap # POSIX capabilities library
         libgcrypt # Cryptographic library
         libglibutil # GLib utilities
-        libgpg-error # GnuPG error library
         libgudev # GObject bindings for libudev
         libidn # Internationalized domain names library
         libimobiledevice # Communicate with iOS devices
@@ -249,15 +245,6 @@ in {
 
         python312Packages.pygobject3
         python312Packages.pyqt6
-        python312Packages.pyqt6
-
-        lua51Packages.lua # Lua interpreter
-        lua51Packages.luautf8 # UTF-8 support for LuaJIT
-        lua51Packages.std-_debug # Debugging utilities for LuaJIT
-        lua51Packages.std-normalize # Normalization utilities for LuaJIT
-        lua51Packages.stdlib # Standard library for LuaJIT
-        lua51Packages.vicious # Widget library for window managers
-        libGLX
         # LuaJIT and Lua libraries
         luajit
         luajitPackages.cjson # JSON parsing for LuaJIT

@@ -215,7 +215,7 @@
         passwordAuthentication = true;
         permitRootLogin = "no";
         maxAuthTries = 3;
-        port = 22;
+        port = 2222;
       };
 
       fail2ban = {

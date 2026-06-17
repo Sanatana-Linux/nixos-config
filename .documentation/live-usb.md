@@ -3,13 +3,13 @@
 ## Generate
 
 ```sh
-nix build /etc/nixos#nixosConfigurations.live-usb.config.system.build.isoImage    
+nix build /etc/nixos#nixosConfigurations.chhinamasta.config.system.build.isoImage    
 ```
 
 or
 
 ```sh
-nix build /etc/nixos#nixosConfigurations.live-usb-min.config.system.build.isoImage
+nix build /etc/nixos#nixosConfigurations.chhinamasta.config.system.build.isoImage
 ```
 
 ## Write it to usb

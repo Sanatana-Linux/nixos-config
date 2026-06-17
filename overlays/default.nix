@@ -141,9 +141,11 @@ with open('./legion_linux/legion.py', 'w') as f:
   };
 
   stable-packages = final: prev: {
-    stable = import inputs.stable {
-      system = final.stdenv.hostPlatform.system;
-      config.allowUnfree = true;
+    stable = prev // {
+      inherit (import inputs.stable {
+        system = final.stdenv.hostPlatform.system;
+        config.allowUnfree = true;
+      }) efitools;
     };
   };
 }

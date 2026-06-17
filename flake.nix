@@ -8,10 +8,18 @@
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    home-manager.url = "github:nix-community/home-manager";
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    nixos-generators.url = "github:nix-community/nixos-generators";
-    rust-overlay.url = "github:oxalica/rust-overlay";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nixos-hardware = {
+      url = "github:NixOS/nixos-hardware";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nixos-generators = {
+      url = "github:nix-community/nixos-generators";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     fx-autoconfig = {
       url = "github:MrOtherGuy/fx-autoconfig";
       flake = false;
@@ -20,15 +28,16 @@
       url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nps.url = "github:OleMussmann/Nix-Package-Search";
+    nps = {
+      url = "github:OleMussmann/Nix-Package-Search";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     bhairava-grub-theme = {
       url = "github:Sanatana-Linux/Bhairava-Grub-Theme";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nix-index-database.url = "github:nix-community/nix-index-database";
-    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
-    cachy-tweaks = {
-      url = "github:AniviaFlome/cachy-tweaks-flake";
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     sops-nix = {
@@ -73,6 +82,30 @@
       in
         import ./shell.nix {inherit pkgs;}
     );
+
+    checks = forAllSystems (system: let
+      pkgs = nixpkgs.legacyPackages.${system};
+    in {
+      alejandra = pkgs.runCommand "check-formatting" {
+        buildInputs = [pkgs.alejandra];
+      } ''
+        cd ${self}
+        alejandra --check . >&2 || (echo "Formatting check failed. Run: alejandra ." >&2; exit 1)
+        touch $out
+      '';
+      eval-all-hosts = pkgs.runCommand "eval-all-hosts" {
+        buildInputs = [pkgs.nixos-rebuild];
+      } ''
+        for host in bagalamukhi matangi bhairavi chhinamasta; do
+          echo "Evaluating $host..." >&2
+          nix-instantiate --eval --strict -E '(import ${self}).nixosConfigurations.''${host}.config.system.build.toplevel' > /dev/null 2>&1 || (
+            echo "Evaluation failed for $host" >&2
+            exit 1
+          )
+        done
+        touch $out
+      '';
+    });
 
     nixosConfigurations = {
       # ┣━━━━━━━━━━━━━━━━━━━━━━┫ My Lenovo Legion 5 Pro ┣━━━━━━━━━━━━━━━━━━━━━━┫

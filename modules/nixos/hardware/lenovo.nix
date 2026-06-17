@@ -111,7 +111,8 @@ in {
     services = {
       auto-cpufreq.enable = mkForce false;
       tlp.enable = mkForce false;
-      power-profiles-daemon.enable = mkForce false;
+      # power-profiles-daemon is NOT force-disabled here — let the host config
+      # decide via modules.power.laptop.powerProfilesDaemon
     };
 
     hardware.sensor.iio.enable = true;

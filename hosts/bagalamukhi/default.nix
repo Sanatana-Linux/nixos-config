@@ -268,7 +268,7 @@
         passwordAuthentication = true; # Allow password login as requested
         permitRootLogin = "no"; # Keep root login disabled for security
         maxAuthTries = 3;
-        port = 22;
+        port = 2222;
       };
 
       # Fail2ban for intrusion prevention

@@ -17,3 +17,18 @@ jobs:
         with:
           git-committer-name: 'Thomas Leon Highbaugh'
           git-committer-email: 'thighbaugh@zoho.com'
+
+  ci:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' || github.event_name == 'pull_request'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v1
+      - name: Check formatting
+        run: alejandra --check .
+      - name: Flake check
+        run: nix flake check
+      - name: Build bhairavi
+        run: nixos-rebuild build --flake .#bhairavi

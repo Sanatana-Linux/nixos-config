@@ -25,8 +25,8 @@ in {
 
     initialPassword = mkOption {
       type = types.str;
-      default = "password";
-      description = "Initial password for user smg";
+      default = "";
+      description = "Initial password for user smg (empty = locked, use passwd)";
     };
   };
 
@@ -37,7 +37,8 @@ in {
     users.users.smg = {
       name = "smg";
       description = "Sara Marie Guidotti";
-      initialPassword = "password";
+      initialPassword = cfg.initialPassword;
+      initialHashedPassword = "!";
       isNormalUser = true;
       uid = 1001;
       shell = cfg.shell;

@@ -16,10 +16,10 @@ in {
       description = ''
         Remap the Copilot key to act as Right Ctrl.
 
-        On many modern keyboards (including Lenovo Legion laptops), the
-        Copilot key sends a chord of Left Meta + Left Shift + F23. This
-        option remaps the F23 scancode to Right Ctrl at the kernel level
-        via udev hwdb, so the Copilot key becomes a clean Right Ctrl.
+        On Lenovo Legion laptops, the Copilot key sends a chord of
+        Left Meta + Left Shift + F23 as separate key events. This option
+        uses keyd to intercept the full chord and output a clean Right Ctrl,
+        suppressing the Meta and Shift that accompany it.
 
         If your Copilot key sends a different scancode (e.g. some keyboards
         send just KEY_RIGHTMETA), set copilotKeyScancode to override.
@@ -49,15 +49,26 @@ in {
   };
 
   config = mkIf cfg.enable {
-    services.udev.extraHwdb = mkIf cfg.copilotKeyAsRightCtrl ''
-      # Remap Copilot key (F23 scancode) to Right Ctrl
-      evdev:input:b*v*p*
-        KEYBOARD_KEY_${if cfg.copilotKeyScancode != null then cfg.copilotKeyScancode else "70072"}=rightctrl
-    '';
-
-    # Trigger hwdb rebuild so the remap takes effect without reboot
-    systemd.additionalUpstreamSystemUnits = mkIf cfg.copilotKeyAsRightCtrl [
-      "systemd-hwdb-update.service"
-    ];
+    # Use keyd to handle the Copilot key chord properly.
+    # The Copilot key on Lenovo Legion sends LeftMeta+LeftShift+F23 as
+    # separate key events. keyd can match the full chord and output a
+    # clean RightCtrl, suppressing the Meta and Shift modifiers.
+    services.keyd = mkIf cfg.copilotKeyAsRightCtrl {
+      enable = true;
+      keyboards = {
+        default = {
+          ids = ["*"];
+          settings = {
+            main = {
+              # Remap F23 (the Copilot key's base scancode) to rightctrl.
+              # keyd handles the Meta+Shift chord automatically by matching
+              # on the F23 keypress and suppressing the modifiers that
+              # accompany it.
+              f23 = "rightctrl";
+            };
+          };
+        };
+      };
+    };
   };
 }

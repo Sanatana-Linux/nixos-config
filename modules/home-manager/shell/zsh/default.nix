@@ -153,6 +153,13 @@ in {
                 ollama pull "$package"
             done
         }
+        # export http_proxy="http://192.168.49.1:8228"
+        # export HTTP_PROXY="http://192.168.49.1:8228"
+        # export https_proxy="http://192.168.49.1:8228"
+        # export http_proxy="http://192.168.49.1:8228"
+
+
+
 
         # Television fuzzy finder
         eval "$(tv init zsh)"
@@ -228,12 +235,30 @@ in {
         enable = true;
         zplugHome = "${config.xdg.configHome}/zsh/zplug";
         plugins = [
-          {name = "hlissner/zsh-autopair";}
-          {name = "chisui/zsh-nix-shell";}
-          {name = "molovo/tipz";}
-          {name = "nix-community/nix-zsh-completions";}
-          {name = "ytet5uy4/fzf-widgets";}
-          {name = "mrjohannchang/zsh-interactive-cd";}
+          {
+            name = "hlissner/zsh-autopair";
+            tags = ["defer:2"];
+          }
+          {
+            name = "chisui/zsh-nix-shell";
+            tags = ["defer:2"];
+          }
+          {
+            name = "molovo/tipz";
+            tags = ["defer:2"];
+          }
+          {
+            name = "nix-community/nix-zsh-completions";
+            tags = ["defer:2"];
+          }
+          {
+            name = "ytet5uy4/fzf-widgets";
+            tags = ["defer:2"];
+          }
+          {
+            name = "mrjohannchang/zsh-interactive-cd";
+            tags = ["defer:2"];
+          }
         ];
       };
     };

@@ -39,7 +39,6 @@ in {
       name = "tlh";
       description = "Thomas Leon Highbaugh";
       initialPassword = cfg.initialPassword;
-      initialHashedPassword = "!";
       isNormalUser = true;
       uid = 1000;
       shell = cfg.shell;

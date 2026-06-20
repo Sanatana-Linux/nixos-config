@@ -69,7 +69,7 @@
       };
       virt-manager.enable = true;
       # waydroid.enable = true;
-      lxc.enable = true;
+      # lxc.enable = true;
     };
 
     # Performance
@@ -214,7 +214,7 @@
       networking = {
         enable = true;
         hostName = "bagalamukhi";
-        wifi.rtl88x2bu.enable = true;
+        # wifi.rtl88x2bu.enable = true;
         quad9.enable = true;
       };
       android.enable = true;
@@ -251,13 +251,12 @@
 
       # Firewall configuration
       firewall = {
-        enable = true;
+        enable = false;
         allowSSH = true;
-        allowHTTP = true; # Port 80 as requested
+        allowHTTP = true; # Port 80
         allowDevelopment = true; # Port 8000 and other dev ports
-        customTcpPorts = [
-          # Add any other specific ports you need
-        ];
+        # customTcpPorts = [
+        # ];
         logRefusedConnections = true;
         trustedInterfaces = ["lo"]; # localhost (127.0.0.1)
       };
@@ -273,7 +272,7 @@
 
       # Fail2ban for intrusion prevention
       fail2ban = {
-        enable = true;
+        enable = false;
         maxRetry = 5;
         banTime = "1h";
         findTime = "10m";

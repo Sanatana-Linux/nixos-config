@@ -33,17 +33,17 @@ with lib; {
     wifi = {
       powersave = mkOption {
         type = types.bool;
-        default = true;
+        default = false;
         description = "Enable WiFi power saving";
       };
       randomMac = mkOption {
         type = types.bool;
-        default = true;
+        default = false;
         description = "Randomize WiFi MAC address";
       };
-      rtl88x2bu = {
-        enable = mkEnableOption "Realtek RTL88x2BU USB WiFi adapter driver (for monitor mode, aircrack, etc.)";
-      };
+      # rtl88x2bu = {
+      #   enable = mkEnableOption "Realtek RTL88x2BU USB WiFi adapter driver (for monitor mode, aircrack, etc.)";
+      # };
     };
 
     quad9 = {
@@ -54,6 +54,7 @@ with lib; {
   config = mkIf config.modules.hardware.networking.enable {
     networking = {
       hostName = config.modules.hardware.networking.hostName;
+
       nameservers =
         if config.modules.hardware.networking.quad9.enable
         then ["9.9.9.11" "149.112.112.11" "2620:fe::11" "2620:fe::fe:11"]
@@ -74,26 +75,27 @@ with lib; {
       };
     };
 
+    # services.resolved.enable = true;
     systemd.services.NetworkManager-wait-online.enable = false;
 
-    boot.extraModulePackages = mkIf config.modules.hardware.networking.wifi.rtl88x2bu.enable [
-      config.boot.kernelPackages.rtl88x2bu
-    ];
+    #   config.boot.kernelPackages.rtl88x2bu
+    # ];
 
-    boot.kernelModules = mkIf config.modules.hardware.networking.wifi.rtl88x2bu.enable [
-      "88x2bu"
-    ];
-
-    boot.kernelParams = mkIf config.modules.hardware.networking.wifi.rtl88x2bu.enable [
-      "rtw_switch_usb_mode=1"
-    ];
-
-    boot.blacklistedKernelModules = mkIf config.modules.hardware.networking.wifi.rtl88x2bu.enable [
-      "rtw88_core"
-      "rtw_usb"
-    ];
+    # boot.kernelModules = mkIf config.modules.hardware.networking.wifi.rtl88x2bu.enable [
+    #   "88x2bu"
+    # ];
+    #
+    # boot.kernelParams = mkIf config.modules.hardware.networking.wifi.rtl88x2bu.enable [
+    #   "rtw_switch_usb_mode=1"
+    # ];
+    #
+    # boot.blacklistedKernelModules = mkIf config.modules.hardware.networking.wifi.rtl88x2bu.enable [
+    #   "rtw88_core"
+    #   "rtw_usb"
+    # ];
 
     boot.kernel.sysctl = {
+      # TODO add descriptive comments to the right of each of these settings explaining what they do and why it is useful
       "net.core.netdev_max_backlog" = 16384;
       "net.core.somaxconn" = 8192;
       "net.core.rmem_default" = 31457280;

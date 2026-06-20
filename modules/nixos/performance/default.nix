@@ -33,12 +33,12 @@ in {
     environment.systemPackages = with pkgs; [peakperf];
 
     # Additional kernel sysctl settings from historical config
+    # NOTE: overcommit_memory deliberately NOT set — kernel default (0, heuristic) is correct for desktop.
+    # Mode 2 (strict accounting) with default 50% ratio caused ENOMEM on apps despite abundant free RAM.
     boot.kernel.sysctl = {
-      "vm.oom_kill_allocating_task" = true;
       "vm.oom_dump_tasks" = false;
       "kernel.sysrq" = lib.mkForce 176; # Magic SysRq key (176 = sync+unmount+reboot only)
       "lenovo-legion.force" = 1; # Laptop module
-      "vm.overcommit_memory" = 2;
       "vm.swappiness" = 10;
       "vm.vfs_cache_pressure" = 50;
     };

@@ -12,6 +12,7 @@
     stylix.enable = true;
     packages = {
       essential.enable = true;
+      permitted-insecure-packages.enable = true;
     };
     shell = {
       zsh.enable = true;

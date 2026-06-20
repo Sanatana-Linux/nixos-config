@@ -38,7 +38,6 @@ in {
       name = "smg";
       description = "Sara Marie Guidotti";
       initialPassword = cfg.initialPassword;
-      initialHashedPassword = "!";
       isNormalUser = true;
       uid = 1001;
       shell = cfg.shell;

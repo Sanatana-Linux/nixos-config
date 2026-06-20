@@ -39,7 +39,6 @@ in {
       name = "user";
       description = "Default User";
       initialPassword = cfg.initialPassword;
-      initialHashedPassword = "!";
       isNormalUser = true;
       uid = 1000;
       shell = cfg.shell;

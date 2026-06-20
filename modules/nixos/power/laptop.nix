@@ -85,8 +85,8 @@ in {
         # Adjusts the action taken at the point of the battery being critical
         criticalPowerAction = "Hibernate";
         percentageLow = 15;
-        percentageCritical = 5;
-        percentageAction = 4;
+        percentageCritical = 8;
+        percentageAction = 3;
         usePercentageForPolicy = true;
       };
     };

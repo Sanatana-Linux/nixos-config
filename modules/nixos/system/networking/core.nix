@@ -73,7 +73,7 @@ with lib; {
 
       networkmanager = {
         enable = true;
-        # dns = "default";
+        dns = "systemd-resolved";
         # insertNameservers =
         #   if config.modules.system.networking.quad9.enable
         #   then ["9.9.9.11" "149.112.112.11" "2620:fe::11" "2620:fe::fe:11"]
@@ -96,10 +96,10 @@ with lib; {
     systemd.services.NetworkManager-wait-online.enable = false;
 
     # Disable openresolv's resolvconf.service — NetworkManager manages
-    # /etc/resolv.conf directly. The resolvconf service conflicts with
-    # NM's own DNS handling and fails with "Operation not permitted"
+    # /etc/resolv.conf via systemd-resolved. The resolvconf service conflicts
+    # with NM's own DNS handling and fails with "Operation not permitted"
     # when trying to chgrp /etc/resolv.conf.
-    # systemd.services.resolvconf.enable = false;
+    systemd.services.resolvconf.enable = false;
 
     # Realtek USB WiFi adapters (both in-kernel rtw88 and out-of-tree
     # rtl88x2bu) often fail to auto-detect the regulatory domain from

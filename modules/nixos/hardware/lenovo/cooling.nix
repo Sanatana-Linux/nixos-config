@@ -69,11 +69,19 @@ in {
           LEGION="/sys/devices/platform/legion"
         else
           for d in /sys/module/legion_laptop/drivers/platform:legion/*; do
+            # Skip the module symlink — it's a backlink to the module dir, not a device
+            basename "$d" | grep -qFx "module" && continue
             if [ -d "$d" ]; then
               LEGION="$d"
               break
             fi
           done
+        fi
+
+        # Verify this is a real device — check for characteristic files
+        if [ -n "$LEGION" ] && [ ! -f "$LEGION/thermalmode" ] && [ ! -f "$LEGION/powermode" ]; then
+          echo "WARNING: Found '$LEGION' but it lacks legion device files — not a bound device"
+          LEGION=""
         fi
 
         # Find hwmon — try by name, then driver-path fallback

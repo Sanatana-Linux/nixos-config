@@ -45,6 +45,8 @@ in {
       # shallow idle states that save power without the thermal penalty
       # of constant L0↔L1 PCIe link cycling.
       "nvme_core.default_ps_max_latency_us=10000"
+      # Force legion_laptop to bind — DMI table doesn't include this model
+      "legion_laptop.force=1"
     ];
 
     # Expose all fan hwmon entries (fan1 + fan2) via the lenovo_wmi_other
@@ -90,40 +92,11 @@ in {
         RUN+="${pkgs.legion-kb-rgb}/bin/legion-kb-rgb color ${cfg.keyboardBacklight.color}"
     '';
 
-    # Keyboard backlight at boot — now handled by udev rule above.
-    # The old polling-based systemd service is removed; the udev rule
-    # triggers the moment the kernel detects the ITE keyboard HID device,
-    # eliminating the race condition entirely.
-    systemd.services.legion-kb-backlight = mkIf (cfg.keyboardBacklight != null) {
-      description = "Set Lenovo Legion keyboard backlight to ${cfg.keyboardBacklight.color}";
-      wantedBy = ["multi-user.target"];
-      after = ["systemd-udev-settle.service"];
-      serviceConfig = {
-        Type = "oneshot";
-        RemainAfterExit = true;
-      };
-      path = with pkgs; [ legion-kb-rgb ];
-      script = ''
-        echo "Setting keyboard backlight to #${cfg.keyboardBacklight.color}..."
-
-        # Wait for the ITE keyboard device to appear
-        for i in $(seq 1 30); do
-          if legion-kb-rgb status 2>&1 | grep -q "Device:"; then
-            break
-          fi
-          echo "Waiting for ITE keyboard device (attempt $i/30)..."
-          sleep 1
-        done
-
-        # Set brightness first
-        legion-kb-rgb brightness 9 2>/dev/null || true
-
-        # Apply static white color
-        legion-kb-rgb color "${cfg.keyboardBacklight.color}" 2>&1 || true
-
-        echo "Keyboard backlight applied: static #${cfg.keyboardBacklight.color}"
-      '';
-    };
+    # Keyboard backlight at boot — handled exclusively by the udev rule above.
+    # NO systemd service here: the udev RUN+= triggers the moment the ITE
+    # keyboard HID device appears, avoiding the double-open conflict that
+    # caused "Broken pipe" errors when both the service and udev rule tried
+    # to write to /dev/hidraw* simultaneously.
 
     # auto-cpufreq, power-profiles-daemon, and tlp are ALL disabled here.
     # intel_pstate handles CPU governor scaling dynamically via HWP.

@@ -61,32 +61,59 @@ in {
       };
       path = with pkgs; [coreutils];
       script = ''
-        LEGION="/sys/devices/platform/legion"
+        LEGION=""
         HWMON=""
 
-        # Find hwmon
+        # Find legion sysfs path — try standard path first, then driver-path fallback
+        if [ -d "/sys/devices/platform/legion" ]; then
+          LEGION="/sys/devices/platform/legion"
+        else
+          for d in /sys/module/legion_laptop/drivers/platform:legion/*; do
+            if [ -d "$d" ]; then
+              LEGION="$d"
+              break
+            fi
+          done
+        fi
+
+        # Find hwmon — try by name, then driver-path fallback
         for d in /sys/class/hwmon/hwmon*; do
           if [ -f "$d/name" ] && grep -q "legion" "$d/name" 2>/dev/null; then
             HWMON="$d"
             break
           fi
         done
+        if [ -z "$HWMON" ] && [ -n "$LEGION" ]; then
+          for d in "$LEGION"/hwmon/hwmon*; do
+            if [ -d "$d" ]; then
+              HWMON="$d"
+              break
+            fi
+          done
+        fi
 
-        if [ -z "$HWMON" ]; then
-          echo "ERROR: No legion hwmon device found"
+        if [ -z "$LEGION" ]; then
+          echo "ERROR: legion_laptop module not bound — check boot.kernelParams for legion_laptop.force=1"
           exit 1
         fi
 
         echo "=== Legion Cooling ==="
+        echo "legion: $LEGION"
         echo "hwmon: $HWMON"
 
         # Set thermal mode (0-4, higher = more aggressive)
-        echo ${toString cfg.thermalMode} > "$LEGION/thermalmode" 2>/dev/null || true
-        echo "thermalmode: $(cat $LEGION/thermalmode)"
+        if [ -f "$LEGION/thermalmode" ]; then
+          echo ${toString cfg.thermalMode} > "$LEGION/thermalmode" 2>/dev/null || true
+          echo "thermalmode: $(cat $LEGION/thermalmode 2>/dev/null || echo 'unavailable')"
+        else
+          echo "thermalmode: unavailable (EC read-only on g8cn/N0CN)"
+        fi
 
         # Set power mode (0-4, higher = more power)
-        echo ${toString cfg.powerMode} > "$LEGION/powermode" 2>/dev/null || true
-        echo "powermode: $(cat $LEGION/powermode)"
+        if [ -f "$LEGION/powermode" ]; then
+          echo ${toString cfg.powerMode} > "$LEGION/powermode" 2>/dev/null || true
+          echo "powermode: $(cat $LEGION/powermode 2>/dev/null || echo 'unavailable')"
+        fi
 
         # Set platform profile
         if [ -f "$LEGION/platform-profile/platform-profile-0/profile" ]; then
@@ -95,12 +122,14 @@ in {
         fi
 
         # Optionally force full fan speed
-        ${if cfg.fanFullSpeed then ''
-          echo 1 > "$LEGION/fan_fullspeed" 2>/dev/null || true
-          echo "fan_fullspeed: $(cat $LEGION/fan_fullspeed)"
-        '' else ''
-          echo 0 > "$LEGION/fan_fullspeed" 2>/dev/null || true
-        ''}
+        if [ -f "$LEGION/fan_fullspeed" ]; then
+          ${if cfg.fanFullSpeed then ''
+            echo 1 > "$LEGION/fan_fullspeed" 2>/dev/null || true
+            echo "fan_fullspeed: $(cat $LEGION/fan_fullspeed)"
+          '' else ''
+            echo 0 > "$LEGION/fan_fullspeed" 2>/dev/null || true
+          ''}
+        fi
 
         echo "=== Cooling applied ==="
       '';

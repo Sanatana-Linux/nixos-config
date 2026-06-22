@@ -66,6 +66,12 @@ in {
               # modifiers that accompany it.
               "leftmeta+leftshift+f23" = "rightcontrol";
             };
+            timings = {
+              # USB keyboard macro fires events faster than default 50ms
+              # chord timeout — increase to 100ms so keyd reliably captures
+              # the full LeftMeta+LeftShift+F23 chord.
+              chord_timeout = 100;
+            };
           };
         };
       };

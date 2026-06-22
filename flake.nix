@@ -129,6 +129,7 @@
             home-manager = {
               useUserPackages = true;
               backupFileExtension = "bak";
+              overwriteBackup = true;
               extraSpecialArgs = {inherit inputs outputs;};
               sharedModules = [
                 ./modules/home-manager
@@ -156,6 +157,7 @@
             home-manager = {
               useUserPackages = true;
               backupFileExtension = "bak";
+              overwriteBackup = true;
               extraSpecialArgs = {inherit inputs outputs;};
               sharedModules = [./modules/home-manager];
               users = {
@@ -181,6 +183,7 @@
             home-manager = {
               useUserPackages = true;
               backupFileExtension = "bak";
+              overwriteBackup = true;
               extraSpecialArgs = {inherit inputs outputs;};
               sharedModules = [./modules/home-manager];
               users = {
@@ -208,6 +211,8 @@
           {
             home-manager = {
               useUserPackages = true;
+              backupFileExtension = "bak";
+              overwriteBackup = true;
               extraSpecialArgs = {inherit inputs outputs;};
               sharedModules = [
                 ./modules/home-manager

@@ -145,7 +145,7 @@ with open('./legion_linux/legion.py', 'w') as f:
       inherit (import inputs.stable {
         system = final.stdenv.hostPlatform.system;
         config.allowUnfree = true;
-      }) efitools;
+      }) efitools olive-editor;
     };
   };
 }

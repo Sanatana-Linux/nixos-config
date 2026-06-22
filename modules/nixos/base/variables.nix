@@ -59,5 +59,15 @@ in {
         ZSH_AUTOSUGGEST_USE_ASYNC = "true";
       }
       // cfg.extraVariables;
+
+    # GSettings/GLib needs gsettings-schemas in XDG_DATA_DIRS for GTK apps
+    # to find schemas like org.gtk.Settings.FileChooser. Desktop environments
+    # (GNOME, Cinnamon, etc.) handle this automatically; on AwesomeWM we need
+    # to add it explicitly.
+    environment.sessionVariables = {
+      XDG_DATA_DIRS = [
+        "${pkgs.gtk3}/share/gsettings-schemas/${pkgs.gtk3.name}"
+      ];
+    };
   };
 }

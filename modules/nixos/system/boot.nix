@@ -55,7 +55,7 @@ with lib; {
     boot = {
       tmp.cleanOnBoot = true;
 
-      kernelPackages = pkgs.linuxPackages_xanmod_latest;
+      kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore;
 
       blacklistedKernelModules = ["nouveau"];
 
@@ -73,6 +73,10 @@ with lib; {
       # reboot=acpi prevents hangs on reboot by using ACPI reset instead of
       # the default EFI/PCI reset mechanisms, which can hang on some hardware
       "reboot=acpi"
+      # NVMe power saving: prevent deep power states (PS4) that cause 100ms+
+      # latency spikes. 5500µs allows moderate power saving (~6ms exit latency)
+      # without the thermal burst on resume from deep sleep.
+      "nvme_core.default_ps_max_latency_us=5500"
     ];
 
       plymouth.enable = true;
@@ -150,7 +154,8 @@ with lib; {
           menuentry 'Advanced UEFI Firmware Settings' --class efi --class uefi  {
             insmod fat
             insmod chain
-            chainloader @bootRoot@/EFI/Boot/BootX64.efi
+            search --no-floppy --set=root --file /EFI/Boot/BootX64.efi
+            chainloader /EFI/Boot/BootX64.efi
           }
         '';
       };

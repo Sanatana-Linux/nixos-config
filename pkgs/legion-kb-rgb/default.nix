@@ -36,16 +36,22 @@ python3.pkgs.buildPythonApplication rec {
 
   dontBuild = true;
 
-  # Fix PID detection: mask (0xC100) excludes 048d:c995 keyboards.
-  # Remove the PID pre-filter — the HID report descriptor check is the real test.
-  postPatch = ''
-    substituteInPlace legion_kb_rgb/__init__.py \
-      --replace-fail 'PRODUCT_ID_MATCH = 0xC100' 'PRODUCT_ID_MATCH = 0xC000'
-    # Also remove the PID mask check entirely — rely on report descriptor
-    substituteInPlace legion_kb_rgb/__init__.py \
-      --replace-fail 'if bus == 3 and vid == VENDOR_ID and (pid & PRODUCT_ID_MASK) == PRODUCT_ID_MATCH:' \
-      'if bus == 3 and vid == VENDOR_ID:'
-  '';
+    # Fix PID detection: mask (0xC100) excludes 048d:c995 keyboards.
+    # Remove the PID pre-filter — the HID report descriptor check is the real test.
+    postPatch = ''
+      substituteInPlace legion_kb_rgb/__init__.py \
+        --replace-fail 'PRODUCT_ID_MATCH = 0xC100' 'PRODUCT_ID_MATCH = 0xC000'
+      # Also remove the PID mask check entirely — rely on report descriptor
+      substituteInPlace legion_kb_rgb/__init__.py \
+        --replace-fail 'if bus == 3 and vid == VENDOR_ID and (pid & PRODUCT_ID_MASK) == PRODUCT_ID_MATCH:' \
+        'if bus == 3 and vid == VENDOR_ID:'
+      # Fix report descriptor size check: Legion 5 Pro (2023+?) has a 191-byte feature
+      # report (report_size=8, report_count=191) instead of the 959-byte one the tool
+      # expects. Accept any size >= 100 bytes to cover both firmware variants.
+      substituteInPlace legion_kb_rgb/__init__.py \
+        --replace-fail 'if report_id == REPORT_ID and (report_size * report_count) // 8 == 959:' \
+        'if report_id == REPORT_ID and (report_size * report_count) // 8 >= 100:'
+    '';
 
   installPhase = ''
     runHook preInstall

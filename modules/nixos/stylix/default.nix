@@ -9,6 +9,29 @@ with lib; let
 in {
   options.modules.stylix = {
     enable = mkEnableOption "Stylix theming at NixOS level";
+
+    packages = {
+      enable = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Font packages (Nerd Fonts, icon fonts, system fonts)";
+      };
+      nerdFonts = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Nerd Font variants";
+      };
+      iconFonts = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Icon fonts for UI";
+      };
+      systemFonts = mkOption {
+        type = types.bool;
+        default = true;
+        description = "System and display fonts";
+      };
+    };
   };
 
   config = mkIf cfg.enable {
@@ -72,5 +95,32 @@ in {
       materia-theme
       colloid-icon-theme
     ];
+
+    # Font packages — Nerd Fonts, icon fonts, system fonts + fontconfig
+    fonts = mkIf cfg.packages.enable {
+      packages = with pkgs;
+        optionals cfg.packages.nerdFonts [
+          nerd-fonts.agave nerd-fonts.d2coding nerd-fonts.envy-code-r
+          nerd-fonts.proggy-clean-tt nerd-fonts.ubuntu nerd-fonts.ubuntu-mono
+          nerd-fonts.ubuntu-sans nerd-fonts.noto
+        ]
+        ++ optionals cfg.packages.iconFonts [
+          nerd-fonts.symbols-only icomoon-feather emacs-all-the-icons-fonts
+          font-awesome_4 font-awesome_5 font-awesome_6 font-awesome_7
+          material-design-icons material-symbols siji
+        ]
+        ++ optionals cfg.packages.systemFonts [
+          corefonts vista-fonts get-google-fonts jost norwester-font
+          pixel-code terminus_font nerd-font-patcher
+        ];
+      fontconfig = {
+        enable = true;
+        cache32Bit = true;
+        antialias = true;
+        useEmbeddedBitmaps = true;
+        hinting = { enable = true; autohint = true; style = "slight"; };
+        subpixel = { lcdfilter = "default"; };
+      };
+    };
   };
 }

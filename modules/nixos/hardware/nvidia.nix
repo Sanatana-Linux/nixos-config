@@ -147,8 +147,15 @@ in {
       "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
       "nvidia-drm.modeset=1"
       "nvidia.NVreg_EnableResizableBar=1"
-      "nvidia.NVreg_EnableGpuFirmware=1"
-      "nvidia.NVreg_DynamicPowerManagement=0x02"
+      # GSP firmware disabled: causes GPU instability on Lenovo Legion hybrid setups
+      # (Vulkan/PRIME sync hangs, prevents lower power states on open kernel modules)
+      "nvidia.NVreg_EnableGpuFirmware=0"
+      # PAT (Page Attribute Table) is the modern memory management method — more
+      # efficient than legacy MTRR for CPU↔GPU memory transfers (constant in sync mode)
+      "nvidia.NVreg_UsePageAttributeTable=1"
+      # Skip clearing system memory before GPU use. Minor perf gain, no meaningful
+      # security risk on a single-user desktop.
+      "nvidia.NVreg_InitializeSystemMemoryAllocations=0"
       "pcie_aspm=on"
       "pcie_aspm.policy=balanced"
     ];
@@ -221,6 +228,10 @@ in {
         };
       };
     };
+
+    # nvidia-powerd requires GSP firmware to function — permanently disabled since
+    # NVreg_EnableGpuFirmware=0 (GSP off) makes it fail with "Allocate Root client failed 0x6a"
+    systemd.services.nvidia-powerd.enable = false;
 
     # Apply GPU temperature limit via nvidia-smi at boot
     systemd.services.nvidia-temp-limit = mkIf (cfg.gpuTempLimit != null) {

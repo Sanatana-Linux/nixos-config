@@ -47,7 +47,7 @@
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
         }
         .card-header {
-            padding: 1.25rem;
+            padding: 0.75rem 1rem;
         }
         .base-name {
             display: block;
@@ -62,7 +62,7 @@
             opacity: 0.8;
         }
         .color-values {
-            padding: 1.25rem;
+            padding: 0.5rem 0.75rem;
             background: rgba(0, 0, 0, 0.15);
             backdrop-filter: blur(10px);
         }
@@ -70,21 +70,19 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0.4rem 0;
-            font-size: 0.9rem;
-        }
-        .value-row:not(:last-child) {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.15rem 0;
+            font-size: 0.65rem;
+            line-height: 1.2;
         }
         .value-type {
             font-weight: 600;
             text-transform: uppercase;
-            font-size: 0.75rem;
+            font-size: 0.6rem;
             opacity: 0.7;
         }
         .value {
             font-family: 'SF Mono', 'Fira Code', monospace;
-            font-size: 0.85rem;
+            font-size: 0.68rem;
         }
     </style>
 </head>
@@ -111,6 +109,10 @@
                     <span class="value-type">HSL</span>
                     <span class="value">hsl(0, 9%, 9%)</span>
                 </div>
+                <div class="value-row">
+                    <span class="value-type">OKLCH</span>
+                    <span class="value">oklch(0.2005 0.0065 17.7)</span>
+                </div>
             </div>
         </div>
         <div class="color-card" style="background-color: #211c1c;">
@@ -130,6 +132,10 @@
                 <div class="value-row">
                     <span class="value-type">HSL</span>
                     <span class="value">hsl(0, 8%, 12%)</span>
+                </div>
+                <div class="value-row">
+                    <span class="value-type">OKLCH</span>
+                    <span class="value">oklch(0.2322 0.0078 17.7)</span>
                 </div>
             </div>
         </div>
@@ -151,6 +157,10 @@
                     <span class="value-type">HSL</span>
                     <span class="value">hsl(0, 9%, 16%)</span>
                 </div>
+                <div class="value-row">
+                    <span class="value-type">OKLCH</span>
+                    <span class="value">oklch(0.2723 0.0106 17.8)</span>
+                </div>
             </div>
         </div>
         <div class="color-card" style="background-color: #72696a;">
@@ -170,6 +180,10 @@
                 <div class="value-row">
                     <span class="value-type">HSL</span>
                     <span class="value">hsl(353, 4%, 43%)</span>
+                </div>
+                <div class="value-row">
+                    <span class="value-type">OKLCH</span>
+                    <span class="value">oklch(0.5294 0.0114 9.8)</span>
                 </div>
             </div>
         </div>
@@ -191,6 +205,10 @@
                     <span class="value-type">HSL</span>
                     <span class="value">hsl(354, 4%, 56%)</span>
                 </div>
+                <div class="value-row">
+                    <span class="value-type">OKLCH</span>
+                    <span class="value">oklch(0.6425 0.0121 10.5)</span>
+                </div>
             </div>
         </div>
         <div class="color-card" style="background-color: #c3b7b8;">
@@ -210,6 +228,10 @@
                 <div class="value-row">
                     <span class="value-type">HSL</span>
                     <span class="value">hsl(355, 9%, 74%)</span>
+                </div>
+                <div class="value-row">
+                    <span class="value-type">OKLCH</span>
+                    <span class="value">oklch(0.7897 0.0137 11.6)</span>
                 </div>
             </div>
         </div>
@@ -231,6 +253,10 @@
                     <span class="value-type">HSL</span>
                     <span class="value">hsl(355, 18%, 86%)</span>
                 </div>
+                <div class="value-row">
+                    <span class="value-type">OKLCH</span>
+                    <span class="value">oklch(0.8807 0.0144 12.1)</span>
+                </div>
             </div>
         </div>
         <div class="color-card" style="background-color: #fff1f3;">
@@ -250,6 +276,10 @@
                 <div class="value-row">
                     <span class="value-type">HSL</span>
                     <span class="value">hsl(351, 100%, 97%)</span>
+                </div>
+                <div class="value-row">
+                    <span class="value-type">OKLCH</span>
+                    <span class="value">oklch(0.9697 0.0153 7.5)</span>
                 </div>
             </div>
         </div>
@@ -271,6 +301,10 @@
                     <span class="value-type">HSL</span>
                     <span class="value">hsl(349, 97%, 70%)</span>
                 </div>
+                <div class="value-row">
+                    <span class="value-type">OKLCH</span>
+                    <span class="value">oklch(0.7100 0.1823 11.9)</span>
+                </div>
             </div>
         </div>
         <div class="color-card" style="background-color: #f38d70;">
@@ -290,6 +324,10 @@
                 <div class="value-row">
                     <span class="value-type">HSL</span>
                     <span class="value">hsl(13, 85%, 70%)</span>
+                </div>
+                <div class="value-row">
+                    <span class="value-type">OKLCH</span>
+                    <span class="value">oklch(0.7459 0.1312 36.7)</span>
                 </div>
             </div>
         </div>
@@ -311,6 +349,10 @@
                     <span class="value-type">HSL</span>
                     <span class="value">hsl(41, 92%, 70%)</span>
                 </div>
+                <div class="value-row">
+                    <span class="value-type">OKLCH</span>
+                    <span class="value">oklch(0.8655 0.1252 84.5)</span>
+                </div>
             </div>
         </div>
         <div class="color-card" style="background-color: #adda78;">
@@ -330,6 +372,10 @@
                 <div class="value-row">
                     <span class="value-type">HSL</span>
                     <span class="value">hsl(88, 57%, 66%)</span>
+                </div>
+                <div class="value-row">
+                    <span class="value-type">OKLCH</span>
+                    <span class="value">oklch(0.8345 0.1354 129.2)</span>
                 </div>
             </div>
         </div>
@@ -351,6 +397,10 @@
                     <span class="value-type">HSL</span>
                     <span class="value">hsl(170, 53%, 69%)</span>
                 </div>
+                <div class="value-row">
+                    <span class="value-type">OKLCH</span>
+                    <span class="value">oklch(0.8303 0.0854 182.5)</span>
+                </div>
             </div>
         </div>
         <div class="color-card" style="background-color: #92b8e8;">
@@ -370,6 +420,10 @@
                 <div class="value-row">
                     <span class="value-type">HSL</span>
                     <span class="value">hsl(213, 65%, 74%)</span>
+                </div>
+                <div class="value-row">
+                    <span class="value-type">OKLCH</span>
+                    <span class="value">oklch(0.7724 0.0805 254.5)</span>
                 </div>
             </div>
         </div>
@@ -391,6 +445,10 @@
                     <span class="value-type">HSL</span>
                     <span class="value">hsl(239, 63%, 79%)</span>
                 </div>
+                <div class="value-row">
+                    <span class="value-type">OKLCH</span>
+                    <span class="value">oklch(0.7583 0.0943 283.2)</span>
+                </div>
             </div>
         </div>
         <div class="color-card" style="background-color: #f38d70;">
@@ -410,6 +468,10 @@
                 <div class="value-row">
                     <span class="value-type">HSL</span>
                     <span class="value">hsl(13, 85%, 70%)</span>
+                </div>
+                <div class="value-row">
+                    <span class="value-type">OKLCH</span>
+                    <span class="value">oklch(0.7459 0.1312 36.7)</span>
                 </div>
             </div>
         </div>

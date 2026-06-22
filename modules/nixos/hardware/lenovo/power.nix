@@ -1,0 +1,127 @@
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
+  cfg = config.modules.hardware.lenovo.power;
+in {
+  options.modules.hardware.lenovo.power = {
+    enable = lib.mkEnableOption "laptop power management";
+
+    powerProfilesDaemon = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Use power-profiles-daemon instead of TLP";
+    };
+
+    cpuBoostOnAc = lib.mkOption {
+      type = lib.types.int;
+      default = 1;
+      description = "CPU boost on AC power";
+    };
+
+    cpuBoostOnBat = lib.mkOption {
+      type = lib.types.int;
+      default = 0;
+      description = "CPU boost on battery";
+    };
+
+    startChargeThreshold = lib.mkOption {
+      type = lib.types.int;
+      default = 40;
+      description = "Battery charge start threshold";
+    };
+
+    stopChargeThreshold = lib.mkOption {
+      type = lib.types.int;
+      default = 80;
+      description = "Battery charge stop threshold";
+    };
+  };
+
+  config = lib.mkIf cfg.enable {
+    powerManagement = {
+      enable = true;
+      powertop.enable = true; # Auto tune performance
+    };
+
+    boot.kernelModules = ["cpupower"];
+    environment.systemPackages = [config.boot.kernelPackages.cpupower];
+
+    services = {
+      # thermal sensors and controls
+      thermald.enable = true;
+      # handle ACPI events
+      acpid.enable = true;
+      # Power Profiles
+      power-profiles-daemon.enable = cfg.powerProfilesDaemon;
+
+      tlp = {
+        enable = !cfg.powerProfilesDaemon;
+        settings = {
+          CPU_BOOST_ON_AC = cfg.cpuBoostOnAc;
+          CPU_BOOST_ON_BAT = cfg.cpuBoostOnBat;
+          CPU_SCALING_GOVERNOR_ON_AC = "performance";
+          CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+          CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+          CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_power";
+          PLATFORM_PROFILE_ON_AC = "performance";
+          PLATFORM_PROFILE_ON_BAT = "balanced";
+          CPU_MAX_PERF_ON_AC = 100;
+          CPU_MAX_PERF_ON_BAT = 60;
+          TLP_DEFAULT_MODE = "BAT";
+          TLP_PERSISTENT_DEFAULT = 1;
+          # Optional helps save long term battery health
+          START_CHARGE_THRESH_BAT0 = cfg.startChargeThreshold;
+          STOP_CHARGE_THRESH_BAT0 = cfg.stopChargeThreshold;
+          DEVICES_TO_DISABLE_ON_LAN_CONNECT = "wifi";
+          DEVICES_TO_ENABLE_ON_LAN_DISCONNECT = "wifi ";
+        };
+      };
+
+      upower = {
+        enable = true;
+        # Adjusts the action taken at the point of the battery being critical
+        criticalPowerAction = "Hibernate";
+        percentageLow = 15;
+        percentageCritical = 8;
+        percentageAction = 3;
+        usePercentageForPolicy = true;
+      };
+    };
+
+    # UPower has no built-in notification mechanism — it relies on desktop
+    # environments to listen to D-Bus signals. In AwesomeWM, no such listener
+    # exists by default. This timer polls battery percentage every 2 minutes
+    # and sends a critical desktop notification when the battery drops to
+    # the critical threshold (8%), giving the user time to act before the
+    # hibernate action fires at 3%.
+    systemd.services.battery-critical-warning = {
+      description = "Send desktop notification when battery is critically low";
+      path = with pkgs; [upower libnotify];
+      serviceConfig.Type = "oneshot";
+      script = ''
+        BATTERY_PATH=$(upower -e 2>/dev/null | grep -i battery | head -1)
+        if [ -z "$BATTERY_PATH" ]; then
+          exit 0
+        fi
+        LEVEL=$(upower -i "$BATTERY_PATH" | grep "percentage:" | tr -dc '0-9\n')
+        STATE=$(upower -i "$BATTERY_PATH" | grep "state:" | cut -d: -f2 | tr -d ' ')
+        if [ "$STATE" = "discharging" ] && [ -n "$LEVEL" ] && [ "$LEVEL" -le 8 ]; then
+          DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/1000/bus" \
+            ${pkgs.libnotify}/bin/notify-send -u critical \
+            "Battery Critical" "Only $LEVEL% remaining — plug in now or system will hibernate at 3%"
+        fi
+      '';
+    };
+
+    systemd.timers.battery-critical-warning = {
+      wantedBy = ["timers.target"];
+      timerConfig = {
+        OnBootSec = "1m";
+        OnUnitActiveSec = "2m";
+      };
+    };
+  };
+}

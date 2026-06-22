@@ -10,7 +10,9 @@ in {
   imports = [
     ./fhs.nix
     ./nix.nix
+    ./packages
     ./permitted-packages.nix
+    ./security-packages.nix
     ./services.nix
     ./shell.nix
     ./variables.nix
@@ -67,7 +69,7 @@ in {
 
     hardware.enableAllFirmware = true;
 
-    # Formerly in environment/default.nix
+    # System-level environment configuration
     environment = with pkgs; {
       systemPackages = [dmidecode];
       shells = [bash zsh];

@@ -24,9 +24,9 @@
       cli-tools.enable = true;
       scripts.enable = true;
     };
-    environment = {
-      home.enable = true;
+    core = {
       environment.enable = true;
+      home.enable = true;
       nix.enable = true;
       xdg.enable = true;
     };

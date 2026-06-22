@@ -17,6 +17,7 @@
     outputs.overlays.modifications
     outputs.overlays.stable-packages
     inputs.nur.overlays.default
+    inputs.nix-cachyos-kernel.overlays.pinned
   ];
 
   modules = {
@@ -29,6 +30,39 @@
         advancedBios.enable = true;
         efiMountPoint = "/boot";
       };
+      networking = {
+        enable = true;
+        hostName = "matangi";
+        quad9.enable = true;
+      };
+      apps = {
+        nix-ld.enable = true;
+        appimage.enable = true;
+        shotcut.enable = true;
+        ai = {
+          ollama.enable = true;
+          core.enable = true;
+        };
+      };
+      desktop = {
+        xfce.enable = true;
+      };
+      performance = {
+        default.enable = true;
+        undervolt.enable = true;
+        cachy.enable = true;
+        oomd.enable = true;
+        zram.enable = true;
+      };
+      security = {
+        doas.enable = true;
+        fail2ban.enable = true;
+        ssh.enable = true;
+        sudo.enable = true;
+        pam.enable = true;
+        tpm.enable = true;
+      };
+      multimedia.enable = true;
     };
 
     base = {
@@ -36,8 +70,69 @@
       nix.enable = true;
       permittedPackages.enable = true;
       services.enable = true;
+      packages = {
+        archives = {
+          enable = true;
+          basicFormats = true;
+          modernCompression = true;
+          parallelTools = true;
+          specializedFormats = true;
+          integrationLibs = true;
+        };
+        core.enable = true;
+        development = {
+          enable = false;
+          linters = false;
+          versionControl = false;
+          buildTools = false;
+          runtimeLanguages = false;
+          luaEcosystem = false;
+          rustEcosystem = false;
+          nixUtilities = true;
+          systemCompilers = true;
+          webDevelopment = false;
+          databases = false;
+          editors = false;
+          treeSitterGrammars = false;
+        };
+        gui = {
+          enable = true;
+          applicationLauncher = true;
+          mediaTools = true;
+          developmentTools = false;
+          windowManagement = true;
+          messaging = true;
+          extraPackages = true;
+          libs = {
+            enable = true;
+            coreGraphics = true;
+            gobjectSupport = true;
+            desktopIntegration = true;
+            xfceSupport = true;
+            audioTerminal = true;
+            pythonBindings = true;
+            fontSupport = true;
+          };
+        };
+        python = {
+          enable = true;
+          development = true;
+          webDevelopment = false;
+          dataProcessing = true;
+          systemIntegration = true;
+          graphics = true;
+        };
+        system = {
+          enable = true;
+          filesystem = true;
+          hardware = true;
+          network = true;
+          performance = true;
+          desktop = true;
+          multimedia = true;
+        };
+      };
     };
-
     # User
     users.smg.enable = true;
     base.shell = {
@@ -46,126 +141,7 @@
       variables.enable = true;
     };
 
-    # Apps
-    apps = {
-      nix-ld.enable = true;
-      appimage.enable = true;
-      shotcut.enable = true;
-    };
-
-    # Performance
-    performance = {
-      default.enable = true;
-      undervolt.enable = true;
-      cachy.enable = true;
-      oomd.enable = true;
-      zram.enable = true;
-    };
-
-    # Services
-    # Power
-    power.laptop = {
-      enable = true;
-      powerProfilesDaemon = true;
-    };
-
-    # Packages
-    packages = {
-      archives = {
-        enable = true;
-        basicFormats = true;
-        modernCompression = true;
-        parallelTools = true;
-        specializedFormats = true;
-        integrationLibs = true;
-      };
-      core.enable = true;
-      fonts = {
-        enable = true;
-        nerdFonts = true;
-        iconFonts = true;
-        systemFonts = true;
-      };
-      development = {
-        enable = false;
-        linters = false;
-        versionControl = false;
-        buildTools = false;
-        runtimeLanguages = false;
-        luaEcosystem = false;
-        rustEcosystem = false;
-        nixUtilities = true;
-        systemCompilers = true;
-        webDevelopment = false;
-        databases = false;
-        editors = false;
-        treeSitterGrammars = false;
-      };
-      # customFonts.enable = true;
-      gui = {
-        enable = true;
-        applicationLauncher = true;
-        mediaTools = true;
-        developmentTools = false;
-        windowManagement = true;
-        messaging = true;
-        extraPackages = true;
-        browsers = true;
-        libs = {
-          enable = true;
-          coreGraphics = true;
-          gobjectSupport = true;
-          desktopIntegration = true;
-          xfceSupport = true;
-          audioTerminal = true;
-          pythonBindings = true;
-          fontSupport = true;
-        };
-      };
-      multimedia = {
-        enable = true;
-        videoTools = true;
-        imageTools = true;
-        streamingTools = true;
-        gstreamerPlugins = true;
-        creators = true;
-        stableVideoEditors = true;
-      };
-      network = {
-        enable = true;
-        gitTools = true;
-        wirelessTools = true;
-        downloadTools = true;
-        compressionLibs = true;
-      };
-      python = {
-        enable = true;
-        development = true;
-        webDevelopment = false;
-        dataProcessing = true;
-        systemIntegration = true;
-        graphics = true;
-      };
-      shell = {
-        enable = true;
-        modernTools = true;
-        systemUtils = true;
-        fileManagement = true;
-        downloadTools = true;
-        zshPlugins = true;
-        inputSupport = true;
-      };
-      system = {
-        enable = true;
-        filesystem = true;
-        hardware = true;
-        network = true;
-        performance = true;
-        desktop = true;
-        multimedia = true;
-      };
-      x11.enable = true;
-    };
+    base.packages.security.enable = true;
 
     # Hardware
     hardware = {
@@ -180,9 +156,7 @@
       };
       intel.enable = true;
       bluetooth.enable = true;
-      tpm.enable = true;
       udev.enable = true;
-      logitech.enable = true;
       lenovo = {
         enable = true;
         keyboardBacklight = {
@@ -190,14 +164,20 @@
           brightness = "High";
           effect = "static";
         };
+        power = {
+          enable = true;
+          powerProfilesDaemon = true;
+        };
+      };
+      devices = {
+        logitech.enable = true;
+        iphone.enable = true;
+        printer.brother = {
+          enable = true;
+          user = "smg";
+        };
       };
       sound.enable = true;
-      networking = {
-        enable = true;
-        hostName = "matangi";
-        quad9.enable = true;
-      };
-      iphone.enable = true;
       keyboard = {
         enable = true;
         copilotKeyAsRightCtrl = true;
@@ -206,35 +186,6 @@
 
     # Stylix
     stylix.enable = true;
-
-    # Desktop
-    desktop = {
-      xfce = {
-        enable = true;
-      };
-    };
-
-    # Printer
-    printer.brother = {
-      enable = true;
-      user = "smg";
-    };
-
-    # AI
-    ai = {
-      ollama.enable = true;
-      core.enable = true;
-    };
-
-    # Security
-    security = {
-      doas.enable = true;
-      fail2ban.enable = true;
-      ssh.enable = true;
-      sudo.enable = true;
-      pam.enable = true;
-      packages.enable = true;
-    };
   };
 
   # Host-specific display configuration

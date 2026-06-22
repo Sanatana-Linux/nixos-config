@@ -1,7 +1,7 @@
 {
   imports = [
+    ./core
     ./desktop
-    ./environment
     ./packages
     ./programs
     ./services

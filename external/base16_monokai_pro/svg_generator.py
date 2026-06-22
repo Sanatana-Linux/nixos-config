@@ -68,7 +68,7 @@ def main():
     output_dir = current_dir / "swatches"
     output_dir.mkdir(exist_ok=True)
 
-    for yaml_file in sorted(current_dir.glob("*.yaml")):
+    for yaml_file in sorted(list(current_dir.glob("*.yaml")) + list(current_dir.glob("*.yml"))):
         data = parse_yaml(yaml_file)
         scheme_name = data.get('scheme', yaml_file.stem)
         colors = {k: v for k, v in data.items() if k.startswith('base')}

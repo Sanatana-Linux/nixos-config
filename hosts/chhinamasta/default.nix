@@ -25,6 +25,7 @@ in {
     # outputs.overlays.modifications
     # outputs.overlays.stable-packages
     inputs.nur.overlays.default
+    inputs.nix-cachyos-kernel.overlays.pinned
   ];
 
   nixpkgs = {
@@ -38,11 +39,41 @@ in {
   modules = {
     # System
     system = {
+      multimedia.enable = true;
       systemd.enable = true;
       boot = {
         enable = true;
         theme.enable = true;
         development.enable = true;
+      };
+      networking = {
+        enable = true;
+        hostName = "chhinamasta";
+        wifi.rtl88x2bu.enable = true; # Same WiFi support as bagalamukhi
+      };
+      apps = {
+        nix-ld.enable = true;
+        appimage.enable = true;
+        thunar.enable = true;
+        ai = {
+          ollama.enable = true;
+          core.enable = true;
+        };
+      };
+      desktop = {
+        awesomewm.enable = true;
+      };
+      performance = {
+        default.enable = true;
+        zram.enable = true; # Good for live ISO with limited RAM
+      };
+      security = {
+        doas = {
+          enable = true;
+          adminUser = "user"; # Note: user instead of tlh
+        };
+        sudo.enable = true;
+        tpm.enable = true; # Modern hardware support
       };
     };
 
@@ -52,6 +83,23 @@ in {
       nix.enable = true;
       permittedPackages.enable = true;
       services.enable = true;
+      packages = {
+        core.enable = true;
+        development = {
+          enable = true;
+          minimal = true;
+        };
+        gui = {
+          enable = true;
+          minimal = true;
+          libs.enable = true;
+        };
+        python.enable = true;
+        system = {
+          enable = true;
+          minimal = true;
+        };
+      };
     };
 
     # User
@@ -62,100 +110,21 @@ in {
       variables.enable = true;
     };
 
-    # Apps - essential for live ISO
-    apps = {
-      nix-ld.enable = true;
-      appimage.enable = true;
-      thunar.enable = true;
-    };
-
-    # Performance - basic for live environment
-    performance = {
-      default.enable = true;
-      zram.enable = true; # Good for live ISO with limited RAM
-    };
-
-    # Packages - configured for live ISO use
-    packages = {
-      core.enable = true;
-      development = {
-        enable = true;
-        minimal = true; # Keep minimal for ISO size
-      };
-      fonts = {
-        enable = true;
-        nerdFonts = true;
-        iconFonts = true;
-        systemFonts = true;
-      };
-      gui = {
-        enable = true;
-        minimal = true; # Keep minimal for ISO size
-        libs.enable = true;
-      };
-      multimedia = {
-        enable = true;
-        minimal = true; # Keep minimal for ISO size
-      };
-      network = {
-        enable = true;
-        wirelessTools = true;
-        downloadTools = true;
-      };
-      python.enable = true;
-      shell = {
-        enable = true;
-        modernTools = true;
-        systemUtils = true;
-        fileManagement = true;
-        zshPlugins = true;
-        inputSupport = true;
-      };
-      system = {
-        enable = true;
-        minimal = true; # Keep minimal for ISO size
-      };
-      x11.enable = true;
-    };
 
     # Hardware - essential for live ISO
     hardware = {
       bluetooth.enable = true; # Common hardware support
       sound.enable = true;
       udev.enable = true;
-      tpm.enable = true; # Modern hardware support
       intel.enable = true; # Intel graphics/CPU support (common)
-      networking = {
-        enable = true;
-        hostName = "chhinamasta";
-        wifi.rtl88x2bu.enable = true; # Same WiFi support as bagalamukhi
+      devices = {
+        android.enable = true; # Mobile device support
       };
-      android.enable = true; # Mobile device support
       # Note: Not adding NVIDIA, Logitech, or Lenovo as these are too specific for a live ISO
     };
 
     # Stylix
     stylix.enable = true;
-
-    # Desktop
-    desktop = {
-      awesomewm.enable = true;
-    };
-
-    # Security - essential
-    security = {
-      doas = {
-        enable = true;
-        adminUser = "user"; # Note: user instead of tlh
-      };
-      sudo.enable = true;
-    };
-
-    # AI - optional but good for demonstration
-    ai = {
-      ollama.enable = true;
-      core.enable = true;
-    };
   };
 
   services.xserver.enable = true;
@@ -187,7 +156,7 @@ in {
     blacklistedKernelModules = [];
     kernelModules = [];
     tmp.cleanOnBoot = true;
-    kernelPackages = lib.mkForce pkgs.linuxPackages_xanmod_latest;
+    kernelPackages = lib.mkForce pkgs.cachyosKernels.linuxPackages-cachyos-bore;
 
     kernelParams = [
       "mitigations=off"

@@ -17,6 +17,7 @@
     outputs.overlays.modifications
     outputs.overlays.stable-packages
     inputs.nur.overlays.default
+    inputs.nix-cachyos-kernel.overlays.pinned
   ];
 
   modules = {
@@ -37,6 +38,72 @@
         advancedBios.enable = true;
         development.enable = true;
       };
+      networking = {
+        enable = true;
+        hostName = "bagalamukhi";
+        # wifi.rtl88x2bu.enable = true;
+        quad9.enable = true;
+      };
+      apps = {
+        nix-ld.enable = true;
+        appimage.enable = true;
+        thunar.enable = true;
+        ai = {
+          ollama.enable = true;
+          core.enable = true;
+        };
+      };
+      desktop = {
+        awesomewm.enable = true;
+        lightdm.enable = true;
+      };
+      performance = {
+        default.enable = true;
+        undervolt.enable = true;
+        cachy.enable = true;
+        oomd.enable = true;
+        zram.enable = true;
+      };
+      multimedia.enable = true;
+      security = {
+        doas = {
+          enable = true;
+          adminUser = "tlh";
+        };
+        sudo.enable = true;
+        tpm.enable = true;
+
+        # Firewall configuration
+        firewall = {
+          enable = false;
+          allowSSH = true;
+          allowHTTP = true; # Port 80
+          allowDevelopment = true; # Port 8000 and other dev ports
+          # customTcpPorts = [
+          # ];
+          logRefusedConnections = true;
+          trustedInterfaces = ["lo"]; # localhost (127.0.0.1)
+        };
+
+        # SSH configuration with password authentication enabled
+        ssh = {
+          enable = true;
+          passwordAuthentication = true; # Allow password login as requested
+          permitRootLogin = "no"; # Keep root login disabled for security
+          maxAuthTries = 3;
+          port = 2222;
+        };
+
+        # Fail2ban for intrusion prevention
+        fail2ban = {
+          enable = false;
+          maxRetry = 5;
+          banTime = "1h";
+          findTime = "10m";
+          enableSSH = true;
+          ignoreIPs = ["127.0.0.1/8" "::1" "192.168.1.0/24"]; # Add your local network
+        };
+      };
     };
 
     base = {
@@ -44,6 +111,68 @@
       nix.enable = true;
       permittedPackages.enable = true;
       services.enable = true;
+      packages = {
+        archives = {
+          enable = true;
+          basicFormats = true;
+          modernCompression = true;
+          parallelTools = true;
+          specializedFormats = true;
+          integrationLibs = true;
+        };
+        core.enable = true;
+        development = {
+          enable = true;
+          linters = true;
+          versionControl = true;
+          buildTools = true;
+          runtimeLanguages = true;
+          luaEcosystem = true;
+          rustEcosystem = true;
+          nixUtilities = true;
+          systemCompilers = true;
+          webDevelopment = true;
+          databases = true;
+          editors = true;
+          treeSitterGrammars = true;
+        };
+        gui = {
+          enable = true;
+          applicationLauncher = true;
+          mediaTools = true;
+          developmentTools = true;
+          windowManagement = true;
+          messaging = true;
+          extraPackages = true;
+          libs = {
+            enable = true;
+            coreGraphics = true;
+            gobjectSupport = true;
+            desktopIntegration = true;
+            xfceSupport = true;
+            audioTerminal = true;
+            pythonBindings = true;
+            fontSupport = true;
+          };
+        };
+        python = {
+          enable = true;
+          development = true;
+          webDevelopment = true;
+          dataProcessing = true;
+          systemIntegration = true;
+          graphics = true;
+        };
+        system = {
+          enable = true;
+          filesystem = true;
+          hardware = true;
+          network = true;
+          performance = true;
+          desktop = true;
+          multimedia = true;
+        };
+      };
     };
 
     # User
@@ -52,13 +181,6 @@
       enable = true;
       zsh = true;
       variables.enable = true;
-    };
-
-    # Apps
-    apps = {
-      nix-ld.enable = true;
-      appimage.enable = true;
-      thunar.enable = true;
     };
 
     # Virtualization
@@ -70,115 +192,6 @@
       virt-manager.enable = true;
       # waydroid.enable = true;
       # lxc.enable = true;
-    };
-
-    # Performance
-    performance = {
-      default.enable = true;
-      undervolt.enable = true;
-      cachy.enable = true;
-      oomd.enable = true;
-      zram.enable = true;
-      cooling.enable = true;
-    };
-
-    # Services
-    # Power
-    power.laptop = {
-      enable = true;
-      powerProfilesDaemon = true;
-    };
-
-    # Packages
-    packages = {
-      archives = {
-        enable = true;
-        basicFormats = true;
-        modernCompression = true;
-        parallelTools = true;
-        specializedFormats = true;
-        integrationLibs = true;
-      };
-      browser.enable = true;
-      core.enable = true;
-      development = {
-        enable = true;
-        linters = true;
-        versionControl = true;
-        buildTools = true;
-        runtimeLanguages = true;
-        luaEcosystem = true;
-        rustEcosystem = true;
-        nixUtilities = true;
-        systemCompilers = true;
-        webDevelopment = true;
-        databases = true;
-        editors = true;
-        treeSitterGrammars = true;
-      };
-      # customFonts.enable = true;
-      gui = {
-        enable = true;
-        applicationLauncher = true;
-        mediaTools = true;
-        developmentTools = true;
-        windowManagement = true;
-        messaging = true;
-        extraPackages = true;
-        browsers = true;
-        libs = {
-          enable = true;
-          coreGraphics = true;
-          gobjectSupport = true;
-          desktopIntegration = true;
-          xfceSupport = true;
-          audioTerminal = true;
-          pythonBindings = true;
-          fontSupport = true;
-        };
-      };
-      multimedia = {
-        enable = true;
-        videoTools = true;
-        imageTools = true;
-        streamingTools = true;
-        gstreamerPlugins = true;
-        creators = true;
-      };
-      network = {
-        enable = true;
-        gitTools = true;
-        wirelessTools = true;
-        downloadTools = true;
-        compressionLibs = true;
-      };
-      python = {
-        enable = true;
-        development = true;
-        webDevelopment = true;
-        dataProcessing = true;
-        systemIntegration = true;
-        graphics = true;
-      };
-      shell = {
-        enable = true;
-        modernTools = true;
-        systemUtils = true;
-        fileManagement = true;
-        downloadTools = true;
-        zshPlugins = true;
-        inputSupport = true;
-      };
-      system = {
-        enable = true;
-        filesystem = true;
-        hardware = true;
-        network = true;
-        performance = true;
-        desktop = true;
-        multimedia = true;
-      };
-      x11.enable = true;
     };
 
     # Hardware
@@ -194,9 +207,7 @@
       };
       intel.enable = true;
       bluetooth.enable = true;
-      tpm.enable = true;
       udev.enable = true;
-      logitech.enable = true;
       lenovo = {
         enable = true;
         keyboardBacklight = {
@@ -204,20 +215,22 @@
           brightness = "High";
           effect = "static";
         };
+        power = {
+          enable = true;
+          powerProfilesDaemon = true;
+        };
+        fan-control = {
+          enable = true;
+          profile = "auto";
+          onAc = "performance";
+        };
+        cooling.enable = true;
       };
-      fan-control = {
-        enable = true;
-        profile = "auto";
-        onAc = "extreme";
+      devices = {
+        logitech.enable = true;
+        android.enable = true;
       };
       sound.enable = true;
-      networking = {
-        enable = true;
-        hostName = "bagalamukhi";
-        # wifi.rtl88x2bu.enable = true;
-        quad9.enable = true;
-      };
-      android.enable = true;
       keyboard = {
         enable = true;
         copilotKeyAsRightCtrl = true;
@@ -227,59 +240,6 @@
     # Stylix
     stylix.enable = true;
 
-    # Desktop
-    desktop = {
-      awesomewm = {
-        enable = true;
-      };
-      lightdm.enable = true;
-    };
-
-    # AI
-    ai = {
-      ollama.enable = true;
-      core.enable = true;
-    };
-
-    # Security
-    security = {
-      doas = {
-        enable = true;
-        adminUser = "tlh";
-      };
-      sudo.enable = true;
-
-      # Firewall configuration
-      firewall = {
-        enable = false;
-        allowSSH = true;
-        allowHTTP = true; # Port 80
-        allowDevelopment = true; # Port 8000 and other dev ports
-        # customTcpPorts = [
-        # ];
-        logRefusedConnections = true;
-        trustedInterfaces = ["lo"]; # localhost (127.0.0.1)
-      };
-
-      # SSH configuration with password authentication enabled
-      ssh = {
-        enable = true;
-        passwordAuthentication = true; # Allow password login as requested
-        permitRootLogin = "no"; # Keep root login disabled for security
-        maxAuthTries = 3;
-        port = 2222;
-      };
-
-      # Fail2ban for intrusion prevention
-      fail2ban = {
-        enable = false;
-        maxRetry = 5;
-        banTime = "1h";
-        findTime = "10m";
-        enableSSH = true;
-        ignoreIPs = ["127.0.0.1/8" "::1" "192.168.1.0/24"]; # Add your local network
-      };
-    };
   };
 
   # Host-specific display configuration

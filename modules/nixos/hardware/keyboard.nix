@@ -60,11 +60,11 @@ in {
           ids = ["*"];
           settings = {
             main = {
-              # Remap F23 (the Copilot key's base scancode) to rightctrl.
-              # keyd handles the Meta+Shift chord automatically by matching
-              # on the F23 keypress and suppressing the modifiers that
-              # accompany it.
-              f23 = "rightctrl";
+              # The Copilot key on Lenovo Legion sends LeftMeta+LeftShift+F23
+              # as a chord of separate key events. keyd matches the full chord
+              # and outputs a clean RightCtrl, suppressing the Meta and Shift
+              # modifiers that accompany it.
+              "leftmeta+leftshift+f23" = "rightcontrol";
             };
           };
         };

@@ -25,6 +25,40 @@ def rgb_to_hsl(r, g, b):
         h /= 6
     return round(h * 360), round(s * 100), round(l * 100)
 
+def rgb_to_oklch(r, g, b):
+    # Linearize sRGB
+    def linearize(c):
+        c = c / 255.0
+        return ((c + 0.055) / 1.055) ** 2.4 if c > 0.04045 else c / 12.92
+
+    r_l = linearize(r)
+    g_l = linearize(g)
+    b_l = linearize(b)
+
+    # Linear RGB to LMS
+    l = 0.4122214708 * r_l + 0.5363325363 * g_l + 0.0514459929 * b_l
+    m = 0.2119034982 * r_l + 0.6806995451 * g_l + 0.1073969566 * b_l
+    s = 0.0883024619 * r_l + 0.2817188376 * g_l + 0.6299787005 * b_l
+
+    # LMS to OKLab
+    import math
+    l_ = math.cbrt(l)
+    m_ = math.cbrt(m)
+    s_ = math.cbrt(s)
+
+    L = 0.2104542553 * l_ + 0.7936177850 * m_ - 0.0040720468 * s_
+    a = 1.9779984951 * l_ - 2.4285922050 * m_ + 0.4505937099 * s_
+    b_lab = 0.0259040371 * l_ + 0.7827717662 * m_ - 0.8086757660 * s_
+
+    # OKLab to OKLCH
+    C = math.sqrt(a * a + b_lab * b_lab)
+    H = math.degrees(math.atan2(b_lab, a))
+    if H < 0:
+        H += 360.0
+
+    return round(L, 4), round(C, 4), round(H, 1)
+
+
 def get_luminance(hex_color):
     r, g, b = hex_to_rgb(hex_color)
     return (0.299 * r + 0.587 * g + 0.114 * b) / 255
@@ -71,6 +105,7 @@ def create_html(scheme_name, colors, output_path):
         hex_color = hex_color.lstrip('#')
         r, g, b = hex_to_rgb(hex_color)
         h, s, l = rgb_to_hsl(r, g, b)
+        okl, okc, okh = rgb_to_oklch(r, g, b)
         label = base_labels.get(base_name, base_name)
         text_color = "#000000" if get_luminance(hex_color) > 0.5 else "#ffffff"
 
@@ -92,6 +127,10 @@ def create_html(scheme_name, colors, output_path):
                 <div class="value-row">
                     <span class="value-type">HSL</span>
                     <span class="value">hsl({h}, {s}%, {l}%)</span>
+                </div>
+                <div class="value-row">
+                    <span class="value-type">OKLCH</span>
+                    <span class="value">oklch({okl:.4f} {okc:.4f} {okh:.1f})</span>
                 </div>
             </div>
         </div>'''
@@ -145,7 +184,7 @@ def create_html(scheme_name, colors, output_path):
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
         }}
         .card-header {{
-            padding: 1.25rem;
+            padding: 0.75rem 1rem;
         }}
         .base-name {{
             display: block;
@@ -160,7 +199,7 @@ def create_html(scheme_name, colors, output_path):
             opacity: 0.8;
         }}
         .color-values {{
-            padding: 1.25rem;
+            padding: 0.5rem 0.75rem;
             background: rgba(0, 0, 0, 0.15);
             backdrop-filter: blur(10px);
         }}
@@ -168,21 +207,19 @@ def create_html(scheme_name, colors, output_path):
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0.4rem 0;
-            font-size: 0.9rem;
-        }}
-        .value-row:not(:last-child) {{
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.15rem 0;
+            font-size: 0.65rem;
+            line-height: 1.2;
         }}
         .value-type {{
             font-weight: 600;
             text-transform: uppercase;
-            font-size: 0.75rem;
+            font-size: 0.6rem;
             opacity: 0.7;
         }}
         .value {{
             font-family: 'SF Mono', 'Fira Code', monospace;
-            font-size: 0.85rem;
+            font-size: 0.68rem;
         }}
     </style>
 </head>
@@ -204,7 +241,7 @@ def main():
     output_dir = current_dir / "swatches"
     output_dir.mkdir(exist_ok=True)
 
-    for yaml_file in sorted(current_dir.glob("*.yaml")):
+    for yaml_file in sorted(list(current_dir.glob("*.yaml")) + list(current_dir.glob("*.yml"))):
         data = parse_yaml(yaml_file)
         scheme_name = data.get('scheme', yaml_file.stem)
         colors = {k: v for k, v in data.items() if k.startswith('base')}

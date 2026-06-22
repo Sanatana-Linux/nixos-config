@@ -11,6 +11,25 @@ Each entry follows this format:
 
 ## Changes
 
+- **2026-06-21**: Major module reorganization + 8 TODO fixes
+  - **REORGANIZED**: `modules/nixos/` directory structure — 7 directories eliminated, 6 new subdirectories created
+    - `ai/` → `system/apps/ai/`, `apps/` → `system/apps/`, `desktop/` → `system/desktop/`
+    - `performance/` → `system/performance/`, `security/` → `system/security/`
+    - `power/` → `hardware/lenovo/power.nix`, `printer/` → `hardware/devices/printer/`
+    - `hardware/`: separated into `lenovo/` and `devices/` subdirectories
+    - `hardware/networking.nix` → `system/networking.nix`, `hardware/tpm.nix` → `system/security/tpm.nix`
+  - **MIGRATED**: Option paths updated across all modules and 4 host configs (bagalamukhi, matangi, bhairavi, chhinamasta)
+  - **FIXED**: fail2ban systemd service — `systemd.services.fail2ban = { ... }` (replaced entire unit, stripped ExecStart) → `systemd.services.fail2ban.after/.wants` (merge syntax)
+  - **FIXED**: Removed redundant firewall sub-options from `hardware/networking.nix` (now `system/networking.nix`) — kept `system/security/firewall.nix` as canonical
+  - **FIXED**: Copilot key mapping — changed keyd config from `f23 = "rightctrl"` to `"leftmeta+leftshift+f23" = "rightctrl"` chord to handle Lenovo Legion's Meta+Shift+F23 chord
+  - **FIXED**: Keyboard backlight race condition — replaced polling `legion-kb-backlight` systemd service with udev `RUN+=` rule triggered on ITE HID device detection
+  - **FIXED**: NetworkManager Realtek USB WiFi instability — added `scanRandMacAddress = false`, `macAddress = "permanent"`, regulatory domain `"US"`, WPS disabled via dispatcher, USB autosuspend off via udev rule (`0bda` vendor), system-owned secrets via dispatcher
+  - **ENHANCED**: Security packages moved to `modules/packages/security` with nested sub-options; `unprivileged_bpf_disabled` sysctl moved to firewall module
+  - **ENHANCED**: Fan curves consolidated 4→3 — `extreme`→`performance`, `performance`→`balanced`, `balanced`→`quiet`; old `quiet` removed; `onAc` default changed from `"extreme"` to `"performance"`
+  - **ENHANCED**: Added `expose_all_fans=Y` kernel parameter to `lenovo.nix` for dual-fan hwmon control
+  - **ENHANCED**: Added UPower critical battery notification — systemd timer polls every 2min, sends `notify-send` at 8% threshold
+  - **UPDATED**: `modules/nixos/AGENTS.md`, `hardware/AGENTS.md`, `system/apps/AGENTS.md`, `system/desktop/AGENTS.md`, `system/performance/AGENTS.md`, `system/security/AGENTS.md`, `system/apps/ai/AGENTS.md` — directory paths and option paths updated to reflect new structure
+
 - **2026-04-16**: Replaced Qogir icon theme with Honor grey icon theme
 - **NEW**: `pkgs/honor-icon-theme.nix` - Custom package for Honor icon theme with grey folder variant
 - **UPDATED**: `modules/nixos/stylix/default.nix` - Changed icon theme from Qogir to Honor-grey/Honor-grey-dark

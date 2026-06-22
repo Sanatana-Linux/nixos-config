@@ -10,18 +10,11 @@ NixOS system-level modules. Each module declares an enable option under `modules
 
 | Directory | Purpose |
 |-----------|---------|
-| `ai/` | AI/ML tools (ollama, comfyui) |
-| `apps/` | System apps (appimage, java, nix-ld, network-manager-applet, shotcut, thunar) |
 | `base/` | Base system config (nix, fhs, services, permitted packages, shell, environment variables) |
-| `desktop/` | Desktop environment (awesomewm, LightDM/GTK greeter, XFCE, wallpapers) |
-| `hardware/` | Hardware support (NVIDIA, Intel, bluetooth, networking, sound, tpm, udev) |
-| `packages/` | System package sets |
-| `performance/` | Performance tuning (cachy scheduler, oomd, undervolt, zram) |
-| `power/` | Power management (laptop) |
-| `printer/` | Printer drivers (Brother) |
-| `security/` | Security (doas, sudo, firewall, fail2ban, pam, ssh) |
+| `hardware/` | Hardware drivers — GPU (nvidia, intel), bluetooth, keyboard, sound, thunderbolt, udev, Lenovo (lenovo, power, cooling, fan-control), devices (android, iphone, logitech, printer) |
+| `packages/` | System package sets (categories + security) |
 | `stylix/` | System-wide theming (colors, fonts, cursor via stylix) |
-| `system/` | Boot, systemd, plymouth |
+| `system/` | System services — boot, cron, systemd, networking, apps (appimage, java, nix-ld, network-manager-applet, shotcut, thunar, ai/ollama/comfyui), desktop (awesomewm, lightdm, xfce), performance (cachy, oomd, undervolt, zram), security (doas, fail2ban, firewall, pam, ssh, sudo, tpm) |
 | `users/` | User account modules (tlh, smg, user) — **import per-host only** |
 | `virtualization/` | VMs and containers (docker, lxc, virt-manager, waydroid, quickemu) |
 

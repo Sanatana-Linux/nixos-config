@@ -90,7 +90,6 @@ in {
         "rcu_nocbs=all"
         "rcutree.rcu_idle_gp_delay=0"
         "rcupdate.rcu_expedited=1"
-        "threadirqs"
         "preempt=voluntary"
         "tsc=reliable"
         "tsc=noirqtime"

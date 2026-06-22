@@ -1,16 +1,23 @@
 {
   "active_changes": [
     "gpg-agent SSH support disabled to fix systemd ordering cycle",
-    "nvidia sync mode with GPU firmware + DynamicPowerManagement",
+    "nvidia sync mode with GSP disabled (NVreg_EnableGpuFirmware=0) — more stable on Legion hybrid",
+    "nvidia PAT memory management enabled (NVreg_UsePageAttributeTable=1)",
+    "nvidia system memory init skipped (NVreg_InitializeSystemMemoryAllocations=0)",
+    "nvidia DynamicPowerManagement removed — no effect in sync mode",
+    "nvidia-powerd disabled — requires GSP firmware",
     "undervolt PL1=65W PL2=100W",
     "systemd.coredump via settings.Coredump.Storage",
     "yazi open rules fixed for 0.4+",
     "opencode 1.17.3 source-built overlay",
     "permittedInsecurePackages moved to home-manager module",
-    "pipx tests disabled via overlay"
+    "pipx tests disabled via overlay",
+    "legion-kb-rgb patched for Legion 5 Pro report descriptor (191 vs 959)",
+    "Copilot key remapped to rightcontrol via keyd (was rightctrl — invalid key name)",
+    "Advanced BIOS GRUB entry uses search --file instead of @bootRoot@"
   ],
   "home_manager_version": "0-unstable-2026-06-05",
-  "last_refresh": "2026-06-11",
+  "last_refresh": "2026-06-22",
   "opencode_config": {
     "opencode_jsonc": true,
     "project_agents_md": true,
@@ -25,5 +32,11 @@
   "nixpkgs_rev": "cab778239e705082fe97bb4990e0d24c50924c04",
   "nixpkgs_version": "26.11pre-git",
   "opencode_version": "1.17.3",
-  "git_head": "ad2ace0"
+  "git_head": "ad2ace0",
+  "known_issues": [
+    "nvidia-persistenced may fail on first switch after kernel param changes — resolves on reboot",
+    "nvidia-temp-limit cascades from persistenced — resolves on reboot",
+    "CDI generator cascades from NVML unavailability — resolves on reboot",
+    "/etc/resolv.conf stale regular file from openresolv — symlink creation fails, NM+DNS still work"
+  ]
 }

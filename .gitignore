@@ -94,6 +94,7 @@ CustomizableUI.sys.mjs:4319:17
 
 # OpenCode session state (gitignored)
 .opencode/state/
+.opencode/cache/
 .opencode/node_modules/
 .opencode/package.json
 .opencode/package-lock.json

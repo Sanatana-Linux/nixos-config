@@ -1,0 +1,44 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "ollama/deepseek-v4-flash:cloud",
+  "default_agent": "hubs",
+  "provider": {
+    "ollama": {
+      "name": "Ollama",
+      "npm": "@ai-sdk/openai-compatible",
+      "options": {
+        "baseURL": "http://127.0.0.1:11434/v1"
+      }
+    }
+  },
+  "permission": {
+    "bash": "allow",
+    "read": "allow",
+    "grep": "allow",
+    "glob": "allow",
+    "skill": "allow",
+    "todowrite": "allow",
+    "question": "allow",
+    "webfetch": "allow",
+    "websearch": "allow"
+  },
+  "instructions": [
+    ".opencode/rules/nix-flake-strategy.md",
+    ".opencode/rules/project-constraints.md",
+    ".opencode/rules/comment-style.md"
+  ],
+  "tools": {
+    "nix-build": true,
+    "nix-flake": true,
+    "nix-format": true
+  },
+  "mcp": {},
+  "skills": {
+    "paths": [
+      ".opencode/skills/nixos-module",
+      ".opencode/skills/nix-flake-ops",
+      ".opencode/skills/nixos-debug",
+      ".opencode/skills/nix-secrets"
+    ]
+  }
+}

@@ -36,6 +36,7 @@
       firefox = {
         enable = true;
         withAutoconfig = true;
+        package = pkgs.firefox;
       };
       kitty.enable = true;
       gpg.enable = true;

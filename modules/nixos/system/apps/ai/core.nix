@@ -20,6 +20,10 @@ in {
       chatblade
       tgpt
 
+      # Image upscaling
+      upscaler
+      upscayl
+
       # Python AI packages
       python312Packages.ollama
     ];

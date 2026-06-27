@@ -49,7 +49,6 @@ in {
       networking = {
         enable = true;
         hostName = "chhinamasta";
-        wifi.rtl88x2bu.enable = true; # Same WiFi support as bagalamukhi
       };
       apps = {
         nix-ld.enable = true;
@@ -79,6 +78,7 @@ in {
 
     base = {
       enable = true;
+      fonts.enable = true;
       timezone = "America/New_York";
       nix.enable = true;
       permittedPackages.enable = true;

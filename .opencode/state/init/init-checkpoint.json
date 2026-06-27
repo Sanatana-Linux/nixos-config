@@ -1,12 +1,23 @@
 {
   "lastCompletedPhase": 3,
-  "timestamp": "2026-06-11T16:30:00Z",
+  "timestamp": "2026-06-27T12:50:00Z",
   "subcommand": "refresh",
   "mode": "merge",
   "files": [
     ".opencode/opencode.jsonc",
+    ".opencode/tools/nix-build.ts",
+    ".opencode/tools/nix-flake.ts",
+    ".opencode/tools/nix-format.ts",
+    ".opencode/skills/nixos-module/SKILL.md",
+    ".opencode/skills/nix-flake-ops/SKILL.md",
+    ".opencode/skills/nixos-debug/SKILL.md",
+    ".opencode/skills/nix-secrets/SKILL.md",
     ".opencode/rules/nix-flake-strategy.md",
+    ".opencode/rules/project-constraints.md",
+    ".opencode/rules/comment-style.md",
     ".opencode/state/project-memory.json",
+    ".opencode/state/init/stack-fingerprint.json",
+    ".opencode/state/init/stack-recommendations.json",
     "AGENTS.md"
   ]
 }

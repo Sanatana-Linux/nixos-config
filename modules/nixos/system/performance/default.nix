@@ -44,7 +44,8 @@ in {
       "vm.dirty_background_ratio" = 5;
     };
 
-    # BPF performance tuning
-    services.bpftune.enable = true;
+    # BPF performance tuning — disabled: burns ~4% CPU for marginal benefit
+    # on a desktop workload. The kernel's built-in heuristics are sufficient.
+    services.bpftune.enable = false;
   };
 }

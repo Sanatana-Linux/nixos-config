@@ -67,6 +67,7 @@
 
     base = {
       enable = true;
+      fonts.enable = true;
       nix.enable = true;
       permittedPackages.enable = true;
       services.enable = true;

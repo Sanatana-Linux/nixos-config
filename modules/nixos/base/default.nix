@@ -9,6 +9,7 @@ with lib; let
 in {
   imports = [
     ./fhs.nix
+    ./fonts.nix
     ./nix.nix
     ./packages
     ./permitted-packages.nix

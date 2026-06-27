@@ -9,7 +9,7 @@ with lib; let
   cfg = config.modules.programs.firefox;
   profile = config.home.username;
   firefox-with-autoconfig =
-    (pkgs.firefox.override {
+    (cfg.package.override {
       extraPrefsFiles = [
         (builtins.fetchurl {
           url = "https://raw.githubusercontent.com/MrOtherGuy/fx-autoconfig/master/program/config.js";
@@ -34,6 +34,13 @@ with lib; let
 in {
   options.modules.programs.firefox = {
     enable = mkEnableOption "Firefox browser with extensions";
+
+    package = mkOption {
+      type = types.package;
+      default = pkgs.firefox;
+      defaultText = literalExpression "pkgs.firefox";
+      description = "Firefox package to use (e.g. pkgs.firefox, pkgs.firefox-beta-bin, pkgs.firefox-devedition-bin)";
+    };
 
     defaultBrowser = mkOption {
       type = types.bool;
@@ -69,7 +76,7 @@ in {
       package =
         if cfg.withAutoconfig
         then firefox-with-autoconfig
-        else pkgs.firefox;
+        else cfg.package;
 
       configPath = "${config.home.homeDirectory}/.mozilla/firefox";
 

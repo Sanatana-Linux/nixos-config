@@ -84,7 +84,7 @@ with lib; {
         # Going from 6 to 3 roughly halves the per-frame blur cost.
         blur = {
           method = "dual_kawase";
-          strength = 3;
+          strength = 2;
         };
 
         # ---- Reduce detection overhead ----

@@ -64,9 +64,14 @@ in {
               # as a chord of separate key events. keyd matches the full chord
               # and outputs a clean RightCtrl, suppressing the Meta and Shift
               # modifiers that accompany it.
+              #
+              # Some models send just F23 without modifiers — the standalone
+              # f23 map catches that case. The chord is tried first; if the
+              # full chord isn't detected within chord_timeout, f23 maps alone.
               "leftmeta+leftshift+f23" = "rightcontrol";
+              "f23" = "rightcontrol";
             };
-            timings = {
+            global = {
               # USB keyboard macro fires events faster than default 50ms
               # chord timeout — increase to 100ms so keyd reliably captures
               # the full LeftMeta+LeftShift+F23 chord.

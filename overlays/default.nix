@@ -40,8 +40,9 @@
         ]
     );
 
-    # opencode removed — using nixpkgs version instead (embedded bun segfault issues)
-    # opencode = final.callPackage ./opencode.nix {};
+    # Latest opencode (v1.17.9) with patches to remove built-in /skills, /share, /init.
+    # Use our own package.nix because nixpkgs lags behind and doesn't include packages/tui.
+    opencode = final.callPackage ../opencode/package.nix {};
 
     nps = inputs.nps.defaultPackage.${prev.stdenv.hostPlatform.system};
 
@@ -75,15 +76,10 @@
       nativeBuildInputs = (old.nativeBuildInputs or []) ++ [final.python313Packages.setuptools-scm];
     });
 
-    # Fix lenovo-legion: hardcoded PNP0C09:00 doesn't exist on kernel 7.x+
-    # The driver registers as platform:legion/legion instead
-    # Also: handle IOError on sysfs reads gracefully (firmware WMI failures return EINVAL
-    # for features like rapidcharge, cpu_oc, power limits that the BIOS doesn't fully implement)
+    # Handle IOError on sysfs reads gracefully — firmware WMI failures return EINVAL
+    # for features like rapidcharge, cpu_oc, power limits that the BIOS doesn't fully implement
     lenovo-legion = prev.lenovo-legion.overrideAttrs (old: {
       postPatch = (old.postPatch or "") + ''
-        substituteInPlace ./legion_linux/legion.py \
-          --replace-fail "LEGION_SYS_BASEPATH = '/sys/module/legion_laptop/drivers/platform:legion/PNP0C09:00'" \
-          "LEGION_SYS_BASEPATH = '/sys/module/legion_laptop/drivers/platform:legion/legion'"
         # Don't crash the GUI when sysfs reads fail — some features exist but the EC
         # returns EINVAL (Errno 22) because the BIOS doesn't fully implement the WMI method
         ${final.python313.interpreter} -c "

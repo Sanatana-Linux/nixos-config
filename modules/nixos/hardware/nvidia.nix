@@ -46,128 +46,119 @@ in {
 
   config = mkIf cfg.enable {
     environment = {
-      variables =
-        {
-          # Display scaling
-          GDK_SCALE = "1";
-          GDK_DPI_SCALE = "1";
-          _JAVA_OPTIONS = "-Dsun.java2d.uiScale=1";
+      variables = {
+        # Display scaling
+        GDK_SCALE = "1";
+        GDK_DPI_SCALE = "1";
+        _JAVA_OPTIONS = "-Dsun.java2d.uiScale=1";
 
-          # Video acceleration
-          LIBVA_DRIVER_NAME = "nvidia";
+        # Video acceleration
+        LIBVA_DRIVER_NAME = "nvidia";
 
-          # Wayland compatibility
-          GBM_BACKEND = "nvidia-drm";
-          __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-        }
-        // optionalAttrs cfg.cuda.enable {
-          CUDA_PATH = "${pkgs.cudatoolkit}";
-          EXTRA_LDFLAGS = "-L/lib -L${config.boot.kernelPackages.nvidiaPackages.${cfg.driver}}/lib";
-          EXTRA_CCFLAGS = "-I/usr/include";
-        };
+        # Wayland compatibility
+        GBM_BACKEND = "nvidia-drm";
+        __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+      } // optionalAttrs cfg.cuda.enable {
+        CUDA_PATH = "${pkgs.cudatoolkit}";
+        EXTRA_LDFLAGS = "-L/lib -L${config.boot.kernelPackages.nvidiaPackages.${cfg.driver}}/lib";
+        EXTRA_CCFLAGS = "-I/usr/include";
+      };
 
-      systemPackages = with pkgs;
-        [
-          # Core GL libraries
-          libGL
-          libGLU
-          libGLX
-          libglut
-          libglvnd
-
-          # Mesa
-          mesa
-          mesa_glu
-          mesa-gl-headers
-          mesa-demos
-
-          # NVIDIA specific
-          nvidia-vaapi-driver
-          nvidia-texture-tools
-          libnvidia-container
-          nv-codec-headers
-          nvtopPackages.full
-          nvidia_cg_toolkit
-
-          nvidia-optical-flow-sdk # Optical flow SDK
-          # Vulkan
-          vulkan-headers
-          vulkan-extension-layer
-          vulkan-helper
-          vulkan-loader
-          vulkan-tools
-          vulkan-utility-libraries
-          vkd3d
-          vk-bootstrap
-
-          # Additional graphics libraries
-          eglexternalplatform
-          freeglut
-          ftgl
-          gegl
-          glew
-          glee
-          glfw
-          libva-vdpau-driver
-          libvdpau-va-gl
-          mlx42
-          xorg_sys_opengl
-          zenith-nvidia
-          kompute
-        ]
-        ++ optionals cfg.cuda.enable [
-          cudatoolkit
-          nvidia-container-toolkit
-          cudaPackages.cuda_opencl
-          cudaPackages.cuda_nvcc
-          cudaPackages.libcublas
-          cudaPackages.libnvjitlink
-          cudaPackages.nvidia_fs
-          cudaPackages.cuda_nvcc
-          cudaPackages.libcutensor
-          # python312Packages.cuda-bindings  # Let torch-bin handle its own CUDA dependencies
-          # python312Packages.pycuda         # Let torch-bin handle its own CUDA dependencies
-          tiny-cuda-nn
-          cudaPackages.cudatoolkit
-          blas
-          peakperf
-          python312Packages.numpy
-          # (python312.withPackages (p:
-          #   with p; [
-          #     # tensorflowWithCuda  # Temporarily disabled - may be pulling in regular torch
-          #     torch-bin # Use binary torch instead of building from source
-          #     torchvision-bin # Use binary torchvision instead of building from source
-          #   ]))
-        ];
+      systemPackages = with pkgs; [
+        # Core GL libraries
+        libGL libGLU libGLX libglut libglvnd
+        # Mesa
+        mesa mesa_glu mesa-gl-headers mesa-demos
+        # NVIDIA specific
+        nvidia-vaapi-driver
+        nvidia-texture-tools
+        libnvidia-container
+        nv-codec-headers
+        nvtopPackages.full
+        nvidia_cg_toolkit
+        nvidia-optical-flow-sdk
+        # Vulkan
+        vulkan-headers vulkan-extension-layer vulkan-helper
+        vulkan-loader vulkan-tools vulkan-utility-libraries
+        vkd3d vk-bootstrap
+        # Additional graphics libraries
+        eglexternalplatform freeglut ftgl gegl glew glee glfw
+        libva-vdpau-driver libvdpau-va-gl mlx42
+        xorg_sys_opengl zenith-nvidia kompute
+      ] ++ optionals cfg.cuda.enable [
+        cudatoolkit
+        nvidia-container-toolkit
+        cudaPackages.cuda_opencl
+        cudaPackages.cuda_nvcc
+        cudaPackages.libcublas
+        cudaPackages.libnvjitlink
+        cudaPackages.nvidia_fs
+        cudaPackages.libcutensor
+        tiny-cuda-nn
+        cudaPackages.cudatoolkit
+        blas peakperf
+        python312Packages.numpy
+      ];
     };
 
-    # Kernel params for NVIDIA
+    # ── Kernel parameters ──────────────────────────────────────────────
     boot.kernelParams = [
+      # ── DRM / display ──
+      # Provide a kernel framebuffer via nvidia-drm. Required for Wayland
+      # and for the console to work before X starts.
       "nvidia_drm.fbdev=1"
-      "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
+      # Enable kernel modesetting via nvidia-drm. Required for PRIME sync,
+      # Wayland, and proper multi-monitor support.
       "nvidia-drm.modeset=1"
+
+      # ── Memory / performance ──
+      # Preserve VRAM allocations across VT switches and suspend/resume.
+      # Without this, the GPU clears VRAM on mode switches, destroying
+      # the desktop state. Does NOT conflict with nvidia-persistenced —
+      # persistenced keeps the kernel module loaded; this preserves the
+      # actual framebuffer contents in VRAM.
+      "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
+      # Enable PCIe Resizable BAR — lets the CPU access the entire GPU
+      # framebuffer in one mapping instead of 256MB windows. Improves
+      # throughput for large texture transfers.
       "nvidia.NVreg_EnableResizableBar=1"
-      # GSP firmware disabled: causes GPU instability on Lenovo Legion hybrid setups
-      # (Vulkan/PRIME sync hangs, prevents lower power states on open kernel modules)
-      "nvidia.NVreg_EnableGpuFirmware=0"
-      # PAT (Page Attribute Table) is the modern memory management method — more
-      # efficient than legacy MTRR for CPU↔GPU memory transfers (constant in sync mode)
+      # Use Page Attribute Table (PAT) for CPU↔GPU memory mappings.
+      # PAT is the modern replacement for MTRR — more flexible, better
+      # performance on CPUs with many cores. MTRR is deprecated.
       "nvidia.NVreg_UsePageAttributeTable=1"
-      # Skip clearing system memory before GPU use. Minor perf gain, no meaningful
-      # security risk on a single-user desktop.
+      # Skip zeroing system memory before GPU DMA allocations. The GPU
+      # overwrites it immediately anyway. Saves CPU time on every buffer
+      # allocation. Safe on a single-user desktop.
       "nvidia.NVreg_InitializeSystemMemoryAllocations=0"
+
+      # ── Power management ──
+      # Enable GSP (GPU System Processor) firmware. Required for:
+      # - nvidia-powerd (dynamic power management)
+      # - Lower GPU idle states (P8 instead of P0)
+      # - Runtime D3 (deep sleep) when GPU is idle
+      # - Video memory self-refresh / power-off
+      "nvidia.NVreg_EnableGpuFirmware=1"
+      # Dynamic power management: 0x02 = coarse-grained (whole-GPU suspend).
+      # Required alongside GSP firmware for the GPU to reach P8 at idle.
+      # Without this, the GPU may stay in P0-P4 even with nvidia-powerd running.
+      "nvidia.NVreg_DynamicPowerManagement=0x02"
+      # Enable PCIe Active State Power Management. Allows the PCIe link
+      # to enter lower power states (L0s, L1) when idle. Required for
+      # the GPU to reach deep sleep states.
       "pcie_aspm=on"
-      "pcie_aspm.policy=balanced"
+      # ASPM policy: powersave = aggressively enter low-power link states.
+      # On laptops this saves 1-3W at idle with negligible latency impact.
+      "pcie_aspm.policy=powersave"
     ];
 
-    # Initrd kernel modules for NVIDIA
-    # Loaded early to ensure display works during boot/LUKS
+    # ── Initrd modules ────────────────────────────────────────────────
+    # Loaded early so the display works during boot and LUKS unlock.
     boot.initrd.kernelModules = [
-      "nvidia" # Main NVIDIA kernel driver
-      "nvidiafb" # NVIDIA framebuffer driver
-      "nvidia-drm" # Direct Rendering Manager (DRM) interface
-      "nvidia-uvm" # Unified Virtual Memory (required for CUDA)
-      "nvidia-modeset" # Kernel modesetting support
+      "nvidia"          # Main kernel driver
+      "nvidiafb"        # Framebuffer (console before X)
+      "nvidia-drm"      # DRM/KMS interface
+      "nvidia-uvm"      # Unified Virtual Memory (CUDA)
+      "nvidia-modeset"  # Kernel modesetting
     ];
 
     nixpkgs.config = {
@@ -190,15 +181,9 @@ in {
         enable = true;
         enable32Bit = true;
         extraPackages = with pkgs; [
-          glfw
-          libva-utils
-          libvdpau-va-gl
-          mesa
-          mesa-gl-headers
-          mesa-demos
-          mlx42
-          nvidia-vaapi-driver
-          xorg_sys_opengl
+          glfw libva-utils libvdpau-va-gl
+          mesa mesa-gl-headers mesa-demos mlx42
+          nvidia-vaapi-driver xorg_sys_opengl
           config.boot.kernelPackages.nvidiaPackages.${cfg.driver}
         ];
       };
@@ -206,20 +191,53 @@ in {
       nvidia = {
         modesetting.enable = true;
         nvidiaSettings = true;
+
+        # ── nvidia-persistenced ──────────────────────────────────────
+        # Keeps the NVIDIA kernel module loaded even when no X clients
+        # are using the GPU. Without it, the module unloads when the
+        # last client exits, which:
+        # - Destroys VRAM state (even with PreserveVideoMemoryAllocations)
+        # - Resets GPU clocks/power state on next load
+        # - Adds ~2s latency to every GPU wake-up
+        # Complementary to PreserveVideoMemoryAllocations=1:
+        #   persistenced = keep the driver loaded
+        #   PreserveVideoMemoryAllocations = keep the framebuffer intact
         nvidiaPersistenced = true;
+
+        # ── Dynamic Boost ────────────────────────────────────────────
+        # Lets the GPU and CPU negotiate power budget dynamically.
+        # When the GPU is idle, power shifts to the CPU. When gaming,
+        # power shifts to the GPU. Requires GSP firmware.
         dynamicBoost.enable = true;
+
+        # ── Composition Pipeline ─────────────────────────────────────
+        # Disabled: adds a full-frame buffer that eliminates tearing but
+        # costs ~1 frame of latency and ~5-10W of GPU power. PRIME sync
+        # handles tear-free output without the power cost.
         forceFullCompositionPipeline = false;
 
+        # ── Runtime power management ─────────────────────────────────
+        # finegrained = false: use coarse-grained runtime PM. The GPU
+        # suspends as a whole device rather than per-function. More
+        # reliable on hybrid laptops where the GPU may be in use by
+        # multiple subsystems (X, CUDA, video decode) simultaneously.
         powerManagement = {
           enable = true;
           finegrained = false;
         };
 
+        # ── Open kernel modules ─────────────────────────────────────
+        # Use the open-source nvidia.ko (not the proprietary one).
+        # Required for GSP firmware support on newer kernels.
         open = true;
+
         package = config.boot.kernelPackages.nvidiaPackages.${cfg.driver};
 
         prime = {
-          # CRITICAL: Never change to offload mode EVER
+          # PRIME sync: the NVIDIA GPU renders directly to the Intel
+          # framebuffer with no copy. Zero latency, tear-free. Never
+          # switch to offload mode — it adds a copy step and breaks
+          # seamless desktop composition.
           sync.enable = mkForce true;
           offload.enable = mkForce false;
 
@@ -229,11 +247,13 @@ in {
       };
     };
 
-    # nvidia-powerd requires GSP firmware to function — permanently disabled since
-    # NVreg_EnableGpuFirmware=0 (GSP off) makes it fail with "Allocate Root client failed 0x6a"
-    systemd.services.nvidia-powerd.enable = false;
+    # ── nvidia-powerd ─────────────────────────────────────────────────
+    # Dynamic power management daemon. Requires GSP firmware
+    # (NVreg_EnableGpuFirmware=1). Manages GPU clock/power state
+    # transitions (P0↔P8), runtime D3, and video memory self-refresh.
+    # Enabled now that GSP firmware is active after reboot.
 
-    # Apply GPU temperature limit via nvidia-smi at boot
+    # ── GPU temperature limit ─────────────────────────────────────────
     systemd.services.nvidia-temp-limit = mkIf (cfg.gpuTempLimit != null) {
       description = "Set NVIDIA GPU temperature limit to +${toString cfg.gpuTempLimit}°C";
       wantedBy = ["multi-user.target"];
@@ -242,12 +262,11 @@ in {
         Type = "oneshot";
         RemainAfterExit = true;
       };
-      path = with pkgs; [ config.boot.kernelPackages.nvidiaPackages.${cfg.driver} ];
+      path = with pkgs; [config.boot.kernelPackages.nvidiaPackages.${cfg.driver}];
       script = ''
         TEMP_LIMIT=${toString cfg.gpuTempLimit}
         echo "Setting GPU temperature limit to $TEMP_LIMIT°C..."
 
-        # Wait up to 30s for nvidia-smi to become available
         for i in $(seq 1 30); do
           if nvidia-smi -L >/dev/null 2>&1; then
             break
@@ -266,6 +285,4 @@ in {
       '';
     };
   };
-
-
 }

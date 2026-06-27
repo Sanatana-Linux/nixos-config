@@ -73,7 +73,7 @@ in {
         cudaPackages.nccl # NVIDIA Collective Communications Library
         cudaPackages.nvidia_fs # NVIDIA file system support
         cudaPackages.libnvjitlink # CUDA JIT linker
-        cudaPackages.cuda_cccl # CUDA C++ Core Libraries
+        cudaPackages.cccl # CUDA C++ Core Libraries
         cudaPackages.cuda_cudart # CUDA runtime library
         cudaPackages.cuda_gdb # CUDA debugger
         cudaPackages.saxpy # CUDA sample code

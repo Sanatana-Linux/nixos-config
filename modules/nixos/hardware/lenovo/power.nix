@@ -50,8 +50,6 @@ in {
     environment.systemPackages = [config.boot.kernelPackages.cpupower];
 
     services = {
-      # thermal sensors and controls
-      thermald.enable = true;
       # handle ACPI events
       acpid.enable = true;
       # Power Profiles
@@ -62,12 +60,13 @@ in {
         settings = {
           CPU_BOOST_ON_AC = cfg.cpuBoostOnAc;
           CPU_BOOST_ON_BAT = cfg.cpuBoostOnBat;
-          CPU_SCALING_GOVERNOR_ON_AC = "performance";
+          CPU_SCALING_GOVERNOR_ON_AC = "powersave";
           CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-          CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+          # EPP is managed by legion-epp + legion-thermal-guard — don't override
+          CPU_ENERGY_PERF_POLICY_ON_AC = "balance_performance";
           CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_power";
-          PLATFORM_PROFILE_ON_AC = "performance";
-          PLATFORM_PROFILE_ON_BAT = "balanced";
+          PLATFORM_PROFILE_ON_AC = "balanced";
+          PLATFORM_PROFILE_ON_BAT = "low-power";
           CPU_MAX_PERF_ON_AC = 100;
           CPU_MAX_PERF_ON_BAT = 60;
           TLP_DEFAULT_MODE = "BAT";

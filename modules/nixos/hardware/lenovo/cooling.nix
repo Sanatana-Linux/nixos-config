@@ -8,139 +8,115 @@ with lib; let
   cfg = config.modules.hardware.lenovo.cooling;
 in {
   options.modules.hardware.lenovo.cooling = {
-    enable = mkEnableOption "Aggressive laptop cooling — sets EC thermal/power modes and aggressive fan curves";
+    enable = mkEnableOption "Thermal guard — defaults to balanced EPP, throttles to power-saver when overheating";
 
-    thermalMode = mkOption {
-      type = types.int;
-      default = 3;
-      description = ''
-        EC thermal mode (0=quiet, 1=balanced, 2=performance, 3=extreme).
-        NOTE: thermalmode is READ-ONLY on g8cn/N0CN — the EC controls it internally.
-        This option only reports the expected value; the actual mode is set by Fn+Q.
-      '';
-    };
+    thermalGuard = {
+      enable = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Enable thermal guard — monitors CPU temp and switches to balanced profile when overheating";
+      };
 
-    powerMode = mkOption {
-      type = types.int;
-      default = 3;
-      description = ''
-        EC power mode (0=low power, 1=balanced, 2=performance, 3=turbo).
-        NOTE: Value 4 (custom) is rejected by the EC on g8cn/N0CN — max is 3.
-      '';
-    };
+      highThreshold = mkOption {
+        type = types.int;
+        default = 75;
+        description = "CPU package temperature (°C) at which to throttle to balanced profile";
+      };
 
-    platformProfile = mkOption {
-      type = types.enum ["low-power" "balanced" "performance" "custom"];
-      default = "performance";
-      description = "Platform profile to set at boot.";
-    };
+      lowThreshold = mkOption {
+        type = types.int;
+        default = 70;
+        description = "CPU package temperature (°C) at which to restore performance profile";
+      };
 
-    fanFullSpeed = mkOption {
-      type = types.bool;
-      default = false;
-      description = "Force both fans to full speed immediately at boot.";
+      pollInterval = mkOption {
+        type = types.int;
+        default = 10;
+        description = "Seconds between temperature checks";
+      };
     };
   };
 
   config = mkIf cfg.enable {
-    assertions = [
-      {
-        assertion = config.modules.hardware.lenovo.enable;
-        message = "cooling requires modules.hardware.lenovo.enable = true (for the legion_laptop kernel module)";
-      }
-    ];
-
-    systemd.services.legion-cooling = {
-      description = "Lenovo Legion aggressive cooling — sets EC thermal/power modes and fan curves";
+    # Thermal guard: monitors CPU temp and throttles EPP when overheating.
+    # Sets EPP to balance_performance at startup (after TLP), throttles to
+    # balance_power at highThreshold, restores at lowThreshold.
+    # Directly calls legion-fan-apply (via legion_cli) for fan curve changes.
+    systemd.services.legion-thermal-guard = lib.mkIf cfg.thermalGuard.enable {
+      description = "Lenovo Legion thermal guard — throttles EPP and fans when CPU overheats";
       wantedBy = ["multi-user.target"];
-      after = ["systemd-modules-load.service" "sysinit.target"];
+      after = ["tlp.service"];
       serviceConfig = {
-        Type = "oneshot";
-        RemainAfterExit = true;
+        Type = "simple";
+        Restart = "always";
+        RestartSec = "${toString cfg.thermalGuard.pollInterval}";
         User = "root";
       };
-      path = with pkgs; [coreutils];
+      path = with pkgs; [coreutils pkgs.lenovo-legion];
       script = ''
-        LEGION=""
-        HWMON=""
+        HIGH=${toString cfg.thermalGuard.highThreshold}
+        LOW=${toString cfg.thermalGuard.lowThreshold}
+        INTERVAL=${toString cfg.thermalGuard.pollInterval}
+        THROTTLED=0
 
-        # Find legion sysfs path — try standard path first, then driver-path fallback
-        if [ -d "/sys/devices/platform/legion" ]; then
-          LEGION="/sys/devices/platform/legion"
-        else
-          for d in /sys/module/legion_laptop/drivers/platform:legion/*; do
-            # Skip the module symlink — it's a backlink to the module dir, not a device
-            basename "$d" | grep -qFx "module" && continue
-            if [ -d "$d" ]; then
-              LEGION="$d"
-              break
+        echo "=== Legion Thermal Guard ==="
+        echo "High threshold: ''${HIGH}°C"
+        echo "Low threshold: ''${LOW}°C"
+        echo "Poll interval: ''${INTERVAL}s"
+        echo "Throttle: EPP=balance_power, Fan=performance"
+        echo "TLP manages baseline EPP — guard only intervenes above threshold"
+
+        while true; do
+          # Read CPU package temperature from coretemp hwmon
+          CPU_TEMP=""
+          for hwmon in /sys/class/hwmon/hwmon*; do
+            if [ -f "$hwmon/name" ] && grep -q "coretemp" "$hwmon/name" 2>/dev/null; then
+              if [ -f "$hwmon/temp1_input" ]; then
+                CPU_TEMP=$(( $(cat "$hwmon/temp1_input") / 1000 ))
+                break
+              fi
             fi
           done
-        fi
 
-        # Verify this is a real device — check for characteristic files
-        if [ -n "$LEGION" ] && [ ! -f "$LEGION/thermalmode" ] && [ ! -f "$LEGION/powermode" ]; then
-          echo "WARNING: Found '$LEGION' but it lacks legion device files — not a bound device"
-          LEGION=""
-        fi
-
-        # Find hwmon — try by name, then driver-path fallback
-        for d in /sys/class/hwmon/hwmon*; do
-          if [ -f "$d/name" ] && grep -q "legion" "$d/name" 2>/dev/null; then
-            HWMON="$d"
-            break
+          if [ -z "$CPU_TEMP" ]; then
+            echo "WARNING: Could not read CPU temperature"
+            sleep "$INTERVAL"
+            continue
           fi
-        done
-        if [ -z "$HWMON" ] && [ -n "$LEGION" ]; then
-          for d in "$LEGION"/hwmon/hwmon*; do
-            if [ -d "$d" ]; then
-              HWMON="$d"
-              break
+
+          if [ "$CPU_TEMP" -ge "$HIGH" ] && [ "$THROTTLED" -eq 0 ]; then
+            # Save current EPP before throttling
+            SAVED_EPP=$(cat /sys/devices/system/cpu/cpu0/cpufreq/energy_performance_preference 2>/dev/null || echo "balance_power")
+            echo "$SAVED_EPP" > /var/run/legion-thermal-guard-saved-epp 2>/dev/null || true
+            echo "[$(date +%H:%M:%S)] CPU at ''${CPU_TEMP}°C >= ''${HIGH}°C — THROTTLING EPP to balance_power (was $SAVED_EPP)"
+            for cpu in /sys/devices/system/cpu/cpu*/cpufreq/energy_performance_preference; do
+              echo "balance_power" > "$cpu" 2>/dev/null || true
+            done
+            # Apply performance fan curve for max cooling
+            legion_cli fancurve-write-file-to-hw /etc/legion/fan-curves/performance-ac.yaml 2>/dev/null || true
+            THROTTLED=1
+          elif [ "$CPU_TEMP" -le "$LOW" ] && [ "$THROTTLED" -eq 1 ]; then
+            RESTORE_EPP="balance_power"
+            if [ -f /var/run/legion-thermal-guard-saved-epp ]; then
+              RESTORE_EPP=$(cat /var/run/legion-thermal-guard-saved-epp 2>/dev/null || echo "balance_power")
             fi
-          done
-        fi
+            echo "[$(date +%H:%M:%S)] CPU at ''${CPU_TEMP}°C <= ''${LOW}°C — RESTORING EPP to $RESTORE_EPP"
+            for cpu in /sys/devices/system/cpu/cpu*/cpufreq/energy_performance_preference; do
+              echo "$RESTORE_EPP" > "$cpu" 2>/dev/null || true
+            done
+            # Write a signal for the Fn+Q poll service to restore auto curve
+            touch /var/run/legion-thermal-recovery 2>/dev/null || true
+            THROTTLED=0
+          fi
 
-        if [ -z "$LEGION" ]; then
-          echo "ERROR: legion_laptop module not bound — check boot.kernelParams for legion_laptop.force=1"
-          exit 1
-        fi
-
-        echo "=== Legion Cooling ==="
-        echo "legion: $LEGION"
-        echo "hwmon: $HWMON"
-
-        # Set thermal mode (0-4, higher = more aggressive)
-        if [ -f "$LEGION/thermalmode" ]; then
-          echo ${toString cfg.thermalMode} > "$LEGION/thermalmode" 2>/dev/null || true
-          echo "thermalmode: $(cat $LEGION/thermalmode 2>/dev/null || echo 'unavailable')"
-        else
-          echo "thermalmode: unavailable (EC read-only on g8cn/N0CN)"
-        fi
-
-        # Set power mode (0-4, higher = more power)
-        if [ -f "$LEGION/powermode" ]; then
-          echo ${toString cfg.powerMode} > "$LEGION/powermode" 2>/dev/null || true
-          echo "powermode: $(cat $LEGION/powermode 2>/dev/null || echo 'unavailable')"
-        fi
-
-        # Set platform profile
-        if [ -f "$LEGION/platform-profile/platform-profile-0/profile" ]; then
-          echo "${cfg.platformProfile}" > "$LEGION/platform-profile/platform-profile-0/profile" 2>/dev/null || true
-          echo "platform-profile: $(cat $LEGION/platform-profile/platform-profile-0/profile)"
-        fi
-
-        # Optionally force full fan speed
-        if [ -f "$LEGION/fan_fullspeed" ]; then
-          ${if cfg.fanFullSpeed then ''
-            echo 1 > "$LEGION/fan_fullspeed" 2>/dev/null || true
-            echo "fan_fullspeed: $(cat $LEGION/fan_fullspeed)"
-          '' else ''
-            echo 0 > "$LEGION/fan_fullspeed" 2>/dev/null || true
-          ''}
-        fi
-
-        echo "=== Cooling applied ==="
+          sleep "$INTERVAL"
+        done
       '';
     };
+
+    # Ensure state directory exists for saved EPP
+    systemd.tmpfiles.rules = lib.mkIf cfg.thermalGuard.enable [
+      "d /var/run/legion 0755 root root -"
+    ];
   };
 }

@@ -30,7 +30,6 @@
       networking = {
         enable = true;
         hostName = "bhairavi";
-        wifi.rtl88x2bu.enable = false;
         quad9.enable = true;
       };
       apps = {
@@ -91,6 +90,7 @@
 
     base = {
       enable = true;
+      fonts.enable = true;
       nix.enable = true;
       permittedPackages.enable = true;
       services.enable = true;

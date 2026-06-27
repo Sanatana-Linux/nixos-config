@@ -41,8 +41,8 @@
       networking = {
         enable = true;
         hostName = "bagalamukhi";
-        # wifi.rtl88x2bu.enable = true;
         quad9.enable = true;
+        networkmanager.enable = false;
       };
       apps = {
         nix-ld.enable = true;
@@ -108,6 +108,7 @@
 
     base = {
       enable = true;
+      fonts.enable = true;
       nix.enable = true;
       permittedPackages.enable = true;
       services.enable = true;
@@ -217,12 +218,11 @@
         };
         power = {
           enable = true;
-          powerProfilesDaemon = true;
+          powerProfilesDaemon = false;
         };
         fan-control = {
           enable = true;
           profile = "auto";
-          onAc = "performance";
         };
         cooling.enable = true;
       };
@@ -239,7 +239,6 @@
 
     # Stylix
     stylix.enable = true;
-
   };
 
   # Host-specific display configuration

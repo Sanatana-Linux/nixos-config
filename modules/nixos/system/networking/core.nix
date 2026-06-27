@@ -29,13 +29,18 @@ with lib; {
         default = "US";
         description = "Wireless regulatory domain (country code). Realtek USB adapters often fail to auto-detect and default to restrictive 'world' domain.";
       };
-      rtl88x2bu = {
-        enable = mkEnableOption "Realtek RTL88x2BU USB WiFi adapter driver (for monitor mode, aircrack, etc.)";
-      };
     };
 
     quad9 = {
       enable = mkEnableOption "Quad9 DNS servers with ECS and threat blocking";
+    };
+
+    networkmanager = {
+      enable = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Enable NetworkManager. Set to false to use manual wpa_supplicant + dhclient instead.";
+      };
     };
 
     packages = {
@@ -70,35 +75,36 @@ with lib; {
   config = mkIf config.modules.system.networking.enable {
     networking = {
       hostName = config.modules.system.networking.hostName;
+    };
 
-      networkmanager = {
-        enable = true;
-        dns = "systemd-resolved";
-        # insertNameservers =
-        #   if config.modules.system.networking.quad9.enable
-        #   then ["9.9.9.11" "149.112.112.11" "2620:fe::11" "2620:fe::fe:11"]
-        #   else ["1.1.1.1" "8.8.8.8" "8.8.4.4" "9.9.9.9"];
-        unmanaged = ["docker0" "rndis0"];
-        wifi = {
-          powersave = config.modules.system.networking.wifi.powersave;
-          # Realtek USB WiFi adapters (rtw88 in-kernel and rtl88x2bu
-          # out-of-tree) cannot handle NetworkManager's default MAC
-          # randomization during scans. This causes connection failures,
-          # dropped associations, and the adapter entering a broken state
-          # that requires physical replugging to recover.
-          scanRandMacAddress = false;
-          macAddress = "permanent";
-        };
+    # ── NetworkManager ────────────────────────────────────────────────
+    # Conditional: set modules.system.networking.networkmanager.enable = false
+    # in the host config to disable NM (for manual wpa_supplicant + dhclient).
+    networking.networkmanager = mkIf config.modules.system.networking.networkmanager.enable {
+      enable = true;
+      dns = "default";
+      insertNameservers =
+        if config.modules.system.networking.quad9.enable
+        then ["9.9.9.11" "149.112.112.11" "2620:fe::11" "2620:fe::fe:11"]
+        else [];
+      unmanaged = ["docker0" "rndis0"];
+      wifi = {
+        powersave = config.modules.system.networking.wifi.powersave;
+        # Realtek USB WiFi adapters (rtw88 in-kernel and rtl88x2bu
+        # out-of-tree) cannot handle NetworkManager's default MAC
+        # randomization during scans. This causes connection failures,
+        # dropped associations, and the adapter entering a broken state
+        # that requires physical replugging to recover.
+        scanRandMacAddress = false;
+        macAddress = "permanent";
       };
     };
 
-    services.resolved.enable = true;
-    systemd.services.NetworkManager-wait-online.enable = false;
+    # services.resolved.enable = true;
+    systemd.services.NetworkManager-wait-online.enable = mkIf config.modules.system.networking.networkmanager.enable false;
 
-    # Disable openresolv's resolvconf.service — NetworkManager manages
-    # /etc/resolv.conf via systemd-resolved. The resolvconf service conflicts
-    # with NM's own DNS handling and fails with "Operation not permitted"
-    # when trying to chgrp /etc/resolv.conf.
+    # Disable openresolv's resolvconf.service — when NM is active it manages
+    # /etc/resolv.conf directly. The resolvconf service conflicts.
     systemd.services.resolvconf.enable = false;
 
     # Realtek USB WiFi adapters (both in-kernel rtw88 and out-of-tree
@@ -108,42 +114,6 @@ with lib; {
     # explicitly fixes channel availability and connection stability.
     # Equivalent to: iw reg set US
     boot.kernelParams = ["cfg80211.ieee80211_regdom=${config.modules.system.networking.wifi.regulatoryDomain}"];
-
-    # ── Realtek USB WiFi: NM dispatcher script ──────────────────────
-    # In AwesomeWM (no GNOME Keyring/Polkit secret agent), NM cannot
-    # store WiFi passwords in a user keyring. It falls back to WPS
-    # button prompts ("push of wps button or a password required")
-    # even when the correct password was provided. This dispatcher
-    # script runs on every WiFi connection "up" event and:
-    #   1. Sets psk-flags=0 → secret is system-owned, stored directly
-    #      in /etc/NetworkManager/system-connections/ (no agent needed)
-    #   2. Sets wps-method=1 → WPS strictly disabled (prevents the
-    #      "push WPS button" fallback prompt)
-    networking.networkmanager.dispatcherScripts = [
-      {
-        source = pkgs.writeText "nm-realtek-wifi-fix" ''
-          INTERFACE="$1"
-          ACTION="$2"
-
-          if [ "$ACTION" != "up" ]; then
-            exit 0
-          fi
-
-          # Only act on WiFi interfaces
-          if ! iw dev "$INTERFACE" info >/dev/null 2>&1; then
-            exit 0
-          fi
-
-          CONNECTION=$(nmcli -t -f GENERAL.CONNECTION device show "$INTERFACE" 2>/dev/null | cut -d: -f2)
-          if [ -n "$CONNECTION" ]; then
-            nmcli connection modify "$CONNECTION" \
-              wifi-sec.psk-flags 0 \
-              wifi-sec.wps-method 1
-          fi
-        '';
-        type = "basic";
-      }
-    ];
 
     # ── Realtek USB WiFi: disable USB autosuspend ────────────────────
     # The kernel's USB power management cuts power to the USB port when
@@ -160,21 +130,13 @@ with lib; {
       SUBSYSTEM=="usb", ATTR{idVendor}=="0bda", TEST=="power/control", ATTR{power/control}="on"
     '';
 
-    #   config.boot.kernelPackages.rtl88x2bu
-    # ];
-
-    # boot.kernelModules = mkIf config.modules.system.networking.wifi.rtl88x2bu.enable [
-    #   "88x2bu"
-    # ];
-    #
-    # boot.kernelParams = mkIf config.modules.system.networking.wifi.rtl88x2bu.enable [
-    #   "rtw_switch_usb_mode=1"
-    # ];
-    #
-    # boot.blacklistedKernelModules = mkIf config.modules.system.networking.wifi.rtl88x2bu.enable [
-    #   "rtw88_core"
-    #   "rtw_usb"
-    # ];
+    # ── Realtek rtw88 driver: disable deep power saving ──────────────
+    # The rtw88_8822bu in-kernel driver has a deep LPS (Leisure Power
+    # Save) mode that can cause the adapter to become unresponsive during
+    # the WPA handshake.  This disables it at module load time.
+    boot.extraModprobeConfig = ''
+      options rtw88_core disable_lps_deep=1
+    '';
 
     # Network utility packages (git, wireless, download, compression)
     environment.systemPackages = with pkgs;
@@ -188,7 +150,10 @@ with lib; {
           libgit2-glib
         ]
         ++ optionals config.modules.system.networking.packages.wirelessTools [
+          wpa_supplicant
+          dhcpcd
           iw
+          iwd
           wirelesstools
         ]
         ++ optionals config.modules.system.networking.packages.downloadTools [

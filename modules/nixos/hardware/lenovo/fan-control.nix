@@ -7,19 +7,27 @@
 with lib; let
   cfg = config.modules.hardware.lenovo.fan-control;
 
-  # Fan curve point: { cpu_temp, gpu_temp, ic_temp, f1_pwm, f2_pwm, accel, decel }
-  # Temperature in °C, PWM 0-255, accel/decel 2-5 (lower = faster response)
-  #
-  # NOTE: The kernel module (model_g8cn) uses FAN_SPEED_UNIT_RPM_HUNDRED internally.
-  # The sysfs interface presents PWM 0-255, and the kernel converts to/from RPM/100.
-  # Writing PWM values is correct — the kernel handles the conversion.
-  # accel/decel must be 2-5 (kernel rejects values < 2).
+  # Convert PWM (0-255) to RPM (max ~4500 RPM for Legion fans)
+  pwmToRpm = pwm:
+    if pwm == 0
+    then 0
+    else builtins.div (pwm * 4500) 255;
 
-  # Quiet: moderate cooling, good idle. (Formerly "balanced")
+  fanCurvePoint = {
+    cpu,
+    gpu,
+    ic,
+    f1,
+    f2,
+    a,
+    d,
+  }: {
+    inherit cpu gpu ic f1 f2 a d;
+  };
+
   quietCurve = {
     points = [
-      # point  cpu_temp  gpu_temp  ic_temp  f1_pwm  f2_pwm  accel  decel
-      {
+      (fanCurvePoint {
         cpu = 0;
         gpu = 0;
         ic = 0;
@@ -27,96 +35,94 @@ with lib; let
         f2 = 0;
         a = 3;
         d = 4;
-      }
-      {
-        cpu = 40;
-        gpu = 50;
-        ic = 50;
-        f1 = 51;
-        f2 = 48;
+      })
+      (fanCurvePoint {
+        cpu = 35;
+        gpu = 45;
+        ic = 45;
+        f1 = 71;
+        f2 = 68;
         a = 3;
         d = 4;
-      }
-      {
-        cpu = 46;
-        gpu = 51;
-        ic = 51;
-        f1 = 61;
-        f2 = 59;
+      })
+      (fanCurvePoint {
+        cpu = 41;
+        gpu = 46;
+        ic = 46;
+        f1 = 82;
+        f2 = 79;
         a = 3;
         d = 3;
-      }
-      {
-        cpu = 51;
-        gpu = 52;
-        ic = 52;
-        f1 = 71;
-        f2 = 69;
+      })
+      (fanCurvePoint {
+        cpu = 46;
+        gpu = 47;
+        ic = 47;
+        f1 = 92;
+        f2 = 89;
         a = 2;
         d = 3;
-      }
-      {
-        cpu = 54;
-        gpu = 53;
-        ic = 53;
-        f1 = 79;
-        f2 = 77;
-        a = 2;
-        d = 2;
-      }
-      {
-        cpu = 60;
-        gpu = 55;
-        ic = 54;
-        f1 = 89;
-        f2 = 87;
-        a = 2;
-        d = 2;
-      }
-      {
-        cpu = 67;
-        gpu = 60;
-        ic = 58;
+      })
+      (fanCurvePoint {
+        cpu = 49;
+        gpu = 48;
+        ic = 48;
         f1 = 102;
         f2 = 99;
         a = 2;
         d = 2;
-      }
-      {
-        cpu = 74;
-        gpu = 65;
-        ic = 62;
-        f1 = 117;
-        f2 = 115;
+      })
+      (fanCurvePoint {
+        cpu = 55;
+        gpu = 50;
+        ic = 49;
+        f1 = 115;
+        f2 = 112;
         a = 2;
         d = 2;
-      }
-      {
-        cpu = 81;
-        gpu = 71;
-        ic = 66;
-        f1 = 133;
-        f2 = 130;
+      })
+      (fanCurvePoint {
+        cpu = 62;
+        gpu = 55;
+        ic = 53;
+        f1 = 130;
+        f2 = 127;
         a = 2;
         d = 2;
-      }
-      {
-        cpu = 89;
-        gpu = 79;
-        ic = 74;
-        f1 = 143;
-        f2 = 140;
+      })
+      (fanCurvePoint {
+        cpu = 69;
+        gpu = 60;
+        ic = 57;
+        f1 = 145;
+        f2 = 142;
         a = 2;
         d = 2;
-      }
+      })
+      (fanCurvePoint {
+        cpu = 76;
+        gpu = 66;
+        ic = 61;
+        f1 = 160;
+        f2 = 157;
+        a = 2;
+        d = 2;
+      })
+      (fanCurvePoint {
+        cpu = 85;
+        gpu = 75;
+        ic = 70;
+        f1 = 175;
+        f2 = 172;
+        a = 2;
+        d = 2;
+      })
     ];
   };
 
-  # Balanced: aggressive cooling, fast spin-up. (Formerly "performance")
   balancedCurve = {
     points = [
-      # point  cpu_temp  gpu_temp  ic_temp  f1_pwm  f2_pwm  accel  decel
-      {
+      (fanCurvePoint {
         cpu = 0;
         gpu = 0;
         ic = 0;
@@ -124,96 +130,94 @@ with lib; let
         f2 = 0;
         a = 2;
         d = 3;
-      }
-      {
-        cpu = 35;
-        gpu = 35;
-        ic = 35;
-        f1 = 61;
-        f2 = 59;
+      })
+      (fanCurvePoint {
+        cpu = 30;
+        gpu = 30;
+        ic = 30;
+        f1 = 82;
+        f2 = 79;
         a = 2;
         d = 3;
-      }
-      {
-        cpu = 41;
-        gpu = 41;
+      })
+      (fanCurvePoint {
+        cpu = 36;
+        gpu = 36;
+        ic = 35;
+        f1 = 97;
+        f2 = 94;
+        a = 2;
+        d = 2;
+      })
+      (fanCurvePoint {
+        cpu = 42;
+        gpu = 42;
         ic = 40;
-        f1 = 74;
-        f2 = 71;
+        f1 = 112;
+        f2 = 109;
         a = 2;
         d = 2;
-      }
-      {
-        cpu = 47;
+      })
+      (fanCurvePoint {
+        cpu = 48;
         gpu = 47;
-        ic = 45;
-        f1 = 87;
-        f2 = 84;
+        ic = 44;
+        f1 = 130;
+        f2 = 127;
         a = 2;
         d = 2;
-      }
-      {
-        cpu = 53;
-        gpu = 52;
-        ic = 49;
-        f1 = 102;
-        f2 = 99;
-        a = 2;
-        d = 2;
-      }
-      {
-        cpu = 59;
-        gpu = 56;
-        ic = 53;
-        f1 = 117;
-        f2 = 115;
-        a = 2;
-        d = 2;
-      }
-      {
-        cpu = 65;
-        gpu = 61;
-        ic = 57;
-        f1 = 133;
-        f2 = 130;
-        a = 2;
-        d = 2;
-      }
-      {
-        cpu = 71;
-        gpu = 66;
-        ic = 61;
-        f1 = 143;
-        f2 = 140;
-        a = 2;
-        d = 2;
-      }
-      {
-        cpu = 77;
-        gpu = 72;
-        ic = 65;
+      })
+      (fanCurvePoint {
+        cpu = 54;
+        gpu = 51;
+        ic = 48;
         f1 = 148;
         f2 = 145;
         a = 2;
         d = 2;
-      }
-      {
-        cpu = 86;
-        gpu = 80;
-        ic = 71;
-        f1 = 153;
-        f2 = 150;
+      })
+      (fanCurvePoint {
+        cpu = 60;
+        gpu = 56;
+        ic = 52;
+        f1 = 166;
+        f2 = 163;
         a = 2;
         d = 2;
-      }
+      })
+      (fanCurvePoint {
+        cpu = 66;
+        gpu = 61;
+        ic = 56;
+        f1 = 184;
+        f2 = 181;
+        a = 2;
+        d = 2;
+      })
+      (fanCurvePoint {
+        cpu = 72;
+        gpu = 67;
+        ic = 60;
+        f1 = 200;
+        f2 = 197;
+        a = 2;
+        d = 2;
+      })
+      (fanCurvePoint {
+        cpu = 80;
+        gpu = 75;
+        ic = 66;
+        f1 = 217;
+        f2 = 214;
+        a = 2;
+        d = 2;
+      })
     ];
   };
 
-  # Performance: maximum cooling, very aggressive ramp. (Formerly "extreme")
   performanceCurve = {
     points = [
-      # point  cpu_temp  gpu_temp  ic_temp  f1_pwm  f2_pwm  accel  decel
-      {
+      (fanCurvePoint {
         cpu = 0;
         gpu = 0;
         ic = 0;
@@ -221,128 +225,184 @@ with lib; let
         f2 = 0;
         a = 2;
         d = 3;
-      }
-      {
-        cpu = 30;
-        gpu = 30;
-        ic = 30;
-        f1 = 89;
-        f2 = 84;
-        a = 2;
-        d = 3;
-      }
-      {
-        cpu = 36;
-        gpu = 36;
-        ic = 35;
+      })
+      (fanCurvePoint {
+        cpu = 25;
+        gpu = 25;
+        ic = 25;
         f1 = 115;
         f2 = 110;
         a = 2;
+        d = 3;
+      })
+      (fanCurvePoint {
+        cpu = 31;
+        gpu = 31;
+        ic = 30;
+        f1 = 145;
+        f2 = 140;
+        a = 2;
         d = 2;
-      }
-      {
-        cpu = 42;
+      })
+      (fanCurvePoint {
+        cpu = 37;
+        gpu = 37;
+        ic = 35;
+        f1 = 175;
+        f2 = 170;
+        a = 2;
+        d = 2;
+      })
+      (fanCurvePoint {
+        cpu = 43;
         gpu = 42;
-        ic = 40;
-        f1 = 140;
-        f2 = 135;
+        ic = 39;
+        f1 = 200;
+        f2 = 195;
         a = 2;
         d = 2;
-      }
-      {
-        cpu = 48;
-        gpu = 47;
-        ic = 44;
-        f1 = 166;
-        f2 = 160;
+      })
+      (fanCurvePoint {
+        cpu = 49;
+        gpu = 46;
+        ic = 43;
+        f1 = 220;
+        f2 = 215;
         a = 2;
         d = 2;
-      }
-      {
-        cpu = 54;
+      })
+      (fanCurvePoint {
+        cpu = 55;
         gpu = 51;
-        ic = 48;
-        f1 = 191;
-        f2 = 186;
+        ic = 47;
+        f1 = 235;
+        f2 = 230;
         a = 2;
         d = 2;
-      }
-      {
-        cpu = 60;
+      })
+      (fanCurvePoint {
+        cpu = 61;
         gpu = 56;
-        ic = 52;
-        f1 = 217;
-        f2 = 212;
+        ic = 51;
+        f1 = 245;
+        f2 = 240;
         a = 2;
         d = 2;
-      }
-      {
-        cpu = 66;
-        gpu = 61;
-        ic = 56;
-        f1 = 230;
-        f2 = 225;
-        a = 2;
-        d = 2;
-      }
-      {
-        cpu = 72;
-        gpu = 67;
-        ic = 60;
-        f1 = 242;
-        f2 = 237;
-        a = 2;
-        d = 2;
-      }
-      {
-        cpu = 80;
-        gpu = 75;
-        ic = 66;
+      })
+      (fanCurvePoint {
+        cpu = 67;
+        gpu = 62;
+        ic = 55;
         f1 = 255;
         f2 = 255;
         a = 2;
         d = 2;
-      }
+      })
+      (fanCurvePoint {
+        cpu = 75;
+        gpu = 70;
+        ic = 61;
+        f1 = 255;
+        f2 = 255;
+        a = 2;
+        d = 2;
+      })
     ];
   };
 
-  # Generate a shell function that writes a fan curve to hwmon
-  # NOTE: model_g8cn uses minifancurve mode — EC controls temp thresholds internally.
-  # Only pwm1 (fan speed) and accel/decel are writable. pwm2/temps are EC-controlled.
-  writeCurveScript = name: curve: let
-    writePoints =
-      imap1 (i: p: ''
-        echo ${toString p.f1} > "$HWMON/pwm1_auto_point${toString i}_pwm"
-        echo ${toString p.a}  > "$HWMON/pwm1_auto_point${toString i}_accel"
-        echo ${toString p.d}  > "$HWMON/pwm1_auto_point${toString i}_decel"
-      '')
-      curve.points;
-  in
-    concatStringsSep "\n" writePoints;
+  # Generate a single YAML entry from a curve point and temp range
+  mkEntry = low: p: high: ''
+    - fan1_speed: ${toString (pwmToRpm p.f1)}
+      fan2_speed: ${toString (pwmToRpm p.f2)}
+      cpu_lower_temp: ${toString low}
+      cpu_upper_temp: ${toString high}
+      gpu_lower_temp: ${toString low}
+      gpu_upper_temp: ${toString high}
+      ic_lower_temp: ${toString low}
+      ic_upper_temp: ${toString high}
+      acceleration: ${toString p.a}
+      deceleration: ${toString p.d}
+  '';
 
-  applyQuiet = writeCurveScript "quiet" quietCurve;
-  applyBalanced = writeCurveScript "balanced" balancedCurve;
-  applyPerformance = writeCurveScript "performance" performanceCurve;
+  # Build midpoints between consecutive curve points
+  midpoints = pts:
+    imap0 (i: p:
+      if i == 0
+      then 0
+      else let
+        prev = builtins.elemAt pts (i - 1);
+      in
+        (prev.cpu + p.cpu) / 2)
+    pts;
+
+  # Generate complete YAML for a fan curve
+  genYaml = name: curve: let
+    pts = curve.points;
+    temps = map (p: p.cpu) pts;
+    mids = midpoints pts ++ [127];
+    entries = imap0 (i: p:
+      mkEntry (builtins.elemAt mids i) p (builtins.elemAt mids (i + 1)))
+    pts;
+  in ''
+    name: ${name}
+    entries:
+    ${concatStrings entries}enable_minifancurve: false
+  '';
+
+  # Produce {ac,battery} variants — same curve, different filename
+  mkProfileYamls = name: curve: {
+    "legion/fan-curves/${name}-ac.yaml".text = genYaml "${name}-ac" curve;
+    "legion/fan-curves/${name}-battery.yaml".text = genYaml "${name}-battery" curve;
+  };
+
+  allYamls =
+    mkProfileYamls "quiet" quietCurve
+    // mkProfileYamls "balanced" balancedCurve
+    // mkProfileYamls "performance" performanceCurve;
+
+  # The core script — detects profile + power source, calls legion_cli
+  applyScript = pkgs.writeShellScriptBin "legion-fan-apply" ''
+    set -e
+    PROFILE="''${1:-}"
+
+    # Detect power source
+    SOURCE="battery"
+    for bat in /sys/class/power_supply/AC*/online /sys/class/power_supply/ADP*/online; do
+      if [ -f "$bat" ] && [ "$(cat "$bat" 2>/dev/null)" = "1" ]; then
+        SOURCE="ac"
+        break
+      fi
+    done
+
+    if [ -z "$PROFILE" ]; then
+      # Auto: resolve from platform_profile (Fn+Q state)
+      PP=$(cat /sys/firmware/acpi/platform_profile 2>/dev/null || echo "balanced")
+      case "$PP" in
+        low-power|quiet)   PROFILE="quiet" ;;
+        balanced)          PROFILE="balanced" ;;
+        performance)       PROFILE="performance" ;;
+        *)                 PROFILE="balanced" ;;
+      esac
+    fi
+
+    FILE="/etc/legion/fan-curves/''${PROFILE}-''${SOURCE}.yaml"
+
+    if [ ! -f "$FILE" ]; then
+      echo "ERROR: Fan curve file not found: $FILE" >&2
+      exit 1
+    fi
+
+    echo "Applying fan curve: ''${PROFILE} (''${SOURCE})"
+    exec ${pkgs.lenovo-legion}/bin/legion_cli --donotexpecthwmon fancurve-write-file-to-hw "$FILE"
+  '';
 in {
   options.modules.hardware.lenovo.fan-control = {
-    enable = mkEnableOption "Lenovo Legion fan curve daemon with automatic profile switching";
+    enable = mkEnableOption "Lenovo Legion fan curve control via legion_cli";
 
     profile = mkOption {
       type = types.enum ["quiet" "balanced" "performance" "auto"];
       default = "auto";
-      description = "Default fan profile. 'auto' switches based on power source (AC=performance, battery=quiet).";
-    };
-
-    onBattery = mkOption {
-      type = types.enum ["quiet" "balanced"];
-      default = "balanced";
-      description = "Fan profile when on battery power (auto mode only).";
-    };
-
-    onAc = mkOption {
-      type = types.enum ["balanced" "performance"];
-      default = "performance";
-      description = "Fan profile when on AC power (auto mode only).";
+      description = "Default fan profile (auto = Fn+Q + power source)";
     };
   };
 
@@ -350,320 +410,114 @@ in {
     assertions = [
       {
         assertion = config.modules.hardware.lenovo.enable;
-        message = "fan-control requires modules.hardware.lenovo.enable = true (for the legion_laptop kernel module)";
+        message = "fan-control requires modules.hardware.lenovo.enable = true";
       }
     ];
 
-    environment.etc = {
-      "legion/fan-curves/quiet.conf".text = lib.generators.toINI {} {
-        FanCurve = {
-          name = "Quiet";
-          description = "Low-noise fan curve for idle and light tasks";
-        };
+    # Generate YAML fan curve files under /etc/legion/fan-curves/
+    environment.etc = allYamls;
+
+    # Boot-time oneshot — wait for hwmon then apply curve
+    systemd.services.legion-fan-boot = {
+      description = "Apply Lenovo Legion fan curve at boot";
+      wantedBy = ["multi-user.target"];
+      after = ["systemd-modules-load.service"];
+      before = ["legion-fan-poll.service"];
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = false;
       };
-      "legion/fan-curves/balanced.conf".text = lib.generators.toINI {} {
-        FanCurve = {
-          name = "Balanced";
-          description = "Moderate fan response for general use";
-        };
-      };
-      "legion/fan-curves/performance.conf".text = lib.generators.toINI {} {
-        FanCurve = {
-          name = "Performance";
-          description = "Aggressive cooling for gaming and heavy workloads";
-        };
-      };
+      path = with pkgs; [bash coreutils findutils lenovo-legion];
+      script = ''
+        # Wait for legion hwmon (PNP0C09:00 under kernel 7.x)
+        for i in $(seq 1 30); do
+          if find /sys/module/legion_laptop/drivers/platform:legion/ -mindepth 2 -name hwmon 2>/dev/null | grep -q .; then
+            break
+          fi
+          sleep 2
+        done
+        ${applyScript}/bin/legion-fan-apply
+      '';
     };
 
-    systemd.services.legion-fan-control = {
-      description = "Lenovo Legion fan curve daemon — applies fan curves and monitors power/profile changes";
+    # udev rule: re-apply on AC plug/unplug
+    services.udev.extraRules = ''
+      SUBSYSTEM=="power_supply", ACTION=="change", RUN+="${applyScript}/bin/legion-fan-apply"
+    '';
+
+    # Minimal polling service — Fn+Q detection (no udev events for platform_profile)
+    systemd.services.legion-fan-poll = {
+      description = "Lenovo Legion fan curve Fn+Q watcher";
       wantedBy = ["multi-user.target"];
-      after =
-        ["systemd-modules-load.service" "systemd-udevd.service" "sysinit.target"]
-        ++ lib.optional config.services.auto-cpufreq.enable "auto-cpufreq.service";
-      wants =
-        ["systemd-udevd.service"]
-        ++ lib.optional config.services.auto-cpufreq.enable "auto-cpufreq.service";
+      after = ["legion-fan-boot.service"];
       serviceConfig = {
         Type = "simple";
         Restart = "always";
         RestartSec = 5;
         User = "root";
-        ExecStartPre = "${pkgs.coreutils}/bin/sleep 5";
       };
-      path = with pkgs; [coreutils gnugrep findutils inotify-tools];
-
+      path = with pkgs; [bash coreutils];
       script = ''
-        HWMON=""
-        PROFILE_FILE="/var/run/legion-fan-profile"
-        OVERRIDE_FILE="/var/run/legion-fan-override"
-        FNQ_EVENT="/var/run/legion-fnq-event"
-        THERMAL_SIGNAL="/var/run/legion-thermal-recovery"
-        DEFAULT_PROFILE="${cfg.profile}"
-        ON_BATTERY="${cfg.onBattery}"
-        ON_AC="${cfg.onAc}"
-
-        # ---- Translate platform_profile values to our curated profile names ----
-        # Fn+Q blue (blue LED)  -> "quiet"
-        # Fn+Q white (no LED)   -> "balanced"
-        # Fn+Q red (red LED)    -> "performance"
-        # Also: low-power=quiet, balanced=balanced, performance=performance
-        translate_profile() {
-          case "$1" in
-            low-power|quiet)     echo "quiet" ;;
-            balanced)            echo "balanced" ;;
-            performance)         echo "performance" ;;
-            *)                   echo "balanced" ;;  # fallback
-          esac
-        }
-
-        # ---- Find the legion hwmon device ----
-        find_hwmon() {
-          for d in /sys/class/hwmon/hwmon*; do
-            if [ -f "$d/name" ] && grep -q "legion" "$d/name" 2>/dev/null; then
-              HWMON="$d"
-              return 0
-            fi
-          done
-          # Fallback: try by driver path
-          for d in /sys/module/legion_laptop/drivers/platform:legion/*/hwmon/hwmon*; do
-            if [ -d "$d" ]; then
-              HWMON="$d"
-              return 0
-            fi
-          done
-          return 1
-        }
-
-        # ---- Apply fan curve by profile name ----
-        apply_curve() {
-          local profile="$1"
-          if [ -z "$HWMON" ]; then
-            echo "ERROR: No hwmon device found"
-            return 1
-          fi
-
-          case "$profile" in
-            quiet)
-              echo "Applying quiet fan curve..."
-              ${applyQuiet}
-              ;;
-            balanced)
-              echo "Applying balanced fan curve..."
-              ${applyBalanced}
-              ;;
-            performance)
-              echo "Applying performance fan curve..."
-              ${applyPerformance}
-              ;;
-            *)
-              echo "Unknown profile: $profile"
-              return 1
-              ;;
-          esac
-          echo "$profile" > "$PROFILE_FILE"
-          echo "Fan curve applied: $profile"
-        }
-
-        # ---- Detect current power source ----
-        get_power_source() {
-          # Check AC adapter status
-          for bat in /sys/class/power_supply/AC*/online /sys/class/power_supply/ADP*/online; do
-            if [ -f "$bat" ]; then
-              if [ "$(cat "$bat" 2>/dev/null)" = "1" ]; then
-                echo "ac"
-                return
-              fi
-            fi
-          done
-          # Check battery status
-          for bat in /sys/class/power_supply/BAT*/status; do
-            if [ -f "$bat" ]; then
-              local status
-              status=$(cat "$bat" 2>/dev/null)
-              if [ "$status" = "Charging" ] || [ "$status" = "Full" ]; then
-                echo "ac"
-                return
-              fi
-            fi
-          done
-          echo "battery"
-        }
-
-        # ---- Resolve which profile should be active ----
-        # Priority: manual override > Fn+Q event > thermal recovery > power source based
-        resolve_profile() {
-          # 1. Check for manual override (set by user via legion-fan command)
-          if [ -f "$OVERRIDE_FILE" ]; then
-            local mtime
-            mtime=$(stat -c %Y "$OVERRIDE_FILE" 2>/dev/null || echo 0)
-            local now
-            now=$(date +%s)
-            local age=$(( now - mtime ))
-            # Overrides expire after 30 minutes
-            if [ "$age" -lt 1800 ]; then
-              cat "$OVERRIDE_FILE"
-              return
-            else
-              rm -f "$OVERRIDE_FILE"
-            fi
-          fi
-
-          # 2. Check for recent Fn+Q event (set by udev rule when platform_profile changes)
-          if [ -f "$FNQ_EVENT" ]; then
-            local mtime
-            mtime=$(stat -c %Y "$FNQ_EVENT" 2>/dev/null || echo 0)
-            local now
-            now=$(date +%s)
-            local age=$(( now - mtime ))
-            # Fn+Q overrides expire after 30 minutes
-            if [ "$age" -lt 1800 ]; then
-              local raw_profile
-              raw_profile=$(cat /sys/firmware/acpi/platform_profile 2>/dev/null || echo "balanced")
-              local translated
-              translated=$(translate_profile "$raw_profile")
-              # Update the event file mtime so it stays active
-              touch "$FNQ_EVENT"
-              echo "Fn+Q active: $raw_profile -> $translated"
-              echo "$translated"
-              return
-            else
-              rm -f "$FNQ_EVENT"
-            fi
-          fi
-
-          # 3. Check for thermal-guard recovery signal
-          if [ -f "$THERMAL_SIGNAL" ]; then
-            rm -f "$THERMAL_SIGNAL"
-            echo "performance"
-            return
-          fi
-
-          # 4. Auto mode: switch based on power source
-          if [ "$DEFAULT_PROFILE" = "auto" ]; then
-            local pw
-            pw=$(get_power_source)
-            if [ "$pw" = "ac" ]; then
-              echo "$ON_AC"
-            else
-              echo "$ON_BATTERY"
-            fi
-            return
-          fi
-
-          echo "$DEFAULT_PROFILE"
-        }
-
-        # ---- Read current platform_profile from sysfs ----
-        read_platform_profile() {
-          cat /sys/firmware/acpi/platform_profile 2>/dev/null || echo "unknown"
-        }
-
-        # ---- Initialize ----
-        echo "=== Legion Fan Control Daemon ==="
-
-        # Wait for hwmon device
-        for i in $(seq 1 30); do
-          if find_hwmon; then
-            break
-          fi
-          echo "Waiting for legion hwmon device (attempt $i/30)..."
-          sleep 2
-        done
-
-        if [ -z "$HWMON" ]; then
-          echo "ERROR: Could not find legion hwmon device after 60 seconds"
-          echo "Make sure the legion_laptop kernel module is loaded"
-          exit 1
-        fi
-
-        echo "Found hwmon device: $HWMON"
-
-        # Initial apply
-        active_profile=""
-        desired_profile=""
-        last_platform_profile=""
-
-        # ---- Main loop ----
+        LAST=""
         while true; do
-          desired_profile=$(resolve_profile)
-
-          # Also detect Fn+Q changes by polling platform_profile directly
-          current_pp=$(read_platform_profile)
-          if [ "$current_pp" != "$last_platform_profile" ] && [ "$last_platform_profile" != "" ]; then
-            # Fn+Q was pressed — update the override
-            translated=$(translate_profile "$current_pp")
-            echo "$translated" > "$OVERRIDE_FILE" 2>/dev/null || true
-            touch "$FNQ_EVENT" 2>/dev/null || true
-            echo "Fn+Q change detected via poll: $current_pp -> $translated"
+          # Check thermal guard recovery signal
+          if [ -f /var/run/legion-thermal-recovery ]; then
+            rm -f /var/run/legion-thermal-recovery
+            ${applyScript}/bin/legion-fan-apply
+            LAST=""  # force re-read of platform_profile
+            sleep 5
+            continue
           fi
-          last_platform_profile="$current_pp"
-
-          if [ "$desired_profile" != "$active_profile" ]; then
-            apply_curve "$desired_profile"
-            active_profile="$desired_profile"
+          CUR=$(cat /sys/firmware/acpi/platform_profile 2>/dev/null || echo "unknown")
+          if [ "$CUR" != "$LAST" ]; then
+            ${applyScript}/bin/legion-fan-apply
+            LAST="$CUR"
           fi
-
           sleep 5
         done
       '';
     };
 
-    # Ensure the override marker directory exists and profile changes are detected
+    # Ensure signal file directory for thermal guard
     systemd.tmpfiles.rules = [
       "d /var/run/legion 0755 root root -"
     ];
 
-    # Expose a convenience script for manual fan curve changes
+    # Manual override CLI — replaces old legion-fan
     environment.systemPackages = [
       (pkgs.writeShellScriptBin "legion-fan" ''
-        case "$1" in
+        case "''${1:-}" in
           quiet|balanced|performance)
-            echo "$1" > /var/run/legion-fan-override
-            echo "Fan profile override set to: $1 (expires in 30 min)"
-            echo "The daemon will apply this on the next cycle."
+            ${applyScript}/bin/legion-fan-apply "$1"
+            echo "Fan curve set to: $1"
             ;;
           auto)
-            rm -f /var/run/legion-fan-override
-            rm -f /var/run/legion-fnq-event
-            echo "Fan profile override cleared. Returning to auto mode."
+            ${applyScript}/bin/legion-fan-apply
+            echo "Fan curve: auto (Fn+Q + power source)"
             ;;
           status)
-            if [ -f /var/run/legion-fan-profile ]; then
-              echo "Active fan profile: $(cat /var/run/legion-fan-profile)"
-            else
-              echo "No fan profile recorded yet"
-            fi
-            if [ -f /var/run/legion-fan-override ]; then
-              echo "Manual override: $(cat /var/run/legion-fan-override)"
-              mtime=$(stat -c %Y /var/run/legion-fan-override 2>/dev/null || echo 0)
-              now=$(date +%s)
-              remaining=$(( 1800 - (now - mtime) ))
-              if [ "$remaining" -gt 0 ]; then
-                echo "Override expires in $(( remaining / 60 )) minutes"
-              else
-                echo "Override expired (daemon will revert to auto)"
-              fi
-            else
-              echo "No manual override active"
-            fi
-            if [ -f /var/run/legion-fnq-event ]; then
-              echo "Fn+Q override active"
-            fi
             echo "Platform profile: $(cat /sys/firmware/acpi/platform_profile 2>/dev/null || echo 'N/A')"
-            echo "Thermal mode: $(cat /sys/devices/platform/legion/thermalmode 2>/dev/null || echo 'N/A')"
-            echo "Power mode: $(cat /sys/devices/platform/legion/powermode 2>/dev/null || echo 'N/A')"
-            echo "Fan speeds: F1=$(cat /sys/devices/platform/legion/hwmon/hwmon*/fan1_input 2>/dev/null) F2=$(cat /sys/devices/platform/legion/hwmon/hwmon*/fan2_input 2>/dev/null)"
-            echo "Temps: CPU=$(cat /sys/devices/platform/legion/hwmon/hwmon*/temp1_input 2>/dev/null) GPU=$(cat /sys/devices/platform/legion/hwmon/hwmon*/temp2_input 2>/dev/null)"
+            for bat in /sys/class/power_supply/AC*/online /sys/class/power_supply/ADP*/online; do
+              if [ -f "$bat" ]; then
+                echo "AC adapter: $(cat "$bat" 2>/dev/null)"
+              fi
+            done
+            echo "Fan speeds (RPM):"
+            for hwmon in /sys/class/hwmon/hwmon*; do
+              if [ -f "$hwmon/name" ] && grep -q legion "$hwmon/name" 2>/dev/null; then
+                cat "$hwmon/fan1_input" 2>/dev/null && echo " RPM"
+                cat "$hwmon/fan2_input" 2>/dev/null && echo " (fan2 RPM)"
+              fi
+            done
             ;;
           *)
             echo "Usage: legion-fan {quiet|balanced|performance|auto|status}"
             echo ""
-            echo "  quiet        - Moderate cooling, good idle (general use)"
-            echo "  balanced     - Aggressive cooling, fast spin-up (gaming)"
-            echo "  performance  - Maximum cooling, full fan speed at high temps"
-            echo "  auto         - Clear manual override, return to auto mode"
-            echo "  status       - Show current profile and override state"
+            echo "  quiet        - Moderate cooling, good idle"
+            echo "  balanced     - Aggressive cooling, fast spin-up"
+            echo "  performance  - Maximum cooling, full speed at high temps"
+            echo "  auto         - Follow Fn+Q key + power source"
+            echo "  status       - Show current state"
             ;;
         esac
       '')

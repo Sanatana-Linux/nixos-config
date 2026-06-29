@@ -40,7 +40,7 @@ in {
     gpuTempLimit = mkOption {
       type = types.nullOr (types.ints.between 30 100);
       default = null;
-      description = "GPU temperature target in °C, set via nvidia-smi -gtt at boot. null = disabled. Recommended: 75-85°C.";
+      description = "GPU temperature target in °C. DEPRECATED — nvidia-smi -gtt is not supported on RTX 4070 Laptop GPU. Kept for compatibility, has no effect.";
     };
   };
 
@@ -227,9 +227,12 @@ in {
         };
 
         # ── Open kernel modules ─────────────────────────────────────
-        # Use the open-source nvidia.ko (not the proprietary one).
-        # Required for GSP firmware support on newer kernels.
-        open = true;
+        # Use the proprietary nvidia.ko (not the open-source one).
+        # The open module fails to communicate with the Lenovo BIOS
+        # (PlatformRequestHandler returns NV_ERR_INVALID_DATA for temp
+        # targets and power modes), causing GPU memory allocation failures
+        # and desktop freezes. Proprietary module works correctly.
+        open = false;
 
         package = config.boot.kernelPackages.nvidiaPackages.${cfg.driver};
 
@@ -251,38 +254,5 @@ in {
     # Dynamic power management daemon. Requires GSP firmware
     # (NVreg_EnableGpuFirmware=1). Manages GPU clock/power state
     # transitions (P0↔P8), runtime D3, and video memory self-refresh.
-    # Enabled now that GSP firmware is active after reboot.
-
-    # ── GPU temperature limit ─────────────────────────────────────────
-    systemd.services.nvidia-temp-limit = mkIf (cfg.gpuTempLimit != null) {
-      description = "Set NVIDIA GPU temperature limit to +${toString cfg.gpuTempLimit}°C";
-      wantedBy = ["multi-user.target"];
-      after = ["nvidia-persistenced.service" "systemd-modules-load.service"];
-      serviceConfig = {
-        Type = "oneshot";
-        RemainAfterExit = true;
-      };
-      path = with pkgs; [config.boot.kernelPackages.nvidiaPackages.${cfg.driver}];
-      script = ''
-        TEMP_LIMIT=${toString cfg.gpuTempLimit}
-        echo "Setting GPU temperature limit to $TEMP_LIMIT°C..."
-
-        for i in $(seq 1 30); do
-          if nvidia-smi -L >/dev/null 2>&1; then
-            break
-          fi
-          echo "Waiting for nvidia-smi (attempt $i/30)..."
-          sleep 1
-        done
-
-        if nvidia-smi -L >/dev/null 2>&1; then
-          nvidia-smi -gtt "$TEMP_LIMIT"
-          echo "GPU temperature limit set to $TEMP_LIMIT°C"
-        else
-          echo "ERROR: nvidia-smi not available after 30s — GPU temp limit NOT applied"
-          exit 1
-        fi
-      '';
-    };
   };
 }

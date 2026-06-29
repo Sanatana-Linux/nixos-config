@@ -374,7 +374,7 @@ with lib; let
       fi
     done
 
-    if [ -z "$PROFILE" ]; then
+    if [ -z "$PROFILE" ] || [ "$PROFILE" = "auto" ]; then
       # Auto: resolve from platform_profile (Fn+Q state)
       PP=$(cat /sys/firmware/acpi/platform_profile 2>/dev/null || echo "balanced")
       case "$PP" in
@@ -436,7 +436,12 @@ in {
           fi
           sleep 2
         done
-        ${applyScript}/bin/legion-fan-apply
+        # Apply a safe baseline curve first so fans are spinning before
+        # auto-detecting — the BIOS default platform_profile may be
+        # low-power/quiet which leaves fans nearly off at boot.
+        ${applyScript}/bin/legion-fan-apply balanced || true
+        # Now apply the configured profile (auto resolves from Fn+Q state)
+        ${applyScript}/bin/legion-fan-apply ${cfg.profile}
       '';
     };
 

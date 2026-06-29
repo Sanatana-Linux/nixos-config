@@ -1,111 +1,24 @@
---- a/legion_kb_rgb/__init__.py
-+++ b/legion_kb_rgb/__init__.py
-@@ -85,11 +85,12 @@
- # ── Device discovery ──────────────────────────────────────────────────────────
- 
- def _has_spectrum_report(desc_path):
-+    """Check HID descriptor for Spectrum report and return its size or None."""
-     try:
-         with open(desc_path, 'rb') as f:
-             desc = f.read()
-     except OSError:
--        return False
-+        return None
- 
-     i = 0
-     report_size = report_count = report_id = 0
-@@ -112,10 +113,12 @@
+--- a/legion_kb_rgb/__init__.py	2026-06-28 17:05:47.960806048 -0400
++++ b/legion_kb_rgb/__init__.py	2026-06-28 17:07:10.185494219 -0400
+@@ -112,10 +112,9 @@
              elif bTag == 9: report_count = value
              elif bTag == 8: report_id = value
          elif bType == 0 and bTag == 11:
 -            if report_id == REPORT_ID and (report_size * report_count) // 8 == 959:
 -                return True
-+            if report_id == REPORT_ID:
-+                total_bytes = (report_size * report_count) // 8
-+                if total_bytes >= 100:
-+                    return total_bytes + 1  # +1 for report ID byte
++            pass
          i += 1 + bSize
 -    return False
-+    return None
++    return True
  
  
  def find_device():
-@@ -131,21 +134,28 @@
+@@ -131,7 +130,7 @@
                  parts = line.split('=')[1].split(':')
                  if len(parts) == 3:
                      bus, vid, pid = int(parts[0], 16), int(parts[1], 16), int(parts[2], 16)
 -                    if bus == 3 and vid == VENDOR_ID and (pid & PRODUCT_ID_MASK) == PRODUCT_ID_MATCH:
--                        if _has_spectrum_report(os.path.join(path, 'device', 'report_descriptor')):
--                            return f'/dev/{name}'
--    return None
 +                    if bus == 3 and vid == VENDOR_ID:
-+                        rsize = _has_spectrum_report(os.path.join(path, 'device', 'report_descriptor'))
-+                        if rsize:
-+                            return (f'/dev/{name}', rsize)
-+    return (None, 960)
- 
- 
- # ── Device class ──────────────────────────────────────────────────────────────
- 
- class SpectrumDevice:
--    def __init__(self, path=None):
--        self.path = path or find_device()
-+    def __init__(self, path=None, report_size=None):
-+        if path is not None:
-+            self.path = path
-+            self._report_size = report_size or 960
-+        else:
-+            self.path, self._report_size = find_device()
-         if not self.path:
-             raise RuntimeError('ITE Spectrum keyboard not found')
-         self.fd = None
-         self._keys_cache = None
-+        self._hidio_csfeature = _IOC(3, 'H', 0x06, self._report_size)
-+        self._hidio_cgfeature = _IOC(3, 'H', 0x07, self._report_size)
- 
-     def open(self):
-         self.fd = os.open(self.path, os.O_RDWR)
-@@ -163,7 +173,7 @@
-         self.close()
- 
-     def _packet(self, opcode, payload=None):
--        buf = bytearray(REPORT_SIZE)
-+        buf = bytearray(self._report_size)
-         buf[0] = REPORT_ID
-         buf[1] = opcode
-         buf[2] = 0xC0
-@@ -173,13 +183,13 @@
-         return buf
- 
-     def _set(self, data):
--        fcntl.ioctl(self.fd, HIDIOCSFEATURE, array.array('B', bytes(data)), True)
-+        fcntl.ioctl(self.fd, self._hidio_csfeature, array.array('B', bytes(data)), True)
- 
-     def _get(self, opcode, payload=None):
-         self._set(self._packet(opcode, payload))
--        buf = array.array('B', [0] * REPORT_SIZE)
-+        buf = array.array('B', [0] * self._report_size)
-         buf[0] = REPORT_ID
--        fcntl.ioctl(self.fd, HIDIOCGFEATURE, buf, True)
-+        fcntl.ioctl(self.fd, self._hidio_cgfeature, buf, True)
-         return bytes(buf)
- 
-     def check_compatibility(self):
-@@ -207,7 +217,7 @@
-         for row in range(rows):
-             resp = self._get(OP_KEY_PAGE, bytes([layout_type, row]))
-             off = 6
--            while off + 2 < REPORT_SIZE:
-+            while off + 2 < self._report_size:
-                 idx, lo, hi = resp[off], resp[off + 1], resp[off + 2]
-                 kc = lo | (hi << 8)
-                 if kc == 0 and idx == 0 and off > 6:
-@@ -239,7 +249,7 @@
-             p.append((n >> 8) & 0xFF)
-         for kc in keys:
-             p.extend([kc & 0xFF, (kc >> 8) & 0xFF])
--        buf = bytearray(REPORT_SIZE)
-+        buf = bytearray(self._report_size)
-         buf[0] = REPORT_ID
-         buf[1] = OP_EFFECT_CHANGE
-         buf[3] = 0x03
+                         if _has_spectrum_report(os.path.join(path, 'device', 'report_descriptor')):
+                             return f'/dev/{name}'
+     return None

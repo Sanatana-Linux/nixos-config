@@ -13,10 +13,10 @@ in {
     keyboardBacklight = mkOption {
       type = types.nullOr (types.submodule {
         options = {
-          color = mkOption {
+          colors = mkOption {
             type = types.str;
-            default = "FFFFFF";
-            description = "Hex color for keyboard backlight (e.g. FFFFFF for white)";
+            default = "255,255,255,255,255,255,255,255,255,255,255,255";
+            description = "4 RGB triplets comma-separated (R,G,B per zone, 4 zones). Default: all white.";
           };
           brightness = mkOption {
             type = types.enum ["Low" "High"];
@@ -24,14 +24,14 @@ in {
             description = "Keyboard backlight brightness";
           };
           effect = mkOption {
-            type = types.enum ["static" "rainbow" "wave" "breath" "rain" "ripple" "smooth" "cycle" "rainbow_wave"];
-            default = "static";
-            description = "Keyboard lighting effect";
+            type = types.enum ["Static" "Breath" "Smooth" "Wave" "Lightning" "AmbientLight" "SmoothWave" "Swipe" "Disco" "Christmas" "Fade" "Temperature" "Ripple"];
+            default = "Static";
+            description = "Keyboard lighting effect (legion-rgb-control effect name)";
           };
         };
       });
       default = null;
-      description = "Set keyboard backlight at boot (requires legion-kb-rgb). null = disabled.";
+      description = "Set keyboard backlight at boot (requires legion-rgb-control). null = disabled.";
     };
   };
 
@@ -87,6 +87,7 @@ in {
         # Restart on nixos-rebuild switch so the bind is re-applied
         X-Restart-Triggers = "${config.system.build.kernel.modules}";
       };
+      path = with pkgs; [kmod coreutils];
       script = ''
         EC_PLATFORM_DEV="PNP0C09:00"
         EC_PLATFORM_PATH="/sys/devices/pci0000:00/0000:00:1f.0/$EC_PLATFORM_DEV"
@@ -133,37 +134,46 @@ in {
     environment.systemPackages = with pkgs; [
       lenovo-legion
       config.boot.kernelPackages.acpi_call
-      legion-kb-rgb
+      legion-rgb-control
     ];
 
     services.udev.extraRules = ''
       # ITE keyboard controller for RGB control
       SUBSYSTEM=="usb", ATTR{idVendor}=="048d", ATTR{idProduct}=="c995", MODE="0666"
       SUBSYSTEM=="usb", ATTR{idVendor}=="048d", ATTR{idProduct}=="c106", MODE="0666"
-      # HID device for Spectrum keyboard (legion-kb-rgb)
+      # HID device for Spectrum keyboard (legion-rgb-control)
       KERNEL=="hidraw*", SUBSYSTEM=="hidraw", KERNELS=="0003:048D:C995.*", MODE="0666", TAG+="uaccess"
-    ''
-    # Set keyboard backlight via udev when the ITE keyboard HID device
-    # appears. Replaces the polling-based legion-kb-backlight systemd
-    # service which had a race condition — the device wasn't always
-    # ready even after systemd-udev-settle.service.
-    + lib.optionalString (cfg.keyboardBacklight != null) ''
-      KERNEL=="hidraw*", SUBSYSTEM=="hidraw", KERNELS=="0003:048D:C995.*", \
-        ACTION=="add", \
-        RUN+="${pkgs.bash}/bin/bash -c '${pkgs.legion-kb-rgb}/bin/legion-kb-rgb brightness 9 && ${pkgs.legion-kb-rgb}/bin/legion-kb-rgb color ${cfg.keyboardBacklight.color}'"
     '';
 
-    # Keyboard backlight at boot — handled exclusively by the udev rule above.
-    # NO systemd service here: the udev RUN+= triggers the moment the ITE
-    # keyboard HID device appears, avoiding the double-open conflict that
-    # caused "Broken pipe" errors when both the service and udev rule tried
-    # to write to /dev/hidraw* simultaneously.
+    # Keyboard backlight at boot — runs after udev settles so the
+    # hidraw device is available. Uses legion-rgb-control (Rust binary
+    # from 4JX/L5P-Keyboard-RGB) which supports this hardware.
+    systemd.services.legion-kb-rgb = mkIf (cfg.keyboardBacklight != null) {
+      description = "Set Legion keyboard backlight at boot";
+      wantedBy = ["multi-user.target"];
+      after = ["systemd-udev-settle.service"];
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = true;
+      };
+      path = with pkgs; [legion-rgb-control];
+      script = let
+        kb = cfg.keyboardBacklight;
+      in ''
+        for i in $(seq 1 10); do
+          if legion-rgb-control set --effect ${kb.effect} --colors ${kb.colors} -b ${kb.brightness} 2>/dev/null; then
+            exit 0
+          fi
+          sleep 1
+        done
+        echo "legion-rgb-control: failed to access keyboard after 10s" >&2
+        exit 1
+      '';
+    };
 
     # power-profiles-daemon is NOT force-disabled here — let the host config
     # decide via modules.hardware.lenovo.power.powerProfilesDaemon
-    services = {};
 
     hardware.sensor.iio.enable = true;
-
   };
 }

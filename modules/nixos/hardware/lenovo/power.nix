@@ -15,6 +15,12 @@ in {
       description = "Use power-profiles-daemon instead of TLP";
     };
 
+    conservationMode = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Enable battery conservation mode (stop charging at ~80%) via legion_cli";
+    };
+
     cpuBoostOnAc = lib.mkOption {
       type = lib.types.int;
       default = 1;
@@ -88,6 +94,23 @@ in {
         percentageAction = 3;
         usePercentageForPolicy = true;
       };
+    };
+
+    # Battery conservation mode via legion_cli — stops charging at ~80%
+    # to reduce VRM/IC heat. Uses set-feature to avoid the broken WMI
+    # rapidcharge path that fancurve-write-preset-to-hw triggers.
+    systemd.services.legion-conservation-mode = lib.mkIf cfg.conservationMode {
+      description = "Enable Lenovo Legion battery conservation mode";
+      wantedBy = ["multi-user.target"];
+      after = ["systemd-modules-load.service"];
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = true;
+      };
+      path = with pkgs; [pkgs.lenovo-legion pkgs.bash pkgs.coreutils];
+      script = ''
+        ${pkgs.lenovo-legion}/bin/legion_cli --donotexpecthwmon set-feature BatteryConservation 1
+      '';
     };
 
     # UPower has no built-in notification mechanism — it relies on desktop

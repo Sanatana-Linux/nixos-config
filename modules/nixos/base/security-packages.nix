@@ -26,6 +26,14 @@ in {
       };
     };
 
+    kryptor = {
+      enable = mkOption {
+        type = types.bool;
+        default = true;
+        description = "File encryption CLI tool";
+      };
+    };
+
     nmap = {
       enable = mkOption {
         type = types.bool;
@@ -57,6 +65,7 @@ in {
         []
         ++ optional cfg.bitwarden.enable bitwarden-desktop
         ++ optional cfg.ghorg.enable ghorg
+        ++ optional cfg.kryptor.enable kryptor
         ++ optional cfg.nmap.enable nmap
         ++ optional cfg.openssl.enable openssl.dev
         ++ optional cfg.tor.enable tor

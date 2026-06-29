@@ -157,6 +157,7 @@ in {
         gtk3 # GTK+ 3 toolkit
         harfbuzz # Text shaping library
         libappindicator-gtk2 # Application indicators for GTK2
+        libappindicator-gtk3 # Application indicators for GTK3
         libcaca # Color ASCII art library
         libcanberra # Event sound library
         libcanberra-gtk3 # Event sound for GTK3

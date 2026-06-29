@@ -153,7 +153,7 @@
           intelBusId = "PCI:00:02:0";
           nvidiaBusId = "PCI:01:00:0";
         };
-        gpuTempLimit = 80;
+        gpuTempLimit = null;
       };
       intel.enable = true;
       bluetooth.enable = true;
@@ -161,9 +161,9 @@
       lenovo = {
         enable = true;
         keyboardBacklight = {
-          color = "FFFFFF";
+          colors = "255,255,255,255,255,255,255,255,255,255,255,255";
           brightness = "High";
-          effect = "static";
+          effect = "Static";
         };
         power = {
           enable = true;

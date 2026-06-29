@@ -45,7 +45,7 @@ in {
     systemd.services.legion-thermal-guard = lib.mkIf cfg.thermalGuard.enable {
       description = "Lenovo Legion thermal guard — throttles EPP and fans when CPU overheats";
       wantedBy = ["multi-user.target"];
-      after = ["tlp.service"];
+      after = ["systemd-modules-load.service" "sysinit.target"];
       serviceConfig = {
         Type = "simple";
         Restart = "always";
@@ -92,8 +92,14 @@ in {
             for cpu in /sys/devices/system/cpu/cpu*/cpufreq/energy_performance_preference; do
               echo "balance_power" > "$cpu" 2>/dev/null || true
             done
-            # Apply performance fan curve for max cooling
-            legion_cli fancurve-write-file-to-hw /etc/legion/fan-curves/performance-ac.yaml 2>/dev/null || true
+            # Apply performance fan curve for max cooling (pick AC or battery variant)
+            SOURCE="battery"
+            for bat in /sys/class/power_supply/AC*/online /sys/class/power_supply/ADP*/online; do
+              if [ -f "$bat" ] && [ "$(cat "$bat" 2>/dev/null)" = "1" ]; then
+                SOURCE="ac"; break
+              fi
+            done
+            ${pkgs.lenovo-legion}/bin/legion_cli --donotexpecthwmon fancurve-write-file-to-hw "/etc/legion/fan-curves/performance-''${SOURCE}.yaml" 2>/dev/null || true
             THROTTLED=1
           elif [ "$CPU_TEMP" -le "$LOW" ] && [ "$THROTTLED" -eq 1 ]; then
             RESTORE_EPP="balance_power"

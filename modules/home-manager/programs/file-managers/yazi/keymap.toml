@@ -1,5 +1,33 @@
 [mgr]
 
+prepend_keymap = [
+  { on = ["m"], run = "plugin bookmarks save", desc = "Save bookmark" },
+  { on = ["'"], run = "plugin bookmarks jump", desc = "Jump to bookmark" },
+  { on = ["`"], run = "plugin bookmarks jump", desc = "Jump to bookmark" },
+
+  # Plugins
+  { on = [",", "h"], run = "plugin chmod", desc = "Change file permissions" },
+  { on = [",", "z"], run = "plugin compress", desc = "Create archive (smart)" },
+  { on = [",", "d"], run = "plugin dupes", desc = "Find duplicate files" },
+  { on = [",", "g"], run = "plugin gitui", desc = "Open gitui" },
+  { on = [",", "v"], run = "plugin mount", desc = "Mount manager" },
+  { on = [",", "o"], run = "plugin ouch", desc = "Compress with ouch" },
+  { on = [",", "t"], run = "plugin recycle-bin menu", desc = "Recycle bin menu" },
+  { on = [",", "R"], run = "plugin restore", desc = "Restore from trash" },
+  { on = [",", "p"], run = "plugin smart-paste", desc = "Smart paste into directory" },
+
+  # Sudo operations
+  { on = [",", "u", "c"], run = "plugin sudo create", desc = "Sudo create file/dir" },
+  { on = [",", "u", "r"], run = "plugin sudo rename", desc = "Sudo rename" },
+  { on = [",", "u", "d"], run = "plugin sudo remove", desc = "Sudo remove" },
+  { on = [",", "u", "p"], run = "plugin sudo paste", desc = "Sudo paste" },
+  { on = [",", "u", "P"], run = "plugin sudo paste --force", desc = "Sudo force paste" },
+
+  # Nav parent panel
+  { on = ["[", "d"], run = "plugin nav-parent-panel prev", desc = "Previous sibling directory" },
+  { on = ["]", "d"], run = "plugin nav-parent-panel next", desc = "Next sibling directory" },
+]
+
 keymap = [
   { on = [
     "<Esc>",
@@ -257,34 +285,6 @@ keymap = [
     "S",
   ], run = "sort size --reverse --dir_first", desc = "Sort by size (reverse)" },
 
-  # Bookmarks
-  { on = ["m"], run = "plugin bookmarks save", desc = "Save bookmark" },
-  { on = ["'"], run = "plugin bookmarks jump", desc = "Jump to bookmark" },
-  { on = ["`"], run = "plugin bookmarks jump", desc = "Jump to bookmark" },
-
-  # Plugins
-  { on = [",", "h"], run = "plugin chmod", desc = "Change file permissions" },
-  { on = [",", "z"], run = "plugin compress", desc = "Create archive (smart)" },
-  { on = [",", "d"], run = "plugin dupes", desc = "Find duplicate files" },
-  { on = [",", "g"], run = "plugin gitui", desc = "Open gitui" },
-  { on = [",", "v"], run = "plugin mount", desc = "Mount manager" },
-  { on = [",", "o"], run = "plugin ouch", desc = "Compress with ouch" },
-  { on = [",", "t"], run = "plugin recycle-bin menu", desc = "Recycle bin menu" },
-  { on = [",", "R"], run = "plugin restore", desc = "Restore from trash" },
-  { on = [",", "p"], run = "plugin smart-paste", desc = "Smart paste into directory" },
-
-  # Sudo operations
-  { on = [",", "u", "c"], run = "plugin sudo create", desc = "Sudo create file/dir" },
-  { on = [",", "u", "r"], run = "plugin sudo rename", desc = "Sudo rename" },
-  { on = [",", "u", "d"], run = "plugin sudo remove", desc = "Sudo remove" },
-  { on = [",", "u", "p"], run = "plugin sudo paste", desc = "Sudo paste" },
-  { on = [",", "u", "P"], run = "plugin sudo paste --force", desc = "Sudo force paste" },
-
-  # Nav parent panel
-  { on = ["[", "d"], run = "plugin nav-parent-panel prev", desc = "Previous sibling directory" },
-  { on = ["]", "d"], run = "plugin nav-parent-panel next", desc = "Next sibling directory" },
-
-  # Tabs
   { on = [
     "t",
   ], run = "tab_create --current", desc = "Create a new tab using the current path" },

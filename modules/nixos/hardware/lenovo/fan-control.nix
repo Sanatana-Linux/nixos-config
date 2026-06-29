@@ -310,38 +310,50 @@ with lib; let
     ];
   };
 
-  # Generate a single YAML entry from a curve point and temp range
-  mkEntry = low: p: high: ''
+  # Generate a single YAML entry from a curve point and per-sensor temp ranges
+  # Each sensor (CPU, GPU, IC) gets its own lower/upper bounds derived from
+  # that sensor's temperature values — not copied from CPU.  This is critical:
+  # the IC/VRM chipset runs independently of CPU load (GPU stress, charging,
+  # power delivery heat soak) and must be able to ramp fans on its own.
+  mkEntry = cpuLow: gpuLow: icLow: p: cpuHigh: gpuHigh: icHigh: ''
     - fan1_speed: ${toString (pwmToRpm p.f1)}
       fan2_speed: ${toString (pwmToRpm p.f2)}
-      cpu_lower_temp: ${toString low}
-      cpu_upper_temp: ${toString high}
-      gpu_lower_temp: ${toString low}
-      gpu_upper_temp: ${toString high}
-      ic_lower_temp: ${toString low}
-      ic_upper_temp: ${toString high}
+      cpu_lower_temp: ${toString cpuLow}
+      cpu_upper_temp: ${toString cpuHigh}
+      gpu_lower_temp: ${toString gpuLow}
+      gpu_upper_temp: ${toString gpuHigh}
+      ic_lower_temp: ${toString icLow}
+      ic_upper_temp: ${toString icHigh}
       acceleration: ${toString p.a}
       deceleration: ${toString p.d}
   '';
 
-  # Build midpoints between consecutive curve points
-  midpoints = pts:
-    imap0 (i: p:
+  # Build midpoints between consecutive curve points for a given sensor field
+  # Returns a list of N+1 values: [0, mid(0→1), mid(1→2), ..., 127]
+  sensorMidpoints = pts: sensor:
+    (imap0 (i: p:
       if i == 0
       then 0
       else let
         prev = builtins.elemAt pts (i - 1);
       in
-        (prev.cpu + p.cpu) / 2)
-    pts;
+        (prev.${sensor} + p.${sensor}) / 2)
+    pts)
+    ++ [127];
 
   # Generate complete YAML for a fan curve
+  # Each sensor gets independent temperature bands so the IC/VRM chipset
+  # can drive fan speed without waiting for CPU to heat up first.
   genYaml = name: curve: let
     pts = curve.points;
-    temps = map (p: p.cpu) pts;
-    mids = midpoints pts ++ [127];
+    cpuMids = sensorMidpoints pts "cpu";
+    gpuMids = sensorMidpoints pts "gpu";
+    icMids = sensorMidpoints pts "ic";
     entries = imap0 (i: p:
-      mkEntry (builtins.elemAt mids i) p (builtins.elemAt mids (i + 1)))
+      mkEntry
+        (builtins.elemAt cpuMids i) (builtins.elemAt gpuMids i) (builtins.elemAt icMids i)
+        p
+        (builtins.elemAt cpuMids (i + 1)) (builtins.elemAt gpuMids (i + 1)) (builtins.elemAt icMids (i + 1)))
     pts;
   in ''
     name: ${name}
@@ -507,22 +519,85 @@ in {
                 echo "AC adapter: $(cat "$bat" 2>/dev/null)"
               fi
             done
-            echo "Fan speeds (RPM):"
+            echo ""
+            echo "=== Temperatures ==="
+            for hwmon in /sys/class/hwmon/hwmon*; do
+              HWMON_NAME=""
+              if [ -f "$hwmon/name" ]; then
+                HWMON_NAME=$(cat "$hwmon/name" 2>/dev/null)
+              fi
+              case "$HWMON_NAME" in
+                coretemp|coretemp.*)
+                  for tfile in "$hwmon"/temp*_input; do
+                    [ -f "$tfile" ] || continue
+                    LABEL=""
+                    LABELFILE="''${tfile%_input}_label"
+                    [ -f "$LABELFILE" ] && LABEL=$(cat "$LABELFILE" 2>/dev/null)
+                    TEMP=$(cat "$tfile" 2>/dev/null | awk '{printf "%d", $1/1000}')
+                    echo "  CPU ''${LABEL:-$(basename "$tfile" _input)}: ''${TEMP}°C"
+                  done
+                  ;;
+                legion*)
+                  # legion_laptop exposes multiple temp sensors:
+                  # temp1 = CPU, temp2 = GPU, temp3 = IC/VRM, temp4 = ambient
+                  for tfile in "$hwmon"/temp*_input; do
+                    [ -f "$tfile" ] || continue
+                    IDX=$(basename "$tfile" _input | sed 's/temp//')
+                    LABEL=""
+                    LABELFILE="''${tfile%_input}_label"
+                    [ -f "$LABELFILE" ] && LABEL=$(cat "$LABELFILE" 2>/dev/null)
+                    TEMP=$(cat "$tfile" 2>/dev/null | awk '{printf "%d", $1/1000}')
+                    case "$IDX" in
+                      1) SENSOR="CPU" ;;
+                      2) SENSOR="GPU" ;;
+                      3) SENSOR="IC/VRM" ;;
+                      4) SENSOR="Ambient" ;;
+                      *) SENSOR="temp''${IDX}" ;;
+                    esac
+                    echo "  ''${SENSOR} ''${LABEL:+($LABEL)}: ''${TEMP}°C"
+                  done
+                  ;;
+              esac
+            done
+            echo ""
+            echo "=== Fan speeds ==="
             for hwmon in /sys/class/hwmon/hwmon*; do
               if [ -f "$hwmon/name" ] && grep -q legion "$hwmon/name" 2>/dev/null; then
-                cat "$hwmon/fan1_input" 2>/dev/null && echo " RPM"
-                cat "$hwmon/fan2_input" 2>/dev/null && echo " (fan2 RPM)"
+                F1=$(cat "$hwmon/fan1_input" 2>/dev/null || echo "N/A")
+                F2=$(cat "$hwmon/fan2_input" 2>/dev/null || echo "N/A")
+                echo "  Fan 1: ''${F1} RPM"
+                echo "  Fan 2: ''${F2} RPM"
               fi
             done
             ;;
+          temps)
+            # Compact one-line temp summary for scripting
+            CPU=""; GPU=""; IC=""
+            for hwmon in /sys/class/hwmon/hwmon*; do
+              HWMON_NAME=""
+              [ -f "$hwmon/name" ] && HWMON_NAME=$(cat "$hwmon/name" 2>/dev/null)
+              case "$HWMON_NAME" in
+                coretemp|coretemp.*)
+                  [ -f "$hwmon/temp1_input" ] && CPU=$(cat "$hwmon/temp1_input" | awk '{printf "%d", $1/1000}')
+                  ;;
+                legion*)
+                  [ -f "$hwmon/temp1_input" ] && [ -z "$CPU" ] && CPU=$(cat "$hwmon/temp1_input" | awk '{printf "%d", $1/1000}')
+                  [ -f "$hwmon/temp2_input" ] && GPU=$(cat "$hwmon/temp2_input" | awk '{printf "%d", $1/1000}')
+                  [ -f "$hwmon/temp3_input" ] && IC=$(cat "$hwmon/temp3_input" | awk '{printf "%d", $1/1000}')
+                  ;;
+              esac
+            done
+            echo "CPU=''${CPU:-N/A}°C GPU=''${GPU:-N/A}°C IC/VRM=''${IC:-N/A}°C"
+            ;;
           *)
-            echo "Usage: legion-fan {quiet|balanced|performance|auto|status}"
+            echo "Usage: legion-fan {quiet|balanced|performance|auto|status|temps}"
             echo ""
             echo "  quiet        - Moderate cooling, good idle"
             echo "  balanced     - Aggressive cooling, fast spin-up"
             echo "  performance  - Maximum cooling, full speed at high temps"
             echo "  auto         - Follow Fn+Q key + power source"
-            echo "  status       - Show current state"
+            echo "  status       - Show temps, fan speeds, and platform profile"
+            echo "  temps        - One-line CPU/GPU/IC temp summary"
             ;;
         esac
       '')

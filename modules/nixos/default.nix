@@ -4,6 +4,5 @@
     ./hardware
     ./stylix
     ./system
-    ./virtualization
   ];
 }

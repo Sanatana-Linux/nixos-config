@@ -25,7 +25,10 @@
   "instructions": [
     ".opencode/rules/nix-flake-strategy.md",
     ".opencode/rules/project-constraints.md",
-    ".opencode/rules/comment-style.md"
+    ".opencode/rules/comment-style.md",
+    ".opencode/rules/nix-service-scripts.md",
+    ".opencode/rules/nix-module-patterns.md",
+    ".opencode/rules/nix-secrets-management.md"
   ],
   "tools": {
     "nix-build": true,
@@ -38,7 +41,8 @@
       ".opencode/skills/nixos-module",
       ".opencode/skills/nix-flake-ops",
       ".opencode/skills/nixos-debug",
-      ".opencode/skills/nix-secrets"
+      ".opencode/skills/nix-secrets",
+      ".opencode/skills/nix-service-scripts"
     ]
   }
 }

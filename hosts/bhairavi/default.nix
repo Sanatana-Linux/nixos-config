@@ -32,6 +32,16 @@
         hostName = "bhairavi";
         quad9.enable = true;
       };
+      virtualization = {
+        docker = {
+          enable = true;
+          rootless = true;
+          nvidia = false;
+        };
+        virt-manager.enable = false;
+        waydroid.enable = false;
+        lxc.enable = false;
+      };
       apps = {
         nix-ld.enable = true;
         appimage.enable = true;
@@ -164,17 +174,6 @@
       enable = true;
       zsh = true;
       variables.enable = true;
-    };
-
-    virtualization = {
-      docker = {
-        enable = true;
-        rootless = true;
-        nvidia = false;
-      };
-      virt-manager.enable = false;
-      waydroid.enable = false;
-      lxc.enable = false;
     };
 
     hardware = {

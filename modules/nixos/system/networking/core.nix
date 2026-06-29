@@ -77,11 +77,14 @@ with lib; {
       hostName = config.modules.system.networking.hostName;
     };
 
-    # ── NetworkManager ────────────────────────────────────────────────
+    # ── NetworkManager with iwd backend ───────────────────────────────
     # Conditional: set modules.system.networking.networkmanager.enable = false
     # in the host config to disable NM (for manual wpa_supplicant + dhclient).
     networking.networkmanager = mkIf config.modules.system.networking.networkmanager.enable {
       enable = true;
+      # Use iwd as the WiFi backend (instead of wpa_supplicant) for better
+      # performance, WPA3/SAE support, and more reliable Realtek adapter handling.
+      backend = "iwd";
       dns = "default";
       insertNameservers =
         if config.modules.system.networking.quad9.enable

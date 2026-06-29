@@ -5,9 +5,9 @@
   ...
 }:
 with lib; let
-  cfg = config.modules.virtualization.virt-manager;
+  cfg = config.modules.system.virtualization.virt-manager;
 in {
-  options.modules.virtualization.virt-manager = {
+  options.modules.system.virtualization.virt-manager = {
     enable = mkEnableOption "Virtual machine management with virt-manager";
   };
 

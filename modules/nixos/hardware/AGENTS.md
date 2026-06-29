@@ -20,8 +20,8 @@ Hardware support and driver configuration. Each module enables specific hardware
 | `keyboard.nix` | Keyboard configuration (Copilot key remapping via keyd) |
 | `lenovo/lenovo.nix` | Lenovo Legion hardware (legion-rgb-control, kernel modules, udev) |
 | `lenovo/power.nix` | Laptop power management (TLP/power-profiles-daemon, upower, battery thresholds) |
-| `lenovo/cooling.nix` | Thermal guard monitoring and recovery |
-| `lenovo/fan-control.nix` | Fan curve daemon with automatic profile switching |
+| `lenovo/cooling.nix` | Thermal guard — monitors CPU and IC/VRM temp, throttles EPP when either overheats |
+| `lenovo/fan-control.nix` | Fan curve daemon with per-sensor (CPU/GPU/IC) independent temperature bands |
 | `devices/android.nix` | Android MTP/ADB support |
 | `devices/iphone.nix` | iPhone/libimobiledevice support |
 | `devices/logitech.nix` | Logitech device support (Solaar) |

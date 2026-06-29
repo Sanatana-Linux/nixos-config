@@ -5,9 +5,9 @@
   ...
 }:
 with lib; let
-  cfg = config.modules.virtualization.core;
+  cfg = config.modules.system.virtualization.core;
 in {
-  options.modules.virtualization.core = {
+  options.modules.system.virtualization.core = {
     enable = mkEnableOption "Core virtualization (Docker, containerd, libvirt)";
 
     nvidia = mkEnableOption "NVIDIA container runtime support";

@@ -16,7 +16,7 @@ NixOS system-level modules. Each module declares an enable option under `modules
 | `stylix/` | System-wide theming (colors, fonts, cursor via stylix) |
 | `system/` | System services — boot, cron, systemd, networking, apps (appimage, java, nix-ld, network-manager-applet, shotcut, thunar, ai/ollama/comfyui), desktop (awesomewm, lightdm, xfce), performance (cachy, oomd, undervolt, zram), security (doas, fail2ban, firewall, pam, ssh, sudo, tpm) |
 | `users/` | User account modules (tlh, smg, user) — **import per-host only** |
-| `virtualization/` | VMs and containers (docker, lxc, virt-manager, waydroid, quickemu) |
+| `system/virtualization/` | VMs and containers (docker, lxc, virt-manager, waydroid, quickemu) |
 
 ## For AI Agents
 

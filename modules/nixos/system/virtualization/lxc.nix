@@ -5,11 +5,11 @@
   ...
 }:
 with lib; {
-  options.modules.virtualization.lxc = {
+  options.modules.system.virtualization.lxc = {
     enable = mkEnableOption "LXC/LXD container virtualization";
   };
 
-  config = mkIf config.modules.virtualization.lxc.enable {
+  config = mkIf config.modules.system.virtualization.lxc.enable {
     virtualisation.lxc.enable = true;
     virtualisation.lxc.lxcfs.enable = true;
 

@@ -5,9 +5,9 @@
   ...
 }:
 with lib; let
-  cfg = config.modules.virtualization.docker;
+  cfg = config.modules.system.virtualization.docker;
 in {
-  options.modules.virtualization.docker = {
+  options.modules.system.virtualization.docker = {
     enable = mkEnableOption "Docker container runtime";
 
     enableOnBoot = mkOption {

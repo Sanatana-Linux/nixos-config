@@ -10,5 +10,6 @@
     ./performance
     ./runtimes
     ./security
+    ./virtualization
   ];
 }

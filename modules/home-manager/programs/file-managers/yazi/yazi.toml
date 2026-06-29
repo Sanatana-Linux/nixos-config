@@ -71,21 +71,17 @@ macro_workers = 10
 bizarre_retry = 5
 
 [plugin]
-# Fetchers: runs on every file to determine MIME type
-fetchers = [
-  { id = "mime-ext", name = "*", run = "mime-ext" },
-]
 # Previewers: custom file preview (replaces built-in preview)
 previewers = [
-  { name = "*.md", run = "glow" },
-  { name = "*.zip", run = "ouch" },
-  { name = "*.7z", run = "ouch" },
-  { name = "*.rar", run = "ouch" },
-  { name = "*.tar", run = "ouch" },
-  { name = "*.tar.gz", run = "ouch" },
-  { name = "*.tar.xz", run = "ouch" },
-  { name = "*.tar.bz2", run = "ouch" },
-  { name = "*.tar.zst", run = "ouch" },
+  { url = "*.md", run = "glow" },
+  { url = "*.zip", run = "ouch" },
+  { url = "*.7z", run = "ouch" },
+  { url = "*.rar", run = "ouch" },
+  { url = "*.tar", run = "ouch" },
+  { url = "*.tar.gz", run = "ouch" },
+  { url = "*.tar.xz", run = "ouch" },
+  { url = "*.tar.bz2", run = "ouch" },
+  { url = "*.tar.zst", run = "ouch" },
 ]
 
 [log]

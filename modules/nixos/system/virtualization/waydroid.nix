@@ -5,9 +5,9 @@
   ...
 }:
 with lib; let
-  cfg = config.modules.virtualization.waydroid;
+  cfg = config.modules.system.virtualization.waydroid;
 in {
-  options.modules.virtualization.waydroid = {
+  options.modules.system.virtualization.waydroid = {
     enable = mkEnableOption "Android apps with Waydroid";
   };
 

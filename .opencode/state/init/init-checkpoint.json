@@ -1,6 +1,6 @@
 {
   "lastCompletedPhase": 3,
-  "timestamp": "2026-06-27T12:50:00Z",
+  "timestamp": "2026-06-29T15:00:00Z",
   "subcommand": "refresh",
   "mode": "merge",
   "files": [
@@ -15,9 +15,15 @@
     ".opencode/rules/nix-flake-strategy.md",
     ".opencode/rules/project-constraints.md",
     ".opencode/rules/comment-style.md",
+    ".opencode/rules/nix-service-scripts.md",
     ".opencode/state/project-memory.json",
     ".opencode/state/init/stack-fingerprint.json",
     ".opencode/state/init/stack-recommendations.json",
     "AGENTS.md"
+  ],
+  "changesApplied": [
+    "Registered nix-service-scripts.md in opencode.jsonc instructions",
+    "Updated stack-fingerprint.json with recent changes and refreshed timestamp",
+    "Updated stack-recommendations.json notes"
   ]
 }

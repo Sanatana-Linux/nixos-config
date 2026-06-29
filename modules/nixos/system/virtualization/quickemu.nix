@@ -5,9 +5,9 @@
   ...
 }:
 with lib; let
-  cfg = config.modules.virtualization.quickemu;
+  cfg = config.modules.system.virtualization.quickemu;
 in {
-  options.modules.virtualization.quickemu = {
+  options.modules.system.virtualization.quickemu = {
     enable = mkEnableOption "Quickemu - Simple QEMU wrapper for quick VM management";
 
     installUtils = mkOption {

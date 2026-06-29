@@ -44,6 +44,15 @@
         quad9.enable = true;
         networkmanager.enable = false;
       };
+      virtualization = {
+        docker = {
+          enable = true;
+          rootless = true;
+        };
+        virt-manager.enable = true;
+        # waydroid.enable = true;
+        # lxc.enable = true;
+      };
       apps = {
         nix-ld.enable = true;
         appimage.enable = true;
@@ -185,17 +194,6 @@
       enable = true;
       zsh = true;
       variables.enable = true;
-    };
-
-    # Virtualization
-    virtualization = {
-      docker = {
-        enable = true;
-        rootless = true;
-      };
-      virt-manager.enable = true;
-      # waydroid.enable = true;
-      # lxc.enable = true;
     };
 
     # Hardware

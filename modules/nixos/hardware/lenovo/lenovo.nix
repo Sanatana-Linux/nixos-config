@@ -73,7 +73,7 @@ in {
     systemd.services.legion-driver-bind = {
       description = "Force legion_laptop to bind to the ACPI EC device (PNP0C09:00)";
       wantedBy = ["multi-user.target"];
-      before = ["legion-fan-control.service"];
+      # fan-control module removed — no ordering dependency needed
       after = ["systemd-modules-load.service" "sysinit.target"];
       # Reload on nixos-rebuild switch — kernel module package may change
       reloadTriggers = [

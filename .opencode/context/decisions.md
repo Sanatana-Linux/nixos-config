@@ -118,3 +118,15 @@
 - **Context**: The bagalamukhi host was using "performance" as the AC fan profile, but the performance curve was too conservative (max 153 PWM / ~60% fan speed at 86°C). The new "extreme" profile ramps to 100% PWM by 80°C.
 - **Decision**: Changed `onAc` from "performance" to "extreme" for bagalamukhi.
 - **Consequences**: Fans will run faster under load, keeping the laptop cooler. Slightly more noise but significantly better thermal performance.
+
+## ADR-008: BIOS update N0CN31WW→N0CN35WW via fwupdtool install-blob
+
+- **Date**: 2026-06-30
+- **Context**: The Legion 5 Pro 16IRX9 (bagalamukhi) was running BIOS N0CN31WW. The VRM/IC region was running excessively hot under load. The BIOS update image `WinN0CN35WW.fd` (27MB) was extracted from the Lenovo-supplied `n0cn35ww.exe` Windows flasher. The UEFI shell method failed (EFI shell couldn't recognize the filesystem), so the update was applied via `fwupdtool install-blob` which stages a UEFI capsule update and flashes on reboot.
+- **Decision**: Updated BIOS from N0CN31WW to N0CN35WW using:
+  ```
+  sudo fwupdtool install-blob ~/Downloads/BIOS/WinN0CN35WW.fd 97a155291f41b383be1520ac4355012ecb875e3f
+  ```
+  Also disabled "always charge" and "charge in low power states" in the BIOS settings.
+- **Consequences**: VRM region heat is noticeably mitigated after the update. The BIOS charge settings changes may also contribute to reduced thermal load. The `cooling.nix` and `fan-control.nix` modules were removed from the NixOS config — they were making things worse by writing to the EC too frequently, causing the system to heat up further with no positive effect. The `legion-default-profile` service was added to force `platform_profile` to "balanced" at boot (overriding the BIOS/EC-persisted Fn+Q state), and `TLP_DEFAULT_MODE` was changed from `"BAT"` to `"AC"` so TLP starts in balanced mode by default.
+- **Note**: The BIOS update locked out the advanced BIOS menu (previously accessible via a key combo or modded BIOS). This is not a concern — the advanced BIOS only provided firmware-level thermal/power controls that are now handled entirely through NixOS (TLP, CPU_MAX_PERF_ON_AC=80, platform_profile forcing, kernel params). Since the system runs NixOS exclusively, all the functionality that was in the advanced BIOS is replicated and more flexibly managed through the NixOS config.

@@ -58,5 +58,6 @@ Reference hardware profile for Lenovo Legion Pro 7 16IRX9H (2024 model).
 - **Audio**: Requires `snd-hda-intel model=auto`, blacklists `snd_soc_avs`
 - **Kernel module**: `lenovo-legion-module` for fan/BIOS control
 - **DPI**: 189 (2560×1600 on 16" display)
-- **Cooling**: `thermald` for thermal management
+- **Cooling**: `thermald` for thermal management. Custom `cooling.nix` and `fan-control.nix` modules were removed — they were writing to the EC too frequently, causing the system to heat up further with no positive effect. TLP handles baseline power management with `CPU_MAX_PERF_ON_AC = 80` to cap VRM current draw.
+- **BIOS**: Updated from N0CN31WW to N0CN35WW via `fwupdtool install-blob` (UEFI capsule). "Always charge" and "charge in low power states" disabled in BIOS settings. The `legion-default-profile` service forces `platform_profile` to "balanced" at boot to override the BIOS/EC-persisted Fn+Q state.
 - Uses `config.boot.kernelPackages` (not `pkgs.linuxPackages`) for kernel module packages

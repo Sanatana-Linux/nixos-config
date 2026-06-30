@@ -21,6 +21,12 @@ in {
       description = "Enable battery conservation mode (stop charging at ~80%) via legion_cli";
     };
 
+    defaultProfile = lib.mkOption {
+      type = lib.types.enum ["low-power" "balanced" "performance"];
+      default = "balanced";
+      description = "Default platform_profile set at boot. Overrides the BIOS/EC-persisted Fn+Q state so the system always starts in the desired mode.";
+    };
+
     cpuBoostOnAc = lib.mkOption {
       type = lib.types.int;
       default = 1;
@@ -68,14 +74,14 @@ in {
           CPU_BOOST_ON_BAT = cfg.cpuBoostOnBat;
           CPU_SCALING_GOVERNOR_ON_AC = "powersave";
           CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-          # EPP is managed by legion-epp + legion-thermal-guard — don't override
+          # EPP is managed by TLP — don't override
           CPU_ENERGY_PERF_POLICY_ON_AC = "balance_performance";
           CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_power";
           PLATFORM_PROFILE_ON_AC = "balanced";
           PLATFORM_PROFILE_ON_BAT = "low-power";
           CPU_MAX_PERF_ON_AC = 80; # Cap at 80% to reduce VRM current draw — full 100% on i9-14900HX causes excessive VRM temperatures
           CPU_MAX_PERF_ON_BAT = 60;
-          TLP_DEFAULT_MODE = "BAT";
+          TLP_DEFAULT_MODE = "AC";
           TLP_PERSISTENT_DEFAULT = 1;
           # Optional helps save long term battery health
           START_CHARGE_THRESH_BAT0 = cfg.startChargeThreshold;
@@ -110,6 +116,34 @@ in {
       path = with pkgs; [pkgs.lenovo-legion pkgs.bash pkgs.coreutils];
       script = ''
         ${pkgs.lenovo-legion}/bin/legion_cli --donotexpecthwmon set-feature BatteryConservation 1
+      '';
+    };
+
+    # Force platform_profile to the configured default at boot.
+    # The BIOS/EC persists the last Fn+Q state across reboots, so if you
+    # last used quiet mode (blue LED), the system boots into quiet mode
+    # with minimal fans and reduced performance. This service overrides
+    # that at boot so the system always starts in the desired profile.
+    systemd.services.legion-default-profile = {
+      description = "Force Legion platform_profile to ${cfg.defaultProfile} at boot";
+      wantedBy = ["multi-user.target"];
+      after = ["systemd-modules-load.service" "sysinit.target"];
+      # No fan-control dependency — that module is being removed
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = true;
+      };
+      path = with pkgs; [coreutils];
+      script = ''
+        PROFILE="${cfg.defaultProfile}"
+        TARGET="/sys/firmware/acpi/platform_profile"
+        if [ -f "$TARGET" ]; then
+          CURRENT=$(cat "$TARGET" 2>/dev/null || echo "unknown")
+          if [ "$CURRENT" != "$PROFILE" ]; then
+            echo "Setting platform_profile from ''${CURRENT} → ''${PROFILE}"
+            echo "$PROFILE" > "$TARGET" 2>/dev/null || echo "WARNING: Could not set platform_profile to $PROFILE" >&2
+          fi
+        fi
       '';
     };
 

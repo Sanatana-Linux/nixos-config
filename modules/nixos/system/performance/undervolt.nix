@@ -13,8 +13,8 @@ in {
     # P-State power limits (missing from current implementation)
     p1Limit = mkOption {
       type = types.int;
-      default = 65;
-      description = "P1 state power limit in watts";
+      default = 45;
+      description = "P1 state (sustained) power limit in watts. Lower values reduce VRM heat. The i9-14900HX base TDP is 55W; 45W is a safe sustained target that significantly reduces VRM load.";
     };
 
     p1Window = mkOption {
@@ -25,14 +25,14 @@ in {
 
     p2Limit = mkOption {
       type = types.int;
-      default = 100;
-      description = "P2 state power limit in watts";
+      default = 65;
+      description = "P2 state (turbo) power limit in watts. Lower values reduce VRM heat spikes. The default of 100W causes excessive VRM temperatures on the Legion 5 Pro.";
     };
 
     p2Window = mkOption {
       type = types.int;
-      default = 24;
-      description = "P2 state power limit window in seconds";
+      default = 8;
+      description = "P2 state power limit window in seconds. Shorter windows limit the duration of high-current VRM stress during turbo boost.";
     };
   };
 
@@ -76,11 +76,13 @@ in {
     # CPU undervolting configuration
     services.undervolt = {
       enable = true;
-      tempBat = 85; # Maximum battery temperature
-      uncoreOffset = -40; # in mV
-      coreOffset = -90; # in mV
+      tempAc = 80; # Maximum AC temperature — throttle before VRM hits danger zone
+      tempBat = 75; # Maximum battery temperature
+      uncoreOffset = -65; # in mV — aggressive uncore undervolt reduces VRM current draw
+      coreOffset = -120; # in mV — deeper core undervolt
+      gpuOffset = -50; # in mV — undervolt the GPU slice too
       package = pkgs.undervolt;
-      verbose = true; # More logging
+      verbose = true;
       turbo = 0; # Keep Intel Turbo feature enabled (1 for disabled)
     };
   };

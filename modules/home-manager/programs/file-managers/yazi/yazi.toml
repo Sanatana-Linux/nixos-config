@@ -84,5 +84,12 @@ previewers = [
   { url = "*.tar.zst", run = "ouch" },
 ]
 
+# Git status fetcher — required by git.yazi plugin to show file change
+# status as linemode in the file list.
+prepend_fetchers = [
+  { id = "git", url = "*",   run = "git", group = "git" },
+  { id = "git", url = "*/",  run = "git", group = "git" },
+]
+
 [log]
 enabled = false

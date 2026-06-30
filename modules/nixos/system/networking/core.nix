@@ -16,7 +16,7 @@ with lib; {
     wifi = {
       powersave = mkOption {
         type = types.bool;
-        default = false;
+        default = true;
         description = "Enable WiFi power saving";
       };
       randomMac = mkOption {
@@ -77,14 +77,11 @@ with lib; {
       hostName = config.modules.system.networking.hostName;
     };
 
-    # ── NetworkManager with iwd backend ───────────────────────────────
-    # Conditional: set modules.system.networking.networkmanager.enable = false
-    # in the host config to disable NM (for manual wpa_supplicant + dhclient).
+    # ── NetworkManager ─────────────────────────────────────────────────
+    # Uses wpa_supplicant (default) for WiFi backend — iwd backend
+    # did not discover WiFi modules on this hardware.
     networking.networkmanager = mkIf config.modules.system.networking.networkmanager.enable {
       enable = true;
-      # Use iwd as the WiFi backend (instead of wpa_supplicant) for better
-      # performance, WPA3/SAE support, and more reliable Realtek adapter handling.
-      backend = "iwd";
       dns = "default";
       insertNameservers =
         if config.modules.system.networking.quad9.enable
@@ -93,13 +90,8 @@ with lib; {
       unmanaged = ["docker0" "rndis0"];
       wifi = {
         powersave = config.modules.system.networking.wifi.powersave;
-        # Realtek USB WiFi adapters (rtw88 in-kernel and rtl88x2bu
-        # out-of-tree) cannot handle NetworkManager's default MAC
-        # randomization during scans. This causes connection failures,
-        # dropped associations, and the adapter entering a broken state
-        # that requires physical replugging to recover.
         scanRandMacAddress = false;
-        macAddress = "permanent";
+        macAddress = "random";
       };
     };
 
@@ -139,6 +131,14 @@ with lib; {
     # the WPA handshake.  This disables it at module load time.
     boot.extraModprobeConfig = ''
       options rtw88_core disable_lps_deep=1
+      # Enable PCIe power saving for the Intel CNVi WiFi (integrated into
+      # the PCH).  When disabled (default), the WiFi reports a 20ms LTR
+      # that blocks the entire package from reaching C6+ deep sleep.
+      # This keeps the PCH/uncore permanently awake, dumping ~11W of heat
+      # into the VRM area.  Enabling this lets the PCIe link reach L1.2
+      # and the PCH enter deeper C-states.
+      options iwlwifi power_save=1
+      options iwlmvm power_scheme=1
     '';
 
     # Network utility packages (git, wireless, download, compression)
@@ -156,7 +156,6 @@ with lib; {
           wpa_supplicant
           dhcpcd
           iw
-          iwd
           wirelesstools
         ]
         ++ optionals config.modules.system.networking.packages.downloadTools [

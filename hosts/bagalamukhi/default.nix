@@ -40,9 +40,9 @@
       };
       networking = {
         enable = true;
+        # networkmanager.enable = false;
         hostName = "bagalamukhi";
         quad9.enable = true;
-        networkmanager.enable = false;
       };
       virtualization = {
         docker = {
@@ -222,11 +222,6 @@
           powerProfilesDaemon = false;
           conservationMode = true;
         };
-        fan-control = {
-          enable = true;
-          profile = "auto";
-        };
-        cooling.enable = true;
       };
       devices = {
         logitech.enable = true;

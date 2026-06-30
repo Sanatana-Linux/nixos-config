@@ -73,9 +73,9 @@ with lib; {
       # reboot=acpi prevents hangs on reboot by using ACPI reset instead of
       # the default EFI/PCI reset mechanisms, which can hang on some hardware
       "reboot=acpi"
-      # NVMe power saving: prevent deep power states (PS4) that cause 100ms+
-      # latency spikes. 5500µs allows moderate power saving (~6ms exit latency)
-      # without the thermal burst on resume from deep sleep.
+      # Allow NVMe autonomous power state transitions up to 5500µs
+      # (PS3-level sleep).  0 DISABLES APST entirely — the NVMe never
+      # sleeps, PCIe root port stays in L0, PCH can't enter deep C-states.
       "nvme_core.default_ps_max_latency_us=5500"
     ];
 

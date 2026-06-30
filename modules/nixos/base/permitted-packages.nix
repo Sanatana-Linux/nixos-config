@@ -24,6 +24,7 @@ in {
         [
           "nodejs-20.20.2"
           "nodejs-slim-20.20.2"
+          "pnpm-10.29.2"
           "ventoy-1.1.12"
         ]
         ++ cfg.packages;

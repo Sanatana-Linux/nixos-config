@@ -35,33 +35,54 @@ with lib; {
         yatline = pkgs.yaziPlugins.yatline;
       };
       initLua = ''
-                -- Git status icons
-                require("git"):setup({
-                                show_branch = true
-                    })
+        -- Git status icons
+        require("git"):setup({
+          show_branch = true,
+        })
 
-                -- Full border around panels
-                require("full-border"):setup {
-        	-- Available values: ui.Border.PLAIN, ui.Border.ROUNDED
-        	type = ui.Border.ROUNDED,
+        -- Full border around panels
+        require("full-border"):setup {
+          type = ui.Border.ROUNDED,
         }
 
         -- Smart enter: directories -> enter, files -> open
-         require("smart-enter"):setup({ open_multi = true })
+        require("smart-enter"):setup({ open_multi = true })
 
-                -- Bookmarks with persistent storage
-                require("bookmarks"):setup({
-                  persist = "all",
-                  desc_format = "full",
-                  file_pick_mode = "hover",
-                  notify = { enable = true, timeout = 2 },
-                })
+        -- Bookmarks with persistent storage
+        require("bookmarks"):setup({
+          persist = "all",
+          desc_format = "full",
+          file_pick_mode = "hover",
+          notify = { enable = true, timeout = 2 },
+        })
 
-                -- Recycle bin integration
-                require("recycle-bin"):setup()
+        -- Recycle bin integration
+        require("recycle-bin"):setup()
 
-                -- Yatline status bar
-                require("yatline"):setup({
+        -- Dupes (duplicate file finder using jdupes)
+        th.dupes = th.dupes or {}
+        th.dupes.mark_style = ui.Style():fg("blue")
+        th.dupes.mark_sign = "X"
+        require("dupes"):setup({
+          save_op = false,
+          auto_confirm = false,
+          profiles = {
+            interactive = { args = { "-r" } },
+            apply = { args = { "-r", "-N", "-d" }, save_op = true },
+          },
+        })
+
+        -- Restore last deleted files/folders
+        require("restore"):setup({
+          show_confirm = true,
+          suppress_success_notification = true,
+        })
+
+        -- GVFS mount manager
+        require("gvfs"):setup()
+
+        -- Yatline status bar
+        require("yatline"):setup({
                   section_separator = { open = "", close = "" },
                   part_separator = { open = "", close = "" },
                   inverse_separator = { open = "", close = "" },
@@ -160,6 +181,7 @@ with lib; {
       vlc           # Video/audio player
       mediainfo     # Media file metadata
       ouch          # Archive compression
+      gitui         # TUI git client (required by gitui.yazi plugin)
     ];
 
     home.file = {

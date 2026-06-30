@@ -41,10 +41,16 @@ in {
         description = "IC/VRM chipset temperature (°C) at which to restore performance profile";
       };
 
+      icCriticalThreshold = mkOption {
+        type = types.int;
+        default = 90;
+        description = "IC/VRM temperature (°C) at which to force maximum fans regardless of profile. The VRM can hit this under sustained load with high PL limits — immediate max cooling is needed to prevent thermal damage.";
+      };
+
       pollInterval = mkOption {
         type = types.int;
-        default = 10;
-        description = "Seconds between temperature checks";
+        default = 5;
+        description = "Seconds between temperature checks. Shorter interval for faster VRM thermal response.";
       };
     };
   };

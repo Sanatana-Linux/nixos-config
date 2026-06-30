@@ -73,7 +73,7 @@ in {
           CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_power";
           PLATFORM_PROFILE_ON_AC = "balanced";
           PLATFORM_PROFILE_ON_BAT = "low-power";
-          CPU_MAX_PERF_ON_AC = 100;
+          CPU_MAX_PERF_ON_AC = 80; # Cap at 80% to reduce VRM current draw — full 100% on i9-14900HX causes excessive VRM temperatures
           CPU_MAX_PERF_ON_BAT = 60;
           TLP_DEFAULT_MODE = "BAT";
           TLP_PERSISTENT_DEFAULT = 1;

@@ -46,59 +46,86 @@ in {
 
   config = mkIf cfg.enable {
     environment = {
-      variables = {
-        # Display scaling
-        GDK_SCALE = "1";
-        GDK_DPI_SCALE = "1";
-        _JAVA_OPTIONS = "-Dsun.java2d.uiScale=1";
+      variables =
+        {
+          # Display scaling
+          GDK_SCALE = "1";
+          GDK_DPI_SCALE = "1";
+          _JAVA_OPTIONS = "-Dsun.java2d.uiScale=1";
 
-        # Video acceleration
-        LIBVA_DRIVER_NAME = "nvidia";
+          # Video acceleration
+          LIBVA_DRIVER_NAME = "nvidia";
 
-        # Wayland compatibility
-        GBM_BACKEND = "nvidia-drm";
-        __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-      } // optionalAttrs cfg.cuda.enable {
-        CUDA_PATH = "${pkgs.cudatoolkit}";
-        EXTRA_LDFLAGS = "-L/lib -L${config.boot.kernelPackages.nvidiaPackages.${cfg.driver}}/lib";
-        EXTRA_CCFLAGS = "-I/usr/include";
-      };
+          # Wayland compatibility
+          GBM_BACKEND = "nvidia-drm";
+          __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+        }
+        // optionalAttrs cfg.cuda.enable {
+          CUDA_PATH = "${pkgs.cudatoolkit}";
+          EXTRA_LDFLAGS = "-L/lib -L${config.boot.kernelPackages.nvidiaPackages.${cfg.driver}}/lib";
+          EXTRA_CCFLAGS = "-I/usr/include";
+        };
 
-      systemPackages = with pkgs; [
-        # Core GL libraries
-        libGL libGLU libGLX libglut libglvnd
-        # Mesa
-        mesa mesa_glu mesa-gl-headers mesa-demos
-        # NVIDIA specific
-        nvidia-vaapi-driver
-        nvidia-texture-tools
-        libnvidia-container
-        nv-codec-headers
-        nvtopPackages.full
-        nvidia_cg_toolkit
-        nvidia-optical-flow-sdk
-        # Vulkan
-        vulkan-headers vulkan-extension-layer vulkan-helper
-        vulkan-loader vulkan-tools vulkan-utility-libraries
-        vkd3d vk-bootstrap
-        # Additional graphics libraries
-        eglexternalplatform freeglut ftgl gegl glew glee glfw
-        libva-vdpau-driver libvdpau-va-gl mlx42
-        xorg_sys_opengl zenith-nvidia kompute
-      ] ++ optionals cfg.cuda.enable [
-        cudatoolkit
-        nvidia-container-toolkit
-        cudaPackages.cuda_opencl
-        cudaPackages.cuda_nvcc
-        cudaPackages.libcublas
-        cudaPackages.libnvjitlink
-        cudaPackages.nvidia_fs
-        cudaPackages.libcutensor
-        tiny-cuda-nn
-        cudaPackages.cudatoolkit
-        blas peakperf
-        python312Packages.numpy
-      ];
+      systemPackages = with pkgs;
+        [
+          # Core GL libraries
+          libGL
+          libGLU
+          libGLX
+          libglut
+          libglvnd
+          # Mesa
+          mesa
+          mesa_glu
+          mesa-gl-headers
+          mesa-demos
+          # NVIDIA specific
+          nvidia-vaapi-driver
+          nvidia-texture-tools
+          libnvidia-container
+          nv-codec-headers
+          nvtopPackages.full
+          nvidia_cg_toolkit
+          nvidia-optical-flow-sdk
+          # Vulkan
+          vulkan-headers
+          vulkan-extension-layer
+          vulkan-helper
+          vulkan-loader
+          vulkan-tools
+          vulkan-utility-libraries
+          vkd3d
+          vk-bootstrap
+          # Additional graphics libraries
+          eglexternalplatform
+          freeglut
+          ftgl
+          gegl
+          glew
+          glee
+          glfw
+          libva-vdpau-driver
+          libvdpau-va-gl
+          mlx42
+          xorg_sys_opengl
+          zenith-nvidia
+          kompute
+        ]
+        ++ optionals cfg.cuda.enable [
+          cudatoolkit
+          nvidia-container-toolkit
+          cudaPackages.cuda_opencl
+          cudaPackages.cuda_nvcc
+          cudaPackages.libcublas
+          cudaPackages.libnvjitlink
+          cudaPackages.nvidia_fs
+          cudaPackages.libcutensor
+          tiny-cuda-nn
+          cudaPackages.cudatoolkit
+          blas
+          peakperf
+          python312Packages.numpy
+        ];
     };
 
     # ── Kernel parameters ──────────────────────────────────────────────
@@ -154,11 +181,11 @@ in {
     # ── Initrd modules ────────────────────────────────────────────────
     # Loaded early so the display works during boot and LUKS unlock.
     boot.initrd.kernelModules = [
-      "nvidia"          # Main kernel driver
-      "nvidiafb"        # Framebuffer (console before X)
-      "nvidia-drm"      # DRM/KMS interface
-      "nvidia-uvm"      # Unified Virtual Memory (CUDA)
-      "nvidia-modeset"  # Kernel modesetting
+      "nvidia" # Main kernel driver
+      "nvidiafb" # Framebuffer (console before X)
+      "nvidia-drm" # DRM/KMS interface
+      "nvidia-uvm" # Unified Virtual Memory (CUDA)
+      "nvidia-modeset" # Kernel modesetting
     ];
 
     nixpkgs.config = {
@@ -181,9 +208,15 @@ in {
         enable = true;
         enable32Bit = true;
         extraPackages = with pkgs; [
-          glfw libva-utils libvdpau-va-gl
-          mesa mesa-gl-headers mesa-demos mlx42
-          nvidia-vaapi-driver xorg_sys_opengl
+          glfw
+          libva-utils
+          libvdpau-va-gl
+          mesa
+          mesa-gl-headers
+          mesa-demos
+          mlx42
+          nvidia-vaapi-driver
+          xorg_sys_opengl
           config.boot.kernelPackages.nvidiaPackages.${cfg.driver}
         ];
       };

@@ -1,1 +1,1 @@
-{ imports = [ ./editorconfig.nix ./fastfetch.nix ./vesktop.nix ]; }
+{imports = [./editorconfig.nix ./fastfetch.nix ./vesktop.nix];}

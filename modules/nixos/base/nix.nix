@@ -124,9 +124,6 @@ in {
         use-xdg-base-directories = true;
         accept-flake-config = true;
 
-        # Use tmpfs for nix builds to reduce NVMe writes/heat
-        build-dir = "/tmp/nix-build";
-
         # Binary caches
         substituters =
           [
@@ -171,7 +168,6 @@ in {
       # Registry and nixPath
       registry = mapAttrs (_: value: {flake = value;}) inputs;
       nixPath = mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
-
     };
 
     # Performance tuning
@@ -179,6 +175,6 @@ in {
     nix.daemonIOSchedPriority = 4;
 
     # Use tmpfs for /tmp to reduce NVMe writes and heat
-    boot.tmp.tmpfs = true;
+    boot.tmp.useTmpfs = true;
   };
 }

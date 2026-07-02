@@ -110,7 +110,6 @@ in {
       variables.enable = true;
     };
 
-
     # Hardware - essential for live ISO
     hardware = {
       bluetooth.enable = true; # Common hardware support

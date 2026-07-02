@@ -1,1 +1,1 @@
-{ imports = [ ./awesome.nix ]; }
+{imports = [./awesome.nix];}

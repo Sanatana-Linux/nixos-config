@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib; {
   options.modules.system.cron = {
     enable = mkEnableOption "cron daemon";
@@ -22,7 +27,7 @@ with lib; {
           };
         };
       });
-      default = [ ];
+      default = [];
       description = "Cron jobs managed by system cron";
     };
   };

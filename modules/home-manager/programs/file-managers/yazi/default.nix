@@ -171,17 +171,17 @@ with lib; {
 
     # External CLI tools referenced by opener and previewer config
     home.packages = with pkgs; [
-      glow          # Markdown preview in yazi
-      dtrx          # Archive extraction
-      feh           # Image viewer
-      imv           # Image viewer
-      exiftool      # EXIF metadata viewer
-      inkscape      # SVG editor/viewer
-      loupe         # Image viewer (GNOME)
-      vlc           # Video/audio player
-      mediainfo     # Media file metadata
-      ouch          # Archive compression
-      gitui         # TUI git client (required by gitui.yazi plugin)
+      glow # Markdown preview in yazi
+      dtrx # Archive extraction
+      feh # Image viewer
+      imv # Image viewer
+      exiftool # EXIF metadata viewer
+      inkscape # SVG editor/viewer
+      loupe # Image viewer (GNOME)
+      vlc # Video/audio player
+      mediainfo # Media file metadata
+      ouch # Archive compression
+      gitui # TUI git client (required by gitui.yazi plugin)
     ];
 
     home.file = {

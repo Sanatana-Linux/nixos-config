@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib; let
   cfg = config.modules.system.desktop.packages;
 in {
@@ -22,16 +27,44 @@ in {
   config = {
     environment.systemPackages = with pkgs;
       optionals cfg.x11.enable [
-        xinit xrdb xhost xscreensaver xsecurelock xss-lock xsuspender
-        xprop xwininfo xev xfontsel xrandr arandr
-        xclip xdotool xbacklight xkill
+        xinit
+        xrdb
+        xhost
+        xscreensaver
+        xsecurelock
+        xss-lock
+        xsuspender
+        xprop
+        xwininfo
+        xev
+        xfontsel
+        xrandr
+        arandr
+        xclip
+        xdotool
+        xbacklight
+        xkill
       ]
       ++ optionals cfg.wayland.enable [
-        wlr-randr wdisplays waypipe xdg-desktop-portal-wlr wl-mirror wlroots
-        waybar wofi fuzzel wlogout
-        grim slurp gpick
-        cliphist brightnessctl
-        libinput libinput-gestures wtype wev
+        wlr-randr
+        wdisplays
+        waypipe
+        xdg-desktop-portal-wlr
+        wl-mirror
+        wlroots
+        waybar
+        wofi
+        fuzzel
+        wlogout
+        grim
+        slurp
+        gpick
+        cliphist
+        brightnessctl
+        libinput
+        libinput-gestures
+        wtype
+        wev
       ];
   };
 }

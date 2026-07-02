@@ -6,11 +6,35 @@
 }:
 with lib; let
   cfg = config.modules.system.performance.undervolt;
+
+  # intel-undervolt config — undervolt + tjoffset only
+  # Power limits are handled by services.throttled below
+  undervoltConfig = ''
+    # Enable elogind triggers
+    enable no
+
+    # CPU Undervolting
+    undervolt 0 'CPU' ${toString cfg.coreOffset}
+    undervolt 1 'GPU' ${toString cfg.gpuOffset}
+    undervolt 2 'CPU Cache' ${toString cfg.cacheOffset}
+    undervolt 3 'System Agent' ${toString cfg.saOffset}
+    undervolt 4 'Analog I/O' ${toString cfg.ioOffset}
+
+    # Critical Temperature Offset
+    tjoffset ${toString cfg.tempOffset}
+
+    # Daemon Update Interval
+    interval 5000
+
+    # Daemon Actions — undervolt and tjoffset only (power limits handled by throttled)
+    daemon undervolt:once
+    daemon tjoffset:once
+  '';
 in {
   options.modules.system.performance.undervolt = {
     enable = mkEnableOption "Intel CPU undervolting and throttling fixes";
 
-    # P-State power limits (missing from current implementation)
+    # P-State power limits
     p1Limit = mkOption {
       type = types.int;
       default = 45;
@@ -34,10 +58,47 @@ in {
       default = 8;
       description = "P2 state power limit window in seconds. Shorter windows limit the duration of high-current VRM stress during turbo boost.";
     };
+
+    # Undervolt values (intel-undervolt tool)
+    coreOffset = mkOption {
+      type = types.int;
+      default = -120;
+      description = "CPU core voltage offset in mV";
+    };
+
+    cacheOffset = mkOption {
+      type = types.int;
+      default = -120;
+      description = "CPU cache voltage offset in mV";
+    };
+
+    gpuOffset = mkOption {
+      type = types.int;
+      default = -50;
+      description = "GPU voltage offset in mV";
+    };
+
+    saOffset = mkOption {
+      type = types.int;
+      default = 0;
+      description = "System Agent voltage offset in mV";
+    };
+
+    ioOffset = mkOption {
+      type = types.int;
+      default = 0;
+      description = "Analog I/O voltage offset in mV";
+    };
+
+    tempOffset = mkOption {
+      type = types.int;
+      default = -20;
+      description = "Temperature offset subtracted from max temp (e.g., -20 = 80°C limit on 100°C CPU)";
+    };
   };
 
   config = mkIf cfg.enable {
-    # Enable fix for Intel CPU throttling with P-State limits
+    # P-State power limits via throttled (periodically re-applies PL1/PL2 limits)
     services.throttled = {
       enable = true;
       extraConfig = ''
@@ -73,17 +134,22 @@ in {
       '';
     };
 
-    # CPU undervolting configuration
-    services.undervolt = {
-      enable = true;
-      tempAc = 80; # Maximum AC temperature — throttle before VRM hits danger zone
-      tempBat = 75; # Maximum battery temperature
-      uncoreOffset = -65; # in mV — aggressive uncore undervolt reduces VRM current draw
-      coreOffset = -120; # in mV — deeper core undervolt
-      gpuOffset = -50; # in mV — undervolt the GPU slice too
-      package = pkgs.undervolt;
-      verbose = true;
-      turbo = 0; # Keep Intel Turbo feature enabled (1 for disabled)
+    # intel-undervolt config file
+    environment.etc."intel-undervolt.conf".text = undervoltConfig;
+
+    # intel-undervolt daemon — applies undervolt + tjoffset at boot
+    # Uses daemon mode with :once actions so settings are applied once on start
+    systemd.services.intel-undervolt = {
+      description = "Intel CPU Undervolting Daemon";
+      wantedBy = ["multi-user.target"];
+      after = ["sysinit.target"];
+      path = with pkgs; [pkgs.intel-undervolt pkgs.bash pkgs.coreutils];
+      serviceConfig = {
+        Type = "simple";
+        ExecStart = "${pkgs.intel-undervolt}/bin/intel-undervolt daemon";
+        Restart = "on-failure";
+        RestartSec = "5";
+      };
     };
   };
 }

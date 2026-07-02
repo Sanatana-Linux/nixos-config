@@ -1,1 +1,1 @@
-{ imports = [ ./gtk.nix ./x11 ]; }
+{imports = [./gtk.nix ./x11];}

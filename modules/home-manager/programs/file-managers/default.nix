@@ -1,1 +1,1 @@
-{ imports = [ ./yazi ]; }
+{imports = [./yazi];}

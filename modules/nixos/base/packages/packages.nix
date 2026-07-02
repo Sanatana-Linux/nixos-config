@@ -47,6 +47,7 @@ in {
       databases = mkEnableOption "Database tools";
       editors = mkEnableOption "Code editors and IDE tools";
       treeSitterGrammars = mkEnableOption "Tree-sitter grammar files";
+      languageServers = mkEnableOption "Language server protocol implementations";
     };
 
     # ══════════════════════════════════════════════════════════════════════════
@@ -325,6 +326,8 @@ in {
             diagnostic-languageserver # LSP for linters
             gopls # Go language server
             beautysh # Shell script beautifier
+            dockerfmt # Dockerfile formatter
+            xmlformat # XML formatter
             libxml2 # Provides xmllint
           ]
           # Version control
@@ -445,10 +448,20 @@ in {
             tree-sitter-grammars.tree-sitter-vue # Vue grammar
             tree-sitter-grammars.tree-sitter-yaml # YAML grammar
             python312Packages.tree-sitter-language-pack # Python tree-sitter bindings
+          ]
+          # Language servers
+          ++ optionals cfg.development.languageServers [
+            typescript-language-server # TypeScript LSP
+            astro-language-server # Astro LSP
+            bash-language-server # Bash LSP
+            vscode-css-languageserver # CSS/SCSS/Less LSP
+            docker-language-server # Dockerfile LSP
+            efm-langserver # General-purpose LSP for linters/formatters
+            just-lsp # Justfile LSP
+            tailwindcss-language-server # Tailwind CSS LSP
           ];
       }
     ]))
-
 
     # ════════════════════════════════════════════════════════════════════════
     # GUI CONFIG
@@ -501,77 +514,79 @@ in {
       }
 
       # GUI Libraries
-      (mkIf cfg.gui.libs.enable {
-        environment.systemPackages = with pkgs;
-        # Core graphics
-          optionals cfg.gui.libs.coreGraphics [
-            cairo # 2D graphics library
-            cairomm # Cairo C++ bindings
-            pango # Text rendering
-            pangomm # Pango C++ bindings
-            gdk-pixbuf # Image loading
-            gdk-pixbuf-xlib # Xlib support
-          ]
-          # GObject support
-          ++ optionals cfg.gui.libs.gobjectSupport [
-            gobject-introspection # GObject introspection
-            gobject-introspection-unwrapped # Unwrapped version
-            libgee # GObject collection library
-            libpeas # GObject plugin library
-            libpeas2 # libpeas v2
-          ]
-          # Desktop integration
-          ++ optionals cfg.gui.libs.desktopIntegration [
-            dbus-broker # D-Bus message broker
-            dconf # GNOME configuration
-            gsettings-desktop-schemas # GNOME schemas
-            libnotify # Notifications library
-            polkit_gnome # Polkit agent
-            menu-cache # Menu caching
+      (
+        mkIf cfg.gui.libs.enable {
+          environment.systemPackages = with pkgs;
+          # Core graphics
+            optionals cfg.gui.libs.coreGraphics [
+              cairo # 2D graphics library
+              cairomm # Cairo C++ bindings
+              pango # Text rendering
+              pangomm # Pango C++ bindings
+              gdk-pixbuf # Image loading
+              gdk-pixbuf-xlib # Xlib support
+            ]
+            # GObject support
+            ++ optionals cfg.gui.libs.gobjectSupport [
+              gobject-introspection # GObject introspection
+              gobject-introspection-unwrapped # Unwrapped version
+              libgee # GObject collection library
+              libpeas # GObject plugin library
+              libpeas2 # libpeas v2
+            ]
+            # Desktop integration
+            ++ optionals cfg.gui.libs.desktopIntegration [
+              dbus-broker # D-Bus message broker
+              dconf # GNOME configuration
+              gsettings-desktop-schemas # GNOME schemas
+              libnotify # Notifications library
+              polkit_gnome # Polkit agent
+              menu-cache # Menu caching
 
-            libadwaita # Modern GNOME applications library
-            adwaita-icon-theme # Essential icons for libadwaita
-            hicolor-icon-theme # Icon theme fallback system
-          ]
-          # XFCE support
-          ++ optionals cfg.gui.libs.xfceSupport [
-            libxfce4ui # XFCE UI library
-            libxfce4util # XFCE utilities
-            xfce4-exo # XFCE extensions
-            xfconf # XFCE configuration
-          ]
-          # Audio and terminal
-          ++ optionals cfg.gui.libs.audioTerminal [
-            libcanberra-gtk3 # Sound theme library
-            portaudio # Audio I/O
-            vte-gtk4 # Terminal emulator library
-          ]
-          # Python bindings
-          ++ optionals cfg.gui.libs.pythonBindings [
-            python313Packages.pycairo # Cairo Python bindings
-            python313Packages.pygobject3 # GObject Python bindings
-            python313Packages.pyqt6 # Qt6 Python bindings
-            python313Packages.pyqt6-charts # Qt Charts
-            python313Packages.pyqt6-webengine # Qt WebEngine
-            python313Packages.pyqt5 # Qt5 Python bindings
-            python313Packages.qt-material # Qt Material Design
-            python313Packages.qstylizer # Qt CSS-like styling
-            python313Packages.anyqt # Qt compatibility layer
-            python313Packages.pyqtdarktheme # Dark theme for Qt apps
-            python313Packages.qtpy # Qt abstraction layer
-          ]
-          # Ruby bindings
-          ++ optionals cfg.gui.libs.rubyBindings [
-            rubyPackages.cairo # Cairo Ruby bindings
-            rubyPackages.gdk_pixbuf2 # GdkPixbuf Ruby
-            rubyPackages.gobject-introspection # GObject Ruby
-          ]
-          # Font support
-          ++ optionals cfg.gui.libs.fontSupport [
-            terminus_font # Terminus font
-          ];
-      }
-    )]))
+              libadwaita # Modern GNOME applications library
+              adwaita-icon-theme # Essential icons for libadwaita
+              hicolor-icon-theme # Icon theme fallback system
+            ]
+            # XFCE support
+            ++ optionals cfg.gui.libs.xfceSupport [
+              libxfce4ui # XFCE UI library
+              libxfce4util # XFCE utilities
+              xfce4-exo # XFCE extensions
+              xfconf # XFCE configuration
+            ]
+            # Audio and terminal
+            ++ optionals cfg.gui.libs.audioTerminal [
+              libcanberra-gtk3 # Sound theme library
+              portaudio # Audio I/O
+              vte-gtk4 # Terminal emulator library
+            ]
+            # Python bindings
+            ++ optionals cfg.gui.libs.pythonBindings [
+              python313Packages.pycairo # Cairo Python bindings
+              python313Packages.pygobject3 # GObject Python bindings
+              python313Packages.pyqt6 # Qt6 Python bindings
+              python313Packages.pyqt6-charts # Qt Charts
+              python313Packages.pyqt6-webengine # Qt WebEngine
+              python313Packages.pyqt5 # Qt5 Python bindings
+              python313Packages.qt-material # Qt Material Design
+              python313Packages.qstylizer # Qt CSS-like styling
+              python313Packages.anyqt # Qt compatibility layer
+              python313Packages.pyqtdarktheme # Dark theme for Qt apps
+              python313Packages.qtpy # Qt abstraction layer
+            ]
+            # Ruby bindings
+            ++ optionals cfg.gui.libs.rubyBindings [
+              rubyPackages.cairo # Cairo Ruby bindings
+              rubyPackages.gdk_pixbuf2 # GdkPixbuf Ruby
+              rubyPackages.gobject-introspection # GObject Ruby
+            ]
+            # Font support
+            ++ optionals cfg.gui.libs.fontSupport [
+              terminus_font # Terminus font
+            ];
+        }
+      )
+    ]))
 
     # ════════════════════════════════════════════════════════════════════════
     # SYSTEM CONFIG
@@ -704,7 +719,5 @@ in {
           ];
       }
     ]))
-
-
   ];
 }

@@ -1,1 +1,1 @@
-{ imports = [ ./ghostty.nix ./kitty.nix ]; }
+{imports = [./ghostty.nix ./kitty.nix];}

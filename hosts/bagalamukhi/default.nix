@@ -148,6 +148,7 @@
           databases = true;
           editors = true;
           treeSitterGrammars = true;
+          languageServers = true;
         };
         gui = {
           enable = true;

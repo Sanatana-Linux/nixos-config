@@ -31,7 +31,7 @@ python3.pkgs.buildPythonApplication rec {
 
   propagatedBuildInputs = [
     python3.pkgs.pygobject3
-    python3.pkgs.pyqt6   # GUI needs PyQt6
+    python3.pkgs.pyqt6 # GUI needs PyQt6
   ];
 
   dontBuild = true;

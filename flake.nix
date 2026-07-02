@@ -90,25 +90,27 @@
     checks = forAllSystems (system: let
       pkgs = nixpkgs.legacyPackages.${system};
     in {
-      alejandra = pkgs.runCommand "check-formatting" {
-        buildInputs = [pkgs.alejandra];
-      } ''
-        cd ${self}
-        alejandra --check . >&2 || (echo "Formatting check failed. Run: alejandra ." >&2; exit 1)
-        touch $out
-      '';
-      eval-all-hosts = pkgs.runCommand "eval-all-hosts" {
-        buildInputs = [pkgs.nixos-rebuild];
-      } ''
-        for host in bagalamukhi matangi bhairavi chhinamasta; do
-          echo "Evaluating $host..." >&2
-          nix-instantiate --eval --strict -E '(import ${self}).nixosConfigurations.''${host}.config.system.build.toplevel' > /dev/null 2>&1 || (
-            echo "Evaluation failed for $host" >&2
-            exit 1
-          )
-        done
-        touch $out
-      '';
+      alejandra =
+        pkgs.runCommand "check-formatting" {
+          buildInputs = [pkgs.alejandra];
+        } ''
+          cd ${self}
+          alejandra --check . >&2 || (echo "Formatting check failed. Run: alejandra ." >&2; exit 1)
+          touch $out
+        '';
+      eval-all-hosts =
+        pkgs.runCommand "eval-all-hosts" {
+          buildInputs = [pkgs.nixos-rebuild];
+        } ''
+          for host in bagalamukhi matangi bhairavi chhinamasta; do
+            echo "Evaluating $host..." >&2
+            nix-instantiate --eval --strict -E '(import ${self}).nixosConfigurations.''${host}.config.system.build.toplevel' > /dev/null 2>&1 || (
+              echo "Evaluation failed for $host" >&2
+              exit 1
+            )
+          done
+          touch $out
+        '';
     });
 
     nixosConfigurations = {

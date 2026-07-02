@@ -351,9 +351,9 @@ with lib; let
     icMids = sensorMidpoints pts "ic";
     entries = imap0 (i: p:
       mkEntry
-        (builtins.elemAt cpuMids i) (builtins.elemAt gpuMids i) (builtins.elemAt icMids i)
-        p
-        (builtins.elemAt cpuMids (i + 1)) (builtins.elemAt gpuMids (i + 1)) (builtins.elemAt icMids (i + 1)))
+      (builtins.elemAt cpuMids i) (builtins.elemAt gpuMids i) (builtins.elemAt icMids i)
+      p
+      (builtins.elemAt cpuMids (i + 1)) (builtins.elemAt gpuMids (i + 1)) (builtins.elemAt icMids (i + 1)))
     pts;
   in ''
     name: ${name}

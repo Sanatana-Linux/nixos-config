@@ -1,6 +1,6 @@
 {
-  "lastCompletedPhase": 3,
-  "timestamp": "2026-06-29T15:00:00Z",
+  "lastCompletedPhase": 8,
+  "timestamp": "2026-07-01T11:00:00Z",
   "subcommand": "refresh",
   "mode": "merge",
   "files": [
@@ -12,18 +12,29 @@
     ".opencode/skills/nix-flake-ops/SKILL.md",
     ".opencode/skills/nixos-debug/SKILL.md",
     ".opencode/skills/nix-secrets/SKILL.md",
+    ".opencode/skills/nix-service-scripts/SKILL.md",
     ".opencode/rules/nix-flake-strategy.md",
     ".opencode/rules/project-constraints.md",
     ".opencode/rules/comment-style.md",
     ".opencode/rules/nix-service-scripts.md",
+    ".opencode/rules/nix-module-patterns.md",
+    ".opencode/rules/nix-secrets-management.md",
     ".opencode/state/project-memory.json",
     ".opencode/state/init/stack-fingerprint.json",
     ".opencode/state/init/stack-recommendations.json",
     "AGENTS.md"
   ],
   "changesApplied": [
-    "Registered nix-service-scripts.md in opencode.jsonc instructions",
-    "Updated stack-fingerprint.json with recent changes and refreshed timestamp",
-    "Updated stack-recommendations.json notes"
+    "Phase 0: Hubs health verified — 31 agents, 106 skills, 32 tools all present",
+    "Phase 1: Stack re-detected — no new architectural changes since last refresh (virtualization moved under system/ was already captured)",
+    "Phase 2: No new recommendations — all resource gaps already filled",
+    "Phase 3: opencode.jsonc unchanged — config is current",
+    "Phase 4: No new provisioning needed — all 5 project skills and 6 rules are in place",
+    "Phase 5: AGENTS.md documentation is current",
+    "Phase 6: Deep codebase mapping completed — architect, convention-extractor, and explore agents analyzed the full codebase",
+    "Phase 6 findings: 34 uncommitted files, 3 stale .bak files, 1 temp file (report-size.patch.tmp), virtualization moved under system/ confirmed",
+    "Phase 6 conventions: All existing rules confirmed matching actual code patterns. Minor findings: two default.nix styles (pure-import vs with-options), mkMerge pattern undocumented, some modules skip cfg binding",
+    "Phase 7: Routing validation — 144/148 subcommand routes OK, 4 missing (analyze-patterns, create-tests, git-stage-thread, pr — all commands not installed)",
+    "Phase 8: Stack fingerprint timestamp updated to 2026-07-01T11:00:00Z"
   ]
 }

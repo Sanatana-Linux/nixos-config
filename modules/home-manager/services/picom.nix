@@ -81,14 +81,11 @@ with lib; {
           strength = 8;
         };
 
-        # ---- Reduce detection overhead ----
-        # detect-client-opacity, detect-transient, detect-client-leader each add
-        # per-window property tracking overhead. Only keep what shadows/blur need.
         mark-wmwin-focused = true;
         mark-ovredir-focused = true;
-        detect-client-opacity = false;
-        detect-transient = false;
-        detect-client-leader = false;
+        detect-client-opacity = true;
+        detect-transient = true;
+        detect-client-leader = true;
 
         shadow-exclude = [
           "class_g = 'firefox'"
@@ -120,7 +117,7 @@ with lib; {
           normal = {
             fade = true;
             shadow = true;
-            opacity = 0.95;
+            blur = true;
           };
           tooltip = {
             fade = true;

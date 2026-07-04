@@ -46,10 +46,7 @@
       };
       desktop = {
         xfce.enable = true;
-        screenshot = {
-          enable = true;
-          tool = "xfce4-screenshooter";
-        };
+        xfce.screenshot.enable = true;
       };
       performance = {
         default.enable = true;

@@ -33,20 +33,22 @@ in {
     users.groups.tss = {};
     users.groups.kvm = {};
 
-    environment.systemPackages = with pkgs; [
-      virt-manager
-      qemu_kvm
-      qemu-utils
-      qemu-python-utils
-      qtemu
-      quickemu
-      OVMFFull
-      kvmtool
-      swtpm
-    ] ++ lib.optionals cfg.libguestfsIntrospection [
-      libguestfs
-      libguestfs-with-appliance
-    ];
+    environment.systemPackages = with pkgs;
+      [
+        virt-manager
+        qemu_kvm
+        qemu-utils
+        qemu-python-utils
+        qtemu
+        quickemu
+        OVMFFull
+        kvmtool
+        swtpm
+      ]
+      ++ lib.optionals cfg.libguestfsIntrospection [
+        libguestfs
+        libguestfs-with-appliance
+      ];
 
     virtualisation.libvirtd = {
       enable = true;

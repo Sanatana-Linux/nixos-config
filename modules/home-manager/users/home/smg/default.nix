@@ -50,12 +50,12 @@
     rounded-corners-exclude = [
       "window_type = 'dock'"
       "window_type = 'desktop'"
-      "_GTK_FRAME_EXTENTS@:c"
+      "_GTK_FRAME_EXTENTS@"
     ];
     blur-background-exclude = [
       "window_type = 'dock'"
       "window_type = 'desktop'"
-      "_GTK_FRAME_EXTENTS@:c"
+      "_GTK_FRAME_EXTENTS@"
     ];
   };
 

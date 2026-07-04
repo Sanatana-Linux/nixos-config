@@ -22,16 +22,18 @@ with lib; {
       settings = {
         animations = false;
 
+        # ---- Backend: configurable via modules.services.picom.backend ----
+        # GLX is NVIDIA's mature X11 rendering path with proper GPU power
+        # state management — allows the dGPU to reach P8 at idle. EGL on
+        # NVIDIA pins clocks at P0 (~30W) even at idle desktop.
+        # xrender does NOT support dual_kawase blur — use GLX or EGL for blur.
+        inherit (config.modules.services.picom) backend;
+
         # ---- Performance-critical: enable damage tracking ----
         # use-damage = false forces picom to redraw the entire screen every frame.
         # Setting it to true (which is now the default in picom-pijulius) means only
         # changed regions get repainted, dramatically reducing CPU/GPU load.
         use-damage = true;
-
-        # ---- Backend: GLX for NVIDIA power management ----
-        # GLX is NVIDIA's mature X11 rendering path with proper GPU power
-        # state management — allows the dGPU to reach P8 at idle. EGL on
-        # NVIDIA pins clocks at P0 (~30W) even at idle desktop.
 
         # ---- VSync — off to work around NVIDIA vblank duplicate bug ----
         # On NVIDIA PRIME sync laptops, the driver generates duplicate vblank
@@ -101,7 +103,7 @@ with lib; {
           "class_g = 'pop_report'"
           "class_g = 'Gnome-screenshot'"
           "class_g = 'peek'"
-          "_GTK_FRAME_EXTENTS@:c"
+          "_GTK_FRAME_EXTENTS@"
         ];
 
         # Window rules for blur

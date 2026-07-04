@@ -10,8 +10,7 @@ in {
     enable = mkEnableOption "Enable cachy performance optimizations";
   };
 
-  # Note: CachyOS tweaks disabled for now as the flake input needs proper integration
-  # TODO: Integrate cachy-tweaks flake properly through specialArgs
+  # BBR congestion control (kernel already provides the cachyos scheduler)
   config = mkIf cfg.enable {
     # Basic performance optimizations inspired by CachyOS
     # NOTE: preempt=full is intentionally NOT set — it prevents the CPU from

@@ -1,5 +1,9 @@
 {inputs, ...}: {
-  additions = final: _prev: import ../pkgs {pkgs = final.pkgs;};
+  additions = final: _prev:
+    (import ../pkgs {pkgs = final.pkgs;})
+    // {
+      firefox-nightly-bin = inputs.firefox-nightly.packages.${final.stdenv.hostPlatform.system}.firefox-nightly-bin;
+    };
 
   modifications = final: prev: {
     # Completely remove torch packages from python312Packages to force use of torch-bin

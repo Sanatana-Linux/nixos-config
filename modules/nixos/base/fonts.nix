@@ -42,6 +42,9 @@ in {
           nerd-fonts.ubuntu-mono # Ubuntu Mono Nerd Font
           nerd-fonts.ubuntu-sans # Ubuntu Sans Nerd Font
           nerd-fonts.noto # Noto Nerd Font
+          nerd-fonts.fira-code # Fira Code Nerd Font
+          nerd-fonts.fira-mono # Fira Mono Nerd Font
+          nerd-fonts."m+" # M+ Nerd Font
         ]
         # Icon Fonts
         ++ optionals cfg.iconFonts [

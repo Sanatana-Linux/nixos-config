@@ -8,7 +8,7 @@
   imports = [
     ./hardware-configuration.nix
     ./sops.nix
-    ../../modules/nixos/users/smg.nix
+    ../../modules/nixos/system/users/smg.nix
   ];
 
   # Overlays

@@ -1,8 +1,8 @@
 {
   "lastCompletedPhase": 8,
-  "timestamp": "2026-07-01T11:00:00Z",
+  "timestamp": "2026-07-02T00:00:00Z",
   "subcommand": "refresh",
-  "mode": "merge",
+  "mode": "full",
   "files": [
     ".opencode/opencode.jsonc",
     ".opencode/tools/nix-build.ts",
@@ -22,19 +22,22 @@
     ".opencode/state/project-memory.json",
     ".opencode/state/init/stack-fingerprint.json",
     ".opencode/state/init/stack-recommendations.json",
-    "AGENTS.md"
+    "AGENTS.md",
+    "flake.nix",
+    "modules/nixos/AGENTS.md"
   ],
   "changesApplied": [
-    "Phase 0: Hubs health verified — 31 agents, 106 skills, 32 tools all present",
-    "Phase 1: Stack re-detected — no new architectural changes since last refresh (virtualization moved under system/ was already captured)",
-    "Phase 2: No new recommendations — all resource gaps already filled",
-    "Phase 3: opencode.jsonc unchanged — config is current",
-    "Phase 4: No new provisioning needed — all 5 project skills and 6 rules are in place",
-    "Phase 5: AGENTS.md documentation is current",
-    "Phase 6: Deep codebase mapping completed — architect, convention-extractor, and explore agents analyzed the full codebase",
-    "Phase 6 findings: 34 uncommitted files, 3 stale .bak files, 1 temp file (report-size.patch.tmp), virtualization moved under system/ confirmed",
-    "Phase 6 conventions: All existing rules confirmed matching actual code patterns. Minor findings: two default.nix styles (pure-import vs with-options), mkMerge pattern undocumented, some modules skip cfg binding",
-    "Phase 7: Routing validation — 144/148 subcommand routes OK, 4 missing (analyze-patterns, create-tests, git-stage-thread, pr — all commands not installed)",
-    "Phase 8: Stack fingerprint timestamp updated to 2026-07-01T11:00:00Z"
+    "Phase 0: Hubs health verified — 145/148 routes OK (same 3 external-command warnings as previous)",
+    "Phase 1: Stack re-detected — 17 inputs (firefox-nightly added), directory restructuring confirmed (users→system/users, runtimes→apps/runtimes, home→modules/home-manager/users/home, packages deleted→base/packages), overlay firefox-nightly-bin added",
+    "Phase 2: No new recommendations needed — all resource gaps already filled from previous init",
+    "Phase 3: opencode.jsonc unchanged — config is current with 6 rules, 3 tools, 5 skills",
+    "Phase 4: No new provisioning needed — all project skills and rules in place",
+    "Phase 5: modules/nixos/AGENTS.md fixed — stale packages/ dir reference updated to base/packages/",
+    "Phase 6: Deep codebase mapping completed — architect, convention-extractor, and explore agents analyzed full codebase",
+    "Phase 6 findings: 87 NixOS .nix files, 51 home-manager .nix files, 4 hosts, 17 flake inputs, directory migration fully consistent (zero stale refs)",
+    "Phase 6 conventions: 100% enable-by-option adoption confirmed. New patterns: submodule-as-directory (zsh/ convention), ifTheyExist helper, firefox.nix uses builtins.fetchurl for autoconfig",
+    "Phase 6 anomalies: modules/nixos/AGENTS.md stale ref (FIXED), 49 session state dirs (cosmetic), base16_monokai_pro tracked directly (not submodule), packages.nix orphaned option decls",
+    "Phase 7: Routing validation — 145/148 subcommand routes OK, 3 external-command warnings (same as before)",
+    "Phase 8: nix flake check — formatting check PASSES. eval-all-hosts has pre-existing limitation (needs sudo for nix daemon profile access, can't run in derivation sandbox). All 4 hosts evaluate successfully via sudo nixos-rebuild dry-build. bagalamukhi builds cleanly."
   ]
 }

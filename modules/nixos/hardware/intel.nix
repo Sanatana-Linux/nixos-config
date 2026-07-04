@@ -105,7 +105,6 @@ in {
       ];
 
     boot.kernel.sysctl = {
-      "kernel.sched_autogroup_enabled" = 0;
       "kernel.sched_schedstats" = 0;
     };
 

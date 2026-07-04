@@ -12,7 +12,7 @@ NixOS system-level modules. Each module declares an enable option under `modules
 |-----------|---------|
 | `base/` | Base system config (nix, fhs, services, permitted packages, shell, environment variables) |
 | `hardware/` | Hardware drivers — GPU (nvidia, intel), bluetooth, keyboard, sound, thunderbolt, udev, Lenovo (lenovo, power, cooling, fan-control), devices (android, iphone, logitech, printer) |
-| `packages/` | System package sets (categories + security) |
+| `base/packages/` | System package sets (categories + security) — split into per-category files |
 | `stylix/` | System-wide theming (colors, fonts, cursor via stylix) |
 | `system/` | System services — boot, cron, systemd, networking, apps (appimage, java, nix-ld, network-manager-applet, shotcut, thunar, ai/ollama/comfyui), desktop (awesomewm, lightdm, xfce), performance (cachy, oomd, undervolt, zram), security (doas, fail2ban, firewall, pam, ssh, sudo, tpm) |
 | `users/` | User account modules (tlh, smg, user) — **import per-host only** |

@@ -42,7 +42,17 @@ in {
       # Reduce writeback spikes that cause thermal bursts on NVMe
       "vm.dirty_ratio" = 10;
       "vm.dirty_background_ratio" = 5;
+      # Smooth writeback — 5s intervals instead of 15s default
+      # prevents large writeback bursts that cause thermal spikes
+      "vm.dirty_writeback_centisecs" = 500;
+      # Group processes by session for better desktop responsiveness
+      "kernel.sched_autogroup_enabled" = lib.mkForce 1;
     };
+
+    # Reduce NVMe queue depth for lower latency on desktop workloads
+    services.udev.extraRules = ''
+      ACTION=="add|change", KERNEL=="nvme[0-9]*", ENV{DEVTYPE}=="disk", ATTR{queue/nr_requests}="512"
+    '';
 
     # BPF performance tuning — disabled: burns ~4% CPU for marginal benefit
     # on a desktop workload. The kernel's built-in heuristics are sufficient.

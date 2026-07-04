@@ -20,10 +20,6 @@
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    fx-autoconfig = {
-      url = "github:MrOtherGuy/fx-autoconfig";
-      flake = false;
-    };
     stylix = {
       url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -48,6 +44,11 @@
     nix-cachyos-kernel = {
       url = "github:xddxdd/nix-cachyos-kernel/release";
     };
+
+    firefox-nightly = {
+      url = "github:nix-community/flake-firefox-nightly";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -56,7 +57,6 @@
     stable,
     home-manager,
     stylix,
-    fx-autoconfig,
     bhairava-grub-theme,
     ...
   } @ inputs: let
@@ -137,7 +137,7 @@
                 ./modules/home-manager
               ];
               users = {
-                tlh = {imports = [./home/tlh/default.nix];};
+                tlh = {imports = [./modules/home-manager/users/home/tlh/default.nix];};
               };
             };
           }
@@ -163,7 +163,7 @@
               extraSpecialArgs = {inherit inputs outputs;};
               sharedModules = [./modules/home-manager];
               users = {
-                smg = {imports = [./home/smg/default.nix];};
+                smg = {imports = [./modules/home-manager/users/home/smg/default.nix];};
               };
             };
           }
@@ -189,7 +189,7 @@
               extraSpecialArgs = {inherit inputs outputs;};
               sharedModules = [./modules/home-manager];
               users = {
-                tlh = {imports = [./home/tlh/default.nix];};
+                tlh = {imports = [./modules/home-manager/users/home/tlh/default.nix];};
               };
             };
           }
@@ -219,7 +219,7 @@
               sharedModules = [
                 ./modules/home-manager
               ];
-              users.user = {imports = [./home/user/default.nix];};
+              users.user = {imports = [./modules/home-manager/users/home/user/default.nix];};
             };
           }
           ./hosts/chhinamasta
@@ -231,13 +231,13 @@
       tlh = inputs.home-manager.lib.homeManagerConfiguration {
         extraSpecialArgs = {inherit inputs outputs self;};
         modules = [
-          ./home/tlh/default.nix
+          ./modules/home-manager/users/home/tlh/default.nix
         ];
       };
       smg = inputs.home-manager.lib.homeManagerConfiguration {
         extraSpecialArgs = {inherit inputs outputs self;};
         modules = [
-          ./home/smg/default.nix
+          ./modules/home-manager/users/home/smg/default.nix
         ];
       };
     };

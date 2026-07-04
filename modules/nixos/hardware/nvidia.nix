@@ -225,23 +225,21 @@ in {
         modesetting.enable = true;
         nvidiaSettings = true;
 
-        # ── nvidia-persistenced ──────────────────────────────────────
-        # Keeps the NVIDIA kernel module loaded even when no X clients
-        # are using the GPU. Without it, the module unloads when the
-        # last client exits, which:
-        # - Destroys VRAM state (even with PreserveVideoMemoryAllocations)
-        # - Resets GPU clocks/power state on next load
-        # - Adds ~2s latency to every GPU wake-up
-        # Complementary to PreserveVideoMemoryAllocations=1:
-        #   persistenced = keep the driver loaded
-        #   PreserveVideoMemoryAllocations = keep the framebuffer intact
-        nvidiaPersistenced = true;
+        # ── nvidia-persistenced — OFF ──────────────────────────────────
+        # Disabled: with PRIME sync, Xorg/picom keep the GPU active at
+        # all times — it will never be idle long enough to enter D3cold
+        # at runtime. persistenced is redundant and adds a daemon that
+        # can interfere with GPU power state transitions.
+        # Does NOT affect suspend/hibernate — that goes through the
+        # kernel PM subsystem, not userspace daemons.
+        nvidiaPersistenced = false;
 
-        # ── Dynamic Boost ────────────────────────────────────────────
-        # Lets the GPU and CPU negotiate power budget dynamically.
-        # When the GPU is idle, power shifts to the CPU. When gaming,
-        # power shifts to the GPU. Requires GSP firmware.
-        dynamicBoost.enable = true;
+        # ── Dynamic Boost — OFF ────────────────────────────────────────
+        # Disabled: nvidia-powerd can pin the GPU at P0 clocks (~30W)
+        # even at idle desktop. On PRIME sync systems where the dGPU
+        # renders everything continuously, Dynamic Boost has no thermal
+        # headroom to shift and only adds polling overhead.
+        dynamicBoost.enable = false;
 
         # ── Composition Pipeline ─────────────────────────────────────
         # Disabled: adds a full-frame buffer that eliminates tearing but

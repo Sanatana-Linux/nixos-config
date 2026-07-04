@@ -4,7 +4,7 @@
 # modules/nixos/system/
 
 ## Purpose
-Boot, systemd, networking, apps, desktop, multimedia, performance, runtimes, security, and virtualization.
+Boot, systemd, networking, apps, desktop, multimedia, performance, security, users, and virtualization.
 
 ## Key Files
 
@@ -19,15 +19,15 @@ Boot, systemd, networking, apps, desktop, multimedia, performance, runtimes, sec
 
 | Directory | Purpose |
 |-----------|---------|
-| `apps/` | Application support (nix-ld, appimage, thunar, browsers, AI) |
+| `apps/` | Application support (nix-ld, appimage, thunar, browsers, AI, runtimes) |
 | `assets/` | Boot-related assets (EFI binaries, icons) |
 | `desktop/` | Desktop environments (AwesomeWM, XFCE, LightDM display manager) |
 | `multimedia/` | Multimedia support |
 | `networking/` | Network configuration (NetworkManager with iwd backend, Quad9 DNS, wifi) |
 | `performance/` | System performance tuning (Cachy, OOMd, undervolt, zram) |
 | `plymouth/` | Plymouth boot splash themes (see `plymouth/AGENTS.md`) |
-| `runtimes/` | Language runtimes |
 | `security/` | Security modules (firewall, SSH, fail2ban, doas, sudo, PAM, TPM) |
+| `users/` | Per-host user account modules (tlh, smg, user) — **import per-host only** |
 | `virtualization/` | VMs and containers (Docker, LXC, virt-manager, Waydroid, Quickemu) |
 
 ## For AI Agents

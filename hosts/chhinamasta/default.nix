@@ -16,7 +16,7 @@ in {
     (modulesPath + "/installer/scan/detected.nix")
     (modulesPath + "/installer/scan/not-detected.nix")
     ./sops.nix
-    ../../modules/nixos/users/user.nix
+    ../../modules/nixos/system/users/user.nix
   ];
 
   # Overlays - same as bagalamukhi but limited to what's needed for live ISO
@@ -39,7 +39,10 @@ in {
   modules = {
     # System
     system = {
-      multimedia.enable = true;
+      multimedia = {
+        enable = true;
+        stableVideoEditors = false; # No stable overlay in ISO
+      };
       systemd.enable = true;
       boot = {
         enable = true;
@@ -167,6 +170,9 @@ in {
       "watchdog=0"
     ];
   };
+
+  # ZFS kernel module is broken for cachyos kernel — prevent it from being pulled in
+  boot.supportedFilesystems = lib.mkForce [];
 
   hardware = {
     enableRedistributableFirmware = true;

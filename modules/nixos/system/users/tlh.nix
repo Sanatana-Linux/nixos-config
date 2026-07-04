@@ -5,41 +5,42 @@
   ...
 }:
 with lib; let
-  cfg = config.modules.users.smg;
+  cfg = config.modules.users.tlh;
   ifTheyExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
 in {
-  options.modules.users.smg = {
-    enable = mkEnableOption "Create user account for smg";
+  options.modules.users.tlh = {
+    enable = mkEnableOption "Create user account for tlh";
 
     shell = mkOption {
       type = types.package;
       default = pkgs.zsh;
-      description = "Default shell for user smg";
+      description = "Default shell for user tlh";
     };
 
     extraGroups = mkOption {
       type = types.listOf types.str;
       default = [];
-      description = "Additional groups for user smg";
+      description = "Additional groups for user tlh";
     };
 
     initialPassword = mkOption {
       type = types.str;
       default = "";
-      description = "Initial password for user smg (empty = locked, use passwd)";
+      description = "Initial password for user tlh (empty = locked, use passwd)";
     };
   };
 
   config = mkIf cfg.enable {
     programs.zsh.enable = true;
+    environment.variables.EDITOR = "nvim";
     users.mutableUsers = true;
-
-    users.users.smg = {
-      name = "smg";
-      description = "Sara Marie Guidotti";
+    # xdg.userDirs.setSessionVariables = true;
+    users.users.tlh = {
+      name = "tlh";
+      description = "Thomas Leon Highbaugh";
       initialPassword = cfg.initialPassword;
       isNormalUser = true;
-      uid = 1001;
+      uid = 1000;
       shell = cfg.shell;
       extraGroups =
         [
@@ -50,6 +51,7 @@ in {
           "input"
         ]
         ++ ifTheyExist [
+          "i2c"
           "plugdev"
           "adbusers"
           "docker"
@@ -59,22 +61,27 @@ in {
           "lp"
           "mysql"
           "network"
+          "qemu"
+          "libvirt-qemu"
+          "libvirt"
+          "kvm"
           "networkmanager"
           "power"
-          "i2c"
           "systemd-journal"
           "tss"
-          "video"
+          "waydroid"
           "wireshark"
+          "zfs_member"
         ]
         ++ cfg.extraGroups;
 
       packages = [pkgs.home-manager];
     };
 
-    # home-manager.users.smg is configured in flake.nix via:
-    #   home-manager.users.smg = {imports = [./home/smg/default.nix];}
+    # home-manager.users.tlh is configured in flake.nix via:
+    #   home-manager.users.tlh = {imports = [./modules/home-manager/users/home/tlh/default.nix];}
     # Do NOT set it here — double-wiring causes home-manager generation
-    # conflicts where zsh init files fail to symlink on fresh shells.
+    # conflicts where zsh init files (.zshrc, .zshenv, .zprofile) fail to
+    # symlink into ~/.config/zsh/ on fresh shells.
   };
 }

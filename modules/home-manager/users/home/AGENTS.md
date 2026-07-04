@@ -1,10 +1,10 @@
-<!-- Parent: ../AGENTS.md -->
-<!-- Generated: 2026-04-21 | Updated: 2026-04-27 -->
+<!-- Parent: ../../AGENTS.md -->
+<!-- Generated: 2026-04-21 | Updated: 2026-07-01 -->
 
-# home/
+# modules/home-manager/users/home/
 
 ## Purpose
-Per-user home-manager configurations. Each user gets a `default.nix` imported by their respective NixOS user module (`modules/nixos/users/<name>.nix`). These files set `home.homeDirectory`, `home.username`, `home.stateVersion`, and import shared home-manager modules.
+Per-user home-manager configurations. Each user gets a `default.nix` imported by their respective NixOS user module (`modules/nixos/system/users/<name>.nix`). These files set `home.homeDirectory`, `home.username`, `home.stateVersion`, and import shared home-manager modules.
 
 ## Key Files
 
@@ -26,7 +26,7 @@ Per-user home-manager configurations. Each user gets a `default.nix` imported by
 
 ### Working In This Directory
 - `home.stateVersion` is **required** in every user's config — omission causes evaluation errors
-- User configs are imported via `home-manager.users.<name> = import cfg.homeManagerConfig` in the corresponding `modules/nixos/users/<name>.nix`
+- User configs are imported via `home-manager.users.<name> = import cfg.homeManagerConfig` in the corresponding `modules/nixos/system/users/<name>.nix`
 - Only import shared home-manager modules that the user actually needs
 - Never reference a user's home-manager config from a host where that user is not imported
 

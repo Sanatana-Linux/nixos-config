@@ -8,7 +8,6 @@
     ./desktop
     ./multimedia
     ./performance
-    ./runtimes
     ./security
     ./virtualization
   ];

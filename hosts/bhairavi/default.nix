@@ -7,7 +7,7 @@
   imports = [
     ./hardware-configuration.nix
     ./sops.nix
-    ../../modules/nixos/users/tlh.nix
+    ../../modules/nixos/system/users/tlh.nix
   ];
 
   nixpkgs.overlays = [

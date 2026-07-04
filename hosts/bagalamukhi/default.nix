@@ -8,7 +8,7 @@
   imports = [
     ./hardware-configuration.nix
     ./sops.nix
-    ../../modules/nixos/users/tlh.nix
+    ../../modules/nixos/system/users/tlh.nix
   ];
 
   # Overlays
@@ -24,14 +24,9 @@
     # System
     system = {
       systemd.enable = true;
-      cron = {
-        enable = true;
-        jobs = [
-          {
-            command = "nix profile wipe-history --older-than 7d --profile /nix/var/nix/profiles/system; find /home/* -lname '/nix/store/*' -delete; nix-store --gc; nix-env --delete-generations old; nix-collect-garbage -d; nix profile wipe-history";
-          }
-        ];
-      };
+      # Cron GC disabled — nix garbage collection is CPU/disk intensive
+      # and contributes unnecessary chassis heat. Run manually when needed.
+      cron.enable = false;
       boot = {
         enable = true;
         theme.enable = true;
@@ -49,7 +44,11 @@
           enable = true;
           rootless = true;
         };
-        virt-manager.enable = true;
+        virt-manager = {
+          enable = true;
+          libguestfsIntrospection = true;
+        };
+        quickemu.enable = true;
         # waydroid.enable = true;
         # lxc.enable = true;
       };

@@ -9,6 +9,12 @@ with lib; let
 in {
   options.modules.system.virtualization.virt-manager = {
     enable = mkEnableOption "Virtual machine management with virt-manager";
+
+    libguestfsIntrospection = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Enable libguestfs for VM disk image introspection (guestfish, virt-inspector, etc.)";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -25,6 +31,7 @@ in {
     };
 
     users.groups.tss = {};
+    users.groups.kvm = {};
 
     environment.systemPackages = with pkgs; [
       virt-manager
@@ -36,6 +43,9 @@ in {
       OVMFFull
       kvmtool
       swtpm
+    ] ++ lib.optionals cfg.libguestfsIntrospection [
+      libguestfs
+      libguestfs-with-appliance
     ];
 
     virtualisation.libvirtd = {

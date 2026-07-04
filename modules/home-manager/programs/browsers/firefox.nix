@@ -35,11 +35,24 @@ in {
   options.modules.programs.firefox = {
     enable = mkEnableOption "Firefox browser with extensions";
 
+    variant = mkOption {
+      type = types.enum ["stable" "beta" "devedition" "nightly"];
+      default = "stable";
+      description = "Firefox release channel to use";
+    };
+
     package = mkOption {
       type = types.package;
-      default = pkgs.firefox;
+      default =
+        if cfg.variant == "nightly"
+        then pkgs.firefox-nightly-bin
+        else if cfg.variant == "beta"
+        then pkgs.firefox-beta-bin
+        else if cfg.variant == "devedition"
+        then pkgs.firefox-devedition-bin
+        else pkgs.firefox;
       defaultText = literalExpression "pkgs.firefox";
-      description = "Firefox package to use (e.g. pkgs.firefox, pkgs.firefox-beta-bin, pkgs.firefox-devedition-bin)";
+      description = "Firefox package to use (e.g. pkgs.firefox, pkgs.firefox-beta-bin, pkgs.firefox-devedition-bin, pkgs.firefox-nightly-bin)";
     };
 
     defaultBrowser = mkOption {

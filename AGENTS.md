@@ -92,9 +92,7 @@ nix develop  # enter project dev shell
 | nur | Nix User Repository |
 | rust-overlay | Latest Rust toolchain |
 | nix-index-database | Pre-built nix-index DB |
-| cachy-tweaks | BORE/Cachy scheduler patches |
 | bhairava-grub-theme | Custom GRUB theme |
-| fx-autoconfig | Firefox autoconfig (non-flake) |
 | nixos-generators | VM/ISO/cloud image builder |
 | nps | Nix package search |
 | sops-nix | Secrets management (sops + age) |

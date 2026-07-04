@@ -5,6 +5,7 @@
     ./network-manager-applet.nix
     ./shotcut.nix
     ./thunar.nix
+    ./runtimes
     ./ai
   ];
 }

@@ -28,31 +28,28 @@ with lib; {
         # changed regions get repainted, dramatically reducing CPU/GPU load.
         use-damage = true;
 
-        # ---- Backend: prefer EGL over GLX for lower overhead ----
-        # EGL is more efficient than GLX on modern systems and uses less CPU.
-        # Falls back to GLX if EGL isn't available.
-        backend = "egl";
+        # ---- Backend: GLX for NVIDIA power management ----
+        # GLX is NVIDIA's mature X11 rendering path with proper GPU power
+        # state management — allows the dGPU to reach P8 at idle. EGL on
+        # NVIDIA pins clocks at P0 (~30W) even at idle desktop.
 
-        # ---- VSync: adaptive to avoid wasted cycles ----
-        # "glx-oml-sync-oboe" is lighter than full vsync and prevents tearing
-        vsync = true;
+        # ---- VSync — off to work around NVIDIA vblank duplicate bug ----
+        # On NVIDIA PRIME sync laptops, the driver generates duplicate vblank
+        # events (see dmesg/journactl for "Duplicate vblank event"). This causes
+        # picom to re-composite each frame twice — doubling GPU compositing work
+        # and keeping the dGPU pinned at P0 with ~30W draw. PRIME sync already
+        # provides tear-free output at the hardware level, so vsync in picom is
+        # redundant and only adds GPU load.
+        vsync = false;
 
         # ---- Unredirect fullscreen windows ----
         # When a window goes fullscreen (e.g. games, video players), picom can skip
         # compositing it entirely, reducing overhead significantly.
         unredirect-fullscreen = true;
 
-        # ---- Corner radius with minimal overhead ----
-        corner-radius = 12;
-        rounded-corners-exclude = [
-          "class_i = 'polybar'"
-          "class_g = 'i3lock'"
-          "class_g = 'awesome'"
-          "class_g = 'dock'"
-        ];
-        round-borders = 3;
-        round-borders-exclude = [];
-        round-borders-rule = [];
+        # ---- Corner radius — awesome handles this natively ----
+        # Picom corner-radius is redundant on awesomewm and adds per-frame
+        # GPU compositing work. Disabled to reduce dGPU idle draw.
 
         # ---- Shadows (keep, but optimize) ----
         shadow = true;
@@ -84,7 +81,7 @@ with lib; {
         # Going from 6 to 3 roughly halves the per-frame blur cost.
         blur = {
           method = "dual_kawase";
-          strength = 2;
+          strength = 4;
         };
 
         # ---- Reduce detection overhead ----
@@ -92,7 +89,6 @@ with lib; {
         # per-window property tracking overhead. Only keep what shadows/blur need.
         mark-wmwin-focused = true;
         mark-ovredir-focused = true;
-        detect-rounded-corners = true;
         detect-client-opacity = false;
         detect-transient = false;
         detect-client-leader = false;

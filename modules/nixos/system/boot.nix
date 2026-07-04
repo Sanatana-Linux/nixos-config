@@ -77,6 +77,16 @@ with lib; {
         # (PS3-level sleep).  0 DISABLES APST entirely — the NVMe never
         # sleeps, PCIe root port stays in L0, PCH can't enter deep C-states.
         "nvme_core.default_ps_max_latency_us=5500"
+        # Force PCIe ASPM — the BIOS on Legion 5 Pro overrides cmdline
+        # pcie_aspm.policy=powersave back to default. Force overrides
+        # the BIOS and pushes PCIe links to L1, letting the PCH enter
+        # deeper C-states. May cause NVMe controller issues — if drives
+        # drop offline on resume, remove this and fall back to BIOS defaults.
+        "pcie_aspm=force"
+        # Use acpi-cpufreq governor instead of intel_pstate. On Intel
+        # 14th-gen mobile (i9-14900HX), the passive governor sometimes
+        # achieves better idle power states than intel_pstate active mode.
+        "intel_pstate=passive"
       ];
 
       plymouth.enable = true;

@@ -4,19 +4,19 @@
 # modules/home-manager/
 
 ## Purpose
-Shared home-manager modules following the same enable-by-option pattern as NixOS modules. These configure user-level programs, shell, desktop preferences, and services. Imported by per-user configs in `home/<user>/default.nix`.
+Shared home-manager modules following the same enable-by-option pattern as NixOS modules. These configure user-level programs, shell, desktop preferences, and services. Imported by per-user configs in `modules/home-manager/users/home/<user>/default.nix`.
 
 ## Subdirectories
 
 | Directory | Purpose |
 |-----------|---------|
 | `desktop/` | Desktop config (awesome WM, GTK, X11) |
-| `environment/` | Session environment (home vars, XDG, Nix CLI) |
 | `packages/` | User package sets (essential) |
 | `programs/` | User programs (firefox, kitty, neovim, ghostty, yazi, fastfetch, etc.) |
 | `services/` | User services (picom, xscreensaver, gnome-keyring, ssh-agent, polkit) |
 | `shell/` | Interactive shell (zsh, starship, cli-tools, scripts) |
 | `stylix/` | Home-manager stylix integration |
+| `users/` | Per-user home-manager configurations (tlh, smg, user) |
 
 ## For AI Agents
 

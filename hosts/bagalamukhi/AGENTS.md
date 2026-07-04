@@ -1,16 +1,16 @@
 <!-- Parent: ../AGENTS.md -->
-<!-- Generated: 2026-04-27 | Updated: 2026-04-27 -->
+<!-- Generated: 2026-04-27 | Updated: 2026-07-04 -->
 
 # bagalamukhi
 
 ## Purpose
-Primary laptop — Lenovo Legion 5 Pro with Intel+NVIDIA Prime hybrid graphics, user tlh, running AwesomeWM with LightDM (slick-greeter) on xanmod kernel. Full development workstation with Docker (rootless+NVIDIA), virt-manager, waydroid, LXC, Ollama AI, zram, undervolt, cachy scheduler patches, and comprehensive security (firewall, SSH, fail2ban, doas).
+Primary laptop — Lenovo Legion 5 Pro 16IRX9 with Intel+NVIDIA Prime hybrid graphics, user tlh, running AwesomeWM with LightDM (slick-greeter) on cachyos-bore kernel. Full development workstation with Docker (rootless+NVIDIA), virt-manager, quickemu, Ollama AI, zram, undervolt, cachy scheduler patches, GLX picom with dual_kawase blur, and comprehensive security (firewall, SSH, fail2ban, doas).
 
 ## Key Files
 
 | File | Description |
 |------|-------------|
-| `default.nix` | Host config — imports hardware-configuration and user tlh; enables system/boot/plymouth, base, shell+zsh, nix-ld/appimage/thunar, virtualization (docker rootless+nvidia, virt-manager, waydroid, lxc), performance (undervolt, cachy, oomd, zram), laptop power, extensive packages (development full, gui full, multimedia, network, python, shell, system), NVIDIA Prime (intelBusId PCI:00:02:0, nvidiaBusId PCI:01:00:0), Intel, bluetooth, TPM, udev, Logitech, Lenovo, sound, networking (hostname bagalamukhi, rtl88x2bu WiFi, quad9 DNS), Android, Stylix, awesome+LightDM, Ollama AI, firewall/SSH/fail2ban/doas |
+| `default.nix` | Host config — imports hardware-configuration and user tlh; enables system/boot/cron/bootloader, base/fonts/nix, packages (archives, core, development full, gui full, python, system), NVIDIA GSP firmware+PRIME sync (intelBusId PCI:00:02:0, nvidiaBusId PCI:01:00:0, nvidiaPersistenced=false, dynamicBoost=false), Intel, bluetooth, TPM, udev, Logitech, Lenovo (power with conservation mode, keyboard backlight), sound, networking (hostname bagalamukhi, rtl88x2bu WiFi, quad9 DNS), Android, Stylix, awesome+LightDM, Ollama AI + core AI, Docker rootless+nvidia, virt-manager, quickemu, security (doas, sudo, TPM, ssh on port 2222) |
 | `hardware-configuration.nix` | Auto-generated hardware config — NVMe root + EFI boot + /home/tlh/Data partition, Intel CPU, x86_64-linux |
 
 ## For AI Agents

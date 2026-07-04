@@ -51,7 +51,7 @@ with lib; {
         # Picom corner-radius is redundant on awesomewm and adds per-frame
         # GPU compositing work. Disabled to reduce dGPU idle draw.
 
-        # ---- Shadows (keep, but optimize) ----
+        # ---- Shadows  ----
         shadow = true;
         shadow-radius = 8;
         shadow-opacity = 0.5;
@@ -59,7 +59,7 @@ with lib; {
         shadow-offset-y = 8;
 
         # ---- Opacity ----
-        fading = false;
+        fading = true;
         inactive-opacity = 0.90;
         frame-opacity = 0.9;
         inactive-opacity-override = false;
@@ -76,12 +76,9 @@ with lib; {
         ];
 
         # ---- Blur (keep functionality, reduce overhead) ----
-        # dual_kawase with lower strength ~3 is much cheaper than strength 6
-        # because each blur pass is a full-screen texture operation.
-        # Going from 6 to 3 roughly halves the per-frame blur cost.
         blur = {
           method = "dual_kawase";
-          strength = 4;
+          strength = 8;
         };
 
         # ---- Reduce detection overhead ----
@@ -128,7 +125,7 @@ with lib; {
           tooltip = {
             fade = true;
             shadow = true;
-            opacity = 1;
+            opacity = 0.98;
             focus = true;
             full-shadow = true;
           };

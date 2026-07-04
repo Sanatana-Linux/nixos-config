@@ -130,3 +130,66 @@
   Also disabled "always charge" and "charge in low power states" in the BIOS settings.
 - **Consequences**: VRM region heat is noticeably mitigated after the update. The BIOS charge settings changes may also contribute to reduced thermal load. The `cooling.nix` and `fan-control.nix` modules were removed from the NixOS config — they were making things worse by writing to the EC too frequently, causing the system to heat up further with no positive effect. The `legion-default-profile` service was added to force `platform_profile` to "balanced" at boot (overriding the BIOS/EC-persisted Fn+Q state), and `TLP_DEFAULT_MODE` was changed from `"BAT"` to `"AC"` so TLP starts in balanced mode by default.
 - **Note**: The BIOS update locked out the advanced BIOS menu (previously accessible via a key combo or modded BIOS). This is not a concern — the advanced BIOS only provided firmware-level thermal/power controls that are now handled entirely through NixOS (TLP, CPU_MAX_PERF_ON_AC=80, platform_profile forcing, kernel params). Since the system runs NixOS exclusively, all the functionality that was in the advanced BIOS is replicated and more flexibly managed through the NixOS config.
+
+## ADR-009: Picom GLX backend + vsync off for NVIDIA power savings
+
+- **Date**: 2026-07-03
+- **Context**: The GPU was stuck at P0 (~30-40W idle), causing the keyboard to heat up. The key suspects were picom backend choice and vsync settings. On NVIDIA PRIME sync laptops, EGL backend lacks proper GPU power state management — it pins clocks at P0. The NVIDIA vblank driver has a known duplicate event bug reported in dmesg.
+- **Decision**:
+  1. Changed picom backend from `egl` to `glx` — NVIDIA's GLX driver supports proper GPU power state transitions (allows P8 at idle)
+  2. Set `vsync = false` — PRIME sync already provides tear-free output at the hardware level; picom vsync + NVIDIA vblank duplicate bug doubles compositing work and keeps the GPU at P0
+  3. Removed `corner-radius` — awesomewm handles corner rounding natively, so picom doing it is redundant and adds per-frame GPU work
+  4. Changed blur `method` to `dual_kawase` with `strength = 4` (was 6) — lower blur passes halve the per-frame compositing cost
+  5. Set `use-damage = true` — picom redraws only changed regions instead of the full screen each frame
+- **Consequences**: GPU compositing overhead reduced. dGPU may now reach P8 at idle (pending verification via sysfs `runtime_status` — `nvidia-smi` itself wakes the GPU). The `use-damage = true` is the most impactful single setting for reducing frame-level work.
+
+## ADR-010: Disable nvidia-persistenced and dynamicBoost
+
+- **Date**: 2026-07-03
+- **Context**: The keyboard heat issue on bagalamukhi is caused by the dGPU staying at P0 (30-40W idle). Two NVIDIA services were running unnecessarily: `nvidia-persistenced` (keeps kernel module loaded for hotplug scenarios) and `nvidia-powerd` (Dynamic Boost shifts power between CPU/GPU based on workload).
+- **Decision**:
+  1. **nvidiaPersistenced = false**: With PRIME sync, Xorg/picom keep the GPU active at all times — it will never be idle long enough to enter D3cold at runtime. persistenced is redundant and can interfere with GPU power state transitions. Does NOT affect suspend/hibernate — kernel PM subsystem handles that.
+  2. **dynamicBoost.enable = false**: nvidia-powerd can pin the GPU at P0 clocks (~30W) even at idle desktop. On PRIME sync where the dGPU renders everything continuously, Dynamic Boost has no thermal headroom to shift power and only adds polling overhead.
+- **Consequences**: Two unnecessary daemons removed. GPU now has a cleaner path to reach P8 at idle. If the GPU still stays at P0, other causes remain (rogue processes, Xorg rendering, compositor overhead).
+
+## ADR-011: TLP CPU power caps and EPP for VRM thermal reduction
+
+- **Date**: 2026-07-03
+- **Context**: The VRM/IC region under the keyboard was reaching 80°C during normal desktop use. The i9-14900HX at full turbo draws excessive current through the VRM, generating heat that conducts through the chassis to the keyboard/palm rest area. Previous settings had no CPU max performance caps.
+- **Decision**:
+  1. Set `CPU_MAX_PERF_ON_AC = 80` — caps CPU frequency at ~80% of max to reduce VRM current draw. Full 100% on i9-14900HX causes excessive VRM temperatures with negligible perf gain for desktop workloads.
+  2. Set `CPU_MAX_PERF_ON_BAT = 60` — lower cap on battery to extend runtime.
+  3. Set `CPU_ENERGY_PERF_POLICY_ON_AC = "balance_power"` — the default "balance_performance" keeps EPP too high for idle desktop. This allows the CPU to reach deeper C-states.
+  4. Set `PLATFORM_PROFILE_ON_AC = "balanced"` — prevents the EC from running in performance mode at boot (overrides Fn+Q persisted state).
+  5. Set `PLATFORM_PROFILE_ON_BAT = "low-power"` — maximum battery saving when unplugged.
+- **Consequences**: The CPU stays cooler at idle and light load, reducing VRM/IC heat dissipation into the keyboard chassis. Performance-heavy tasks still get turbo boost within the 80% cap — no perceptible slowdown for development workloads.
+
+## ADR-012: PCIe ASPM force + intel_pstate passive for better idle power
+
+- **Date**: 2026-07-03
+- **Context**: The Legion 5 Pro BIOS overrides cmdline `pcie_aspm.policy=powersave` back to the default policy, preventing PCIe links from entering L1 states. The PCH stays in shallow C-states as a result. Additionally, `intel_pstate` active mode on i9-14900HX may prevent the CPU from reaching idle frequencies as low as possible.
+- **Decision**:
+  1. Added `pcie_aspm=force` — overrides the BIOS ASPM policy and forces PCIe links into L1, allowing the PCH to enter deeper C-states. May cause NVMe drives to drop offline on resume — if so, remove and fall back to BIOS defaults.
+  2. Added `intel_pstate=passive` — uses acpi-cpufreq governor instead of intel_pstate active mode. The passive governor sometimes achieves better idle power states on 14th-gen mobile HX processors.
+  3. Added `nvme_core.default_ps_max_latency_us=5500` — allows NVMe autonomous power state transitions up to PS3-level sleep (5500µs latency tolerance).
+- **Consequences**: Slightly deeper idle power savings at the PCIe and CPU level. If NVMe drives drop off after suspend/resume, `pcie_aspm=force` should be removed.
+
+## ADR-013: Yazi module refactor — Nix-native config via programs.yazi.*
+
+- **Date**: 2026-07-03
+- **Context**: The original yazi module used raw TOML files (`yazi.toml`, `keymap.toml`) via `home.file` symlinks plus `initLua` for plugin config. This approach was brittle — the raw TOML files were separate from the Nix module, `initLua` duplicated what `programs.yazi.plugins` provides, and home-manager's `programs.yazi` module has native support for all of these via `settings`, `keymap`, and `plugins` options.
+- **Decision**: Full refactor to Nix-native config:
+  1. All `yazi.toml` settings moved to `programs.yazi.settings`
+  2. All `keymap.toml` content moved to `programs.yazi.keymap`
+  3. Plugin `initLua` blocks replaced with `programs.yazi.plugins.<name>.settings` and `programs.yazi.plugins.<name>.setup`
+  4. Old `home.file` symlinks removed — no more `yazi.toml`, `keymap.toml` files
+  5. External plugins (fd-fzf, fuzzy-search) not yet in `pkgs.yaziPlugins` fetched via `pkgs.fetchFromGitHub`
+  6. Full-border, smart-enter, compress, gitui, nav-parent-panel plugins added (were missing from old config)
+- **Consequences**: Config is now purely Nix — type-checked, formatting-consistent, and maintainable. The `programs.yazi` module generates correct TOMYAML automatically. External plugins use `fetchFromGitHub` with SRI hashes. Cleanup removes ~250 lines compared to the old TOML+initLua approach.
+
+## ADR-014: Yazi keymap cleanup — remove duplicated built-in defaults
+
+- **Date**: 2026-07-04
+- **Context**: The yazi keymap contained a complete verbatim copy of yazi's compiled-in default keybindings across 8 modes (mgr, tasks, spot, pick, input, confirm, cmp, help) — ~260 lines of duplication. In yazi's keymap model, `prepend_keymap` entries are prepended to built-in defaults, while `keymap` entries **replace** built-in defaults entirely. By including `keymap` arrays duplicating yazi's defaults, the config was both redundant and would become stale on yazi version bumps.
+- **Decision**: Removed all `keymap` arrays from all modes. Kept only `prepend_keymap` entries for mgr mode (44 custom plugin bindings). All sub-mode keymaps (tasks, spot, pick, input, confirm, cmp, help) removed entirely — yazi uses its compiled-in defaults.
+- **Consequences**: ~260 lines of dead duplication deleted. Yazi will use built-in defaults for all modes, with plugin bindings prepended to mgr. The config now correctly follows yazi's keymap override model — only custom bindings are specified, defaults come from the binary.

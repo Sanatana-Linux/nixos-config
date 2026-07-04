@@ -1,5 +1,5 @@
 <!-- Parent: ../AGENTS.md -->
-<!-- Generated: 2026-04-21 | Updated: 2026-04-27 -->
+<!-- Generated: 2026-04-21 | Updated: 2026-07-04 -->
 
 # modules/nixos/base/
 
@@ -17,6 +17,8 @@ Core NixOS system configuration — nix daemon settings, FHS compatibility, esse
 | `permitted-packages.nix` | Packages allowed for unprivileged users via doas/sudo |
 | `shell.nix` | Shell environment (ZSH config, default shell selection) — formerly in `shell/` |
 | `variables.nix` | System environment variables (browser, Java/OpenGL/ZSH optimizations) — formerly in `shell/` |
+| `fonts.nix` | Font packages (Nerd Fonts, icon fonts, system fonts) and fontconfig settings |
+| `permitted-packages.nix` | Packages allowed for unprivileged users via doas/sudo |
 
 ## For AI Agents
 

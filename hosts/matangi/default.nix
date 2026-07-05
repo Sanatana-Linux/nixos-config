@@ -58,7 +58,10 @@
       security = {
         doas.enable = true;
         fail2ban.enable = true;
-        ssh.enable = true;
+        ssh = {
+          enable = true;
+          passwordAuthentication = true;
+        };
         sudo.enable = true;
         pam.enable = true;
         tpm.enable = true;

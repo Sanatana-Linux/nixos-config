@@ -16,6 +16,11 @@ in {
         default = false;
         description = "Enable CUDA toolkit and related packages";
       };
+      containerRuntime = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Enable NVIDIA container runtime (libnvidia-container + nvidia-container-toolkit)";
+      };
     };
 
     prime = {
@@ -82,7 +87,6 @@ in {
           # NVIDIA specific
           nvidia-vaapi-driver
           nvidia-texture-tools
-          libnvidia-container
           nv-codec-headers
           nvtopPackages.full
           nvidia_cg_toolkit
@@ -111,9 +115,12 @@ in {
           zenith-nvidia
           kompute
         ]
+        ++ optionals cfg.cuda.containerRuntime [
+          libnvidia-container
+          nvidia-container-toolkit
+        ]
         ++ optionals cfg.cuda.enable [
           cudatoolkit
-          nvidia-container-toolkit
           cudaPackages.cuda_opencl
           cudaPackages.cuda_nvcc
           cudaPackages.libcublas
@@ -203,7 +210,7 @@ in {
     };
 
     hardware = {
-      nvidia-container-toolkit.enable = cfg.cuda.enable;
+      nvidia-container-toolkit.enable = cfg.cuda.containerRuntime;
       graphics = {
         enable = true;
         enable32Bit = true;

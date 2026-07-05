@@ -39,7 +39,7 @@ in {
       description = "Sara Marie Guidotti";
       initialPassword = cfg.initialPassword;
       isNormalUser = true;
-      uid = 1001;
+      uid = 1000;
       shell = cfg.shell;
       extraGroups =
         [

@@ -211,9 +211,15 @@
     xfce.xfce4-screenshooter
   ];
 
-  # Camera support via xdg-desktop-portal — cheese and other V4L2 apps
-  # need this for smooth video. Without it, apps fall back to raw V4L2
-  # which stutters, especially on cachy kernels.
+  # Camera support — cheese and other V4L2 apps
+  # uvcvideo.nodrop=1 prevents the UVC driver from dropping frames
+  # when the consumer is slow (common root cause of stutter on cachy kernels).
+  boot.extraModprobeConfig = ''
+    options uvcvideo nodrop=1
+  '';
+
+  # xdg-desktop-portal provides the camera portal layer that cheese
+  # needs for smooth video via PipeWire's camera control.
   xdg.portal = {
     enable = true;
     extraPortals = [pkgs.xdg-desktop-portal-gtk];

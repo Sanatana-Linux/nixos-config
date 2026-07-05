@@ -45,6 +45,11 @@
     };
   };
 
+  # Explicitly disable Stylix at home-manager level — NixOS-level stylix
+  # stays enabled to keep the Stylix home-manager option available, but
+  # smg gets no theming, no Firefox profile warnings, etc.
+  stylix.enable = false;
+
   services.picom.settings = {
     shadow = lib.mkForce false;
     rounded-corners-exclude = [
@@ -83,4 +88,10 @@
   # Force kitty installation
   home.packages = [pkgs.kitty];
   programs.kitty.enable = true;
+
+  # Increase GStreamer V4L2 buffer count — default is 4, which causes
+  # stuttering on high-res webcams. 16 gives the pipeline enough runway.
+  home.sessionVariables = {
+    GST_V4L2_DEFAULT_BUFFER_COUNT = "16";
+  };
 }

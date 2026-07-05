@@ -22,12 +22,12 @@ with lib; {
       settings = {
         animations = false;
 
-        # ---- Backend: configurable via modules.services.picom.backend ----
+        # ---- Backend: GLX for NVIDIA power management ----
         # GLX is NVIDIA's mature X11 rendering path with proper GPU power
         # state management — allows the dGPU to reach P8 at idle. EGL on
         # NVIDIA pins clocks at P0 (~30W) even at idle desktop.
         # xrender does NOT support dual_kawase blur — use GLX or EGL for blur.
-        inherit (config.modules.services.picom) backend;
+        backend = "glx";
 
         # ---- Performance-critical: enable damage tracking ----
         # use-damage = false forces picom to redraw the entire screen every frame.

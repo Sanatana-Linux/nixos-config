@@ -66,6 +66,10 @@ in {
           cheese
           fswebcam
           libwebcam
+          v4l-utils
+          libcamera
+          gst_all_1.gst-devtools
+          gst_all_1.gst-rtsp-server
           ladspa-sdk
           lv2
           swh
@@ -75,6 +79,15 @@ in {
           peek
           yt-dlp
           svt-av1
+          # Video editing effects and filters
+          frei0r
+          mlt
+          movit
+          opencv
+          chromaprint
+          rubberband
+          sox
+          audiowaveform
         ]
         ++ optionals cfg.imageTools [
           imagemagick

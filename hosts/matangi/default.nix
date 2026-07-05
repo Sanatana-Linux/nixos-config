@@ -204,7 +204,18 @@
 
   hardware.nvidia.forceFullCompositionPipeline = lib.mkForce false;
 
-  environment.systemPackages = [pkgs.easyeffects];
+  environment.systemPackages = with pkgs; [
+    easyeffects
+    xfce.xfce4-screenshooter
+  ];
+
+  # Camera support via xdg-desktop-portal — cheese and other V4L2 apps
+  # need this for smooth video. Without it, apps fall back to raw V4L2
+  # which stutters, especially on cachy kernels.
+  xdg.portal = {
+    enable = true;
+    extraPortals = [pkgs.xdg-desktop-portal-gtk];
+  };
 
   services = {
     logind.settings.Login = {

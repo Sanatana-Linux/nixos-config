@@ -62,6 +62,9 @@
         sudo.enable = true;
         pam.enable = true;
         tpm.enable = true;
+        firewall = {
+          allowSSH = true;
+        };
       };
       multimedia.enable = true;
     };

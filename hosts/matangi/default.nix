@@ -173,7 +173,6 @@
       };
       devices = {
         logitech.enable = true;
-        iphone.enable = true;
         printer.brother = {
           enable = true;
           user = "smg";

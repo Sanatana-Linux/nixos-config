@@ -90,7 +90,7 @@ with lib; {
       unmanaged = ["docker0" "rndis0"];
       wifi = {
         powersave = config.modules.system.networking.wifi.powersave;
-        scanRandMacAddress = false;
+        scanRandMacAddress = true;
         macAddress = "random";
       };
     };
@@ -130,7 +130,7 @@ with lib; {
     # Save) mode that can cause the adapter to become unresponsive during
     # the WPA handshake.  This disables it at module load time.
     boot.extraModprobeConfig = ''
-      options rtw88_core disable_lps_deep=1
+      # options rtw88_core disable_lps_deep=1
       # Enable PCIe power saving for the Intel CNVi WiFi (integrated into
       # the PCH).  When disabled (default), the WiFi reports a 20ms LTR
       # that blocks the entire package from reaching C6+ deep sleep.

@@ -113,6 +113,8 @@ in {
         use-cgroups = true;
 
         # Build settings
+        sandbox = "relaxed"; # Allow network access for fixed-output derivations
+        extra-sandbox-paths = ["/etc/resolv.conf"];
         log-lines = 50;
         builders-use-substitutes = true;
         always-allow-substitutes = true;
@@ -136,6 +138,7 @@ in {
             "https://cache.nixos-cuda.org"
             "https://ai.cachix.org"
             "https://nix-gaming.cachix.org"
+            "https://comfyui.cachix.org"
           ]
           ++ cfg.extraCaches;
 
@@ -151,6 +154,7 @@ in {
             "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="
             "ai.cachix.org-1:N9dzRK+alWwoKXQlnn0H6aUx0lU/mspIoz8hMvGvbbc="
             "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
+            "comfyui.cachix.org-1:33mf9VzoIjzVbp0zwj+fT51HG0y31ZTK3nzYZAX0rec="
           ]
           ++ cfg.extraTrustedKeys;
       };

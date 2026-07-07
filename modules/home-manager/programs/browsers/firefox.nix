@@ -37,7 +37,7 @@ in {
 
     variant = mkOption {
       type = types.enum ["stable" "beta" "devedition" "nightly"];
-      default = "stable";
+      default = "nightly";
       description = "Firefox release channel to use";
     };
 
@@ -65,6 +65,18 @@ in {
       type = types.bool;
       default = false;
       description = "Enable fx-autoconfig for userChrome.js support and symlink external chrome config";
+    };
+
+    searxngUrl = mkOption {
+      type = types.str;
+      default = "";
+      description = "URL of SearXNG instance (e.g. http://localhost:8080). When set, adds SearXNG as a search engine.";
+    };
+
+    defaultSearchEngine = mkOption {
+      type = types.str;
+      default = "google";
+      description = "Default search engine name (must match an engine in the engines list)";
     };
   };
 
@@ -101,25 +113,31 @@ in {
           auto-referer
           auto-tab-discard
           bitwarden
+          bypass-paywalls-clean
           cookie-quick-manager
           copy-selection-as-markdown
           don-t-fuck-with-paste
+          dont-track-me-google1
           export-cookies-txt
           export-tabs-urls-and-titles
+          fastforwardteam
           firemonkey
           form-history-control
-          foxytab
           gaoptout
+          flagfox
+          header-editor
           ipfs-companion
           istilldontcareaboutcookies
           justdeleteme
           link-gopher
+          mailvelope
           markdownload
           multi-account-containers
-          persistentpin
           raindropio
           refined-github
           tab-stash
+          temporary-containers-plus
+
           ublock-origin
           view-image
         ];
@@ -232,110 +250,118 @@ in {
         };
 
         search = {
-          default = "google";
+          default = cfg.defaultSearchEngine;
           force = true;
-          engines = {
-            "Nix Packages" = {
-              urls = [
-                {
-                  template = "https://search.nixos.org/packages";
-                  params = [
-                    {
-                      name = "type";
-                      value = "packages";
-                    }
-                    {
-                      name = "query";
-                      value = "{searchTerms}";
-                    }
-                  ];
-                }
-              ];
-              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-              definedAliases = ["@np"];
+          engines =
+            {
+              "Nix Packages" = {
+                urls = [
+                  {
+                    template = "https://search.nixos.org/packages";
+                    params = [
+                      {
+                        name = "type";
+                        value = "packages";
+                      }
+                      {
+                        name = "query";
+                        value = "{searchTerms}";
+                      }
+                    ];
+                  }
+                ];
+                icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+                definedAliases = ["@np"];
+              };
+              "Nix Options" = {
+                urls = [
+                  {
+                    template = "https://search.nixos.org/options";
+                    params = [
+                      {
+                        name = "type";
+                        value = "options";
+                      }
+                      {
+                        name = "query";
+                        value = "{searchTerms}";
+                      }
+                    ];
+                  }
+                ];
+                icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+                definedAliases = ["@no"];
+              };
+              "NixOS Wiki" = {
+                urls = [{template = "https://nixos.wiki/index.php?search={searchTerms}";}];
+                icon = "https://nixos.wiki/favicon.png";
+                updateInterval = 24 * 60 * 60 * 1000;
+                definedAliases = ["@nw"];
+              };
+              "Home Manager Options" = {
+                urls = [{template = "https://home-manager-options.extranix.com/?query={searchTerms}";}];
+                icon = "https://home-manager-options.extranix.com/images/favicon.png";
+                definedAliases = ["hm"];
+              };
+              "Firefox Addons" = {
+                urls = [{template = "https://addons.mozilla.org/en-US/firefox/search/?q={searchTerms}";}];
+                icon = "https://en.wikipedia.org/wiki/File:Firefox_logo,_2017.svg";
+                definedAliases = ["af"];
+              };
+              Searchfox = {
+                urls = [{template = "https://searchfox.org/mozilla-central/search?q={searchTerms}";}];
+                icon = "https://searchfox.org/favicon.ico";
+                definedAliases = ["sf"];
+              };
+              "ddg" = {
+                urls = [{template = "https://duckduckgo.com/?q={searchTerms}";}];
+                icon = "https://duckduckgo.com/assets/icons/meta/DDG-icon_256x256.png";
+                definedAliases = ["ddg"];
+              };
+              "Yandex" = {
+                urls = [{template = "https://yandex.com/search/?text={searchTerms}";}];
+                icon = "https://i.pinimg.com/474x/64/cf/8b/64cf8bb59b5339f8c309dfc0368bf4ea.jpg";
+                definedAliases = ["ya"];
+              };
+              "StartPage" = {
+                urls = [{template = "https://startpage.com/search?q={searchTerms}";}];
+                icon = "https://www.startpage.com/sp/cdn/images/startpage-logo-dark-new.svg";
+                definedAliases = ["s"];
+              };
+              "Brave" = {
+                urls = [{template = "https://search.brave.com/search?q={searchTerms}";}];
+                icon = "https://brave.com/static-assets/images/brave-logo-dark.svg";
+                definedAliases = ["b"];
+              };
+              "Anna's Archive" = {
+                urls = [{template = "https://annas-archive.gl/search?q={searchTerms}";}];
+                icon = "https://annas-archive.gl/favicon-32x32.png?hash=989ac03e6b8daade6d2d";
+                definedAliases = ["a"];
+              };
+              "youtube" = {
+                urls = [{template = "https://www.youtube.com/results?search_query={searchTerms}";}];
+                definedAliases = ["yt"];
+              };
+              "Github Users" = {
+                urls = [{template = "https://github.com/search?q={searchTerms}&type=users";}];
+                icon = "https://www.svgrepo.com/show/68072/github-logo-face.svg";
+                definedAliases = ["gu"];
+              };
+              "Github Repos" = {
+                urls = [{template = "https://github.com/search?q={searchTerms}&type=repositories";}];
+                icon = "https://www.svgrepo.com/show/68072/github-logo-face.svg";
+                definedAliases = ["gr"];
+              };
+              "bing".metaData.alias = "@b";
+              "google".metaData.alias = "@g";
+            }
+            // lib.optionalAttrs (cfg.searxngUrl != "") {
+              "SearXNG" = {
+                urls = [{template = "${cfg.searxngUrl}/search?q={searchTerms}";}];
+                icon = "${cfg.searxngUrl}/favicon.ico";
+                definedAliases = ["@sx"];
+              };
             };
-            "Nix Options" = {
-              urls = [
-                {
-                  template = "https://search.nixos.org/options";
-                  params = [
-                    {
-                      name = "type";
-                      value = "options";
-                    }
-                    {
-                      name = "query";
-                      value = "{searchTerms}";
-                    }
-                  ];
-                }
-              ];
-              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-              definedAliases = ["@no"];
-            };
-            "NixOS Wiki" = {
-              urls = [{template = "https://nixos.wiki/index.php?search={searchTerms}";}];
-              icon = "https://nixos.wiki/favicon.png";
-              updateInterval = 24 * 60 * 60 * 1000;
-              definedAliases = ["@nw"];
-            };
-            "Home Manager Options" = {
-              urls = [{template = "https://home-manager-options.extranix.com/?query={searchTerms}";}];
-              icon = "https://home-manager-options.extranix.com/images/favicon.png";
-              definedAliases = ["hm"];
-            };
-            "Firefox Addons" = {
-              urls = [{template = "https://addons.mozilla.org/en-US/firefox/search/?q={searchTerms}";}];
-              icon = "https://en.wikipedia.org/wiki/File:Firefox_logo,_2017.svg";
-              definedAliases = ["af"];
-            };
-            Searchfox = {
-              urls = [{template = "https://searchfox.org/mozilla-central/search?q={searchTerms}";}];
-              icon = "https://searchfox.org/favicon.ico";
-              definedAliases = ["sf"];
-            };
-            "ddg" = {
-              urls = [{template = "https://duckduckgo.com/?q={searchTerms}";}];
-              icon = "https://duckduckgo.com/assets/icons/meta/DDG-icon_256x256.png";
-              definedAliases = ["ddg"];
-            };
-            "Yandex" = {
-              urls = [{template = "https://yandex.com/search/?text={searchTerms}";}];
-              icon = "https://i.pinimg.com/474x/64/cf/8b/64cf8bb59b5339f8c309dfc0368bf4ea.jpg";
-              definedAliases = ["ya"];
-            };
-            "StartPage" = {
-              urls = [{template = "https://startpage.com/search?q={searchTerms}";}];
-              icon = "https://www.startpage.com/sp/cdn/images/startpage-logo-dark-new.svg";
-              definedAliases = ["s"];
-            };
-            "Brave" = {
-              urls = [{template = "https://search.brave.com/search?q={searchTerms}";}];
-              icon = "https://brave.com/static-assets/images/brave-logo-dark.svg";
-              definedAliases = ["b"];
-            };
-            "Anna's Archive" = {
-              urls = [{template = "https://annas-archive.gl/search?q={searchTerms}";}];
-              icon = "https://annas-archive.gl/favicon-32x32.png?hash=989ac03e6b8daade6d2d";
-              definedAliases = ["a"];
-            };
-            "youtube" = {
-              urls = [{template = "https://www.youtube.com/results?search_query={searchTerms}";}];
-              definedAliases = ["yt"];
-            };
-            "Github Users" = {
-              urls = [{template = "https://github.com/search?q={searchTerms}&type=users";}];
-              icon = "https://www.svgrepo.com/show/68072/github-logo-face.svg";
-              definedAliases = ["gu"];
-            };
-            "Github Repos" = {
-              urls = [{template = "https://github.com/search?q={searchTerms}&type=repositories";}];
-              icon = "https://www.svgrepo.com/show/68072/github-logo-face.svg";
-              definedAliases = ["gr"];
-            };
-            "bing".metaData.alias = "@b";
-            "google".metaData.alias = "@g";
-          };
         };
       };
     };

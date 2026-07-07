@@ -54,7 +54,11 @@
       };
       apps = {
         nix-ld.enable = true;
-        appimage.enable = true;
+        appimage = {
+          enable = true;
+          binfmt = true;
+        };
+        searxng.enable = true;
         thunar.enable = true;
         browsers = {
           googleChrome = true;

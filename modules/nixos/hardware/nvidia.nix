@@ -132,6 +132,24 @@ in {
           blas
           peakperf
           python312Packages.numpy
+
+          # ── Video/image editing CUDA packages ────────────────────────
+          cudaPackages.libnpp # NVIDIA Performance Primitives (image/signal processing)
+          cudaPackages.libnvjpeg # GPU JPEG encode/decode — accelerates image workflow
+          cudaPackages.libnvjpeg_2k # GPU JPEG2000 encode/decode — pro image editing
+          cudaPackages.libcufft # CUDA FFT library — audio/video signal processing
+          cudaPackages.nvcomp # GPU-accelerated compression — video codec pipelines
+          cudaPackages.cudnn # Deep neural network library — AI upscaling/denoising
+
+          # CUDA-enabled ffmpeg with NVENC/NVDEC hardware encoding/decoding
+          (ffmpeg-full.override {
+            withNvcodec = true;
+            withCuda = true;
+            withCudaNVCC = true;
+            withNpp = true;
+            withNvdec = true;
+            withNvenc = true;
+          })
         ];
     };
 

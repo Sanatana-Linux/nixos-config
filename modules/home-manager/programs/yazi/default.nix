@@ -159,11 +159,9 @@ with lib; {
           bizarre_retry = 5;
         };
         plugin = {
-          previewers = [
-            {
-              url = "*.md";
-              run = "glow";
-            }
+          # prepend_previewers adds rules BEFORE the built-in defaults
+          # (previewers would REPLACE the defaults entirely — breaking code preview)
+          prepend_previewers = [
             {
               url = "*.zip";
               run = "ouch";
@@ -195,20 +193,6 @@ with lib; {
             {
               url = "*.tar.zst";
               run = "ouch";
-            }
-          ];
-          prepend_fetchers = [
-            {
-              id = "git";
-              url = "*";
-              run = "git";
-              group = "git";
-            }
-            {
-              id = "git";
-              url = "*/";
-              run = "git";
-              group = "git";
             }
           ];
         };
@@ -289,6 +273,12 @@ with lib; {
               on = "C";
               run = "plugin ouch";
               desc = "Compress with ouch";
+            }
+            {
+              on = "X";
+              run = "shell --block -- ouch decompress --yes %s";
+              desc = "Extract archive with ouch";
+              for = "unix";
             }
             {
               on = "M";

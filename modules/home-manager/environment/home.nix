@@ -42,7 +42,7 @@ in {
 
     home.sessionVariables = {
       EDITOR = lib.mkDefault "nvim";
-      BROWSER = lib.mkDefault "firefox";
+      BROWSER = lib.mkDefault "firefox-nightly";
       TERMINAL = lib.mkDefault "kitty";
       GOPATH = lib.mkDefault "$HOME/go";
       GOBIN = lib.mkDefault "$HOME/go/bin";

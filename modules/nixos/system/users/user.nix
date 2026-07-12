@@ -67,7 +67,7 @@ in {
     };
 
     # home-manager.users.user is configured in flake.nix via:
-    #   home-manager.users.user = {imports = [./modules/home-manager/users/home/user/default.nix];}
+    #   home-manager.users.user = {imports = [./modules/home-manager/users/user/default.nix];}
     # Do NOT set it here — double-wiring causes home-manager generation conflicts.
   };
 }

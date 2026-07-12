@@ -137,7 +137,7 @@
                 ./modules/home-manager
               ];
               users = {
-                tlh = {imports = [./modules/home-manager/users/home/tlh/default.nix];};
+                tlh = {imports = [./modules/home-manager/users/tlh/default.nix];};
               };
             };
           }
@@ -163,7 +163,7 @@
               extraSpecialArgs = {inherit inputs outputs;};
               sharedModules = [./modules/home-manager];
               users = {
-                smg = {imports = [./modules/home-manager/users/home/smg/default.nix];};
+                smg = {imports = [./modules/home-manager/users/smg/default.nix];};
               };
             };
           }
@@ -189,7 +189,7 @@
               extraSpecialArgs = {inherit inputs outputs;};
               sharedModules = [./modules/home-manager];
               users = {
-                tlh = {imports = [./modules/home-manager/users/home/tlh/default.nix];};
+                tlh = {imports = [./modules/home-manager/users/tlh/default.nix];};
               };
             };
           }
@@ -219,7 +219,7 @@
               sharedModules = [
                 ./modules/home-manager
               ];
-              users.user = {imports = [./modules/home-manager/users/home/user/default.nix];};
+              users.user = {imports = [./modules/home-manager/users/user/default.nix];};
             };
           }
           ./hosts/chhinamasta

@@ -141,6 +141,7 @@ in {
 
     # Force pointer cursor configuration (override stylix cursor handling)
     home.pointerCursor = mkForce {
+      enable = true;
       package = cfg.cursor.package;
       name = cfg.cursor.name;
       size = cfg.cursor.size;

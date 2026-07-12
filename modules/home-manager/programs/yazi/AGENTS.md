@@ -28,7 +28,7 @@ Yazi terminal file manager configuration with custom keymap, openers, status bar
   - `l` → smart-enter, `p` → smart-paste (both intentionally shadow defaults)
   - `m` → bookmarks save (shadows linemode prefix)
   - `c m` → chmod, `c a` → compress (extends copy prefix)
-  - `C` → ouch, `M` → mount, `U` → restore (unused by default)
+  - `C` → ouch (compress), `X` → ouch (decompress), `M` → mount, `U` → restore (unused by default)
   - `g i` → gitui, `g v` → gvfs (extends goto prefix)
   - `R` → recycle-bin prefix, `<A-d>` → dupes, `<A-s>` → sudo
 

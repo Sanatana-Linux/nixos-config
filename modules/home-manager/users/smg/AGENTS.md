@@ -15,7 +15,7 @@ Secondary user home-manager configuration for host matangi. Runs XFCE desktop wi
 ## For AI Agents
 
 ### Working In This Directory
-- User modules are imported by host configs — each host only imports the users it needs
+- User modules are imported by host configs — each host only imports the users it needs. Located at `modules/home-manager/users/smg/`.
 - Enable-by-option pattern: modules are toggled with `modules.<cat>.<name>.enable = true`
 - stateVersion should never change after first install
 

@@ -1,10 +1,10 @@
 <!-- Parent: ../AGENTS.md -->
 <!-- Generated: 2026-04-27 | Updated: 2026-04-27 -->
 
-# user
+# tlh
 
 ## Purpose
-Generic user home-manager configuration for host chhinamasta (live USB ISO). Nearly identical to tlh's config — full awesome WM desktop with Stylix theming, shell toolchain, Firefox+autoconfig, Kitty, and standard services. Uses username "user" with homeDirectory "/home/user". Designed as the live-session user with full desktop capabilities.
+Primary user home-manager configuration for hosts bagalamukhi and bhairavi. Enables full desktop experience with awesome WM, Stylix theming, shell toolchain (zsh/starship/cli-tools), browser (Firefox with autoconfig), terminal (Kitty), and services (gnome-keyring, picom, xscreensaver). Disables all manual formats in favor of tealdeer and online references.
 
 ## Key Files
 
@@ -15,7 +15,7 @@ Generic user home-manager configuration for host chhinamasta (live USB ISO). Nea
 ## For AI Agents
 
 ### Working In This Directory
-- User modules are imported by host configs — each host only imports the users it needs
+- User modules are imported by host configs — each host only imports the users it needs. Located at `modules/home-manager/users/tlh/`.
 - Enable-by-option pattern: modules are toggled with `modules.<cat>.<name>.enable = true`
 - stateVersion should never change after first install
 

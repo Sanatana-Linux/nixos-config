@@ -103,7 +103,6 @@ in {
         gst_all_1.gst-plugins-bad # Plugins needing more testing
         gst_all_1.gst-plugins-ugly # Proprietary codec plugins
         gst_all_1.gst-libav # FFmpeg-based plugins
-        gst_all_1.gst-vaapi # Hardware acceleration via VAAPI
         gst_all_1.gst-plugins-rs # Rust-based plugins
         gst_all_1.gst-editing-services # Non-linear editing support
         # Icons

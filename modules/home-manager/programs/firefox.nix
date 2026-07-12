@@ -8,6 +8,17 @@
 with lib; let
   cfg = config.modules.programs.firefox;
   profile = config.home.username;
+
+  # Map variant to desktop file name, binary name, and WM class
+  # stable → firefox, beta → firefox-beta, devedition → firefox-devedition, nightly → firefox-nightly
+  firefoxSuffix =
+    if cfg.variant == "stable"
+    then ""
+    else "-${cfg.variant}";
+  firefoxDesktopName = "firefox${firefoxSuffix}.desktop";
+  firefoxBinaryName = "firefox${firefoxSuffix}";
+  firefoxWmClass = "firefox${firefoxSuffix}";
+
   firefox-with-autoconfig =
     (cfg.package.override {
       extraPrefsFiles = [
@@ -84,15 +95,16 @@ in {
     home.sessionVariables = {
       MOZ_USE_XINPUT2 = "1";
       MOZ_DISABLE_RDD_SANDBOX = "1";
+      BROWSER = firefoxBinaryName;
     };
 
     xdg.mimeApps = mkIf cfg.defaultBrowser {
       enable = true;
       defaultApplications = {
-        "text/html" = ["firefox.desktop"];
-        "text/xml" = ["firefox.desktop"];
-        "x-scheme-handler/http" = ["firefox.desktop"];
-        "x-scheme-handler/https" = ["firefox.desktop"];
+        "text/html" = [firefoxDesktopName];
+        "text/xml" = [firefoxDesktopName];
+        "x-scheme-handler/http" = [firefoxDesktopName];
+        "x-scheme-handler/https" = [firefoxDesktopName];
       };
     };
 
@@ -127,7 +139,6 @@ in {
           flagfox
           header-editor
           ipfs-companion
-          istilldontcareaboutcookies
           justdeleteme
           link-gopher
           mailvelope

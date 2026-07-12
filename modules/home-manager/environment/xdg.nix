@@ -7,7 +7,7 @@
 with lib; let
   cfg = config.modules.core.xdg;
 
-  browser = ["firefox.desktop"];
+  browser = ["firefox-nightly.desktop"];
   archiveExtractor = ["file-roller.desktop"]; # Define file-roller application
   pdfViewer = ["foliate.desktop"]; # Define pdfViewer application
   videoPlayer = ["vlc.desktop"]; # VLC application
@@ -107,7 +107,7 @@ in {
     # Ensure application environment variables are set for all applications
     home.sessionVariables = {
       TERMINAL = "kitty";
-      BROWSER = "firefox";
+      BROWSER = "firefox-nightly";
       EDITOR = "nvim";
       VISUAL = "nvim";
       PAGER = "less";
@@ -124,13 +124,13 @@ in {
         "preferred/TerminalEmulator" = "kitty";
 
         # Web browser
-        "preferred/WebBrowser" = "firefox";
+        "preferred/WebBrowser" = "firefox-nightly";
 
         # File manager (Thunar itself)
         "preferred/FileManager" = "thunar";
 
         # Mail reader
-        "preferred/MailReader" = "firefox"; # Use browser for web mail
+        "preferred/MailReader" = "firefox-nightly"; # Use browser for web mail
 
         # Text editor
         "preferred/TextEditor" = "nvim";
@@ -154,11 +154,11 @@ in {
       # Additional XFCE mime associations for better integration
       "mimeapps" = {
         # Web browser associations
-        "default/text/html" = "firefox.desktop";
-        "default/application/xhtml+xml" = "firefox.desktop";
-        "default/x-scheme-handler/http" = "firefox.desktop";
-        "default/x-scheme-handler/https" = "firefox.desktop";
-        "default/x-scheme-handler/ftp" = "firefox.desktop";
+        "default/text/html" = "firefox-nightly.desktop";
+        "default/application/xhtml+xml" = "firefox-nightly.desktop";
+        "default/x-scheme-handler/http" = "firefox-nightly.desktop";
+        "default/x-scheme-handler/https" = "firefox-nightly.desktop";
+        "default/x-scheme-handler/ftp" = "firefox-nightly.desktop";
 
         # Terminal
         "default/x-scheme-handler/terminal" = "kitty.desktop";
@@ -170,7 +170,7 @@ in {
         "default/text/x-c" = "nvim.desktop";
         "default/text/x-c++" = "nvim.desktop";
         "default/text/markdown" = "nvim.desktop";
-        "default/application/json" = "firefox.desktop";
+        "default/application/json" = "firefox-nightly.desktop";
 
         # Media files
         "default/video/*" = "vlc.desktop";

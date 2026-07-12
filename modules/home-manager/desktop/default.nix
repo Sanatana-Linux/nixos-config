@@ -7,8 +7,9 @@ with lib; let
   cfg = config.modules.desktop;
 in {
   imports = [
-    ./compositors
-    ./theming
+    ./awesome.nix
+    ./gtk.nix
+    ./x11
   ];
 
   options.modules.desktop = {

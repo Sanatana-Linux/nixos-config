@@ -73,7 +73,7 @@ in {
     };
 
     # home-manager.users.smg is configured in flake.nix via:
-    #   home-manager.users.smg = {imports = [./modules/home-manager/users/home/smg/default.nix];}
+    #   home-manager.users.smg = {imports = [./modules/home-manager/users/smg/default.nix];}
     # Do NOT set it here — double-wiring causes home-manager generation
     # conflicts where zsh init files fail to symlink on fresh shells.
   };

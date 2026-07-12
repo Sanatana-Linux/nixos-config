@@ -36,7 +36,6 @@
       firefox = {
         enable = true;
         withAutoconfig = true;
-        package = pkgs.firefox;
         searxngUrl = "http://localhost:8080";
         defaultSearchEngine = "SearXNG";
       };

@@ -10,9 +10,9 @@ User account modules. Each file creates a system user and imports their home-man
 
 | File | Description |
 |------|-------------|
-| `tlh.nix` | Primary user (tlh) — imports `modules/home-manager/users/home/tlh/default.nix` |
-| `smg.nix` | Secondary user (smg) — imports `modules/home-manager/users/home/smg/default.nix` |
-| `user.nix` | Generic user (user) — imports `modules/home-manager/users/home/user/default.nix`, for live ISO |
+| `tlh.nix` | Primary user (tlh) — imports `modules/home-manager/users/tlh/default.nix` |
+| `smg.nix` | Secondary user (smg) — imports `modules/home-manager/users/smg/default.nix` |
+| `user.nix` | Generic user (user) — imports `modules/home-manager/users/user/default.nix`, for live ISO |
 
 ## For AI Agents
 
@@ -20,6 +20,6 @@ User account modules. Each file creates a system user and imports their home-man
 - **Never** create a `default.nix` here that imports all users — this was the root cause of the home-manager stateVersion bug
 - Each user module is imported directly by host configs (e.g., `../../modules/nixos/system/users/tlh.nix`)
 - User modules set `home-manager.users.<name> = import cfg.homeManagerConfig` inside their `mkIf` block
-- The `homeManagerConfig` option defaults to the correct `modules/home-manager/users/home/<name>/default.nix` path
+- The `homeManagerConfig` option defaults to the correct `modules/home-manager/users/<name>/default.nix` path
 
 <!-- MANUAL: Any manually added notes below this line are preserved on regeneration -->

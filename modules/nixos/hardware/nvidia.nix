@@ -142,9 +142,12 @@ in {
           cudaPackages.cudnn # Deep neural network library — AI upscaling/denoising
 
           # CUDA-enabled ffmpeg with NVENC/NVDEC hardware encoding/decoding
+          # withCudaNVCC requires withUnfree (maps to --enable-nonfree) because
+          # NVIDIA's CUDA NVCC compiler path is considered non-free by ffmpeg's configure.
           (ffmpeg-full.override {
             withNvcodec = true;
             withCuda = true;
+            withUnfree = true;
             withCudaNVCC = true;
             withNpp = true;
             withNvdec = true;

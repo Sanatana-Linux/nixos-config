@@ -16,12 +16,6 @@ in {
       description = "Font size for Kitty terminal";
     };
 
-    fontFamily = mkOption {
-      type = types.str;
-      default = "Mplus Code 60";
-      description = "Font family for Kitty terminal";
-    };
-
     backgroundOpacity = mkOption {
       type = types.float;
       default = 0.65;
@@ -65,6 +59,45 @@ in {
         tab_bar_margin_width = "3";
         tab_bar_margin_height = "3";
         tab_bar_edge = "top";
+      };
+
+      keybindings = {
+        "shift+alt+up" = "move_window up";
+        "shift+alt+left" = "move_window left";
+        "shift+alt+right" = "move_window right";
+        "shift+alt+down" = "move_window down";
+
+        "kitty_mod+left" = "neighboring_window left";
+        "kitty_mod+right" = "neighboring_window right";
+        "kitty_mod+up" = "neighboring_window up";
+        "kitty_mod+down" = "neighboring_window down";
+
+        "alt+t" = "new_tab_with_cwd";
+        "alt+v" = "launch --cwd=current --location=vsplit";
+        "alt+h" = "launch --cwd=current --location=hsplit";
+        "alt+n" = "next_tab";
+        "alt+b" = "previous_tab";
+        "alt+q" = "close_tab";
+        "alt+shift+q" = "close_window";
+        "alt+," = "move_tab_backward";
+        "alt+." = "move_tab_forward";
+
+        "alt+1" = "goto_tab 1";
+        "alt+2" = "goto_tab 2";
+        "alt+3" = "goto_tab 3";
+        "alt+4" = "goto_tab 4";
+        "alt+5" = "goto_tab 5";
+        "alt+6" = "goto_tab 6";
+        "alt+7" = "goto_tab 7";
+        "alt+8" = "goto_tab 8";
+        "alt+9" = "goto_tab 9";
+
+        # clear the terminal screen
+        "alt+k" = "combine : clear_terminal scrollback active";
+
+        "kitty_mod+equal" = "change_font_size all +1.0";
+        "kitty_mod+minus" = "change_font_size all -1.0";
+        "kitty_mod+0" = "change_font_size all 0";
       };
 
       # Tab splitting keybindings

@@ -78,6 +78,10 @@ in {
           squashfs-tools-ng # SquashFS utilities
           squashfuse # Mount SquashFS
 
+          json-glib
+          json-repair
+          json-sort-cli
+
           # Browsing & Search
           surfraw # Shell web search
           lynx # Text web browser
@@ -85,6 +89,7 @@ in {
         ]
         # Linters
         ++ optionals cfg.linters [
+          css-variables-language-server
           actionlint # GitHub Actions linter
           commitlint-rs # Commit message linter
           deadnix # Dead code detector for Nix

@@ -74,6 +74,12 @@ in {
         # Messaging
         ++ optionals cfg.messaging [
           telegram-desktop # Telegram client
+          signal-desktop # Signal messenger
+          signal-cli # Signal CLI interface
+          signal-export # Export Signal chats to markdown
+          signalbackup-tools # Signal backup file tools
+          signal-backup-deduplicator # Signal backup deduplication
+          element-desktop # Matrix client
         ];
     }
 

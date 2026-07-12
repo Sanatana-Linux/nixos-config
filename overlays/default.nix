@@ -45,6 +45,21 @@
         ]
     );
 
+    # Python 3.14 qemu fix: add missing qemu-qmp runtime dependency
+    python314Packages = prev.python314Packages.overrideScope (
+      python-final: python-prev:
+        python-prev // {
+          qemu = python-prev.qemu.overrideAttrs (old: {
+            propagatedBuildInputs = (old.propagatedBuildInputs or []) ++ [python-prev.qemu-qmp];
+          });
+        }
+    );
+
+    # Disable nodejs-slim tests — flaky DNS tests in this nixpkgs revision
+    nodejs-slim = prev.nodejs-slim.overrideAttrs (old: {
+      doCheck = false;
+    });
+
     # Latest opencode (v1.17.9) with patches to remove built-in /skills, /share, /init.
     # Use our own package.nix because nixpkgs lags behind and doesn't include packages/tui.
     opencode = final.callPackage ../opencode/package.nix {};

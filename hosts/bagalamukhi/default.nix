@@ -38,11 +38,13 @@
         # networkmanager.enable = false;
         hostName = "bagalamukhi";
         quad9.enable = true;
+        resolved.enable = true;
       };
       virtualization = {
         docker = {
           enable = true;
           rootless = true;
+          nvidia = true;
         };
         virt-manager = {
           enable = true;

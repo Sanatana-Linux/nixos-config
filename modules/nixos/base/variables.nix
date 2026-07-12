@@ -12,7 +12,7 @@ in {
 
     browser = mkOption {
       type = types.str;
-      default = "firefox";
+      default = "firefox-nightly";
       description = "Default browser";
     };
 

@@ -71,6 +71,7 @@ with lib; {
         opacity-rule = [
           "100:class_g = 'i3lock'"
           "100:class_g = 'firefox'"
+          "100:class_g = 'firefox-nightly'"
           "60:class_g = 'Dunst'"
           "85:class_g = 'kitty' && focused"
           "80:class_g = 'kitty' && !focused"
@@ -91,6 +92,7 @@ with lib; {
 
         shadow-exclude = [
           "class_g = 'firefox'"
+          "class_g = 'firefox-nightly'"
           "class_g = 'Dunst'"
           "class_g = 'awesome'"
         ];

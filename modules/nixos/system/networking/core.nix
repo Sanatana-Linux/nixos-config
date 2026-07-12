@@ -82,7 +82,7 @@ with lib; {
     # did not discover WiFi modules on this hardware.
     networking.networkmanager = mkIf config.modules.system.networking.networkmanager.enable {
       enable = true;
-      dns = "default";
+      dns = mkDefault "default";
       insertNameservers =
         if config.modules.system.networking.quad9.enable
         then ["9.9.9.11" "149.112.112.11" "2620:fe::11" "2620:fe::fe:11"]

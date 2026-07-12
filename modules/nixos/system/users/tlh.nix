@@ -79,7 +79,7 @@ in {
     };
 
     # home-manager.users.tlh is configured in flake.nix via:
-    #   home-manager.users.tlh = {imports = [./modules/home-manager/users/home/tlh/default.nix];}
+    #   home-manager.users.tlh = {imports = [./modules/home-manager/users/tlh/default.nix];}
     # Do NOT set it here — double-wiring causes home-manager generation
     # conflicts where zsh init files (.zshrc, .zshenv, .zprofile) fail to
     # symlink into ~/.config/zsh/ on fresh shells.

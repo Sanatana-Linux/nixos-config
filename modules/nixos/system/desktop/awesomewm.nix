@@ -137,6 +137,7 @@ in {
           libxcb-errors
           xdotool
           xsel
+          screenkey
           xsettingsd
           dconf-editor
           xwininfo

@@ -14,13 +14,12 @@ with lib; {
   config = mkIf config.modules.base.packages.security.enable {
     environment.systemPackages = with pkgs; [
       aircrack-ng # Wireless network security tool
-      pkgs.stable.bitwarden-desktop # Password manager
+      bitwarden-cli # Bitwarden CLI password manager
+
       ghorg # GitHub organization cloning tool
       go-exploitdb # Exploit database search tool
       kryptor # File encryption CLI tool
-      metasploit # Penetration testing framework
       nmap # Network discovery and security auditing
-      routersploit # Router exploitation framework
       openssl.dev # OpenSSL development headers
       tor # Tor anonymity network
       tor-browser # Tor Browser

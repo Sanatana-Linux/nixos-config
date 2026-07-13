@@ -1,5 +1,6 @@
 {
   inputs,
+  outputs,
   lib,
   config,
   modulesPath,
@@ -26,6 +27,7 @@ in {
     # outputs.overlays.stable-packages
     inputs.nur.overlays.default
     inputs.nix-cachyos-kernel.overlays.pinned
+    outputs.overlays.cachyos-patches
   ];
 
   nixpkgs = {

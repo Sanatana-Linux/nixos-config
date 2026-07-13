@@ -48,16 +48,15 @@
     # Python 3.14 qemu fix: add missing qemu-qmp runtime dependency
     python314Packages = prev.python314Packages.overrideScope (
       python-final: python-prev:
-        python-prev // {
+        python-prev
+        // {
           qemu = python-prev.qemu.overrideAttrs (old: {
             propagatedBuildInputs = (old.propagatedBuildInputs or []) ++ [python-prev.qemu-qmp];
           });
         }
     );
 
-
-
-nps = inputs.nps.defaultPackage.${prev.stdenv.hostPlatform.system};
+    nps = inputs.nps.defaultPackage.${prev.stdenv.hostPlatform.system};
 
     what-size = prev.yaziPlugins.mkYaziPlugin {
       pname = "what-size";
@@ -129,26 +128,36 @@ nps = inputs.nps.defaultPackage.${prev.stdenv.hostPlatform.system};
       };
     });
 
-    linuxPackages_xanmod_latest = prev.linuxPackages_xanmod_latest.extend (_kFinal: kPrev: {
-      lenovo-legion-module = kPrev.lenovo-legion-module.overrideAttrs (oldAttrs: {
-        # Bump to latest upstream (main @ 2026-05-07) which has:
-        # - N0CN DMI entry (Legion Pro 5 16IRX9) mapped to model_g8cn
-        # - NRCN DMI entry (Legion Slim 5 16AHP9)
-        # - R3CN DMI entry (LOQ 15IRX10)
-        # - Fixed ec_register_offsets_loq_v0 with correct register values
-        # - New ec_register_offsets_loq_v1, model_nrcn, model_r3cn
-        src = prev.fetchFromGitHub {
-          owner = "johnfanv2";
-          repo = "LenovoLegionLinux";
-          rev = "352cb4b3cfc29ae7cee5b1c7901b2d39445fe7bd";
-          hash = "sha256-KhDtdBedsYSH9x/hk5PYfFR9h0x7ZCLqMA2OG6PERf4=";
-        };
-        version = "unstable-2026-05-07";
-        # fetchFromGitHub creates source root named "source", so we need
-        # to set sourceRoot to match the kernel_module subdirectory
-        sourceRoot = "source/kernel_module";
-      });
-    });
+    # Patches applied after the cachyos kernel overlay — see cachyos-patches below
+  };
+
+  # Overlay that runs after the cachyos kernel overlay to patch the lenovo-legion-module
+  # for the cachyos kernel. Registered in host configs after inputs.nix-cachyos-kernel.overlays.pinned.
+  cachyos-patches = final: prev: {
+    cachyosKernels =
+      prev.cachyosKernels
+      // {
+        linuxPackages-cachyos-bore-lto-x86_64-v3 = prev.cachyosKernels.linuxPackages-cachyos-bore-lto-x86_64-v3.extend (_kFinal: kPrev: {
+          lenovo-legion-module = kPrev.lenovo-legion-module.overrideAttrs (oldAttrs: {
+            # Bump to latest upstream (main @ 2026-05-07) which has:
+            # - N0CN DMI entry (Legion Pro 5 16IRX9) mapped to model_g8cn
+            # - NRCN DMI entry (Legion Slim 5 16AHP9)
+            # - R3CN DMI entry (LOQ 15IRX10)
+            # - Fixed ec_register_offsets_loq_v0 with correct register values
+            # - New ec_register_offsets_loq_v1, model_nrcn, model_r3cn
+            src = prev.fetchFromGitHub {
+              owner = "johnfanv2";
+              repo = "LenovoLegionLinux";
+              rev = "352cb4b3cfc29ae7cee5b1c7901b2d39445fe7bd";
+              hash = "sha256-KhDtdBedsYSH9x/hk5PYfFR9h0x7ZCLqMA2OG6PERf4=";
+            };
+            version = "unstable-2026-05-07";
+            # fetchFromGitHub creates source root named "source", so we need
+            # to set sourceRoot to match the kernel_module subdirectory
+            sourceRoot = "source/kernel_module";
+          });
+        });
+      };
   };
 
   stable-packages = final: prev: {

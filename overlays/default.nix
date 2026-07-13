@@ -165,6 +165,7 @@
             config.allowUnfree = true;
           })
           efitools
+          bitwarden-desktop
           inkscape
           inkscape-with-extensions
           gimp3-with-plugins

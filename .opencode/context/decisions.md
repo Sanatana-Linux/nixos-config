@@ -193,3 +193,15 @@
 - **Context**: The yazi keymap contained a complete verbatim copy of yazi's compiled-in default keybindings across 8 modes (mgr, tasks, spot, pick, input, confirm, cmp, help) — ~260 lines of duplication. In yazi's keymap model, `prepend_keymap` entries are prepended to built-in defaults, while `keymap` entries **replace** built-in defaults entirely. By including `keymap` arrays duplicating yazi's defaults, the config was both redundant and would become stale on yazi version bumps.
 - **Decision**: Removed all `keymap` arrays from all modes. Kept only `prepend_keymap` entries for mgr mode (44 custom plugin bindings). All sub-mode keymaps (tasks, spot, pick, input, confirm, cmp, help) removed entirely — yazi uses its compiled-in defaults.
 - **Consequences**: ~260 lines of dead duplication deleted. Yazi will use built-in defaults for all modes, with plugin bindings prepended to mgr. The config now correctly follows yazi's keymap override model — only custom bindings are specified, defaults come from the binary.
+
+## ADR-015: Replace SREP chainload with GRUB fwsetup for UEFI firmware access
+
+- **Date**: 2026-07-13
+- **Context**: The BIOS update to N0CN35WW locked out the advanced BIOS menu (SREP-based). The SREP EFI files (DisplayEngine.efi, BootX64.efi, Loader.efi, SetupBrowser.efi, SuppressIFPatcher.efi, UiApp.efi + SREP_Config.cfg) were previously bundled into the GRUB boot via `extraFiles` and chainloaded from a custom menu entry. Since the advanced BIOS is no longer accessible, these files are dead weight in the ESP.
+- **Decision**:
+  1. Replaced the chainload menu entry with GRUB's built-in `fwsetup` command, which calls the UEFI firmware setup interface directly
+  2. Removed the `extraFiles` block that copied SREP files to the ESP
+  3. Moved all 6 EFI files + SREP_Config.cfg to `.documentation/archived/advanced_bios/` for historical reference
+  4. Moved `lenovo-advanced-bios.md` documentation to the same archive directory
+  5. Renamed the menu entry from "Advanced UEFI Firmware Settings" to "UEFI Firmware Settings"
+- **Consequences**: ~350KB of EFI binaries no longer copied to the ESP at every build. The GRUB menu entry now uses the standard UEFI firmware setup mechanism instead of a fragile chainload. All thermal/power controls that were in the advanced BIOS are already handled through NixOS (TLP, undervolt, kernel params, platform_profile forcing).

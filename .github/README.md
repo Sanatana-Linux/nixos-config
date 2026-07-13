@@ -113,7 +113,7 @@ in {
 ### Hardware and Desktop
 
 1. [NVIDIA Settings](../.documentation/nvidia-settings.md) - NVIDIA driver and CUDA configuration notes.
-1. [Advanced BIOS for Lenovo Legion](../.documentation/lenovo-advanced-bios.md) - Access the unlocked "Advanced BIOS" firmware settings from the Grub boot menu.
+1. [Advanced BIOS for Lenovo Legion](../.documentation/archived/advanced_bios/lenovo-advanced-bios.md) - Archived documentation for the SREP-based Advanced BIOS setup (no longer needed — use the UEFI Firmware Settings entry in GRUB).
 
 ### Secrets
 

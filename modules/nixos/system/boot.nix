@@ -43,7 +43,7 @@ with lib; {
     };
 
     advancedBios = {
-      enable = mkEnableOption "Advanced BIOS setup configuration";
+      enable = mkEnableOption "UEFI firmware settings entry in the GRUB boot menu";
     };
 
     development = {
@@ -55,7 +55,7 @@ with lib; {
     boot = {
       tmp.cleanOnBoot = true;
 
-      kernelPackages = pkgs.linuxPackages;
+      kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore-lto-x86_64-v3;
 
       blacklistedKernelModules = ["nouveau"];
 
@@ -150,22 +150,9 @@ with lib; {
         useOSProber = false;
         bhairava-grub-theme.enable = config.modules.system.boot.theme.enable;
 
-        extraFiles = mkIf config.modules.system.boot.advancedBios.enable {
-          "DisplayEngine.efi" = ./assets/DisplayEngine.efi;
-          "EFI/Boot/BootX64.efi" = ./assets/BootX64.efi;
-          "Loader.efi" = ./assets/Loader.efi;
-          "SREP_Config.cfg" = ./assets/SREP_Config.cfg;
-          "SetupBrowser.efi" = ./assets/SetupBrowser.efi;
-          "SuppressIFPatcher.efi" = ./assets/SuppressIFPatcher.efi;
-          "UiApp.efi" = ./assets/UiApp.efi;
-        };
-
         extraEntries = optionalString config.modules.system.boot.advancedBios.enable ''
-          menuentry 'Advanced UEFI Firmware Settings' --class efi --class uefi  {
-            insmod fat
-            insmod chain
-            search --no-floppy --set=root --file /EFI/Boot/BootX64.efi
-            chainloader /EFI/Boot/BootX64.efi
+          menuentry 'UEFI Firmware Settings' --class efi --class uefi  {
+            fwsetup
           }
         '';
       };

@@ -55,7 +55,7 @@ with lib; {
     boot = {
       tmp.cleanOnBoot = true;
 
-      kernelPackages = pkgs.linuxPackages_latest;
+      kernelPackages = pkgs.linuxPackages;
 
       blacklistedKernelModules = ["nouveau"];
 

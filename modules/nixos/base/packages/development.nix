@@ -138,6 +138,7 @@ in {
           cargo # Rust package manager
           go # Go programming language
           gopls # Go language server
+          go-exploitdb # Exploit database search tool
           lua # Lua scripting language
           nodejs # Node.js JavaScript runtime
           openjdk # Java development kit

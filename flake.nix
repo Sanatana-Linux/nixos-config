@@ -2,7 +2,7 @@
   description = "The ShizNix Upon Which I Constantly Nit Pick";
 
   inputs = {
-    stable.url = "github:nixos/nixpkgs/nixos-25.05?shallow=1";
+    stable.url = "github:nixos/nixpkgs/nixos-26.05?shallow=1";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable?shallow=1";
     nur = {
       url = "github:nix-community/NUR";

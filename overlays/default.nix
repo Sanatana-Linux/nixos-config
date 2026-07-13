@@ -165,7 +165,7 @@
             config.allowUnfree = true;
           })
           efitools
-          olive-editor
+          inkscape
           inkscape-with-extensions
           gimp3-with-plugins
           ;

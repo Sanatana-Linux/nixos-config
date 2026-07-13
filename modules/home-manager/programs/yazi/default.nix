@@ -672,7 +672,7 @@ with lib; {
       feh
       imv
       exiftool
-      inkscape
+      pkgs.stable.inkscape
       loupe
       vlc
       mediainfo

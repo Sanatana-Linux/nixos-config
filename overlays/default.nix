@@ -55,14 +55,11 @@
         }
     );
 
-    # Disable nodejs-slim tests — flaky DNS tests in this nixpkgs revision
-    nodejs-slim = prev.nodejs-slim.overrideAttrs (old: {
-      doCheck = false;
-    });
+
 
     # Latest opencode (v1.17.9) with patches to remove built-in /skills, /share, /init.
     # Use our own package.nix because nixpkgs lags behind and doesn't include packages/tui.
-    opencode = final.callPackage ../opencode/package.nix {};
+    opencode = final.callPackage ../pkgs/opencode/package.nix {};
 
     nps = inputs.nps.defaultPackage.${prev.stdenv.hostPlatform.system};
 
@@ -169,6 +166,8 @@
           })
           efitools
           olive-editor
+          inkscape-with-extensions
+          gimp3-with-plugins
           ;
       };
   };

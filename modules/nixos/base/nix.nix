@@ -139,6 +139,8 @@ in {
             "https://ai.cachix.org"
             "https://nix-gaming.cachix.org"
             "https://comfyui.cachix.org"
+            "https://cache.xinux.uz"
+            "https://attic.xuyh0120.win/lantian"
           ]
           ++ cfg.extraCaches;
 
@@ -155,6 +157,8 @@ in {
             "ai.cachix.org-1:N9dzRK+alWwoKXQlnn0H6aUx0lU/mspIoz8hMvGvbbc="
             "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
             "comfyui.cachix.org-1:33mf9VzoIjzVbp0zwj+fT51HG0y31ZTK3nzYZAX0rec="
+            "cache.xinux.uz:BXCrtqejFjWzWEB9YuGB7X2MV4ttBur1N8BkwQRdH+0="
+            "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="
           ]
           ++ cfg.extraTrustedKeys;
       };

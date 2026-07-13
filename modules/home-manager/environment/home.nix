@@ -33,7 +33,6 @@ in {
       "/home/linuxbrew/.linuxbrew/sbin"
       "${pkgs.nodejs}/bin"
       "${pkgs.pnpm}/bin"
-      "${pkgs.nodejs_20}/bin"
       "${pkgs.gnutar}/bin"
       "${pkgs.git}/bin"
       "${pkgs.python311}/bin"

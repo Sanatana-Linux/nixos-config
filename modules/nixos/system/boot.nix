@@ -55,7 +55,7 @@ with lib; {
     boot = {
       tmp.cleanOnBoot = true;
 
-      kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-bore;
+      kernelPackages = pkgs.linuxPackages_latest;
 
       blacklistedKernelModules = ["nouveau"];
 

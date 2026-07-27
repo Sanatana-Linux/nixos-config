@@ -123,8 +123,6 @@ in {
         ++ optionals cfg.cuda.enable [
           cudatoolkit
           clinfo # OpenCL info/debug tool
-          ocl-icd # OpenCL ICD Loader — required by GIMP/GEGL and other apps to find GPU OpenCL
-          cudaPackages.cuda_opencl
           cudaPackages.cuda_nvcc
           cudaPackages.libcublas
           cudaPackages.libnvjitlink

@@ -38,7 +38,7 @@
     };
     services = {
       picom = {
-        enable = false;
+        enable = true;
       };
       xscreensaver.enable = true;
       polkit-agent.enable = true;
@@ -94,4 +94,15 @@
   home.sessionVariables = {
     GST_V4L2_DEFAULT_BUFFER_COUNT = "16";
   };
+
+  # Disable xfwm4 compositor at session startup.
+  # Async with delay to let xfce4-session and xfconfd fully initialize first.
+  # xfwm4's built-in compositor redirects windows offscreen, which breaks
+  # GL-CL interop (cl_khr_gl_sharing) that GIMP/GEGL and Shotcut/MLT need
+  # for GPU compute detection — they silently fall back to CPU when redirected
+  # GL contexts don't support sharing. Also avoids dual-compositor conflicts.
+  xsession.initExtra = ''
+    (sleep 3 && ${pkgs.xfce.xfconf}/bin/xfconf-query \
+      -c xfwm4 -p /general/use_compositing -s false 2>/dev/null) &
+  '';
 }

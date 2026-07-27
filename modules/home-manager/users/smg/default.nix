@@ -10,7 +10,7 @@
   ];
 
   modules = {
-    stylix.enable = false;
+    stylix.enable = true;
     desktop = {
       enable = true;
     };
@@ -44,11 +44,6 @@
       polkit-agent.enable = true;
     };
   };
-
-  # Explicitly disable Stylix at home-manager level — NixOS-level stylix
-  # stays enabled to keep the Stylix home-manager option available, but
-  # smg gets no theming, no Firefox profile warnings, etc.
-  stylix.enable = false;
 
   services.picom.settings = {
     shadow = lib.mkForce false;

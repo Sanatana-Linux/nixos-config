@@ -54,6 +54,8 @@ in {
       xarchiver
       zip
       yt-dlp
+      scss-lint
+      jsbeautifier
       zsh
       zplug
       zsh-autosuggestions

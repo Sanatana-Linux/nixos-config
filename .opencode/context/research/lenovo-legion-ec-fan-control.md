@@ -1,3 +1,12 @@
+---
+title: "Lenovo Legion EC Fan & Thermal Control"
+type: source-summary
+tags: [lenovo, legion, ec, fan, thermal, pwm, fancurve]
+created: 2026-06-14
+updated: 2026-06-14
+status: active
+---
+
 # Lenovo Legion EC Fan & Thermal Control
 
 > Research on the Lenovo Legion embedded controller (EC) fan/thermal system for the Legion Pro 5 16IRX9 (bagalamukhi).

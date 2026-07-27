@@ -62,6 +62,12 @@ with lib; {
 
         # ---- Opacity ----
         fading = true;
+        # Opacity change between steps while fading in. (0.01 - 1.0, defaults to 0.028)
+        fade-in-step = 0.075;
+
+        # Opacity change between steps while fading out. (0.01 - 1.0, defaults to 0.03)
+        fade-out-step = 0.035;
+
         inactive-opacity = 0.90;
         frame-opacity = 0.9;
         inactive-opacity-override = false;
@@ -89,6 +95,9 @@ with lib; {
         detect-client-opacity = true;
         detect-transient = true;
         detect-client-leader = true;
+        detect-rounded-corners = true;
+        xrender-sync-fence = true;
+        glx-no-rebind-stencil = true;
 
         shadow-exclude = [
           "class_g = 'firefox'"
@@ -126,13 +135,14 @@ with lib; {
           tooltip = {
             fade = true;
             shadow = true;
-            opacity = 0.98;
+            opacity = 0.8;
             focus = true;
             full-shadow = true;
           };
           dock = {
             shadow = true;
             rounded-corners = false;
+            clip-shadow-above = true;
             opacity = 1;
           };
           utility = {
@@ -140,7 +150,7 @@ with lib; {
             blur = true;
           };
           dnd = {shadow = false;};
-          popup_menu = {opacity = 0.95;};
+          popup_menu = {opacity = 0.9;};
           dropdown_menu = {opacity = 0.9;};
         };
       };

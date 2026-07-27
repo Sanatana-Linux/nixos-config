@@ -1,3 +1,12 @@
+---
+title: "Nix-Secrets Reference (EmergentMind)"
+type: source-summary
+tags: [secrets, sops-nix, age, encryption]
+created: 2026-04-27
+updated: 2026-04-27
+status: active
+---
+
 # Nix-Secrets Reference (EmergentMind)
 
 > Source: https://github.com/EmergentMind/nix-secrets-reference | License: MIT

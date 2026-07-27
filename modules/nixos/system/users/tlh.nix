@@ -69,7 +69,6 @@ in {
           "power"
           "systemd-journal"
           "tss"
-          "waydroid"
           "wireshark"
           "zfs_member"
         ]

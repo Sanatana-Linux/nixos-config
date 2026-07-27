@@ -38,7 +38,7 @@
     };
     services = {
       picom = {
-        enable = true;
+        enable = false;
       };
       xscreensaver.enable = true;
       polkit-agent.enable = true;

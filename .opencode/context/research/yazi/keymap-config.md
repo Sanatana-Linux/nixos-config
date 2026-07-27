@@ -1,3 +1,12 @@
+---
+title: "Yazi Keymap Configuration"
+type: source-summary
+tags: [yazi, keymap, file-manager]
+created: 2026-06-29
+updated: 2026-06-29
+status: active
+---
+
 # Yazi Keymap Configuration — Researched 2026-06-29
 
 ## Source

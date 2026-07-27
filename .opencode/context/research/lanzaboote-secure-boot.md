@@ -1,3 +1,12 @@
+---
+title: "Lanzaboote — Secure Boot for NixOS"
+type: source-summary
+tags: [lanzaboote, secure-boot, uefi, boot]
+created: 2026-06-28
+updated: 2026-06-28
+status: active
+---
+
 # Lanzaboote — Secure Boot for NixOS
 
 **Source**: https://wiki.nixos.org/wiki/Lanzaboote  

@@ -20,7 +20,7 @@ Boot, systemd, networking, apps, desktop, multimedia, performance, security, use
 | Directory | Purpose |
 |-----------|---------|
 | `apps/` | Application support (nix-ld, appimage, thunar, browsers, AI, runtimes) |
-| `assets/` | Boot-related assets (EFI binaries, icons) |
+| `assets/` | Boot-related assets (wallpaper, icons) — EFI binaries archived to `.documentation/archived/advanced_bios/` |
 | `desktop/` | Desktop environments (AwesomeWM, XFCE, LightDM display manager) |
 | `multimedia/` | Multimedia support |
 | `networking/` | Network configuration (NetworkManager with iwd backend, Quad9 DNS, wifi) |

@@ -1,5 +1,6 @@
 {
   imports = [
+    ./clamav.nix
     ./doas.nix
     ./fail2ban.nix
     ./firewall.nix

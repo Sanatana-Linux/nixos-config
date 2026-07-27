@@ -69,6 +69,7 @@ in {
           pixel-code # Pixel Code font
           terminus_font # Terminus bitmap font
           nerd-font-patcher # Font patching tool
+          openttd-ttf
         ];
 
       # Font configuration - CRITICAL for fonts to work
@@ -76,12 +77,9 @@ in {
         enable = true;
         cache32Bit = true;
         antialias = true;
+        allowBitmaps = true;
+        allowType1 = true;
         useEmbeddedBitmaps = true;
-        hinting = {
-          enable = true;
-          autohint = true;
-          style = "slight";
-        };
         subpixel = {
           lcdfilter = "default";
         };

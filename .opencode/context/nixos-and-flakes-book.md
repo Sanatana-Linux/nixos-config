@@ -1,3 +1,12 @@
+---
+title: "NixOS & Flakes Book"
+type: source-summary
+tags: [nixos, flakes, book, tutorial]
+created: 2026-04-27
+updated: 2026-04-27
+status: active
+---
+
 # NixOS & Flakes Book
 
 > Source: https://nixos-and-flakes.thiscute.world/ | Author: Ryan Yin | License: CC BY-SA 4.0

@@ -42,7 +42,9 @@
       ".opencode/skills/nix-flake-ops",
       ".opencode/skills/nixos-debug",
       ".opencode/skills/nix-secrets",
-      ".opencode/skills/nix-service-scripts"
+      ".opencode/skills/nix-service-scripts",
+      ".opencode/skills/nixos-best-practices",
+      ".opencode/skills/nix-packaging-best-practices"
     ]
   }
 }

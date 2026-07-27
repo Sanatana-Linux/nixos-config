@@ -1,3 +1,12 @@
+---
+title: "Excessive Heat Investigation — bagalamukhi (Lenovo Legion 5 Pro)"
+type: source-summary
+tags: [heat, thermal, bagalamukhi, lenovo, legion, nvidia, tlp]
+created: 2026-07-03
+updated: 2026-07-03
+status: active
+---
+
 # Excessive Heat Investigation — bagalamukhi (Lenovo Legion 5 Pro)
 
 **Discovered:** 2026-06-07  

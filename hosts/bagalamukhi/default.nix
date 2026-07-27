@@ -52,8 +52,11 @@
           libguestfsIntrospection = true;
         };
         quickemu.enable = true;
-        # waydroid.enable = true;
-        # lxc.enable = true;
+        waydroid = {
+          enable = true;
+          users = ["tlh"];
+        };
+        lxc.enable = true;
       };
       apps = {
         nix-ld.enable = true;

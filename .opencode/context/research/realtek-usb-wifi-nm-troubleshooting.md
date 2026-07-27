@@ -1,3 +1,12 @@
+---
+title: "Realtek USB WiFi + NetworkManager Troubleshooting"
+type: source-summary
+tags: [realtek, wifi, networkmanager, usb, troubleshooting]
+created: 2026-06-21
+updated: 2026-06-21
+status: active
+---
+
 # Realtek USB WiFi + NetworkManager Troubleshooting
 
 > Source: Gemini troubleshooting session (2026-06-20)

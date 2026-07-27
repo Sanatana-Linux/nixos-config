@@ -1,3 +1,12 @@
+---
+title: "OpenCode Bun Embedded Runtime — Debug Notes"
+type: source-summary
+tags: [opencode, bun, segfault, config, schema]
+created: 2026-06-12
+updated: 2026-06-12
+status: active
+---
+
 # OpenCode Bun Embedded Runtime — Debug Notes
 
 ## The Problem

@@ -1,3 +1,12 @@
+---
+title: "Ingested Nix Learning Resources"
+type: source-summary
+tags: [nix, learning, resources, guides]
+created: 2026-05-17
+updated: 2026-05-17
+status: active
+---
+
 # Ingested Nix Learning Resources — 2026-05-17
 
 ## Summary

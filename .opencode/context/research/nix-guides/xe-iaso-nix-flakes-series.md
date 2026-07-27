@@ -1,3 +1,12 @@
+---
+title: "Xe Iaso: Nix Flakes Series"
+type: source-summary
+tags: [nix, flakes, xe-iaso, series]
+created: 2026-05-17
+updated: 2026-05-17
+status: active
+---
+
 # Xe Iaso: Nix Flakes Series — Ingested 2026-05-17
 
 ## Source

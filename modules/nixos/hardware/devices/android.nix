@@ -38,6 +38,11 @@ with lib; {
         apkid
         #  Copy/extract/patch android apk signatures & compare APKs
         apksigcopier
+
+        apkeditor
+        apkeep
+
+        apkleaks
         # sign and verify apk files
         apksigner
         # reverse engineering apks
@@ -51,6 +56,7 @@ with lib; {
         # Android SDK platform tools (adb, fastboot, etc...)
         android-tools
         payload-dumper-go # Tool for extracting all .img files from an Android OTA payload.bin file
+        pixelflasher
       ]
       # Sparse image conversion for Android firmware images
       ++ optionals config.modules.hardware.devices.android.devTools (with pkgs; [simg2img]);

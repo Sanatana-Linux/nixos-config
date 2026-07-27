@@ -1,3 +1,12 @@
+---
+title: "Session: TODO.md Sweep + Module Reorganization"
+type: synthesis
+tags: [session, todo, reorganization, modules]
+created: 2026-06-21
+updated: 2026-06-21
+status: active
+---
+
 # Session: TODO.md Sweep + Module Reorganization
 
 > **Date:** 2026-06-21

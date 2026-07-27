@@ -1,3 +1,12 @@
+---
+title: "Architecture Decision Records"
+type: decision
+tags: [adr, decisions, architecture]
+created: 2026-05-05
+updated: 2026-07-15
+status: active
+---
+
 # Architecture Decision Records
 
 ## ADR-001: Sea-greeter theme directory patch (themes/ vs greeterThemes/)

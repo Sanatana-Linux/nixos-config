@@ -1,3 +1,12 @@
+---
+title: "Lenovo Legion — Hardware Interface Reference"
+type: reference
+tags: [lenovo, legion, ec, wmi, acpi, kernel, hardware]
+created: 2026-05-07
+updated: 2026-05-07
+status: active
+---
+
 # Lenovo Legion — Hardware Interface Reference
 
 > EC, WMI, ACPI, and firmware interfaces for Lenovo Legion laptops.  

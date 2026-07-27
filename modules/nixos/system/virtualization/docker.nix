@@ -34,6 +34,12 @@ in {
       description = "Extra options for Docker daemon";
     };
 
+    dns = mkOption {
+      type = types.listOf types.str;
+      default = ["9.9.9.11" "149.112.112.11" "2620:fe::11" "2620:fe::fe:11" "1.1.1.1"];
+      description = "DNS servers for Docker containers. Explicit DNS prevents resolution failures when host network changes (wifi on/off).";
+    };
+
     composeSupport = mkOption {
       type = types.bool;
       default = true;
@@ -46,14 +52,31 @@ in {
       docker = {
         enable = true;
         enableOnBoot = cfg.enableOnBoot;
+        autoPrune = {
+          enable = true;
+          allVolumes.enable = true;
+          dates = "weekly";
+        };
         rootless = mkIf cfg.rootless {
           enable = true;
           daemon.settings.features.cdi = mkForce cfg.nvidia;
+          extraPackages = with pkgs; [
+            docker
+            docker-client
+            docker-buildx
+            conmon
+            containerd
+            fuse-overlayfs
+            docker-credential-helpers
+            distribution
+            docker-gc
+          ];
         };
-        extraOptions =
-          cfg.extraOptions
-          + optionalString cfg.nvidia
-          " --add-runtime nvidia=/run/current-system/sw/bin/nvidia-container-runtime";
+        daemon.settings = {
+          features.cdi = mkIf cfg.nvidia true;
+          dns = cfg.dns;
+        };
+        extraOptions = cfg.extraOptions;
       };
       containers.enable = true;
       containerd.enable = true;
@@ -67,16 +90,17 @@ in {
 
     environment.systemPackages = with pkgs;
       [
-        docker
-        docker-client
-        docker-buildx
-        conmon
+        docker # the main application in the module, container runtime
+        docker-client # client for container runtime
+        docker-buildx # extended building capabilities
+        conmon #
         containerd
         fuse-overlayfs
         docker-credential-helpers
         distribution
         docker-gc
-        docker-slim
+        docker-slim # minify containers
+        x11docker # run graphical applications (x11) via docker
       ]
       ++ optionals cfg.composeSupport [
         docker-compose

@@ -48,7 +48,7 @@ in {
 
     variant = mkOption {
       type = types.enum ["stable" "beta" "devedition" "nightly"];
-      default = "nightly";
+      default = "stable";
       description = "Firefox release channel to use";
     };
 
@@ -92,6 +92,11 @@ in {
   };
 
   config = mkIf cfg.enable {
+    home.packages = with pkgs; [
+      foxmarks
+      firefox_decrypt
+    ];
+
     home.sessionVariables = {
       MOZ_USE_XINPUT2 = "1";
       MOZ_DISABLE_RDD_SANDBOX = "1";

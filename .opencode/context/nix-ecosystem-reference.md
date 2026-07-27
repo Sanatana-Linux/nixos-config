@@ -1,3 +1,12 @@
+---
+title: "Nix Ecosystem Reference"
+type: source-summary
+tags: [nix, ecosystem, reference, official-docs]
+created: 2026-04-27
+updated: 2026-04-27
+status: active
+---
+
 # Nix Ecosystem Reference
 
 > Harvested: 2026-04-27 | Source: Context7 MCP (official docs)

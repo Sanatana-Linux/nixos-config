@@ -34,12 +34,14 @@ in {
     services.resolved = {
       enable = true;
       settings = {
-        Resolve = {
-          DNSSEC = cfg.dnssec;
-          DNSOverTLS = cfg.dnsovertls;
-        } // optionalAttrs (cfg.fallbackDns != null) {
-          FallbackDNS = cfg.fallbackDns;
-        };
+        Resolve =
+          {
+            DNSSEC = cfg.dnssec;
+            DNSOverTLS = cfg.dnsovertls;
+          }
+          // optionalAttrs (cfg.fallbackDns != null) {
+            FallbackDNS = cfg.fallbackDns;
+          };
       };
     };
 

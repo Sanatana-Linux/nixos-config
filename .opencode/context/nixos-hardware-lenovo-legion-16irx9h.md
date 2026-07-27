@@ -1,3 +1,12 @@
+---
+title: "nixos-hardware: Lenovo Legion 16IRX9H"
+type: source-summary
+tags: [nixos-hardware, lenovo, legion, hardware-profile]
+created: 2026-04-27
+updated: 2026-04-27
+status: active
+---
+
 # nixos-hardware: Lenovo Legion 16IRX9H
 
 > Source: https://github.com/NixOS/nixos-hardware/blob/b8f8163/lenovo/legion/16irx9h/default.nix

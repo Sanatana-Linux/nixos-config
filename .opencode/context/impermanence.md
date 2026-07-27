@@ -1,3 +1,12 @@
+---
+title: "Impermanence"
+type: source-summary
+tags: [impermanence, ephemeral, persistence, nix-community]
+created: 2026-04-27
+updated: 2026-04-27
+status: active
+---
+
 # Impermanence
 
 > Source: https://github.com/nix-community/impermanence | License: MIT | ⭐ 1.8k

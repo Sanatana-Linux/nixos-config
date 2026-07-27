@@ -82,7 +82,7 @@ with lib; {
     # did not discover WiFi modules on this hardware.
     networking.networkmanager = mkIf config.modules.system.networking.networkmanager.enable {
       enable = true;
-      dns = mkDefault "default";
+      #        dns = mkDefault "default";
       insertNameservers =
         if config.modules.system.networking.quad9.enable
         then ["9.9.9.11" "149.112.112.11" "2620:fe::11" "2620:fe::fe:11"]
@@ -100,7 +100,7 @@ with lib; {
 
     # Disable openresolv's resolvconf.service — when NM is active it manages
     # /etc/resolv.conf directly. The resolvconf service conflicts.
-    systemd.services.resolvconf.enable = false;
+    systemd.services.resolvconf.enable = true;
 
     # Realtek USB WiFi adapters (both in-kernel rtw88 and out-of-tree
     # rtl88x2bu) often fail to auto-detect the regulatory domain from
@@ -131,14 +131,8 @@ with lib; {
     # the WPA handshake.  This disables it at module load time.
     boot.extraModprobeConfig = ''
       # options rtw88_core disable_lps_deep=1
-      # Enable PCIe power saving for the Intel CNVi WiFi (integrated into
-      # the PCH).  When disabled (default), the WiFi reports a 20ms LTR
-      # that blocks the entire package from reaching C6+ deep sleep.
-      # This keeps the PCH/uncore permanently awake, dumping ~11W of heat
-      # into the VRM area.  Enabling this lets the PCIe link reach L1.2
-      # and the PCH enter deeper C-states.
-      options iwlwifi power_save=1
-      options iwlmvm power_scheme=1
+      options iwlwifi power_save=0
+      options iwlmvm power_scheme=2
     '';
 
     # Network utility packages (git, wireless, download, compression)

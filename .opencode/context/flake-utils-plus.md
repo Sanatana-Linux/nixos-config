@@ -1,3 +1,12 @@
+---
+title: "Flake-Utils-Plus (FUP)"
+type: source-summary
+tags: [flake-utils, flakes, library, reference]
+created: 2026-04-27
+updated: 2026-04-27
+status: active
+---
+
 # Flake-Utils-Plus (FUP)
 
 > Source: https://github.com/gytis-ivaskevicius/flake-utils-plus | License: MIT | v1.5.1

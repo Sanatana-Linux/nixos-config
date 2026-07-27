@@ -18,10 +18,10 @@
 
 | Directory | Purpose |
 |-----------|---------|
-| `flake.nix` | Flake entry — 16 inputs, 4 hosts, overlays, templates, packages |
+| `flake.nix` | Flake entry — 13 inputs, 4 hosts, overlays, templates, packages |
 | `modules/nixos/` | System-level modules — 15 categories (see `modules/nixos/AGENTS.md`) |
 | `modules/home-manager/` | User-level modules — 7 categories (see `modules/home-manager/AGENTS.md`) |
-| `home/` | Per-user home-manager configs — tlh, smg, user (see `home/AGENTS.md`) |
+| `modules/home-manager/users/` | Per-user home-manager configs — tlh, smg, user |
 | `hosts/` | Per-host NixOS configs — 4 hosts (see `hosts/AGENTS.md`) |
 | `overlays/` | Nixpkgs overlays (see `overlays/AGENTS.md`) |
 | `pkgs/` | Custom packages — 8 derivations (see `pkgs/AGENTS.md`) |
@@ -32,10 +32,10 @@
 
 | Host | Type | User | GPU | Desktop | Kernel |
 |------|------|------|-----|---------|--------|
-| bagalamukhi | Lenovo Legion 5 Pro | tlh | NVIDIA+Intel Prime | awesome+LightDM | xanmod |
-| matangi | Lenovo Legion Pro | smg | NVIDIA+Intel Prime | xfce | xanmod |
-| bhairavi | VM | tlh | modesetting | awesome | xanmod |
-| chhinamasta | Live USB ISO | user | Intel | awesome | xanmod |
+| bagalamukhi | Lenovo Legion 5 Pro | tlh | NVIDIA+Intel Prime | awesome+LightDM | cachyos-bore-lto-x86_64-v3 |
+| matangi | Lenovo Legion Pro | smg | NVIDIA+Intel Prime | xfce | cachyos-bore-lto-x86_64-v3 |
+| bhairavi | VM | tlh | modesetting | awesome | cachyos-bore-lto-x86_64-v3 |
+| chhinamasta | Live USB ISO | user | Intel | awesome | cachyos-bore |
 
 ## Development
 
@@ -78,25 +78,25 @@ nix develop  # enter project dev shell
 - **New Nix files:** Must `git add` before building — Nix flake only sees tracked files
 - **External configs:** Managed as git submodules in `external/`, linked via `mkOutOfStoreSymlink`
 - **Stylix:** Sets theme for most apps automatically — avoid duplicating color/font config in individual modules
-- **CRITICAL — Do NOT modify `external/` directory:** The `external/` directory contains git submodules (awesome, nvim, firefox, base16_monokai_pro) that are managed in their own repos. Only modify files in `external/` when explicitly instructed to do so. All NixOS configuration changes should be made in `modules/`, `home/`, `hosts/`, `pkgs/`, or `overlays/`.
+- **CRITICAL — Do NOT modify `external/` directory:** The `external/` directory contains git submodules (awesome, nvim, firefox, secrets) that are managed in their own repos. Only modify files in `external/` when explicitly instructed to do so. All NixOS configuration changes should be made in `modules/`, `hosts/`, `pkgs/`, or `overlays/`.
 
 ## Flake Inputs
 
 | Input | Purpose |
 |-------|---------|
-| nixpkgs | Primary package set (unstable) |
-| stable | Stable channel (nixos-25.05) for pinned packages |
+| nixpkgs | Primary package set (nixos-unstable) |
+| stable | Stable channel (nixos-26.05) for pinned packages |
 | home-manager | User environment management |
 | stylix | System-wide theming |
 | nixos-hardware | Hardware-specific modules |
 | nur | Nix User Repository |
-| rust-overlay | Latest Rust toolchain |
 | nix-index-database | Pre-built nix-index DB |
 | bhairava-grub-theme | Custom GRUB theme |
 | nixos-generators | VM/ISO/cloud image builder |
 | nps | Nix package search |
 | sops-nix | Secrets management (sops + age) |
-| lightdm-webkit2-sanatana | Sanatana glassmorphism sea-greeter theme (non-flake) |
+| nix-cachyos-kernel | CachyOS kernel variants (cachyos-bore-lto-x86_64-v3) |
+| firefox-nightly | Firefox Nightly binary |
 
 ## OpenCode Configuration
 

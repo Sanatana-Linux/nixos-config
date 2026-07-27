@@ -1,3 +1,12 @@
+---
+title: "NVMe Tuning → GPU Overheating on Hybrid Graphics Laptops"
+type: source-summary
+tags: [nvme, gpu, heat, hybrid-graphics, pcie, aspm]
+created: 2026-07-03
+updated: 2026-07-03
+status: active
+---
+
 # NVMe Tuning → GPU Overheating on Hybrid Graphics Laptops
 
 **Discovered:** 2026-05-08  

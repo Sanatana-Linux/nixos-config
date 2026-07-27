@@ -27,64 +27,90 @@ in {
     programs.zsh = {
       enable = true;
       syntaxHighlighting.enable = true;
-      enableCompletion = true;
-      autocd = true; # Automatically change directory on typing a directory name
-      enableVteIntegration = true; # Integrate with VTE terminals
+      # Don't use home-manager's built-in compinit — we handle it ourselves in
+      # completionInit with -C (cache-only) for much faster startup on NixOS.
+      enableCompletion = false;
+      autocd = true;
+      enableVteIntegration = true;
 
       autosuggestion = {
         enable = true;
-        highlight = "fg=8,bg=default"; # Set highlight style for autosuggestions
+        highlight = "fg=8,bg=default";
       };
 
-      defaultKeymap = "viins"; # Use vi insert mode as the default keymap
-      dotDir = "${config.xdg.configHome}/zsh"; # Location for ZSH configuration files
+      defaultKeymap = "viins";
+      dotDir = "${config.xdg.configHome}/zsh";
 
       # History configuration
       history = {
         append = true;
-        extended = true; # Use extended history format
-        ignoreDups = false; # Do not ignore duplicate history entries
-        expireDuplicatesFirst = true; # Expire duplicate entries first
-        ignoreSpace = false; # Do not ignore entries with leading spaces
-        path = "${config.xdg.dataHome}/zsh/history"; # Path to the history file
-        save = 9000000; # Number of history lines to save
-        size = 9900000; # Maximum number of history lines
-        share = true; # Share history between sessions
+        extended = true;
+        ignoreDups = false;
+        expireDuplicatesFirst = true;
+        ignoreSpace = false;
+        path = "${config.xdg.dataHome}/zsh/history";
+        save = 50000;
+        size = 55000;
+        share = true;
       };
 
-      # History substring search - use Up/Down arrows to search history
       historySubstringSearch = {
         enable = true;
-        searchDownKey = "\\e[B"; # Down arrow - search forward in history
-        searchUpKey = "\\e[A"; # Up arrow - search backward in history
+        searchDownKey = "\\e[B";
+        searchUpKey = "\\e[A";
       };
 
-      # Completion system initialization
+      # Completion: use compinit -C on NixOS. Store paths are immutable,
+      # so the completion cache is never stale — skip the file scan entirely.
       completionInit = ''
-        zmodload -i zsh/zle
+        autoload -U compinit; compinit -C
         zmodload zsh/complist
-        autoload -U compinit; compinit
         _comp_options+=(globdots)
         WORDCHARS="$WORDCHARS//[\/[&.;]"
+
+        # Cache completion results for speed
+        zstyle ':completion:*' use-cache on
+        zstyle ':completion:*' cache-path "${config.xdg.cacheHome}/zsh/completion-cache"
+        mkdir -p "${config.xdg.cacheHome}/zsh/completion-cache"
+
+        # Completion menu and matcher
+        zstyle ':completion:*' completer _complete _ignored _approximate
+        zstyle ':completion:*' complete true
+        zstyle ':completion:*' complete-options true
+        zstyle ':completion:*' file-sort modification
+        zstyle ':completion:*' group-name ''''
+        zstyle ':completion:*' keep-prefix true
+        zstyle ':completion:*' list-colors ''${(s.:.)LS_COLORS}
+        zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+        zstyle ':completion:*' menu select
+        zstyle ':completion:*' verbose true
+
+        zstyle ':completion:*:default' list-prompt '%S%M matches%s'
+        zstyle ':completion:*:corrections' format '%F{yellow}!- %d (errors: %e) -!%f'
+        zstyle ':completion:*:descriptions' format '%F{blue}-- %D %d --%f'
+        zstyle ':completion:*:messages' format ' %F{purple} -- %d --%f'
+        zstyle ':completion:*:warnings' format ' %F{red}-- no matches found --%f'
+        zstyle ':completion:*:*:-command-:*:*' group-order aliases builtins functions commands
+        zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
+
+        # Vim-style navigation in completion menu (menuselect keymap created by compinit)
+        bindkey -M menuselect 'h' vi-backward-char
+        bindkey -M menuselect 'k' vi-up-line-or-history
+        bindkey -M menuselect 'l' vi-forward-char
+        bindkey -M menuselect 'j' vi-down-line-or-history
       '';
 
       # ZSH initialization
       initContent = ''
         # Home/End key bindings - Jump to beginning/end of line
-        # Cover all common terminal escape sequences for compatibility
-        # Standard xterm sequences
         bindkey '^[[H' beginning-of-line
         bindkey '^[[F' end-of-line
-        # Alternative sequences (some terminals)
         bindkey '^[[1~' beginning-of-line
         bindkey '^[[4~' end-of-line
-        # Kitty/terminfo sequences
         bindkey '^[[7~' beginning-of-line
         bindkey '^[[8~' end-of-line
-        # Application mode (used by some terminals)
         bindkey '^[OH' beginning-of-line
         bindkey '^[OF' end-of-line
-        # Also bind for vi command mode
         bindkey -M vicmd '^[[H' beginning-of-line
         bindkey -M vicmd '^[[F' end-of-line
         bindkey -M vicmd '^[[1~' beginning-of-line
@@ -105,68 +131,8 @@ in {
         # Ctrl+Backspace - Delete word backward
         bindkey '^H' backward-kill-word
 
-        # Vim-style navigation in completion menu (hjkl)
-        bindkey -M menuselect 'h' vi-backward-char
-        bindkey -M menuselect 'k' vi-up-line-or-history
-        bindkey -M menuselect 'l' vi-forward-char
-        bindkey -M menuselect 'j' vi-down-line-or-history
-
-        export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense' # optional
-        zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
-        source <(carapace _carapace)
-        source <(sk --shell zsh)
-
-        mkdir -p "${config.xdg.cacheHome}/zsh/completion-cache" # Use xdg directory for cache
-
-        # Completion & Completion Menu Options
-        zstyle ':completion:*' completer _complete _ignored _approximate
-        zstyle ':completion:*' complete true
-        zstyle ':completion:*' complete-options true
-        zstyle ':completion:*' file-sort modification
-        zstyle ':completion:*' group-name '''
-        zstyle ':completion:*' keep-prefix true
-        zstyle ':completion:*' list-colors ''${(s.:.)LS_COLORS}
-        zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-        zstyle ':completion:*' menu select
-        zstyle ':completion:*' verbose true
-
-        zstyle ':completion:*:default' list-prompt '%S%M matches%s'
-        zstyle ':completion:*:corrections' format '%F{yellow}!- %d (errors: %e) -!%f'
-        zstyle ':completion:*:descriptions' format '%F{blue}-- %D %d --%f'
-        zstyle ':completion:*:messages' format ' %F{purple} -- %d --%f'
-        zstyle ':completion:*:warnings' format ' %F{red}-- no matches found --%f'
-        zstyle ':completion:*:*:-command-:*:*' group-order aliases builtins functions commands
-
-        zstyle ':completion:*' use-cache on
-        zstyle ':completion:*' cache-path "${config.xdg.cacheHome}/zsh/completion-cache"
-
-        # Functions
-        # walk tui file management and navigation
-        function lk {
-          cd "$(walk --icons  "$@")"
-        }
-
-        # Ollama update function
-        ollama_update() {
-            ollama list | awk 'NR>1 {print $1}' | while read package; do
-                echo "Updating $package..."
-                ollama pull "$package"
-            done
-        }
-        # export http_proxy="http://192.168.49.1:8228"
-        # export HTTP_PROXY="http://192.168.49.1:8228"
-        # export https_proxy="http://192.168.49.1:8228"
-        # export http_proxy="http://192.168.49.1:8228"
-
-
-
-
-        # Television fuzzy finder
-        eval "$(tv init zsh)"
-
-        # Sanatana Linux Banner
-        clear
-        cfonts "Sanatana Linux" -c "#4FB0BE","#F25F89" --align center --font slick
+        # Carapace bridges
+        export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
       '';
 
       # ZSH options
@@ -181,8 +147,8 @@ in {
 
       # Local ZSH variables
       localVariables = {
-        ZSH_AUTOSUGGEST_USE_ASYNC = "true"; # Use asynchronous autosuggestions
-        ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE = 40; # Maximum buffer size for autosuggestions
+        ZSH_AUTOSUGGEST_USE_ASYNC = "true";
+        ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE = 40;
         KEYTIMEOUT = 1;
       };
 
@@ -191,8 +157,8 @@ in {
         # Navigation
         "cd.." = "cd ../";
         "cd..." = "cd ../../";
-        fcd = "cd $(find -type d | fzf)"; # Fuzzy find a directory and change to it
-        mkcd = "mkdir $1 && cd $1 "; # Create a directory and change to it
+        fcd = "cd $(find -type d | fzf)";
+        mkcd = "mkdir $1 && cd $1 ";
 
         # File Management and Viewing
         l = "eza -l --git --color=auto --group-directories-first --time-style=long-iso --icons -s extension";
@@ -201,12 +167,11 @@ in {
         ls = "eza -h --git --icons --color=auto --group-directories-first -s extension";
         lx = "eza -alh -s extension --color=auto --group-directories-first --icons -R";
         tree = "eza --icons --tree";
-        cat = "bat --style=plain"; # Use bat for syntax highlighting
-        du = "${lib.getBin dust}/bin/dust"; # Disk usage analyzer
-        gz = "gzip -l"; # list contents of gzipped files
-        rm = "rm -rvf"; # remove files and directories recursively and forcefully
-        trm = "${lib.getBin trash-cli}/bin/trash-cli"; # Move files to trash
-        firefox = "firefox-nightly";
+        cat = "bat --style=plain";
+        du = "${lib.getBin dust}/bin/dust";
+        gz = "gzip -l";
+        rm = "rm -rvf";
+        trm = "${lib.getBin trash-cli}/bin/trash-cli";
         less = "moor";
 
         # Compression/Decompression
@@ -214,20 +179,27 @@ in {
         encom = "_() { echo -n 'Enter directory name to compress and encrypt: '; read n; ouch compress \"$n\" \"$n.7z\" && gpg --symmetric \"$n.7z\" && rm \"$n.7z\"; }; _";
 
         # System
-        cleanup = "sudo nix-collect-garbage --delete-older-than 3d"; # Clean up old Nix store entries
-        purge = "doas sync; echo 3 | doas tee /proc/sys/vm/drop_caches"; # Purge disk caches
-        ps = "${lib.getBin procs}/bin/procs"; # Improved process viewer
+        cleanup = "sudo nix-collect-garbage --delete-older-than 3d";
+        purge = "doas sync; echo 3 | doas tee /proc/sys/vm/drop_caches";
+        ps = "${lib.getBin procs}/bin/procs";
 
         # Searching and File Opening
-        grep = "${lib.getBin ripgrep-all}/bin/rga"; # Use ripgrep for fast searching
-        fzim = "fzf | xargs nvim"; # Fuzzy find a file and open it with Neovim
+        grep = "${lib.getBin ripgrep-all}/bin/rga";
+        fzim = "fzf | xargs nvim";
         skvim = "nvim $(find . -type f | sk -m)";
         vim = "nvim";
 
         # Miscellaneous
         c = "clear";
-        m = "mkdir -p"; # create directory if not exists
-        ytmp3 = "${lib.getBin yt-dlp}/bin/yt-dlp -x --continue --add-metadata --embed-thumbnail --audio-format mp3 --audio-quality 0 --metadata-from-title=\"%(artist)s - %(title)s\" --prefer-ffmpeg -o \"%(title)s.%(ext)s\""; # Download YouTube videos as MP3
+        m = "mkdir -p";
+        ytmp3 = "${lib.getBin yt-dlp}/bin/yt-dlp -x --continue --add-metadata --embed-thumbnail --audio-format mp3 --audio-quality 0 --metadata-from-title=\"%(artist)s - %(title)s\" --prefer-ffmpeg -o \"%(title)s.%(ext)s\"";
+
+        # Downloaders
+        ardo = "${lib.getBin aria2}/bin/aria2c -x 16 -s 16";
+        arlist = "${lib.getBin aria2}/bin/aria2c -i $1 -j 16";
+
+        # AI
+        pgpt = "npx @pollinations/cli gen text";
       });
 
       zplug = mkIf cfg.enablePlugins {

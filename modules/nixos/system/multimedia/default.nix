@@ -150,7 +150,7 @@ in {
           gst_all_1.gst-libav
           gst_all_1.gst-editing-services
         ]
-        ++ optionals cfg.creators [gimp3-with-plugins pkgs.stable.inkscape-with-extensions]
+        ++ optionals cfg.creators [gimp3-with-plugins pkgs.stable.inkscape-with-extensions gegl]
         ++ optionals cfg.stableVideoEditors [
           pkgs.stable.shotcut
           pkgs.stable.openshot-qt

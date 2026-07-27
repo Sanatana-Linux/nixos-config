@@ -141,6 +141,7 @@ in {
             "https://comfyui.cachix.org"
             "https://cache.xinux.uz"
             "https://attic.xuyh0120.win/lantian"
+            "https://cache.numtide.com"
           ]
           ++ cfg.extraCaches;
 

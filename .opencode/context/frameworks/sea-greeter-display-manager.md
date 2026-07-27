@@ -1,3 +1,12 @@
+---
+title: "Sea-Greeter Display Manager Architecture"
+type: concept
+tags: [lightdm, sea-greeter, webkit, display-manager, theming]
+created: 2026-04-27
+updated: 2026-05-08
+status: active
+---
+
 # Sea-Greeter Display Manager Architecture
 
 ## Overview

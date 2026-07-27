@@ -18,7 +18,6 @@ in {
       code2prompt
       codegrab # use as `grab`
       chatblade
-      tgpt
 
       # Image upscaling
       upscaler

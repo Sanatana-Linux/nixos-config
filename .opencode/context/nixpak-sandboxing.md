@@ -1,3 +1,12 @@
+---
+title: "NixPak — Runtime Sandboxing for Nix"
+type: source-summary
+tags: [nixpak, sandboxing, bubblewrap, security]
+created: 2026-04-27
+updated: 2026-04-27
+status: active
+---
+
 # NixPak — Runtime Sandboxing for Nix
 
 > Source: https://github.com/nixpak/nixpak | License: EUPL-1.2

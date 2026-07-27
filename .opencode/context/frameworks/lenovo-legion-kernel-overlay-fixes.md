@@ -1,3 +1,12 @@
+---
+title: "Lenovo Legion Kernel Driver Overlay Fixes"
+type: concept
+tags: [lenovo, legion, kernel, overlay, sysfs, nixpkgs]
+created: 2026-05-07
+updated: 2026-05-07
+status: active
+---
+
 # Lenovo Legion Kernel Driver Overlay Fixes
 
 > Two critical patches to the nixpkgs `lenovo-legion` package (v0.0.20) in `/etc/nixos/overlays/default.nix`.

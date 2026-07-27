@@ -1,3 +1,12 @@
+---
+title: "BIOS SREP / Advanced BIOS vs Firmware Update — Trade-off Analysis"
+type: source-summary
+tags: [bios, srep, firmware, uefi, lenovo]
+created: 2026-07-13
+updated: 2026-07-13
+status: active
+---
+
 # BIOS SREP / Advanced BIOS vs Firmware Update — Trade-off Analysis
 
 > Decision context for bagalamukhi (Lenovo Legion Pro 5 16IRX9, BIOS N0CN).  

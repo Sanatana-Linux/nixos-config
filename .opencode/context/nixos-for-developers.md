@@ -1,3 +1,12 @@
+---
+title: "NixOS: For Developers"
+type: source-summary
+tags: [nixos, development, guide]
+created: 2026-04-27
+updated: 2026-04-27
+status: active
+---
+
 # NixOS: For Developers
 
 > Source: https://myme.no/posts/2020-01-26-nixos-for-development.html | Martin Myrseth | 2020-01-26

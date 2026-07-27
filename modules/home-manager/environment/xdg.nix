@@ -7,7 +7,7 @@
 with lib; let
   cfg = config.modules.core.xdg;
 
-  browser = ["firefox-nightly.desktop"];
+  browser = ["firefox.desktop"];
   archiveExtractor = ["file-roller.desktop"]; # Define file-roller application
   pdfViewer = ["foliate.desktop"]; # Define pdfViewer application
   videoPlayer = ["vlc.desktop"]; # VLC application
@@ -107,7 +107,7 @@ in {
     # Ensure application environment variables are set for all applications
     home.sessionVariables = {
       TERMINAL = "kitty";
-      BROWSER = "firefox-nightly";
+      BROWSER = "firefox";
       EDITOR = "nvim";
       VISUAL = "nvim";
       PAGER = "less";

@@ -1,3 +1,12 @@
+---
+title: "Nix Best Practices (nix.dev)"
+type: source-summary
+tags: [nix, best-practices, official-docs]
+created: 2026-04-27
+updated: 2026-04-27
+status: active
+---
+
 # Nix Best Practices (nix.dev)
 
 > Source: https://nix.dev/guides/best-practices | Official Nix documentation

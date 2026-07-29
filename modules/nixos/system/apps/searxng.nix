@@ -52,10 +52,6 @@ with lib; let
     # https://github.com/searxng/searxng/blob/master/searx/settings.yml
     engines:
       # --- Disabled by default ---
-      - name: 360search
-        disabled: false
-      - name: 360search videos
-        disabled: false
       - name: 500px
         disabled: false
       - name: 9gag
@@ -82,8 +78,6 @@ with lib; let
         disabled: false
       - name: bitbucket
         disabled: false
-      - name: boardreader
-        disabled: false
       - name: bpb
         disabled: false
       - name: btdigg
@@ -97,8 +91,6 @@ with lib; let
       - name: crossref
         disabled: false
       - name: crowdview
-        disabled: false
-      - name: yep
         disabled: false
       - name: deezer
         disabled: false
@@ -130,8 +122,6 @@ with lib; let
         disabled: false
       - name: 1x
         disabled: false
-      - name: fastbot
-        disabled: false
       - name: fdroid
         disabled: false
       - name: findfiles
@@ -143,12 +133,6 @@ with lib; let
       - name: findfiles music
         disabled: false
       - name: findthatmeme
-        disabled: false
-      - name: fireball
-        disabled: false
-      - name: fireball news
-        disabled: false
-      - name: fireball videos
         disabled: false
       - name: flaticon
         disabled: false
@@ -262,14 +246,6 @@ with lib; let
         disabled: false
       - name: quark images
         disabled: false
-      - name: qwant
-        disabled: false
-      - name: qwant news
-        disabled: false
-      - name: qwant images
-        disabled: false
-      - name: qwant videos
-        disabled: false
       - name: reddit
         disabled: false
       - name: searchmysite
@@ -300,21 +276,11 @@ with lib; let
         disabled: false
       - name: tmdb
         disabled: false
-      - name: tusksearch
-        disabled: false
-      - name: tusksearch images
-        disabled: false
-      - name: tusksearch videos
-        disabled: false
-      - name: tusksearch news
-        disabled: false
       - name: yandex
         disabled: false
       - name: yandex images
         disabled: false
       - name: yandex music
-        disabled: false
-      - name: yahoo
         disabled: false
       - name: wikibooks
         disabled: false
@@ -327,8 +293,6 @@ with lib; let
       - name: wikiversity
         disabled: false
       - name: wikivoyage
-        disabled: false
-      - name: wolframalpha
         disabled: false
       - name: 1337x
         disabled: false
@@ -356,10 +320,6 @@ with lib; let
         disabled: false
       - name: mediathekviewweb
         disabled: false
-      - name: yacy
-        disabled: false
-      - name: yacy images
-        disabled: false
       - name: rumble
         disabled: false
       - name: reloado
@@ -371,8 +331,6 @@ with lib; let
       - name: uxwing
         disabled: false
       - name: voidlinux
-        disabled: false
-      - name: wikimini
         disabled: false
       - name: zapmeta
         disabled: false
@@ -400,9 +358,6 @@ with lib; let
       - name: cl0q
         disabled: false
         inactive: false
-      - name: cloudflareai
-        disabled: false
-        inactive: false
       - name: core.ac.uk
         disabled: false
         inactive: false
@@ -410,9 +365,6 @@ with lib; let
         disabled: false
         inactive: false
       - name: ebay
-        disabled: false
-        inactive: false
-      - name: freesound
         disabled: false
         inactive: false
       - name: github code
@@ -425,24 +377,6 @@ with lib; let
         disabled: false
         inactive: false
       - name: google videos
-        disabled: false
-        inactive: false
-      - name: grokipedia
-        disabled: false
-        inactive: false
-      - name: heexy
-        disabled: false
-        inactive: false
-      - name: heexy images
-        disabled: false
-        inactive: false
-      - name: iseek
-        disabled: false
-        inactive: false
-      - name: kozmonavt
-        disabled: false
-        inactive: false
-      - name: kukei
         disabled: false
         inactive: false
       - name: z-library
@@ -484,9 +418,6 @@ with lib; let
       - name: rawweb
         disabled: false
         inactive: false
-      - name: seekninja
-        disabled: false
-        inactive: false
       - name: springer nature
         disabled: false
         inactive: false
@@ -505,19 +436,10 @@ with lib; let
       - name: unobtanium
         disabled: false
         inactive: false
-      - name: yahoo news
-        disabled: false
-        inactive: false
       - name: youtube_api
         disabled: false
         inactive: false
-      - name: wolframalpha_api
-        disabled: false
-        inactive: false
       - name: deepl
-        disabled: false
-        inactive: false
-      - name: neosearch
         disabled: false
         inactive: false
       - name: repology
@@ -558,6 +480,11 @@ in {
       }
     ];
 
+    # Declare the SearXNG secret in sops-nix. The encrypted value must be added
+    # to external/secrets/secrets.yaml with key name "searxng_secret" and the
+    # value in key=value format: SEARXNG_SECRET=<secret>
+    sops.secrets.searxng_secret = {};
+
     # OCI container for SearXNG — starts at boot via Docker
     virtualisation.oci-containers.containers."searxng" = {
       image = cfg.image;
@@ -567,12 +494,13 @@ in {
       volumes = [
         "${settingsYaml}:/etc/searxng/settings.yml:ro"
       ];
-      # secret_key is provided via env var (settings_defaults.py reads
-      # environ_name='SEARXNG_SECRET'), not from settings.yml. This avoids the
-      # entrypoint needing write access to the read-only Nix store mount.
-      environment = {
-        SEARXNG_SECRET = "xcg9INRvZJX6CTdvKvh7OPoQb2fVC3eM";
-      };
+      # secret_key is provided via env var from sops-nix managed file
+      # (settings_defaults.py reads environ_name='SEARXNG_SECRET'), not from
+      # settings.yml. This avoids the entrypoint needing write access to the
+      # read-only Nix store mount.
+      environmentFiles = [
+        config.sops.secrets.searxng_secret.path
+      ];
       extraOptions = cfg.extraOptions;
     };
   };

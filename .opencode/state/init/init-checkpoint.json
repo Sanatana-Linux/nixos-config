@@ -1,6 +1,6 @@
 {
   "lastCompletedPhase": 8,
-  "timestamp": "2026-07-02T00:00:00Z",
+  "timestamp": "2026-07-27T00:00:00Z",
   "subcommand": "refresh",
   "mode": "full",
   "files": [
@@ -13,6 +13,8 @@
     ".opencode/skills/nixos-debug/SKILL.md",
     ".opencode/skills/nix-secrets/SKILL.md",
     ".opencode/skills/nix-service-scripts/SKILL.md",
+    ".opencode/skills/nixos-best-practices/SKILL.md",
+    ".opencode/skills/nix-packaging-best-practices/SKILL.md",
     ".opencode/rules/nix-flake-strategy.md",
     ".opencode/rules/project-constraints.md",
     ".opencode/rules/comment-style.md",
@@ -22,22 +24,23 @@
     ".opencode/state/project-memory.json",
     ".opencode/state/init/stack-fingerprint.json",
     ".opencode/state/init/stack-recommendations.json",
+    ".opencode/context/decisions.md",
     "AGENTS.md",
     "flake.nix",
-    "modules/nixos/AGENTS.md"
+    "modules/nixos/AGENTS.md",
+    "modules/nixos/system/AGENTS.md"
   ],
   "changesApplied": [
-    "Phase 0: Hubs health verified — 145/148 routes OK (same 3 external-command warnings as previous)",
-    "Phase 1: Stack re-detected — 17 inputs (firefox-nightly added), directory restructuring confirmed (users→system/users, runtimes→apps/runtimes, home→modules/home-manager/users/home, packages deleted→base/packages), overlay firefox-nightly-bin added",
-    "Phase 2: No new recommendations needed — all resource gaps already filled from previous init",
-    "Phase 3: opencode.jsonc unchanged — config is current with 6 rules, 3 tools, 5 skills",
+    "Phase 0: Hubs health verified — 31 agents, 121 skills, 37 tools, 184 subcommand specs across 6 hubs",
+    "Phase 1: Stack re-detected — 14 inputs (llm-agents added), 87 NixOS .nix files, 43 home-manager .nix files, 11 host files. New modules: searxng.nix, clamav.nix. Deleted: cooling.nix, fan-control.nix, comfyui.nix. 109 files changed since last fingerprint (8634 insertions, 942 deletions)",
+    "Phase 2: No new recommendations needed — all 7 project skills, 6 rules, 3 tools, 5 recommended agents cover current needs",
+    "Phase 3: opencode.jsonc unchanged — config is current with 6 rules, 3 tools, 7 skills",
     "Phase 4: No new provisioning needed — all project skills and rules in place",
-    "Phase 5: modules/nixos/AGENTS.md fixed — stale packages/ dir reference updated to base/packages/",
-    "Phase 6: Deep codebase mapping completed — architect, convention-extractor, and explore agents analyzed full codebase",
-    "Phase 6 findings: 87 NixOS .nix files, 51 home-manager .nix files, 4 hosts, 17 flake inputs, directory migration fully consistent (zero stale refs)",
-    "Phase 6 conventions: 100% enable-by-option adoption confirmed. New patterns: submodule-as-directory (zsh/ convention), ifTheyExist helper, firefox.nix uses builtins.fetchurl for autoconfig",
-    "Phase 6 anomalies: modules/nixos/AGENTS.md stale ref (FIXED), 49 session state dirs (cosmetic), base16_monokai_pro tracked directly (not submodule), packages.nix orphaned option decls",
-    "Phase 7: Routing validation — 145/148 subcommand routes OK, 3 external-command warnings (same as before)",
-    "Phase 8: nix flake check — formatting check PASSES. eval-all-hosts has pre-existing limitation (needs sudo for nix daemon profile access, can't run in derivation sandbox). All 4 hosts evaluate successfully via sudo nixos-rebuild dry-build. bagalamukhi builds cleanly."
+    "Phase 5: AGENTS.md files updated — root AGENTS.md: 14 inputs (added llm-agents), modules/nixos/AGENTS.md: searxng/clamav added, cooling/fan-control/comfyui removed. modules/nixos/system/AGENTS.md: ClamAV/searxng added. Timestamps updated to 2026-07-27",
+    "Phase 6: Deep codebase mapping completed — 3 parallel agents (architect, convention-extractor, explore) analyzed full codebase",
+    "Phase 6 findings: CRITICAL — stale homeConfigurations in flake.nix (lines 234-248) point to non-existent paths. HIGH — hardcoded SearXNG secret key in searxng.nix:574. MEDIUM — 3 deleted files still in git index (cooling.nix, fan-control.nix, comfyui.nix). MEDIUM — redundant clamav in systemPackages. LOW — 5 convention violations (power.nix qualified lib.*, history comments, commented-out code, DRY overlays)",
+    "Phase 6 context: 3 new ADRs added to decisions.md (ADR-016: stale homeConfigurations, ADR-017: SearXNG secret → sops-nix, ADR-018: remove redundant clamav)",
+    "Phase 7: Routing validation — 155/156 subcommand routes OK, 1 pre-existing @code-reviewer spec issue (same as previous)",
+    "Phase 8: nix flake check — formatting check PASSES. All files properly formatted by alejandra."
   ]
 }

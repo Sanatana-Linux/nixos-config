@@ -2,8 +2,8 @@
   description = "The ShizNix Upon Which I Constantly Nit Pick";
 
   inputs = {
-    stable.url = "github:nixos/nixpkgs/nixos-26.05?shallow=1";
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable?shallow=1";
+    stable.url = "github:nixos/nixpkgs/nixos-26.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nur = {
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -228,21 +228,6 @@
             };
           }
           ./hosts/chhinamasta
-        ];
-      };
-    };
-    # ┣━━━━━━━━━━━━━━━━━━━━━┫ Home Configurations ┣━━━━━━━━━━━━━━━━━━━━━┫
-    homeConfigurations = {
-      tlh = inputs.home-manager.lib.homeManagerConfiguration {
-        extraSpecialArgs = {inherit inputs outputs self;};
-        modules = [
-          ./modules/home-manager/users/home/tlh/default.nix
-        ];
-      };
-      smg = inputs.home-manager.lib.homeManagerConfiguration {
-        extraSpecialArgs = {inherit inputs outputs self;};
-        modules = [
-          ./modules/home-manager/users/home/smg/default.nix
         ];
       };
     };

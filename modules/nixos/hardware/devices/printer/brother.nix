@@ -20,7 +20,6 @@ in {
 
     user = mkOption {
       type = types.str;
-      default = "smg";
       description = "User to add to printer groups (lp, scanner)";
     };
 

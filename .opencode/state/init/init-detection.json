@@ -3,12 +3,12 @@
   "framework": "nixos",
   "packageManager": "nix",
   "buildSystem": "flake",
-  "directories": ["modules", "hosts", "home", "pkgs", "overlays", "templates", "external"],
-  "ci": "none",
+  "directories": ["modules", "hosts", "pkgs", "overlays", "templates", "external"],
+  "ci": "github-actions",
   "confidence": "high",
-  "inputs": ["nixpkgs", "home-manager", "stylix", "nixos-hardware", "nur", "rust-overlay", "sops-nix", "nix-index-database", "cachy-tweaks", "bhairava-grub-theme", "fx-autoconfig", "nixos-generators", "nps", "lightdm-webkit2-sanatana"],
+  "inputs": ["nixpkgs", "stable", "home-manager", "stylix", "nixos-hardware", "nur", "sops-nix", "nix-index-database", "nix-cachyos-kernel", "bhairava-grub-theme", "nixos-generators", "nps", "firefox-nightly", "llm-agents"],
   "hosts": ["bagalamukhi", "matangi", "bhairavi", "chhinamasta"],
   "users": ["tlh", "smg", "user"],
   "templates": 42,
-  "external_submodules": ["awesome", "nvim", "firefox", "base16_monokai_pro"]
+  "external_submodules": ["awesome", "nvim", "firefox", "secrets"]
 }

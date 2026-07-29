@@ -1,4 +1,4 @@
-<!-- Generated: 2026-04-21 | Updated: 2026-06-11 -->
+<!-- Generated: 2026-04-21 | Updated: 2026-07-27 -->
 
 # The ShizNix
 
@@ -18,7 +18,7 @@
 
 | Directory | Purpose |
 |-----------|---------|
-| `flake.nix` | Flake entry — 13 inputs, 4 hosts, overlays, templates, packages |
+| `flake.nix` | Flake entry — 14 inputs, 4 hosts, overlays, templates, packages |
 | `modules/nixos/` | System-level modules — 15 categories (see `modules/nixos/AGENTS.md`) |
 | `modules/home-manager/` | User-level modules — 7 categories (see `modules/home-manager/AGENTS.md`) |
 | `modules/home-manager/users/` | Per-user home-manager configs — tlh, smg, user |
@@ -97,6 +97,7 @@ nix develop  # enter project dev shell
 | sops-nix | Secrets management (sops + age) |
 | nix-cachyos-kernel | CachyOS kernel variants (cachyos-bore-lto-x86_64-v3) |
 | firefox-nightly | Firefox Nightly binary |
+| llm-agents | LLM agent tooling (github:numtide/llm-agents.nix) |
 
 ## OpenCode Configuration
 

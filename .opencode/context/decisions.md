@@ -214,3 +214,24 @@ status: active
   4. Moved `lenovo-advanced-bios.md` documentation to the same archive directory
   5. Renamed the menu entry from "Advanced UEFI Firmware Settings" to "UEFI Firmware Settings"
 - **Consequences**: ~350KB of EFI binaries no longer copied to the ESP at every build. The GRUB menu entry now uses the standard UEFI firmware setup mechanism instead of a fragile chainload. All thermal/power controls that were in the advanced BIOS are already handled through NixOS (TLP, undervolt, kernel params, platform_profile forcing).
+
+## ADR-016: Stale homeConfigurations in flake.nix (dead code)
+
+- **Date**: 2026-07-27
+- **Context**: The `flake.nix` `outputs.homeConfigurations` block (lines 234-248) references `./modules/home-manager/users/home/tlh/default.nix` and `./modules/home-manager/users/home/smg/default.nix` — paths that do not exist. The home-manager module tree was flattened from `users/home/<user>/` to `users/<user>/` during a previous refactor, but the standalone `homeConfigurations` output was not updated. These are dead configurations that would fail at build time if invoked.
+- **Decision**: Remove the stale `homeConfigurations` block from `flake.nix`. The project uses home-manager exclusively as a NixOS module (via `home-manager.nixosModules.home-manager`), not as a standalone configuration. The per-user configs live at `modules/home-manager/users/<user>/default.nix` and are imported by host configs.
+- **Consequences**: Cleaner flake.nix with no dead code. No functional impact — these configs were never used.
+
+## ADR-017: SearXNG secret key must use sops-nix
+
+- **Date**: 2026-07-27
+- **Context**: The `searxng.nix` module at line 574 hardcodes `SEARXNG_SECRET = "xcg9INRvZJX6CTdvKvh7OPoQb2fVC3eM"` — a plaintext secret committed to version control. This is a security vulnerability. The project uses sops-nix for all secrets management.
+- **Decision**: Replace the hardcoded secret with `config.sops.secrets.searxng_secret.path`. Declare the secret in each host's sops.nix. Add the encrypted value to `external/secrets/secrets.yaml`.
+- **Consequences**: The SearXNG secret is now managed through sops-nix like all other secrets. No plaintext secrets in version control.
+
+## ADR-018: Remove redundant clamav from systemPackages
+
+- **Date**: 2026-07-27
+- **Context**: The `clamav.nix` module adds `clamav` to `systemPackages` at line 60, but `services.clamav.daemon.enable` already provides the `clamav` package automatically. This results in a redundant package reference.
+- **Decision**: Remove the `clamav` package from `systemPackages` in `clamav.nix`. The daemon enable already handles installation.
+- **Consequences**: Cleaner module with no redundant package declaration.

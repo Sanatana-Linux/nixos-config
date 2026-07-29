@@ -41,12 +41,6 @@ in {
       default = "stable";
       description = "Which NVIDIA driver to use";
     };
-
-    gpuTempLimit = mkOption {
-      type = types.nullOr (types.ints.between 30 100);
-      default = null;
-      description = "GPU temperature target in °C. DEPRECATED — nvidia-smi -gtt is not supported on RTX 4070 Laptop GPU. Kept for compatibility, has no effect.";
-    };
   };
 
   config = mkIf cfg.enable {

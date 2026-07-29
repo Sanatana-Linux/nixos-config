@@ -1,5 +1,5 @@
 <!-- Parent: ../AGENTS.md -->
-<!-- Generated: 2026-04-21 | Updated: 2026-04-27 -->
+<!-- Generated: 2026-04-21 | Updated: 2026-07-27 -->
 
 # modules/nixos/
 
@@ -11,10 +11,10 @@ NixOS system-level modules. Each module declares an enable option under `modules
 | Directory | Purpose |
 |-----------|---------|
 | `base/` | Base system config (nix, fhs, services, permitted packages, shell, environment variables) |
-| `hardware/` | Hardware drivers — GPU (nvidia, intel), bluetooth, keyboard, sound, thunderbolt, udev, Lenovo (lenovo, power, cooling, fan-control), devices (android, iphone, logitech, printer) |
+| `hardware/` | Hardware drivers — GPU (nvidia, intel), bluetooth, keyboard, sound, thunderbolt, udev, Lenovo (lenovo, power), devices (android, iphone, logitech, printer) |
 | `base/packages/` | System package sets (categories + security) — split into per-category files |
 | `stylix/` | System-wide theming (colors, fonts, cursor via stylix) |
-| `system/` | System services — boot, cron, systemd, networking, apps (appimage, java, nix-ld, network-manager-applet, shotcut, thunar, ai/ollama/comfyui), desktop (awesomewm, lightdm, xfce), performance (cachy, oomd, undervolt, zram), security (doas, fail2ban, firewall, pam, ssh, sudo, tpm) |
+| `system/` | System services — boot, cron, systemd, networking, apps (appimage, java, nix-ld, network-manager-applet, shotcut, thunar, searxng, ai/ollama), desktop (awesomewm, lightdm, xfce), performance (cachy, oomd, undervolt, zram), security (doas, fail2ban, firewall, pam, ssh, sudo, tpm, clamav) |
 | `users/` | User account modules (tlh, smg, user) — **import per-host only** |
 | `system/virtualization/` | VMs and containers (docker, lxc, virt-manager, waydroid, quickemu) |
 

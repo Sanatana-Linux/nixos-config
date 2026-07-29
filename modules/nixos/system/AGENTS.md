@@ -1,5 +1,5 @@
 <!-- Parent: ../AGENTS.md -->
-<!-- Generated: 2026-04-21 | Updated: 2026-07-04 -->
+<!-- Generated: 2026-04-21 | Updated: 2026-07-27 -->
 
 # modules/nixos/system/
 
@@ -19,14 +19,14 @@ Boot, systemd, networking, apps, desktop, multimedia, performance, security, use
 
 | Directory | Purpose |
 |-----------|---------|
-| `apps/` | Application support (nix-ld, appimage, thunar, browsers, AI, runtimes) |
+| `apps/` | Application support (nix-ld, appimage, thunar, browsers, searxng, AI, runtimes) |
 | `assets/` | Boot-related assets (wallpaper, icons) — EFI binaries archived to `.documentation/archived/advanced_bios/` |
 | `desktop/` | Desktop environments (AwesomeWM, XFCE, LightDM display manager) |
 | `multimedia/` | Multimedia support |
 | `networking/` | Network configuration (NetworkManager with iwd backend, Quad9 DNS, wifi) |
 | `performance/` | System performance tuning (Cachy, OOMd, undervolt, zram) |
 | `plymouth/` | Plymouth boot splash themes (see `plymouth/AGENTS.md`) |
-| `security/` | Security modules (firewall, SSH, fail2ban, doas, sudo, PAM, TPM) |
+| `security/` | Security modules (firewall, SSH, fail2ban, doas, sudo, PAM, TPM, ClamAV) |
 | `users/` | Per-host user account modules (tlh, smg, user) — **import per-host only** |
 | `virtualization/` | VMs and containers (Docker, LXC, virt-manager, Waydroid, Quickemu) |
 

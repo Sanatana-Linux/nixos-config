@@ -55,9 +55,6 @@ in {
       };
     };
 
-    # Install clamav client tools
-    environment.systemPackages = with pkgs; [
-      clamav
-    ];
+    # clamav client tools are provided by services.clamav.daemon.enable
   };
 }

@@ -86,12 +86,6 @@ in {
           # Optional helps save long term battery health
           START_CHARGE_THRESH_BAT0 = cfg.startChargeThreshold;
           STOP_CHARGE_THRESH_BAT0 = cfg.stopChargeThreshold;
-          # PCI wifi disabled — TLP's wifi-on-LAN management leaves the internal
-          # iwlwifi interface in a half-associated state (connected via 802.11
-          # but kernel link DOWN). With USB wifi adapters providing connectivity,
-          # TLP managing the PCI wifi adds no benefit.
-          # DEVICES_TO_DISABLE_ON_LAN_CONNECT = "wifi";
-          # DEVICES_TO_ENABLE_ON_LAN_DISCONNECT = "wifi ";
         };
       };
 

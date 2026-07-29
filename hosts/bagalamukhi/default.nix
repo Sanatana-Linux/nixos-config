@@ -215,7 +215,6 @@
           intelBusId = "PCI:00:02:0";
           nvidiaBusId = "PCI:01:00:0";
         };
-        gpuTempLimit = null;
       };
       intel.enable = true;
       bluetooth.enable = true;

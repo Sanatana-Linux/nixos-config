@@ -56,28 +56,28 @@ in {
     };
 
     # Session startup commands
-    services.xserver.displayManager.sessionCommands =
-      let
-        xfconf = "${pkgs.xfce.xfconf}/bin/xfconf-query";
-      in
-        # PrintScreen keybinding for xfce4-screenshooter
-        (optionalString cfg.screenshot.enable ''
-          ${xfconf} \
-            -c xfce4-keyboard-shortcuts \
-            -p /commands/custom/Print \
-            -s "${pkgs.xfce4-screenshooter}/bin/xfce4-screenshooter -f" \
-            --create -t string 2>/dev/null || true
-          ${xfconf} \
-            -c xfce4-keyboard-shortcuts \
-            -p /commands/custom/<Primary>Print \
-            -s "${pkgs.xfce4-screenshooter}/bin/xfce4-screenshooter -r" \
-            --create -t string 2>/dev/null || true
-          ${xfconf} \
-            -c xfce4-keyboard-shortcuts \
-            -p /commands/custom/<Alt>Print \
-            -s "${pkgs.xfce4-screenshooter}/bin/xfce4-screenshooter -w" \
-            --create -t string 2>/dev/null || true
-        '') + ''
+    services.xserver.displayManager.sessionCommands = let
+      xfconf = "${pkgs.xfce.xfconf}/bin/xfconf-query";
+    in
+      # PrintScreen keybinding for xfce4-screenshooter
+      (optionalString cfg.screenshot.enable ''
+        ${xfconf} \
+          -c xfce4-keyboard-shortcuts \
+          -p /commands/custom/Print \
+          -s "${pkgs.xfce4-screenshooter}/bin/xfce4-screenshooter -f" \
+          --create -t string 2>/dev/null || true
+        ${xfconf} \
+          -c xfce4-keyboard-shortcuts \
+          -p /commands/custom/<Primary>Print \
+          -s "${pkgs.xfce4-screenshooter}/bin/xfce4-screenshooter -r" \
+          --create -t string 2>/dev/null || true
+        ${xfconf} \
+          -c xfce4-keyboard-shortcuts \
+          -p /commands/custom/<Alt>Print \
+          -s "${pkgs.xfce4-screenshooter}/bin/xfce4-screenshooter -w" \
+          --create -t string 2>/dev/null || true
+      '')
+      + ''
         # Disable xfwm4 compositor — picom handles compositing instead
         ${xfconf} -c xfwm4 -p /general/use_compositing -s false 2>/dev/null || true
       '';

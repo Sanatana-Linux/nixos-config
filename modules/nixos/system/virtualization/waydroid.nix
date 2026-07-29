@@ -42,11 +42,11 @@ in {
     networking.nftables.enable = true;
 
     environment.systemPackages = with pkgs; [
-      weston          # Fallback Wayland compositor for nested sessions
-      cage            # Minimal Wayland compositor for nested sessions
+      weston # Fallback Wayland compositor for nested sessions
+      cage # Minimal Wayland compositor for nested sessions
       waydroid-helper # Extra Waydroid utilities
-      iptables        # iptables-nft compatibility layer
-      wireplumber     # Session manager for Waydroid audio
+      iptables # iptables-nft compatibility layer
+      wireplumber # Session manager for Waydroid audio
 
       # Launch waydroid in a nested Cage compositor (Intel iGPU for wlroots)
       (pkgs.writeScriptBin "waydroid-session" ''
@@ -200,10 +200,12 @@ in {
     users.groups.waydroid = {};
 
     # Add specified users to the waydroid group
-    users.users = listToAttrs (map (userName:
-      nameValuePair userName {
-        extraGroups = [ "waydroid" ];
-      }
-    ) cfg.users);
+    users.users = listToAttrs (map (
+        userName:
+          nameValuePair userName {
+            extraGroups = ["waydroid"];
+          }
+      )
+      cfg.users);
   };
 }

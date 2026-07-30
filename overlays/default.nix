@@ -70,6 +70,13 @@
         }
     );
 
+    # Top-level poetry override: pkgs.poetry resolves through python3Packages → python3.pkgs,
+    # which is a DIFFERENT code path from python314Packages. The python314Packages override above
+    # doesn't propagate to python3Packages, so we need a direct top-level override too.
+    poetry = prev.poetry.overridePythonAttrs (old: {
+      doCheck = false;
+    });
+
     nps = inputs.nps.defaultPackage.${prev.stdenv.hostPlatform.system};
 
     what-size = prev.yaziPlugins.mkYaziPlugin {
@@ -88,6 +95,9 @@
     # });
 
     efitools = final.stable.efitools;
+
+    # Pin ffmpeg-full to stable to avoid CUDA nvcc build failures on unstable
+    ffmpeg-full = final.stable.ffmpeg-full;
 
     libvirt = prev.libvirt.overrideAttrs (old: {
       postInstall =
@@ -193,6 +203,7 @@
           inkscape-with-extensions
           gimp3-with-plugins
           calibre
+          ffmpeg-full
           ;
       };
   };

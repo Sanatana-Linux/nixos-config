@@ -5,7 +5,16 @@
       firefox-nightly-bin = inputs.firefox-nightly.packages.${final.stdenv.hostPlatform.system}.firefox-nightly-bin;
     };
 
-  modifications = final: prev: {
+  modifications = final: prev: let
+    # Import stable nixpkgs for pinned Python packages
+    stable-pkgs = import inputs.stable {
+      system = final.stdenv.hostPlatform.system;
+      config = {
+        allowUnfree = true;
+        permittedInsecurePackages = ["electron-39.8.10"];
+      };
+    };
+  in {
     # Completely remove torch packages from python312Packages to force use of torch-bin
     # Also disable pipx tests (known upstream assertion failures)
     python312Packages = prev.python312Packages.overrideScope (
@@ -35,6 +44,7 @@
             qemu = python-prev.qemu.overrideAttrs (old: {
               propagatedBuildInputs = (old.propagatedBuildInputs or []) ++ [python-prev.qemu-qmp];
             });
+            black = stable-pkgs.python313Packages.black;
           }) [
           "pytorch-lightning"
           "lightning"
@@ -46,12 +56,16 @@
     );
 
     # Python 3.14 qemu fix: add missing qemu-qmp runtime dependency
+    # Disable poetry 3.14 tests (3 upstream test failures on nixos-unstable)
     python314Packages = prev.python314Packages.overrideScope (
       python-final: python-prev:
         python-prev
         // {
           qemu = python-prev.qemu.overrideAttrs (old: {
             propagatedBuildInputs = (old.propagatedBuildInputs or []) ++ [python-prev.qemu-qmp];
+          });
+          poetry = python-prev.poetry.overridePythonAttrs (old: {
+            doCheck = false;
           });
         }
     );
@@ -178,6 +192,7 @@
           inkscape
           inkscape-with-extensions
           gimp3-with-plugins
+          calibre
           ;
       };
   };

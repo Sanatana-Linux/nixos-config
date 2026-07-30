@@ -27,6 +27,7 @@ in {
         nodejs
         pnpm
         fzf
+        joplin-desktop
         nps
         rofi
         ;

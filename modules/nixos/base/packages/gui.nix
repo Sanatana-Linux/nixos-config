@@ -55,7 +55,7 @@ in {
           mupdf # PDF viewer
           poppler-utils # PDF utilities
           pdftk # PDF toolkit
-          calibre # Comprehensive e-book software with ebook-convert
+          stable.calibre # Stable calibre (unstable cudnn-frontend breaks CUDA build)
 
           # Other
           transmission_4-gtk # BitTorrent client

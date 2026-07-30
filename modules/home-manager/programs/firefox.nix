@@ -130,7 +130,6 @@ in {
           auto-referer
           auto-tab-discard
           bitwarden
-          bypass-paywalls-clean
           cookie-quick-manager
           copy-selection-as-markdown
           don-t-fuck-with-paste

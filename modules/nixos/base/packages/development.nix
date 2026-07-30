@@ -99,6 +99,7 @@ in {
           shellcheck # Shell script analysis tool
           shellharden # Corrective bash syntax highlighter
           shfmt # bash format tool
+          python313Packages.black # Python formatter (from stable nixpkgs)
           prettier # Multi-language formatter
           yamlfmt # Extensible command line tool or library to format yaml files
           rust-analyzer # Rust language server

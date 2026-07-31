@@ -12,7 +12,7 @@ in {
 
     package = mkOption {
       type = types.package;
-      default = pkgs.ollama;
+      default = pkgs.stable.ollama-cuda;
       description = "The Ollama package to use";
     };
   };
@@ -28,7 +28,6 @@ in {
     services.ollama = {
       enable = true;
       package = cfg.package;
-      acceleration = "cuda";
       user = "ollama";
       group = "ollama";
     };

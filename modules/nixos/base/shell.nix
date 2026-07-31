@@ -107,7 +107,6 @@ in {
           beep
           viu
           chafa
-          ueberzugpp
         ]
         ++ optionals cfg.tools.fileManagement [
           tree

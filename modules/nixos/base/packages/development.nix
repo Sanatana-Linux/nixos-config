@@ -64,7 +64,6 @@ in {
 
           # Environment & Build Systems
           direnv # Directory-specific environments
-          poetry # Python dependency manager
           getopt # Command-line option parser
           cmake # Cross-platform build system
           gettext # Internationalization tools

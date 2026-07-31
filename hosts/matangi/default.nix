@@ -156,10 +156,7 @@
     hardware = {
       nvidia = {
         enable = true;
-        cuda = {
-          enable = true;
-          containerRuntime = false;
-        };
+        cuda.enable = true;
         prime = {
           intelBusId = "PCI:00:02:0";
           nvidiaBusId = "PCI:01:00:0";
@@ -175,9 +172,13 @@
           brightness = "High";
           effect = "Static";
         };
+        # Identical hardware to bagalamukhi — use the same TLP tuning
+        # (CPU perf caps, boost control, platform profile forcing) and
+        # battery conservation mode instead of power-profiles-daemon.
         power = {
           enable = true;
-          powerProfilesDaemon = true;
+          powerProfilesDaemon = false;
+          conservationMode = true;
         };
       };
       devices = {
@@ -209,8 +210,6 @@
     enable = true;
     enable32Bit = true;
   };
-
-  hardware.nvidia.forceFullCompositionPipeline = lib.mkForce false;
 
   environment.systemPackages = with pkgs; [
     easyeffects

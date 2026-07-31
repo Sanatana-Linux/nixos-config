@@ -33,6 +33,7 @@
         theme.enable = true;
         advancedBios.enable = true;
         development.enable = true;
+        configurationLimit = 10;
       };
       networking = {
         enable = true;
@@ -96,12 +97,11 @@
 
         # Firewall configuration
         firewall = {
-          enable = false;
+          enable = true;
           allowSSH = true;
           allowHTTP = true; # Port 80
-          allowDevelopment = true; # Port 8000 and other dev ports
-          # customTcpPorts = [
-          # ];
+          allowHTTPS = true; # Port 443
+          allowDevelopment = true; # Ports 3000, 5173, 8000, 8080 (SearXNG/dev), 8443
           logRefusedConnections = true;
           trustedInterfaces = ["lo"]; # localhost (127.0.0.1)
         };
@@ -117,12 +117,12 @@
 
         # Fail2ban for intrusion prevention
         fail2ban = {
-          enable = false;
+          enable = true;
           maxRetry = 5;
           banTime = "1h";
           findTime = "10m";
           enableSSH = true;
-          ignoreIPs = ["127.0.0.1/8" "::1" "192.168.1.0/24"]; # Add your local network
+          ignoreIPs = ["127.0.0.1/8" "::1" "192.168.1.0/24"]; # Whitelist localhost and local network
         };
       };
     };

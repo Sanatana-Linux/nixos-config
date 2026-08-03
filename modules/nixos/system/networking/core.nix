@@ -97,9 +97,10 @@ with lib; {
     # services.resolved.enable = true;
     systemd.services.NetworkManager-wait-online.enable = mkIf config.modules.system.networking.networkmanager.enable false;
 
-    # Disable openresolv's resolvconf.service — when NM is active it manages
-    # /etc/resolv.conf directly. The resolvconf service conflicts.
-    systemd.services.resolvconf.enable = true;
+    # openresolv's resolvconf service is not used — DNS is handled by
+    # NetworkManager directly or by systemd-resolved (resolved module),
+    # which owns the /etc/resolv.conf symlink.
+    systemd.services.resolvconf.enable = false;
 
     # Realtek USB WiFi adapters (both in-kernel rtw88 and out-of-tree
     # rtl88x2bu) often fail to auto-detect the regulatory domain from

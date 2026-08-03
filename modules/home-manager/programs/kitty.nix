@@ -73,14 +73,12 @@ in {
         "kitty_mod+down" = "neighboring_window down";
 
         "alt+t" = "new_tab_with_cwd";
-        "alt+v" = "launch --cwd=current --location=vsplit";
-        "alt+h" = "launch --cwd=current --location=hsplit";
-        "alt+n" = "next_tab";
-        "alt+b" = "previous_tab";
+        "alt+/" = "launch --cwd=current --location=vsplit";
+        "alt+-" = "launch --cwd=current --location=hsplit";
+        "alt+." = "next_tab";
+        "alt+," = "previous_tab";
         "alt+q" = "close_tab";
         "alt+shift+q" = "close_window";
-        "alt+," = "move_tab_backward";
-        "alt+." = "move_tab_forward";
 
         "alt+1" = "goto_tab 1";
         "alt+2" = "goto_tab 2";
@@ -104,11 +102,11 @@ in {
       extraConfig = ''
         # https://www.reddit.com/r/KittyTerminal/comments/1ijwbo1/comment/mbsof9t/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
         enabled_layouts splits
-        # Vertical split: kitty_mod + /
-        map ctrl+shift+/ launch --location vsplit
+        # Vertical split: shift+alt + /
+        map shift+alt+/ launch --location vsplit
 
-        # Horizontal split: kitty_mod + -
-        map ctrl+shift+- launch --location hsplit
+        # Horizontal split: shift+alt + -
+        map shift+alt+- launch --location hsplit
       '';
 
       # Font configuration disabled - managed by Stylix for consistency

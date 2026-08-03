@@ -76,7 +76,8 @@ in {
       targets.plymouth.enable = true;
       targets.console.enable = true;
 
-      # Desktop environment targets - just enable GTK, theme will be overridden by home-manager
+      # GTK theme — sharabha-gtk-theme is set via home-manager GTK module
+      # (stylix generates the GTK CSS, home-manager sets the theme package/name)
       targets.gtk.enable = true;
 
       targets.qt.enable = true;
@@ -90,9 +91,9 @@ in {
       targets.gnome.enable = false;
     };
 
-    # Ensure materia-theme is available system-wide
+    # Ensure gnome-themes-extra is available system-wide
     environment.systemPackages = with pkgs; [
-      materia-theme
+      gnome-themes-extra
       colloid-icon-theme
     ];
 

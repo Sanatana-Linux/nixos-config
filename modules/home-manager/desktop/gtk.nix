@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }:
 with lib; let
@@ -34,7 +35,7 @@ in {
     # Essential GTK and Qt packages for proper theming support
     home.packages = with pkgs; [
       # Theme packages
-      materia-theme-transparent
+      gnome-themes-extra
       colloid-icon-theme
 
       # Libadwaita and schema support packages
@@ -55,14 +56,14 @@ in {
       cfg.cursor.package
     ];
 
-    # GTK Configuration - FORCE Materia-dark-compact theme
+    # GTK Configuration - sharabha-gtk-theme (skeuomorphic dark, matches Sanatana palette)
     gtk = {
       enable = true;
 
-      # Force Materia theme - override Stylix completely
+      # sharabha-gtk-theme - matches the Sanatana Linux base16 palette used by Stylix
       theme = mkForce {
-        name = "Materia-dark-compact";
-        package = pkgs.materia-theme-transparent;
+        name = "sharabha-gtk-theme";
+        package = inputs.sharabha-gtk.packages.${pkgs.system}.default;
       };
 
       # Force icon theme
@@ -80,13 +81,13 @@ in {
 
       # Explicitly set GTK4 theme preference but allow libadwaita override
       gtk4.theme = mkDefault {
-        name = "Materia-dark-compact";
-        package = pkgs.materia-theme-transparent;
+        name = "sharabha-gtk-theme";
+        package = inputs.sharabha-gtk.packages.${pkgs.system}.default;
       };
 
       # GTK2 configuration
       gtk2.extraConfig = ''
-        gtk-theme-name="Materia-dark-compact"
+        gtk-theme-name="sharabha-gtk-theme"
         gtk-icon-theme-name="Colloid-dark"
         gtk-cursor-theme-name="${cfg.cursor.name}"
             gtk-cursor-theme-size=${toString cfg.cursor.size}
@@ -104,7 +105,7 @@ in {
 
       # GTK3 configuration
       gtk3.extraConfig = {
-        gtk-theme-name = mkForce "Materia-dark-compact";
+        gtk-theme-name = mkForce "sharabha-gtk-theme";
         gtk-icon-theme-name = mkForce "Colloid-dark";
         gtk-cursor-theme-name = mkForce cfg.cursor.name;
         gtk-cursor-theme-size = mkForce cfg.cursor.size;
@@ -127,8 +128,8 @@ in {
 
     # Environment variables for GTK theme and cursor theme
     home.sessionVariables = {
-      # Use Materia theme for most GTK apps, but allow libadwaita apps to override
-      GTK_THEME = mkDefault "Materia-dark-compact";
+      # Use sharabha-gtk-theme for most GTK apps, but allow libadwaita apps to override
+      GTK_THEME = mkDefault "sharabha-gtk-theme";
       # Ensure proper schema loading for GSettings/dconf
       GSETTINGS_SCHEMA_DIR = "${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}/glib-2.0/schemas";
       # Allow libadwaita apps to use native theming
@@ -175,7 +176,7 @@ in {
     # dconf settings for dark theme preference and cursor theme
     dconf.settings = {
       "org/gnome/desktop/interface" = {
-        gtk-theme = mkDefault "Materia-dark-compact";
+        gtk-theme = mkDefault "sharabha-gtk-theme";
         icon-theme = mkDefault "Colloid-dark";
         color-scheme = mkForce "prefer-dark";
         # Force cursor theme in GNOME/GTK settings

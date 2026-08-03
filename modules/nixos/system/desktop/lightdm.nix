@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }:
 with lib; {
@@ -20,24 +21,16 @@ with lib; {
       enable = true;
       background = ./assets/wallpaper.png;
 
-      greeters.slick = {
+      greeters.ganapati = {
         enable = true;
-        theme = {
-          package = pkgs.materia-theme-transparent;
-          name = "Materia-dark-compact";
-        };
-        iconTheme = {
-          package = pkgs.colloid-icon-theme;
-          name = "Colloid-dark";
-        };
-        cursorTheme = {
-          package = pkgs.phinger-cursors;
-          name = "phinger-cursors-light";
-          size = 32;
-        };
-        draw-user-backgrounds = false;
+        themeName = "sharabha-gtk-theme";
       };
     };
+
+    # Install sharabha-gtk-theme system-wide so the greeter can find it
+    environment.systemPackages = [
+      inputs.sharabha-gtk.packages.${pkgs.system}.default
+    ];
 
     # Configure LightDM settings if numlock is enabled
     services.xserver.displayManager.lightdm.extraConfig = lib.mkIf config.modules.system.desktop.lightdm.autoNumlock ''

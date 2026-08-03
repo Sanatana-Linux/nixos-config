@@ -54,6 +54,16 @@
       url = "github:numtide/llm-agents.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    greeter-ganapati = {
+      url = "github:Sanatana-Linux/lightdm-greeter-ganapati";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    sharabha-gtk = {
+      url = "github:Sanatana-Linux/sharabha-gtk-theme";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -63,6 +73,7 @@
     home-manager,
     stylix,
     bhairava-grub-theme,
+    sharabha-gtk,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -131,6 +142,7 @@
           inputs.bhairava-grub-theme.nixosModule
           inputs.nix-index-database.nixosModules.nix-index
           inputs.home-manager.nixosModules.home-manager
+          inputs.greeter-ganapati.nixosModules.default
           ./modules/nixos
           {
             home-manager = {
@@ -159,6 +171,7 @@
           inputs.nixos-hardware.nixosModules.lenovo-legion-16irx9h
           inputs.bhairava-grub-theme.nixosModule
           inputs.home-manager.nixosModules.home-manager
+          inputs.greeter-ganapati.nixosModules.default
           ./modules/nixos
           {
             home-manager = {
@@ -185,6 +198,7 @@
           inputs.bhairava-grub-theme.nixosModule
           inputs.home-manager.nixosModules.home-manager
           inputs.nixos-generators.nixosModules.all-formats
+          inputs.greeter-ganapati.nixosModules.default
           ./modules/nixos
           {
             home-manager = {
@@ -214,6 +228,7 @@
           inputs.nur.modules.nixos.default
           inputs.bhairava-grub-theme.nixosModule
           inputs.home-manager.nixosModules.home-manager
+          inputs.greeter-ganapati.nixosModules.default
           ./modules/nixos
           {
             home-manager = {

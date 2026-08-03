@@ -71,6 +71,16 @@
         };
       };
       multimedia.enable = true;
+      sleep = {
+        enable = true;
+        lidCloseAction = "suspend";
+        lidCloseActionExternalPower = "lock";
+        powerKeyAction = "suspend";
+        powerKeyLongPressAction = "poweroff";
+        idleAction = "suspend";
+        idleTimeout = "20min";
+        criticalBatteryAction = "Hibernate";
+      };
     };
 
     base = {
@@ -231,11 +241,6 @@
   };
 
   services = {
-    logind.settings.Login = {
-      HandleLidSwitch = "suspend";
-      HandlePowerKey = "ignore";
-      HandlePowerKeyLongPress = "suspend";
-    };
     displayManager.defaultSession = "xfce";
   };
 

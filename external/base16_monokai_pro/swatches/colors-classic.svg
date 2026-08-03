@@ -5,52 +5,52 @@
     .hex-label { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; font-size: 11px; text-anchor: middle; }
   </style>
 
-  <rect x="30" y="20" width="100" height="100" rx="8" fill="#161613"/>
+  <rect x="30" y="20" width="100" height="100" rx="8" fill="#161613" stroke="#ffffff" stroke-width="3"/>
   <text x="80" y="140" class="hex-label" fill="#e0e0e0">#161613</text>
 
-  <rect x="150" y="20" width="100" height="100" rx="8" fill="#1d1e19"/>
+  <rect x="150" y="20" width="100" height="100" rx="8" fill="#1d1e19" stroke="#ffffff" stroke-width="3"/>
   <text x="200" y="140" class="hex-label" fill="#e0e0e0">#1d1e19</text>
 
-  <rect x="270" y="20" width="100" height="100" rx="8" fill="#272822"/>
+  <rect x="270" y="20" width="100" height="100" rx="8" fill="#272822" stroke="#ffffff" stroke-width="3"/>
   <text x="320" y="140" class="hex-label" fill="#e0e0e0">#272822</text>
 
-  <rect x="390" y="20" width="100" height="100" rx="8" fill="#6e7066"/>
+  <rect x="390" y="20" width="100" height="100" rx="8" fill="#6e7066" stroke="#ffffff" stroke-width="3"/>
   <text x="440" y="140" class="hex-label" fill="#e0e0e0">#6e7066</text>
 
-  <rect x="30" y="160" width="100" height="100" rx="8" fill="#919288"/>
+  <rect x="30" y="160" width="100" height="100" rx="8" fill="#919288" stroke="#ffffff" stroke-width="3"/>
   <text x="80" y="280" class="hex-label" fill="#e0e0e0">#919288</text>
 
-  <rect x="150" y="160" width="100" height="100" rx="8" fill="#c0c1b5"/>
+  <rect x="150" y="160" width="100" height="100" rx="8" fill="#c0c1b5" stroke="#ffffff" stroke-width="3"/>
   <text x="200" y="280" class="hex-label" fill="#e0e0e0">#c0c1b5</text>
 
-  <rect x="270" y="160" width="100" height="100" rx="8" fill="#deded3"/>
+  <rect x="270" y="160" width="100" height="100" rx="8" fill="#deded3" stroke="#ffffff" stroke-width="3"/>
   <text x="320" y="280" class="hex-label" fill="#e0e0e0">#deded3</text>
 
-  <rect x="390" y="160" width="100" height="100" rx="8" fill="#fdfff1"/>
+  <rect x="390" y="160" width="100" height="100" rx="8" fill="#fdfff1" stroke="#ffffff" stroke-width="3"/>
   <text x="440" y="280" class="hex-label" fill="#e0e0e0">#fdfff1</text>
 
-  <rect x="30" y="300" width="100" height="100" rx="8" fill="#f92672"/>
+  <rect x="30" y="300" width="100" height="100" rx="8" fill="#f92672" stroke="#ffffff" stroke-width="3"/>
   <text x="80" y="420" class="hex-label" fill="#e0e0e0">#f92672</text>
 
-  <rect x="150" y="300" width="100" height="100" rx="8" fill="#fd971f"/>
+  <rect x="150" y="300" width="100" height="100" rx="8" fill="#fd971f" stroke="#ffffff" stroke-width="3"/>
   <text x="200" y="420" class="hex-label" fill="#e0e0e0">#fd971f</text>
 
-  <rect x="270" y="300" width="100" height="100" rx="8" fill="#e6db74"/>
+  <rect x="270" y="300" width="100" height="100" rx="8" fill="#e6db74" stroke="#ffffff" stroke-width="3"/>
   <text x="320" y="420" class="hex-label" fill="#e0e0e0">#e6db74</text>
 
-  <rect x="390" y="300" width="100" height="100" rx="8" fill="#a6e22e"/>
+  <rect x="390" y="300" width="100" height="100" rx="8" fill="#a6e22e" stroke="#ffffff" stroke-width="3"/>
   <text x="440" y="420" class="hex-label" fill="#e0e0e0">#a6e22e</text>
 
-  <rect x="30" y="440" width="100" height="100" rx="8" fill="#66d9ef"/>
+  <rect x="30" y="440" width="100" height="100" rx="8" fill="#66d9ef" stroke="#ffffff" stroke-width="3"/>
   <text x="80" y="560" class="hex-label" fill="#e0e0e0">#66d9ef</text>
 
-  <rect x="150" y="440" width="100" height="100" rx="8" fill="#78a0ff"/>
+  <rect x="150" y="440" width="100" height="100" rx="8" fill="#78a0ff" stroke="#ffffff" stroke-width="3"/>
   <text x="200" y="560" class="hex-label" fill="#e0e0e0">#78a0ff</text>
 
-  <rect x="270" y="440" width="100" height="100" rx="8" fill="#ae81ff"/>
+  <rect x="270" y="440" width="100" height="100" rx="8" fill="#ae81ff" stroke="#ffffff" stroke-width="3"/>
   <text x="320" y="560" class="hex-label" fill="#e0e0e0">#ae81ff</text>
 
-  <rect x="390" y="440" width="100" height="100" rx="8" fill="#fd971f"/>
+  <rect x="390" y="440" width="100" height="100" rx="8" fill="#fd971f" stroke="#ffffff" stroke-width="3"/>
   <text x="440" y="560" class="hex-label" fill="#e0e0e0">#fd971f</text>
 
 </svg>

@@ -12,7 +12,7 @@ in {
 
     package = mkOption {
       type = types.package;
-      default = pkgs.ollama;
+      default = pkgs.ollama-cuda;
       description = "The Ollama package to use";
     };
   };

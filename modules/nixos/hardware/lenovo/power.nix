@@ -88,16 +88,6 @@ in {
           STOP_CHARGE_THRESH_BAT0 = cfg.stopChargeThreshold;
         };
       };
-
-      upower = {
-        enable = true;
-        # Adjusts the action taken at the point of the battery being critical
-        criticalPowerAction = "Hibernate";
-        percentageLow = 15;
-        percentageCritical = 8;
-        percentageAction = 3;
-        usePercentageForPolicy = true;
-      };
     };
 
     # Battery conservation mode via legion_cli — stops charging at ~80%

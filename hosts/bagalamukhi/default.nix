@@ -87,6 +87,16 @@
         zram.enable = true;
       };
       multimedia.enable = true;
+      sleep = {
+        enable = true;
+        lidCloseAction = "suspend";
+        lidCloseActionExternalPower = "lock";
+        powerKeyAction = "suspend";
+        powerKeyLongPressAction = "poweroff";
+        idleAction = "suspend";
+        idleTimeout = "20min";
+        criticalBatteryAction = "Hibernate";
+      };
       security = {
         doas = {
           enable = true;
@@ -260,13 +270,6 @@
   };
 
   services = {
-    logind.settings.Login = {
-      HandleLidSwitch = "lock";
-      HandlePowerKey = "lock";
-      HandlePowerKeyLongPress = "suspend";
-      IdleAction = "suspend";
-      IdleActionSec = "15min";
-    };
     displayManager.defaultSession = "none+awesome";
   };
 

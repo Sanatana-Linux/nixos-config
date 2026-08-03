@@ -257,7 +257,7 @@ in {
           "gfx.webgpu.force-enabled" = true;
           "widget.dmabuf.force-enabled" = true;
           "widget.gtk.rounded-bottom-corners.enabled" = true;
-          "widget.content.gtk-theme-override" = "Materia-Dark-Compact";
+          "widget.content.gtk-theme-override" = "sharabha-gtk-theme";
           "widget.use-xdg-desktop-portal" = true;
           "widget.use-xdg-desktop-portal.mime-handler" = true;
           "xpinstall.signatures.required" = false;

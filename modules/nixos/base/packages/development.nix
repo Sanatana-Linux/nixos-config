@@ -84,7 +84,6 @@ in {
           # Browsing & Search
           surfraw # Shell web search
           lynx # Text web browser
-          feather # Lightweight note-taking
         ]
         # Linters
         ++ optionals cfg.linters [

@@ -36,6 +36,9 @@ in {
     };
   };
 
+  # om — NixOS Operations Manager (Zig), replaces the old bash wrapper
+  programs.om.enable = true;
+
   # Enable modules using the "activate by enable option" paradigm
   # Live ISO configuration with essential features
   modules = {

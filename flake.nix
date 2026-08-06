@@ -64,6 +64,11 @@
       url = "github:Sanatana-Linux/sharabha-gtk-theme";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    om = {
+      url = "github:Sanatana-Linux/om";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -74,6 +79,7 @@
     stylix,
     bhairava-grub-theme,
     sharabha-gtk,
+    om,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -143,6 +149,7 @@
           inputs.nix-index-database.nixosModules.nix-index
           inputs.home-manager.nixosModules.home-manager
           inputs.greeter-ganapati.nixosModules.default
+          inputs.om.nixosModules.om
           ./modules/nixos
           {
             home-manager = {
@@ -172,6 +179,7 @@
           inputs.bhairava-grub-theme.nixosModule
           inputs.home-manager.nixosModules.home-manager
           inputs.greeter-ganapati.nixosModules.default
+          inputs.om.nixosModules.om
           ./modules/nixos
           {
             home-manager = {
@@ -199,6 +207,7 @@
           inputs.home-manager.nixosModules.home-manager
           inputs.nixos-generators.nixosModules.all-formats
           inputs.greeter-ganapati.nixosModules.default
+          inputs.om.nixosModules.om
           ./modules/nixos
           {
             home-manager = {
@@ -229,6 +238,7 @@
           inputs.bhairava-grub-theme.nixosModule
           inputs.home-manager.nixosModules.home-manager
           inputs.greeter-ganapati.nixosModules.default
+          inputs.om.nixosModules.om
           ./modules/nixos
           {
             home-manager = {

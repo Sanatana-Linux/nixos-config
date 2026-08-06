@@ -725,6 +725,26 @@
         "type": "github"
       }
     },
+    "om": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1786059189,
+        "narHash": "sha256-cYGVV+8xNcoSx6j8iyKVDdNikjPNVIl0tBOa0NMQlBQ=",
+        "owner": "Sanatana-Linux",
+        "repo": "om",
+        "rev": "d3d62dae3f839659d6ce90497d0618180aff8659",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Sanatana-Linux",
+        "repo": "om",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "bhairava-grub-theme": "bhairava-grub-theme",
@@ -739,6 +759,7 @@
         "nixpkgs": "nixpkgs_2",
         "nps": "nps",
         "nur": "nur",
+        "om": "om",
         "sharabha-gtk": "sharabha-gtk",
         "sops-nix": "sops-nix",
         "stable": "stable",

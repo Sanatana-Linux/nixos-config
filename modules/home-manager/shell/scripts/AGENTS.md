@@ -11,7 +11,6 @@ Custom shell scripts packaged as Nix derivations and added to the user's PATH vi
 | File | Description |
 |------|-------------|
 | `default.nix` | Module entry — imports all scripts, adds them to `home.packages` when `modules.shell.scripts.enable = true` |
-| `om.nix` | `om` — NixOS administration wrapper (rebuild, clean, sync, search, build-iso, build-qcow, etc.) |
 | `gita.nix` | `gita` — Quick git add/commit/push with timestamped message |
 | `nixfetch.nix` | `nixfetch` — NixOS system info display (OS, kernel, DE/WM, package count) with Nix logo |
 | `mountbox.nix` | `mountbox` — Mount Dropbox and Google Drive remotes via rclone |
@@ -28,6 +27,5 @@ Custom shell scripts packaged as Nix derivations and added to the user's PATH vi
 - Scripts are imported in `default.nix` with `{inherit pkgs;}` — no lib/config needed
 - To add a new script: create `new-script.nix`, import it in `default.nix`, add to `home.packages` list
 - The `ns` script is the only one sourced from a raw `.sh` file via `builtins.readFile`
-- `om` is the primary NixOS management script — changes here affect all admin workflows
 
 <!-- MANUAL: Any manually added notes below this line are preserved on regeneration -->

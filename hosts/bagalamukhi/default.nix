@@ -21,6 +21,9 @@
     outputs.overlays.cachyos-patches
   ];
 
+  # om — NixOS Operations Manager (Zig), replaces the old bash wrapper
+  programs.om.enable = true;
+
   modules = {
     # System
     system = {

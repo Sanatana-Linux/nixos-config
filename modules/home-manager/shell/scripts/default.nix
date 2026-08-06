@@ -6,7 +6,6 @@
 }:
 with lib; let
   cfg = config.modules.shell.scripts;
-  om = import ./om.nix {inherit pkgs;};
   scripts = import ./scripts.nix {inherit pkgs;};
 in {
   options.modules.shell.scripts = {
@@ -14,6 +13,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    home.packages = [om] ++ scripts;
+    home.packages = scripts;
   };
 }

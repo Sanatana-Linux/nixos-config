@@ -4,7 +4,7 @@
 # desktop/
 
 ## Purpose
-Home-manager desktop environment modules. Configures AwesomeWM symlink to the external git submodule, GTK theme/cursor/icon settings with forced overrides (Materia-dark-compact + Colloid-dark), Qt integration, and X11 resources with Monokai Pro Spectrum colors. The top-level `modules.desktop.enable` auto-enables GTK by default.
+Home-manager desktop environment modules. Configures AwesomeWM symlink to the external git submodule, GTK theme/cursor/icon settings with forced overrides (sharabha-gtk-theme + Colloid-dark), Qt integration, and X11 resources with Monokai Pro Spectrum colors. The top-level `modules.desktop.enable` auto-enables GTK by default.
 
 ## Key Files
 

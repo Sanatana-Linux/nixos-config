@@ -63,7 +63,7 @@ in {
       # sharabha-gtk-theme - matches the Sanatana Linux base16 palette used by Stylix
       theme = mkForce {
         name = "sharabha-gtk-theme";
-        package = inputs.sharabha-gtk.packages.${pkgs.system}.default;
+        package = inputs.sharabha-gtk.packages.${pkgs.stdenv.hostPlatform.system}.default;
       };
 
       # Force icon theme
@@ -82,7 +82,7 @@ in {
       # Explicitly set GTK4 theme preference but allow libadwaita override
       gtk4.theme = mkDefault {
         name = "sharabha-gtk-theme";
-        package = inputs.sharabha-gtk.packages.${pkgs.system}.default;
+        package = inputs.sharabha-gtk.packages.${pkgs.stdenv.hostPlatform.system}.default;
       };
 
       # GTK2 configuration
@@ -109,6 +109,7 @@ in {
         gtk-icon-theme-name = mkForce "Colloid-dark";
         gtk-cursor-theme-name = mkForce cfg.cursor.name;
         gtk-cursor-theme-size = mkForce cfg.cursor.size;
+        gtk-application-prefer-dark-theme = mkForce "1";
         gtk-decoration-layout = mkDefault "menu:";
         gtk-button-images = mkDefault "1";
         gtk-menu-images = mkDefault "1";
@@ -120,7 +121,7 @@ in {
 
       # GTK4 configuration - allow libadwaita apps to use native theming
       gtk4.extraConfig = {
-        # Use default for libadwaita apps, Materia for others
+        gtk-application-prefer-dark-theme = mkForce "1";
         gtk-decoration-layout = mkDefault "menu:";
         gtk-enable-animations = mkDefault true;
       };
@@ -129,7 +130,9 @@ in {
     # Environment variables for GTK theme and cursor theme
     home.sessionVariables = {
       # Use sharabha-gtk-theme for most GTK apps, but allow libadwaita apps to override
-      GTK_THEME = mkDefault "sharabha-gtk-theme";
+      GTK_THEME = mkForce "sharabha-gtk-theme";
+      # Always prefer the dark variant when a theme ships light+dark variants
+      GTK_THEME_VARIANT = mkDefault "dark";
       # Ensure proper schema loading for GSettings/dconf
       GSETTINGS_SCHEMA_DIR = "${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}/glib-2.0/schemas";
       # Allow libadwaita apps to use native theming
@@ -179,6 +182,7 @@ in {
         gtk-theme = mkDefault "sharabha-gtk-theme";
         icon-theme = mkDefault "Colloid-dark";
         color-scheme = mkForce "prefer-dark";
+        gtk-application-prefer-dark-theme = mkForce true;
         # Force cursor theme in GNOME/GTK settings
         cursor-theme = mkForce cfg.cursor.name;
         cursor-size = mkForce cfg.cursor.size;

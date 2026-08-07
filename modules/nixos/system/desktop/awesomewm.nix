@@ -136,6 +136,8 @@ in {
           libxcb-render-util
           libxcb-errors
           xdotool
+          xprintidle
+          xautolock
           xsel
           screenkey
           xsettingsd

@@ -29,7 +29,7 @@ with lib; {
 
     # Install sharabha-gtk-theme system-wide so the greeter can find it
     environment.systemPackages = [
-      inputs.sharabha-gtk.packages.${pkgs.system}.default
+      inputs.sharabha-gtk.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
 
     # Configure LightDM settings if numlock is enabled

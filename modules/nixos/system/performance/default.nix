@@ -9,6 +9,7 @@ with lib; let
 in {
   imports = [
     ./cachy.nix
+    ./hugepages.nix
     ./oomd.nix
     ./undervolt.nix
     ./zram.nix
@@ -25,6 +26,7 @@ in {
       oomd.enable = mkDefault true;
       cachy.enable = mkDefault true;
       undervolt.enable = mkDefault true;
+      hugepages.enable = mkDefault true;
     };
 
     # Performance analysis tools

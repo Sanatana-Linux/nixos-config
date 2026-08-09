@@ -77,8 +77,8 @@
       sleep = {
         enable = true;
         lidCloseAction = "suspend";
-        lidCloseActionExternalPower = "lock";
-        powerKeyAction = "suspend";
+        lidCloseActionExternalPower = "suspend";
+        powerKeyAction = "ask";
         powerKeyLongPressAction = "poweroff";
         idleAction = "suspend";
         idleTimeout = "20min";
@@ -138,9 +138,9 @@
         };
         python = {
           enable = true;
-          development = true;
+          development = false;
           webDevelopment = false;
-          dataProcessing = true;
+          dataProcessing = false;
           systemIntegration = true;
           graphics = true;
         };
@@ -216,7 +216,6 @@
   services.xserver = {
     enable = true;
     videoDrivers = ["nvidia"];
-    dpi = lib.mkForce 96;
   };
 
   hardware.graphics = {

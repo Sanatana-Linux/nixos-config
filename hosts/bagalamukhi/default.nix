@@ -116,7 +116,7 @@
           allowHTTPS = true; # Port 443
           allowDevelopment = true; # Ports 3000, 5173, 8000, 8080 (SearXNG/dev), 8443
           logRefusedConnections = true;
-          trustedInterfaces = ["lo"]; # localhost (127.0.0.1)
+          trustedInterfaces = ["lo" "localhost" "127.0.0.1"]; # localhost (127.0.0.1)
         };
 
         # SSH configuration with password authentication enabled
@@ -264,7 +264,6 @@
   services.xserver = {
     enable = true;
     videoDrivers = ["nvidia"];
-    dpi = lib.mkForce 96;
   };
 
   # Keep nixos-hardware's Intel GPU driver aligned with the project's

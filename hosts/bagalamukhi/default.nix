@@ -267,6 +267,11 @@
     dpi = lib.mkForce 96;
   };
 
+  # Keep nixos-hardware's Intel GPU driver aligned with the project's
+  # intel.nix packageOverrides so both resolve to the same hybrid-codec
+  # intel-vaapi-driver build — otherwise graphics-drivers collides.
+  hardware.intelgpu.enableHybridCodec = true;
+
   hardware.graphics = {
     enable = true;
     enable32Bit = true;

@@ -99,6 +99,12 @@
     # Pin ffmpeg-full to stable to avoid CUDA nvcc build failures on unstable
     ffmpeg-full = final.stable.ffmpeg-full;
 
+    # frei0r: CUDA-enabled opencv's OpenCVConfig.cmake calls find_package(CUDAToolkit),
+    # which requires nvcc at configure time. frei0r doesn't declare it, so add it.
+    frei0r = prev.frei0r.overrideAttrs (old: {
+      nativeBuildInputs = (old.nativeBuildInputs or []) ++ [final.cudaPackages.cuda_nvcc];
+    });
+
     libvirt = prev.libvirt.overrideAttrs (old: {
       postInstall =
         (old.postInstall or "")

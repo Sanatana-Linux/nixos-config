@@ -113,12 +113,34 @@ This project uses OpenCode with Hubs orchestration. Configuration lives in `.ope
 ### Agent Routing
 
 For this Nix/NixOS configuration project:
-- **NixOS module changes** → `executor` (default for .nix edits)
-- **Architecture decisions** → `architect` (flake structure, module refactoring)
-- **Bug investigation** → `debugger` (nixos-rebuild errors, eval trace)
-- **Security review** → `security-reviewer` (firewall, ssh, doas rules)
-- **Code review** → `code-reviewer` (module patterns, overlay correctness)
+- **NixOS module changes** → `executor` (default for .nix edits) — use `nixos-module` skill
+- **Architecture decisions** → `architect` (flake structure, module refactoring) — use `nixos-ops`, `ultimate-nixos`
+- **Bug investigation** → `debugger` (nixos-rebuild errors, eval trace) — use `nixos-debug`
+- **Security review** → `security-reviewer` (firewall, ssh, doas rules) — use `nix-secrets`
+- **Code review** → `code-reviewer` (module patterns, overlay correctness) — use `nix-best-practices`, `ultimate-nixos`
 - **Testing** → `verifier` (nixos-rebuild build, flake check)
+
+### Skills
+
+Project skills live in `.opencode/skills/` (registered in `.opencode/opencode.jsonc`). Nix-specific skills:
+
+| Skill | Purpose |
+|-------|---------|
+| `nixos-module` | Author enable-by-option NixOS/home-manager modules |
+| `nix-flake-ops` | Flake input/lock maintenance |
+| `nixos-debug` | Diagnose NixOS build/eval/activation failures |
+| `nix-secrets` | sops-nix secrets operations |
+| `nix-service-scripts` | systemd service scripts in Nix modules |
+| `nixos-best-practices` | Overlay scope / useGlobalPkgs / config structure |
+| `nix-packaging-best-practices` | Packaging pre-compiled binaries |
+| `nixos-btw` | General NixOS/Nix administration (rebuild verbs, rollback, store hygiene) |
+| `ultimate-nixos` | Nix ecosystem reasoning (derivations, modules, overlays, packaging, security) |
+| `nixos-ops` | Multi-host deployment & repo architecture |
+| `nixos-managing` | Rebuild/config/images/secrets management |
+| `nix-best-practices` | Flake structure, follows, overlays, unfree packages |
+| `nix-ecosystem-guide` | Foundational Nix concepts and gotchas |
+| `nixos-docs-reference` | Official docs index mapped to this repo |
+| `nixos-build-lock` | Concurrent-build lock + SOPS secrecy guard |
 
 ## Context Files
 

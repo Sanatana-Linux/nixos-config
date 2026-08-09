@@ -28,7 +28,8 @@
     ".opencode/rules/comment-style.md",
     ".opencode/rules/nix-service-scripts.md",
     ".opencode/rules/nix-module-patterns.md",
-    ".opencode/rules/nix-secrets-management.md"
+    ".opencode/rules/nix-secrets-management.md",
+    ".opencode/rules/nix-pkgs-system-deprecation.md"
   ],
   "tools": {
     "nix-build": true,
@@ -44,7 +45,15 @@
       ".opencode/skills/nix-secrets",
       ".opencode/skills/nix-service-scripts",
       ".opencode/skills/nixos-best-practices",
-      ".opencode/skills/nix-packaging-best-practices"
+      ".opencode/skills/nix-packaging-best-practices",
+      ".opencode/skills/nixos-btw",
+      ".opencode/skills/ultimate-nixos",
+      ".opencode/skills/nixos-ops",
+      ".opencode/skills/nixos-managing",
+      ".opencode/skills/nix-best-practices",
+      ".opencode/skills/nix-ecosystem-guide",
+      ".opencode/skills/nixos-docs-reference",
+      ".opencode/skills/nixos-build-lock"
     ]
   }
 }

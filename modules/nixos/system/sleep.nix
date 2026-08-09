@@ -72,25 +72,21 @@ in {
   };
 
   config = mkIf cfg.enable {
-    services.logind = {
+    services.logind.settings.Login = {
       # Lid switch
-      lidSwitch = cfg.lidCloseAction;
-      lidSwitchExternalPower =
+      HandleLidSwitch = cfg.lidCloseAction;
+      HandleLidSwitchExternalPower =
         if cfg.lidCloseActionExternalPower != null
         then cfg.lidCloseActionExternalPower
         else cfg.lidCloseAction;
 
       # Power button
-      powerKey = cfg.powerKeyAction;
-      powerKeyLongPress = cfg.powerKeyLongPressAction;
+      HandlePowerKey = cfg.powerKeyAction;
+      HandlePowerKeyLongPress = cfg.powerKeyLongPressAction;
 
-      # Idle — set via raw settings since idleAction/idleActionSec aren't direct NixOS options
-      settings = {
-        Login = {
-          IdleAction = cfg.idleAction;
-          IdleActionSec = cfg.idleTimeout;
-        };
-      };
+      # Idle
+      IdleAction = cfg.idleAction;
+      IdleActionSec = cfg.idleTimeout;
     };
 
     services.upower = {

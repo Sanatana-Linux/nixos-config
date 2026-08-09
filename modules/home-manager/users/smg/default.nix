@@ -57,6 +57,40 @@
       "window_type = 'desktop'"
       "_GTK_FRAME_EXTENTS@"
     ];
+
+    # ── Menu lag fix ────────────────────────────────────────────────
+    # GIMP 3 (and other GTK apps) open File/menu as popup/dropdown/tooltip
+    # windows. With fading + opacity animation enabled, every menu open
+    # triggers a multi-frame re-composite on the NVIDIA dGPU (PRIME sync +
+    # GLX), causing visible stutter on "basic" actions like opening a menu.
+    # Render these window types directly: no fade, no shadow, full opacity,
+    # no blur. Menus appear instantly.
+    wintypes = {
+      popup_menu = {
+        fade = lib.mkForce false;
+        shadow = lib.mkForce false;
+        opacity = lib.mkForce 1.0;
+        blur = lib.mkForce false;
+      };
+      dropdown_menu = {
+        fade = lib.mkForce false;
+        shadow = lib.mkForce false;
+        opacity = lib.mkForce 1.0;
+        blur = lib.mkForce false;
+      };
+      tooltip = {
+        fade = lib.mkForce false;
+        shadow = lib.mkForce false;
+        opacity = lib.mkForce 1.0;
+        blur = lib.mkForce false;
+      };
+      utility = {
+        fade = lib.mkForce false;
+        shadow = lib.mkForce false;
+        opacity = lib.mkForce 1.0;
+        blur = lib.mkForce false;
+      };
+    };
   };
 
   nixpkgs = {

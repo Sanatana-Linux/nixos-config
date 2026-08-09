@@ -76,13 +76,13 @@
       multimedia.enable = true;
       sleep = {
         enable = true;
-        lidCloseAction = "suspend";
-        lidCloseActionExternalPower = "suspend";
-        powerKeyAction = "ask";
+        lidCloseAction = "ignore";
+        lidCloseActionExternalPower = "ignore";
+        powerKeyAction = "ignore";
         powerKeyLongPressAction = "poweroff";
-        idleAction = "suspend";
+        idleAction = "ignore";
         idleTimeout = "20min";
-        criticalBatteryAction = "Hibernate";
+        criticalBatteryAction = "suspend";
       };
     };
 

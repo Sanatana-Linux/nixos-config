@@ -37,59 +37,14 @@
       neovim.enable = true;
     };
     services = {
+      # Picom disabled on matangi — its GLX compositing (fade/opacity/blur on
+      # menu windows) caused GIMP 3 menu lag on the NVIDIA PRIME-sync stack.
+      # xfwm4 compositing is also disabled below, so windows render directly.
       picom = {
-        enable = true;
+        enable = false;
       };
       xscreensaver.enable = true;
       polkit-agent.enable = true;
-    };
-  };
-
-  services.picom.settings = {
-    shadow = lib.mkForce false;
-    rounded-corners-exclude = [
-      "window_type = 'dock'"
-      "window_type = 'desktop'"
-      "_GTK_FRAME_EXTENTS@"
-    ];
-    blur-background-exclude = [
-      "window_type = 'dock'"
-      "window_type = 'desktop'"
-      "_GTK_FRAME_EXTENTS@"
-    ];
-
-    # ── Menu lag fix ────────────────────────────────────────────────
-    # GIMP 3 (and other GTK apps) open File/menu as popup/dropdown/tooltip
-    # windows. With fading + opacity animation enabled, every menu open
-    # triggers a multi-frame re-composite on the NVIDIA dGPU (PRIME sync +
-    # GLX), causing visible stutter on "basic" actions like opening a menu.
-    # Render these window types directly: no fade, no shadow, full opacity,
-    # no blur. Menus appear instantly.
-    wintypes = {
-      popup_menu = {
-        fade = lib.mkForce false;
-        shadow = lib.mkForce false;
-        opacity = lib.mkForce 1.0;
-        blur = lib.mkForce false;
-      };
-      dropdown_menu = {
-        fade = lib.mkForce false;
-        shadow = lib.mkForce false;
-        opacity = lib.mkForce 1.0;
-        blur = lib.mkForce false;
-      };
-      tooltip = {
-        fade = lib.mkForce false;
-        shadow = lib.mkForce false;
-        opacity = lib.mkForce 1.0;
-        blur = lib.mkForce false;
-      };
-      utility = {
-        fade = lib.mkForce false;
-        shadow = lib.mkForce false;
-        opacity = lib.mkForce 1.0;
-        blur = lib.mkForce false;
-      };
     };
   };
 

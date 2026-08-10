@@ -14,7 +14,7 @@ in {
 
     maxJobs = mkOption {
       type = types.int;
-      default = 0;
+      default = 32;
       description = "Maximum number of build jobs to run simultaneously";
     };
 

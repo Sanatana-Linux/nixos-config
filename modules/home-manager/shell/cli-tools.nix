@@ -25,7 +25,6 @@ in {
       editorconfig-core-c
       eza
       fd
-      fzf-obc
       fzf
       findutils
       file
@@ -98,10 +97,6 @@ in {
         enableZshIntegration = true;
       };
       rbenv = {
-        enable = true;
-        enableZshIntegration = true;
-      };
-      carapace = {
         enable = true;
         enableZshIntegration = true;
       };

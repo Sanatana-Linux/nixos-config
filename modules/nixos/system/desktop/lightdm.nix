@@ -21,9 +21,9 @@ with lib; {
       enable = true;
       background = ./assets/wallpaper.png;
 
-      greeters.ganapati = {
+      greeters.slick = {
         enable = true;
-        themeName = "sharabha-gtk-theme";
+        theme.name = "sharabha-gtk-theme";
       };
     };
 

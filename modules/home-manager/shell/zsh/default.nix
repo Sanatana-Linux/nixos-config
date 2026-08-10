@@ -24,6 +24,26 @@ in {
   };
 
   config = mkIf cfg.enable {
+    home.packages = with pkgs; [
+      autocomplete-sh
+    ];
+
+    # Pre-seed autocomplete-sh config to use the local Ollama model.
+    home.file.".autocomplete/config".text = ''
+      # ~/.autocomplete/config
+      provider: ollama
+      model: lfm2.5:latest
+      temperature: 0.0
+      endpoint: http://localhost:11434/api/chat
+      api_prompt_cost: 0.000000
+      api_completion_cost: 0.000000
+      max_history_commands: 20
+      max_recent_files: 20
+      cache_dir: $HOME/.autocomplete/cache
+      cache_size: 10
+      log_file: $HOME/.autocomplete/autocomplete.log
+    '';
+
     programs.zsh = {
       enable = true;
       syntaxHighlighting.enable = true;
@@ -131,8 +151,8 @@ in {
         # Ctrl+Backspace - Delete word backward
         bindkey '^H' backward-kill-word
 
-        # Carapace bridges
-        export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
+        # Autocomplete.sh - LLM-powered command completion (Ollama backend)
+        source ${pkgs.autocomplete-sh}/bin/autocomplete enable
       '';
 
       # ZSH options
@@ -216,18 +236,6 @@ in {
           }
           {
             name = "molovo/tipz";
-            tags = ["defer:2"];
-          }
-          {
-            name = "nix-community/nix-zsh-completions";
-            tags = ["defer:2"];
-          }
-          {
-            name = "ytet5uy4/fzf-widgets";
-            tags = ["defer:2"];
-          }
-          {
-            name = "mrjohannchang/zsh-interactive-cd";
             tags = ["defer:2"];
           }
         ];

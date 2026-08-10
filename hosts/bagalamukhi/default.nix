@@ -264,6 +264,7 @@
   services.xserver = {
     enable = true;
     videoDrivers = ["nvidia"];
+    dpi = lib.mkForce 96;
   };
 
   # Keep nixos-hardware's Intel GPU driver aligned with the project's

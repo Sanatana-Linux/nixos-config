@@ -1,0 +1,228 @@
+--- a/autocomplete.zsh
++++ b/autocomplete.zsh
+@@ -168,6 +168,11 @@
+         )
+         set -e
+     } || HELP_INFO="'$COMMAND --help' not available"
++    # Strip ANSI/OSC escape sequences (--help hyperlinks/color under eza, grc)
++    # so raw control bytes never leak into the JSON payload. Handles both
++    # ANSI SGR (ESC[..m) and OSC hyperlink (ESC]8;;..ESC\) forms, including
++    # the OSC string-terminator backslash that tr alone would leave behind.
++    HELP_INFO=$(printf "%s" "$HELP_INFO" | perl -pe 's/\e\]8;;.*?\e\\//g; s/\e\[[0-9;]*[A-Za-z]//g; s/\e[()][0-9A-B]//g; s/\e//g')
+     echo "$HELP_INFO"
+ }
+ 
+@@ -254,9 +259,9 @@
+     local base_payload
+     base_payload=$(build_common_payload)
+ 
+-    case "${ACSH_PROVIDER^^}" in
++    case "${(U)ACSH_PROVIDER}" in
+         "ANTHROPIC")
+-            payload=$(echo "$base_payload" | jq '. + {
++            payload=$(printf '%s' "$base_payload" | jq '. + {
+                 system: .messages[0].content,
+                 messages: [{role:"user", content: .messages[1].content}],
+                 max_tokens: 1024,
+@@ -275,17 +280,17 @@
+             }')
+             ;;
+         "GROQ")
+-            payload=$(echo "$base_payload" | jq '. + {response_format: {type: "json_object"}}')
++            payload=$(printf '%s' "$base_payload" | jq '. + {response_format: {type: "json_object"}}')
+             ;;
+         "OLLAMA")
+-            payload=$(echo "$base_payload" | jq '. + {
++            payload=$(printf '%s' "$base_payload" | jq '. + {
+                 format: "json",
+                 stream: false,
+                 options: {temperature: (.temperature | tonumber)}
+             }')
+             ;;
+         *)
+-            payload=$(echo "$base_payload" | jq '. + {
++            payload=$(printf '%s' "$base_payload" | jq '. + {
+                 response_format: {type: "json_object"},
+                 tool_choice: {
+                     type: "function",
+@@ -318,7 +323,7 @@
+             }')
+             ;;
+     esac
+-    echo "$payload"
++    printf '%s' "$payload"
+ }
+ 
+ log_request() {
+@@ -328,20 +333,20 @@
+     response_body="$2"
+     user_input_hash=$(echo -n "$user_input" | md5sum | cut -d ' ' -f 1)
+ 
+-    if [[ "${ACSH_PROVIDER^^}" == "ANTHROPIC" ]]; then
+-        prompt_tokens=$(echo "$response_body" | jq -r '.usage.input_tokens')
++    if [[ "${(U)ACSH_PROVIDER}" == "ANTHROPIC" ]]; then
++        prompt_tokens=$(printf '%s' "$response_body" | jq -r '.usage.input_tokens')
+         prompt_tokens_int=$((prompt_tokens))
+-        completion_tokens=$(echo "$response_body" | jq -r '.usage.output_tokens')
++        completion_tokens=$(printf '%s' "$response_body" | jq -r '.usage.output_tokens')
+         completion_tokens_int=$((completion_tokens))
+     else
+-        prompt_tokens=$(echo "$response_body" | jq -r '.usage.prompt_tokens')
++        prompt_tokens=$(printf '%s' "$response_body" | jq -r '.usage.prompt_tokens')
+         prompt_tokens_int=$((prompt_tokens))
+-        completion_tokens=$(echo "$response_body" | jq -r '.usage.completion_tokens')
++        completion_tokens=$(printf '%s' "$response_body" | jq -r '.usage.completion_tokens')
+         completion_tokens_int=$((completion_tokens))
+     fi
+ 
+     created=$(date +%s)
+-    created=$(echo "$response_body" | jq -r ".created // $created")
++    created=$(printf '%s' "$response_body" | jq -r ".created // $created")
+     api_cost=$(echo "$prompt_tokens_int * $ACSH_API_PROMPT_COST + $completion_tokens_int * $ACSH_API_COMPLETION_COST" | bc)
+     log_file=${ACSH_LOG_FILE:-"$HOME/.autocomplete/autocomplete.log"}
+     echo "$created,$user_input_hash,$prompt_tokens_int,$completion_tokens_int,$api_cost" >> "$log_file"
+@@ -354,8 +359,8 @@
+     default_user_input="Write two to six most likely commands given the provided information"
+     user_input=${*:-$default_user_input}
+ 
+-    if [[ -z "$ACSH_ACTIVE_API_KEY" && ${ACSH_PROVIDER^^} != "OLLAMA" ]]; then
+-        echo_error "ACSH_ACTIVE_API_KEY not set. Please set it with: export ${ACSH_PROVIDER^^}_API_KEY=<your-api-key>"
++    if [[ -z "$ACSH_ACTIVE_API_KEY" && ${(U)ACSH_PROVIDER} != "OLLAMA" ]]; then
++        echo_error "ACSH_ACTIVE_API_KEY not set. Please set it with: export ${(U)ACSH_PROVIDER}_API_KEY=<your-api-key>"
+         return
+     fi
+     api_key="${ACSH_ACTIVE_API_KEY:-$OPENAI_API_KEY}"
+@@ -364,13 +369,13 @@
+     max_attempts=2
+     attempt=1
+     while [ $attempt -le $max_attempts ]; do
+-        if [[ "${ACSH_PROVIDER^^}" == "ANTHROPIC" ]]; then
++        if [[ "${(U)ACSH_PROVIDER}" == "ANTHROPIC" ]]; then
+             response=$(curl -s -m "$timeout" -w "\n%{http_code}" "$endpoint" \
+                 -H "content-type: application/json" \
+                 -H "anthropic-version: 2023-06-01" \
+                 -H "x-api-key: $api_key" \
+                 --data "$payload")
+-        elif [[ "${ACSH_PROVIDER^^}" == "OLLAMA" ]]; then
++        elif [[ "${(U)ACSH_PROVIDER}" == "OLLAMA" ]]; then
+             response=$(curl -s -m "$timeout" -w "\n%{http_code}" "$endpoint" --data "$payload")
+         else
+             response=$(\curl -s -m "$timeout" -w "\n%{http_code}" "$endpoint" \
+@@ -378,8 +383,8 @@
+                 -H "Authorization: Bearer $api_key" \
+                 -d "$payload")
+         fi
+-        status_code=$(echo "$response" | tail -n1)
+-        response_body=$(echo "$response" | sed '$d')
++        status_code=$(printf '%s' "$response" | tail -n1)
++        response_body=$(printf '%s' "$response" | sed '$d')
+         if [[ $status_code -eq 200 ]]; then
+             break
+         else
+@@ -400,21 +405,21 @@
+         return
+     fi
+ 
+-    if [[ "${ACSH_PROVIDER^^}" == "ANTHROPIC" ]]; then
+-        content=$(echo "$response_body" | jq -r '.content[0].input.commands')
+-    elif [[ "${ACSH_PROVIDER^^}" == "GROQ" ]]; then
+-        content=$(echo "$response_body" | jq -r '.choices[0].message.content')
+-        content=$(echo "$content" | jq -r '.completions')
+-    elif [[ "${ACSH_PROVIDER^^}" == "OLLAMA" ]]; then
+-        content=$(echo "$response_body" | jq -r '.message.content')
+-        content=$(echo "$content" | jq -r '.completions')
++    if [[ "${(U)ACSH_PROVIDER}" == "ANTHROPIC" ]]; then
++        content=$(printf '%s' "$response_body" | jq -r '.content[0].input.commands')
++    elif [[ "${(U)ACSH_PROVIDER}" == "GROQ" ]]; then
++        content=$(printf '%s' "$response_body" | jq -r '.choices[0].message.content')
++        content=$(printf '%s' "$content" | jq -r '.completions')
++    elif [[ "${(U)ACSH_PROVIDER}" == "OLLAMA" ]]; then
++        content=$(printf '%s' "$response_body" | jq -r '.message.content')
++        content=$(printf '%s' "$content" | jq -r '.completions')
+     else
+-        content=$(echo "$response_body" | jq -r '.choices[0].message.tool_calls[0].function.arguments')
+-        content=$(echo "$content" | jq -r '.commands')
++        content=$(printf '%s' "$response_body" | jq -r '.choices[0].message.tool_calls[0].function.arguments')
++        content=$(printf '%s' "$content" | jq -r '.commands')
+     fi
+ 
+     local completions
+-    completions=$(echo "$content" | jq -r '.[]' | grep -v '^$')
++    completions=$(printf '%s' "$content" | jq -r '.[]' | grep -v '^$')
+     echo -n "$completions"
+     log_request "$user_input" "$response_body"
+ }
+@@ -464,7 +469,7 @@
+     if [[ ${#COMPREPLY[@]} -eq 0 && $COMP_TYPE -eq 63 ]]; then
+         local completions user_input user_input_hash
+         acsh_load_config
+-        if [[ -z "$ACSH_ACTIVE_API_KEY" && ${ACSH_PROVIDER^^} != "OLLAMA" ]]; then
++        if [[ -z "$ACSH_ACTIVE_API_KEY" && ${(U)ACSH_PROVIDER} != "OLLAMA" ]]; then
+             local provider_key="${ACSH_PROVIDER:-openai}_API_KEY"
+             provider_key=$(echo "$provider_key" | tr '[:lower:]' '[:upper:]')
+             echo_error "${provider_key} is not set. Please set it using: export ${provider_key}=<your-api-key> or disable autocomplete via: autocomplete disable"
+@@ -715,6 +720,8 @@
+             key=$(echo "$key" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+             value=$(echo "$value" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+             key=$(echo "$key" | tr '[:lower:]' '[:upper:]' | sed 's/[^A-Z0-9]/_/g')
++            # Expand a leading $HOME so cache_dir / log_file resolve correctly.
++            value=$(printf '%s' "$value" | sed "s|^\$HOME|$HOME|")
+             if [[ -n $value ]]; then
+                 export "ACSH_$key"="$value"
+             fi
+@@ -1021,23 +1028,23 @@
+     completion_cost=$(echo "$selected_value" | jq -r '.completion_cost' | awk '{printf "%.8f", $1}')
+     set_config "api_prompt_cost" "$prompt_cost"
+     set_config "api_completion_cost" "$completion_cost"
+-    if [[ -z "$ACSH_ACTIVE_API_KEY" && ${ACSH_PROVIDER^^} != "OLLAMA" ]]; then
+-        echo -e "\e[34mSet ${ACSH_PROVIDER^^}_API_KEY\e[0m"
++    if [[ -z "$ACSH_ACTIVE_API_KEY" && ${(U)ACSH_PROVIDER} != "OLLAMA" ]]; then
++        echo -e "\e[34mSet ${(U)ACSH_PROVIDER}_API_KEY\e[0m"
+         echo "Stored in ~/.autocomplete/config"
+-        if [[ ${ACSH_PROVIDER^^} == "OPENAI" ]]; then
++        if [[ ${(U)ACSH_PROVIDER} == "OPENAI" ]]; then
+             echo "Create a new one: https://platform.openai.com/settings/profile?tab=api-keys"
+-        elif [[ ${ACSH_PROVIDER^^} == "ANTHROPIC" ]]; then
++        elif [[ ${(U)ACSH_PROVIDER} == "ANTHROPIC" ]]; then
+             echo "Create a new one: https://console.anthropic.com/settings/keys"
+-        elif [[ ${ACSH_PROVIDER^^} == "GROQ" ]]; then
++        elif [[ ${(U)ACSH_PROVIDER} == "GROQ" ]]; then
+             echo "Create a new one: https://console.groq.com/keys"
+         fi
+-        print -n "Enter your ${ACSH_PROVIDER^^} API Key: "
++        print -n "Enter your ${(U)ACSH_PROVIDER} API Key: "
+         read -sr user_api_key_input < /dev/tty
+         clear
+         echo -e "\e[1;32mAutocomplete.zsh - Model Configuration\e[0m"
+         if [[ -n "$user_api_key_input" ]]; then
+             export ACSH_ACTIVE_API_KEY="$user_api_key_input"
+-            set_config "${ACSH_PROVIDER,,}_api_key" "$user_api_key_input"
++            set_config "${(L)ACSH_PROVIDER}_api_key" "$user_api_key_input"
+         fi
+     fi
+     model="${ACSH_MODEL:-ERROR}"
+@@ -1050,7 +1057,7 @@
+     echo -e "Endpoint:\t\e[90m$ACSH_ENDPOINT\e[0m"
+     echo -n "API Key:"
+     if [[ -z $ACSH_ACTIVE_API_KEY ]]; then
+-        if [[ ${ACSH_PROVIDER^^} == "OLLAMA" ]]; then
++        if [[ ${(U)ACSH_PROVIDER} == "OLLAMA" ]]; then
+             echo -e "\t\e[90mNot Used\e[0m"
+         else
+             echo -e "\t\e[31mUNSET\e[0m"
+@@ -1060,12 +1067,12 @@
+         config_value="${ACSH_ACTIVE_API_KEY:0:4}...${rest: -4}"
+         echo -e "\t\e[32m$config_value\e[0m"
+     fi
+-    if [[ -z $ACSH_ACTIVE_API_KEY && ${ACSH_PROVIDER^^} != "OLLAMA" ]]; then
++    if [[ -z $ACSH_ACTIVE_API_KEY && ${(U)ACSH_PROVIDER} != "OLLAMA" ]]; then
+         echo "To set the API Key, run:"
+         echo -e "\t\e[31mautocomplete config set api_key <your-api-key>\e[0m"
+-        echo -e "\t\e[31mexport ${ACSH_PROVIDER^^}_API_KEY=<your-api-key>\e[0m"
++        echo -e "\t\e[31mexport ${(U)ACSH_PROVIDER}_API_KEY=<your-api-key>\e[0m"
+     fi
+-    if [[ ${ACSH_PROVIDER^^} == "OLLAMA" ]]; then
++    if [[ ${(U)ACSH_PROVIDER} == "OLLAMA" ]]; then
+         echo "To set a custom endpoint:"
+         echo -e "\t\e[34mautocomplete config set endpoint <your-url>\e[0m"
+         echo "Other models can be set with:"

@@ -39,10 +39,12 @@ in {
       api_completion_cost: 0.000000
       max_history_commands: 20
       max_recent_files: 20
-      cache_dir: $HOME/.autocomplete/cache
+      cache_dir: ${config.home.homeDirectory}/.autocomplete/cache
       cache_size: 10
-      log_file: $HOME/.autocomplete/autocomplete.log
+      log_file: ${config.home.homeDirectory}/.autocomplete/autocomplete.log
     '';
+    home.file.".autocomplete/cache/.keep".text = "";
+    home.file.".autocomplete/autocomplete.log".text = "";
 
     programs.zsh = {
       enable = true;

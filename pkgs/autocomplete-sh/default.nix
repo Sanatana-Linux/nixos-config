@@ -17,6 +17,13 @@ stdenvNoCC.mkDerivation rec {
 
   dontBuild = true;
 
+  # The upstream script uses bash-only case-modifier expansion (VAR^^ / VAR,,)
+  # that fails under zsh with 'bad substitution'. Convert them to zsh's
+  # (U)VAR / (L)VAR equivalents so completion actually works.
+  patches = [
+    ./zsh-bashisms.patch
+  ];
+
   installPhase = ''
     runHook preInstall
     install -Dm755 autocomplete.zsh $out/bin/autocomplete

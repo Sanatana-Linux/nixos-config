@@ -74,16 +74,7 @@
         };
       };
       multimedia.enable = true;
-      sleep = {
-        enable = true;
-        lidCloseAction = "ignore";
-        lidCloseActionExternalPower = "ignore";
-        powerKeyAction = "ignore";
-        powerKeyLongPressAction = "poweroff";
-        idleAction = "ignore";
-        idleTimeout = "20min";
-        criticalBatteryAction = "suspend";
-      };
+      sleep.enable = false;
     };
 
     base = {
@@ -222,6 +213,11 @@
     enable = true;
     enable32Bit = true;
   };
+
+  # Keep nixos-hardware's Intel GPU driver aligned with the project's
+  # intel.nix packageOverrides so both resolve to the same hybrid-codec
+  # intel-vaapi-driver build — otherwise graphics-drivers collides.
+  hardware.intelgpu.enableHybridCodec = true;
 
   environment.systemPackages = with pkgs; [
     easyeffects

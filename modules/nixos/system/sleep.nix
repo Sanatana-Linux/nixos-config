@@ -47,9 +47,15 @@ in {
     };
 
     criticalBatteryAction = mkOption {
-      type = types.enum ["PowerOff" "Hibernate" "HybridSleep" "GotoSuspend"];
+      type = types.enum ["PowerOff" "Hibernate" "HybridSleep" "Suspend" "Ignore"];
       default = "Hibernate";
-      description = "UPower action when battery reaches critical level";
+      description = "UPower action when battery reaches critical level. `Suspend` and `Ignore` require `allowRiskyCriticalPowerAction`.";
+    };
+
+    allowRiskyCriticalPowerAction = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Allow the risky critical-power actions `Suspend` and `Ignore`. UPower refuses these unless this is enabled.";
     };
 
     percentageLow = mkOption {
@@ -92,6 +98,7 @@ in {
     services.upower = {
       enable = true;
       criticalPowerAction = cfg.criticalBatteryAction;
+      allowRiskyCriticalPowerAction = cfg.allowRiskyCriticalPowerAction;
       percentageLow = cfg.percentageLow;
       percentageCritical = cfg.percentageCritical;
       percentageAction = cfg.percentageAction;

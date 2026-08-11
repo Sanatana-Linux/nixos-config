@@ -30,6 +30,7 @@ in {
         joplin-desktop
         nps
         rofi
+        feather
         ;
       pylsp = pkgs.python314.withPackages (p:
         with p; [

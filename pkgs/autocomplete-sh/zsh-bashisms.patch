@@ -1,20 +1,23 @@
 --- a/autocomplete.zsh
 +++ b/autocomplete.zsh
-@@ -13,8 +13,11 @@
- ###############################################################################
+@@ -14,7 +14,15 @@
  # Make sure that the native completion system is loaded and enable the bash
  # compatibility layer so that our original Bash-style completions work.
--if [[ -n $ZSH_VERSION ]]; then
+ if [[ -n $ZSH_VERSION ]]; then
 -    autoload -Uz compinit && compinit -u
-+if [[ -n $ZSH_VERSION ]] && ! (( $+functions[compdef] )); then
 +    # Cache-only compinit (-C): reuse the existing compdump instead of
 +    # rescanning fpath every shell start. The zsh module already runs
 +    # compinit -C, so this runs only when it hasn't been initialized yet.
-+    autoload -Uz compinit && compinit -C
++    if ! (( $+functions[compdef] )); then
++        autoload -Uz compinit && compinit -C
++    fi
++    # bashcompinit provides the 'complete'/'compgen' builtins that the
++    # enable/disable/check functions rely on. It is fast and must always
++    # run, even when compinit was already initialized.
      autoload -Uz bashcompinit && bashcompinit
  fi
  
-@@ -168,6 +171,11 @@
+@@ -168,6 +176,11 @@
          )
          set -e
      } || HELP_INFO="'$COMMAND --help' not available"
@@ -26,7 +29,7 @@
      echo "$HELP_INFO"
  }
  
-@@ -254,9 +262,9 @@
+@@ -254,9 +267,9 @@
      local base_payload
      base_payload=$(build_common_payload)
  
@@ -38,7 +41,7 @@
                  system: .messages[0].content,
                  messages: [{role:"user", content: .messages[1].content}],
                  max_tokens: 1024,
-@@ -275,17 +283,17 @@
+@@ -275,17 +288,17 @@
              }')
              ;;
          "GROQ")
@@ -59,7 +62,7 @@
                  response_format: {type: "json_object"},
                  tool_choice: {
                      type: "function",
-@@ -318,7 +326,7 @@
+@@ -318,7 +331,7 @@
              }')
              ;;
      esac
@@ -68,7 +71,7 @@
  }
  
  log_request() {
-@@ -328,20 +336,20 @@
+@@ -328,20 +341,20 @@
      response_body="$2"
      user_input_hash=$(echo -n "$user_input" | md5sum | cut -d ' ' -f 1)
  
@@ -95,7 +98,7 @@
      api_cost=$(echo "$prompt_tokens_int * $ACSH_API_PROMPT_COST + $completion_tokens_int * $ACSH_API_COMPLETION_COST" | bc)
      log_file=${ACSH_LOG_FILE:-"$HOME/.autocomplete/autocomplete.log"}
      echo "$created,$user_input_hash,$prompt_tokens_int,$completion_tokens_int,$api_cost" >> "$log_file"
-@@ -354,8 +362,8 @@
+@@ -354,8 +367,8 @@
      default_user_input="Write two to six most likely commands given the provided information"
      user_input=${*:-$default_user_input}
  
@@ -106,7 +109,7 @@
          return
      fi
      api_key="${ACSH_ACTIVE_API_KEY:-$OPENAI_API_KEY}"
-@@ -364,13 +372,13 @@
+@@ -364,13 +377,13 @@
      max_attempts=2
      attempt=1
      while [ $attempt -le $max_attempts ]; do
@@ -122,7 +125,7 @@
              response=$(curl -s -m "$timeout" -w "\n%{http_code}" "$endpoint" --data "$payload")
          else
              response=$(\curl -s -m "$timeout" -w "\n%{http_code}" "$endpoint" \
-@@ -378,8 +386,8 @@
+@@ -378,8 +391,8 @@
                  -H "Authorization: Bearer $api_key" \
                  -d "$payload")
          fi
@@ -133,7 +136,7 @@
          if [[ $status_code -eq 200 ]]; then
              break
          else
-@@ -400,21 +408,21 @@
+@@ -400,21 +413,21 @@
          return
      fi
  
@@ -166,7 +169,7 @@
      echo -n "$completions"
      log_request "$user_input" "$response_body"
  }
-@@ -464,7 +472,7 @@
+@@ -464,7 +477,7 @@
      if [[ ${#COMPREPLY[@]} -eq 0 && $COMP_TYPE -eq 63 ]]; then
          local completions user_input user_input_hash
          acsh_load_config
@@ -175,7 +178,7 @@
              local provider_key="${ACSH_PROVIDER:-openai}_API_KEY"
              provider_key=$(echo "$provider_key" | tr '[:lower:]' '[:upper:]')
              echo_error "${provider_key} is not set. Please set it using: export ${provider_key}=<your-api-key> or disable autocomplete via: autocomplete disable"
-@@ -709,15 +717,14 @@
+@@ -709,15 +722,14 @@
      local config_file="$HOME/.autocomplete/config" key value
      if [ -f "$config_file" ]; then
          while IFS=':' read -r key value; do
@@ -199,7 +202,7 @@
          done < "$config_file"
          if [[ -z "$ACSH_OPENAI_API_KEY" && -n "$OPENAI_API_KEY" ]]; then
              export ACSH_OPENAI_API_KEY="$OPENAI_API_KEY"
-@@ -1021,23 +1028,23 @@
+@@ -1021,23 +1033,23 @@
      completion_cost=$(echo "$selected_value" | jq -r '.completion_cost' | awk '{printf "%.8f", $1}')
      set_config "api_prompt_cost" "$prompt_cost"
      set_config "api_completion_cost" "$completion_cost"
@@ -230,7 +233,7 @@
          fi
      fi
      model="${ACSH_MODEL:-ERROR}"
-@@ -1050,7 +1057,7 @@
+@@ -1050,7 +1062,7 @@
      echo -e "Endpoint:\t\e[90m$ACSH_ENDPOINT\e[0m"
      echo -n "API Key:"
      if [[ -z $ACSH_ACTIVE_API_KEY ]]; then
@@ -239,7 +242,7 @@
              echo -e "\t\e[90mNot Used\e[0m"
          else
              echo -e "\t\e[31mUNSET\e[0m"
-@@ -1060,12 +1067,12 @@
+@@ -1060,12 +1072,12 @@
          config_value="${ACSH_ACTIVE_API_KEY:0:4}...${rest: -4}"
          echo -e "\t\e[32m$config_value\e[0m"
      fi

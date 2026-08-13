@@ -152,10 +152,8 @@ in {
         gdk-pixbuf # Image loading for GTK
         glib # Core GNOME library
         gobject-introspection # Introspection for GObject libraries
-        gtk2 # GTK+ 2 toolkit
         gtk3 # GTK+ 3 toolkit
         harfbuzz # Text shaping library
-        libappindicator-gtk2 # Application indicators for GTK2
         libappindicator-gtk3 # Application indicators for GTK3
         libcaca # Color ASCII art library
         libcanberra # Event sound library

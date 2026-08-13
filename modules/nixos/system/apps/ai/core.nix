@@ -14,7 +14,6 @@ in {
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       aichat
-      gemini-cli
       code2prompt
       codegrab # use as `grab`
       chatblade

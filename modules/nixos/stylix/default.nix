@@ -68,7 +68,7 @@ in {
         enable = true;
         package = pkgs.colloid-icon-theme;
         light = "Colloid";
-        dark = "Colloid-dark";
+        dark = "Colloid-Dark";
       };
 
       # System-level targets

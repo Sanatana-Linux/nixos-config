@@ -68,7 +68,7 @@ in {
 
       # Force icon theme
       iconTheme = mkForce {
-        name = "Colloid-dark";
+        name = "Colloid-Dark";
         package = pkgs.colloid-icon-theme;
       };
 
@@ -88,7 +88,7 @@ in {
       # GTK2 configuration
       gtk2.extraConfig = ''
         gtk-theme-name="sharabha-gtk-theme"
-        gtk-icon-theme-name="Colloid-dark"
+        gtk-icon-theme-name="Colloid-Dark"
         gtk-cursor-theme-name="${cfg.cursor.name}"
             gtk-cursor-theme-size=${toString cfg.cursor.size}
             gtk-toolbar-style=GTK_TOOLBAR_BOTH_HORIZ
@@ -106,7 +106,7 @@ in {
       # GTK3 configuration
       gtk3.extraConfig = {
         gtk-theme-name = mkForce "sharabha-gtk-theme";
-        gtk-icon-theme-name = mkForce "Colloid-dark";
+        gtk-icon-theme-name = mkForce "Colloid-Dark";
         gtk-cursor-theme-name = mkForce cfg.cursor.name;
         gtk-cursor-theme-size = mkForce cfg.cursor.size;
         gtk-application-prefer-dark-theme = mkForce "1";
@@ -180,7 +180,7 @@ in {
     dconf.settings = {
       "org/gnome/desktop/interface" = {
         gtk-theme = mkDefault "sharabha-gtk-theme";
-        icon-theme = mkDefault "Colloid-dark";
+        icon-theme = mkDefault "Colloid-Dark";
         color-scheme = mkForce "prefer-dark";
         gtk-application-prefer-dark-theme = mkForce true;
         # Force cursor theme in GNOME/GTK settings

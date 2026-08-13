@@ -9,7 +9,8 @@
   dbus,
   libusb1,
   gtk3,
-  xorg,
+  libxcb,
+  libX11,
   gst_all_1,
 }:
 stdenv.mkDerivation rec {
@@ -31,8 +32,8 @@ stdenv.mkDerivation rec {
     dbus
     libusb1
     gtk3
-    xorg.libxcb
-    xorg.libX11
+    libxcb
+    libX11
     gst_all_1.gstreamer
     gst_all_1.gst-plugins-base
   ];

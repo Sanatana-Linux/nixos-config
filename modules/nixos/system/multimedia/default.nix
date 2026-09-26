@@ -153,7 +153,6 @@ in {
         ++ optionals cfg.creators [gimp3-with-plugins pkgs.stable.inkscape-with-extensions gegl]
         ++ optionals cfg.stableVideoEditors [
           pkgs.stable.shotcut
-          pkgs.stable.openshot-qt
           losslesscut-bin
           vid-stab
           vidmerger

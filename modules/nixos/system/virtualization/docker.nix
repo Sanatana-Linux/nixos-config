@@ -84,7 +84,7 @@ in {
     };
 
     hardware = mkIf cfg.nvidia {
-      nvidia-container-toolkit.enable = true;
+      # nvidia-container-toolkit.enable = true;
       graphics.enable32Bit = true;
     };
 

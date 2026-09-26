@@ -18,7 +18,7 @@ in {
       };
       containerRuntime = mkOption {
         type = types.bool;
-        default = true;
+        default = false;
         description = "Enable NVIDIA container runtime (libnvidia-container + nvidia-container-toolkit)";
       };
     };
@@ -33,6 +33,14 @@ in {
         type = types.str;
         default = "PCI:01:00:0";
         description = "PCI bus ID of the NVIDIA GPU (use 'lspci | grep 3D')";
+      };
+    };
+
+    lact = {
+      enable = mkOption {
+        type = types.bool;
+        default = false;
+        description = "LACT GPU monitoring, fan control, and overclocking daemon";
       };
     };
 
@@ -111,8 +119,8 @@ in {
           kompute
         ]
         ++ optionals cfg.cuda.containerRuntime [
-          libnvidia-container
-          nvidia-container-toolkit
+          # libnvidia-container
+          # nvidia-container-toolkit
         ]
         ++ optionals cfg.cuda.enable [
           cudatoolkit
@@ -210,6 +218,16 @@ in {
       "nvidia-uvm" # Unified Virtual Memory (CUDA)
       "nvidia-modeset" # Kernel modesetting
     ];
+
+    # ── LACT — GPU monitoring, fan control, and overclocking ───────────
+    # services.lact installs the lact GUI and the lactd control daemon
+    # together. The daemon owns the privileged socket the GUI talks to;
+    # without it the GUI falls back to embedded mode and cannot change
+    # clocks, power limits, or fan curves. On NVIDIA it drives the GPU
+    # through NVML, reading the driver libraries that
+    # hardware.graphics.extraPackages already exposes via
+    # /run/opengl-driver/lib.
+    services.lact.enable = cfg.lact.enable;
 
     nixpkgs.config = {
       allowUnfree = true;

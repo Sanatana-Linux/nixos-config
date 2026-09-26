@@ -5,17 +5,40 @@
 ## Build & Switch by Host
 
 ```bash
-sudo nixos-rebuild switch --flake .#<host>
+sudo nixos-rebuild switch --flake .#<host> --impure
 ```
 
 Available hosts: bagalamukhi, matangi, bhairavi, chhinamasta
 
+## Critical — `--impure` Is Always Required
+
+Every build, rebuild, and evaluation in this repo must pass `--impure`:
+
+```bash
+nixos-rebuild build --flake .#<host> --impure
+nixos-rebuild switch --flake .#<host> --impure
+nixos-rebuild vm --flake .#<host> --impure
+nix flake check . --impure
+```
+
+sops-nix sets `sops.defaultSopsFile` to the absolute path
+`/etc/nixos/external/secrets/secrets.yaml`, and pure evaluation mode refuses to
+read absolute paths. Without the flag the build fails with:
+
+```
+error: access to absolute path '/etc/nixos/external/secrets/secrets.yaml'
+is forbidden in pure evaluation mode (use '--impure' to override)
+```
+
+`nixos-rebuild` forwards `--impure` to the `nix build` it runs internally, so
+the flag must be given to `nixos-rebuild` itself, not appended afterwards.
+
 ## Testing
 
 ```bash
-nixos-rebuild vm --flake .#bhairavi       # VM test
-nixos-rebuild build --flake .#chhinamasta  # ISO build
-nix flake check                             # Validate flake
+nixos-rebuild vm --flake .#bhairavi --impure        # VM test
+nixos-rebuild build --flake .#chhinamasta --impure  # ISO build
+nix flake check . --impure                          # Validate flake
 ```
 
 ## Formatting
@@ -54,6 +77,6 @@ Do NOT modify files in `external/` unless explicitly instructed. They are git su
 ## Flake Maintenance
 
 ```bash
-nix flake update                    # update all inputs
+nix flake update                      # update all inputs
 nix flake lock --update-input <name>  # update one input
 ```

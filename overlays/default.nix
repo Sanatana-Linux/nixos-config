@@ -156,6 +156,19 @@
         inherit src;
         hash = "sha256-pjBCwOtx5UiZWW7/Tir4KHZAkPgrM2sMDix/g2USDWk=";
       };
+      # SillyTavern-CharacterLibrary companion plugin (cl-helper). The server
+      # plugin loader only scans <serverDirectory>/plugins, which is read-only
+      # in the Nix store, so cl-helper must be baked in at build time.
+      clHelperSrc = final.fetchFromGitHub {
+        owner = "Sillyanonymous";
+        repo = "SillyTavern-CharacterLibrary";
+        rev = "70ff25474f77516ffc81ebd22fa8a2e37a9b7b4b"; # v7.1.0
+        hash = "sha256-O26ROGIeKmIhlbImO1eGLi2vR+N+5kNcSfn+2JkcJQ4=";
+      };
+      postInstall = (oldAttrs.postInstall or "") + ''
+        mkdir -p $out/lib/node_modules/sillytavern/plugins/cl-helper
+        cp -r ${clHelperSrc}/extras/cl-helper/. $out/lib/node_modules/sillytavern/plugins/cl-helper/
+      '';
     });
 
     # Patches applied after the cachyos kernel overlay — see cachyos-patches below

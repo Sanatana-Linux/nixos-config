@@ -85,11 +85,11 @@ in {
         cudatoolkit # CUDA toolkit (meta)
         intel-media-driver # Intel VAAPI driver for GPUs
         intel-vaapi-driver # Intel VAAPI driver (older)
-        libnvidia-container # NVIDIA container runtime library
+        # libnvidia-container # NVIDIA container runtime library
         libvdpau # Video Decode and Presentation API for Unix
         libvdpau-va-gl # VDPAU driver with VA-API backend
         nv-codec-headers # NVIDIA codec headers
-        nvidia-container-toolkit # NVIDIA container toolkit
+        # nvidia-container-toolkit # NVIDIA container toolkit
         nvidia-texture-tools # NVIDIA texture processing tools
         nvidia-vaapi-driver # NVIDIA VAAPI driver
         nvidia_cg_toolkit # NVIDIA Cg toolkit

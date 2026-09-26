@@ -23,6 +23,7 @@ in {
         "${config.home.homeDirectory}/.cargo/bin"
         "${config.home.homeDirectory}/.yarn/bin"
         "${config.home.homeDirectory}/.local/share/pnpm"
+        "${config.home.homeDirectory}/.local/share/pnpm/bin"
         "${config.home.homeDirectory}/node_modules/.bin"
       ];
 

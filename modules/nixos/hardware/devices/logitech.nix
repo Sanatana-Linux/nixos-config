@@ -13,14 +13,13 @@ in {
   };
 
   config = mkIf cfg.enable {
-    hardware.logitech.wireless = {
-      enable = true;
-      enableGraphical = cfg.enableGraphical;
-    };
+    hardware.logitech.wireless.enable = true;
+
+    # Graphical Solaar tool — option renamed from hardware.logitech.wireless.enableGraphical
+    programs.solaar.enable = cfg.enableGraphical;
 
     environment.systemPackages = with pkgs; [
       ltunify
-      solaar
     ];
 
     services.udev.packages = with pkgs; [

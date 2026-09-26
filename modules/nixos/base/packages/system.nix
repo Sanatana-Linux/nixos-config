@@ -77,7 +77,6 @@ in {
 
           # Linux/Mac specific
           apfs-fuse # APFS filesystem
-          ext4fuse # ext4 FUSE
 
           # Integration
           libcloudproviders # Cloud integration

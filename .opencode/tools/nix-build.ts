@@ -55,6 +55,13 @@ export default tool({
         return JSON.stringify({ error: `Unknown action: ${action}` })
     }
 
+    // --impure is required for every build and rebuild in this repo. sops-nix
+    // points sops.defaultSopsFile at the absolute path
+    // /etc/nixos/external/secrets/secrets.yaml, and pure evaluation mode
+    // refuses to read absolute paths. nixos-rebuild forwards --impure to the
+    // `nix build` it runs internally, so it must be passed here.
+    cmd += " --impure"
+
     if (args.showTrace) cmd += " --show-trace"
     if (args.verbose) cmd += " -v"
     if (args.fast) cmd += " --fast"

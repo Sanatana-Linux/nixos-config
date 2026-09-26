@@ -48,15 +48,15 @@ in {
       fstrim.enable = cfg.fstrim.enable;
       fwupd.enable = cfg.fwupd.enable;
 
-      journald.extraConfig = ''
-        SystemMaxUse=${cfg.journald.systemMaxUse}
-        RuntimeMaxUse=${cfg.journald.runtimeMaxUse}
-        MaxRetentionSec=${cfg.journald.maxRetentionSec}
-      '';
+      journald.settings.Journal = {
+        SystemMaxUse = cfg.journald.systemMaxUse;
+        RuntimeMaxUse = cfg.journald.runtimeMaxUse;
+        MaxRetentionSec = cfg.journald.maxRetentionSec;
+      };
 
       dbus = {
         enable = true;
-        packages = with pkgs; [dconf gcr dbus-broker polkit_gnome];
+        packages = with pkgs; [dconf gcr_4 dbus-broker polkit_gnome];
         implementation = "dbus";
       };
 

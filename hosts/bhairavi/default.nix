@@ -140,7 +140,7 @@
           developmentTools = true;
           windowManagement = true;
           messaging = true;
-          extraPackages = true;
+          fileTransfer = true;
           libs = {
             enable = true;
             coreGraphics = true;

@@ -51,7 +51,12 @@
         components = ["secrets" "ssh" "pkcs11"];
       };
       picom.enable = true;
-      xscreensaver.enable = true;
+      # xscreensaver disabled — it competed with the in-process AwesomeWM
+      # lockscreen. Both grab the keyboard when idle (xscreensaver after 9 min
+      # via X resources, xautolock after 10 min via core/autostart), and
+      # whichever grabs second wins while the other's password prompt goes
+      # deaf to keypresses. Manual locking (Mod4+Ctrl+L) remains available.
+      xscreensaver.enable = false;
     };
   };
 

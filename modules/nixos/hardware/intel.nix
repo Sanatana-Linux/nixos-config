@@ -75,9 +75,12 @@ in {
     # Intel graphics driver
     hardware.graphics = {
       enable = true;
+      # intel-vaapi-driver is provided by nixos-hardware's intelgpu module
+      # (hardware.intelgpu.enableHybridCodec), which applies the same
+      # hybrid-codec override. Adding it here too would create a duplicate
+      # derivation that collides in the graphics-drivers buildEnv.
       extraPackages = mkIf cfg.vaapi (with pkgs; [
         intel-media-driver
-        intel-vaapi-driver
       ]);
     };
 

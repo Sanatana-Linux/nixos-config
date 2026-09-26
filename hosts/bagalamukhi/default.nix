@@ -143,6 +143,7 @@
     base = {
       enable = true;
       fonts.enable = true;
+      timezone = "America/Los_Angeles";
       nix.enable = true;
       permittedPackages.enable = true;
       services.enable = true;
@@ -179,7 +180,7 @@
           developmentTools = true;
           windowManagement = true;
           messaging = true;
-          extraPackages = true;
+          fileTransfer = true;
           libs = {
             enable = true;
             coreGraphics = true;
@@ -224,6 +225,7 @@
       nvidia = {
         enable = true;
         cuda.enable = true;
+        lact.enable = true;
         prime = {
           intelBusId = "PCI:00:02:0";
           nvidiaBusId = "PCI:01:00:0";

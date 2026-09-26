@@ -51,6 +51,12 @@ export default tool({
         return JSON.stringify({ error: `Unknown action: ${action}` })
     }
 
+    // --impure is required whenever a flake command evaluates NixOS
+    // configurations. sops-nix points sops.defaultSopsFile at the absolute
+    // path /etc/nixos/external/secrets/secrets.yaml, which pure evaluation
+    // mode refuses to read.
+    cmd += " --impure"
+
     if (args.showTrace) cmd += " --show-trace"
     if (args.extraFlags) cmd += ` ${args.extraFlags}`
 

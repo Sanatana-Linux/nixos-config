@@ -17,6 +17,7 @@ in {
       "$HOME/.config/emacs/bin"
       "$HOME/.local/bin"
       "$HOME/.local/share/pnpm"
+      "$HOME/.local/share/pnpm/bin"
       "$HOME/.local/share/gem/ruby/3.1.0/bin"
       "$HOME/.local/share/flatpak/exports/share"
       "$HOME/.local/share/nvim/site"

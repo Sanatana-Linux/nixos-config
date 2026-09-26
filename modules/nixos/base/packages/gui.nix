@@ -15,7 +15,7 @@ in {
     developmentTools = mkEnableOption "GUI development tools";
     windowManagement = mkEnableOption "Window management utilities";
     messaging = mkEnableOption "Messaging applications";
-    extraPackages = mkEnableOption "Extra GUI packages";
+    fileTransfer = mkEnableOption "Cloud storage and file transfer GUIs";
 
     libs = {
       enable = mkEnableOption "GUI libraries";
@@ -36,7 +36,7 @@ in {
       modules.base.packages.gui = {
         messaging = mkDefault false;
         developmentTools = mkDefault false;
-        extraPackages = mkDefault false;
+        fileTransfer = mkDefault false;
       };
     })
 
@@ -80,6 +80,10 @@ in {
           signalbackup-tools # Signal backup file tools
           signal-backup-deduplicator # Signal backup deduplication
           element-desktop # Matrix client
+        ]
+        # Cloud storage and file transfer
+        ++ optionals cfg.fileTransfer [
+          rclone-browser # Qt GUI for managing rclone remotes
         ];
     }
 
@@ -90,9 +94,9 @@ in {
         # Core graphics
           optionals cfg.libs.coreGraphics [
             cairo # 2D graphics library
-            cairomm # Cairo C++ bindings
+            cairomm_1_16 # Cairo C++ bindings
             pango # Text rendering
-            pangomm # Pango C++ bindings
+            pangomm_2_48 # Pango C++ bindings
             gdk-pixbuf # Image loading
             gdk-pixbuf-xlib # Xlib support
           ]

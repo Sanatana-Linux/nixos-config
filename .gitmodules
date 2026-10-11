@@ -9,4 +9,4 @@
 	url = https://github.com/Sanatana-Linux/nixos-awesomewm
 [submodule "external/secrets"]
 	path = external/secrets
-	url = git@github.com:Sanatana-Linux/nixos-secrets.git
+	url = https://github.com/Thomashighbaugh/secrets.git

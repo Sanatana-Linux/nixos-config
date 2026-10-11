@@ -7,7 +7,7 @@
     # from the -small channels, so tracking nixos-unstable-small makes CUDA
     # derivations substitute instead of rebuilding from source. A full
     # nixos-unstable commit never matches the caches' hashes.
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nur = {
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";

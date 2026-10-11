@@ -2,6 +2,7 @@
   imports = [
     ./nvidia.nix
     ./intel.nix
+    ./amd.nix
     ./bluetooth.nix
     ./keyboard.nix
     ./input.nix

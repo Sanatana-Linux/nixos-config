@@ -65,33 +65,38 @@ with lib; {
       extraModulePackages = [
       ];
 
-      kernelParams = [
-        "fbcon=nodefer"
-        "splash"
-        "quiet"
-        "rd.udev.log_priority=3"
-        # reboot=acpi prevents hangs on reboot by using ACPI reset instead of
-        # the default EFI/PCI reset mechanisms, which can hang on some hardware
-        "reboot=acpi"
-        # Allow NVMe autonomous power state transitions up to 5500µs
-        # (PS3-level sleep).  0 DISABLES APST entirely — the NVMe never
-        # sleeps, PCIe root port stays in L0, PCH can't enter deep C-states.
-        # Sole owner of this parameter; hardware/lenovo/lenovo.nix also
-        # declared it, and only the last occurrence on the cmdline applied.
-        "nvme_core.default_ps_max_latency_us=5500"
-        # PCIe ASPM for the whole bus, including the PCH-attached CNVi WiFi.
-        # policy=default caps links at L1.1; policy=powersave additionally
-        # permits L1.2, which is a known cause of periodic CNVi disconnects —
-        # the link drops on an idle timer and recovers on the next
-        # association. Note pcie_aspm=force does NOT override the firmware
-        # here; it defers to whatever the BIOS advertises.
-        "pcie_aspm=on"
-        "pcie_aspm.policy=default"
-        # Use acpi-cpufreq governor instead of intel_pstate. On Intel
-        # 14th-gen mobile (i9-14900HX), the passive governor sometimes
-        # achieves better idle power states than intel_pstate active mode.
-        "intel_pstate=passive"
-      ];
+      kernelParams =
+        [
+          "fbcon=nodefer"
+          "splash"
+          "quiet"
+          "rd.udev.log_priority=3"
+          # reboot=acpi prevents hangs on reboot by using ACPI reset instead of
+          # the default EFI/PCI reset mechanisms, which can hang on some hardware
+          "reboot=acpi"
+          # Allow NVMe autonomous power state transitions up to 5500µs
+          # (PS3-level sleep).  0 DISABLES APST entirely — the NVMe never
+          # sleeps, PCIe root port stays in L0, PCH can't enter deep C-states.
+          # Sole owner of this parameter; hardware/lenovo/lenovo.nix also
+          # declared it, and only the last occurrence on the cmdline applied.
+          "nvme_core.default_ps_max_latency_us=5500"
+          # PCIe ASPM for the whole bus, including the PCH-attached CNVi WiFi.
+          # policy=default caps links at L1.1; policy=powersave additionally
+          # permits L1.2, which is a known cause of periodic CNVi disconnects —
+          # the link drops on an idle timer and recovers on the next
+          # association. Note pcie_aspm=force does NOT override the firmware
+          # here; it defers to whatever the BIOS advertises.
+          "pcie_aspm=on"
+          "pcie_aspm.policy=default"
+        ]
+        # Intel-only: prefer the acpi-cpufreq governor over intel_pstate. On
+        # Intel 14th-gen mobile (i9-14900HX) the passive governor sometimes
+        # reaches better idle power states than intel_pstate active mode.
+        # Gated on the Intel module so it is not emitted on AMD/other hosts,
+        # where intel_pstate does not exist.
+        ++ optionals config.modules.hardware.intel.enable [
+          "intel_pstate=passive"
+        ];
 
       plymouth.enable = true;
 

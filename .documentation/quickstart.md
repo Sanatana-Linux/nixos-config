@@ -1,360 +1,124 @@
 # NixOS Installation Quickstart
 
-> [!NOTE]
-> This is a personal reference guide for installing NixOS using the automated installation script. This assumes you're booting from the chhinamasta live ISO or the official NixOS installer.
+> Host-agnostic install of any **physical** host in this flake using `disko`
+> (declarative disks) + LUKS2 + TPM2 auto-unlock. Replace the `‹host›` and
+> `‹user›` placeholders throughout with the target host/user.
+
+## Hosts
+
+| Host         | User | Disks                     | disko layout                          |
+| ------------ | ---- | ------------------------- | ------------------------------------- |
+| bagalamukhi  | tlh  | 2 × 1TB NVMe              | `hosts/bagalamukhi/disko.nix`           |
+| kamala       | tlh  | NVMe + 1.8TB SATA         | `hosts/kamala/disko.nix`                |
+| matangi      | smg  | 2 × 1TB NVMe              | `hosts/matangi/disko.nix`               |
+| bhairavi     | tlh  | VM (not covered here)     | —                                     |
+| chhinamasta  | user | Live ISO (not covered)    | —                                     |
+
+Encrypted hosts share one LUKS2 passphrase per machine, unlocked in the initrd
+by the platform TPM2 (Intel PTT / AMD fTPM); `/boot` is plaintext so GRUB never
+prompts. Attach the machine's `hosts/‹host›/disko.nix` for the exact layout.
 
 ## Prerequisites
 
 - Bootable NixOS installer USB (chhinamasta ISO or official NixOS ISO)
-- Internet connection
-- Target machine ready for installation (all data will be erased)
+- Internet + membership in the `Sanatana-Linux` GitHub org (secrets submodule)
+- TPM2 (fTPM/PTT) enabled in firmware for the zero-prompt path
+- **All data on the target disks is erased**
 
-## Installation Steps
-
-### 1. Boot into Live Environment
-
-Boot from your USB installer. You should land in a live NixOS environment.
-
-### 2. Setup Nix Environment
-
-Load necessary packages into a temporary shell environment:
+## Steps
 
 ```bash
-nix-shell -p git curl wget
-```
+# 0. root + tooling
+sudo -s
+nix-shell -p gh git neovim sops age
+export NIX_CONFIG="experimental-features = nix-command flakes"
 
-### 3. Download and Run Installation Script
+# 1. GitHub auth (the secrets submodule is private)
+gh auth login --hostname github.com --git-protocol https --web
+gh auth setup-git
+git config --global url."https://github.com/".insteadOf "git@github.com:"
 
-Pull the installation script directly from GitHub and execute it:
+# 2. ONE passphrase for both LUKS volumes (read by disko's passwordFile)
+printf '%s' 'PASSPHRASE' > /root/luks.key && chmod 600 /root/luks.key
 
-```bash
-curl -L https://raw.githubusercontent.com/Sanatana-Linux/nixos-config/main/.assets/install.sh -o /tmp/install.sh
-chmod +x /tmp/install.sh
-sudo /tmp/install.sh
-```
+# 3. disko config straight from the flake
+curl -fsSL -o /tmp/disko.nix \
+  https://raw.githubusercontent.com/Sanatana-Linux/nixos-config/main/hosts/‹host›/disko.nix
 
-**What the script does:**
+# 4. format + mount the target (WIPES the disks)
+nix run github:nix-community/disko/latest -- --mode disko /tmp/disko.nix
 
-- Prompts for target disk selection
-- Sets up partitioning (LVM + LUKS encryption)
-- Formats and mounts filesystems
-- Clones this repository to `/mnt/etc/nixos`
-- Generates hardware configuration
-- Prompts for host selection (bagalamukhi, matangi, chhinamasta)
-- Runs `nixos-install`
-- Prompts for root password
+# 5. clone straight onto the TARGET, submodules included
+mkdir -pv /mnt/etc
+git clone --recurse-submodules \
+  https://github.com/Sanatana-Linux/nixos-config /mnt/etc/nixos
 
-### 4. First Boot
+# 6. make the hardcoded sops path resolve to the target copy
+rm -rfv /etc/nixos
+ln -sfvn /mnt/etc/nixos /etc/nixos
 
-After installation completes, reboot into your new system:
+# 7. TPM2 auto-unlock (skip on unencrypted / VM hosts)
+modprobe tpm; modprobe tpm_crb
+systemd-cryptenroll --tpm2-device=auto --tpm2-pcrs=7 /dev/nvme0n1p3   # cryptroot
+systemd-cryptenroll --tpm2-device=auto --tpm2-pcrs=7 /dev/nvme1n1p1   # cryptdata
+#   kamala: nvme0n1p3 (cryptroot) + sda1 (cryptdata)
+#   bagalamukhi/matangi: nvme0n1p3 + nvme1n1p1
 
-```bash
+# 8. hardware config (disko owns the mounts)
+nixos-generate-config --root /mnt --no-filesystems
+cp -v /mnt/etc/nixos/hardware-configuration.nix \
+      /mnt/etc/nixos/hosts/‹host›/hardware-configuration.nix
+
+# 9. sops system key into the target
+cd /etc/nixos/external/secrets && nix run .#ensure-system-key-exists
+install -v -D -o root -g wheel -m 440 /var/lib/sops/age-keys.txt \
+  /mnt/var/lib/sops/age-keys.txt
+
+# 10. install
+nixos-install --flake /etc/nixos#‹host› --impure
+
+# 11. reboot, remove the USB
 reboot
 ```
 
-Remove the USB drive during reboot.
+### TPM enrollment notes
 
-### 5. Login
+- Intel hosts (bagalamukhi, matangi) use **Intel PTT**; enabled in firmware.
+- AMD host (kamala) uses **AMD fTPM**; enabled in firmware.
+- `--tpm2-pcrs=7` binds to the Secure Boot policy. Without Secure Boot it is
+  stable but only protects against moving the disk to another machine.
+- Enrollment only rewrites the LUKS headers — no reinstall needed. If it fails,
+  the passphrase still unlocks at boot (fallback).
 
-You'll be prompted for the LUKS encryption password, then:
+### Host-config prerequisites for an encrypted install
 
-- Login as your user (tlh for bagalamukhi, smg for matangi)
-- Default password is set in the configuration (change it immediately!)
+The disko file alone is not enough; the host's `default.nix` must also have:
 
-## Post-Installation
-
-After first boot, complete these setup steps:
-
-### 1. Change Default Password
-
-**IMPORTANT**: Change your user password immediately!
-
-```bash
-passwd
+```nix
+boot.initrd.systemd.tpm2.enable = true;   # pulls tpm-crb/tpm-tis into the initrd
 ```
 
-### 2. Set Configuration Ownership
+and `modules/nixos/system/boot.nix` must keep `boot.initrd.systemd.enable = true`
+(it does). **matangi only:** the new layout moves the ESP to `/boot/efi`, so change
+`boot.efiMountPoint = "/boot"` → `"/boot/efi"` (see `hosts/matangi/default.nix`).
 
-The configuration is installed in `/etc/nixos` and owned by root. Change ownership to your user:
-
-```bash
-doas chown -R $USER:users /etc/nixos
-```
-
-### 3. Configure Git Safe Directory
-
-Prevent git from complaining about directory ownership:
+## Post-install
 
 ```bash
+# take ownership of the cloned config + let git trust it
+sudo chown -R $USER:users /etc/nixos
 git config --global --add safe.directory /etc/nixos
-```
 
-### 4. Fork Repository (Optional)
-
-If you want to maintain your own fork instead of tracking the upstream repository:
-
-```bash
-cd /etc/nixos
-
-# Remove the upstream remote
-git remote remove origin
-
-# Add your own fork as origin
-git remote add origin git@github.com:yourusername/nixos-config.git
-
-# Make initial commit and push
-git add .
-git commit -m 'Initial commit from Sanatana-Linux base'
-git push -u origin main
-```
-
-### 5. Apply Configuration Changes
-
-After making any changes to the configuration:
-
-```bash
-cd /etc/nixos
-
-# Stage your changes
-git add .
-git commit -m 'Description of changes'
-
-# Rebuild the system
-sudo nixos-rebuild switch --flake .#$(hostname)
-```
-
-**Note**: Use `sudo` instead of `doas` for `nixos-rebuild` as it requires root privileges.
-
-## Secrets Management (Optional)
-
-If you want to set up encrypted secrets management (API keys, private credentials, etc.), follow the appropriate workflow below depending on whether you're setting up secrets for the first time or adding a new host to an existing secrets repository.
-
-For detailed information about how sops-nix works, see [Secrets Management with sops-nix](.documentation/sops-nix-guide.md).
-
-### First Time Secrets Setup
-
-If you don't have a secrets repository yet, follow these steps to create one:
-
-#### 1. Get This Host's Age Key
-
-The age key is derived from the SSH host key and is needed for sops to decrypt secrets on this machine.
-
-```bash
-sudo cat /etc/ssh/ssh_host_ed25519_key.pub | ssh-to-age
-```
-
-**Copy this key** - you'll need to add it to `.sops.yaml` in the next steps.
-
-#### 2. Authenticate to GitHub
-
-```bash
-gh auth login
-```
-
-This opens a browser for GitHub OAuth authentication and grants access to your private repositories.
-
-#### 3. Create Private Secrets Repository
-
-```bash
-gh repo create nix-secrets --private --clone
-cd ~/nix-secrets
-```
-
-#### 4. Run Setup Script
-
-The setup script will guide you through creating `.sops.yaml` and initial secrets structure:
-
-```bash
-cd /etc/nixos
-./.assets/setup_secrets.sh
-```
-
-Follow the prompts to:
-
-- Provide your GPG key fingerprint (for manual editing)
-- Add the age key from step 1 (for automatic decryption)
-- Create initial `secrets.yaml` structure
-
-#### 5. Update Your NixOS Configuration
-
-Add the secrets repository as a flake input in `flake.nix`:
-
-```nix
-inputs.nix-secrets = {
-  url = "git+ssh://git@github.com/yourusername/nix-secrets.git";
-  flake = true;
-};
-```
-
-Then reference secrets in your modules:
-
-```nix
-sops.secrets.example = {
-  sopsFile = inputs.nix-secrets.sopsFile;
-};
-```
-
-#### 6. Rebuild with Secrets
-
-```bash
-cd /etc/nixos
-sudo nixos-rebuild switch --flake .#$(hostname)
-```
-
-### Adding New Host to Existing Secrets Repository
-
-If you already have a secrets repository and want to add this new host:
-
-#### 1. Get This Host's Age Key
-
-The age key is derived from the SSH host key and is needed for sops to decrypt secrets on this machine.
-
-```bash
-sudo cat /etc/ssh/ssh_host_ed25519_key.pub | ssh-to-age
-```
-
-**Copy this key** - you'll need to add it to `.sops.yaml` in the next steps.
-
-#### 2. Authenticate to GitHub
-
-```bash
-gh auth login
-```
-
-This opens a browser for GitHub OAuth authentication and grants access to your private repositories.
-
-#### 3. Clone Your Private Secrets Repository
-
-```bash
-gh repo clone yourusername/nix-secrets ~/nix-secrets
-cd ~/nix-secrets
-```
-
-Replace `yourusername/nix-secrets` with your actual private secrets repository.
-
-#### 4. Add This Host to .sops.yaml
-
-Edit `.sops.yaml` and add the age key from step 1:
-
-```bash
-$EDITOR .sops.yaml
-```
-
-Add your host's age key to the configuration:
-
-```yaml
-creation_rules:
-  - path_regex: .*.yaml
-    pgp:
-      - &your_gpg_key XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-    age:
-      - &bagalamukhi XXXXXXXXX... # Paste the age key from step 1
-```
-
-#### 5. Re-encrypt Secrets with New Host Key
-
-```bash
-sops updatekeys secrets.yaml
-```
-
-This re-encrypts all secrets so this host can decrypt them.
-
-#### 6. Commit and Push Changes
-
-```bash
-git add .sops.yaml secrets.yaml
-git commit -S -m "Add $(hostname) to secrets access"
-git push
-```
-
-#### 8. Rebuild NixOS with Secrets
-
-```bash
-cd /etc/nixos
-sudo nixos-rebuild switch --flake .#$(hostname)
-```
-
-#### 9. Verify Secrets Access
-
-After rebuild, secrets should be available in `/run/secrets/`:
-
-```bash
-ls -la /run/secrets/
+# rebuild after edits
+sudo nixos-rebuild switch --flake /etc/nixos#$(hostname) --impure
 ```
 
 ## Troubleshooting
 
-### Script fails during partition setup
-
-- Check disk device name: `lsblk`
-- Ensure disk is not mounted: `umount -R /mnt`
-- Verify disk is correct target (all data will be erased!)
-
-### Can't authenticate to GitHub
-
-- Ensure internet connection: `ping github.com`
-- Install GitHub CLI: `nix-shell -p gh`
-- Try PAT authentication: `gh auth login --with-token < token.txt`
-
-### Secrets won't decrypt after rebuild
-
-- Verify host age key was added to `.sops.yaml`
-- Check sops configuration: `cat ~/nix-secrets/.sops.yaml`
-- Re-run: `sops updatekeys secrets.yaml`
-- Ensure flake.nix includes nix-secrets input
-
-### GPG key not found for commit signing
-
-- Import existing key: `gpg --import < your-key.asc`
-- Or generate new: `gpg --full-generate-key`
-- Add to GitHub: `gh gpg-key add`
-
-## Quick Reference Commands
-
-```bash
-# Check system status
-om rebuild $(hostname)
-
-# Update flake inputs (after first install)
-om update
-
-# Test config without switching
-sudo nixos-rebuild test --flake .#$(hostname)
-
-# Build specific host
-sudo nixos-rebuild switch --flake .#bagalamukhi
-
-# Edit secrets (from secrets repo)
-cd ~/nix-secrets
-sops secrets.yaml
-
-# Check secrets in running system
-ls -la /run/secrets/
-
-# View hardware config
-cat /etc/nixos/hosts/$(hostname)/hardware-configuration.nix
-```
-
-## Summary Workflow
-
-```bash
-# On live ISO
-nix-shell -p git curl wget
-curl -L https://raw.githubusercontent.com/Sanatana-Linux/nixos-config/main/.assets/install.sh -o /tmp/install.sh
-sudo /tmp/install.sh
-# Follow prompts, reboot
-
-# On first boot (optional secrets setup)
-cd ~/nixos
-./.assets/bootstrap-host-secrets.sh
-# Follow interactive guide
-
-# Done!
-```
-
-## See Also
-
-- [Installation with Encryption](./installation-with-encryption.md) - Manual installation steps (reference)
-- [Secrets Management](./secrets.md) - Detailed secrets strategy
-- [SOPS Documentation](./sops.md) - sops-nix integration details
-- [AGENTS.md](../AGENTS.md) - Developer workflow and module guidelines
+| Symptom | Fix |
+| ------- | --- |
+| `experimental Nix feature 'nix-command' is disabled` | re-run `export NIX_CONFIG="experimental-features = nix-command flakes"` |
+| `Repository not found` on `external/secrets` | `git submodule set-url external/secrets https://github.com/Thomashighbaugh/secrets.git && git submodule sync --recursive && git submodule update --init --recursive` |
+| `/dev/tpmrm0: No such file or directory` | `modprobe tpm; modprobe tpm_crb`, or enable fTPM/PTT in firmware |
+| `fallbackToPassword is implied by systemd stage 1` | don't set it — the systemd initrd falls back automatically |
+| GRUB asks for a passphrase | `/boot` wasn't a separate plaintext partition — re-check the disko layout |

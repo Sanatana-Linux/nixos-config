@@ -104,7 +104,7 @@ in {
         zstyle ':completion:*' complete true
         zstyle ':completion:*' complete-options true
         zstyle ':completion:*' file-sort modification
-        zstyle ':completion:*' group-name ''''
+        zstyle ':completion:*' group-name ""
         zstyle ':completion:*' keep-prefix true
         zstyle ':completion:*' list-colors ''${(s.:.)LS_COLORS}
         zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'

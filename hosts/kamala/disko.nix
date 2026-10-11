@@ -1,6 +1,5 @@
 # Declarative disk layout for Kamala (AMD desktop).
 #
-# Applied with disko BEFORE nixos-install:
 #   nix run github:nix-community/disko/latest -- --mode disko \
 #     /etc/nixos/hosts/kamala/disko.nix
 #
@@ -9,15 +8,18 @@
 #   nvme0n1  ->  512M ESP (/boot/efi) + 1G plaintext /boot + LUKS2 root (ext4 /)
 #   sda      ->  LUKS2 data (ext4 /home/tlh/Data)
 #
-# /boot is deliberately a plaintext partition so GRUB can load the kernel and
-# initrd WITHOUT cryptomounting the root — no GRUB passphrase prompt. The root
-# and data volumes are LUKS2 and are unlocked in the (systemd) initrd via TPM2
-# (crypttabExtraOpts = tpm2-device=auto), enrolled with `systemd-cryptenroll`
-# after install. That yields ZERO passphrase prompts at boot. If the TPM2
-# enrollment is absent, both fall back to a single passphrase prompt each.
+# BOTH LUKS volumes are formatted from the SAME passphrase file
+# (/root/luks.key) so disko asks for NOTHING and the two share one password.
+# Create it on the live ISO before running disko:
 #
-# Because disko owns the mount layout, generate the hardware config with
-# `nixos-generate-config --root /mnt --no-filesystems`.
+#   printf '%s' 'YOUR-PASSPHRASE' > /root/luks.key && chmod 600 /root/luks.key
+#
+# At boot the volumes unlock automatically via TPM2 (crypttabExtraOpts =
+# tpm2-device=auto) once enrolled with `systemd-cryptenroll`; until then the
+# initrd falls back to prompting for the passphrase.
+#
+# disko owns the mount layout, so generate the hardware config with:
+#   nixos-generate-config --root /mnt --no-filesystems
 {
   disko.devices.disk = {
     nvme = {
@@ -49,10 +51,10 @@
             content = {
               type = "luks";
               name = "cryptroot";
+              passwordFile = "/root/luks.key";
               settings = {
                 allowDiscards = true;
                 crypttabExtraOpts = ["tpm2-device=auto"];
-                fallbackToPassword = true;
               };
               content = {
                 type = "filesystem";
@@ -75,10 +77,10 @@
           content = {
             type = "luks";
             name = "cryptdata";
+            passwordFile = "/root/luks.key";
             settings = {
               allowDiscards = true;
               crypttabExtraOpts = ["tpm2-device=auto"];
-              fallbackToPassword = true;
             };
             content = {
               type = "filesystem";

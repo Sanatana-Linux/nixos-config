@@ -13,15 +13,10 @@ in {
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      aichat
-      code2prompt
       codegrab # use as `grab`
-      chatblade
-
       # Image upscaling
       upscaler
       upscayl
-
       # Python AI packages
       python312Packages.ollama
     ];

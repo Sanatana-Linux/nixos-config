@@ -3,7 +3,11 @@
 
   inputs = {
     stable.url = "github:nixos/nixpkgs/nixos-26.05";
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    # The CUDA binary caches (cache.nixos-cuda.org, nix-community) are built
+    # from the -small channels, so tracking nixos-unstable-small makes CUDA
+    # derivations substitute instead of rebuilding from source. A full
+    # nixos-unstable commit never matches the caches' hashes.
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
     nur = {
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";

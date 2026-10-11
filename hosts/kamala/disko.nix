@@ -52,6 +52,7 @@
               settings = {
                 allowDiscards = true;
                 crypttabExtraOpts = ["tpm2-device=auto"];
+                fallbackToPassword = true;
               };
               content = {
                 type = "filesystem";
@@ -77,6 +78,7 @@
             settings = {
               allowDiscards = true;
               crypttabExtraOpts = ["tpm2-device=auto"];
+              fallbackToPassword = true;
             };
             content = {
               type = "filesystem";

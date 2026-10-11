@@ -24,6 +24,24 @@
   # om — NixOS Operations Manager (Zig), replaces the old bash wrapper
   programs.om.enable = true;
 
+  # USB-SATA bridges with a broken UAS implementation drop off the bus in a
+  # reset loop (link resets, DID_ERROR, then the device disappears and never
+  # shows in lsblk). The 'u' quirk flag makes the kernel skip UAS for this
+  # bridge and fall back to the bulk-only usb-storage driver, which is stable.
+  # VID:PID here = the ULT-Best enclosure currently in use.
+  boot.extraModprobeConfig = "options usb-storage quirks=7825:a2a4:u";
+
+  # The internal ITE Device(8295) controller (048d:c995) gets stuck in an endless
+  # `usb_reset_device` loop on this machine, flooding dmesg every ~1.3 s. Nix
+  # can't stop it at the driver level (unbinding the usb/usbhid driver doesn't
+  # help), but deauthorizing the device makes the USB core stop managing it,
+  # which silences the storm. If this device turns out to be a keyboard you use,
+  # delete this rule (or `echo 1 | sudo tee /sys/bus/usb/devices/1-1/authorized`)
+  # to restore it.
+  services.udev.extraRules = ''
+    ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="048d", ATTR{idProduct}=="c995", ATTR{authorized}="0"
+  '';
+
   modules = {
     # System
     system = {

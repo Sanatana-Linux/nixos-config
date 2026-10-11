@@ -85,6 +85,10 @@
 
     nps = inputs.nps.defaultPackage.${prev.stdenv.hostPlatform.system};
 
+    # nixpkgs' typescript-language-server 6.0.2 ships a pnpmDeps hash that no
+    # longer reproduces (the FOD aborts). Use the stable-channel 5.3.0 instead.
+    typescript-language-server = stable-pkgs.typescript-language-server;
+
     what-size = prev.yaziPlugins.mkYaziPlugin {
       pname = "what-size";
       version = "2025-03-07";

@@ -21,6 +21,11 @@ in {
         default = false;
         description = "Enable NVIDIA container runtime (libnvidia-container + nvidia-container-toolkit)";
       };
+      capabilities = mkOption {
+        type = types.listOf types.str;
+        default = [];
+        description = "CUDA compute capabilities to compile for, e.g. [ \"6.1\" ] for Pascal (GTX 10 series). Empty keeps the nixpkgs default set — which excludes Pascal, so verily set this on Pascal hosts.";
+      };
     };
 
     prime = {
@@ -163,7 +168,6 @@ in {
           cudaPackages.libcublas
           cudaPackages.libnvjitlink
           cudaPackages.nvidia_fs
-          cudaPackages.libcutensor
           tiny-cuda-nn
           cudaPackages.cudatoolkit
           blas
@@ -175,8 +179,6 @@ in {
           cudaPackages.libnvjpeg # GPU JPEG encode/decode — accelerates image workflow
           cudaPackages.libnvjpeg_2k # GPU JPEG2000 encode/decode — pro image editing
           cudaPackages.libcufft # CUDA FFT library — audio/video signal processing
-          cudaPackages.nvcomp # GPU-accelerated compression — video codec pipelines
-          cudaPackages.cudnn # Deep neural network library — AI upscaling/denoising
 
           # CUDA-enabled ffmpeg with NVENC/NVDEC hardware encoding/decoding.
           # Stock ffmpeg already turns on CUDA/NVDEC/NVENC under cudaSupport,
@@ -261,6 +263,7 @@ in {
     nixpkgs.config = {
       allowUnfree = true;
       cudaSupport = cfg.cuda.enable;
+      cudaCapabilities = cfg.cuda.capabilities;
       nvidia.acceptLicense = true;
       allowUnfreePredicate = pkg:
         builtins.elem (lib.getName pkg) [

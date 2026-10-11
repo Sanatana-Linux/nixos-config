@@ -246,6 +246,11 @@
         turingOrNewer = false;
         cuda = {
           enable = true;
+          # GTX 1080 is Pascal (compute capability 6.1). nixpkgs' default
+          # capability list starts at 7.5, so without this every cudaSupport
+          # package lacks sm_61 kernels and dies with "no kernel image available
+          # for this device" at runtime.
+          capabilities = ["6.1"];
           # Generates the CDI spec at boot so `docker run --gpus all` and
           # CDI-referencing pods get GPU access.
           containerRuntime = true;

@@ -69,7 +69,6 @@ in {
 
         # CUDA/NVIDIA
         config.boot.kernelPackages.nvidiaPackages.production # NVIDIA X11 kernel module
-        cudaPackages.cudnn # NVIDIA CUDA Deep Neural Network library
         cudaPackages.nccl # NVIDIA Collective Communications Library
         cudaPackages.nvidia_fs # NVIDIA file system support
         cudaPackages.libnvjitlink # CUDA JIT linker

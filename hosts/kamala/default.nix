@@ -7,6 +7,7 @@
 }: {
   imports = [
     ./hardware-configuration.nix
+    ./disko.nix
     ./sops.nix
     ../../modules/nixos/system/users/tlh.nix
   ];
@@ -266,6 +267,10 @@
   # laptop/PRIME optimisation) is off — it can blank or freeze the only
   # output when the GPU drops to a low power state.
   hardware.nvidia.powerManagement.enable = false;
+
+  # Encrypted root — GRUB must cryptomount the LUKS2 root to reach /boot
+  # (kernel + initrd live inside it; only the ESP at /boot/efi is plaintext).
+  boot.loader.grub.enableCryptodisk = true;
 
   hardware.graphics = {
     enable = true;

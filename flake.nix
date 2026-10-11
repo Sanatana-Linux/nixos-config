@@ -69,6 +69,11 @@
       url = "github:Sanatana-Linux/om";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -179,6 +184,7 @@
           inputs.sops-nix.nixosModules.sops
           inputs.stylix.nixosModules.stylix
           inputs.nur.modules.nixos.default
+          inputs.disko.nixosModules.disko
           inputs.nixos-hardware.nixosModules.asus-pro-ws-x570-ace
           inputs.bhairava-grub-theme.nixosModule
           inputs.nix-index-database.nixosModules.nix-index

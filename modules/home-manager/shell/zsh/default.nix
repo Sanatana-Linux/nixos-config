@@ -238,11 +238,14 @@ in {
           }
           {
             name = "chisui/zsh-nix-shell";
-            tags = ["defer:2"];
+            # defer:2 (on-demand) is a no-op for plugins that define no commands;
+            # defer:1 defers to after the first prompt, keeping it off the
+            # startup/env-read path.
+            tags = ["defer:1"];
           }
           {
             name = "molovo/tipz";
-            tags = ["defer:2"];
+            tags = ["defer:1"];
           }
         ];
       };

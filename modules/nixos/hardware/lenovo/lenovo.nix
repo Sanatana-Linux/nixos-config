@@ -56,6 +56,11 @@ in {
       "acpi_call"
     ];
 
+    # Consumed by the Lenovo legion kernel module. Laptop-only, so it is scoped
+    # here rather than in the fleet-wide performance module where it would be
+    # emitted (and fail to apply) on non-Lenovo hosts.
+    boot.kernel.sysctl."lenovo-legion.force" = 1;
+
     # ── Force legion_laptop to bind to the EC device ─────────────────
     # The in-kernel acpi-ec driver claims PNP0C09:00 first (during ACPI
     # init), leaving legion_laptop's driver orphaned even with force=1.

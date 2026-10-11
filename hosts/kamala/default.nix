@@ -232,6 +232,8 @@
       # AMD Ryzen 9 (Zen 2) + X570 platform — CPU/chipset kernel modules,
       # sensors (k10temp, nct6775, asus_ec_sensors) and AMD-V/IOMMU.
       amd.enable = true;
+      # Runtime platform_profile + EPP switching (power-saver/balanced/performance).
+      amd.powerProfilesDaemon = true;
 
       nvidia = {
         enable = true;

@@ -38,7 +38,6 @@ in {
     boot.kernel.sysctl = {
       "vm.oom_dump_tasks" = false;
       "kernel.sysrq" = lib.mkForce 176; # Magic SysRq key (176 = sync+unmount+reboot only)
-      "lenovo-legion.force" = 1; # Laptop module
       "vm.swappiness" = 10;
       "vm.vfs_cache_pressure" = 50;
       # Reduce writeback spikes that cause thermal bursts on NVMe

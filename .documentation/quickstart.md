@@ -74,9 +74,11 @@ cd /etc/nixos/external/secrets && nix run .#ensure-system-key-exists
 install -v -D -o root -g wheel -m 440 /var/lib/sops/age-keys.txt \
   /mnt/var/lib/sops/age-keys.txt
 
-# 10. install (binary caches: see "Binary caches during install" below)
-nixos-install --flake /etc/nixos#‹host› --impure \
-  --option accept-flake-config true
+# 10. install — all configured caches + keys handed to the installer daemon
+#     (see "Binary caches during install" below for why this is needed)
+nixos-install --flake .#kamala --impure \
+  --option substituters "https://cache.nixos.org?priority=10 https://nix-community.cachix.org https://nixpkgs-unfree.cachix.org https://pre-commit-hooks.cachix.org https://cache.nixos-cuda.org https://ai.cachix.org https://nix-gaming.cachix.org https://comfyui.cachix.org https://attic.xuyh0120.win/lantian https://cache.numtide.com" \
+  --option trusted-public-keys "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs= nixpkgs-unfree.cachix.org-1:hqvoInulhbV4nJ9yJOEr+4wxhDV4xq2d1DK7S6Nj6rs= pre-commit-hooks.cachix.org-1:Pkk3Panw5AW24TOv6kz3PvLhlH8puAsJTBbOPmBo7Rc= cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M= ai.cachix.org-1:N9dzRK+alWwoKXQlnn0H6aUx0lU/mspIoz8hMvGvbbc= nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4= comfyui.cachix.org-1:33mf9VzoIjzVbp0zwj+fT51HG0y31ZTK3nzYZAX0rec= lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc= niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
 
 # 11. reboot, remove the USB
 reboot
@@ -92,32 +94,46 @@ Without intervention the install silently compiles from source:
 
 - **The kernel.** `boot.kernelPackages` is
   `cachyosKernels.linuxPackages-cachyos-bore-lto-x86_64-v3`. That flake
-  (`xddxdd/nix-cachyos-kernel`) publishes to `attic.xuyh0120.win/lantian` and
-  declares it through its own `nixConfig`. Flake `nixConfig` is honored only
-  with `accept-flake-config = true` — the target sets it, the installer does
-  not — so the LTO + BORE + x86-64-v3 kernel and its modules build locally.
+  (`xddxdd/nix-cachyos-kernel`) is not on `cache.nixos.org`; it publishes to
+  `attic.xuyh0120.win/lantian`, which the *installed* system picks up from the
+  flake's own `nixConfig`. The installer does not read that config, so without
+  the explicit `substituters` below the LTO + BORE + x86-64-v3 kernel and its
+  modules build locally. The explicit list supplies the same lantian cache
+  directly, which is why it does not need `accept-flake-config`.
 - **Overlay-modified packages.** `additions`, `modifications`,
   `stable-packages`, `nur`, and `cachyos-patches` all change derivation hashes
   (python scope, `lenovo-legion-module`, custom `pkgs/`, stable-pinned apps),
   so no cache can satisfy them. These rebuilds are unavoidable — pre-seeding
   the store is the only way around them.
 
-Give the installer daemon the caches on the command line. Use the `extra-*`
-forms so `cache.nixos.org` stays in the list (plain `substituters` replaces it):
+Hand the installer daemon the **exact set configured in
+`modules/nixos/base/nix.nix`**. That list already contains `cache.nixos.org`, so a
+plain `substituters` (full replacement) is complete and drops nothing. Run as
+root (the steps above use `sudo -s`; prefix with `sudo` if not already root):
 
 ```bash
 nixos-install --flake /etc/nixos#‹host› --impure \
-  --option accept-flake-config true \
-  --option extra-substituters "https://cache.numtide.com" \
-  --option extra-substituters "https://cache.nixos-cuda.org" \
-  --option extra-substituters "https://nix-community.cachix.org" \
-  --option extra-trusted-public-keys "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g=" \
-  --option extra-trusted-public-keys "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="
+  --option substituters "https://cache.nixos.org?priority=10 https://nix-community.cachix.org https://nixpkgs-unfree.cachix.org https://pre-commit-hooks.cachix.org https://cache.nixos-cuda.org https://ai.cachix.org https://nix-gaming.cachix.org https://comfyui.cachix.org https://attic.xuyh0120.win/lantian https://cache.numtide.com" \
+  --option trusted-public-keys "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs= nixpkgs-unfree.cachix.org-1:hqvoInulhbV4nJ9yJOEr+4wxhDV4xq2d1DK7S6Nj6rs= pre-commit-hooks.cachix.org-1:Pkk3Panw5AW24TOv6kz3PvLhlH8puAsJTBbOPmBo7Rc= cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M= ai.cachix.org-1:N9dzRK+alWwoKXQlnn0H6aUx0lU/mspIoz8hMvGvbbc= nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4= comfyui.cachix.org-1:33mf9VzoIjzVbp0zwj+fT51HG0y31ZTK3nzYZAX0rec= lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc= niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
 ```
 
-`--option accept-flake-config true` on its own already fixes the kernel by
-pulling in the lantian cache. To also skip the overlay rebuilds, pre-seed the
-store from a machine that already has the closure (e.g. bagalamukhi):
+Equivalently, write the same two keys into the installer's `/etc/nix/nix.conf`
+and `systemctl restart nix-daemon` before installing — the CLI form above just
+avoids editing the live ISO.
+
+> **Flakes gotcha.** Passing `--option accept-flake-config true` here prints
+> `warning: Ignoring setting 'accept-flake-config' because experimental feature
+> 'flakes' is not enabled` and does nothing at all, unless the shell already has
+> flakes enabled. Enable it first if you want the setting honored —
+> `export NIX_CONFIG="experimental-features = nix-command flakes"` (note `sudo`
+> strips it; use `sudo -E` or set it inside the root shell), or order
+> `--option experimental-features "nix-command flakes"` *before*
+> `--option accept-flake-config true`. It is redundant for this install anyway:
+> the `substituters` above already name the lantian cache and its key, so the
+> kernel substitutes with or without it.
+
+To also skip the overlay rebuilds, pre-seed the store from a machine that already
+has the closure (e.g. bagalamukhi):
 
 ```bash
 # on the build machine

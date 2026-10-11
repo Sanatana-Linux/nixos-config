@@ -57,7 +57,8 @@ in {
         tab_bar_style = "separator";
         tab_separator = " ┇";
         tab_bar_margin_width = "3";
-        tab_bar_margin_height = "3";
+        # tab_bar_margin_height takes <top> <bottom>; a single value is rejected.
+        tab_bar_margin_height = "3 0";
         tab_bar_edge = "top";
       };
 

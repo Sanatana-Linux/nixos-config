@@ -49,9 +49,13 @@ in {
     programs.zsh = {
       enable = true;
       syntaxHighlighting.enable = true;
-      # Don't use home-manager's built-in compinit — we handle it ourselves in
-      # completionInit with -C (cache-only) for much faster startup on NixOS.
-      enableCompletion = false;
+      # Home-manager only emits `completionInit` when completion is enabled
+      # (`mkIf (cfg.enableCompletion && ...) (mkOrder 570 cfg.completionInit)`).
+      # With it false the custom `compinit -C` below never ran, so compinit was
+      # triggered uncached by zplug/skim at every shell start (~1.5-2.5s) — which
+      # is what made kitty time out reading the shell environment. Enable it so
+      # the cached init actually runs.
+      enableCompletion = true;
       autocd = true;
       enableVteIntegration = true;
 

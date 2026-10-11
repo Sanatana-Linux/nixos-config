@@ -237,6 +237,13 @@
 
       nvidia = {
         enable = true;
+        # ZOTAC GeForce GTX 1080 AMP — Pascal (GP104). The 590+ driver branches
+        # dropped Maxwell/Pascal/Volta, so this card must stay on the 580 legacy
+        # branch (legacy_580), which is the last to support it.
+        driver = "legacy_580";
+        # Pascal predates GSP firmware, runtime-D3 dynamic power management and
+        # PCIe Resizable BAR — none of those parameters are emitted.
+        turingOrNewer = false;
         cuda = {
           enable = true;
           # Generates the CDI spec at boot so `docker run --gpus all` and
@@ -247,6 +254,9 @@
         # Single discrete GPU — the GTX 1080 (Pascal) drives every output
         # directly, so there is no Intel iGPU and PRIME must stay off.
         prime.enable = false;
+        # Always-on CUDA workstation: keep the driver loaded between jobs so the
+        # first kernel launch is not re-paid per process.
+        nvidiaPersistenced = true;
       };
       # No Intel CPU/GPU on this machine (Ryzen 9 + NVIDIA only).
       # intel.enable is intentionally omitted.
@@ -269,10 +279,12 @@
     dpi = lib.mkForce 96;
   };
 
-  # The GPU is the sole display adapter, so runtime D3 power management (a
-  # laptop/PRIME optimisation) is off — it can blank or freeze the only
-  # output when the GPU drops to a low power state.
-  hardware.nvidia.powerManagement.enable = false;
+  # Suspend support: with powerManagement enabled, the nvidia-suspend/resume
+  # services save and restore VRAM (NVreg_PreserveVideoMemoryAllocations), which
+  # the power-key suspend this desktop uses needs. Runtime D3 (finegrained) stays
+  # off — the GTX 1080 is the sole display adapter and must not drop to a low
+  # power state.
+  hardware.nvidia.powerManagement.enable = true;
 
   # /boot is a plaintext partition, so GRUB never cryptomounts (no prompt).
   # The root and data LUKS volumes are unlocked in the systemd initrd; TPM2

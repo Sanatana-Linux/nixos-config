@@ -55,6 +55,12 @@ in {
         cost — only appropriate on a physically trusted, single-tenant machine.
       '';
     };
+
+    monitoring = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Load the out-of-tree ryzen_smu module and install ryzen-monitor-ng and zenstates for AMD SMU power/P-state telemetry and tuning";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -73,6 +79,8 @@ in {
     #                          The Pro WS X570-ACE is an explicitly supported board:
     #                          adds chipset/VRM/T_Sensor temps, extra fan RPM and
     #                          CPU current/voltage the Super I/O chip does not expose.
+    #   ryzen_smu            — out-of-tree SMU driver; exposes per-rail power and
+    #                          P-state telemetry to ryzen-monitor-ng and zenstates.
     boot.kernelModules =
       [
         "msr"
@@ -94,7 +102,15 @@ in {
       ]
       ++ optionals cfg.virtualization [
         "vfio-pci"
+      ]
+      ++ optionals cfg.monitoring [
+        "ryzen_smu" # out-of-tree SMU driver (ryzen-monitor-ng, zenstates)
       ];
+
+    # Out-of-tree ryzen_smu module — SMU access for ryzen-monitor-ng / zenstates.
+    boot.extraModulePackages = optionals cfg.monitoring [
+      config.boot.kernelPackages.ryzen-smu
+    ];
 
     # amd_pstate=active is supplied by nixos-hardware's asus/pro-ws-x570-ace
     # module (which imports common/cpu/amd/pstate.nix) on kernel >= 6.3, so it
@@ -152,7 +168,11 @@ in {
         powertop
         zenmonitor # Zen MSR frequency/voltage/temperature monitor
       ]
-      ++ optionals cfg.ecc [edac-utils];
+      ++ optionals cfg.ecc [edac-utils]
+      ++ optionals cfg.monitoring [
+        ryzen-monitor-ng # SMU power/temperature/frequency monitor
+        zenstates # P-state / SMU tuning
+      ];
 
     # Persist the hwmon module list for sensor and fan tooling.
     environment.etc."sysconfig/lm_sensors".text = mkIf cfg.sensors ''

@@ -31,7 +31,12 @@ prompts. Attach the machine's `hosts/‹host›/disko.nix` for the exact layout.
 # 0. root + tooling
 sudo -s
 nix-shell -p gh git neovim sops age
-export NIX_CONFIG="experimental-features = nix-command flakes"
+# All configured caches + keys from modules/nixos/base/nix.nix. nixos-install
+# builds with `--store /mnt --extra-substituters auto?trusted=1`, and `auto`
+# resolves to these settings — so this is where the caches must live.
+export NIX_CONFIG="experimental-features = nix-command flakes
+substituters = https://cache.nixos.org?priority=10 https://nix-community.cachix.org https://nixpkgs-unfree.cachix.org https://pre-commit-hooks.cachix.org https://cache.nixos-cuda.org https://ai.cachix.org https://nix-gaming.cachix.org https://comfyui.cachix.org https://attic.xuyh0120.win/lantian https://cache.numtide.com
+trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs= nixpkgs-unfree.cachix.org-1:hqvoInulhbV4nJ9yJOEr+4wxhDV4xq2d1DK7S6Nj6rs= pre-commit-hooks.cachix.org-1:Pkk3Panw5AW24TOv6kz3PvLhlH8puAsJTBbOPmBo7Rc= cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M= ai.cachix.org-1:N9dzRK+alWwoKXQlnn0H6aUx0lU/mspIoz8hMvGvbbc= nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4= comfyui.cachix.org-1:33mf9VzoIjzVbp0zwj+fT51HG0y31ZTK3nzYZAX0rec= lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc= niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
 
 # 1. GitHub auth (the secrets submodule is private)
 gh auth login --hostname github.com --git-protocol https --web
@@ -74,11 +79,8 @@ cd /etc/nixos/external/secrets && nix run .#ensure-system-key-exists
 install -v -D -o root -g wheel -m 440 /var/lib/sops/age-keys.txt \
   /mnt/var/lib/sops/age-keys.txt
 
-# 10. install — all configured caches + keys handed to the installer daemon
-#     (see "Binary caches during install" below for why this is needed)
-nixos-install --flake .#kamala --impure \
-  --option substituters "https://cache.nixos.org?priority=10 https://nix-community.cachix.org https://nixpkgs-unfree.cachix.org https://pre-commit-hooks.cachix.org https://cache.nixos-cuda.org https://ai.cachix.org https://nix-gaming.cachix.org https://comfyui.cachix.org https://attic.xuyh0120.win/lantian https://cache.numtide.com" \
-  --option trusted-public-keys "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs= nixpkgs-unfree.cachix.org-1:hqvoInulhbV4nJ9yJOEr+4wxhDV4xq2d1DK7S6Nj6rs= pre-commit-hooks.cachix.org-1:Pkk3Panw5AW24TOv6kz3PvLhlH8puAsJTBbOPmBo7Rc= cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M= ai.cachix.org-1:N9dzRK+alWwoKXQlnn0H6aUx0lU/mspIoz8hMvGvbbc= nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4= comfyui.cachix.org-1:33mf9VzoIjzVbp0zwj+fT51HG0y31ZTK3nzYZAX0rec= lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc= niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
+# 10. install (caches come from the NIX_CONFIG set in step 0)
+nixos-install --flake /etc/nixos#‹host› --impure
 
 # 11. reboot, remove the USB
 reboot
@@ -106,20 +108,26 @@ Without intervention the install silently compiles from source:
   so no cache can satisfy them. These rebuilds are unavoidable — pre-seeding
   the store is the only way around them.
 
-Hand the installer daemon the **exact set configured in
-`modules/nixos/base/nix.nix`**. That list already contains `cache.nixos.org`, so a
-plain `substituters` (full replacement) is complete and drops nothing. Run as
-root (the steps above use `sudo -s`; prefix with `sudo` if not already root):
+Hand the installer the **exact set configured in `modules/nixos/base/nix.nix`**
+via `NIX_CONFIG` (set in step 0). `nixos-install` builds with
+`--store /mnt --extra-substituters "auto?trusted=1"`, and `auto` expands to the
+effective `substituters` setting — so the installer's Nix configuration is the
+authoritative place to put the caches. That list already contains
+`cache.nixos.org`, so a plain `substituters` (full replacement) is complete.
+
+Confirm the shell actually carries them before committing to the build — this
+must list `attic.xuyh0120.win/lantian`:
 
 ```bash
-nixos-install --flake /etc/nixos#‹host› --impure \
-  --option substituters "https://cache.nixos.org?priority=10 https://nix-community.cachix.org https://nixpkgs-unfree.cachix.org https://pre-commit-hooks.cachix.org https://cache.nixos-cuda.org https://ai.cachix.org https://nix-gaming.cachix.org https://comfyui.cachix.org https://attic.xuyh0120.win/lantian https://cache.numtide.com" \
-  --option trusted-public-keys "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs= nixpkgs-unfree.cachix.org-1:hqvoInulhbV4nJ9yJOEr+4wxhDV4xq2d1DK7S6Nj6rs= pre-commit-hooks.cachix.org-1:Pkk3Panw5AW24TOv6kz3PvLhlH8puAsJTBbOPmBo7Rc= cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M= ai.cachix.org-1:N9dzRK+alWwoKXQlnn0H6aUx0lU/mspIoz8hMvGvbbc= nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4= comfyui.cachix.org-1:33mf9VzoIjzVbp0zwj+fT51HG0y31ZTK3nzYZAX0rec= lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc= niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
+nix config show | grep -E '^(substituters|trusted-public-keys)'
 ```
 
-Equivalently, write the same two keys into the installer's `/etc/nix/nix.conf`
-and `systemctl restart nix-daemon` before installing — the CLI form above just
-avoids editing the live ISO.
+Then run the plain install from step 10. During the build you should see
+`copying path '/nix/store/…-linux-cachyos-bore-lto-x86_64-v3-7.2.8' from
+'https://attic.xuyh0120.win/lantian'`. If instead it starts `building`, the
+config did not reach the build — `--option substituters "…"` +
+`--option trusted-public-keys "…"` on the `nixos-install` command line is also
+forwarded to the inner `nix build` and is the fallback.
 
 > **Flakes gotcha.** Passing `--option accept-flake-config true` here prints
 > `warning: Ignoring setting 'accept-flake-config' because experimental feature

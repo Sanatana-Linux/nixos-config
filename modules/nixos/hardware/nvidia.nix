@@ -55,9 +55,26 @@ in {
     };
 
     driver = mkOption {
-      type = types.enum ["stable" "latest" "beta" "production"];
+      type = types.enum ["stable" "latest" "beta" "production" "legacy_580"];
       default = "stable";
-      description = "Which NVIDIA driver to use";
+      description = "Which NVIDIA driver to use. Use legacy_580 for Maxwell/Pascal/Volta (GeForce GTX 10 series and older) — the 590+ branches no longer support those GPUs.";
+    };
+
+    turingOrNewer = mkOption {
+      type = types.bool;
+      default = true;
+      description = ''
+        Whether the GPU is Turing (RTX 20 / GTX 16) or newer. Gates the
+        GSP-firmware, runtime-D3 dynamic power management and Resizable BAR
+        parameters, none of which exist on Maxwell/Pascal/Volta (GeForce GTX 10
+        series and older). Set false for those cards.
+      '';
+    };
+
+    nvidiaPersistenced = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Run nvidia-persistenced so the driver stays initialised between CUDA jobs. Useful on an always-on compute workstation; keeps the GPU awake, so a little more idle power at the wall.";
     };
   };
 
@@ -172,53 +189,54 @@ in {
     };
 
     # ── Kernel parameters ──────────────────────────────────────────────
-    boot.kernelParams = [
-      # ── DRM / display ──
-      # Provide a kernel framebuffer via nvidia-drm. Required for Wayland
-      # and for the console to work before X starts.
-      "nvidia_drm.fbdev=1"
-      # Enable kernel modesetting via nvidia-drm. Required for PRIME sync,
-      # Wayland, and proper multi-monitor support.
-      "nvidia-drm.modeset=1"
+    boot.kernelParams =
+      [
+        # ── DRM / display ──
+        # Provide a kernel framebuffer via nvidia-drm. Required for Wayland
+        # and for the console to work before X starts.
+        "nvidia_drm.fbdev=1"
+        # Enable kernel modesetting via nvidia-drm. Required for PRIME sync,
+        # Wayland, and proper multi-monitor support.
+        "nvidia-drm.modeset=1"
 
-      # ── Memory / performance ──
-      # Preserve VRAM allocations across VT switches and suspend/resume.
-      # Without this, the GPU clears VRAM on mode switches, destroying
-      # the desktop state. Does NOT conflict with nvidia-persistenced —
-      # persistenced keeps the kernel module loaded; this preserves the
-      # actual framebuffer contents in VRAM.
-      "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
-      # Enable PCIe Resizable BAR — lets the CPU access the entire GPU
-      # framebuffer in one mapping instead of 256MB windows. Improves
-      # throughput for large texture transfers.
-      "nvidia.NVreg_EnableResizableBar=1"
-      # Use Page Attribute Table (PAT) for CPU↔GPU memory mappings.
-      # PAT is the modern replacement for MTRR — more flexible, better
-      # performance on CPUs with many cores. MTRR is deprecated.
-      "nvidia.NVreg_UsePageAttributeTable=1"
-      # Skip zeroing system memory before GPU DMA allocations. The GPU
-      # overwrites it immediately anyway. Saves CPU time on every buffer
-      # allocation. Safe on a single-user desktop.
-      "nvidia.NVreg_InitializeSystemMemoryAllocations=0"
-
-      # ── Power management ──
-      # Enable GSP (GPU System Processor) firmware. Required for:
-      # - nvidia-powerd (dynamic power management)
-      # - Lower GPU idle states (P8 instead of P0)
-      # - Runtime D3 (deep sleep) when GPU is idle
-      # - Video memory self-refresh / power-off
-      "nvidia.NVreg_EnableGpuFirmware=1"
-      # Dynamic power management: 0x02 = coarse-grained (whole-GPU suspend).
-      # Required alongside GSP firmware for the GPU to reach P8 at idle.
-      # Without this, the GPU may stay in P0-P4 even with nvidia-powerd running.
-      "nvidia.NVreg_DynamicPowerManagement=0x02"
-      # PCIe ASPM is deliberately not set here. It is a bus-wide policy covering
-      # the CPU root ports, the NVMe link and the PCH-attached CNVi WiFi, not a
-      # property of the GPU — the GPU's own power states come from the runtime PM
-      # entries above. policy=powersave additionally permits L1.2, which shows up
-      # as periodic CNVi disconnects on idle timers. system/boot.nix is the single
-      # owner of these parameters.
-    ];
+        # ── Memory / performance (every generation) ──
+        # Preserve VRAM allocations across VT switches and suspend/resume.
+        # Without this, the GPU clears VRAM on mode switches, destroying
+        # the desktop state. Does NOT conflict with nvidia-persistenced —
+        # persistenced keeps the kernel module loaded; this preserves the
+        # actual framebuffer contents in VRAM.
+        "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
+        # Use Page Attribute Table (PAT) for CPU↔GPU memory mappings.
+        # PAT is the modern replacement for MTRR — more flexible, better
+        # performance on CPUs with many cores. MTRR is deprecated.
+        "nvidia.NVreg_UsePageAttributeTable=1"
+        # Skip zeroing system memory before GPU DMA allocations. The GPU
+        # overwrites it immediately anyway. Saves CPU time on every buffer
+        # allocation. Safe on a single-user desktop.
+        "nvidia.NVreg_InitializeSystemMemoryAllocations=0"
+      ]
+      # ── Turing and newer only ──
+      # GSP firmware, runtime-D3 dynamic power management and Resizable BAR do
+      # not exist on Maxwell/Pascal/Volta (GeForce GTX 10 series and older) —
+      # the driver ignores them there, so they are only emitted for Turing+.
+      ++ optionals cfg.turingOrNewer [
+        # Enable GSP (GPU System Processor) firmware. Required for
+        # nvidia-powerd, P8 idle states and runtime D3 deep sleep.
+        "nvidia.NVreg_EnableGpuFirmware=1"
+        # Dynamic power management: 0x02 = coarse-grained (whole-GPU suspend).
+        # Required alongside GSP firmware for the GPU to reach P8 at idle.
+        "nvidia.NVreg_DynamicPowerManagement=0x02"
+        # Enable PCIe Resizable BAR — lets the CPU access the entire GPU
+        # framebuffer in one mapping instead of 256MB windows. Improves
+        # throughput for large texture transfers.
+        "nvidia.NVreg_EnableResizableBar=1"
+      ];
+    # PCIe ASPM is deliberately not set here. It is a bus-wide policy covering
+    # the CPU root ports, the NVMe link and the PCH-attached CNVi WiFi, not a
+    # property of the GPU — the GPU's own power states come from the parameters
+    # above. policy=powersave additionally permits L1.2, which shows up as
+    # periodic CNVi disconnects on idle timers. system/boot.nix is the single
+    # owner of these parameters.
 
     # ── Initrd modules ────────────────────────────────────────────────
     # Loaded early so the display works during boot and LUKS unlock.
@@ -277,14 +295,13 @@ in {
         modesetting.enable = true;
         nvidiaSettings = true;
 
-        # ── nvidia-persistenced — OFF ──────────────────────────────────
-        # Disabled: with PRIME sync, Xorg/picom keep the GPU active at
-        # all times — it will never be idle long enough to enter D3cold
-        # at runtime. persistenced is redundant and adds a daemon that
-        # can interfere with GPU power state transitions.
-        # Does NOT affect suspend/hibernate — that goes through the
+        # ── nvidia-persistenced ────────────────────────────────────────
+        # Keeps the driver initialised between CUDA jobs so the first kernel
+        # launch is not re-paid on every process. Off by default (PRIME-sync
+        # laptops keep the GPU active anyway); enable it on an always-on CUDA
+        # desktop. Does NOT affect suspend/hibernate — that goes through the
         # kernel PM subsystem, not userspace daemons.
-        nvidiaPersistenced = false;
+        nvidiaPersistenced = cfg.nvidiaPersistenced;
 
         # ── Dynamic Boost — OFF ────────────────────────────────────────
         # Disabled: nvidia-powerd can pin the GPU at P0 clocks (~30W)
@@ -318,6 +335,11 @@ in {
         # targets and power modes), causing GPU memory allocation failures
         # and desktop freezes. Proprietary module works correctly.
         open = false;
+
+        # GSP (GPU System Processor) firmware is a Turing+ feature. Keep it
+        # disabled on Maxwell/Pascal/Volta so no GSP firmware is packaged and
+        # the driver does not attempt a firmware handshake those GPUs lack.
+        gsp.enable = cfg.turingOrNewer;
 
         package = config.boot.kernelPackages.nvidiaPackages.${cfg.driver};
 

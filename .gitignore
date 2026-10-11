@@ -14,7 +14,7 @@ result-*
 
 # Ignore automatically generated direnv output
 .direnv
-
+.direnv/*
 
 ### https://raw.github.com/github/gitignore/310d5c4fa48aaa215c33642165fe8745e28c138b/Global/Linux.gitignore
 

@@ -180,7 +180,7 @@
         owner = "SillyTavern";
         repo = "SillyTavern";
         rev = "staging";
-        hash = "sha256-GLM88OIEdi4jJ3He3KXe6585cFlhkfjiEJ4PJqWDSQI=";
+        hash = "sha256-YR9+FpG7F4ypgQNYEYzb8PoITGZnbSihLytwKozpn24=";
       };
       # `npmDepsHash` cannot be overridden here: the upstream package already
       # instantiated its fetchNpmDeps derivation during evaluation, so only replacing

@@ -268,9 +268,10 @@
   # output when the GPU drops to a low power state.
   hardware.nvidia.powerManagement.enable = false;
 
-  # Encrypted root — GRUB must cryptomount the LUKS2 root to reach /boot
-  # (kernel + initrd live inside it; only the ESP at /boot/efi is plaintext).
-  boot.loader.grub.enableCryptodisk = true;
+  # /boot is a plaintext partition, so GRUB never cryptomounts (no prompt).
+  # The root and data LUKS volumes are unlocked in the systemd initrd; TPM2
+  # (AMD fTPM) auto-unlock is enrolled post-install, giving zero prompts.
+  boot.initrd.systemd.tpm2.enable = true;
 
   hardware.graphics = {
     enable = true;

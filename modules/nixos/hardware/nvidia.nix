@@ -161,18 +161,13 @@ in {
           cudaPackages.nvcomp # GPU-accelerated compression — video codec pipelines
           cudaPackages.cudnn # Deep neural network library — AI upscaling/denoising
 
-          # CUDA-enabled ffmpeg with NVENC/NVDEC hardware encoding/decoding
-          # withCudaNVCC requires withUnfree (maps to --enable-nonfree) because
-          # NVIDIA's CUDA NVCC compiler path is considered non-free by ffmpeg's configure.
-          (ffmpeg-full.override {
-            withNvcodec = true;
-            withCuda = true;
-            withUnfree = true;
-            withCudaNVCC = true;
-            withNpp = true;
-            withNvdec = true;
-            withNvenc = true;
-          })
+          # CUDA-enabled ffmpeg with NVENC/NVDEC hardware encoding/decoding.
+          # Stock ffmpeg already turns on CUDA/NVDEC/NVENC under cudaSupport,
+          # and nixpkgs' CUDA jobset builds this exact derivation into the CUDA
+          # binary cache, so it substitutes. Overriding it (withUnfree /
+          # withCudaNVCC / withNpp) yields a bespoke derivation no cache
+          # carries, so ffmpeg rebuilds from source on every update.
+          ffmpeg
         ];
     };
 

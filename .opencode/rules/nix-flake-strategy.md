@@ -8,7 +8,7 @@
 sudo nixos-rebuild switch --flake .#<host> --impure
 ```
 
-Available hosts: bagalamukhi, matangi, bhairavi, chhinamasta
+Available hosts: bagalamukhi, kamala, matangi, bhairavi, chhinamasta
 
 ## Critical — `--impure` Is Always Required
 

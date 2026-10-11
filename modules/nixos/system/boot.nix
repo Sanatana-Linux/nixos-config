@@ -76,13 +76,17 @@ with lib; {
         # Allow NVMe autonomous power state transitions up to 5500µs
         # (PS3-level sleep).  0 DISABLES APST entirely — the NVMe never
         # sleeps, PCIe root port stays in L0, PCH can't enter deep C-states.
+        # Sole owner of this parameter; hardware/lenovo/lenovo.nix also
+        # declared it, and only the last occurrence on the cmdline applied.
         "nvme_core.default_ps_max_latency_us=5500"
-        # Force PCIe ASPM — the BIOS on Legion 5 Pro overrides cmdline
-        # pcie_aspm.policy=powersave back to default. Force overrides
-        # the BIOS and pushes PCIe links to L1, letting the PCH enter
-        # deeper C-states. May cause NVMe controller issues — if drives
-        # drop offline on resume, remove this and fall back to BIOS defaults.
-        "pcie_aspm=force"
+        # PCIe ASPM for the whole bus, including the PCH-attached CNVi WiFi.
+        # policy=default caps links at L1.1; policy=powersave additionally
+        # permits L1.2, which is a known cause of periodic CNVi disconnects —
+        # the link drops on an idle timer and recovers on the next
+        # association. Note pcie_aspm=force does NOT override the firmware
+        # here; it defers to whatever the BIOS advertises.
+        "pcie_aspm=on"
+        "pcie_aspm.policy=default"
         # Use acpi-cpufreq governor instead of intel_pstate. On Intel
         # 14th-gen mobile (i9-14900HX), the passive governor sometimes
         # achieves better idle power states than intel_pstate active mode.

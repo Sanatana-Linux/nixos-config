@@ -1,4 +1,4 @@
-<!-- Generated: 2026-04-21 | Updated: 2026-07-27 -->
+<!-- Generated: 2026-04-21 | Updated: 2026-10-06 -->
 
 # The ShizNix
 
@@ -33,6 +33,7 @@
 | Host | Type | User | GPU | Desktop | Kernel |
 |------|------|------|-----|---------|--------|
 | bagalamukhi | Lenovo Legion 5 Pro | tlh | NVIDIA+Intel Prime | awesome+LightDM | cachyos-bore-lto-x86_64-v3 |
+| kamala | AMD desktop (ASUS Pro WS, Ryzen 9) | tlh | NVIDIA GTX 1080 | awesome+LightDM | cachyos-bore-lto-x86_64-v3 |
 | matangi | Lenovo Legion Pro | smg | NVIDIA+Intel Prime | xfce | cachyos-bore-lto-x86_64-v3 |
 | bhairavi | VM | tlh | modesetting | awesome | cachyos-bore-lto-x86_64-v3 |
 | chhinamasta | Live USB ISO | user | Intel | awesome | cachyos-bore |
@@ -106,9 +107,29 @@ This project uses OpenCode with Hubs orchestration. Configuration lives in `.ope
 | Path | Purpose | Git |
 |------|---------|-----|
 | `.opencode/opencode.jsonc` | Project-level OpenCode config | ✓ |
-| `.opencode/rules/` | Project-specific rules (nix-flake-strategy, shell_strategy, context-strategy) | ✓ |
+| `.opencode/rules/` | Project-specific rules (nix-flake-strategy, shell_strategy, context-strategy, graph-context) | ✓ |
 | `.opencode/context/` | Durable knowledge — frameworks, patterns, research, decisions | ✓ |
+| `.opencode/tools/` | Project tools (nix-build, nix-flake, nix-format) | ✓ |
 | `.opencode/state/` | Session state — checkpoints, todos, artifacts | ✗ (gitignored) |
+| `.opencode/state/vector/` | Knowledge graph + vector indexes (derived cache) | ✗ (gitignored) |
+
+### Knowledge Graph
+
+Hybrid retrieval over this repo's context, rules, skills, and Nix sources:
+embedding recall → classifier gate → cross-encoder rerank → graph refine.
+2,572 nodes / 14,339 edges over 403 context chunks and 2,316 code chunks.
+
+Reach for `graphQuery` before grepping — it ranks by meaning, not substring:
+
+- `graphQuery(query=…)` — hybrid search
+- `graphQuery(action="neighbors", id="rule:nix-module-patterns")` — traverse edges
+- `graphQuery(action="impact", id=…)` — what depends on a node
+- `rerank(query=…, documents=[…])` — score candidates already in hand
+
+The databases are a derived cache and are gitignored. Rebuild after corpus
+changes (`OPCODE_DIR=/etc/nixos node …/vectorize.ts` then `…/graph.ts build`) —
+see `.opencode/rules/graph-context.md` for the full procedure and why each
+retrieval stage exists.
 
 ### Agent Routing
 
@@ -150,3 +171,20 @@ Project context is stored in `.opencode/context/`:
 - `decisions.md` — Architecture Decision Records (ADRs)
 - `frameworks/sea-greeter-display-manager.md` — Sea greeter display manager integration
 - `research/` — External research and references
+
+### Repository References
+
+`.opencode/opencode.jsonc` carries a `references` block pointing at the upstream
+projects this flake actually builds on, so agents can consult the real source
+rather than a cached paraphrase:
+
+| Reference | Why it matters here |
+|-----------|---------------------|
+| `Mic92/sops-nix` | Secrets module — age over SSH host keys, all four hosts |
+| `NixOS/nixpkgs` | Primary package set (nixos-unstable); option and attribute names |
+| `NixOS/nixos-hardware` | Hardware modules, incl. the Legion 16irx9h module |
+| `nix-community/impermanence`, `nix-community/lanzaboote` | Tmpfs system state; Secure Boot |
+| `numtide/flake-utils`, `gytis-ivaskevicius/flake-utils-plus` | Flake helpers behind the four host outputs |
+| `nixpak/nixpak`, `containers/bubblewrap` | Sandboxed apps |
+| `johnfanv2/LenovoLegionLinux` | EC/WMI fan, RGB and battery control |
+| `Sanatana-Linux/lightdm-webkit2-sanatana` | In-house greeter theme |

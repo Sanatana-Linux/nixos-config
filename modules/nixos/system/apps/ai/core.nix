@@ -14,6 +14,7 @@ in {
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       aichat
+      claude-code # Anthropic Claude Code CLI (binary: `claude`)
       code2prompt
       codegrab # use as `grab`
       chatblade

@@ -25,6 +25,12 @@
               doCheck = false;
               pythonImportsCheck = ["pipx"];
             });
+            # anyio's TLS and hypothesis-plugin tests need resources the Nix
+            # sandbox does not provide. Only the tests fail, so they are
+            # disabled rather than patched.
+            anyio = python-prev.anyio.overridePythonAttrs (old: {
+              doCheck = false;
+            });
           }) [
           "pytorch-lightning"
           "lightning"
@@ -140,35 +146,55 @@
         '';
     });
 
-    # Update SillyTavern to latest staging branch commit
-    sillytavern = prev.sillytavern.overrideAttrs (oldAttrs: rec {
-      pname = "sillytavern";
-      version = "unstable-2026-04-09";
-      src = final.fetchFromGitHub {
-        owner = "SillyTavern";
-        repo = "SillyTavern";
-        rev = "64e8c8d964c74b72b421ed06f1d5706713edb804";
-        hash = "sha256-8xY0ngf4nCqPqGMsnUQWkhHfOgZSBM08NvL/bnVIqCg=";
-      };
-      npmDepsHash = "sha256-pjBCwOtx5UiZWW7/Tir4KHZAkPgrM2sMDix/g2USDWk=";
-      # Force rebuild of npm dependencies
-      npmDeps = final.fetchNpmDeps {
-        inherit src;
-        hash = "sha256-pjBCwOtx5UiZWW7/Tir4KHZAkPgrM2sMDix/g2USDWk=";
-      };
+    # SillyTavern is tracked from the upstream `staging` branch — the server's
+    # development branch, which is always ahead of the newest release tag — so the
+    # package builds current upstream instead of a frozen snapshot.
+    #
+    # Nix pins sources by content, so the branch is captured as `rev = "staging"`
+    # plus the hash of whichever commit the branch pointed at when that hash was
+    # computed. To move to the current head:
+    #
+    #   nix hash convert --from nix32 --to sri --hash-algo sha256 \
+    #     "$(nix-prefetch-url --unpack --type base32 \
+    #        https://github.com/SillyTavern/SillyTavern/archive/refs/heads/staging.tar.gz)"
+    #
+    # A staging bump that touches package-lock.json also changes the `npmDeps` hash
+    # below; build once and copy the value Nix reports for the new source.
+    sillytavern = prev.sillytavern.overrideAttrs (oldAttrs: let
       # SillyTavern-CharacterLibrary companion plugin (cl-helper). The server
       # plugin loader only scans <serverDirectory>/plugins, which is read-only
-      # in the Nix store, so cl-helper must be baked in at build time.
+      # in the Nix store, so cl-helper must be baked in at build time. Tracked from
+      # the plugin's newest release tag.
       clHelperSrc = final.fetchFromGitHub {
         owner = "Sillyanonymous";
         repo = "SillyTavern-CharacterLibrary";
-        rev = "70ff25474f77516ffc81ebd22fa8a2e37a9b7b4b"; # v7.1.0
+        tag = "v7.1.0";
         hash = "sha256-O26ROGIeKmIhlbImO1eGLi2vR+N+5kNcSfn+2JkcJQ4=";
       };
-      postInstall = (oldAttrs.postInstall or "") + ''
-        mkdir -p $out/lib/node_modules/sillytavern/plugins/cl-helper
-        cp -r ${clHelperSrc}/extras/cl-helper/. $out/lib/node_modules/sillytavern/plugins/cl-helper/
-      '';
+    in rec {
+      pname = "sillytavern";
+      # Staging is unreleased work with no release version to name, so the build is
+      # identified by its source hash rather than a hand-maintained version string.
+      version = "unstable";
+      src = final.fetchFromGitHub {
+        owner = "SillyTavern";
+        repo = "SillyTavern";
+        rev = "staging";
+        hash = "sha256-GLM88OIEdi4jJ3He3KXe6585cFlhkfjiEJ4PJqWDSQI=";
+      };
+      # `npmDepsHash` cannot be overridden here: the upstream package already
+      # instantiated its fetchNpmDeps derivation during evaluation, so only replacing
+      # `npmDeps` itself re-resolves the hash against this `src`.
+      npmDeps = final.fetchNpmDeps {
+        inherit src;
+        hash = "sha256-wAVmQuchjDXh7sTj8Q7+bJJoYCi7JdvlEeC5G9VtjMU=";
+      };
+      postInstall =
+        (oldAttrs.postInstall or "")
+        + ''
+          mkdir -p $out/lib/node_modules/sillytavern/plugins/cl-helper
+          cp -r ${clHelperSrc}/extras/cl-helper/. $out/lib/node_modules/sillytavern/plugins/cl-helper/
+        '';
     });
 
     # Patches applied after the cachyos kernel overlay — see cachyos-patches below

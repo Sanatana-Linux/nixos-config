@@ -29,7 +29,8 @@
     ".opencode/rules/nix-service-scripts.md",
     ".opencode/rules/nix-module-patterns.md",
     ".opencode/rules/nix-secrets-management.md",
-    ".opencode/rules/nix-pkgs-system-deprecation.md"
+    ".opencode/rules/nix-pkgs-system-deprecation.md",
+    ".opencode/rules/graph-context.md"
   ],
   "tools": {
     "nix-build": true,
@@ -55,5 +56,71 @@
       ".opencode/skills/nixos-docs-reference",
       ".opencode/skills/nixos-build-lock"
     ]
+  },
+  "references": {
+    "context": {
+      "path": "./.opencode/context",
+      "description": "Durable project knowledge base — decisions, patterns, research, frameworks, and theory. Use when seeking project-specific context, ADRs, or discovered patterns."
+    },
+    "sops-nix": {
+      "repository": "Mic92/sops-nix",
+      "description": "sops-nix module used for encrypted secrets (age, SSH host keys) across all four hosts. Reference when touching sops.secrets or external/secrets.",
+      "hidden": true
+    },
+    "nixpkgs": {
+      "repository": "NixOS/nixpkgs",
+      "description": "Primary package set (nixos-unstable). Reference for option names, package attributes, and module behaviour.",
+      "hidden": true
+    },
+    "nixos-hardware": {
+      "repository": "NixOS/nixos-hardware",
+      "description": "Hardware-specific NixOS modules (e.g. the Lenovo Legion 16irx9h module backing bagalamukhi/matangi).",
+      "hidden": true
+    },
+    "impermanence": {
+      "repository": "nix-community/impermanence",
+      "description": "Impermanence module used for tmpfs/system state. See context/impermanence.md.",
+      "hidden": true
+    },
+    "lanzaboote": {
+      "repository": "nix-community/lanzaboote",
+      "description": "Lanzaboote Secure Boot setup. See context/research/lanzaboote-secure-boot.md.",
+      "hidden": true
+    },
+    "flake-utils": {
+      "repository": "numtide/flake-utils",
+      "description": "Flake helper library — eachSystem/eachDefaultSystem patterns behind the four host outputs.",
+      "hidden": true
+    },
+    "flake-utils-plus": {
+      "repository": "gytis-ivaskevicius/flake-utils-plus",
+      "description": "Extended flake helpers in use. See context/flake-utils-plus.md.",
+      "hidden": true
+    },
+    "nixpak": {
+      "repository": "nixpak/nixpak",
+      "description": "Sandboxed app runtimes. See context/nixpak-sandboxing.md.",
+      "hidden": true
+    },
+    "bubblewrap": {
+      "repository": "containers/bubblewrap",
+      "description": "bubblewrap sandbox backend underpinning nixpak. See context/nixpak-sandboxing.md.",
+      "hidden": true
+    },
+    "lenovo-legion-linux": {
+      "repository": "johnfanv2/LenovoLegionLinux",
+      "description": "Legion EC/WMI fan, RGB and battery-control tooling behind modules/hardware/lenovo.",
+      "hidden": true
+    },
+    "nixos-guide": {
+      "repository": "mikeroyal/NixOS-Guide",
+      "description": "External NixOS reference material. See context/research/nix-guides/.",
+      "hidden": true
+    },
+    "lightdm-webkit2-sanatana": {
+      "repository": "Sanatana-Linux/lightdm-webkit2-sanatana",
+      "description": "In-house LightDM webkit2 greeter theme wired into the sea-greeter display manager module.",
+      "hidden": true
+    }
   }
 }

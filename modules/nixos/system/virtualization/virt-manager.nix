@@ -42,7 +42,6 @@ in {
         qtemu
         quickemu
         OVMFFull
-        kvmtool
         swtpm
       ]
       ++ lib.optionals cfg.libguestfsIntrospection [

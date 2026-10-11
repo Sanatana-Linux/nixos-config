@@ -24,6 +24,16 @@ in {
     };
 
     prime = {
+      enable = mkOption {
+        type = types.bool;
+        default = true;
+        description = ''
+          Enable NVIDIA PRIME (hybrid Intel-iGPU + NVIDIA-dGPU) with sync
+          output. Leave true on hybrid laptops. Set false on a machine whose
+          NVIDIA GPU drives every display directly (a desktop with no iGPU),
+          where the PRIME bus IDs below do not apply.
+        '';
+      };
       intelBusId = mkOption {
         type = types.str;
         default = "PCI:00:02:0";
@@ -119,8 +129,15 @@ in {
           kompute
         ]
         ++ optionals cfg.cuda.containerRuntime [
-          # libnvidia-container
-          # nvidia-container-toolkit
+          # nvidia-container-cli and libnvidia-container, invoked by the runtime
+          # hook to inject the driver libraries and devices into a container
+          libnvidia-container
+          # nvidia-ctk, which generates the CDI specification
+          nvidia-container-toolkit
+          # nvidia-container-runtime and its hook, in a separate output so the
+          # runtime is not dragged in by every consumer of nvidia-ctk. This is the
+          # path qemu-base.nix passes to Docker's --add-runtime.
+          nvidia-container-toolkit.tools
         ]
         ++ optionals cfg.cuda.enable [
           cudatoolkit
@@ -200,13 +217,12 @@ in {
       # Required alongside GSP firmware for the GPU to reach P8 at idle.
       # Without this, the GPU may stay in P0-P4 even with nvidia-powerd running.
       "nvidia.NVreg_DynamicPowerManagement=0x02"
-      # Enable PCIe Active State Power Management. Allows the PCIe link
-      # to enter lower power states (L0s, L1) when idle. Required for
-      # the GPU to reach deep sleep states.
-      "pcie_aspm=on"
-      # ASPM policy: powersave = aggressively enter low-power link states.
-      # On laptops this saves 1-3W at idle with negligible latency impact.
-      "pcie_aspm.policy=powersave"
+      # PCIe ASPM is deliberately not set here. It is a bus-wide policy covering
+      # the CPU root ports, the NVMe link and the PCH-attached CNVi WiFi, not a
+      # property of the GPU — the GPU's own power states come from the runtime PM
+      # entries above. policy=powersave additionally permits L1.2, which shows up
+      # as periodic CNVi disconnects on idle timers. system/boot.nix is the single
+      # owner of these parameters.
     ];
 
     # ── Initrd modules ────────────────────────────────────────────────
@@ -293,8 +309,10 @@ in {
         # suspends as a whole device rather than per-function. More
         # reliable on hybrid laptops where the GPU may be in use by
         # multiple subsystems (X, CUDA, video decode) simultaneously.
+        # mkDefault so a desktop, where the GPU is the sole display
+        # adapter, can turn runtime PM off from the host config.
         powerManagement = {
-          enable = true;
+          enable = mkDefault true;
           finegrained = false;
         };
 
@@ -308,7 +326,10 @@ in {
 
         package = config.boot.kernelPackages.nvidiaPackages.${cfg.driver};
 
-        prime = {
+        # Only configure PRIME on hybrid systems. On a desktop with the
+        # NVIDIA GPU as the sole adapter, the Intel bus ID is meaningless
+        # and PRIME sync would point X at a non-existent framebuffer.
+        prime = mkIf cfg.prime.enable {
           # PRIME sync: the NVIDIA GPU renders directly to the Intel
           # framebuffer with no copy. Zero latency, tear-free. Never
           # switch to offload mode — it adds a copy step and breaks

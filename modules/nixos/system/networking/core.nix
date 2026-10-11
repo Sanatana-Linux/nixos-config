@@ -16,23 +16,30 @@ with lib; {
     wifi = {
       powersave = mkOption {
         type = types.bool;
-        default = true;
-        description = "Enable WiFi power saving";
+        default = false;
+        description = ''
+          Enable WiFi power saving. Leave false: NetworkManager re-applies this on
+          every association, and it overrides the driver's own power_save=0 set
+          below in extraModprobeConfig. With it on, the adapter sleeps between
+          beacons, which stalls throughput and lengthens the gap on every roam
+          between access points.
+        '';
       };
       randomMac = mkOption {
         type = types.bool;
         default = false;
-        description = "Randomize WiFi MAC address";
+        description = ''
+          Randomize the WiFi MAC address. Leave false on a machine that roams
+          between known access points: a changing station address makes each
+          association look like a new client, which defeats the fast-roaming
+          state kept by the previous one.
+        '';
       };
       regulatoryDomain = mkOption {
         type = types.str;
         default = "US";
-        description = "Wireless regulatory domain (country code). Realtek USB adapters often fail to auto-detect and default to restrictive 'world' domain.";
+        description = "Wireless regulatory domain (country code). Pinned on the kernel command line so the radio does not fall back to the restrictive 'world' domain when an access point advertises none.";
       };
-    };
-
-    quad9 = {
-      enable = mkEnableOption "Quad9 DNS servers with ECS and threat blocking";
     };
 
     networkmanager = {
@@ -82,19 +89,24 @@ with lib; {
     # did not discover WiFi modules on this hardware.
     networking.networkmanager = mkIf config.modules.system.networking.networkmanager.enable {
       enable = true;
-      insertNameservers =
-        if config.modules.system.networking.quad9.enable
-        then ["9.9.9.11" "149.112.112.11" "2620:fe::11" "2620:fe::fe:11"]
-        else [];
       unmanaged = ["docker0" "rndis0"];
       wifi = {
         powersave = config.modules.system.networking.wifi.powersave;
-        scanRandMacAddress = true;
-        macAddress = "random";
+        scanRandMacAddress = config.modules.system.networking.wifi.randomMac;
+        macAddress =
+          if config.modules.system.networking.wifi.randomMac
+          then "random"
+          else "preserve";
       };
     };
 
-    # services.resolved.enable = true;
+    warnings = [
+      (
+        lib.optionalString config.modules.system.networking.wifi.powersave
+        "networking.wifi.powersave is enabled: NetworkManager will re-enable adapter power saving on every association, overriding the iwlwifi power_save=0 in extraModprobeConfig. Expect stalled throughput and longer outages on each roam."
+      )
+    ];
+
     systemd.services.NetworkManager-wait-online.enable = mkIf config.modules.system.networking.networkmanager.enable false;
 
     # openresolv's resolvconf service is not used — DNS is handled by
@@ -102,35 +114,17 @@ with lib; {
     # which owns the /etc/resolv.conf symlink.
     systemd.services.resolvconf.enable = false;
 
-    # Realtek USB WiFi adapters (both in-kernel rtw88 and out-of-tree
-    # rtl88x2bu) often fail to auto-detect the regulatory domain from
-    # the AP, defaulting to the restrictive "world" domain (00) which
-    # limits available channels and transmit power. Setting this
-    # explicitly fixes channel availability and connection stability.
-    # Equivalent to: iw reg set US
+    # Pin the regulatory domain from the kernel command line. Without it a radio
+    # that cannot read the domain from the AP association falls back to "world"
+    # (00), which restricts channels and transmit power. Equivalent to:
+    # iw reg set US
     boot.kernelParams = ["cfg80211.ieee80211_regdom=${config.modules.system.networking.wifi.regulatoryDomain}"];
 
-    # ── Realtek USB WiFi: disable USB autosuspend ────────────────────
-    # The kernel's USB power management cuts power to the USB port when
-    # the WiFi card draws high voltage for the cryptographic handshake
-    # (WPA2 4-way handshake, WPA3 SAE). The radio crashes mid-handshake
-    # and sends a DEAUTH_LEAVING (Reason Code 3), causing NM to report
-    # "association took too long, failing activation."
-    #
-    # This udev rule targets Realtek USB devices (vendor 0bda) and
-    # sets power/control=on to prevent autosuspend. More targeted than
-    # the global usbcore.autosuspend=-1 kernel parameter.
-    services.udev.extraRules = ''
-      # Realtek USB WiFi adapters: disable USB autosuspend
-      SUBSYSTEM=="usb", ATTR{idVendor}=="0bda", TEST=="power/control", ATTR{power/control}="on"
-    '';
-
-    # ── Realtek rtw88 driver: disable deep power saving ──────────────
-    # The rtw88_8822bu in-kernel driver has a deep LPS (Leisure Power
-    # Save) mode that can cause the adapter to become unresponsive during
-    # the WPA handshake.  This disables it at module load time.
+    # Adapter power management for the internal CNVi radio (iwlwifi/iwlmvm).
+    # power_save=0 keeps the radio out of PS mode; iwlmvm power_scheme=2 selects
+    # the power-scheme table tuned for continuous association. Both must agree
+    # with networking.wifi.powersave above, which takes precedence over them.
     boot.extraModprobeConfig = ''
-      # options rtw88_core disable_lps_deep=1
       options iwlwifi power_save=0
       options iwlmvm power_scheme=2
     '';
@@ -147,10 +141,9 @@ with lib; {
           libgit2-glib
         ]
         ++ optionals config.modules.system.networking.packages.wirelessTools [
+          # NetworkManager's supplicant backend
           wpa_supplicant
-          dhcpcd
           iw
-          wirelesstools
         ]
         ++ optionals config.modules.system.networking.packages.downloadTools [
           aria2

@@ -16,7 +16,6 @@ in {
         gnome-settings-daemon
         xsettingsd
         xfce4-settings
-        logitech-udev-rules
         via
         qmk-udev-rules
         libsigrok

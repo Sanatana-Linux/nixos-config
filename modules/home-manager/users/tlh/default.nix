@@ -86,6 +86,25 @@
 
   programs.home-manager.enable = true;
 
+  # SSH client host aliases so `ssh kamala` reaches the AMD desktop from any
+  # tlh machine (bagalamukhi included). Matches the server's 2222 port and
+  # resolves via mDNS (avahi runs on both ends), so no DNS or /etc/hosts
+  # entry is needed.
+  programs.ssh = {
+    enable = true;
+    # Don't install home-manager's opinionated default Host * block; only the
+    # alias below is managed.
+    enableDefaultConfig = false;
+    settings = {
+      kamala = {
+        HostName = "kamala.local";
+        User = "tlh";
+        Port = 2222;
+        StrictHostKeyChecking = "accept-new";
+      };
+    };
+  };
+
   home = {
     username = "tlh";
     homeDirectory = "/home/tlh";

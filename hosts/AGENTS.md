@@ -11,6 +11,7 @@ Per-host NixOS configuration directories. Each host has its own `default.nix` th
 | File | Description |
 |------|-------------|
 | `bagalamukhi/default.nix` | Primary laptop (Lenovo Legion 5 Pro, user: tlh) |
+| `kamala/default.nix` | AMD desktop (Ryzen 9 + ASUS Pro WS AM4, NVIDIA GTX 1080, user: tlh) |
 | `bhairavi/default.nix` | VM/secondary host (user: tlh) |
 | `matangi/default.nix` | Sara's laptop (Lenovo Legion Pro, user: smg) |
 | `chhinamasta/default.nix` | Live USB ISO (user: user) |
@@ -20,6 +21,7 @@ Per-host NixOS configuration directories. Each host has its own `default.nix` th
 | Directory | Purpose |
 |-----------|---------|
 | `bagalamukhi/` | Primary desktop with NVIDIA, LightDM+slick-greeter, cachyos-bore kernel (see `bagalamukhi/AGENTS.md`) |
+| `kamala/` | AMD desktop, single NVIDIA GTX 1080, wired, SSH-managed from bagalamukhi (see `kamala/AGENTS.md`) |
 | `bhairavi/` | VM configuration (see `bhairavi/AGENTS.md`) |
 | `matangi/` | Sara's laptop with NVIDIA (see `matangi/AGENTS.md`) |
 | `chhinamasta/` | Live ISO builder (see `chhinamasta/AGENTS.md`) |

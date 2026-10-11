@@ -38,12 +38,6 @@ in {
   config = mkIf cfg.enable {
     boot.kernelParams = [
       "acpi_osi=Linux"
-      # Allow NVMe autonomous power state transitions. The default
-      # max latency of 10000µs allows sleep up to PS3 (~5ms exit)
-      # which balances power saving with responsiveness.  Setting
-      # to 0 DISABLES APST entirely — drives never sleep, PCIe
-      # links stay in L0, PCH can't enter deep C-states.
-      "nvme_core.default_ps_max_latency_us=10000"
       # Force legion_laptop to bind — DMI table doesn't include this model
       "legion_laptop.force=1"
     ];

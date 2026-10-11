@@ -33,3 +33,22 @@ Yazi terminal file manager configuration with custom keymap, openers, status bar
   - `R` → recycle-bin prefix, `<A-d>` → dupes, `<A-s>` → sudo
 
 <!-- MANUAL: Any manually added notes below this line are preserved on regeneration -->
+
+## Opener arguments: use `%s`, never `$@`
+
+Yazi 26.x expands the file placeholders in `[opener].run` itself. It does **not**
+populate positional parameters, so the old shell convention silently opens the
+wrong thing:
+
+| Opener `run`                | Result                                                   |
+| --------------------------- | -------------------------------------------------------- |
+| `$EDITOR "$@"` (wrong)     | `$@` is empty → `nvim` with no file → snacks dashboard    |
+| `$EDITOR %s` (correct)     | `%s` expands to the hovered/selected paths                |
+
+`%s` is all selected paths, `%s1` is the first path only. `$EDITOR` still
+works as a normal shell variable and should stay, so the editor remains
+overridable — yazi's own documented default is `$EDITOR %s`.
+
+Every opener in `default.nix` uses `%s` / `%s1`. The `[open]` rules reference a
+`fallback` opener for unmatched MIME types; that opener must exist, or opening
+an unrecognised file does nothing at all.

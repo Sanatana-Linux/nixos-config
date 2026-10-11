@@ -16,28 +16,29 @@ cache_dir = ""
 
 [opener]
 folder = [
-{ run = 'thunar "$@"', desc = "Reveal in Thunar" },
-{ run = '$EDITOR "$@"' },
+{ run = 'thunar %s', desc = "Reveal in Thunar" },
+{ run = '$EDITOR %s' },
 ]
-archive = [{ run = 'dtrx "$1"', desc = "Extract here" }]
-text = [{ run = '$EDITOR "$@"', block = true }]
+archive = [{ run = 'dtrx %s1', desc = "Extract here" }]
+text = [{ run = '$EDITOR %s', block = true }]
 image = [
-{ run = 'feh "$@"' },
-{ run = 'imv "$@"' },
-{ run = '''exiftool "$1"; echo "Press enter to exit"; read''', block = true, desc = "Show EXIF" },
+{ run = 'feh %s' },
+{ run = 'imv %s' },
+{ run = '''exiftool %s1; echo "Press enter to exit"; read''', block = true, desc = "Show EXIF" },
 ]
 svg = [
-{ run = 'inkscape "$@"' },
-{ run = 'loupe "$@"' },
+{ run = 'inkscape %s' },
+{ run = 'loupe %s' },
 ]
 video = [
-{ run = 'vlc "$@"' },
-{ run = '''mediainfo "$1"; echo "Press enter to exit"; read''', block = true, desc = "Show media info" },
+{ run = 'vlc %s' },
+{ run = '''mediainfo %s1; echo "Press enter to exit"; read''', block = true, desc = "Show media info" },
 ]
 audio = [
-{ run = 'vlc "$@"' },
-{ run = '''mediainfo "$1"; echo "Press enter to exit"; read''', block = true, desc = "Show media info" },
+{ run = 'vlc %s' },
+{ run = '''mediainfo %s1; echo "Press enter to exit"; read''', block = true, desc = "Show media info" },
 ]
+fallback = [{ run = 'xdg-open %s', orphan = true, desc = "Open with default application" }]
 
 [open]
 rules = [

@@ -124,7 +124,7 @@
         pkgs.runCommand "eval-all-hosts" {
           buildInputs = [pkgs.nixos-rebuild];
         } ''
-          for host in bagalamukhi matangi bhairavi chhinamasta; do
+          for host in bagalamukhi kamala matangi bhairavi chhinamasta; do
             echo "Evaluating $host..." >&2
             nix-instantiate --eval --strict -E '(import ${self}).nixosConfigurations.''${host}.config.system.build.toplevel' > /dev/null 2>&1 || (
               echo "Evaluation failed for $host" >&2
@@ -168,7 +168,42 @@
           ./hosts/bagalamukhi
         ];
       };
-      # ┣━━━━━━━━━━━━━━━━━━┫ Sara's Lenovo Legion Pro ┣━━━━━━━━━━━━━━━━┫
+      # ┣━━━━━━━━━━━━━━━━━━┫ AMD Desktop — Kamala ┣━━━━━━━━━━━━━━━━━━━┫
+      # Ryzen 9 3000-series desktop, ASUS Pro WS AM4 board, single NVIDIA
+      # GTX 1080 (Pascal). Wired as closely to bagalamukhi as the hardware
+      # allows: same modules, kernel, theming and security, minus the
+      # laptop-only (Lenovo/Intel) hardware modules and PRIME.
+      kamala = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        modules = [
+          inputs.sops-nix.nixosModules.sops
+          inputs.stylix.nixosModules.stylix
+          inputs.nur.modules.nixos.default
+          inputs.nixos-hardware.nixosModules.asus-pro-ws-x570-ace
+          inputs.bhairava-grub-theme.nixosModule
+          inputs.nix-index-database.nixosModules.nix-index
+          inputs.home-manager.nixosModules.home-manager
+          inputs.greeter-ganapati.nixosModules.default
+          inputs.om.nixosModules.om
+          ./modules/nixos
+          {
+            home-manager = {
+              useUserPackages = true;
+              backupFileExtension = "bak";
+              overwriteBackup = true;
+              extraSpecialArgs = {inherit inputs outputs;};
+              sharedModules = [
+                ./modules/home-manager
+              ];
+              users = {
+                tlh = {imports = [./modules/home-manager/users/tlh/default.nix];};
+              };
+            };
+          }
+          ./hosts/kamala
+        ];
+      };
+      # ┣━━━━━━━━━━━━━━━━━━┫ Sara's Lenovo Legion Pro ┣━━━━━━━━━━━━━━━━━━┫
       matangi = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [

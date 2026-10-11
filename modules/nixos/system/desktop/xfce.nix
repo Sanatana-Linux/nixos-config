@@ -24,16 +24,13 @@ in {
     modules.system.desktop.lightdm.enable = true;
     gtk.iconCache.enable = true;
     xdg.icons.enable = true;
+
+    # Pointer input is owned by the hardware input module so mouse, trackball,
+    # and touchpad settings live in one place regardless of window manager
+    modules.hardware.input.enable = true;
+
     # Common XFCE configuration
     services = {
-      libinput = {
-        enable = true;
-        touchpad = {
-          naturalScrolling = false;
-          disableWhileTyping = true;
-        };
-      };
-
       xserver = {
         enable = true;
         autorun = true;

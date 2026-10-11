@@ -16,16 +16,12 @@ in {
     # Enable LightDM display manager
     modules.system.desktop.lightdm.enable = true;
 
+    # Pointer input is owned by the hardware input module so mouse, trackball,
+    # and touchpad settings live in one place regardless of window manager
+    modules.hardware.input.enable = true;
+
     # Common AwesomeWM configuration
     services = {
-      libinput = {
-        enable = true;
-        touchpad = {
-          naturalScrolling = false;
-          disableWhileTyping = true;
-        };
-      };
-
       displayManager.defaultSession = "none+awesome";
 
       xserver = {

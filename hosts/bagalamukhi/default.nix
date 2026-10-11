@@ -42,8 +42,13 @@
         enable = true;
         # networkmanager.enable = false;
         hostName = "bagalamukhi";
-        quad9.enable = true;
-        resolved.enable = true;
+        wifi = {
+          # Randomized station MAC, stable per network so the mesh keeps its
+          # roaming state. Module default is off.
+          randomMac = true;
+          # Spelled out next to the MAC choice; module default is off.
+          powersave = false;
+        };
       };
       virtualization = {
         docker = {
@@ -224,7 +229,12 @@
     hardware = {
       nvidia = {
         enable = true;
-        cuda.enable = true;
+        cuda = {
+          enable = true;
+          # Generates the CDI spec at boot (hardware.nvidia-container-toolkit) so
+          # `docker run --gpus all` and CDI-referencing pods get GPU access
+          containerRuntime = true;
+        };
         lact.enable = true;
         prime = {
           intelBusId = "PCI:00:02:0";
@@ -248,7 +258,6 @@
         };
       };
       devices = {
-        logitech.enable = true;
         android.enable = true;
       };
       sound.enable = true;
@@ -281,6 +290,16 @@
 
   services = {
     displayManager.defaultSession = "none+awesome";
+    # mDNS so `ssh kamala.local` (and avahi-browse) resolves the AMD
+    # desktop from this machine without a DNS or /etc/hosts entry.
+    avahi = {
+      enable = true;
+      nssmdns4 = true;
+      publish = {
+        enable = true;
+        addresses = true;
+      };
+    };
   };
 
   system.stateVersion = "24.11";

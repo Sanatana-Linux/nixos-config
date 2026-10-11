@@ -31,53 +31,64 @@ with lib; {
           max_height = 860;
           cache_dir = "";
         };
+        # Yazi 26.x expands `%s`/`%s1` itself; `$@`/`$1` are NOT passed to
+        # opener commands, so legacy `$EDITOR "$@"` launches the editor with no
+        # file (nvim falls back to its dashboard). Use yazi's placeholders.
         opener = {
           folder = [
             {
-              run = "thunar \"$@\"";
+              run = "thunar %s";
               desc = "Reveal in Thunar";
             }
-            {run = ''$EDITOR "$@"'';}
+            {run = ''$EDITOR %s'';}
           ];
           archive = [
             {
-              run = "dtrx \"$1\"";
+              run = "dtrx %s1";
               desc = "Extract here";
             }
           ];
           text = [
             {
-              run = ''$EDITOR "$@"'';
+              run = ''$EDITOR %s'';
               block = true;
             }
           ];
           image = [
-            {run = "feh \"$@\"";}
-            {run = "imv \"$@\"";}
+            {run = "feh %s";}
+            {run = "imv %s";}
             {
-              run = "exiftool \"$1\"; echo \"Press enter to exit\"; read";
+              run = "exiftool %s1; echo \"Press enter to exit\"; read";
               block = true;
               desc = "Show EXIF";
             }
           ];
           svg = [
-            {run = "inkscape \"$@\"";}
-            {run = "loupe \"$@\"";}
+            {run = "inkscape %s";}
+            {run = "loupe %s";}
           ];
           video = [
-            {run = "vlc \"$@\"";}
+            {run = "vlc %s";}
             {
-              run = "mediainfo \"$1\"; echo \"Press enter to exit\"; read";
+              run = "mediainfo %s1; echo \"Press enter to exit\"; read";
               block = true;
               desc = "Show media info";
             }
           ];
           audio = [
-            {run = "vlc \"$@\"";}
+            {run = "vlc %s";}
             {
-              run = "mediainfo \"$1\"; echo \"Press enter to exit\"; read";
+              run = "mediainfo %s1; echo \"Press enter to exit\"; read";
               block = true;
               desc = "Show media info";
+            }
+          ];
+          # `open` rules below fall back to this opener for unmatched mime types.
+          fallback = [
+            {
+              run = "xdg-open %s";
+              orphan = true;
+              desc = "Open with default application";
             }
           ];
         };

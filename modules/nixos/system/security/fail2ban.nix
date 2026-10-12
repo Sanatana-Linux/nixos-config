@@ -97,7 +97,10 @@ in {
           sshd = {
             settings = {
               enabled = true;
-              port = "ssh";
+              # The repo runs sshd on 2222, not 22 — the literal "ssh" service
+              # name resolves to port 22, so fail2ban would ban the wrong port
+              # and leave the real one unprotected.
+              port = toString config.modules.system.security.ssh.port;
               filter = "sshd";
               backend = "systemd";
               maxretry = cfg.maxRetry;

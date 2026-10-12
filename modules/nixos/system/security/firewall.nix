@@ -114,7 +114,11 @@ in {
       logRefusedPackets = cfg.logRefusedPackets;
 
       # Enable connection tracking and rate limiting
-      checkReversePath = "strict";
+      # "strict" reverse-path filtering drops any packet whose return route
+      # isn't the interface it arrived on — that breaks container/VM networking
+      # (docker0, virbr0) and, on a host with several routes, its own traffic.
+      # "loose" (the NixOS default) keeps the anti-spoofing benefit without it.
+      checkReversePath = "loose";
     };
 
     # Install required packages

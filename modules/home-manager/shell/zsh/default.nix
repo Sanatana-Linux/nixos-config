@@ -217,6 +217,9 @@ in {
 
         # Miscellaneous
         c = "clear";
+
+        # LAN ssh — this repo runs sshd on port 2222, not 22
+        lanssh = "ssh -p 2222";
         m = "mkdir -p";
         ytmp3 = "${lib.getBin yt-dlp}/bin/yt-dlp -x --continue --add-metadata --embed-thumbnail --audio-format mp3 --audio-quality 0 --metadata-from-title=\"%(artist)s - %(title)s\" --prefer-ffmpeg -o \"%(title)s.%(ext)s\"";
 

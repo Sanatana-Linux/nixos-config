@@ -47,6 +47,12 @@ with lib; {
         apksigner
         # reverse engineering apks
         apktool
+        # dynamic instrumentation toolkit (frida CLI: frida, frida-ps, ...)
+        frida-tools
+        # Frida core library for static linking into custom bindings
+        libfrida-core
+        # runtime mobile exploration toolkit powered by Frida
+        objection
         # manipulate app bundles
         bundletool
         # tools for .dex files

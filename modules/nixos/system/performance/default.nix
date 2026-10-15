@@ -42,9 +42,9 @@ in {
       "kernel.sysrq" = lib.mkForce 176; # Magic SysRq key (176 = sync+unmount+reboot only)
       # With zram (compressed RAM swap) "swap" is cheaper than evicting the page
       # cache, so a high swappiness keeps file pages hot and pushes cold
-      # anonymous pages into zram instead. CachyOS ships 100 at boot / 150 with
-      # zram active; 10 was counter-productive on a zram system.
-      "vm.swappiness" = 100;
+      # anonymous pages into zram instead. CachyOS ships 150 with zram active;
+      # the kernel docs suggest values beyond 100 for in-memory swap.
+      "vm.swappiness" = 150;
       "vm.vfs_cache_pressure" = 50;
       # Reduce writeback spikes that cause thermal bursts on NVMe
       "vm.dirty_ratio" = 10;
@@ -56,6 +56,20 @@ in {
       # (large parallel Nix builds) hit kswapd instead of stalling in direct
       # reclaim. Default is 10.
       "vm.watermark_scale_factor" = 100;
+      # zram: read one page per fault instead of a swap cluster, which is keyed
+      # to rotational-disk seek amortisation and meaningless for RAM-backed swap
+      # — lowers swap-in latency and random-read amplification.
+      "vm.page-cluster" = 0;
+      # zram: the watermark boost is designed for disk-backed swap and only adds
+      # reclaim churn during large bursts on a RAM-backed device.
+      "vm.watermark_boost_factor" = 0;
+      # Large address-space consumers (games under Proton/Wine, Electron apps,
+      # CUDA/JIT workloads) exceed the 65536 default and abort with ENOMEM.
+      "vm.max_map_count" = 1048576;
+      # Dev tooling and file watchers need more than the default inotify limits,
+      # otherwise watchers silently miss events (stale editors/tests).
+      "fs.inotify.max_user_instances" = 1024;
+      "fs.inotify.max_user_watches" = 524288;
       # Group processes by session for better desktop responsiveness
       "kernel.sched_autogroup_enabled" = lib.mkForce 1;
     };

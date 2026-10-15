@@ -163,9 +163,10 @@ in {
 
     boot.blacklistedKernelModules = mkIf cfg.zenpower ["k10temp"];
 
-    # amd_pstate=active is supplied by nixos-hardware's asus/pro-ws-x570-ace
-    # module (which imports common/cpu/amd/pstate.nix) on kernel >= 6.3, so it
-    # is not repeated here.
+    # The amd_pstate operating mode is set from cfg.pstateMode below. The
+    # amd_pstate driver itself is provided by the kernel (or by nixos-hardware's
+    # common/cpu/amd/pstate module, which also emits amd_pstate=active — ours is
+    # appended afterwards so it takes precedence).
     #
     # power-profiles-daemon drives platform_profile and the amd_pstate EPP hint
     # (power-saver / balanced / performance) at runtime. While it is enabled the

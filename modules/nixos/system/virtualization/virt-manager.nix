@@ -6,7 +6,7 @@
 }:
 with lib; let
   cfg = config.modules.system.virtualization.virt-manager;
-  systemdPkg = config.systemd;
+  systemdPkg = config.systemd.package;
 in {
   options.modules.system.virtualization.virt-manager = {
     enable = mkEnableOption "Virtual machine management with virt-manager";

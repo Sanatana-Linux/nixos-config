@@ -154,7 +154,7 @@ in {
 
       sessionVariables = {
         LUA_PATH = "${pkgs.luajitPackages.luarocks}/share/lua/${pkgs.luajit.luaversion}/?.lua;${pkgs.luajitPackages.luarocks}/share/lua/${pkgs.luajit.luaversion}/?/init.lua;${pkgs.lua52Packages.lgi}/share/lua/5.2/?.lua;${pkgs.lua52Packages.lgi}/share/lua/5.2/?/init.lua";
-        LUA_CPATH = "${pkgs.luajitPackages.luarocks}/lib/lua/${pkgs.luajit.luaversion}/?.so;${pkgs.lua52Packages.lgi}/lib/lua/5.2/?.so";
+        LUA_CPATH = "${pkgs.luajitPackages.luarocks}/lib/lua/${pkgs.luajit.luaversion}/?.so;${pkgs.lua52Packages.lgi}/lib/lua/5.2/?.so;${luaPam}/lib/lua/5.1/?.so";
         PATH = ["${pkgs.luajitPackages.luarocks}/bin"];
         QT_QPA_PLATFORM = mkForce "xcb";
         GDK_BACKEND = "x11";

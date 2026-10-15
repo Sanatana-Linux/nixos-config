@@ -69,26 +69,27 @@ in {
     # here. Generation is idempotent: replacing the key would orphan every secret
     # already encrypted under the previous one, and libvirt fails to start with
     # "Encrypted file too short" if the file is empty or unencrypted.
-systemd.services.virt-secret-init-encryption = {
+    systemd.services.virt-secret-init-encryption = {
       description = "Initialize libvirt secret encryption key";
       wantedBy = ["multi-user.target"];
       before = ["libvirtd.service" "virtsecretd.service"];
+      serviceConfig.RemainAfterExit = true;
       path = with pkgs; [
-    systemdPkg
+        systemdPkg
         coreutils
         bash
       ];
       script = ''
-        set -euo pipefail
-        key=/var/lib/libvirt/secrets/secrets-encryption-key
-      mkdir -p /var/lib/libvirt/secrets
-      if [ ! -s "$key" ]; then
-          raw=$(mktemp)
-    ${pkgs.coreutils}/bin/head -c 32 /dev/urandom > "$raw"
-    ${systemdPkg}/bin/systemd-creds encrypt --name=secrets-encryption-key "$raw" "$key"
-   ${pkgs.coreutils}/bin/shred -u "$raw"
-        fi
-     ${pkgs.coreutils}/bin/chmod 0600 "$key"
+             set -euo pipefail
+             key=/var/lib/libvirt/secrets/secrets-encryption-key
+           mkdir -p /var/lib/libvirt/secrets
+           if [ ! -s "$key" ]; then
+               raw=$(mktemp)
+         ${pkgs.coreutils}/bin/head -c 32 /dev/urandom > "$raw"
+         ${systemdPkg}/bin/systemd-creds encrypt --name=secrets-encryption-key "$raw" "$key"
+        ${pkgs.coreutils}/bin/shred -u "$raw"
+             fi
+          ${pkgs.coreutils}/bin/chmod 0600 "$key"
       '';
     };
 

@@ -263,7 +263,11 @@ in {
 
     # Persist the hwmon module list for sensor and fan tooling.
     environment.etc."sysconfig/lm_sensors".text = mkIf cfg.sensors ''
-      HWMON_MODULES="${if cfg.zenpower then "zenpower" else "k10temp"} nct6775 asus_ec_sensors"
+      HWMON_MODULES="${
+        if cfg.zenpower
+        then "zenpower"
+        else "k10temp"
+      } nct6775 asus_ec_sensors"
     '';
   };
 }

@@ -63,6 +63,12 @@ in {
       "libvirtd-ro.socket"
     ];
 
+    # libvirt consumes its secrets-encryption-key through LoadCredentialEncrypted=,
+    # which requires a systemd-creds encrypted blob rather than a plaintext key.
+    # libvirt ships the drop-in but not this init service, so it must be provided
+    # here. Generation is idempotent: replacing the key would orphan every secret
+    # already encrypted under the previous one, and libvirt fails to start with
+    # "Encrypted file too short" if the file is empty or unencrypted.
     systemd.services.virt-secret-init-encryption = {
       description = "Initialize libvirt secret encryption key";
       wantedBy = ["multi-user.target"];
@@ -70,7 +76,20 @@ in {
       serviceConfig = {
         Type = "oneshot";
         RemainAfterExit = true;
-        ExecStart = "${pkgs.bash}/bin/bash -c 'mkdir -p /var/lib/libvirt/secrets && touch /var/lib/libvirt/secrets/secrets-encryption-key && chmod 0600 /var/lib/libvirt/secrets/secrets-encryption-key'";
+        ExecStart = ''
+          ${pkgs.bash}/bin/bash -c '
+            set -euo pipefail
+            key=/var/lib/libvirt/secrets/secrets-encryption-key
+            mkdir -p /var/lib/libvirt/secrets
+            if [ ! -s "$key" ]; then
+              raw=$(mktemp)
+              ${pkgs.coreutils}/bin/head -c 32 /dev/urandom > "$raw"
+              ${systemdPkg}/bin/systemd-creds encrypt --name=secrets-encryption-key "$raw" "$key"
+              ${pkgs.coreutils}/bin/shred -u "$raw"
+            fi
+            ${pkgs.coreutils}/bin/chmod 0600 "$key"
+          '
+        '';
       };
     };
 

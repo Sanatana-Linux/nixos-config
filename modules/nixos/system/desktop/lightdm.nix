@@ -39,20 +39,18 @@ in {
     # Exactly one greeter may own lightdm.conf's greeter-session, and each
     # greeter module registers the `greeter` option. Guard each on cfg.greeter
     # so the unselected module never competes for it.
-    services.xserver.displayManager.lightdm.greeters.slick =
-      mkIf (cfg.greeter == "slick") {
-        enable = true;
-        theme.name = "sharabha-gtk-theme";
-      };
+    services.xserver.displayManager.lightdm.greeters.slick = mkIf (cfg.greeter == "slick") {
+      enable = true;
+      theme.name = "sharabha-gtk-theme";
+    };
 
-    services.xserver.displayManager.lightdm.greeters.ganapati =
-      mkIf (cfg.greeter == "ganapati") {
-        enable = true;
-        themeName = "sharabha-gtk-theme";
-        # Ganapati would otherwise inherit stylix.image; pin the same asset
-        # the slick greeter uses so the login screen is unchanged.
-        wallpaper = ./assets/wallpaper.png;
-      };
+    services.xserver.displayManager.lightdm.greeters.ganapati = mkIf (cfg.greeter == "ganapati") {
+      enable = true;
+      themeName = "sharabha-gtk-theme";
+      # Ganapati would otherwise inherit stylix.image; pin the same asset
+      # the slick greeter uses so the login screen is unchanged.
+      wallpaper = ./assets/wallpaper.png;
+    };
 
     # Install sharabha-gtk-theme system-wide so the greeter can find it
     environment.systemPackages = [

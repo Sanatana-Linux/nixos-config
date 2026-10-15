@@ -74,12 +74,21 @@ with lib; {
           # reboot=acpi prevents hangs on reboot by using ACPI reset instead of
           # the default EFI/PCI reset mechanisms, which can hang on some hardware
           "reboot=acpi"
-          # Allow NVMe autonomous power state transitions up to 5500µs
-          # (PS3-level sleep).  0 DISABLES APST entirely — the NVMe never
-          # sleeps, PCIe root port stays in L0, PCH can't enter deep C-states.
-          # Sole owner of this parameter; hardware/lenovo/lenovo.nix also
-          # declared it, and only the last occurrence on the cmdline applied.
-          "nvme_core.default_ps_max_latency_us=5500"
+          # 0 DISABLES NVMe autonomous power-state transitions (APST) entirely:
+          # the NVMe never sleeps, so an I/O never waits on a power-state
+          # wakeup. This is the lowest-latency setting (a value like 5500
+          # permits PS3-level sleep and adds microseconds-to-milliseconds of
+          # wakeup latency on idle->busy transitions). Trade-off: the drive and
+          # PCIe root port stay in L0, so idle power and heat rise — the reason
+          # this was previously 5500.
+          "nvme_core.default_ps_max_latency_us=0"
+          # Thread hard-IRQ handlers (CONFIG_IRQ_FORCED_THREADING=y) so their
+          # bottom halves are preemptible — lowers input/audio jitter.
+          "threadirqs"
+          # Batch RCU callbacks and flush after a delay instead of executing
+          # immediately (kernel has CONFIG_RCU_LAZY=y, default off). Fewer
+          # wakeups -> less idle jitter and lower power on a laptop.
+          "rcutree.enable_rcu_lazy=1"
           # PCIe ASPM for the whole bus, including the PCH-attached CNVi WiFi.
           # policy=default caps links at L1.1; policy=powersave additionally
           # permits L1.2, which is a known cause of periodic CNVi disconnects —

@@ -55,7 +55,11 @@ in {
   config = lib.mkIf cfg.enable {
     powerManagement = {
       enable = true;
-      powertop.enable = true; # Auto tune performance
+      # powertop --auto-tune rewrites tuned sysctls at every boot — in particular
+      # it resets vm.dirty_writeback_centisecs to 1500, undoing the smooth-writeback
+      # tuning in modules/nixos/system/performance/default.nix. Keep it off so the
+      # configured values actually stick.
+      powertop.enable = false;
     };
 
     boot.kernelModules = ["cpupower"];
@@ -72,8 +76,14 @@ in {
         settings = {
           CPU_BOOST_ON_AC = cfg.cpuBoostOnAc;
           CPU_BOOST_ON_BAT = cfg.cpuBoostOnBat;
-          CPU_SCALING_GOVERNOR_ON_AC = "powersave";
-          CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+          # NOTE: this system runs intel_pstate in *passive* mode
+          # (intel_pstate=passive -> scaling_driver=intel_cpufreq). In passive
+          # mode the generic "powersave" governor pins the CPU to its MINIMUM
+          # frequency — it is NOT the dynamic intel_pstate active-mode algorithm
+          # of the same name. schedutil lets the CPU scheduler drive frequency
+          # and is the correct governor for intel_cpufreq.
+          CPU_SCALING_GOVERNOR_ON_AC = "schedutil";
+          CPU_SCALING_GOVERNOR_ON_BAT = "schedutil";
           # EPP is managed by TLP — don't override
           CPU_ENERGY_PERF_POLICY_ON_AC = "balance_power";
           CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_power";

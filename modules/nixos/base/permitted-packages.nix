@@ -20,6 +20,10 @@ in {
   config = mkIf cfg.enable {
     nixpkgs.config = {
       allowUnfree = true;
+      # Required for the Android platform-tools / SDK used by waydroid and the
+      # android device support (hardware.devices.android). Without this the
+      # system build aborts asking for android-sdk-license acceptance.
+      android_sdk.accept_license = true;
       permittedInsecurePackages =
         [
           "pnpm-10.29.2"

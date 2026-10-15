@@ -85,7 +85,11 @@
       };
       desktop = {
         awesomewm.enable = true;
-        lightdm.enable = true;
+        lightdm = {
+          enable = true;
+          # Go-native Greeter Ganapati (imported via greeter-ganapati flake input).
+          greeter = "ganapati";
+        };
       };
       performance = {
         default.enable = true;

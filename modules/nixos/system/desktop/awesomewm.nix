@@ -104,7 +104,6 @@ in {
           luabind_luajit
           lua52Packages.lua
           lua52Packages.lgi
-          lua52Packages.lua-pam
           gsettings-desktop-schemas
           gobject-introspection-unwrapped
           eggdbus

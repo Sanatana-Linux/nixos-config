@@ -7,6 +7,11 @@
 }:
 with lib; let
   cfg = config.modules.system.desktop.awesomewm;
+
+  # LuaJIT-ABI PAM bindings, loaded as require("liblua_pam"). Awesome runs
+  # LuaJIT, so the nixpkgs lua52Packages build is the wrong ABI and its
+  # module name (pam.so) does not match the require in the config.
+  luaPam = inputs.lua-pam.packages.${pkgs.stdenv.hostPlatform.system}.default;
 in {
   options.modules.system.desktop.awesomewm = {
     enable = mkEnableOption "AwesomeWM window manager";

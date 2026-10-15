@@ -69,6 +69,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # PAM authentication bindings for Lua, loaded by awesome as
+    # require("liblua_pam"). nixpkgs' lua-pam is marked broken under LuaJIT
+    # (awesome runs LuaJIT, so a 5.2-ABI build will not load) and installs as
+    # pam.so rather than the liblua_pam.so this config expects. This fork
+    # builds against LuaJIT and installs liblua_pam.so under lib/lua/5.1.
+    lua-pam = {
+      url = "github:Thomashighbaugh/lua-pam";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     om = {
       url = "github:Sanatana-Linux/om";
       inputs.nixpkgs.follows = "nixpkgs";

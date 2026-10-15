@@ -20,6 +20,12 @@ in {
   config = mkIf cfg.enable {
     nixpkgs.config = {
       allowUnfree = true;
+
+      # Google's Android SDK license. Required by androidenv, which the
+      # `objection` reverse-engineering tool composes an SDK from. Hosts that
+      # enable modules.hardware.devices.android cannot build without this.
+      android_sdk.accept_license = true;
+
       permittedInsecurePackages =
         [
           "pnpm-10.29.2"

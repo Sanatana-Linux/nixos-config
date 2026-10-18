@@ -56,7 +56,10 @@
     };
 
     nix-cachyos-kernel = {
-      url = "github:xddxdd/nix-cachyos-kernel/release";
+      # Pinned to the rev the release branch currently resolves to, so the
+      # kernel cannot drift while the nixpkgs pin above is in force. Restore
+      # url = "github:xddxdd/nix-cachyos-kernel/release" at the same time.
+      url = "github:xddxdd/nix-cachyos-kernel/b1332396df6e880d7e3b6b451c6a74132ce8cf66";
     };
 
     firefox-nightly = {

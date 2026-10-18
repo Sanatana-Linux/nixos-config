@@ -7,7 +7,17 @@
     # from the -small channels, so tracking nixos-unstable-small makes CUDA
     # derivations substitute instead of rebuilding from source. A full
     # nixos-unstable commit never matches the caches' hashes.
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
+    #
+    # Pinned to the 2026-10-11 nixos-unstable-small commit. Later commits make
+    # pkgs/os-specific/linux/kernel/rebuild-image.nix reference
+    # lib/modules/<modDirVersion>/modules.cer unconditionally, while
+    # pkgs/os-specific/linux/kernel/build.nix only generates that file for
+    # kernels carrying a separate `modules` output. The cachyos kernel has none,
+    # so building it against any later nixpkgs fails with:
+    #   cp: cannot stat '.../modules.cer': No such file or directory
+    # Restore url = "github:nixos/nixpkgs/nixos-unstable-small" once
+    # xddxdd/nix-cachyos-kernel ships a kernel that provides modules.cer.
+    nixpkgs.url = "github:nixos/nixpkgs/5081109a1880d1cb4d5a4a9cd441f2762f66bbca";
     nur = {
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";

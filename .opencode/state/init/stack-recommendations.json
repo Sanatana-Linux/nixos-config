@@ -1,0 +1,36 @@
+{
+  "recommends": {
+    "archetype": "nixos-config",
+    "skills": [
+      { "name": "naming-cheatsheet", "reason": "Language-agnostic naming conventions for Nix files" },
+      { "name": "context7-docs", "reason": "Nix/NixOS documentation lookup" }
+    ],
+    "agents": [
+      { "name": "code-reviewer", "reason": "Nix module pattern and overlay correctness review" },
+      { "name": "security-reviewer", "reason": "Firewall, SSH, doas, sops-nix security audit" },
+      { "name": "debugger", "reason": "nixos-rebuild errors, eval trace debugging" },
+      { "name": "verifier", "reason": "nixos-rebuild build, flake check verification" },
+      { "name": "architect", "reason": "Flake structure, module refactoring decisions" }
+    ],
+    "rules": [
+      "nix-flake-strategy.md",
+      "project-constraints.md",
+      "comment-style.md"
+    ],
+    "tools": [
+      { "name": "nix-build", "reason": "Build/switch/test NixOS configurations across all 4 hosts" },
+      { "name": "nix-flake", "reason": "Flake management — update inputs, lock, check, show metadata" },
+      { "name": "nix-format", "reason": "Format Nix files with alejandra — project-wide or per-file" }
+    ],
+    "fine_rules": [],
+    "commands": [],
+    "notes": [
+      "NixOS config project — 3 project-specific TypeScript tools created for Nix operations",
+      "Existing rules (nix-flake-strategy, project-constraints, comment-style, nix-service-scripts) are well-suited",
+      "Gaps from previous refresh have been filled: nix-module-patterns.md and nix-secrets-management.md now exist as project rules",
+      "nix-service-scripts rule grew from convention to a full project skill (nix-service-scripts skill added)",
+      "No new gaps detected — all identified resource needs are covered"
+    ],
+    "gaps": []
+  }
+}

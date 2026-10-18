@@ -167,7 +167,6 @@ in {
           cudaPackages.cuda_nvcc
           cudaPackages.libcublas
           cudaPackages.libnvjitlink
-          cudaPackages.nvidia_fs
           tiny-cuda-nn
           cudaPackages.cudatoolkit
           blas

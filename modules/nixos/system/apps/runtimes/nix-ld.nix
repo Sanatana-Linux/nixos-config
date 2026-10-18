@@ -70,7 +70,6 @@ in {
         # CUDA/NVIDIA
         config.boot.kernelPackages.nvidiaPackages.production # NVIDIA X11 kernel module
         cudaPackages.nccl # NVIDIA Collective Communications Library
-        cudaPackages.nvidia_fs # NVIDIA file system support
         cudaPackages.libnvjitlink # CUDA JIT linker
         cudaPackages.cccl # CUDA C++ Core Libraries
         cudaPackages.cuda_cudart # CUDA runtime library

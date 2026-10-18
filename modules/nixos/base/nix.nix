@@ -140,7 +140,17 @@ in {
             "https://ai.cachix.org"
             "https://nix-gaming.cachix.org"
             "https://comfyui.cachix.org"
-            "https://attic.xuyh0120.win/lantian"
+            # CachyOS kernel cache. boot.kernelPackages is
+            # cachyosKernels.linuxPackages-cachyos-bore-lto-x86_64-v3, which is
+            # absent from cache.nixos.org (LTO + BORE + x86-64-v3). Upstream's
+            # primary attic cache at attic.xuyh0120.win/lantian is dead: the
+            # hostname resolves to the non-routable 198.18.0.8 and a ULA IPv6,
+            # so every narinfo lookup stalls for the full connect-timeout and
+            # falls through — hundreds of retry warnings per rebuild.
+            # cache.xinux.uz is the upstream-documented alternative cache
+            # serving the same Hydra-built kernels; it carries this kernel's
+            # out/dev/modules outputs.
+            "https://cache.xinux.uz"
             "https://cache.numtide.com"
           ]
           ++ cfg.extraCaches;
@@ -156,7 +166,7 @@ in {
             "ai.cachix.org-1:N9dzRK+alWwoKXQlnn0H6aUx0lU/mspIoz8hMvGvbbc="
             "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
             "comfyui.cachix.org-1:33mf9VzoIjzVbp0zwj+fT51HG0y31ZTK3nzYZAX0rec="
-            "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="
+            "cache.xinux.uz:BXCrtqejFjWzWEB9YuGB7X2MV4ttBur1N8BkwQRdH+0="
             "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
           ]
           ++ cfg.extraTrustedKeys;

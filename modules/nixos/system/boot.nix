@@ -82,9 +82,13 @@ with lib; {
           # PCIe root port stay in L0, so idle power and heat rise — the reason
           # this was previously 5500.
           "nvme_core.default_ps_max_latency_us=0"
-          # Thread hard-IRQ handlers (CONFIG_IRQ_FORCED_THREADING=y) so their
-          # bottom halves are preemptible — lowers input/audio jitter.
-          "threadirqs"
+          # Hard-IRQ threading (CONFIG_IRQ_FORCED_THREADING=y) is deliberately
+          # NOT enabled. It moves completion IRQs — including the xHCI one that
+          # services the USB keyboard — onto schedulable threads. A keyboard's
+          # HID interrupt endpoint reports current key STATE rather than events,
+          # so a poll window missed across a keypress drops that keystroke
+          # entirely and silently. preempt=full already supplies the low
+          # scheduling latency this was meant to buy.
           # Batch RCU callbacks and flush after a delay instead of executing
           # immediately (kernel has CONFIG_RCU_LAZY=y, default off). Fewer
           # wakeups -> less idle jitter and lower power on a laptop.

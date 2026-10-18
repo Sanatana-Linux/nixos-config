@@ -96,12 +96,17 @@ Without intervention the install silently compiles from source:
 
 - **The kernel.** `boot.kernelPackages` is
   `cachyosKernels.linuxPackages-cachyos-bore-lto-x86_64-v3`. That flake
-  (`xddxdd/nix-cachyos-kernel`) is not on `cache.nixos.org`; it publishes to
-  `attic.xuyh0120.win/lantian`, which the *installed* system picks up from the
-  flake's own `nixConfig`. The installer does not read that config, so without
-  the explicit `substituters` below the LTO + BORE + x86-64-v3 kernel and its
-  modules build locally. The explicit list supplies the same lantian cache
+  (`xddxdd/nix-cachyos-kernel`) is not on `cache.nixos.org`; it publishes to the
+  `lantian` attic cache named in its `nixConfig`, which the *installed* system
+  would pick up from the flake. The installer does not read that config, so
+  without the explicit `substituters` below the LTO + BORE + x86-64-v3 kernel
+  and its modules build locally. The explicit list names a CachyOS cache
   directly, which is why it does not need `accept-flake-config`.
+  Upstream's primary cache host, `attic.xuyh0120.win`, is currently
+  unreachable — its A record is the non-routable `198.18.0.8` and its AAAA is a
+  ULA, so lookups hang for the full `connect-timeout`. The list therefore uses
+  **`cache.xinux.uz`**, the alternative cache upstream documents in its README,
+  which serves the same Hydra-built kernels.
 - **Overlay-modified packages.** `additions`, `modifications`,
   `stable-packages`, `nur`, and `cachyos-patches` all change derivation hashes
   (python scope, `lenovo-legion-module`, custom `pkgs/`, stable-pinned apps),
@@ -116,7 +121,7 @@ authoritative place to put the caches. That list already contains
 `cache.nixos.org`, so a plain `substituters` (full replacement) is complete.
 
 Confirm the shell actually carries them before committing to the build — this
-must list `attic.xuyh0120.win/lantian`:
+must list `cache.xinux.uz`:
 
 ```bash
 nix config show | grep -E '^(substituters|trusted-public-keys)'
@@ -124,7 +129,7 @@ nix config show | grep -E '^(substituters|trusted-public-keys)'
 
 Then run the plain install from step 10. During the build you should see
 `copying path '/nix/store/…-linux-cachyos-bore-lto-x86_64-v3-7.2.8' from
-'https://attic.xuyh0120.win/lantian'`. If instead it starts `building`, the
+'https://cache.xinux.uz'`. If instead it starts `building`, the
 config did not reach the build — `--option substituters "…"` +
 `--option trusted-public-keys "…"` on the `nixos-install` command line is also
 forwarded to the inner `nix build` and is the fallback.

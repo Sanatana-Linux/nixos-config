@@ -27,7 +27,7 @@ in {
       permittedInsecurePackages =
         [
           "pnpm-10.29.2"
-          "ventoy-1.1.17"
+          "ventoy-1.1.18"
           "electron-39.8.10"
         ]
         ++ cfg.packages;

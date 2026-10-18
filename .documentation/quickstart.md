@@ -142,7 +142,7 @@ forwarded to the inner `nix build` and is the fallback.
 > strips it; use `sudo -E` or set it inside the root shell), or order
 > `--option experimental-features "nix-command flakes"` *before*
 > `--option accept-flake-config true`. It is redundant for this install anyway:
-> the `substituters` above already name the lantian cache and its key, so the
+> the `substituters` above already name the CachyOS cache and its key, so the
 > kernel substitutes with or without it.
 
 To also skip the overlay rebuilds, pre-seed the store from a machine that already

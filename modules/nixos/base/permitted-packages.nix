@@ -27,6 +27,10 @@ in {
       permittedInsecurePackages =
         [
           "pnpm-10.29.2"
+          # Both ventoy releases are permitted: the pinned nixpkgs in flake.nix
+          # ships 1.1.17 while the channel it is held behind ships 1.1.18.
+          # Listing both keeps the pin reversible without editing this list.
+          "ventoy-1.1.17"
           "ventoy-1.1.18"
           "electron-39.8.10"
         ]

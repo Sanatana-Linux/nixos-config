@@ -56,6 +56,7 @@ in {
 
       # Misc Utilities
       llm-agents.opencode # opencode from numtide/llm-agents.nix (tracks upstream releases)
+      llm-agents.maki # maki AI coding agent from numtide/llm-agents.nix
       mcp-nixos # MCP server exposing package/option search to OpenCode
       tealdeer # tldr pages in Rust
       dmg2img # Convert DMG to IMG

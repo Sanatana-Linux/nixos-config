@@ -101,7 +101,10 @@
       };
       desktop = {
         awesomewm.enable = true;
-        lightdm.enable = true;
+        lightdm = {
+          enable = true;
+          greeter = "ganapati";
+        };
       };
       performance = {
         default.enable = true;

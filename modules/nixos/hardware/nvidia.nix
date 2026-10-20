@@ -99,6 +99,18 @@ in {
           GBM_BACKEND = "nvidia-drm";
           __GLX_VENDOR_LIBRARY_NAME = "nvidia";
         }
+        // optionalAttrs cfg.prime.enable {
+          # Pin Vulkan to the NVIDIA ICD on PRIME systems. The loader otherwise
+          # enumerates every installed ICD (Intel ANV included) and that order
+          # is not contractual, so an app taking physical device 0 can land on
+          # the iGPU instead of the dGPU that PRIME sync actually renders with.
+          # VK_DRIVER_FILES is the current variable; VK_ICD_FILENAMES is the
+          # deprecated name still read by older loaders and applications.
+          # Override per-invocation to reach Intel Vulkan, e.g.
+          #   VK_DRIVER_FILES=/run/opengl-driver/share/vulkan/icd.d/intel_icd.x86_64.json <app>
+          VK_DRIVER_FILES = "/run/opengl-driver/share/vulkan/icd.d/nvidia_icd.json";
+          VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/nvidia_icd.json";
+        }
         // optionalAttrs cfg.cuda.enable {
           CUDA_PATH = "${pkgs.cudatoolkit}";
           EXTRA_LDFLAGS = "-L/lib -L${config.boot.kernelPackages.nvidiaPackages.${cfg.driver}}/lib";

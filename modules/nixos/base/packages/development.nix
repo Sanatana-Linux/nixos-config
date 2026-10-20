@@ -192,6 +192,7 @@ in {
         ++ optionals cfg.editors [
           lldb # LLVM debugger
           llm-agents.opencode # AI coding assistant
+          llm-agents.maki # maki AI coding agent
         ]
         # Tree-sitter grammars
         ++ optionals cfg.treeSitterGrammars [

@@ -188,7 +188,10 @@ in {
           "browser.safebrowsing.malware.enabled" = false;
           "browser.shell.checkDefaultBrowser" = false;
           "browser.startup.blankWindow" = false;
-          "browser.startup.page" = "0";
+          # 3 = restore previous session. Was "0" (blank) — that prevented any
+          # session resume, so restarts reopened a stale recovery snapshot
+          # instead of the live session (lost tabs / scrambled tab groups).
+          "browser.startup.page" = "3";
           "browser.startup.preXulSkeletonUI" = true;
           "browser.tabs.hoverPreview.enabled" = true;
           "browser.tabs.splitView.enabled" = true;

@@ -55,7 +55,7 @@ in {
       papirus-folders # Papirus icon folder colors
 
       # Misc Utilities
-      opencode
+      llm-agents.opencode # opencode from numtide/llm-agents.nix (tracks upstream releases)
       mcp-nixos # MCP server exposing package/option search to OpenCode
       tealdeer # tldr pages in Rust
       dmg2img # Convert DMG to IMG

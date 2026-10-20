@@ -191,7 +191,7 @@ in {
         # Editors
         ++ optionals cfg.editors [
           lldb # LLVM debugger
-          opencode # AI coding assistant
+          llm-agents.opencode # AI coding assistant
         ]
         # Tree-sitter grammars
         ++ optionals cfg.treeSitterGrammars [

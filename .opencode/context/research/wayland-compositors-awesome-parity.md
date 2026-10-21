@@ -185,3 +185,69 @@ The "**same language across WM + widgets**" reality: only **ShojiWM** (TSX/JS) c
 you write WM logic and (via quickshell, QML/JS) the widget layer in one language family. **qtile +
 ignis** is the only *strictly* same-language (Python) stack, but its Wayland backend (wayc) is young.
 Everywhere else the WM config language ≠ the widget language.
+
+---
+
+# Full census — the vibe-coding-era compositor flood (2025–2026)
+
+> `gh search` sweep across many query angles, sorted by recent push. The pattern: since ~2025 a wave
+> of one- or few-author compositors appeared, most Rust/Smithay, many explicitly "config IS code."
+> Grouped by how you actually control them. ★ = GitHub stars as of 2026-10-21. Verified via API.
+
+## Tier 1 — the WM logic is a program you write (true frameworks)
+
+| Name | Core | WM logic written in | In-process UI | Maturity | ★ |
+|---|---|---|---|---|---|
+| **ShojiWM** | Rust/Smithay | **TypeScript/TSX** or Rust | ✅ TSX reactive components render chrome/SSD | young, active | 751 |
+| **minde** | Rust/Smithay | **Guile Scheme** policy layer | via IPC/Eww | RC 1.0.0-rc1, 1 maintainer | 0 |
+| **Pinnacle** | Rust/Smithay | **Lua or Rust** | partial (snowcap) | active | 647 |
+| **aster-wm** | Zig | **Lua** — `wm.lua` *is* the WM | n/a (no X11/Wayland yet — native) | brand new, pre-Wayland | 0 |
+| **nnwm** | C++/wlroots | **Lua** + hot-reload | — | young (created 2026-07) | 3 |
+| **rhizome** | river protocol | **Common Lisp** (WM-as-process) | no | young | 6 |
+| **clear** | Rust | **Rhai** extensions | optional quickshell | experimental | 0 |
+| **solium** | Rust/Smithay | **Lua + QML** | ✅ QML | days old | 4 |
+
+## Tier 2 — deep live IPC / scripting surface, static or generated config
+
+| Name | Core | Control | Maturity | ★ |
+|---|---|---|---|---|
+| **fwm** | C/wlroots | TOML + `fwmctl` JSON IPC, every setting live, Box2D physics, built-in shell | active daily driver | 184 |
+| **fht-compositor** | Rust/Smithay | config + IPC, dynamic tiling | active since 2024 | 283 |
+| **viewport** | Rust/Smithay | **shell is a web page (WebKit); window placement is JavaScript's job over IPC** | experimental rewrite | 7 |
+| **margo** | Rust | config | active | 17 |
+| **halley** | Rust | config | active, spatial/infinite-workspace | 182 |
+| **jay** | Rust | TOML live-reload | very active | 719 |
+| **synshell** | Rust/Smithay | live-reload TOML, full DE split (compositor+shell+settings) | young | 2 |
+| **wayle** (Wayland Elements) | — | compositor-agnostic shell, extensive customization | young | 2 |
+
+## Tier 3 — widget/shell frameworks (the wibox layer)
+
+| Name | Language | Model | ★ |
+|---|---|---|---|
+| **quickshell** | QML/JS | framework, services only, no layouts | 3.2k |
+| **astal + Gnim** | TS/JSX + Vala | library-first, zero widgets shipped | 995 |
+| **ignis** | Python/GTK4 | batteries-included services | 694 |
+| **snowcap** | — | **Pinnacle's own widget system** (built for Pinnacle) | 14 |
+| **wisp** | C | **DSL compiled to C**, links only libc/libm — single-process bar/hud/osd/menu/lock/notif | 2 |
+| **gelm** | Go | pure-Go retained-mode CSS-themed widget toolkit | 0 |
+| **iwwc** | Rust/Iced | Iced Wayland Widget Center | 4 |
+| **barf** | V | eww-like widget engine | 1 |
+| **runic** | HTML/CSS/JS (WebKitGTK) | widgets as web pages on layer-shell | small |
+
+## Notable dead-ends / too-early
+
+- **aster-wm** — the purest "config IS the WM" pitch (`wm.lua` is the window manager) but explicitly
+  "No X11, no Wayland" yet — native rendering, pre-protocol. Watch it.
+- **snowcap** (Pinnacle's widgets) — last push 2024-12, stalled.
+- **newm-atha**, **way-cooler**, **vivarium** — dormant/archived (confirmed earlier).
+- Dozens of 0★ Rust/Smithay learning projects (`purpwm`, `seinas`, `cce-compositor`, `monotile`,
+  `spitfire`, `tinytile`, `tyler`, `anvil`) — mostly toys, listed to show the flood is real.
+
+## The read
+
+The vibe-coding era produced a real pattern: **Smithay lowered the floor** so a single dev can ship a
+compositor, and the interesting ones split "display machinery" (Rust/Smithay) from "WM policy" (a
+scripting layer you own). **ShojiWM (TSX), minde (Scheme), Pinnacle (Lua/Rust), nnwm (Lua), aster-wm
+(Lua)** all embody it. Of these, **ShojiWM** and **Pinnacle** are the only ones both *actively
+maintained* and *Nix-flake-installable* with a real config-as-code surface; **minde** is the most
+principled but a one-maintainer RC.

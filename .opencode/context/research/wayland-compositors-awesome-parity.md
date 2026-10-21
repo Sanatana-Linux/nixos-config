@@ -1,93 +1,84 @@
 ---
-title: Wayland compositors & shells — AwesomeWM feature parity
+title: Wayland compositor + desktop shell stacks — AwesomeWM parity
 type: research
 date: 2026-10-21
 status: current
-tags: [wayland, compositor, awesomewm, window-manager, desktop-shell, lua]
-sources: deep-research subagent (general), primary docs + GitHub repos
+tags: [wayland, compositor, desktop-shell, awesomewm, quickshell, window-manager]
+sources: deep-research subagents (general), primary docs + GitHub repos
 ---
 
-# Wayland Compositors & Shells — AwesomeWM Feature Parity
+# Wayland Compositor + Shell Stacks — AwesomeWM Parity
 
-> Research snapshot 2026-10-21. **Hyprland excluded by requirement.** Goal: find a Wayland
-> compositor/shell that matches AwesomeWM's model — Lua scripting, tags (not workspaces),
-> wibox widgets, rules engine, user-writable layouts, signal-driven client lifecycle.
+> Snapshot 2026-10-21. **Hyprland excluded by requirement.**
+> The realistic path off awesome is a **two-part stack**: a tag-capable compositor
+> (window management) + a desktop shell (the wibox/bar/OSD/notification layer).
+> Reference the user already likes: **mangowm + quickshell**.
 
-## Parity bar (8 AwesomeWM capabilities)
+## Recommended compositor + shell stacks (ranked by awesome-likeness)
 
-1. **Lua scripting** — full programmable config, not a static config file
-2. **Tiling + floating** — dynamic layouts, switchable per-tag
-3. **Tags** — a window can hold multiple tags; multiple tags visible at once; per-tag layout
-4. **Widget toolkit** — wibox-style bars/panels/OSD built in-process
-5. **Key/mouse bindings** — arbitrary global hotkeys, keygrabbers, client mouse bindings
-6. **Rules engine** — declarative matching of new clients → tags/floating/geometry
-7. **Extensible layouts** — write new layouts in the scripting language
-8. **Signals/lifecycle** — event-driven scripting on manage/focus/unfocus/property-change
+| Rank | Compositor | Shell | Why it's awesome-like | Gap |
+|---|---|---|---|---|
+| **1** | **mangowm** | **DMS (dux-shell)** | dwm-descended tags + per-tag layouts + rules + hot-reload + `mmsg` IPC; DMS replaces waybar/swaylock/mako/fuzzel/polkit in one, **first-class MangoWC support** | Two programs; IPC not in-process; DMS is Material-opinionated |
+| **2** | **mangowm** | **Noctalia v5** | Same WM virtues; Noctalia lists **Mango** as a supported backend; lightweight native runtime, TOML hot-reload | v5 is a fresh rewrite (no Qt); TOML less scriptable than QML |
+| **3** | **mangowm** | **quickshell (raw)** | Max scriptability — write your own wibox in QML/JS with live reload, mango IPC for tag state | You build notif daemon / launcher / OSD yourself |
+| **4** | **river-classic** | **ags/astal** | river's multi-tag + multi-view is the **truest awesome tag semantics** on Wayland; astal has a dedicated river module | river-classic slow-moving; ags ecosystem shrinking vs quickshell |
+| **5** | **dwl** | **waybar + swaync + rofi-wayland + swayosd** | dwm purity: tags, rules, status-stdout bar contract; every piece mature | Needs dwl IPC patch; 4–5 programs for the shell layer; compile-time config |
+| **6** | **qtile-wayland** | built-in bar **+ ignis** | All-Python in-process WM + bar = awesome's actual architecture | `wayc` C backend rewrite (2026) is young; groups aren't quite tags |
+| **7** | **niri** | **DMS / Noctalia** | Best-supported shell ecosystem, live-reload KDL, window rules | Dynamic workspaces ≠ tags — no multi-tag views, no sticky across tags |
 
-## Comparison table
+## Desktop shells (the wibox/OSD/notification layer)
 
-| Candidate | Lang | Maintained 2025–26 | Lua scripting | Tile+Float | Tags (multi) | Widgets | Keybinds | Rules | Ext. layouts | ≈Awesome (1–10) |
-|---|---|---|---|---|---|---|---|---|---|---|
-| **somewm** | C + LuaJIT | ✅ active (2.1, 2026-10) | ✅ awesome Lua API | ✅ | ✅ multi + per-tag layout | ✅ wibox-compatible | ✅ +keygrabber | ✅ awful.rules | ✅ in Lua | **10** |
-| **cwc / cwcwm** | C + LuaJIT | ✅ (v0.4 2026-06, commits 2026-10) | ✅ Lua API (gears ported) | ✅ | ✅ tags not workspaces | ❌ external layer-shell | ✅ kbind/kbindmap | ✅ cuteful.rules | ✅ Lua custom layouts | **8** |
-| **somewm-kiln** (sibling) | C + Lua? | ✅ (same maintainer, experimental) | ✅ | ✅ | ✅ | ✅ Clay layout tree | ✅ | ✅ | ✅ | 8 (experimental) |
-| **qtile** (Wayland) | Python | ✅ active | ✅ Python (not Lua) | ✅ many layouts | ❌ groups = workspaces | ✅ built-in bar widgets | ✅ | ◑ Match/dgroups | ✅ in Python | 7 |
-| **river-classic** | Zig | ✅ maintenance fork of 0.3 | ❌ riverctl IPC | ✅ | ✅ bitmask multi-tag | ❌ external | ✅ | ✅ rule-add globs | ✅ external layout generators | 6 |
-| **mangowm (mango)** | C | ✅ very active | ❌ text config + IPC | ✅ many layouts | ✅ per-tag layouts | ❌ external | ✅ | ✅ window rules | ❌ compile-time | 5 |
-| **wayfire** | C++ | ✅ active | ❌ INI | ◑ simple-tile plugin | ❌ workspace grid | ❌ wf-shell external | ✅ key/btn/gesture/corner | ✅ rich criteria | ◑ C++ plugins | 4 |
-| **miracle-wm** | C++ (Mir) | ✅ active | ❌ YAML + IPC | ✅ | ❌ workspaces | ❌ external | ✅ | ✅ custom rules | ◑ WASM plugins | 4 |
-| **dwl** | C | ✅ active | ❌ config.h recompile | ✅ | ✅ bitmask tags | ❌ external (by design) | ✅ | ✅ config.h rules | ◑ C patches | 4 |
-| **sway / swayfx** | C | ✅ both active | ❌ config + JSON IPC | ✅ | ❌ workspaces | ❌ swaybar/waybar external | ✅ | ✅ for_window criteria | ❌ | 3 |
-| **niri** | Rust | ✅ very active | ❌ KDL config + IPC | ✅ scrollable tiling | ❌ dynamic workspaces | ❌ external (quickshell) | ✅ | ✅ window-rule blocks | ❌ | 3 |
-| **labwc** | C | ✅ active (feature-frozen 2026) | ❌ XML | ❌ stacking + snap | ❌ workspaces | ❌ external | ✅ | ✅ openbox app rules | ❌ | 2 |
-| **newm-atha** | Python | ⚠️ dormant keeper fork | ✅ Python | ◑ zoomable wall | ❌ | ❌ external panels | ✅ | ◑ | ◑ Python | 2 |
-| **way-cooler** | Rust | ❌ **archived 2020-01-11** | (Lua planned, never finished) | ◑ | — | — | — | — | — | dead |
+| Shell | Config lang | Bar | OSD | Notif | Launcher | Lock | Maintained | Maturity | Compositor-agnostic |
+|---|---|---|---|---|---|---|---|---|---|
+| **quickshell** | QML/JS | framework | framework | framework | framework | framework | ✅ active | high | ✅ |
+| **DMS (dux-shell)** | QML/JS + Go | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ active | high | ✅ (optimized: niri/sway/**mango**/labwc/miracle) |
+| **Noctalia v5** | TOML + native | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ active | medium (fresh rewrite) | ✅ (incl. **Mango**, **dwl**) |
+| **Caelestia** | QML + shell.json | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ active | high | ❌ Hyprland-only |
+| **end-4 ii** | QML + py venv | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ active | high | ❌ Hyprland-only dotfiles distro |
+| **ags/astal v3** | TS/JSX (GJS) + Vala | framework | framework | framework | framework | framework | ✅ astal active | high | ✅ (hyprland/**river**/niri modules) |
+| **eww** | Rust + yuck | ✅ | ◑ build it | ❌ | ❌ | ❌ | ⚠️ slow (author on yolk) | high (aging) | ✅ |
+| **waybar** | JSONC + CSS | ✅ | ❌ | ❌ | ❌ | ❌ | ✅ active | very high | ✅ (**river**/**dwl**/**mango** modules) |
+| **ironbar** | TOML/YAML + Lua | ✅ | popups | ❌ | ❌ | ❌ | ✅ active | alpha | ◑ (sway/hyprland, niri partial) |
+| **fabric** | Python + GTK3 | framework | framework | framework | framework | framework | ✅ slow cadence | medium | ✅ |
+| **ignis** | Python + GTK4 | framework | framework | ✅ services | framework | framework | ✅ (Rust rewrite pending) | medium | ✅ layer-shell |
 
-Legend: ✅ full · ◑ partial · ❌ none/absent · **bold** = genuine awesome-parity contenders.
+**Shell notes:** quickshell is the toolkit everything converges on (ships no bar/OSD itself — it's the
+wibox framework). **DMS** = most complete pre-built shell, explicit mango support. **Noctalia v5** =
+ground-up native rewrite (no Qt/GTK), supports mango + dwl. Caelestia & end-4 are Hyprland-coupled —
+out. **ags/astal** has the only dedicated **river** module. **ignis** is the all-Python play (pairs
+with qtile). **eww** is the most conceptually awesome-like widget DSL but widget-layer only and dormant.
 
-## Desktop shells (recreate the wibox/widget layer on any compositor)
+## Compositors (the WM half) — tags/rules model
 
-These are **not compositors** — they replace awesome's *widget* layer atop a tag-capable compositor.
+| Compositor | Lang | Tag model | Rules | Runtime config | Maintained |
+|---|---|---|---|---|---|
+| **mangowm** | C/wlroots | ✅ tags, per-tag layouts | ✅ window rules | ✅ hot-reload + `mmsg` IPC | ✅ very active |
+| **river-classic** | Zig | ✅ **multi-tag windows + multi-tag views** (true awesome semantics) | ✅ riverctl rules | ✅ riverctl + ext layout gens | ✅ slow (0.3 fork) |
+| **dwl** | C | ✅ bitmask tags | ✅ config.h rules | ❌ compile-time | ✅ active |
+| **qtile-wayland** | Python | ◑ groups+scratchpads | ✅ Match/dgroups | ✅ Python | ✅ (wayc backend young) |
+| **niri** | Rust | ❌ dynamic workspaces | ✅ window-rule blocks | ✅ KDL live-reload | ✅ very active |
+| **wayfire** | C++ | ❌ Compiz grid | ✅ rich criteria | ✅ INI | ✅ |
 
-| Shell | Lang | Role | Notes |
+**Compositor notes:** `river` split — awesome-relevant features live in **`river-classic`** (upstream
+river went non-monolithic). **dwl** expects the two-part stack (no bar by design); mango exists because
+of dwl's compile-time config. **niri**'s shell ecosystem is best-in-class but its model is workspaces,
+not tags. **qtile** has the only built-in widget bar (in-process, awesome's real architecture).
+
+## Dotfile distros (bundled shell+compositor; strip difficulty)
+
+| Distro | Shell | Compositor | Strip-to-shell |
 |---|---|---|---|
-| **Quickshell** | QML/QtQuick | bars, widgets, OSD, lockscreens | De-facto successor to the awesome widget role; live-reload; what Noctalia / DankMaterialShell build on. niri steers users to it. |
-| **ags** (Aylur's GTK Shell) | JS/GJS (GTK) | shell widgets | Mature, compositor-agnostic via layer-shell; scripts the shell, not the WM. |
-| **eww** | Rust + yuck (GTK) | widgets | Same role; external to the WM. |
+| **DMS/Dux** | quickshell+Go | any (mango-optimized) | **Trivial — ships as a shell package** |
+| **Noctalia v5** | native | any (mango, dwl) | **Trivial — shell-only default** |
+| Caelestia | quickshell | Hyprland (hard-coded) | Hard |
+| end-4 ii | quickshell | Hyprland (hard-coded) | Very hard |
 
-## Findings
+## Bottom line
 
-- **somewm is the literal answer.** A from-scratch wlroots compositor (C + LuaJIT, GPLv3) implementing
-  the AwesomeWM Lua API — tags, wibox widgets, awful.rules, signals, user Lua layouts. `release/1.4`
-  targets 100% awesome parity; `main` (2.x-dev) has documented deviations. An awesomeWM maintainer
-  pointed users to it on upstream issue awesomeWM/awesome#159 (2026-03). Risk: young project, small
-  bus factor. ~403 stars, NixOS/AUR/Debian/Fedora packaging. [github.com/trip-zip/somewm](https://github.com/trip-zip/somewm) · [somewm.org docs](https://somewm.org/docs/next/getting-started/installation)
-- **cwc** is second-best and arguably better-engineered — awesome-shaped object model (`cwc.client`,
-  `cwc_tag`, `cuteful.rules`, ported `gears.*`), but **no wibox** (bring an external bar). Author warns
-  crashes may happen. [github.com/Cudiph/cwcwm](https://github.com/Cudiph/cwcwm)
-- **awesome upstream will never be a Wayland compositor** — issue #159 closed `wontfix`/locked (2022).
-  "Awesome on Wayland" = somewm or cwc, not upstream. [awesomeWM/awesome#159](https://github.com/awesomeWM/awesome/issues/159)
-- **river renamed/split:** `river` (main) is now a non-monolithic compositor delegating WM policy to a
-  client protocol; the awesome-relevant dynamic-tiling feature set lives in **`river-classic`** (0.3
-  maintenance fork). Tags + external layout generators + riverctl rules.
-- **qtile** is the pragmatic pick if you want scripting + built-in widgets and can accept workspaces
-  (groups) instead of tags. Wayland backend has known gaps; "wayc" C rewrite in progress.
-- **way-cooler is dead** (archived 2020). **newm-atha is dormant.** **piemi: no such compositor found.**
-- Nothing outside somewm/cwc ships all 8 capabilities. Everything else = compositor + external shell
-  (quickshell), and you lose the unified in-process signal model.
-
-## Practical recommendation for this repo
-
-| Priority | Path | Why |
-|---|---|---|
-| Literal parity | **somewm** (`release/1.4`) | Only option carrying existing awesome configs/widgets/themes to Wayland |
-| Best engineering, accept ext. bar | **cwc** | awesome model minus wibox; cleaner; pair with quickshell for widgets |
-| Scripting + widgets, accept workspaces | **qtile (Wayland)** | Python config, built-in bar; lose tag semantics |
-| Assemble from parts | **river-classic + quickshell** | tags + rules + external widgets over IPC |
-
-## Conflicts & gaps
-
-- **river naming** — awesome-relevant features are in `river-classic`, not mainline `river`.
-- **maomaowm → mangowm** — same author; maomaowm superseded/renamed; old mirrors linger.
-- **qtile Wayland widget gap list** lives on a non-fetchable GitHub Projects board → Medium confidence.
-- **somewm 2.x deviations** — exact list in-repo (`DEVIATIONS.md`), not independently verified.
+The answer to "awesome on Wayland" in 2026 is a stack, not a single compositor. **mangowm + DMS**
+is the least-assembly path to a complete awesome-like desktop (tags + rules + a full
+bar/OSD/notif/launcher/lock shell with native mango support — CachyOS already ships it).
+**mangowm + raw quickshell** is the max-control path (write your own wibox in QML). **river-classic +
+ags/astal** is the most faithful to awesome's *tag semantics* specifically. The single-program
+alternatives (somewm, cwc) chase the literal awesome Lua API but "targets 100% parity" is not "is
+100% parity" — young projects, small bus factor.

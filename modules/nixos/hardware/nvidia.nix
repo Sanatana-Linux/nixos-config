@@ -252,9 +252,10 @@ in {
 
     # ── Initrd modules ────────────────────────────────────────────────
     # Loaded early so the display works during boot and LUKS unlock.
+    # nvidiafb is deliberately absent: it is the legacy framebuffer driver
+    # and conflicts with nvidia-drm's own fbdev (nvidia_drm.fbdev=1).
     boot.initrd.kernelModules = [
       "nvidia" # Main kernel driver
-      "nvidiafb" # Framebuffer (console before X)
       "nvidia-drm" # DRM/KMS interface
       "nvidia-uvm" # Unified Virtual Memory (CUDA)
       "nvidia-modeset" # Kernel modesetting
@@ -372,6 +373,32 @@ in {
           nvidiaBusId = cfg.prime.nvidiaBusId;
         };
       };
+    };
+
+    # ── X layout when the dGPU drives the panel directly ───────────────
+    # With PRIME off, nixpkgs' X driver registration still shapes xorg.conf
+    # for hybrid output: the only Screen in the ServerLayout belongs to the
+    # Intel modesetting device, and the NVIDIA device is a GPU-screen for
+    # PRIME offload with no Screen of its own. When a firmware mux has
+    # routed the panel to the dGPU, the iGPU never registers a DRM card and
+    # X dies with "no screens found". Rebuild the layout around the NVIDIA
+    # Screen instead.
+    services.xserver = mkIf (!cfg.prime.enable) {
+      serverLayoutSection = ''
+        Inactive "Device-nvidia[0]"
+        Screen "Screen-nvidia[0]"
+      '';
+      screenSection = ''
+        Option "RandRRotation" "on"
+        # nvidia-drm is the KMS driver here, so the driver would let each
+        # X client pick a GPU as if this were a hybrid system. With the
+        # iGPU absent there is nothing to pick.
+        Option "PerProcessGpuPicking" "off"
+        # Work around a blank panel on Legion/ADL laptops in dGPU-only
+        # mode with GSP firmware: the driver's default vsync mode can
+        # leave the mux-routed eDP dark.
+        Option "UseSwVsyncForFlip" "on"
+      '';
     };
 
     # ── nvidia-powerd ─────────────────────────────────────────────────

@@ -82,3 +82,66 @@ bar/OSD/notif/launcher/lock shell with native mango support — CachyOS already 
 ags/astal** is the most faithful to awesome's *tag semantics* specifically. The single-program
 alternatives (somewm, cwc) chase the literal awesome Lua API but "targets 100% parity" is not "is
 100% parity" — young projects, small bus factor.
+
+---
+
+# Exotic / code-first options (maximum control, wide open to modify)
+
+> For a user who wants to **write the WM logic and the widget layer as code**, not adopt someone's
+> pre-built shell. Workspaces fine (tags optional). Frameworks, not dotfile distros.
+
+## Scriptable compositors (you write WM logic in code)
+
+| Name | Lang / base | Framework or config? | Scripting lang | Control depth | Maintained | Daily-drivable | Notes |
+|---|---|---|---|---|---|---|---|
+| **Pinnacle** | Rust / Smithay | **Framework** — configured as code | **Lua or Rust** | full (layouts, window behavior, keybinds, decorations, signals) | ✅ active (2026-06) | usable | **AwesomeWM-inspired, tag system, dynamic tiling.** The single best match: awesome's model, configured in real Lua (or Rust), on Smithay. Has a Nix flake. [github.com/pinnacle-comp/pinnacle](https://github.com/pinnacle-comp/pinnacle) |
+| **jay** | Rust | framework-ish | TOML + live-reload | high (keybinds, layout, input in config; core is code) | ✅ very active (2026-10) | yes | i3-feel, Rust, single-author but consistent. Workspaces not tags. [github.com/mahkoh/jay](https://github.com/mahkoh/jay) |
+| **kiwmi** | C / wlroots | **Framework** — you write `main()`/Lua | **Lua** | full (layouts, input, rendering behavior scripted) | ⚠️ slow (2025-08) | toy/usable | "Fully programmable, enforces no logic." True awesome-spirit (Lua, script everything) but WIP + steep curve. [github.com/buffet/kiwmi](https://github.com/buffet/kiwmi) |
+| **japokwm** | C / dwl+wlroots | config | text file | layout-centric (built around creating layouts) | ⚠️ slow (2025-11) | usable | Dynamic tags, layout-focused, dwl-descended. [github.com/itsjakobx/japokwm](https://github.com/itsjakobx/japokwm) |
+| **vivarium** | C / wlroots | config + C header | TOML (custom code in C via `viv_config.h`) | layouts/keybinds hardcoded; custom layouts need C + recompile | ❌ dormant (2023-09) | usable-ish | xmonad semantics. Author *wants* to make it a FFI library but hasn't. [github.com/inclement/vivarium](https://github.com/inclement/vivarium) |
+| **way-cooler** | Rust | framework | Lua (planned) | — | ❌ archived 2020 | dead | Historical only. |
+
+**The standout here is Pinnacle** — it's the only living, actively-developed, awesome-*inspired* compositor where the config IS Lua (or Rust) code and the tag system is first-class. Built on Smithay, ships a Nix flake (drops into this repo cleanly), documented Lua + Rust API references. kiwmi is the purer "script literally everything in Lua" ideal but is slow-moving and unfinished.
+
+## Code-first widget/shell frameworks (the wibox you write yourself)
+
+| Framework | Language | Your code vs framework | Services included | Maturity | Maintained | Control (1–10) |
+|---|---|---|---|---|---|---|
+| **quickshell** | QML/JS (Qt6) | **all your code** (types + services, zero layouts shipped) | pipewire, net, bt, notif-daemon, mpris, tray, upower, pam, polkit, greetd, lock, screencopy, hyprland/i3 | high (v0.3.2, 2026-10) | ✅ | **9** |
+| **astal + Gnim** | TS/JSX (GJS) over Vala/C libs | **all your code** (library-first, ships no widgets) | wireplumber, net, bt, brightness, notif, mpris, tray, battery, apps, auth, idle, cava, greetd, ext-workspace | high | ✅ | **8** |
+| **ignis** | Python (GTK4) | mostly your code | audio, backlight, bt, net, notif, mpris, tray, upower, apps, recorder, wallpaper, systemd, hyprland, niri | medium (Rust rewrite announced) | ✅ w/ caveat | 7 |
+| **fabric** | Python (GTK3) | mostly your code | partial (audio, bt, notif, tray, power, hyprland/i3/niri) | medium-high | ✅ | 6.5 |
+| **raw gtk4-layer-shell** | C/Rust/Python/Vala/**Lua via lgi** | **everything yours** | none (just layer-shell + session-lock) | high (the substrate) | ✅ | **10** |
+| **Lua: lgi + gtk4-layer-shell GIR** | Lua | **everything yours** | none | unproven | n/a (DIY) | 10 (solo expedition) |
+| **ironbar** | TOML/YAML + embedded Lua | bar framework, Lua for widget logic | tray/net/bt/audio/clipboard as bar modules | alpha, daily-driven | ✅ | 5 |
+| **eww** | Rust + yuck DSL | DSL-limited, script via shell | none built-in | aging | ⚠️ dormant | 4 |
+
+**Framework notes:** quickshell is the wibox-replacement ceiling — ships *types and services*, no
+layouts, so you write every pixel in QML/JS (reactive property bindings ≈ awesome's signal model) and
+it covers lockscreen/polkit/greetd/screencopy. astal is the most library-honest and has the deepest
+service list + a **river** module. **There is no maintained Lua-native Wayland widget framework** — the
+Lua path is lgi → GTK4 → gtk4-layer-shell GIR, which works but you're the entire ecosystem. Raw
+gtk4-layer-shell (Rust gtk4-rs/relm4 or Python) is the true "no framework" floor — 10/10 control,
+you re-derive the services yourself.
+
+## Modular tools (assemble the shell from single-purpose scriptable pieces)
+
+| Role | Best-in-class 2026 | Scriptable via | Notes |
+|---|---|---|---|
+| Wallpaper | **awww** (née swww) | CLI + unix socket | animated transitions, daemonized |
+| OSD (rich) | **swayosd** | CLI flags | GTK OSD: volume/brightness/capslock |
+| OSD (minimal) | **wob** | FIFO/socket | pure overlay bar, zero deps |
+| Notifications | **mako** / dunst / fnott | makoctl/dunstctl + D-Bus | mako = dunst-style config |
+| Launcher | **walker** (+elephant) | unix socket + dmenu + custom menus | GTK4/Rust front, Go backend, providers |
+| Launcher (minimal) | **fuzzel** / tofi | stdin→stdout dmenu | tiny, C, wlroots |
+| Lockscreen | **gtklock** | config + CSS + PAM | ext-session-lock via gtk-session-lock |
+| Bar (config fallback) | **ironbar** | TOML/YAML + Lua + IPC | escape hatch if a framework bar is too much some week |
+
+## The actual answer for maximum control
+
+**Pinnacle (compositor, Lua/Rust config) + quickshell (widget layer, QML)** is the exotic code-first
+pair: both are frameworks, neither ships opinions, and you write the WM logic *and* the wibox as code.
+Pinnacle is awesome-inspired with a real tag system and Lua config; quickshell is the deepest
+build-it-yourself widget toolkit. If you want to keep everything in **Lua**, Pinnacle handles the WM
+in Lua and you'd write widgets via lgi+gtk4-layer-shell (lonely) — or accept QML for the shell.
+If the plumbing is the fun, **raw gtk4-layer-shell in Rust** is the no-framework floor.

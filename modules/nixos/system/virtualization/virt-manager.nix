@@ -6,6 +6,7 @@
 }:
 with lib; let
   cfg = config.modules.system.virtualization.virt-manager;
+  systemdPkg = config.systemd.package;
 in {
   options.modules.system.virtualization.virt-manager = {
     enable = mkEnableOption "Virtual machine management with virt-manager";
@@ -62,15 +63,34 @@ in {
       "libvirtd-ro.socket"
     ];
 
+    # libvirt consumes its secrets-encryption-key through LoadCredentialEncrypted=,
+    # which requires a systemd-creds encrypted blob rather than a plaintext key.
+    # libvirt ships the drop-in but not this init service, so it must be provided
+    # here. Generation is idempotent: replacing the key would orphan every secret
+    # already encrypted under the previous one, and libvirt fails to start with
+    # "Encrypted file too short" if the file is empty or unencrypted.
     systemd.services.virt-secret-init-encryption = {
       description = "Initialize libvirt secret encryption key";
       wantedBy = ["multi-user.target"];
       before = ["libvirtd.service" "virtsecretd.service"];
-      serviceConfig = {
-        Type = "oneshot";
-        RemainAfterExit = true;
-        ExecStart = "${pkgs.bash}/bin/bash -c 'mkdir -p /var/lib/libvirt/secrets && touch /var/lib/libvirt/secrets/secrets-encryption-key && chmod 0600 /var/lib/libvirt/secrets/secrets-encryption-key'";
-      };
+      serviceConfig.RemainAfterExit = true;
+      path = with pkgs; [
+        systemdPkg
+        coreutils
+        bash
+      ];
+      script = ''
+             set -euo pipefail
+             key=/var/lib/libvirt/secrets/secrets-encryption-key
+           mkdir -p /var/lib/libvirt/secrets
+           if [ ! -s "$key" ]; then
+               raw=$(mktemp)
+         ${pkgs.coreutils}/bin/head -c 32 /dev/urandom > "$raw"
+         ${systemdPkg}/bin/systemd-creds encrypt --name=secrets-encryption-key "$raw" "$key"
+        ${pkgs.coreutils}/bin/shred -u "$raw"
+             fi
+          ${pkgs.coreutils}/bin/chmod 0600 "$key"
+      '';
     };
 
     # Initialize swtpm-localca directory with proper permissions

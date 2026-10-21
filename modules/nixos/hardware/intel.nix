@@ -39,6 +39,19 @@ in {
       default = false;
       description = "Enable Intel GVT-g graphics virtualization (GPU passthrough support)";
     };
+
+    gpu = {
+      enable = mkOption {
+        type = types.bool;
+        default = true;
+        description = ''
+          Keep the Intel iGPU active as a render node (i915, VA-API, OpenCL).
+          Set false when a firmware mux routes the panel to the dGPU and the
+          iGPU has no display role. CPU-side tuning (microcode, governor,
+          virtualization) stays enabled either way.
+        '';
+      };
+    };
   };
 
   config = mkIf cfg.enable {
@@ -55,6 +68,8 @@ in {
       [
         "i2c-dev" # Userspace I2C access (often needed by DDC/CI tools)
         "i2c-i801" # Intel SMBus driver (common motherboard controller)
+      ]
+      ++ optionals cfg.gpu.enable [
         "i915" # Intel graphics
       ]
       ++ optionals cfg.powerManagement [
@@ -72,8 +87,9 @@ in {
     # Intel CPU microcode updates
     hardware.cpu.intel.updateMicrocode = true;
 
-    # Intel graphics driver
-    hardware.graphics = {
+    # Intel graphics driver — dropped when the firmware mux has routed the
+    # panel to the dGPU (gpu.enable = false); the iGPU is then compute-only.
+    hardware.graphics = mkIf cfg.gpu.enable {
       enable = true;
       # intel-vaapi-driver is provided by nixos-hardware's intelgpu module
       # (hardware.intelgpu.enableHybridCodec), which applies the same
@@ -86,9 +102,11 @@ in {
 
     # Kernel parameters for Intel hardware
     boot.kernelParams =
-      [
+      optionals cfg.gpu.enable [
         "i915.fastboot=1"
         "dev.i915.perf_stream_paranoid=0"
+      ]
+      ++ [
         "skew_tick=1"
         "rcu_nocbs=all"
         "rcutree.rcu_idle_gp_delay=0"
@@ -109,7 +127,7 @@ in {
         "kvm.ignore_msrs=1" # Ignore unimplemented MSRs
         "kvm_intel.nested=1" # Enable nested virtualization
       ]
-      ++ optionals cfg.enableGVT [
+      ++ optionals (cfg.gpu.enable && cfg.enableGVT) [
         "i915.enable_gvt=1"
       ];
 
@@ -117,7 +135,7 @@ in {
       "kernel.sched_schedstats" = 0;
     };
 
-    nixpkgs.config.packageOverrides = mkIf cfg.vaapi (pkgs: {
+    nixpkgs.config.packageOverrides = mkIf (cfg.gpu.enable && cfg.vaapi) (pkgs: {
       intel-vaapi-driver = pkgs.intel-vaapi-driver.override {enableHybridCodec = true;};
     });
 
@@ -129,12 +147,12 @@ in {
         inxi
         i2c-tools
       ]
-      ++ optionals cfg.vaapi [
+      ++ optionals (cfg.gpu.enable && cfg.vaapi) [
         # Video acceleration
         libva-vdpau-driver
         libvdpau-va-gl
       ]
-      ++ optionals cfg.opencl [
+      ++ optionals (cfg.gpu.enable && cfg.opencl) [
         # OpenCL compute
         intel-compute-runtime
         intel-gmmlib
@@ -146,6 +164,6 @@ in {
         powertop
         intel-undervolt
       ]
-      ++ optional cfg.vaapi intel-gpu-tools;
+      ++ optional (cfg.gpu.enable && cfg.vaapi) intel-gpu-tools;
   };
 }

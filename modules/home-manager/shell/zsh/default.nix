@@ -217,6 +217,9 @@ in {
 
         # Miscellaneous
         c = "clear";
+        # dGPU mux control — Lenovo Legion hybrid-mode (native ACPI, no
+        # system76-power needed; that one hard-codes Debian update-initramfs)
+        mux = "${lib.getBin lenovo-legion}/bin/legion_cli";
 
         # LAN ssh — this repo runs sshd on port 2222, not 22
         lanssh = "ssh -p 2222";

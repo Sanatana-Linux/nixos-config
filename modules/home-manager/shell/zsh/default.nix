@@ -217,6 +217,8 @@ in {
 
         # Miscellaneous
         c = "clear";
+        # dGPU mux control (system76-power CLI; daemon runs as a system service)
+        mux = "${lib.getBin system76-power}/bin/system76-power";
 
         # LAN ssh — this repo runs sshd on port 2222, not 22
         lanssh = "ssh -p 2222";

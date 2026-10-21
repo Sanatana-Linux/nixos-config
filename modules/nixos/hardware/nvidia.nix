@@ -119,6 +119,8 @@ in {
 
       systemPackages = with pkgs;
         [
+          # system76-power — dGPU mux control (see systemd.services below)
+          system76-power
           # Core GL libraries
           libGL
           libGLU
@@ -270,6 +272,25 @@ in {
     # hardware.graphics.extraPackages already exposes via
     # /run/opengl-driver/lib.
     services.lact.enable = cfg.lact.enable;
+
+    # ── system76-power — dGPU mux control ─────────────────────────────
+    # Client/daemon pair that flips the firmware mux on hybrid laptops
+    # (ACPI calls, so it works on Legion where legion_laptop exposes no
+    # WMI mux). The CLI is a DBus client, so the daemon needs to run as
+    # a system service; the dbus module links the package's policy file
+    # so non-root clients can query it.
+    services.dbus.packages = [pkgs.system76-power];
+
+    systemd.services.system76-power = {
+      description = "System76 Power Daemon";
+      wantedBy = ["multi-user.target"];
+      serviceConfig = {
+        Type = "dbus";
+        BusName = "com.system76.PowerDaemon";
+        ExecStart = "${pkgs.system76-power}/bin/system76-power daemon";
+        Restart = "on-failure";
+      };
+    };
 
     nixpkgs.config = {
       allowUnfree = true;

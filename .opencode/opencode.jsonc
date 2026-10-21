@@ -37,7 +37,15 @@
     "nix-flake": true,
     "nix-format": true
   },
-  "mcp": {},
+  "mcp": {
+    // NixOS package, option, Home Manager, and nix-darwin lookup over stdio.
+    // The binary is provided by modules/nixos/base/packages/core.nix.
+    "nixos": {
+      "type": "local",
+      "command": ["mcp-nixos"],
+      "enabled": true
+    }
+  },
   "skills": {
     "paths": [
       ".opencode/skills/nixos-module",

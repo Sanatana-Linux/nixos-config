@@ -1,0 +1,184 @@
+{
+  "detected": true,
+  "projectType": "os-config",
+  "fingerprint": {
+    "language": {
+      "primary": "nix",
+      "secondary": ["lua", "javascript", "yaml"],
+      "runtimes": ["nix"],
+      "versionConstraints": {
+        "nix": "unstable (experimental flakes)",
+        "nixpkgs": "nixos-unstable",
+        "stable": "nixos-26.05"
+      },
+      "detectedFiles": ["flake.nix", "flake.lock", "default.nix", "shell.nix"],
+      "secondaryLanguages": {
+        "lua": { "context": "awesome WM config (external/awesome/)", "fileCount": 98 },
+        "javascript": { "context": "Firefox autoconfig (external/firefox/JS/)", "fileCount": 16 },
+        "yaml": { "context": "base16 color schemes (external/base16_monokai_pro/)", "fileCount": 8 }
+      }
+    },
+    "framework": {
+      "name": "nixos",
+      "version": "unstable (nixos-26.05 stable pin)",
+      "mode": {
+        "flake": true,
+        "homeManagerAsNixosModule": true,
+        "enableByOptionModuleSystem": true,
+        "hostCount": 4,
+        "userCount": 3
+      },
+      "components": {
+        "nixos": { "source": "github:nixos/nixpkgs/nixos-unstable", "type": "primary" },
+        "home-manager": { "source": "github:nix-community/home-manager", "type": "integrated-module", "integration": "home-manager.nixosModules.home-manager" },
+        "stylix": { "source": "github:nix-community/stylix", "type": "theming", "base16Scheme": "Monokai Pro Spectrum", "polarity": "dark" },
+        "nix-cachyos-kernel": { "source": "github:xddxdd/nix-cachyos-kernel/release", "type": "kernel", "kernelVariant": "cachyos-bore-lto-x86_64-v3" }
+      }
+    },
+    "buildTool": {
+      "name": "nix-flakes",
+      "configFiles": ["flake.nix", "flake.lock", "shell.nix"],
+      "formatter": { "name": "alejandra", "configFile": "flake.nix (formatter = alejandra)" },
+      "checkCommands": ["nix flake check", "alejandra --check ."]
+    },
+    "packageManager": {
+      "name": "nix",
+      "lockfile": "flake.lock",
+      "inputCount": 14,
+      "inputs": [
+        { "name": "nixpkgs", "source": "github:nixos/nixpkgs/nixos-unstable", "type": "primary" },
+        { "name": "stable", "source": "github:nixos/nixpkgs/nixos-26.05", "type": "stable-pin" },
+        { "name": "home-manager", "source": "github:nix-community/home-manager", "type": "user-env" },
+        { "name": "stylix", "source": "github:nix-community/stylix", "type": "theming" },
+        { "name": "nixos-hardware", "source": "github:NixOS/nixos-hardware", "type": "hardware" },
+        { "name": "nur", "source": "github:nix-community/NUR", "type": "user-repo" },
+        { "name": "sops-nix", "source": "github:Mic92/sops-nix", "type": "secrets" },
+        { "name": "nixos-generators", "source": "github:nix-community/nixos-generators", "type": "build" },
+        { "name": "nix-index-database", "source": "github:nix-community/nix-index-database", "type": "tooling" },
+        { "name": "nps", "source": "github:OleMussmann/Nix-Package-Search", "type": "tooling" },
+        { "name": "bhairava-grub-theme", "source": "github:Sanatana-Linux/Bhairava-Grub-Theme", "type": "boot" },
+        { "name": "nix-cachyos-kernel", "source": "github:xddxdd/nix-cachyos-kernel/release", "type": "kernel" },
+        { "name": "firefox-nightly", "source": "github:nix-community/flake-firefox-nightly", "type": "firefox" },
+        { "name": "llm-agents", "source": "github:numtide/llm-agents.nix", "type": "ai-tooling" }
+      ],
+      "additionalChannels": ["nixos-26.05 (stable pin)"]
+    },
+    "infrastructure": {
+      "approach": "nixos-modules",
+      "moduleSystem": "enable-by-option (options.modules.<cat>.<name>.enable + mkIf)",
+      "nixosModuleCategories": {
+        "base": ["default.nix", "fhs.nix", "fonts.nix", "nix.nix", "permitted-packages.nix", "security-packages.nix", "services.nix", "shell.nix", "variables.nix", "packages/"],
+        "hardware": ["bluetooth.nix", "intel.nix", "keyboard.nix", "nvidia.nix", "sound.nix", "thunderbolt.nix", "udev.nix", "devices/", "lenovo/"],
+        "stylix": ["default.nix"],
+        "system": ["boot.nix", "cron.nix", "systemd.nix", "networking/", "performance/", "security/", "desktop/", "apps/", "multimedia/", "plymouth/", "users/", "virtualization/"]
+      },
+      "homeManagerModuleCategories": {
+        "core": ["home.nix", "environment.nix", "xdg.nix", "nix.nix"],
+        "desktop": ["awesome.nix", "gtk.nix", "x11/"],
+        "packages": ["essential.nix", "permitted-insecure-packages.nix"],
+        "programs": ["editorconfig.nix", "fastfetch.nix", "firefox.nix", "ghostty.nix", "gpg.nix", "kitty.nix", "neovim.nix", "vesktop.nix", "yazi/"],
+        "services": ["gnome-keyring.nix", "picom.nix", "polkit-agent.nix", "poweralertd.nix", "ssh-agent.nix", "xscreensaver.nix"],
+        "shell": ["cli-tools.nix", "scripts/", "starship/", "zsh/"],
+        "stylix": ["default.nix"]
+      },
+      "overlays": {
+        "additions": "import ../pkgs for custom packages + firefox-nightly-bin + nps + what-size yazi plugin + llm-agents",
+        "modifications": "patches: torch removal, pipx test disable, opencode custom, nps, sillytavern, lenovo-legion (sysfs IOError fix), efitools, libvirt, uefi-firmware-parser, python fixes, firefox-nightly-bin",
+        "cachyos-patches": "lenovo-legion-module patched to unstable-2026-05-07 for cachyos kernel",
+        "stable-packages": "pinned packages from nixos-26.05 (efitools, inkscape, inkscape-with-extensions, gimp3-with-plugins)"
+      },
+      "customPackages": ["material-symbols", "legion-rgb-control", "legion-kb-rgb"]
+    },
+    "styling": {
+      "approach": "stylix-base16",
+      "scheme": "Monokai Pro Spectrum (custom)",
+      "fonts": {
+        "serif": "Operator SSm",
+        "sansSerif": "OperatorUltraNerdFontComplete Nerd Font Propo",
+        "monospace": "OperatorMono Nerd Font",
+        "emoji": "Noto Color Emoji"
+      },
+      "icons": { "theme": "Colloid (light/dark)", "package": "colloid-icon-theme" }
+    },
+    "testing": {
+      "frameworks": [
+        { "name": "nix-flake-check", "type": "integration", "configFile": "flake.nix (checks: alejandra, eval-all-hosts)" },
+        { "name": "nixos-rebuild", "type": "build-test", "usage": "nixos-rebuild build --flake .#bhairavi / .#chhinamasta" }
+      ]
+    },
+    "cicd": {
+      "platforms": ["github-actions"],
+      "workflowCount": 3,
+      "workflows": [
+        { "name": "update-flake-lock", "file": ".github/workflows/update.yml" },
+        { "name": "Mirror Repository to Codeberg", "file": ".github/workflows/codeberg_mirror.yml" },
+        { "name": "Create issues from TODOs", "file": ".github/workflows/todo.yml" }
+      ]
+    },
+    "containerization": { "docker": true, "compose": false, "kubernetes": false },
+    "monorepo": {
+      "tool": "nix-flake",
+      "workspaceCount": 4,
+      "hosts": [
+        { "name": "bagalamukhi", "type": "laptop", "user": "tlh", "gpu": "nvidia+intel-prime", "desktop": "awesome+lightdm", "kernel": "cachyos-bore-lto-x86_64-v3" },
+        { "name": "matangi", "type": "laptop", "user": "smg", "gpu": "nvidia+intel-prime", "desktop": "xfce", "kernel": "cachyos-bore-lto-x86_64-v3" },
+        { "name": "bhairavi", "type": "vm", "user": "tlh", "gpu": "modesetting", "desktop": "awesome", "kernel": "cachyos-bore-lto-x86_64-v3" },
+        { "name": "chhinamasta", "type": "live-usb-iso", "user": "user", "gpu": "intel", "desktop": "awesome", "kernel": "cachyos-bore (non-LTO variant)" }
+      ]
+    },
+    "codeQuality": { "linter": null, "formatter": { "name": "alejandra", "configFile": "flake.nix (formatter output)" } },
+    "secrets": {
+      "tool": "sops-nix",
+      "encryption": "age (SSH host key)",
+      "hostsUsingSops": ["bagalamukhi", "matangi", "bhairavi", "chhinamasta"],
+      "submodule": "external/secrets (git@github.com:Sanatana-Linux/nixos-secrets.git)"
+    },
+    "externalDependencies": {
+      "gitSubmodules": [
+        { "path": "external/nvim", "url": "https://github.com/Thomashighbaugh/nvim-forge", "purpose": "Neovim config" },
+        { "path": "external/firefox", "url": "https://github.com/Thomashighbaugh/firefox", "purpose": "Firefox theme/userChrome" },
+        { "path": "external/awesome", "url": "https://github.com/Sanatana-Linux/nixos-awesomewm", "purpose": "Awesome WM config" },
+        { "path": "external/secrets", "url": "git@github.com:Sanatana-Linux/nixos-secrets.git", "purpose": "Encrypted secrets" }
+      ]
+    },
+    "boot": { "type": "grub", "kernel": "cachyos-bore-lto-x86_64-v3 (via nix-cachyos-kernel flake)", "grubExtraEntries": "UEFI Firmware Settings (fwsetup command)" },
+    "desktop": { "primary": "awesomewm", "secondary": "xfce (matangi)", "displayManager": "LightDM" },
+    "security": { "modules": ["doas", "sudo", "firewall", "fail2ban", "ssh", "pam", "tpm", "clamav"] },
+    "hardware": {
+      "platforms": ["lenovo-legion-16irx9h", "lenovo-legion-pro"],
+      "lenovoModules": ["legion-kb-rgb", "legion-rgb-control", "lenovo-legion-module (cachyos-patched)", "power"]
+    },
+    "archivedAssets": {
+      "directory": ".documentation/archived/advanced_bios/",
+      "files": ["BootX64.efi", "DisplayEngine.efi", "Loader.efi", "SetupBrowser.efi", "UiApp.efi", "SuppressIFPatcher.efi", "SREP_Config.cfg", "lenovo-advanced-bios.md"]
+    },
+    "_changesSinceLastFingerprint": [
+      "New flake input: llm-agents (github:numtide/llm-agents.nix)",
+      "New module: modules/nixos/system/security/clamav.nix — ClamAV antivirus",
+      "New module: modules/nixos/system/apps/searxng.nix — self-hosted search engine (531 lines, major addition)",
+      "boot.nix: kernelPackages changed from pkgs.linuxPackages to pkgs.cachyosKernels.linuxPackages-cachyos-bore-lto-x86_64-v3",
+      "boot.nix: SREP chainload EFI files removed from extraFiles (archived to .documentation/archived/advanced_bios/)",
+      "boot.nix: GRUB extra entry changed from 'Advanced UEFI Firmware Settings' (chainload) to 'UEFI Firmware Settings' (fwsetup)",
+      "waydroid.nix: Major refactor — added users option, enabled LXC, restructured config",
+      "networking/core.nix: resolvconf.service re-enabled, PCIe power saving modprobe config removed",
+      "xfce.nix: Screenshot keybinding refactored — moved from sessionCommands to xfconf-query approach",
+      "overlays/default.nix: lenovo-legion-module overlay moved from xanmod to cachyos-patches section",
+      "overlays/default.nix: nps and what-size yazi plugin added to additions overlay",
+      "Deleted modules: cooling.nix, fan-control.nix, comfyui.nix (removed/consolidated)",
+      "home-manager: zsh/default.nix significantly refactored (182 lines changed)",
+      "home-manager: smg user config updated (18 lines changed)",
+      "home-manager: firefox.nix updated (7 lines changed)",
+      "home-manager: picom.nix updated (14 lines changed)",
+      "home-manager: cli-tools.nix updated (2 lines added)",
+      "home-manager: xdg.nix updated (4 lines changed)",
+      "docker.nix: updated (42 lines changed)",
+      "nvidia.nix: updated (3 lines changed)",
+      "fonts.nix: updated (8 lines changed)",
+      "nix.nix: updated (1 line added)",
+      "hosts: bagalamukhi (8 lines), bhairavi (1 line), chhinamasta (2 lines), matangi (1 line) updated",
+      "AGENTS.md: updated (22 lines changed)",
+      "109 files changed total, 8634 insertions, 942 deletions since last fingerprint"
+    ],
+    "_refreshed": "2026-07-27"
+  }
+}

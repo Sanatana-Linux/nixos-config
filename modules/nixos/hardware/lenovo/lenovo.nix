@@ -141,6 +141,16 @@ in {
       SUBSYSTEM=="usb", ATTR{idVendor}=="048d", ATTR{idProduct}=="c106", MODE="0666"
       # HID device for Spectrum keyboard (legion-rgb-control)
       KERNEL=="hidraw*", SUBSYSTEM=="hidraw", KERNELS=="0003:048D:C995.*", MODE="0666", TAG+="uaccess"
+      # Keep both ITE controllers out of runtime autosuspend. c995's suspend and
+      # resume cycle is unreliable: on resume it re-enumerates its HID
+      # interfaces, so the kernel logs a stream of
+      #   usb 1-1: reset full-speed USB device number 2 using xhci_hcd
+      # and keyd is forced to re-grab its keyboard node every time. The built-in
+      # keyboard (c106) is a sibling full-speed device on this same root hub, so
+      # those resets also perturb its interrupt-endpoint polling and silently
+      # drop keystrokes. Pinning power/control keeps both controllers awake.
+      SUBSYSTEM=="usb", ATTR{idVendor}=="048d", ATTR{idProduct}=="c995", ATTR{power/control}="on"
+      SUBSYSTEM=="usb", ATTR{idVendor}=="048d", ATTR{idProduct}=="c106", ATTR{power/control}="on"
     '';
 
     # Keyboard backlight at boot — runs after udev settles so the

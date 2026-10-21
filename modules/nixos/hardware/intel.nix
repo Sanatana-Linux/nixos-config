@@ -93,7 +93,13 @@ in {
         "rcu_nocbs=all"
         "rcutree.rcu_idle_gp_delay=0"
         "rcupdate.rcu_expedited=1"
-        "preempt=voluntary"
+        # Full kernel preemption for lower scheduling latency under load.
+        # The kernel is built with CONFIG_PREEMPT=y + CONFIG_PREEMPT_DYNAMIC=y,
+        # so the model is selectable on the command line. (CONFIG_PREEMPT_LAZY
+        # is not compiled in, so "lazy" is unavailable; the choice is
+        # voluntary <-> full.) Trade-off: full preemption keeps the CPU out of
+        # deep C-states a little more often, so idle power/heat rises slightly.
+        "preempt=full"
         "tsc=reliable"
         "tsc=noirqtime"
       ]

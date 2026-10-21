@@ -46,7 +46,24 @@ in {
   config = mkIf cfg.enable {
     services = {
       fstrim.enable = cfg.fstrim.enable;
-      fwupd.enable = cfg.fwupd.enable;
+
+      fwupd = {
+        enable = cfg.fwupd.enable;
+        # Extra remotes beyond the default `lvfs`: the testing metadata remote
+        # plus the local vendor remotes (OEM firmware placed in the fwupd state
+        # directory). Only takes effect while fwupd is enabled — the fwupd
+        # module guards all of its config on services.fwupd.enable.
+        extraRemotes = [
+          "lvfs-testing"
+          "vendor"
+          "vendor-directory"
+        ];
+        # Allow firmware that is not signed by a trusted key to be installed
+        # without additional authentication. The testing and vendor remotes are
+        # not covered by the small default trusted-key set, so their payloads
+        # would otherwise be treated as untrusted.
+        daemonSettings.OnlyTrusted = false;
+      };
 
       journald.settings.Journal = {
         SystemMaxUse = cfg.journald.systemMaxUse;

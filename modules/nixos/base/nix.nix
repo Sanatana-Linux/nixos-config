@@ -140,7 +140,17 @@ in {
             "https://ai.cachix.org"
             "https://nix-gaming.cachix.org"
             "https://comfyui.cachix.org"
-            "https://attic.xuyh0120.win/lantian"
+            # CachyOS kernel cache. boot.kernelPackages is
+            # cachyosKernels.linuxPackages-cachyos-bore-lto-x86_64-v3, absent
+            # from cache.nixos.org because of its LTO + BORE + x86-64-v3 build.
+            # Both caches upstream advertises for it are unreachable from here:
+            # attic.xuyh0120.win resolves to the non-routable 198.18.0.8 plus a
+            # ULA IPv6, and cache.xinux.uz resolves to 91.212.89.28 but never
+            # completes a connection. Listing either one makes every rebuild
+            # stall through connect-timeout retries against a dead host, so no
+            # third-party kernel cache is configured: the kernel substitutes
+            # from cache.nixos.org when a matching build exists and is compiled
+            # locally otherwise.
             "https://cache.numtide.com"
           ]
           ++ cfg.extraCaches;
@@ -156,7 +166,6 @@ in {
             "ai.cachix.org-1:N9dzRK+alWwoKXQlnn0H6aUx0lU/mspIoz8hMvGvbbc="
             "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
             "comfyui.cachix.org-1:33mf9VzoIjzVbp0zwj+fT51HG0y31ZTK3nzYZAX0rec="
-            "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="
             "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
           ]
           ++ cfg.extraTrustedKeys;

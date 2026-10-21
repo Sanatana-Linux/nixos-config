@@ -20,6 +20,9 @@
     inputs.nur.overlays.default
     inputs.nix-cachyos-kernel.overlays.pinned
     outputs.overlays.cachyos-patches
+    # llm-agents packages under the llm-agents namespace, built against this
+    # repo's pinned nixpkgs (binaries substitute from cache.numtide.com).
+    inputs.llm-agents.overlays.shared-nixpkgs
   ];
 
   # om — NixOS Operations Manager (Zig), replaces the old bash wrapper
@@ -94,7 +97,7 @@
       performance = {
         default.enable = true;
         # undervolt is the Intel-only intel-undervolt/throttled stack; the
-        # Ryzen 9 uses amd_pstate (via the nixos-hardware ASUS module) instead.
+        # Ryzen 9 uses amd_pstate (guided mode) instead.
         undervolt.enable = false;
         cachy.enable = true;
         oomd.enable = true;
@@ -236,8 +239,22 @@
       # AMD Ryzen 9 (Zen 2) + X570 platform — CPU/chipset kernel modules,
       # sensors (k10temp, nct6775, asus_ec_sensors) and AMD-V/IOMMU.
       amd.enable = true;
-      # Runtime platform_profile + EPP switching (power-saver/balanced/performance).
-      amd.powerProfilesDaemon = true;
+      # amd_pstate=guided, not active: Zen 2 has no reliable CPPC EPP support,
+      # so active mode can pin the cores at the lowest non-linear frequency.
+      amd.pstateMode = "guided";
+      # Full kernel preemption for the lowest scheduling latency under load.
+      amd.preemptFull = true;
+      # Side-channel mitigations off — maximum throughput on a physically
+      # trusted, single-tenant workstation behind the firewall.
+      amd.mitigations = "off";
+      # power-profiles-daemon is off: on Zen 2 its EPP hints are inert and it
+      # pins the governor to powersave, which fights the responsiveness goal.
+      # The static governor set at the bottom of this file drives frequency
+      # scaling instead.
+      amd.powerProfilesDaemon = false;
+      # If amd_pstate fails to load ("_CPC object is not present in SBIOS"),
+      # set BIOS APIC to XAPIC (not X2APIC/Auto) or update the BIOS, or set
+      # amd.x2apicWorkaround = true to append nox2apic.
 
       nvidia = {
         enable = true;
@@ -280,6 +297,11 @@
     # Stylix
     stylix.enable = true;
   };
+
+  # Static CPU governor. With power-profiles-daemon disabled the amd_pstate
+  # driver is driven by this governor; `performance` pins the clock for maximum
+  # desktop responsiveness on this always-on workstation.
+  powerManagement.cpuFreqGovernor = "performance";
 
   # Host-specific display configuration — the NVIDIA GPU is the only adapter.
   services.xserver = {

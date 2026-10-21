@@ -24,6 +24,14 @@ in {
       };
     };
 
+    # RealtimeKit grants PipeWire/PipeWire-JACK realtime scheduling priority,
+    # which materially reduces audio xrun/crackle under load.
+    security.rtkit.enable = true;
+
+    # Keep the HDA codec powered (power_save=0) so the first audio sample after
+    # silence does not pay a codec-wakeup penalty (audible as a click/crackle).
+    boot.extraModprobeConfig = "options snd_hda_intel power_save=0";
+
     systemd.user.services = {
       pipewire.wantedBy = ["default.target"];
       pipewire-pulse = {

@@ -72,10 +72,13 @@ in {
               "f23" = "rightcontrol";
             };
             global = {
-              # USB keyboard macro fires events faster than default 50ms
-              # chord timeout — increase to 100ms so keyd reliably captures
-              # the full LeftMeta+LeftShift+F23 chord.
-              chord_timeout = 100;
+              # chord_timeout is how long keyd holds a chord-prefix key —
+              # here LeftMeta and LeftShift — waiting for the rest of the
+              # chord to arrive. Every bare Super and Shift press therefore
+              # pays this delay, so keep it as short as the chord tolerates.
+              # The Copilot key emits LeftMeta+LeftShift+F23 as one firmware
+              # burst, which lands well inside 25ms.
+              chord_timeout = 25;
             };
           };
         };

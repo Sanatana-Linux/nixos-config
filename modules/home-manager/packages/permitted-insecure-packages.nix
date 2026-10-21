@@ -14,7 +14,10 @@ in {
   config = mkIf cfg.enable {
     nixpkgs.config.permittedInsecurePackages = [
       "pnpm-10.29.2"
+      # Both ventoy releases are permitted — see
+      # modules/nixos/base/permitted-packages.nix for why.
       "ventoy-1.1.17"
+      "ventoy-1.1.18"
       "electron-39.8.10"
     ];
   };

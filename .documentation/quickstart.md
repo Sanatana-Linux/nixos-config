@@ -35,8 +35,8 @@ nix-shell -p gh git neovim sops age
 # builds with `--store /mnt --extra-substituters auto?trusted=1`, and `auto`
 # resolves to these settings — so this is where the caches must live.
 export NIX_CONFIG="experimental-features = nix-command flakes
-substituters = https://cache.nixos.org?priority=10 https://nix-community.cachix.org https://nixpkgs-unfree.cachix.org https://pre-commit-hooks.cachix.org https://cache.nixos-cuda.org https://ai.cachix.org https://nix-gaming.cachix.org https://comfyui.cachix.org https://attic.xuyh0120.win/lantian https://cache.numtide.com
-trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs= nixpkgs-unfree.cachix.org-1:hqvoInulhbV4nJ9yJOEr+4wxhDV4xq2d1DK7S6Nj6rs= pre-commit-hooks.cachix.org-1:Pkk3Panw5AW24TOv6kz3PvLhlH8puAsJTBbOPmBo7Rc= cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M= ai.cachix.org-1:N9dzRK+alWwoKXQlnn0H6aUx0lU/mspIoz8hMvGvbbc= nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4= comfyui.cachix.org-1:33mf9VzoIjzVbp0zwj+fT51HG0y31ZTK3nzYZAX0rec= lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc= niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
+substituters = https://cache.nixos.org?priority=10 https://nix-community.cachix.org https://nixpkgs-unfree.cachix.org https://pre-commit-hooks.cachix.org https://cache.nixos-cuda.org https://ai.cachix.org https://nix-gaming.cachix.org https://comfyui.cachix.org https://cache.numtide.com
+trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs= nixpkgs-unfree.cachix.org-1:hqvoInulhbV4nJ9yJOEr+4wxhDV4xq2d1DK7S6Nj6rs= pre-commit-hooks.cachix.org-1:Pkk3Panw5AW24TOv6kz3PvLhlH8puAsJTBbOPmBo7Rc= cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M= ai.cachix.org-1:N9dzRK+alWwoKXQlnn0H6aUx0lU/mspIoz8hMvGvbbc= nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4= comfyui.cachix.org-1:33mf9VzoIjzVbp0zwj+fT51HG0y31ZTK3nzYZAX0rec= niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
 
 # 1. GitHub auth (the secrets submodule is private)
 gh auth login --hostname github.com --git-protocol https --web
@@ -96,12 +96,17 @@ Without intervention the install silently compiles from source:
 
 - **The kernel.** `boot.kernelPackages` is
   `cachyosKernels.linuxPackages-cachyos-bore-lto-x86_64-v3`. That flake
-  (`xddxdd/nix-cachyos-kernel`) is not on `cache.nixos.org`; it publishes to
-  `attic.xuyh0120.win/lantian`, which the *installed* system picks up from the
-  flake's own `nixConfig`. The installer does not read that config, so without
-  the explicit `substituters` below the LTO + BORE + x86-64-v3 kernel and its
-  modules build locally. The explicit list supplies the same lantian cache
+  (`xddxdd/nix-cachyos-kernel`) is not on `cache.nixos.org`; it publishes to the
+  `lantian` attic cache named in its `nixConfig`, which the *installed* system
+  would pick up from the flake. The installer does not read that config, so
+  without the explicit `substituters` below the LTO + BORE + x86-64-v3 kernel
+  and its modules build locally. The explicit list names a CachyOS cache
   directly, which is why it does not need `accept-flake-config`.
+  Upstream's primary cache host, `attic.xuyh0120.win`, is currently
+  unreachable — its A record is the non-routable `198.18.0.8` and its AAAA is a
+  ULA, so lookups hang for the full `connect-timeout`. The list therefore uses
+  **`cache.xinux.uz`**, the alternative cache upstream documents in its README,
+  which serves the same Hydra-built kernels.
 - **Overlay-modified packages.** `additions`, `modifications`,
   `stable-packages`, `nur`, and `cachyos-patches` all change derivation hashes
   (python scope, `lenovo-legion-module`, custom `pkgs/`, stable-pinned apps),
@@ -116,7 +121,7 @@ authoritative place to put the caches. That list already contains
 `cache.nixos.org`, so a plain `substituters` (full replacement) is complete.
 
 Confirm the shell actually carries them before committing to the build — this
-must list `attic.xuyh0120.win/lantian`:
+must list `cache.xinux.uz`:
 
 ```bash
 nix config show | grep -E '^(substituters|trusted-public-keys)'
@@ -124,7 +129,7 @@ nix config show | grep -E '^(substituters|trusted-public-keys)'
 
 Then run the plain install from step 10. During the build you should see
 `copying path '/nix/store/…-linux-cachyos-bore-lto-x86_64-v3-7.2.8' from
-'https://attic.xuyh0120.win/lantian'`. If instead it starts `building`, the
+'https://cache.xinux.uz'`. If instead it starts `building`, the
 config did not reach the build — `--option substituters "…"` +
 `--option trusted-public-keys "…"` on the `nixos-install` command line is also
 forwarded to the inner `nix build` and is the fallback.
@@ -137,7 +142,7 @@ forwarded to the inner `nix build` and is the fallback.
 > strips it; use `sudo -E` or set it inside the root shell), or order
 > `--option experimental-features "nix-command flakes"` *before*
 > `--option accept-flake-config true`. It is redundant for this install anyway:
-> the `substituters` above already name the lantian cache and its key, so the
+> the `substituters` above already name the CachyOS cache and its key, so the
 > kernel substitutes with or without it.
 
 To also skip the overlay rebuilds, pre-seed the store from a machine that already

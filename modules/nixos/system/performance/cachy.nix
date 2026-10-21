@@ -12,10 +12,9 @@ in {
 
   # BBR congestion control (kernel already provides the cachyos scheduler)
   config = mkIf cfg.enable {
-    # Basic performance optimizations inspired by CachyOS
-    # NOTE: preempt=full is intentionally NOT set — it prevents the CPU from
-    # entering deep C-states (idle power savings), generating excess heat.
-    # intel_pstate + powersave governor handles dynamic scaling better.
+    # Basic performance optimizations inspired by CachyOS.
+    # NOTE: preempt=full is set on the Intel module (hardware/intel.nix); it is
+    # deliberately not repeated here so the model has a single owner.
     boot.kernelParams = [];
 
     # Enable BBR congestion control

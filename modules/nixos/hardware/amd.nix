@@ -61,6 +61,44 @@ in {
       default = true;
       description = "Load the out-of-tree ryzen_smu module and install ryzen-monitor-ng and zenstates for AMD SMU power/P-state telemetry and tuning";
     };
+
+    pstateMode = mkOption {
+      type = types.enum ["active" "guided" "passive"];
+      default = "guided";
+      description = ''
+        amd_pstate operating mode. "active" is EPP-based and requires CPU
+        support for the CPPC Energy Performance Preference; Zen 2 (Ryzen 3000)
+        does not provide it reliably and "active" can pin the cores to the
+        lowest non-linear frequency. "guided" (OS sets min/max, firmware picks
+        within range) is correct for Zen 2; "passive" (governor drives the
+        target) is the fallback. Only Zen 3+ should use "active".
+      '';
+    };
+
+    preemptFull = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Set preempt=full on the kernel command line. The kernel is built with PREEMPT_DYNAMIC, so this is a pure command-line choice; it lowers scheduling latency under load at the cost of slightly higher idle power.";
+    };
+
+    zenpower = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Use the out-of-tree zenpower driver instead of k10temp for richer per-core/SoC Zen telemetry. Requires boot.kernelPackages.zenpower to build for the running kernel.";
+    };
+
+    maxCstate = mkOption {
+      type = types.nullOr types.int;
+      default = null;
+      example = 5;
+      description = "Cap the deepest CPU C-state via processor.max_cstate=N. null leaves the firmware default. Use 5 to work around Zen idle-freeze (C6) hangs.";
+    };
+
+    x2apicWorkaround = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Append nox2apic to the kernel command line. Kernel-side workaround for firmware whose broken X2APIC prevents amd_pstate from loading (dmesg: '_CPC object is not present'). The preferred fix is the BIOS APIC setting (XAPIC).";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -91,10 +129,17 @@ in {
         "x86_pkg_temp_thermal"
       ]
       ++ optionals cfg.sensors [
-        "k10temp"
         "nct6775"
         "asus_ec_sensors"
         "i2c-dev"
+      ]
+      # k10temp and zenpower both claim the Zen temperature interface; zenpower
+      # supersedes k10temp when enabled.
+      ++ optionals (cfg.sensors && !cfg.zenpower) [
+        "k10temp"
+      ]
+      ++ optionals cfg.zenpower [
+        "zenpower"
       ]
       ++ optionals cfg.ecc [
         "edac_mce_amd"
@@ -107,14 +152,21 @@ in {
         "ryzen_smu" # out-of-tree SMU driver (ryzen-monitor-ng, zenstates)
       ];
 
-    # Out-of-tree ryzen_smu module — SMU access for ryzen-monitor-ng / zenstates.
-    boot.extraModulePackages = optionals cfg.monitoring [
-      config.boot.kernelPackages.ryzen-smu
-    ];
+    # Out-of-tree modules: ryzen_smu (SMU telemetry) and optionally zenpower.
+    boot.extraModulePackages =
+      optionals cfg.monitoring [
+        config.boot.kernelPackages.ryzen-smu
+      ]
+      ++ optionals cfg.zenpower [
+        config.boot.kernelPackages.zenpower
+      ];
 
-    # amd_pstate=active is supplied by nixos-hardware's asus/pro-ws-x570-ace
-    # module (which imports common/cpu/amd/pstate.nix) on kernel >= 6.3, so it
-    # is not repeated here.
+    boot.blacklistedKernelModules = mkIf cfg.zenpower ["k10temp"];
+
+    # The amd_pstate operating mode is set from cfg.pstateMode below. The
+    # amd_pstate driver itself is provided by the kernel (or by nixos-hardware's
+    # common/cpu/amd/pstate module, which also emits amd_pstate=active — ours is
+    # appended afterwards so it takes precedence).
     #
     # power-profiles-daemon drives platform_profile and the amd_pstate EPP hint
     # (power-saver / balanced / performance) at runtime. While it is enabled the
@@ -125,9 +177,21 @@ in {
     powerManagement.cpuFreqGovernor =
       mkIf (cfg.powerManagement && !cfg.powerProfilesDaemon) (mkDefault "schedutil");
 
-    boot.kernelParams =
+    # mkAfter appends these after nixos-hardware's pstate module, which
+    # hard-codes `amd_pstate=active` on kernel >= 6.3 with no CPU-generation
+    # guard. The last `amd_pstate=` on the command line wins, so ours takes
+    # effect regardless of that module.
+    boot.kernelParams = mkAfter (
+      ["amd_pstate=${cfg.pstateMode}"]
+      # Full preemption (PREEMPT_DYNAMIC kernel) — lowest scheduling latency
+      # under load; the desktop-responsiveness preemption setting.
+      ++ optional cfg.preemptFull "preempt=full"
+      # Optional C-state cap to work around Zen idle-freeze (C6) hangs.
+      ++ optional (cfg.maxCstate != null) "processor.max_cstate=${toString cfg.maxCstate}"
+      # Optional kernel-side X2APIC workaround (prefer the BIOS APIC=XAPIC fix).
+      ++ optional cfg.x2apicWorkaround "nox2apic"
       # AMD IOMMU and KVM tuning for the virtualization stack (Docker, virt-manager).
-      optionals cfg.virtualization [
+      ++ optionals cfg.virtualization [
         "amd_iommu=on"
         "iommu=pt"
         "kvm.ignore_msrs=1"
@@ -145,13 +209,36 @@ in {
         "tsc=reliable"
         "tsc=noirqtime"
       ]
-      ++ optional (cfg.mitigations == "off") "mitigations=off";
+      ++ optional (cfg.mitigations == "off") "mitigations=off"
+    );
 
     boot.kernel.sysctl = mkIf cfg.tuning {
       # The NMI watchdog spends a perf counter on every package; disable it
       # along with the scheduler statistics that only matter under profiling.
       "kernel.nmi_watchdog" = 0;
       "kernel.sched_schedstats" = 0;
+    };
+
+    # Force the amd_pstate operating mode at runtime. The command-line parameter
+    # above is authoritative, but this guarantees the mode even if firmware or
+    # another layer left the driver in a different state at boot. It is a no-op
+    # when the driver is absent (e.g. an acpi-cpufreq fallback) because the
+    # status path does not exist.
+    systemd.services.amd-pstate-mode = {
+      description = "Set amd_pstate operating mode to ${cfg.pstateMode}";
+      wantedBy = ["multi-user.target"];
+      after = ["sysinit.target"];
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = true;
+      };
+      path = [pkgs.coreutils pkgs.bash];
+      script = ''
+        status=/sys/devices/system/cpu/amd_pstate/status
+        if [ -w "$status" ]; then
+          echo ${cfg.pstateMode} > "$status" || true
+        fi
+      '';
     };
 
     environment.systemPackages = with pkgs;
@@ -176,7 +263,11 @@ in {
 
     # Persist the hwmon module list for sensor and fan tooling.
     environment.etc."sysconfig/lm_sensors".text = mkIf cfg.sensors ''
-      HWMON_MODULES="k10temp nct6775 asus_ec_sensors"
+      HWMON_MODULES="${
+        if cfg.zenpower
+        then "zenpower"
+        else "k10temp"
+      } nct6775 asus_ec_sensors"
     '';
   };
 }

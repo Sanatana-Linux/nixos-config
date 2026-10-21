@@ -123,13 +123,6 @@ with lib; {
 
         log-level = "warn";
 
-        # NVIDIA GLX: copy from front buffer instead of blitting — lower
-        # latency, fewer GPU operations per frame.
-        glx-copy-from-front = true;
-        # Skip stencil buffer allocation — saves VRAM bandwidth, no visual
-        # impact with the current shadow/blur/opacity settings.
-        glx-no-stencil = true;
-
         wintypes = {
           normal = {
             fade = true;

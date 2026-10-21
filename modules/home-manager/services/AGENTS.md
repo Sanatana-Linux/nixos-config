@@ -23,7 +23,7 @@ User-level systemd services managed by home-manager — compositing, screen lock
 ### Working In This Directory
 - Picom uses GLX backend (not EGL) — NVIDIA's GLX driver has proper GPU power state management (allows P8 at idle), while EGL pins clocks at P0 (~30W)
 - vsync is enabled — the firmware mux routes the panel directly to the dGPU (dGPU-only mode), so picom's own vsync is the only tear-free mechanism; the PRIME-sync vblank duplicate bug does not apply
-- `glx-copy-from-front = true` and `glx-no-stencil = true` — NVIDIA GLX optimizations for lower latency and reduced VRAM bandwidth
+- Legacy GLX tuning options (`glx-no-stencil`, `glx-copy-from-front`, `glx-no-rebind-pixmap`) are deprecated no-ops in picom-pijulius 8.2+ — the new GL backend handles stencil/pixmap allocation internally; setting them only emits warnings
 - Blur uses `dual_kawase` with strength 8; awesomewm handles corner rounding natively
 - Picom conflicts with some WM compositors — only enable when not running a composited WM
 - xscreensaver is X11-only; for Wayland, use swaylock or hyprlock

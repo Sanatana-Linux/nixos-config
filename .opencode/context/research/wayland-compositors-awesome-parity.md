@@ -145,3 +145,43 @@ Pinnacle is awesome-inspired with a real tag system and Lua config; quickshell i
 build-it-yourself widget toolkit. If you want to keep everything in **Lua**, Pinnacle handles the WM
 in Lua and you'd write widgets via lgi+gtk4-layer-shell (lonely) — or accept QML for the shell.
 If the plumbing is the fun, **raw gtk4-layer-shell in Rust** is the no-framework floor.
+
+---
+
+# Deep-cut programmable compositors (the exotic tier)
+
+> Found via `gh search` across obscure repos, sorted by recent activity — not the first search page.
+> These are the ones where the WM logic itself is code you write, not a config file. Verified against
+> READMEs and GitHub API (created/pushed dates) on 2026-10-21.
+
+| Name | Core | You write WM logic in | In-process reactive UI? | Maturity | Notes |
+|---|---|---|---|---|---|
+| **ShojiWM** | Rust / Smithay | **TypeScript/TSX** (embedded Deno/V8) or **Rust** | **Yes** — TSX components with signals render SSD/chrome reactively | young (created 2026-03, pushed 2026-10, 751★) | **The closest thing to "awesome but the whole WM is your code."** Compositor is a framework; the WM is the default *config* you rewrite. Pluggable `ConfigRuntime` — write a runtime for Lua/Python/C#. Custom per-element shader pipeline, tearing, xwayland-satellite. NixOS module. [bea4dev/ShojiWM](https://github.com/bea4dev/ShojiWM) |
+| **minde** | Rust / Smithay | **Guile Scheme** policy layer | No (ext via IPC/Eww) | RC (1.0.0-rc1, created 2026-08, 0★) | StumpWM model: frames/groups/master-stack. **Live Scheme eval on the compositor thread**, hooks, atomic config reload, JSON state + event socket, agent control surface with typed actions + receipts. Docs are exceptional. One maintainer. [9s-l-s9/minde](https://github.com/9s-l-s9/minde) |
+| **Pinnacle** | Rust / Smithay | **Lua or Rust** | Partial (snowcap widget layer) | active (2026-06, 647★) | Awesome-inspired, tag system, real Lua config code. Has a Nix flake — drops into this repo. [pinnacle-comp/pinnacle](https://github.com/pinnacle-comp/pinnacle) |
+| **rhizome** | River protocol | **Common Lisp** | No | young (created 2026-07, 6★) | StumpWM-style WM as a **client of river's** `river-window-management-v1` protocol — the WM is a separate Lisp program. Proof the "WM-as-process" pattern is real on river. [parenworks/rhizome](https://github.com/parenworks/rhizome) |
+| **clear** | Rust | **Rhai** extensions | Optional (ships a quickshell example) | experimental (0★) | Modular Rust compositor with Rhai scripting + an optional Quickshell pairing. [aneeshthunga26/clear](https://github.com/aneeshthunga26/clear) |
+| **fwm** | C / wlroots | TOML + `fwmctl` JSON IPC | No (built-in shell: launcher/mixer/visualiser) | active daily driver (184★) | Physics WM (Box2D) + BSP tiling + built-in shell, all one TOML. Deep live IPC, every setting scriptable. Not a real programming language, but the most feature-dense single binary. Nix flake. [iluaii/fwm](https://github.com/iluaii/fwm) |
+| **halley** | Rust | config | No | active (182★) | Spatial / infinite-workspace navigation. |
+| **Aqueous** (+ **Pearl** shell) | Zig | config | Pearl = GTK4 shell | young (42★) | One-process Zig compositor + Vulkan effects; Pearl is the matching shell. |
+| **solium** | Rust / Smithay | **Lua + QML** | Yes (QML) | brand new (created 2026-09, 4★) | Lilium DE's compositor: Smithay + Lua + QML. The "Lua config + QML widgets" combo in one process, but days old. |
+| **jay** | Rust | TOML live-reload | No | very active (719★) | i3-feel, single-author, consistent. More "configured" than "programmed." |
+
+## What actually answers the brief
+
+Three stand out for "write the WM as code, wide open":
+
+1. **ShojiWM** — the WM layer is **TypeScript/TSX you write**, with reactive signals, in a framework
+   compositor (Smithay). Most awesome-like *philosophy* (the WM is your program), and TSX is the same
+   family as quickshell's QML/JS — so the compositor logic and a quickshell shell are nearly the
+   same language. Young (2026-03) but the architecture is exactly the brief.
+2. **minde** — **Guile Scheme** policy layer over a Rust/Smithay core, with live-eval, hooks, atomic
+   reload, and a real agent/IPC control surface. StumpWM model. Best documentation and most
+   principled "program your environment" design; one maintainer, brand new.
+3. **Pinnacle** — **Lua or Rust**, awesome-*inspired* with a real tag system, actively maintained,
+   Nix flake. The most established of the three and the easiest to drop into this repo today.
+
+The "**same language across WM + widgets**" reality: only **ShojiWM** (TSX/JS) comes close to letting
+you write WM logic and (via quickshell, QML/JS) the widget layer in one language family. **qtile +
+ignis** is the only *strictly* same-language (Python) stack, but its Wayland backend (wayc) is young.
+Everywhere else the WM config language ≠ the widget language.

@@ -255,12 +255,17 @@
           containerRuntime = true;
         };
         lact.enable = true;
-        prime = {
-          intelBusId = "PCI:00:02:0";
-          nvidiaBusId = "PCI:01:00:0";
-        };
+        # Firmware mux is flipped to dGPU-only (igpumode=0, hybrid off) so
+        # PRIME sync must not engage — it would bind the Intel modesetting
+        # driver to a framebuffer the mux has already taken away.
+        prime.enable = false;
       };
-      intel.enable = true;
+      # Firmware mux is dGPU-only (igpumode=0): keep the CPU-side tuning,
+      # drop the i915/X/VA-API plumbing that assumes the iGPU has a display.
+      intel = {
+        enable = true;
+        gpu.enable = false;
+      };
       bluetooth.enable = true;
       udev.enable = true;
       lenovo = {
@@ -296,11 +301,6 @@
     videoDrivers = ["nvidia"];
     dpi = lib.mkForce 96;
   };
-
-  # Keep nixos-hardware's Intel GPU driver aligned with the project's
-  # intel.nix packageOverrides so both resolve to the same hybrid-codec
-  # intel-vaapi-driver build — otherwise graphics-drivers collides.
-  hardware.intelgpu.enableHybridCodec = true;
 
   hardware.graphics = {
     enable = true;

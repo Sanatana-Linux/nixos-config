@@ -98,14 +98,13 @@ in {
           # Wayland compatibility
           GBM_BACKEND = "nvidia-drm";
           __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-        }
-        // optionalAttrs cfg.prime.enable {
-          # Pin Vulkan to the NVIDIA ICD on PRIME systems. The loader otherwise
-          # enumerates every installed ICD (Intel ANV included) and that order
-          # is not contractual, so an app taking physical device 0 can land on
-          # the iGPU instead of the dGPU that PRIME sync actually renders with.
-          # VK_DRIVER_FILES is the current variable; VK_ICD_FILENAMES is the
-          # deprecated name still read by older loaders and applications.
+
+          # Pin Vulkan to the NVIDIA ICD. Whether PRIME sync or a firmware
+          # mux is driving the panel, the loader otherwise enumerates every
+          # installed ICD (Intel ANV included) and that order is not
+          # contractual — an app taking physical device 0 can land on the
+          # iGPU. VK_DRIVER_FILES is the current variable; VK_ICD_FILENAMES
+          # is the deprecated name still read by older loaders and apps.
           # Override per-invocation to reach Intel Vulkan, e.g.
           #   VK_DRIVER_FILES=/run/opengl-driver/share/vulkan/icd.d/intel_icd.x86_64.json <app>
           VK_DRIVER_FILES = "/run/opengl-driver/share/vulkan/icd.d/nvidia_icd.json";
@@ -119,8 +118,6 @@ in {
 
       systemPackages = with pkgs;
         [
-          # system76-power — dGPU mux control (see systemd.services below)
-          system76-power
           # Core GL libraries
           libGL
           libGLU
@@ -273,25 +270,6 @@ in {
     # /run/opengl-driver/lib.
     services.lact.enable = cfg.lact.enable;
 
-    # ── system76-power — dGPU mux control ─────────────────────────────
-    # Client/daemon pair that flips the firmware mux on hybrid laptops
-    # (ACPI calls, so it works on Legion where legion_laptop exposes no
-    # WMI mux). The CLI is a DBus client, so the daemon needs to run as
-    # a system service; the dbus module links the package's policy file
-    # so non-root clients can query it.
-    services.dbus.packages = [pkgs.system76-power];
-
-    systemd.services.system76-power = {
-      description = "System76 Power Daemon";
-      wantedBy = ["multi-user.target"];
-      serviceConfig = {
-        Type = "dbus";
-        BusName = "com.system76.PowerDaemon";
-        ExecStart = "${pkgs.system76-power}/bin/system76-power daemon";
-        Restart = "on-failure";
-      };
-    };
-
     nixpkgs.config = {
       allowUnfree = true;
       cudaSupport = cfg.cuda.enable;
@@ -379,7 +357,8 @@ in {
         package = config.boot.kernelPackages.nvidiaPackages.${cfg.driver};
 
         # Only configure PRIME on hybrid systems. On a desktop with the
-        # NVIDIA GPU as the sole adapter, the Intel bus ID is meaningless
+        # NVIDIA GPU as the sole adapter — or a laptop whose firmware mux
+        # routes the panel to the dGPU — the Intel bus ID is meaningless
         # and PRIME sync would point X at a non-existent framebuffer.
         prime = mkIf cfg.prime.enable {
           # PRIME sync: the NVIDIA GPU renders directly to the Intel

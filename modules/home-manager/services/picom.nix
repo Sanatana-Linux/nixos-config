@@ -22,7 +22,7 @@ with lib; {
       settings = {
         animations = false;
 
-        # ---- Backend: GLX for NVIDIA power management ----
+        # ---- Backend: GLX for NVIDIA dGPU-only ----
         # GLX is NVIDIA's mature X11 rendering path with proper GPU power
         # state management — allows the dGPU to reach P8 at idle. EGL on
         # NVIDIA pins clocks at P0 (~30W) even at idle desktop.
@@ -35,14 +35,13 @@ with lib; {
         # changed regions get repainted, dramatically reducing CPU/GPU load.
         use-damage = true;
 
-        # ---- VSync — off to work around NVIDIA vblank duplicate bug ----
-        # On NVIDIA PRIME sync laptops, the driver generates duplicate vblank
-        # events (see dmesg/journactl for "Duplicate vblank event"). This causes
-        # picom to re-composite each frame twice — doubling GPU compositing work
-        # and keeping the dGPU pinned at P0 with ~30W draw. PRIME sync already
-        # provides tear-free output at the hardware level, so vsync in picom is
-        # redundant and only adds GPU load.
-        vsync = false;
+        # ---- VSync — on for tear-free output in dGPU-only mode ----
+        # The firmware mux routes the panel directly to the dGPU (no PRIME
+        # sync in the display path), so there is no hardware-level tear-free
+        # guarantee. Picom's own vsync is now the only mechanism preventing
+        # tearing. The NVIDIA vblank duplicate bug from PRIME sync mode
+        # does not apply here.
+        vsync = true;
 
         # ---- Unredirect fullscreen windows ----
         # When a window goes fullscreen (e.g. games, video players), picom can skip
@@ -124,7 +123,12 @@ with lib; {
 
         log-level = "warn";
 
-        glx-copy-from-front = false;
+        # NVIDIA GLX: copy from front buffer instead of blitting — lower
+        # latency, fewer GPU operations per frame.
+        glx-copy-from-front = true;
+        # Skip stencil buffer allocation — saves VRAM bandwidth, no visual
+        # impact with the current shadow/blur/opacity settings.
+        glx-no-stencil = true;
 
         wintypes = {
           normal = {

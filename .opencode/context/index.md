@@ -1,6 +1,6 @@
 # Wiki Catalog
 
-> Auto-maintained catalog of all context files. Last updated: 2026-07-15
+> Auto-maintained catalog of all context files. Last updated: 2026-10-22
 
 ---
 
@@ -38,6 +38,7 @@
 | [[nix-secrets-reference]] | EmergentMind's sops-nix secrets reference |
 | [[nixpak-sandboxing]] | NixPak bubblewrap-based runtime sandboxing for Nix packages |
 | [[nix-commands-reference]] | Common nix commands — flake management, build, switch, garbage collection, packaging |
+| [[cuda-build-strategy]] | Why CUDA packages compile locally on `nixos-unstable-small`, the `enableCuda` override, cache facts, and rebuild tuning |
 
 ## Research — Raw Sources & Problem Investigations
 

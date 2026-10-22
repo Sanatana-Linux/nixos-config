@@ -235,3 +235,14 @@ status: active
 - **Context**: The `clamav.nix` module adds `clamav` to `systemPackages` at line 60, but `services.clamav.daemon.enable` already provides the `clamav` package automatically. This results in a redundant package reference.
 - **Decision**: Remove the `clamav` package from `systemPackages` in `clamav.nix`. The daemon enable already handles installation.
 - **Consequences**: Cleaner module with no redundant package declaration.
+
+## ADR-019: Disable `enableCuda` in packages that do not need CUDA
+
+- **Date**: 2026-10-22
+- **Context**: The flake follows `nixos-unstable-small` while `nixpkgs.config.cudaSupport = cfg.cuda.enable` is set globally. Any derivation reading `enableCuda ? config.cudaSupport` therefore gets a CUDA-flavoured hash that no cache publishes for that rev — Hydra builds CUDA only for full `nixos-unstable`. Rebuilds consequently compiled `opencv` (via `frei0r` → `shotcut`), `peakperf`, and `ncnn` locally with `nvcc`. `peakperf`'s GPU path additionally targets `compute_50`, which CUDA 13 dropped, so it fails outright (`nvcc fatal: Unsupported gpu architecture 'compute_50'`). At `max-jobs = 32` the resulting memory pressure made the OOM killer reap Firefox renderers mid-rebuild.
+- **Decision**:
+  1. Override `opencv4` and `peakperf` with `{ enableCuda = false; }` in `overlays/default.nix`. The derivation argument is `enableCuda`; `cudaSupport` is only the config flag and passing it to `.override` is an evaluation error.
+  2. Keep CUDA enabled where it is the actual compute path: `ollama-cuda`, PyTorch/ComfyUI, and the `cudaPackages` bundle in `modules/nixos/hardware/nvidia.nix`.
+  3. `ncnn` needs no override — it has no `cudaSupport` argument and its upscalers use Vulkan.
+  4. Lower `maxJobs` from 32 to 4 and set `cores = 6` in `modules/nixos/base/nix.nix`.
+- **Consequences**: Every CUDA-adjacent derivation on the build path now substitutes from `cache.nixos.org` instead of compiling with `nvcc`; peak rebuild memory stays within the machine's 31 GiB. `peakperf` is installed in its CPU-only form, which is its primary purpose. Trade-off: any future GPU-accelerated package added to the config must be checked for whether its `enableCuda` default drags in a local build.

@@ -72,3 +72,18 @@
 - `.documentation/debugging/template.md` — Blank template, no content
 
 **Note**: Several README-linked files (`encrypted-root.md`, `FLAKES.md`, `flake.nix.md`, `nvidia-settings.md`, `secrets*`, `sops*`, `credits.md`, `debugging/display-manager.md`, `debugging/cuda-compat.md`, `debugging/annoying-permissions-errors.md`) no longer exist in `.documentation/` — the README references are stale.
+
+## 2026-10-22 — CUDA build strategy captured
+
+**Source**: rebuild session on `bagalamukhi` (nixos-unstable-small, cudaSupport on)
+
+**Files created**:
+- `cuda-build-strategy.md` — why CUDA derivations compile locally, the `enableCuda` override argument, verified cache behaviour, build-throughput settings, and rebuild operator rules
+
+**Files updated**:
+- `decisions.md` — ADR-019 (disable `enableCuda` for opencv4/peakperf, keep it for ollama/torch, maxJobs 4 + cores 6)
+- `index.md` — registered `cuda-build-strategy`
+
+**Findings left in code, not context**:
+- `peakperf` GPU path targets `compute_50`, dropped in CUDA 13
+- `svgwrite` `test_performance` is a wall-clock assertion that fails on a loaded host

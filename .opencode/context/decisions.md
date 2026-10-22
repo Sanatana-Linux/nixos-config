@@ -246,3 +246,14 @@ status: active
   3. `ncnn` needs no override — it has no `cudaSupport` argument and its upscalers use Vulkan.
   4. Lower `maxJobs` from 32 to 4 and set `cores = 6` in `modules/nixos/base/nix.nix`.
 - **Consequences**: Every CUDA-adjacent derivation on the build path now substitutes from `cache.nixos.org` instead of compiling with `nvcc`; peak rebuild memory stays within the machine's 31 GiB. `peakperf` is installed in its CPU-only form, which is its primary purpose. Trade-off: any future GPU-accelerated package added to the config must be checked for whether its `enableCuda` default drags in a local build.
+
+## ADR-020: Weight the nix-daemon build subtree instead of only capping jobs
+
+- **Date**: 2026-10-22
+- **Context**: `max-jobs = 4` / `cores = 6` were configured but a rebuild still drove load average past 80 on a 32-thread machine and made the desktop unusable. Two causes: (1) `nix-daemon` reads `/etc/nix/nix.conf` at start, and that file only changes at activation, so a running rebuild uses the previous generation's `max-jobs = 32`, `cores = 0`; (2) even a capped job count leaves the granted jobs free to monopolise the CPU, because `max-jobs` bounds concurrency, not CPU share.
+- **Decision**: Give the daemon's cgroup lower CPU and IO weight than the user session:
+  ```nix
+  systemd.services.nix-daemon.serviceConfig = { CPUWeight = 15; IOWeight = 40; };
+  ```
+  Keep `daemonIOSchedPriority = 4`. Rejected `nix.daemonCPUSchedPolicy = "idle"` — it applies SCHED_IDLE to activation builds, which can starve the switch that installs it — and deferred a hard `CPUQuota` because it doubles rebuild time on heavy derivations such as `gimp` and `electron`.
+- **Consequences**: Builds take the whole machine when it is idle and yield proportionally when the session needs CPU, so a rebuild no longer makes the box unusable. The runtime form (`systemctl set-property --runtime nix-daemon.service CPUWeight=15 IOWeight=40`) gives immediate relief on an in-flight rebuild without killing it. Rules of thumb: `cores = 0` means unlimited, never leave it; a `maxJobs` change does nothing until the build after next.

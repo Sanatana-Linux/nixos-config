@@ -207,6 +207,13 @@
     stylix.enable = true;
   };
 
+  # Exempt mousepad from Stylix/sharabha theming. The sharabha-gtk-theme's
+  # textview styling makes mousepad's text unreadable, and there is no
+  # per-app Stylix GTK target. Exclude the stock mousepad from the XFCE
+  # desktop set and install a wrapper that forces the default Adwaita theme
+  # for mousepad only — every other app keeps the Stylix/sharabha theme.
+  environment.xfce.excludePackages = [pkgs.xfce.mousepad];
+
   # Host-specific display configuration
   services.xserver = {
     enable = true;
@@ -226,6 +233,19 @@
   environment.systemPackages = with pkgs; [
     easyeffects
     xfce.xfce4-screenshooter
+
+    # Mousepad wrapped to use the default Adwaita GTK theme instead of the
+    # Stylix/sharabha theme, whose textview colors make text unreadable.
+    # GTK_THEME overrides the session-wide theme for this process only.
+    (symlinkJoin {
+      name = "mousepad-adwaita";
+      paths = [xfce.mousepad];
+      nativeBuildInputs = [makeWrapper];
+      postBuild = ''
+        wrapProgram $out/bin/mousepad \
+          --set GTK_THEME "Adwaita"
+      '';
+    })
   ];
 
   # Camera support — cheese and other V4L2 apps

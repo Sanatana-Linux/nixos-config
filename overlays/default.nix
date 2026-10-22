@@ -15,74 +15,26 @@
       };
     };
   in {
-    # Completely remove torch packages from python312Packages to force use of torch-bin
-    # Also disable pipx tests (known upstream assertion failures)
+    # pipx and anyio fail their own test suites inside the Nix sandbox: pipx
+    # wants a writable venv, anyio's TLS and hypothesis plugins need network.
+    # Only the checks fail, never the build, so the tests are skipped rather
+    # than patched. Overriding changes the derivation, so these two rebuild
+    # locally instead of substituting — keep them scoped to just these two.
     python312Packages = prev.python312Packages.overrideScope (
-      python-final: python-prev:
-        builtins.removeAttrs (python-prev
-          // {
-            pipx = python-prev.pipx.overridePythonAttrs (old: {
-              doCheck = false;
-              pythonImportsCheck = ["pipx"];
-            });
-            # anyio's TLS and hypothesis-plugin tests need resources the Nix
-            # sandbox does not provide. Only the tests fail, so they are
-            # disabled rather than patched.
-            anyio = python-prev.anyio.overridePythonAttrs (old: {
-              doCheck = false;
-            });
-          }) [
-          "pytorch-lightning"
-          "lightning"
-          "onnxruntime"
-          "torch"
-          "torchvision"
-          "torchmetrics"
-        ]
-    );
-
-    # Disable Python 3.13 ML packages that cause compatibility issues
-    # Also fix qemu python package: add missing qemu-qmp runtime dependency
-    python313Packages = prev.python313Packages.overrideScope (
-      python-final: python-prev:
-        builtins.removeAttrs (python-prev
-          // {
-            qemu = python-prev.qemu.overrideAttrs (old: {
-              propagatedBuildInputs = (old.propagatedBuildInputs or []) ++ [python-prev.qemu-qmp];
-            });
-            black = stable-pkgs.python313Packages.black;
-          }) [
-          "pytorch-lightning"
-          "lightning"
-          "onnxruntime"
-          "torch"
-          "torchvision"
-          "torchmetrics"
-        ]
-    );
-
-    # Python 3.14 qemu fix: add missing qemu-qmp runtime dependency
-    # Disable poetry 3.14 tests (3 upstream test failures on nixos-unstable)
-    python314Packages = prev.python314Packages.overrideScope (
-      python-final: python-prev:
+      _python-final: python-prev:
         python-prev
         // {
-          qemu = python-prev.qemu.overrideAttrs (old: {
-            propagatedBuildInputs = (old.propagatedBuildInputs or []) ++ [python-prev.qemu-qmp];
+          pipx = python-prev.pipx.overridePythonAttrs (_: {
+            doCheck = false;
+            pythonImportsCheck = ["pipx"];
           });
-          poetry = python-prev.poetry.overridePythonAttrs (old: {
+          anyio = python-prev.anyio.overridePythonAttrs (_: {
             doCheck = false;
           });
         }
     );
 
-    # Top-level poetry override: pkgs.poetry resolves through python3Packages → python3.pkgs,
-    # which is a DIFFERENT code path from python314Packages. The python314Packages override above
-    # doesn't propagate to python3Packages, so we need a direct top-level override too.
-    poetry = prev.poetry.overridePythonAttrs (old: {
-      doCheck = false;
-    });
-
+    # nix-search CLI from the `nps` flake input; not packaged in nixpkgs.
     nps = inputs.nps.defaultPackage.${prev.stdenv.hostPlatform.system};
 
     # nixpkgs' typescript-language-server 6.0.2 ships a pnpmDeps hash that no
@@ -96,6 +48,7 @@
     # on PATH.
     mcp-nixos = stable-pkgs.mcp-nixos;
 
+    # yazi plugin that reports file sizes in the preview pane; not in nixpkgs.
     what-size = prev.yaziPlugins.mkYaziPlugin {
       pname = "what-size";
       version = "2025-03-07";
@@ -111,29 +64,11 @@
     #   nativeBuildInputs = (oldAttrs.nativeBuildInputs or []) ++ [final.nodejs];
     # });
 
-    efitools = final.stable.efitools;
-
-    # Pin ffmpeg-full to stable to avoid CUDA nvcc build failures on unstable
+    # Pin ffmpeg-full to stable: ffmpeg's generic.nix enables withCudaNVCC
+    # whenever config.cudaSupport is true, so the unstable build of the full
+    # variant compiles through nvcc and fails; the stable channel's full
+    # variant is prebuilt and substitutes.
     ffmpeg-full = final.stable.ffmpeg-full;
-
-    # frei0r: CUDA-enabled opencv's OpenCVConfig.cmake calls find_package(CUDAToolkit),
-    # which requires nvcc at configure time. frei0r doesn't declare it, so add it.
-    frei0r = prev.frei0r.overrideAttrs (old: {
-      nativeBuildInputs = (old.nativeBuildInputs or []) ++ [final.cudaPackages.cuda_nvcc];
-    });
-
-    libvirt = prev.libvirt.overrideAttrs (old: {
-      postInstall =
-        (old.postInstall or "")
-        + ''
-          rm -f $out/lib/systemd/system/virt-secret-init-encryption.service
-        '';
-    });
-
-    # Fix uefi-firmware-parser: missing setuptools-scm build dependency
-    uefi-firmware-parser = prev.uefi-firmware-parser.overridePythonAttrs (old: {
-      nativeBuildInputs = (old.nativeBuildInputs or []) ++ [final.python313Packages.setuptools-scm];
-    });
 
     # Handle IOError on sysfs reads gracefully — firmware WMI failures return EINVAL
     # for features like rapidcharge, cpu_oc, power limits that the BIOS doesn't fully implement

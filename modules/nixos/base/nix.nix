@@ -14,7 +14,7 @@ in {
 
     maxJobs = mkOption {
       type = types.int;
-      default = 8;
+      default = 4;
       description = ''
         Maximum number of build jobs to run simultaneously. Kept well below
         the core count because C++/CUDA derivations hold 2-4 GiB each; 32

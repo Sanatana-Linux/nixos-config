@@ -217,6 +217,19 @@ in {
       # along with the scheduler statistics that only matter under profiling.
       "kernel.nmi_watchdog" = 0;
       "kernel.sched_schedstats" = 0;
+
+      # BORE (Burst-Oriented Response Enhancer) tuning. The cachyos kernel is
+      # built CONFIG_SCHED_BORE=y. These are scheduler-latency knobs; values are
+      # the upstream-recommended desktop/responsiveness set for an always-on
+      # workstation. sched_bore=1 (enabled) is already the kernel default.
+      # Child tasks inherit half the parent's burst score on fork — keeps a
+      # forking desktop app responsive instead of each child starting cold.
+      "kernel.sched_burst_fork_atavistic" = 2;
+      # Penalise tasks that burn their full slice so interactive ones win.
+      "kernel.sched_burst_penalty_offset" = 22;
+      "kernel.sched_burst_penalty_scale" = 1280;
+      # Exclude tasks that ran their full slice from the cache bonus.
+      "kernel.sched_burst_exclude_kthreads" = 1;
     };
 
     # Force the amd_pstate operating mode at runtime. The command-line parameter

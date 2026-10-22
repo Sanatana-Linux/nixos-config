@@ -133,6 +133,14 @@ in {
 
     boot.kernel.sysctl = {
       "kernel.sched_schedstats" = 0;
+
+      # BORE scheduler tuning (cachyos kernel, CONFIG_SCHED_BORE=y). Mirrors the
+      # desktop/responsiveness set applied on the AMD hosts; see
+      # modules/nixos/hardware/amd.nix for the per-knob rationale.
+      "kernel.sched_burst_fork_atavistic" = 2;
+      "kernel.sched_burst_penalty_offset" = 22;
+      "kernel.sched_burst_penalty_scale" = 1280;
+      "kernel.sched_burst_exclude_kthreads" = 1;
     };
 
     nixpkgs.config.packageOverrides = mkIf (cfg.gpu.enable && cfg.vaapi) (pkgs: {

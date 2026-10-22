@@ -64,6 +64,16 @@
     #   nativeBuildInputs = (oldAttrs.nativeBuildInputs or []) ++ [final.nodejs];
     # });
 
+    # Pin opencv and ncnn to stable for the same reason as ffmpeg-full below:
+    # with cudaSupport on they become CUDA variants, and nixos-unstable-small
+    # revs are not covered by the CUDA jobset, so every bump recompiles them
+    # through nvcc locally. The stable builds are cached and the CVDL code
+    # paths that consume them (frei0r, shotcut, upscalers) are source builds
+    # anyway, so the older ABI is consistent. Cost: no CUDA kernels in opencv
+    # or ncnn — nothing in this configuration calls those paths directly.
+    opencv = stable-pkgs.opencv;
+    ncnn = stable-pkgs.ncnn;
+
     # Pin ffmpeg-full to stable: ffmpeg's generic.nix enables withCudaNVCC
     # whenever config.cudaSupport is true, so the unstable build of the full
     # variant compiles through nvcc and fails; the stable channel's full

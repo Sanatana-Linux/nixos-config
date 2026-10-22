@@ -127,6 +127,10 @@ in {
         keep-derivations = true;
         keep-outputs = true;
         max-jobs = cfg.maxJobs;
+        # Cap per-derivation parallelism too. Rust/C++ builders derive their
+        # own -j from NIX_BUILD_CORES, so a single cargo derivation would
+        # otherwise spawn one rustc per core and exhaust RAM on its own.
+        cores = 6;
         warn-dirty = false;
         use-xdg-base-directories = true;
         accept-flake-config = true;

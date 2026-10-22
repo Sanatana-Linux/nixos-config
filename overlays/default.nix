@@ -14,7 +14,31 @@
         permittedInsecurePackages = ["electron-39.8.10"];
       };
     };
+
+    # nixpkgs signs out-of-tree modules per module with kmodigest and the kernel
+    # modules aggregator expects a <name>.ko.cer beside every .ko. acpi_call and
+    # lenovo-legion-module install unsigned .ko files, so the kernel "modules"
+    # derivation fails with "cat: ...legion-laptop.ko.cer: No such file".
+    # Sign them after install, which also emits the matching certificate.
+    signModulePackage = drv:
+      drv.overrideAttrs (old: {
+        postFixup =
+          (old.postFixup or "")
+          + ''
+            find "$out/lib/modules" -name '*.ko' -print0 | while IFS= read -r -d "" ko; do
+              ${final.kmodigest}/bin/kmodigest "$ko"
+            done
+          '';
+      });
   in {
+    # Out-of-tree modules loaded by the Lenovo hardware modules need the cert fix
+    linuxPackages_xanmod_latest =
+      prev.linuxPackages_xanmod_latest.extend
+      (_kFinal: kPrev: {
+        acpi_call = signModulePackage kPrev.acpi_call;
+        lenovo-legion-module = signModulePackage kPrev.lenovo-legion-module;
+      });
+
     # pipx and anyio fail their own test suites inside the Nix sandbox: pipx
     # wants a writable venv, anyio's TLS and hypothesis plugins need network.
     # Only the checks fail, never the build, so the tests are skipped rather

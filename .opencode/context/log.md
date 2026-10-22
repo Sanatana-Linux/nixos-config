@@ -87,3 +87,13 @@
 **Findings left in code, not context**:
 - `peakperf` GPU path targets `compute_50`, dropped in CUDA 13
 - `svgwrite` `test_performance` is a wall-clock assertion that fails on a loaded host
+
+## 2026-10-22 — rebuild throughput: weights vs caps
+
+**Source**: interactive-slowness report during a `gimp` rebuild
+
+**Files updated**:
+- `cuda-build-strategy.md` — expanded the build-throughput section: activation-lag trap (config says 4/6 while the live daemon runs 32/0), `cores = 0` meaning unlimited, CPUWeight/IOWeight vs `daemonCPUSchedPolicy` vs `CPUQuota`
+- `decisions.md` — ADR-020 (weight the daemon build subtree; rejected SCHED_IDLE and hard quota)
+
+**Operational note recorded**: `systemctl set-property --runtime nix-daemon.service CPUWeight=15 IOWeight=40` relieves an in-flight rebuild without killing it.

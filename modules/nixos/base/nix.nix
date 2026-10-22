@@ -149,12 +149,11 @@ in {
             "https://ai.cachix.org"
             "https://nix-gaming.cachix.org"
             "https://comfyui.cachix.org"
-            # CachyOS kernel cache. boot.kernelPackages is
-            # cachyosKernels.linuxPackages-cachyos-bore-lto-x86_64-v3, absent
-            # from cache.nixos.org because of its LTO + BORE + x86-64-v3 build.
-            # Upstream's own cache (attic.xuyh0120.win) is offline following a
-            # server compromise (xddxdd/nix-cachyos-kernel#110); the xinux mirror
-            # is reachable and carries the bore-lto-v3 build.
+            # CachyOS kernel cache. The live ISO (chhinamasta) still builds
+            # cachyosKernels.linuxPackages-cachyos-bore, which is absent from
+            # cache.nixos.org. Upstream's own cache (attic.xuyh0120.win) is
+            # offline following a server compromise (xddxdd/nix-cachyos-kernel#110);
+            # the xinux mirror is reachable and carries the bore builds.
             "https://cache.xinux.uz"
             "https://cache.numtide.com"
           ]
@@ -193,7 +192,19 @@ in {
     };
 
     # Performance tuning
-    #   daemonCPUSchedPolicy = "idle";
+    #
+    # `max-jobs` and `cores` bound how much a build *asks* for, but they do not
+    # stop a granted job from monopolising the CPU: four gcc/rustc jobs on 32
+    # threads still push load past 70 and make the desktop unusable. cgroup v2
+    # CPU weight throttles the daemon's whole build subtree against the user
+    # session instead, proportionally — builds keep making progress while the
+    # interactive slice always wins the CPU it needs. IO weight does the same
+    # for the compiler's disk traffic, whose page-cache churn also evicts the
+    # desktop's working set.
+    systemd.services.nix-daemon.serviceConfig = {
+      CPUWeight = 15;
+      IOWeight = 40;
+    };
     nix.daemonIOSchedPriority = 4;
 
     # Use tmpfs for /tmp to reduce NVMe writes and heat

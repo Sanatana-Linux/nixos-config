@@ -76,14 +76,49 @@ non-CUDA build and substitutes from `cache.nixos.org`.
 `modules/nixos/base/nix.nix`:
 
 ```nix
-maxJobs = 4;   # was 32 — see below
-cores   = 6;   # caps NIX_BUILD_CORES so cargo/rust stop spawning one job per core
+max-jobs = cfg.maxJobs;   # default 4 — was 32
+cores = 6;                # caps NIX_BUILD_CORES so cargo/rust stop spawning one job per core
 ```
 
 At `max-jobs = 32` on a 31 GiB machine the kernel OOM killer reaped the desktop
 (Firefox renderers, `oom_score_adj=200`) during a rebuild. Four jobs with six
-cores each keeps peak usage under the available memory while still saturating
-the CPU.
+cores each keeps peak usage under memory while still using the machine.
+
+### The settings only apply after activation
+
+`nix-daemon` reads `/etc/nix/nix.conf` at start, and that file is written by
+activation. A rebuild therefore runs under the **previous** generation's
+values — editing `maxJobs` mid-flight does nothing to the build in progress.
+Observed: config said `max-jobs = 4` / `cores = 6` while `nix config show`
+still reported `max-jobs = 32` and `cores = 0` (unlimited: every job gets all
+32 threads), which is why gcc/rustc saturated the machine and load average
+reached 80+ on a 32-thread box.
+
+`cores = 0` is the trap: it hands each derivation the full core count, so a
+concurrency cap alone does not bound CPU use.
+
+### Weights, not quotas, for interactivity
+
+Capping `max-jobs` bounds how much a build *asks for*; it does not stop the
+granted jobs from monopolising the CPU. cgroup v2 weights make the daemon's
+build subtree yield to the session proportionally:
+
+```nix
+systemd.services.nix-daemon.serviceConfig = {
+  CPUWeight = 15;   # against user.slice's default 100
+  IOWeight = 40;
+};
+```
+
+Applied at runtime with `systemctl set-property --runtime nix-daemon.service
+CPUWeight=15 IOWeight=40` it takes effect immediately, without killing running
+builds — the surgical alternative to killing a rebuild. Builds keep the whole
+machine when idle and give way when the desktop needs CPU.
+
+`nix.daemonCPUSchedPolicy = "idle"` achieves a stronger version, but it applies
+SCHED_IDLE to activation builds too, which can starve the very switch that
+installs it. `CPUQuota = "1400%"` is the hard-cap alternative: predictable
+response, roughly doubled rebuild times.
 
 ## Operator rules for a long rebuild
 

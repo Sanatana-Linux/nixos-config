@@ -72,7 +72,6 @@ in {
           gst_all_1.gst-rtsp-server
           ladspa-sdk
           lv2
-          swh
           mjpegtools
           mp4v2
           oggvideotools

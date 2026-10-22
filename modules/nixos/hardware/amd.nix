@@ -218,18 +218,24 @@ in {
       "kernel.nmi_watchdog" = 0;
       "kernel.sched_schedstats" = 0;
 
-      # BORE (Burst-Oriented Response Enhancer) tuning. The cachyos kernel is
-      # built CONFIG_SCHED_BORE=y. These are scheduler-latency knobs; values are
-      # the upstream-recommended desktop/responsiveness set for an always-on
-      # workstation. sched_bore=1 (enabled) is already the kernel default.
-      # Child tasks inherit half the parent's burst score on fork — keeps a
-      # forking desktop app responsive instead of each child starting cold.
-      "kernel.sched_burst_fork_atavistic" = 2;
-      # Penalise tasks that burn their full slice so interactive ones win.
-      "kernel.sched_burst_penalty_offset" = 22;
+      # BORE (Burst-Oriented Response Enhancer). The cachyos kernel is built
+      # CONFIG_SCHED_BORE=y and it is the active scheduler. Only the knobs this
+      # kernel actually exposes under /proc/sys/kernel/sched_burst* are set
+      # here — a key the kernel does not know would make systemd-sysctl fail
+      # at boot.
+      # Pin the scheduler on explicitly instead of trusting the build default.
+      "kernel.sched_bore" = 1;
+      # Burst-score decay window in nanoseconds (75 ms, the cachyos default).
+      "kernel.sched_burst_cache_lifetime" = 75000000;
+      # Offset a task must exceed before any burst penalty applies, so
+      # short-lived wakeups (input, compositor) never pay one.
+      "kernel.sched_burst_penalty_offset" = 24;
+      # Penalty scale for a task that burns its slice. Lower than this kernel's
+      # 1536 default: CPU-bound work loses the CPU to interactive tasks sooner,
+      # which is the trade this workstation wants.
       "kernel.sched_burst_penalty_scale" = 1280;
-      # Exclude tasks that ran their full slice from the cache bonus.
-      "kernel.sched_burst_exclude_kthreads" = 1;
+      # Smooth the burst score across wakeups to avoid score spikes.
+      "kernel.sched_burst_smoothness" = 1;
     };
 
     # Force the amd_pstate operating mode at runtime. The command-line parameter

@@ -89,6 +89,13 @@
     # longer reproduces (the FOD aborts). Use the stable-channel 5.3.0 instead.
     typescript-language-server = stable-pkgs.typescript-language-server;
 
+    # fastmcp-slim is marked broken on unstable while upstream fastmcp is not
+    # yet compatible with mcp 2.x, which makes mcp-nixos unevaluable there.
+    # The stable channel still pairs mcp 1.x with a working fastmcp, and
+    # mcp-nixos is the MCP server OpenCode launches by name, so it must stay
+    # on PATH.
+    mcp-nixos = stable-pkgs.mcp-nixos;
+
     what-size = prev.yaziPlugins.mkYaziPlugin {
       pname = "what-size";
       version = "2025-03-07";

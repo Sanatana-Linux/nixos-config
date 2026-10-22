@@ -101,6 +101,14 @@ with lib; {
           # here; it defers to whatever the BIOS advertises.
           "pcie_aspm=on"
           "pcie_aspm.policy=default"
+          # The kernel is built with CONFIG_INTEL_TDX_HOST=y (cachyos config),
+          # so its host TDX initcall runs on every boot and prints
+          # "virt/tdx: TDX not supported by the host platform" at KERN_ERR —
+          # above the quiet/loglevel=4 console threshold, so it breaks through
+          # the bootsplash. Blacklisting the initcall skips the probe entirely
+          # instead of lowering the console loglevel. Remove this only if the
+          # machine actually has TDX-capable hardware (none of the hosts do).
+          "initcall_blacklist=tdx_init"
         ]
         # Intel-only: prefer the acpi-cpufreq governor over intel_pstate. On
         # Intel 14th-gen mobile (i9-14900HX) the passive governor sometimes
@@ -114,8 +122,6 @@ with lib; {
       plymouth.enable = true;
 
       initrd = {
-        systemd.enable = true;
-        verbose = false;
         compressor = "zstd";
         compressorArgs = ["-19"];
         kernelModules = [

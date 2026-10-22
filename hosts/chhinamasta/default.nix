@@ -156,8 +156,6 @@ in {
   boot = {
     # early boot settings
     initrd = {
-      systemd.enable = true;
-      verbose = false;
       compressor = "zstd";
       compressorArgs = ["-19"];
       kernelModules = [];

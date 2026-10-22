@@ -193,7 +193,19 @@ in {
     };
 
     # Performance tuning
-    #   daemonCPUSchedPolicy = "idle";
+    #
+    # `max-jobs` and `cores` bound how much a build *asks* for, but they do not
+    # stop a granted job from monopolising the CPU: four gcc/rustc jobs on 32
+    # threads still push load past 70 and make the desktop unusable. cgroup v2
+    # CPU weight throttles the daemon's whole build subtree against the user
+    # session instead, proportionally — builds keep making progress while the
+    # interactive slice always wins the CPU it needs. IO weight does the same
+    # for the compiler's disk traffic, whose page-cache churn also evicts the
+    # desktop's working set.
+    systemd.services.nix-daemon.serviceConfig = {
+      CPUWeight = 15;
+      IOWeight = 40;
+    };
     nix.daemonIOSchedPriority = 4;
 
     # Use tmpfs for /tmp to reduce NVMe writes and heat

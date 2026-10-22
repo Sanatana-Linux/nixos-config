@@ -149,12 +149,11 @@ in {
             "https://ai.cachix.org"
             "https://nix-gaming.cachix.org"
             "https://comfyui.cachix.org"
-            # CachyOS kernel cache. boot.kernelPackages is
-            # cachyosKernels.linuxPackages-cachyos-bore-lto-x86_64-v3, absent
-            # from cache.nixos.org because of its LTO + BORE + x86-64-v3 build.
-            # Upstream's own cache (attic.xuyh0120.win) is offline following a
-            # server compromise (xddxdd/nix-cachyos-kernel#110); the xinux mirror
-            # is reachable and carries the bore-lto-v3 build.
+            # CachyOS kernel cache. The live ISO (chhinamasta) still builds
+            # cachyosKernels.linuxPackages-cachyos-bore, which is absent from
+            # cache.nixos.org. Upstream's own cache (attic.xuyh0120.win) is
+            # offline following a server compromise (xddxdd/nix-cachyos-kernel#110);
+            # the xinux mirror is reachable and carries the bore builds.
             "https://cache.xinux.uz"
             "https://cache.numtide.com"
           ]

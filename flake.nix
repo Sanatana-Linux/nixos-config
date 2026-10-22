@@ -3,11 +3,12 @@
 
   inputs = {
     stable.url = "github:nixos/nixpkgs/nixos-26.05";
-    # The CUDA binary caches (cache.nixos-cuda.org, nix-community) are built
-    # from the -small channels, so tracking nixos-unstable-small makes CUDA
-    # derivations substitute instead of rebuilding from source. A full
-    # nixos-unstable commit never matches the caches' hashes.
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
+    # nixos-unstable, not nixos-unstable-small. The -small channel is a reduced
+    # Hydra jobset: anything outside its subset has no store path and builds
+    # locally (opencv, peakperf, gimp's deps, the kernel). CUDA substituters do
+    # not require -small either — cache.nixos-cuda.org served every CUDA path at
+    # the same revision this flake tracked.
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nur = {
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";

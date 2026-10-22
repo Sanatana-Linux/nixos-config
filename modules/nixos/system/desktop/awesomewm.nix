@@ -40,6 +40,13 @@ in {
           enable = true;
           package = pkgs.awesome.overrideAttrs (old: rec {
             version = "git-2024-12-08";
+            # The API docs are doxygen output for developers; nothing in the
+            # session closure reads them, and generating them doubles the
+            # configure/build cost of every local awesome rebuild.
+            cmakeFlags = [
+              "-DOVERRIDE_VERSION=${version}"
+              "-DGENERATE_DOC=OFF"
+            ];
             src = pkgs.fetchFromGitHub {
               owner = "awesomewm";
               repo = "awesome";

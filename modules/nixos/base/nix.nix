@@ -14,8 +14,13 @@ in {
 
     maxJobs = mkOption {
       type = types.int;
-      default = 32;
-      description = "Maximum number of build jobs to run simultaneously";
+      default = 8;
+      description = ''
+        Maximum number of build jobs to run simultaneously. Kept well below
+        the core count because C++/CUDA derivations hold 2-4 GiB each; 32
+        parallel jobs on a 31 GiB machine exhausts RAM, the kernel OOM killer
+        then reaps whichever process scores highest (the desktop session).
+      '';
     };
 
     garbageCollection = {

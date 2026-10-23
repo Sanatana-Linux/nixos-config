@@ -187,6 +187,7 @@
       bluetooth.enable = false;
       udev.enable = true;
       sound.enable = true;
+      vmGuest.enable = true;
     };
 
     stylix.enable = true;
@@ -210,7 +211,6 @@
       HandlePowerKeyLongPress = "ignore";
     };
     displayManager.defaultSession = "none+awesome";
-    qemuGuest.enable = true;
   };
 
   virtualisation = {

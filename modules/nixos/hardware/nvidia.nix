@@ -6,6 +6,15 @@
 }:
 with lib; let
   cfg = config.modules.hardware.nvidia;
+
+  # CUDA 13 dropped compute 5.0–7.0 (Maxwell, Pascal, Volta). nixpkgs defaults
+  # cudaPackages to 13.x, whose backendStdenv asserts on any requested
+  # capability below 7.5. Hosts that still target such a GPU (Pascal here) need
+  # a 12.x toolkit, so pin it rather than dropping the capability — dropping it
+  # would compile binaries that cannot run on those cards at all.
+  cudaNeedsLegacyToolkit =
+    cfg.cuda.enable
+    && lib.any (capability: versionOlder capability "7.5") cfg.cuda.capabilities;
 in {
   options.modules.hardware.nvidia = {
     enable = mkEnableOption "NVIDIA graphics hardware support";

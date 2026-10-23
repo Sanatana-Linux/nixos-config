@@ -100,3 +100,9 @@ Expected: all files in `/boot/EFI/` should show `✓ is signed`. Kernel images a
 - All hosts are UEFI systems with TPM2 support
 - Could be integrated as a new module (`modules/nixos/system/lanzaboote.nix`) following the enable-by-option pattern
 - Would require: flake input (`github:nix-community/lanzaboote`), key generation, and enrollment in UEFI firmware
+
+## See also
+
+- [[research/secure-boot-chain-of-trust]] — how Secure Boot verification actually
+  binds, why lanzaboote requires systemd-boot, and the GRUB + signed-UKI route
+  that keeps the GRUB theme. Decision recorded in ADR-021.

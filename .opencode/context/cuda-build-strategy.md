@@ -3,7 +3,7 @@ title: "CUDA Build Strategy — Keeping NixOS Substitution-Only"
 type: concept
 tags: [nix, cuda, nvidia, build, substitution, cache]
 created: 2026-10-22
-updated: 2026-10-22
+updated: 2026-10-23
 status: active
 ---
 
@@ -134,9 +134,38 @@ response, roughly doubled rebuild times.
   regression — disable that check in the package scope rather than raising
   `max-jobs`.
 
+## CUDA 13 dropped Pascal — the 13.4 assertion and the pin
+
+CUDA 13 removed compute 5.0–7.0 (Maxwell, Pascal, Volta). nixpkgs defaults
+`cudaPackages` to `cudaPackages_13_4`, and that set's `backendStdenv` asserts on
+any requested capability below 7.5:
+
+```
+cudaPackages_13_4.backendStdenv has failed assertions:
+  Requested CUDA capabilities which are too old for CUDA 13.4: ["6.1"]
+```
+
+`kamala` requests `capabilities = [ "6.1" ]` (GTX 1080), so every CUDA package
+in its closure failed to evaluate. Probe results with `cudaCapabilities = ["6.1"]`:
+
+| Package set            | `backendStdenv` |
+| ---------------------- | --------------- |
+| `cudaPackages` (13.4)    | throws          |
+| `cudaPackages_12_9`      | evaluates       |
+
+All 15 `cudaPackages` attributes this repo references exist in both sets.
+
+**Rule**: when a host requests a capability below `"7.5"`, pin
+`cudaPackages = prev.cudaPackages_12_9` via an overlay
+(`modules/nixos/hardware/nvidia.nix`). Do not simply drop the capability —
+binaries built without `sm_61` cannot run on a Pascal card at all.
+
+Result: `kamala` builds CUDA against 12.9, hosts without capabilities
+(`bagalamukhi`) stay on the 13.4 default. See ADR-022.
+
 ## References
 
-- [[decisions]] — ADR-019
+- [[decisions]] — ADR-019, ADR-022
 - `modules/nixos/hardware/nvidia.nix`
 - `modules/nixos/base/nix.nix`
 - `overlays/default.nix`

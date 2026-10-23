@@ -1,6 +1,6 @@
 # Wiki Catalog
 
-> Auto-maintained catalog of all context files. Last updated: 2026-10-22
+> Auto-maintained catalog of all context files. Last updated: 2026-10-23
 
 ---
 
@@ -50,6 +50,7 @@
 | [[research/realtek-usb-wifi-nm-troubleshooting]] | Realtek USB WiFi NetworkManager debugging |
 | [[research/bios-srep-vs-firmware-update-tradeoff]] | BIOS SREP chainload vs fwsetup tradeoff analysis |
 | [[research/lanzaboote-secure-boot]] | Lanzaboote secure boot investigation |
+| [[research/secure-boot-chain-of-trust]] | Secure Boot chain of trust — GRUB `chainloader` vs lanzaboote vs Limine under the Bhairava theme constraint |
 | [[research/opencode-bun-segfault-config-keys]] | OpenCode Bun segfault from invalid config keys |
 | [[research/lenovo-advanced-bios-srep]] | Lenovo Advanced BIOS SREP chainload, undervolt, and archival |
 | [[research/yazi]] | Yazi file manager research |

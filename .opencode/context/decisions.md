@@ -3,7 +3,7 @@ title: "Architecture Decision Records"
 type: decision
 tags: [adr, decisions, architecture]
 created: 2026-05-05
-updated: 2026-07-15
+updated: 2026-10-23
 status: active
 ---
 
@@ -257,3 +257,17 @@ status: active
   ```
   Keep `daemonIOSchedPriority = 4`. Rejected `nix.daemonCPUSchedPolicy = "idle"` — it applies SCHED_IDLE to activation builds, which can starve the switch that installs it — and deferred a hard `CPUQuota` because it doubles rebuild time on heavy derivations such as `gimp` and `electron`.
 - **Consequences**: Builds take the whole machine when it is idle and yield proportionally when the session needs CPU, so a rebuild no longer makes the box unusable. The runtime form (`systemctl set-property --runtime nix-daemon.service CPUWeight=15 IOWeight=40`) gives immediate relief on an in-flight rebuild without killing it. Rules of thumb: `cores = 0` means unlimited, never leave it; a `maxJobs` change does nothing until the build after next.
+
+## ADR-021: Keep GRUB and the Bhairava theme — reject lanzaboote and Limine for Secure Boot
+
+- **Date**: 2026-10-23
+- **Context**: Secure Boot was being evaluated for the same maintenance window as a drive migration. Lanzaboote (signed UKIs) is the standard NixOS route, but its module is hard-wired to systemd-boot (`config.boot.loader.systemd-boot.*`, `--systemd-boot-loader-config`, "boot via systemd-boot" in `nix/modules/lanzaboote.nix`) and systemd-boot has no upstream theming. The Bhairava GRUB theme is non-negotiable. Limine 12.9.4 was examined as an alternative with native theming (`boot.loader.limine.style`) and native sbctl signing, but its style vocabulary tops out at wallpaper, colours, one font scale and text branding — it cannot express the theme's 28%×54% menu box, per-entry 48px icons, nine-slice selection pixmap, positioned logo, or countdown label.
+- **Decision**: Do not change the bootloader. GRUB, the theme, `/boot` (ext4) and `/boot/efi` (ESP) all stay as they are. Secure Boot remains off. The only route that preserves the theme *and* verifies kernels is GRUB chainloading signed UKIs (firmware `LoadImage` authenticates them; see `research/secure-boot-chain-of-trust.md`), and that is recorded as an option, not adopted.
+- **Consequences**: `configurationLimit` stays 10, the ESP is not repartitioned, and the `efiMountPoint` option in `modules/nixos/system/boot.nix` stays dead code (line 167 hardcodes `/boot/efi`; `hosts/matangi/default.nix` sets the option and is silently ignored — separate latent bug, worth its own fix). The GRUB+UKI design carries a 132M-per-generation cost (117M initrd + 15M kernel), so adopting it later forces the generation limit down to 3–4 and requires a `bhairavi` test cycle plus a BIOS visit.
+
+## ADR-022: Pin `cudaPackages` to 12.9 when a sub-7.5 compute capability is requested
+
+- **Date**: 2026-10-23
+- **Context**: `kamala` requests `capabilities = ["6.1"]` (GTX 1080, Pascal) at `hosts/kamala/default.nix:274`, which the nvidia module forwards to `nixpkgs.config.cudaCapabilities`. nixpkgs now defaults `cudaPackages` to `cudaPackages_13_4`, and CUDA 13 dropped compute 5.0–7.0, so `cudaPackages_13_4.backendStdenv` fails its own assertion (`pkgs/development/cuda-modules/backendStdenv/default.nix:124–206, 282`) with "Requested CUDA capabilities which are too old for CUDA 13.4". Every CUDA package in kamala's closure then failed to evaluate. Confirmed by probe: with `cudaCapabilities = ["6.1"]`, `cudaPackages.backendStdenv` throws while `cudaPackages_12_9.backendStdenv` evaluates; all 15 attributes the repo references exist in both sets.
+- **Decision**: In `modules/nixos/hardware/nvidia.nix`, when `cuda.enable` is set and any requested capability is below `"7.5"`, apply an overlay pinning `cudaPackages = prev.cudaPackages_12_9`. Dropping the capability was rejected: it would compile binaries that cannot execute on the 1080 at all.
+- **Consequences**: `kamala` builds all CUDA against 12.9 (`cudatoolkit.version` = 12.9); hosts that request no capabilities keep the 13.4 default (`bagalamukhi` verified at 13.4). Verified at evaluation level only — `nixosConfigurations.kamala.config.system.build.toplevel.drvPath` evaluates to `nixos-system-kamala-26.11.20261020.02c087f.drv`. If a package in the closure hard-requires CUDA 13 it will fail at build time and needs a per-package override rather than a global one.

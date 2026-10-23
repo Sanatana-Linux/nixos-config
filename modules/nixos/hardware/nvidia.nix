@@ -280,6 +280,10 @@ in {
     # /run/opengl-driver/lib.
     services.lact.enable = cfg.lact.enable;
 
+    nixpkgs.overlays = mkIf cudaNeedsLegacyToolkit [
+      (final: prev: {cudaPackages = prev.cudaPackages_12_9;})
+    ];
+
     nixpkgs.config = {
       allowUnfree = true;
       cudaSupport = cfg.cuda.enable;

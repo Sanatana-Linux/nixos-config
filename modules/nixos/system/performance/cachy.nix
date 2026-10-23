@@ -10,7 +10,8 @@ in {
     enable = mkEnableOption "Enable cachy performance optimizations";
   };
 
-  # BBR congestion control (kernel already provides the cachyos scheduler)
+  # BBR congestion control; the scheduler choice belongs to the kernel package,
+  # so this module only tunes the network stack.
   config = mkIf cfg.enable {
     # Basic performance optimizations inspired by CachyOS.
     # NOTE: preempt=full is set on the Intel module (hardware/intel.nix); it is

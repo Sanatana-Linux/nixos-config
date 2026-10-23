@@ -1,6 +1,7 @@
 {
   imports = [
     ./nvidia.nix
+    ./scheduler.nix
     ./intel.nix
     ./amd.nix
     ./bluetooth.nix

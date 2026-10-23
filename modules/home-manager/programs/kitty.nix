@@ -74,6 +74,8 @@ in {
         "kitty_mod+down" = "neighboring_window down";
 
         "alt+t" = "new_tab_with_cwd";
+        # Command palette as an overlay over the current window.
+        "alt+p" = "launch --type=overlay kitty +kitten command_palette";
         "alt+/" = "launch --cwd=current --location=vsplit";
         "alt+-" = "launch --cwd=current --location=hsplit";
         "alt+." = "next_tab";

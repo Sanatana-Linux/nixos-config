@@ -13,6 +13,7 @@ Hardware support and driver configuration. Each module enables specific hardware
 | `default.nix` | Re-exports hardware submodules |
 | `nvidia.nix` | NVIDIA driver config (PRIME sync, GPU firmware, dynamic power management) |
 | `intel.nix` | Intel CPU features (undervolt kernel patch, microcode) |
+| `scheduler.nix` | Kernel-aware scheduler latency tuning — applies BORE/schedstats/nmi_watchdog/timer_migration knobs at runtime only when the running kernel exports them (XanMod has no BORE, CachyOS does) |
 | `bluetooth.nix` | Bluetooth support |
 | `sound.nix` | PipeWire audio server |
 | `udev.nix` | Custom udev rules |

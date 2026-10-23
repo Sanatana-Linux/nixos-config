@@ -213,9 +213,7 @@ in {
     );
 
     # Scheduler knobs live in one place because they are kernel-dependent: see
-    # modules/nixos/hardware/scheduler.nix. They are applied only when the
-    # running kernel exports them, so the same set is valid on both the CachyOS
-    # BORE kernel and XanMod mainline (which carries no BORE patch).
+    # modules/nixos/hardware/scheduler.nix.
     modules.hardware.scheduler.enable = cfg.tuning;
 
     # Force the amd_pstate operating mode at runtime. The command-line parameter
@@ -243,7 +241,7 @@ in {
     environment.systemPackages = with pkgs;
       [
         cpufrequtils
-        # Userspace CPU tooling built from the running CachyOS kernel tree so
+        # Userspace CPU tooling built from the running kernel tree so
         # versions match: cpupower reports amd_pstate limits/EPP, turbostat
         # reports package power and per-core frequency (both need the msr module).
         config.boot.kernelPackages.cpupower

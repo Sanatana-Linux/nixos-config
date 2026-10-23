@@ -17,7 +17,7 @@ in {
         latency-critical workloads (gaming, multimedia, desktop) and is hybrid
         (P/E-core) aware; `scx_bpfland` is a good general-purpose desktop
         alternative; `scx_rusty` is the classic all-rounder. Requires a kernel
-        built with `CONFIG_SCHED_CLASS_EXT` (the CachyOS kernel has it) and the
+        built with `CONFIG_SCHED_CLASS_EXT` (the XanMod kernel has it) and the
         NixOS `services.scx` module, which asserts kernel >= 6.12.
       '';
     };

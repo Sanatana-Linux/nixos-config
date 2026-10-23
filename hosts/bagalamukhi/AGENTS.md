@@ -4,7 +4,7 @@
 # bagalamukhi
 
 ## Purpose
-Primary laptop — Lenovo Legion 5 Pro 16IRX9 with Intel+NVIDIA Prime hybrid graphics, user tlh, running AwesomeWM with LightDM (slick-greeter) on cachyos-bore kernel. Full development workstation with Docker (rootless+NVIDIA), virt-manager, quickemu, Ollama AI, zram, undervolt, cachy scheduler patches, GLX picom with dual_kawase blur, and comprehensive security (firewall, SSH, fail2ban, doas).
+Primary laptop — Lenovo Legion 5 Pro 16IRX9 with Intel+NVIDIA Prime hybrid graphics, user tlh, running AwesomeWM with LightDM (slick-greeter) on the XanMod kernel. Full development workstation with Docker (rootless+NVIDIA), virt-manager, quickemu, Ollama AI, zram, undervolt, sched_ext schedulers, GLX picom with dual_kawase blur, and comprehensive security (firewall, SSH, fail2ban, doas).
 
 ## Key Files
 

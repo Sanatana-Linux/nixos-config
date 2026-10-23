@@ -322,6 +322,14 @@
   # (AMD fTPM) auto-unlock is enrolled post-install, giving zero prompts.
   boot.initrd.systemd.tpm2.enable = true;
 
+  # Shared LUKS keyfile, copied into the initrd (which lives on plaintext
+  # /boot) so the containers volume unlocks without a prompt. The absolute
+  # path is why every build here needs --impure; the file is gitignored and
+  # is not part of the repo.
+  boot.initrd.secrets = {
+    "/etc/cryptkeys/luks.key" = /etc/nixos/.tmp/kamala-storage/luks.key;
+  };
+
   hardware.graphics = {
     enable = true;
     enable32Bit = true;

@@ -91,5 +91,33 @@
         };
       };
     };
+
+    # Second NVMe holds the container image store so large docker/comfyui
+    # images stop competing with / and /nix on the root disk. Unlocks from the
+    # keyfile copied into the initrd by boot.initrd.secrets (see default.nix),
+    # so it never prompts.
+    nvme1 = {
+      type = "disk";
+      device = "/dev/disk/by-id/nvme-Samsung_SSD_970_EVO_500GB_S5H7NS0N545721D";
+      content = {
+        type = "gpt";
+        partitions.containers = {
+          size = "100%";
+          content = {
+            type = "luks";
+            name = "cryptcontainers";
+            settings = {
+              allowDiscards = true;
+              keyFile = "/etc/cryptkeys/luks.key";
+            };
+            content = {
+              type = "filesystem";
+              format = "ext4";
+              mountpoint = "/var/lib/containerd";
+            };
+          };
+        };
+      };
+    };
   };
 }

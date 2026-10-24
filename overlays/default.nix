@@ -16,9 +16,9 @@
     };
 
     # nixpkgs signs out-of-tree modules per module with kmodigest and the kernel
-    # modules aggregator expects a <name>.ko.cer beside every .ko. acpi_call and
-    # lenovo-legion-module install unsigned .ko files, so the kernel "modules"
-    # derivation fails with "cat: ...legion-laptop.ko.cer: No such file".
+    # modules aggregator expects a <name>.ko.cer beside every .ko. acpi_call,
+    # lenovo-legion-module and ryzen-smu install only the bare .ko, so the kernel
+    # "modules" derivation fails with "cat: ...<name>.ko.cer: No such file".
     # Sign them after install, which also emits the matching certificate.
     signModulePackage = drv:
       drv.overrideAttrs (old: {
@@ -31,12 +31,14 @@
           '';
       });
   in {
-    # Out-of-tree modules loaded by the Lenovo hardware modules need the cert fix
+    # Out-of-tree modules loaded by the Lenovo hardware modules and by
+    # modules.hardware.amd.monitoring need the cert fix
     linuxPackages_xanmod_latest =
       prev.linuxPackages_xanmod_latest.extend
       (_kFinal: kPrev: {
         acpi_call = signModulePackage kPrev.acpi_call;
         lenovo-legion-module = signModulePackage kPrev.lenovo-legion-module;
+        ryzen-smu = signModulePackage kPrev.ryzen-smu;
       });
 
     # pipx and anyio fail their own test suites inside the Nix sandbox: pipx

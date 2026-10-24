@@ -18,7 +18,7 @@
 
 | Directory | Purpose |
 |-----------|---------|
-| `flake.nix` | Flake entry — 14 inputs, 4 hosts, overlays, templates, packages |
+| `flake.nix` | Flake entry — 13 inputs, 5 hosts, overlays, templates, packages |
 | `modules/nixos/` | System-level modules — 15 categories (see `modules/nixos/AGENTS.md`) |
 | `modules/home-manager/` | User-level modules — 7 categories (see `modules/home-manager/AGENTS.md`) |
 | `modules/home-manager/users/` | Per-user home-manager configs — tlh, smg, user |
@@ -32,11 +32,11 @@
 
 | Host | Type | User | GPU | Desktop | Kernel |
 |------|------|------|-----|---------|--------|
-| bagalamukhi | Lenovo Legion 5 Pro | tlh | NVIDIA+Intel Prime | awesome+LightDM | cachyos-bore-lto-x86_64-v3 |
-| kamala | AMD desktop (ASUS Pro WS, Ryzen 9) | tlh | NVIDIA GTX 1080 | awesome+LightDM | cachyos-bore-lto-x86_64-v3 |
-| matangi | Lenovo Legion Pro | smg | NVIDIA+Intel Prime | xfce | cachyos-bore-lto-x86_64-v3 |
-| bhairavi | VM | tlh | modesetting | awesome | cachyos-bore-lto-x86_64-v3 |
-| chhinamasta | Live USB ISO | user | Intel | awesome | cachyos-bore |
+| bagalamukhi | Lenovo Legion 5 Pro | tlh | NVIDIA+Intel Prime | awesome+LightDM | linuxPackages_xanmod_latest |
+| kamala | AMD desktop (ASUS Pro WS, Ryzen 9) | tlh | NVIDIA GTX 1080 | awesome+LightDM | linuxPackages_xanmod_latest |
+| matangi | Lenovo Legion Pro | smg | NVIDIA+Intel Prime | xfce | linuxPackages_xanmod_latest |
+| bhairavi | VM | tlh | modesetting | awesome | linuxPackages_xanmod_latest |
+| chhinamasta | Live USB ISO | user | Intel | awesome | linuxPackages_xanmod_latest |
 
 ## Development
 
@@ -96,7 +96,6 @@ nix develop  # enter project dev shell
 | nixos-generators | VM/ISO/cloud image builder |
 | nps | Nix package search |
 | sops-nix | Secrets management (sops + age) |
-| nix-cachyos-kernel | CachyOS kernel variants (cachyos-bore-lto-x86_64-v3) |
 | firefox-nightly | Firefox Nightly binary |
 | llm-agents | LLM agent tooling (github:numtide/llm-agents.nix) |
 

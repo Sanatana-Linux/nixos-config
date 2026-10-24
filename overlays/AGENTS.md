@@ -10,7 +10,7 @@ Nixpkgs overlays for modifying or extending packages from nixpkgs. Overrides, pa
 
 | File | Description |
 |------|-------------|
-| `default.nix` | Aggregates and exports all overlays — additions, modifications, cachyos-patches, stable-packages |
+| `default.nix` | Aggregates and exports all overlays — additions, modifications, stable-packages |
 | `opencode.nix` | Source-built opencode 1.17.3 with bun-based npm dependency resolution |
 
 ## For AI Agents
@@ -21,7 +21,6 @@ Nixpkgs overlays for modifying or extending packages from nixpkgs. Overrides, pa
 - For entirely new packages, use `pkgs/` instead
 - Keep overlays minimal — complex logic belongs in `pkgs/`
 - `opencode.nix` uses `stdenvNoCC.mkDerivation` with bun `--frozen-lockfile` for npm deps, with pre-built `node_modules` derivation for purity
-- `default.nix` exports 4 overlays: `additions` (custom pkgs + firefox-nightly-bin), `modifications` (torch removal, pipx, lenovo-legion sysfs fix, etc.), `cachyos-patches` (lenovo-legion-module for cachyos kernel), `stable-packages` (pinned from nixos-26.05)
-- `cachyos-patches` must be registered **after** `inputs.nix-cachyos-kernel.overlays.pinned` in host configs so `prev.cachyosKernels` is available
+- `default.nix` exports 3 overlays: `additions` (custom pkgs + firefox-nightly-bin), `modifications` (torch removal, pipx, lenovo-legion module signing for the XanMod kernel, etc.), `stable-packages` (pinned from nixos-26.05)
 
 <!-- MANUAL: Any manually added notes below this line are preserved on regeneration -->

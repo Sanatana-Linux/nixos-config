@@ -46,10 +46,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # master: release branch is frozen (attic cache compromised, upstream #110).
-    # Kernel substitutes come from cache.xinux.uz.
-    nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/master";
-
     firefox-nightly = {
       url = "github:nix-community/flake-firefox-nightly";
       inputs.nixpkgs.follows = "nixpkgs";

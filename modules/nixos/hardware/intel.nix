@@ -112,10 +112,9 @@ in {
         "rcutree.rcu_idle_gp_delay=0"
         "rcupdate.rcu_expedited=1"
         # Full kernel preemption for lower scheduling latency under load.
-        # The kernel is built with CONFIG_PREEMPT=y + CONFIG_PREEMPT_DYNAMIC=y,
-        # so the model is selectable on the command line. (CONFIG_PREEMPT_LAZY
-        # is not compiled in, so "lazy" is unavailable; the choice is
-        # voluntary <-> full.) Trade-off: full preemption keeps the CPU out of
+        # CONFIG_PREEMPT_DYNAMIC=y makes the model a command-line choice, and
+        # the XanMod build defaults to PREEMPT_LAZY, so this is what moves it
+        # from lazy to full. Trade-off: full preemption keeps the CPU out of
         # deep C-states a little more often, so idle power/heat rises slightly.
         "preempt=full"
         "tsc=reliable"
@@ -131,18 +130,9 @@ in {
         "i915.enable_gvt=1"
       ];
 
-    boot.kernel.sysctl = {
-      "kernel.sched_schedstats" = 0;
-
-      # BORE scheduler tuning (cachyos kernel, CONFIG_SCHED_BORE=y). Same knob
-      # set as the AMD hosts — see modules/nixos/hardware/amd.nix for the
-      # per-knob rationale. Keys must exist in /proc/sys/kernel/sched_burst*.
-      "kernel.sched_bore" = 1;
-      "kernel.sched_burst_cache_lifetime" = 75000000;
-      "kernel.sched_burst_penalty_offset" = 24;
-      "kernel.sched_burst_penalty_scale" = 1280;
-      "kernel.sched_burst_smoothness" = 1;
-    };
+    # Scheduler knobs live in one place because they are kernel-dependent: see
+    # modules/nixos/hardware/scheduler.nix.
+    modules.hardware.scheduler.enable = true;
 
     nixpkgs.config.packageOverrides = mkIf (cfg.gpu.enable && cfg.vaapi) (pkgs: {
       intel-vaapi-driver = pkgs.intel-vaapi-driver.override {enableHybridCodec = true;};

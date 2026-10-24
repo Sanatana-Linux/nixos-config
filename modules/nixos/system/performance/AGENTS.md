@@ -11,7 +11,7 @@ System performance tuning — CPU scheduler, memory management, OOM handling, an
 | File | Description |
 |------|-------------|
 | `default.nix` | Re-exports performance submodules |
-| `cachy.nix` | CachyOS BORE scheduler kernel patch for better desktop responsiveness |
+| `cachy.nix` | Network-stack tuning in the CachyOS spirit — BBR congestion control on the `fq` qdisc (the scheduler itself comes from the kernel package) |
 | `oomd.nix` | Out-of-memory daemon configuration |
 | `undervolt.nix` | Intel CPU undervolting with P-State power limits (65W PL1 / 100W PL2 for laptop thermals) |
 | `zram.nix` | ZRAM compressed swap for memory efficiency |

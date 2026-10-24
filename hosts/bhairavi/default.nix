@@ -15,8 +15,6 @@
     outputs.overlays.modifications
     outputs.overlays.stable-packages
     inputs.nur.overlays.default
-    inputs.nix-cachyos-kernel.overlays.pinned
-    outputs.overlays.cachyos-patches
     # llm-agents packages under the llm-agents namespace, built against this
     # repo's pinned nixpkgs (binaries substitute from cache.numtide.com).
     inputs.llm-agents.overlays.shared-nixpkgs
@@ -189,6 +187,7 @@
       bluetooth.enable = false;
       udev.enable = true;
       sound.enable = true;
+      vmGuest.enable = true;
     };
 
     stylix.enable = true;
@@ -212,7 +211,6 @@
       HandlePowerKeyLongPress = "ignore";
     };
     displayManager.defaultSession = "none+awesome";
-    qemuGuest.enable = true;
   };
 
   virtualisation = {

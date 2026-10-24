@@ -212,17 +212,9 @@ in {
       ++ optional (cfg.mitigations == "off") "mitigations=off"
     );
 
-    boot.kernel.sysctl = mkIf cfg.tuning {
-      # The NMI watchdog spends a perf counter on every package; disable it
-      # along with the scheduler statistics that only matter under profiling.
-      "kernel.nmi_watchdog" = 0;
-      "kernel.sched_schedstats" = 0;
-
-      # XanMod 7.x schedules with EEVDF plus sched_ext and carries no BORE
-      # patch, so the kernel exposes no /proc/sys/kernel/sched_burst* keys.
-      # Setting one would make systemd-sysctl fail at boot; latency is tuned
-      # through the command line instead (rcu_nocbs, skew_tick, tsc=reliable).
-    };
+    # Scheduler knobs live in one place because they are kernel-dependent: see
+    # modules/nixos/hardware/scheduler.nix.
+    modules.hardware.scheduler.enable = cfg.tuning;
 
     # Force the amd_pstate operating mode at runtime. The command-line parameter
     # above is authoritative, but this guarantees the mode even if firmware or
@@ -249,7 +241,7 @@ in {
     environment.systemPackages = with pkgs;
       [
         cpufrequtils
-        # Userspace CPU tooling built from the running CachyOS kernel tree so
+        # Userspace CPU tooling built from the running kernel tree so
         # versions match: cpupower reports amd_pstate limits/EPP, turbostat
         # reports package power and per-core frequency (both need the msr module).
         config.boot.kernelPackages.cpupower

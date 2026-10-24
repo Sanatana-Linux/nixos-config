@@ -149,12 +149,6 @@ in {
             "https://ai.cachix.org"
             "https://nix-gaming.cachix.org"
             "https://comfyui.cachix.org"
-            # CachyOS kernel cache. The live ISO (chhinamasta) still builds
-            # cachyosKernels.linuxPackages-cachyos-bore, which is absent from
-            # cache.nixos.org. Upstream's own cache (attic.xuyh0120.win) is
-            # offline following a server compromise (xddxdd/nix-cachyos-kernel#110);
-            # the xinux mirror is reachable and carries the bore builds.
-            "https://cache.xinux.uz"
             "https://cache.numtide.com"
           ]
           ++ cfg.extraCaches;
@@ -170,7 +164,6 @@ in {
             "ai.cachix.org-1:N9dzRK+alWwoKXQlnn0H6aUx0lU/mspIoz8hMvGvbbc="
             "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
             "comfyui.cachix.org-1:33mf9VzoIjzVbp0zwj+fT51HG0y31ZTK3nzYZAX0rec="
-            "cache.xinux.uz:BXCrtqejFjWzWEB9YuGB7X2MV4ttBur1N8BkwQRdH+0="
             "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
           ]
           ++ cfg.extraTrustedKeys;

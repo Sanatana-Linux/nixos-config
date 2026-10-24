@@ -4,13 +4,13 @@
 # kamala
 
 ## Purpose
-AMD desktop — Ryzen 9 3000-series on an ASUS Pro WS AM4 board with 64 GB RAM and a single NVIDIA GTX 1080 (Pascal), user tlh. Wired as closely to bagalamukhi as the hardware allows: same cachyos-bore kernel, module set, Stylix theming and security posture. Runs AwesomeWM with LightDM, Docker (rootless + NVIDIA CDI), virt-manager, quickemu, Ollama AI, zram/cachy/oomd tuning, TPM and full security (firewall, SSH on port 2222, fail2ban, doas). Reached from bagalamukhi via `ssh kamala` (mDNS `kamala.local`, port 2222).
+AMD desktop — Ryzen 9 3000-series on an ASUS Pro WS AM4 board with 64 GB RAM and a single NVIDIA GTX 1080 (Pascal), user tlh. Wired as closely to bagalamukhi as the hardware allows: same XanMod kernel, module set, Stylix theming and security posture. Runs AwesomeWM with LightDM, Docker (rootless + NVIDIA CDI), virt-manager, quickemu, Ollama AI, zram/cachy/oomd tuning, TPM and full security (firewall, SSH on port 2222, fail2ban, doas). Reached from bagalamukhi via `ssh kamala` (mDNS `kamala.local`, port 2222).
 
 ## Key Files
 
 | File | Description |
 |------|-------------|
-| `default.nix` | Host config — imports hardware-configuration, sops and user tlh. Sets cachyos overlays and `programs.om`. Enables system/boot (GRUB + Bhairava theme)/networking (hostname kamala), base packages (full dev/gui/python sets), NVIDIA (CUDA + container runtime, LACT) with `prime.enable = false`, bluetooth, TPM, udev, Android, sound, Stylix, awesome+LightDM, Docker rootless+nvidia, virt-manager, quickemu, waydroid, lxc, performance (cachy/oomd/zram, Intel-only undervolt off), security (doas/sudo/TPM/firewall/ssh:2222/fail2ban), sleep (no lid, no idle suspend — stays reachable over SSH), and avahi mDNS. |
+| `default.nix` | Host config — imports hardware-configuration, sops and user tlh. Sets `programs.om`. Enables system/boot (GRUB + Bhairava theme)/networking (hostname kamala), base packages (full dev/gui/python sets), NVIDIA (CUDA + container runtime, LACT) with `prime.enable = false`, bluetooth, TPM, udev, Android, sound, Stylix, awesome+LightDM, Docker rootless+nvidia, virt-manager, quickemu, waydroid, lxc, performance (cachy/oomd/zram, Intel-only undervolt off), security (doas/sudo/TPM/firewall/ssh:2222/fail2ban), sleep (no lid, no idle suspend — stays reachable over SSH), and avahi mDNS. |
 | `hardware-configuration.nix` | STARTER generated-config equivalent — NVMe root + EFI boot placeholders, AMD microcode, `kvm-amd`. **The filesystem UUIDs are placeholders and must be regenerated on the target machine before first switch.** |
 | `sops.nix` | sops-nix wiring — same repo age key (`/var/lib/sops/age-keys.txt`) as bagalamukhi; no new recipient required. |
 

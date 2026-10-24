@@ -26,8 +26,6 @@ in {
     # outputs.overlays.modifications
     # outputs.overlays.stable-packages
     inputs.nur.overlays.default
-    inputs.nix-cachyos-kernel.overlays.pinned
-    outputs.overlays.cachyos-patches
     # llm-agents packages under the llm-agents namespace, built against this
     # repo's pinned nixpkgs (binaries substitute from cache.numtide.com).
     inputs.llm-agents.overlays.shared-nixpkgs
@@ -164,7 +162,6 @@ in {
     blacklistedKernelModules = [];
     kernelModules = [];
     tmp.cleanOnBoot = true;
-    kernelPackages = lib.mkForce pkgs.cachyosKernels.linuxPackages-cachyos-bore;
 
     kernelParams = [
       "mitigations=off"
@@ -177,7 +174,7 @@ in {
     ];
   };
 
-  # ZFS kernel module is broken for cachyos kernel — prevent it from being pulled in
+  # The live image does not need ZFS; keep it out of the ISO closure.
   boot.supportedFilesystems = lib.mkForce [];
 
   hardware = {

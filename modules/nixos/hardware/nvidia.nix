@@ -33,7 +33,7 @@ in {
       capabilities = mkOption {
         type = types.listOf types.str;
         default = [];
-        description = "CUDA compute capabilities to compile for, e.g. [ \"6.1\" ] for Pascal (GTX 10 series). Empty keeps the nixpkgs default set — which excludes Pascal, so verily set this on Pascal hosts.";
+        description = "CUDA compute capabilities to compile for, e.g. [ \"6.1\" ] for Pascal (GTX 10 series). Empty keeps the nixpkgs default set — which excludes Pascal, so verily set this on Pascal hosts. A capability below 7.5 also swaps the system's CUDA toolkit to 12.9, because CUDA 13 dropped Maxwell, Pascal and Volta entirely.";
       };
     };
 
@@ -298,6 +298,17 @@ in {
           "nvidia-x11"
         ];
     };
+
+    # CUDA 13 dropped Maxwell, Pascal and Volta. Every CUDA consumer in the
+    # system — opencv, ollama, the toolkit itself — takes its toolkit from
+    # `cudaPackages`, and callPackage bakes that in, so overriding a single
+    # package's argument does nothing. Hosts with those cards swap the set.
+    # cudaCapabilities still narrows the arch list, so the 12.9 build emits
+    # exactly the kernels the card needs.
+    nixpkgs.overlays =
+      optionals
+      (cfg.cuda.enable && any (capability: versionOlder capability "7.5") cfg.cuda.capabilities)
+      [(final: prev: {cudaPackages = prev.cudaPackages_12_9;})];
 
     hardware = {
       nvidia-container-toolkit.enable = cfg.cuda.containerRuntime;

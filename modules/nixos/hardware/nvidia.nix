@@ -299,17 +299,6 @@ in {
         ];
     };
 
-    # CUDA 13 dropped Maxwell, Pascal and Volta. Every CUDA consumer in the
-    # system — opencv, ollama, the toolkit itself — takes its toolkit from
-    # `cudaPackages`, and callPackage bakes that in, so overriding a single
-    # package's argument does nothing. Hosts with those cards swap the set.
-    # cudaCapabilities still narrows the arch list, so the 12.9 build emits
-    # exactly the kernels the card needs.
-    nixpkgs.overlays =
-      optionals
-      (cfg.cuda.enable && any (capability: versionOlder capability "7.5") cfg.cuda.capabilities)
-      [(final: prev: {cudaPackages = prev.cudaPackages_12_9;})];
-
     hardware = {
       nvidia-container-toolkit.enable = cfg.cuda.containerRuntime;
       graphics = {

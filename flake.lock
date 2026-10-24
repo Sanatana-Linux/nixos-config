@@ -392,11 +392,11 @@
         "sharabha-gtk": "sharabha-gtk"
       },
       "locked": {
-        "lastModified": 1792748959,
-        "narHash": "sha256-C12+CGqWL5t2CMCgpFPzQpFUGd8dSwQrQ76xxFru/9M=",
+        "lastModified": 1792831445,
+        "narHash": "sha256-l+62+FiUDfpIN4GyzoCQ5wiI2hB6AZ7QcEScAnFbNo0=",
         "owner": "Sanatana-Linux",
         "repo": "lightdm-greeter-ganapati",
-        "rev": "a16415dca54f96e650d33c43987c4f12dee2ca68",
+        "rev": "a8c47939993b03235e58439136da09786862c4bf",
         "type": "github"
       },
       "original": {

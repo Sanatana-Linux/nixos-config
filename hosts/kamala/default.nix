@@ -126,6 +126,11 @@
           allowHTTP = true; # Port 80
           allowHTTPS = true; # Port 443
           allowDevelopment = true; # Ports 3000, 5173, 8000, 8080 (SearXNG/dev), 8443
+          # ComfyUI LAN access: ui-proxy binds 0.0.0.0:8188 in host network
+          # mode, so it needs an explicit firewall opening — network_mode:
+          # host does not get Docker's automatic NAT pass-through the way
+          # published bridge ports do.
+          customTcpPorts = [ 8188 ];
           logRefusedConnections = true;
           trustedInterfaces = ["lo" "localhost" "127.0.0.1"];
         };

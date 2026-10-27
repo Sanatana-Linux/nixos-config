@@ -306,6 +306,34 @@
   # desktop responsiveness on this always-on workstation.
   powerManagement.cpuFreqGovernor = "performance";
 
+  # ASUS Pro WS boards often need ACPI to relax resource checks so lm_sensors
+  # and fan control daemons can read/write to the Nuvoton Super I/O PWM registers.
+  boot.kernelParams = lib.mkAfter ["acpi_enforce_resources=lax"];
+
+  # Modern cooling & fan curve daemon + GUI. Automatically detects hwmon sensors
+  # (k10temp, asus_ec_sensors, nct6775, nvidia) and allows defining custom fan curves.
+  programs.coolercontrol.enable = true;
+
+  # Classic lm_sensors fancontrol service. Kept disabled by default until
+  # generated with `sudo pwmconfig /tmp/fancontrol`. Once populated below, set enable = true.
+  hardware.fancontrol = {
+    enable = false;
+    config = ''
+      # /etc/fancontrol
+      # Run 'sudo pwmconfig' to automatically generate this file.
+      # Example:
+      # INTERVAL=10
+      # DEVPATH=hwmon2=devices/platform/nct6775.2592 hwmon1=devices/pci0000:00/0000:00:18.3
+      # DEVNAME=hwmon2=nct6798 hwmon1=k10temp
+      # FCTEMPS=hwmon2/pwm1=hwmon1/temp1_input
+      # FCFANS=hwmon2/pwm1=hwmon2/fan1_input
+      # MINTEMP=hwmon2/pwm1=30
+      # MAXTEMP=hwmon2/pwm1=60
+      # MINSTART=hwmon2/pwm1=150
+      # MINSTOP=hwmon2/pwm1=0
+    '';
+  };
+
   # Host-specific display configuration — the NVIDIA GPU is the only adapter.
   services.xserver = {
     enable = true;

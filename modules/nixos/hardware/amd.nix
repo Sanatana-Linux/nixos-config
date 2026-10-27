@@ -152,9 +152,13 @@ in {
         "ryzen_smu" # out-of-tree SMU driver (ryzen-monitor-ng, zenstates)
       ];
 
-    # Out-of-tree modules: ryzen_smu (SMU telemetry) and optionally zenpower.
+    # Out-of-tree modules: asus-ec-sensors (ASUS EC telemetry), ryzen_smu
+    # (SMU telemetry), and optionally zenpower.
     boot.extraModulePackages =
-      optionals cfg.monitoring [
+      optionals cfg.sensors [
+        config.boot.kernelPackages.asus-ec-sensors
+      ]
+      ++ optionals cfg.monitoring [
         config.boot.kernelPackages.ryzen-smu
       ]
       ++ optionals cfg.zenpower [
@@ -247,7 +251,7 @@ in {
         config.boot.kernelPackages.cpupower
         config.boot.kernelPackages.turbostat
       ]
-      ++ optionals cfg.sensors [lm_sensors]
+      ++ optionals cfg.sensors [lm_sensors i2c-tools]
       ++ optionals cfg.powerManagement [
         powertop
         zenmonitor # Zen MSR frequency/voltage/temperature monitor

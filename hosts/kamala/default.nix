@@ -302,14 +302,17 @@
   powerManagement.cpuFreqGovernor = "performance";
 
   # ASUS Pro WS boards often need ACPI to relax resource checks so lm_sensors
-  # fancontrol can write to the Nuvoton Super I/O PWM registers.
+  # and fan control daemons can read/write to the Nuvoton Super I/O PWM registers.
   boot.kernelParams = lib.mkAfter ["acpi_enforce_resources=lax"];
 
-  # Software fan control. Run `sudo pwmconfig` as root after boot to detect
-  # fans/pwms and write /etc/fancontrol. The placeholder below prevents the
-  # module from asserting until you've generated a real configuration.
+  # Modern cooling & fan curve daemon + GUI. Automatically detects hwmon sensors
+  # (k10temp, asus_ec_sensors, nct6775, nvidia) and allows defining custom fan curves.
+  programs.coolercontrol.enable = true;
+
+  # Classic lm_sensors fancontrol service. Kept disabled by default until
+  # generated with `sudo pwmconfig /tmp/fancontrol`. Once populated below, set enable = true.
   hardware.fancontrol = {
-    enable = true;
+    enable = false;
     config = ''
       # /etc/fancontrol
       # Run 'sudo pwmconfig' to automatically generate this file.

@@ -1,11 +1,8 @@
 {
   inputs,
-  outputs,
   lib,
-  config,
   modulesPath,
   pkgs,
-  bhairava-grub-theme,
   ...
 }: let
   inherit (lib) mkDefault;
@@ -20,69 +17,33 @@ in {
     ../../modules/nixos/system/users/user.nix
   ];
 
-  # Overlays - same as bagalamukhi but limited to what's needed for live ISO
+  # Overlays stay declared because modules resolve attributes through them;
+  # they add nothing to the closure unless something actually uses them.
   nixpkgs.overlays = [
-    # outputs.overlays.additions  # Not adding these to keep ISO size manageable
-    # outputs.overlays.modifications
-    # outputs.overlays.stable-packages
     inputs.nur.overlays.default
     # llm-agents packages under the llm-agents namespace, built against this
     # repo's pinned nixpkgs (binaries substitute from cache.numtide.com).
     inputs.llm-agents.overlays.shared-nixpkgs
   ];
 
-  nixpkgs = {
-    config = {
-      allowUnfree = true;
-    };
-  };
+  nixpkgs.config.allowUnfree = true;
 
-  # om — NixOS Operations Manager (Zig), replaces the old bash wrapper
-  programs.om.enable = true;
-
-  # Enable modules using the "activate by enable option" paradigm
-  # Live ISO configuration with essential features
+  # A live installer, not a desktop: the awesome configuration, zsh, and the
+  # tooling needed to partition and install. Everything else is left out so the
+  # image stays small and boots quickly.
   modules = {
-    # System
     system = {
-      multimedia = {
-        enable = true;
-        stableVideoEditors = false; # No stable overlay in ISO
-      };
       systemd.enable = true;
       boot = {
         enable = true;
         theme.enable = true;
-        development.enable = true;
       };
       networking = {
         enable = true;
         hostName = "chhinamasta";
       };
-      apps = {
-        nix-ld.enable = true;
-        appimage.enable = true;
-        thunar.enable = true;
-        ai = {
-          ollama.enable = true;
-          core.enable = true;
-        };
-      };
-      desktop = {
-        awesomewm.enable = true;
-      };
-      performance = {
-        default.enable = true;
-        zram.enable = true; # Good for live ISO with limited RAM
-      };
-      security = {
-        doas = {
-          enable = true;
-          adminUser = "user"; # Note: user instead of tlh
-        };
-        sudo.enable = true;
-        tpm.enable = true; # Modern hardware support
-      };
+      desktop.awesomewm.enable = true;
+      security.sudo.enable = true;
     };
 
     base = {
@@ -90,65 +51,52 @@ in {
       fonts.enable = true;
       timezone = "America/New_York";
       nix.enable = true;
-      permittedPackages.enable = true;
-      services.enable = true;
-      packages = {
-        core.enable = true;
-        development = {
-          enable = true;
-          minimal = true;
-        };
-        gui = {
-          enable = true;
-          minimal = true;
-          libs.enable = true;
-        };
-        python.enable = true;
-        system = {
-          enable = true;
-          minimal = true;
-        };
+      services = {
+        enable = true;
+        fstrim.enable = false;
+        fwupd.enable = false;
+      };
+      shell = {
+        enable = true;
+        zsh = true;
+        variables.enable = true;
       };
     };
 
-    # User
     users.user.enable = true;
-    base.shell = {
-      enable = true;
-      zsh = true;
-      variables.enable = true;
-    };
 
-    # Hardware - essential for live ISO
-    hardware = {
-      bluetooth.enable = true; # Common hardware support
-      sound.enable = true;
-      udev.enable = true;
-      intel.enable = true; # Intel graphics/CPU support (common)
-      devices = {
-        android.enable = true; # Mobile device support
-      };
-      # Note: Not adding NVIDIA, Logitech, or Lenovo as these are too specific for a live ISO
-    };
+    hardware.udev.enable = true;
 
-    # Stylix
     stylix.enable = true;
   };
 
   services.xserver.enable = true;
   services.displayManager.defaultSession = "none+awesome";
 
+  # disko drives the partitioning; the rest are the userspace halves of the
+  # filesystems and volume stacks the hosts use, plus nixos-install itself.
   environment.systemPackages = with pkgs; [
-    dbus
-    grub2
-    plymouth
-    dbus-broker
-    dbus-glib
-    libdbusmenu
-    libdbusmenu-gtk3
-    polkit_gnome
-    xss-lock
-    xssproxy
+    disko
+    nixos-install-tools
+    parted
+    gptfdisk
+    dosfstools
+    e2fsprogs
+    btrfs-progs
+    xfsprogs
+    f2fs-tools
+    cryptsetup
+    lvm2
+    mdadm
+    util-linux
+    rsync
+    git
+    sops
+    age
+    ssh-to-age
+    curl
+    wget
+    vim
   ];
 
   boot = {
@@ -177,20 +125,11 @@ in {
   # The live image does not need ZFS; keep it out of the ISO closure.
   boot.supportedFilesystems = lib.mkForce [];
 
-  hardware = {
-    enableRedistributableFirmware = true;
-  };
+  hardware.enableRedistributableFirmware = true;
 
   networking = {
     hostName = "chhinamasta";
     networkmanager.enable = true;
-  };
-
-  services = {
-    gnome = {
-      glib-networking.enable = true;
-      gnome-keyring.enable = true;
-    };
   };
 
   isoImage.makeEfiBootable = true;

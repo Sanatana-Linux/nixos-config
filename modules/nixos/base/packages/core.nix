@@ -55,7 +55,17 @@ in {
       papirus-folders # Papirus icon folder colors
 
       # Misc Utilities
-      llm-agents.opencode # opencode from numtide/llm-agents.nix (tracks upstream releases)
+      # llm-agents installs the V2 binary as `opencode2` so it can sit beside
+      # V1. V1 is no longer packaged here, and upstream's V2 installer exposes
+      # the command as `opencode`, so link both names.
+      (symlinkJoin {
+        name = "opencode-${llm-agents.opencode2.version}";
+        paths = [llm-agents.opencode2];
+        inherit (llm-agents.opencode2) meta;
+        postBuild = ''
+          ln -s ${llm-agents.opencode2}/bin/opencode2 $out/bin/opencode
+        '';
+      })
       mcp-nixos # MCP server exposing package/option search to OpenCode
       tealdeer # tldr pages in Rust
       dmg2img # Convert DMG to IMG

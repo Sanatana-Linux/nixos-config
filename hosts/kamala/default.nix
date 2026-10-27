@@ -301,6 +301,31 @@
   # desktop responsiveness on this always-on workstation.
   powerManagement.cpuFreqGovernor = "performance";
 
+  # ASUS Pro WS boards often need ACPI to relax resource checks so lm_sensors
+  # fancontrol can write to the Nuvoton Super I/O PWM registers.
+  boot.kernelParams = lib.mkAfter ["acpi_enforce_resources=lax"];
+
+  # Software fan control. Run `sudo pwmconfig` as root after boot to detect
+  # fans/pwms and write /etc/fancontrol. The placeholder below prevents the
+  # module from asserting until you've generated a real configuration.
+  hardware.fancontrol = {
+    enable = true;
+    config = ''
+      # /etc/fancontrol
+      # Run 'sudo pwmconfig' to automatically generate this file.
+      # Example:
+      # INTERVAL=10
+      # DEVPATH=hwmon2=devices/platform/nct6775.2592 hwmon1=devices/pci0000:00/0000:00:18.3
+      # DEVNAME=hwmon2=nct6798 hwmon1=k10temp
+      # FCTEMPS=hwmon2/pwm1=hwmon1/temp1_input
+      # FCFANS=hwmon2/pwm1=hwmon2/fan1_input
+      # MINTEMP=hwmon2/pwm1=30
+      # MAXTEMP=hwmon2/pwm1=60
+      # MINSTART=hwmon2/pwm1=150
+      # MINSTOP=hwmon2/pwm1=0
+    '';
+  };
+
   # Host-specific display configuration — the NVIDIA GPU is the only adapter.
   services.xserver = {
     enable = true;

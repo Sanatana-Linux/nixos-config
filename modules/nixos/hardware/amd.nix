@@ -247,7 +247,7 @@ in {
         config.boot.kernelPackages.cpupower
         config.boot.kernelPackages.turbostat
       ]
-      ++ optionals cfg.sensors [lm_sensors]
+      ++ optionals cfg.sensors [lm_sensors i2c-tools]
       ++ optionals cfg.powerManagement [
         powertop
         zenmonitor # Zen MSR frequency/voltage/temperature monitor

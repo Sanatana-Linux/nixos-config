@@ -78,8 +78,17 @@
     # yet compatible with mcp 2.x, which makes mcp-nixos unevaluable there.
     # The stable channel still pairs mcp 1.x with a working fastmcp, and
     # mcp-nixos is the MCP server OpenCode launches by name, so it must stay
-    # on PATH.
-    mcp-nixos = stable-pkgs.mcp-nixos;
+    # on PATH. fastmcp's async proxy tests are flaky in the Nix sandbox, so
+    # skip its checks.
+    mcp-nixos = stable-pkgs.mcp-nixos.override {
+      python3Packages = stable-pkgs.python3Packages.overrideScope (
+        _python-final: python-prev: {
+          fastmcp = python-prev.fastmcp.overridePythonAttrs (_: {
+            doCheck = false;
+          });
+        }
+      );
+    };
 
     # yazi plugin that reports file sizes in the preview pane; not in nixpkgs.
     what-size = prev.yaziPlugins.mkYaziPlugin {

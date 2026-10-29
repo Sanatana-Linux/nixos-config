@@ -30,6 +30,29 @@
             done
           '';
       });
+
+    ollamaOverride = drv:
+      drv.overrideAttrs (old: rec {
+        version = "0.40.13";
+        src = final.fetchFromGitHub {
+          owner = "ollama";
+          repo = "ollama";
+          tag = "v${version}";
+          hash = "sha256-cxpgG6l97S7f+XZy5Hb689MYpVnbaqxBhzHLL62zAKM=";
+        };
+        vendorHash = "sha256-1mzJrZUHH2ouP6I+LVojHbft7No5AumqKZVq0I/Ubsg=";
+        passthru =
+          (old.passthru or {})
+          // rec {
+            llamaCppVersion = "b11963";
+            llamaCppSrc = final.fetchFromGitHub {
+              owner = "ggml-org";
+              repo = "llama.cpp";
+              tag = llamaCppVersion;
+              hash = "sha256-DUggBODOVSOydWopvdXt/K9ZiRrbWrl+mywpr1vjJwM=";
+            };
+          };
+      });
   in {
     # Out-of-tree modules loaded by the Lenovo hardware modules and by
     # modules.hardware.amd.monitoring need the cert fix
@@ -89,6 +112,13 @@
         }
       );
     };
+
+    # Upstream Ollama v0.40.13 introduces support for newer architectures like
+    # Liquid AI's LFM-3-VL (lfm3-vl) which requires v0.40.13 or newer.
+    ollama = ollamaOverride prev.ollama;
+    ollama-cuda = ollamaOverride (prev.ollama-cuda.override {
+      cudaArches = ["sm_86"];
+    });
 
     # yazi plugin that reports file sizes in the preview pane; not in nixpkgs.
     what-size = prev.yaziPlugins.mkYaziPlugin {

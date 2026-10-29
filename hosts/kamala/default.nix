@@ -59,7 +59,7 @@
         };
         virt-manager = {
           enable = true;
-          libguestfsIntrospection = true;
+          libguestfsIntrospection = false;
         };
         quickemu.enable = true;
         waydroid = {
@@ -130,7 +130,7 @@
           # mode, so it needs an explicit firewall opening — network_mode:
           # host does not get Docker's automatic NAT pass-through the way
           # published bridge ports do.
-          customTcpPorts = [ 8188 ];
+          customTcpPorts = [8188];
           logRefusedConnections = true;
           trustedInterfaces = ["lo" "localhost" "127.0.0.1"];
         };

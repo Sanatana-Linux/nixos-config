@@ -208,7 +208,7 @@ in {
         libisoburn # ISO-9660 image manipulation
         libjack2 # JACK audio connection kit
         libjpeg # JPEG image library
-        libpng12 # PNG image library (older version)
+        libpng # PNG image library
         libsecret # Secret storage library
         libthai # Thai language support
         libtiff # TIFF image library

@@ -26,8 +26,6 @@ with lib; {
       [
         abootimg
 
-        # rootless access to adb fs
-        adbfs-rootless
         # backup extraction
         android-backup-extractor
         # mount android with fuse

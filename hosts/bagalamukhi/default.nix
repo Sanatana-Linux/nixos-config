@@ -72,7 +72,7 @@
         };
         virt-manager = {
           enable = true;
-          libguestfsIntrospection = true;
+          libguestfsIntrospection = false;
         };
         quickemu.enable = true;
         waydroid = {

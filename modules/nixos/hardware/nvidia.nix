@@ -388,6 +388,16 @@ in {
       };
     };
 
+    # Prevent nvidia-container-toolkit-cdi-generator from failing live activation
+    # during nixos-rebuild switch when the nvidia driver was upgraded in nixpkgs
+    # while the machine is running (in-memory kernel module version != userspace NVML).
+    systemd.services.nvidia-container-toolkit-cdi-generator = mkIf cfg.cuda.containerRuntime {
+      unitConfig.X-OnlyManualStart = true;
+      restartIfChanged = false;
+      stopIfChanged = false;
+      serviceConfig.SuccessExitStatus = [0 1];
+    };
+
     # ── X layout when the dGPU drives the panel directly ───────────────
     # With PRIME off, nixpkgs' X driver registration still shapes xorg.conf
     # for hybrid output: the only Screen in the ServerLayout belongs to the

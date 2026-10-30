@@ -47,13 +47,14 @@ in {
       waydroid-helper # Extra Waydroid utilities
       iptables # iptables-nft compatibility layer
       wireplumber # Session manager for Waydroid audio
+      xdg-utils # Desktop integration for deep links
+      mesa-demos # For testing GL rendering
 
       # Launch waydroid in a nested Cage compositor (Intel iGPU for wlroots)
       (pkgs.writeScriptBin "waydroid-session" ''
         #!${pkgs.bash}/bin/bash
         # Launch waydroid in a nested Wayland compositor.
-        # Uses cage with the Intel iGPU for best wlroots compatibility
-        # on NVIDIA PRIME hybrid systems. Falls back to weston if cage fails.
+        # Uses software rendering to avoid EGL_BAD_ALLOC on NVIDIA PRIME systems.
 
         set -euo pipefail
 
@@ -79,13 +80,21 @@ in {
         if ! systemctl is-active --quiet waydroid-container.service; then
           echo "Starting waydroid container service..."
           sudo systemctl start waydroid-container.service
-          sleep 3
+          sleep 5
         fi
 
         echo ""
         echo "Starting Waydroid in nested compositor..."
         echo "Press Super+Shift+E to exit or close the window."
         echo ""
+
+        # Force software rendering to avoid EGL_BAD_ALLOC on hybrid GPU setups
+        export WLR_NO_HARDWARE_CURSORS=1
+        export WLR_RENDERER=pixman
+        export LIBGL_ALWAYS_SOFTWARE=1
+        export GALLIUM_DRIVER=llvmpipe
+        export MESA_GL_VERSION_OVERRIDE=3.3
+        export __GLX_VENDOR_LIBRARY_NAME=mesa
 
         # On NVIDIA PRIME, weston's X11 backend is reliable (renders via X server,
         # not wlroots GLES2). Try weston first, fall back to cage with pixman.
@@ -95,8 +104,6 @@ in {
         fi
 
         echo "Weston failed, trying cage with pixman (software) renderer..."
-        export WLR_NO_HARDWARE_CURSORS=1
-        export WLR_RENDERER=pixman
         exec ${pkgs.cage}/bin/cage -- ${pkgs.waydroid}/bin/waydroid show-full-ui
       '')
 
@@ -149,6 +156,14 @@ in {
         echo "Starting Waydroid in nested compositor (no network)..."
         echo ""
 
+        # Force software rendering to avoid EGL_BAD_ALLOC
+        export WLR_NO_HARDWARE_CURSORS=1
+        export WLR_RENDERER=pixman
+        export LIBGL_ALWAYS_SOFTWARE=1
+        export GALLIUM_DRIVER=llvmpipe
+        export MESA_GL_VERSION_OVERRIDE=3.3
+        export __GLX_VENDOR_LIBRARY_NAME=mesa
+
         # Try weston first (reliable on NVIDIA X11)
         if ${pkgs.weston}/bin/weston --backend=x11-backend.so -- \
           ${pkgs.waydroid}/bin/waydroid show-full-ui; then
@@ -156,8 +171,6 @@ in {
         fi
 
         echo "Weston failed, trying cage with pixman renderer..."
-        export WLR_NO_HARDWARE_CURSORS=1
-        export WLR_RENDERER=pixman
         exec ${pkgs.cage}/bin/cage -- ${pkgs.waydroid}/bin/waydroid show-full-ui
       '')
 
@@ -180,8 +193,16 @@ in {
         if ! systemctl is-active --quiet waydroid-container.service; then
           echo "Starting waydroid container..."
           sudo systemctl start waydroid-container.service
-          sleep 3
+          sleep 5
         fi
+
+        # Force software rendering to avoid EGL_BAD_ALLOC
+        export WLR_NO_HARDWARE_CURSORS=1
+        export WLR_RENDERER=pixman
+        export LIBGL_ALWAYS_SOFTWARE=1
+        export GALLIUM_DRIVER=llvmpipe
+        export MESA_GL_VERSION_OVERRIDE=3.3
+        export __GLX_VENDOR_LIBRARY_NAME=mesa
 
         # Try weston first (reliable on NVIDIA X11)
         if ${pkgs.weston}/bin/weston --backend=x11-backend.so -- \
@@ -190,8 +211,6 @@ in {
         fi
 
         echo "Weston failed, trying cage with pixman renderer..."
-        export WLR_NO_HARDWARE_CURSORS=1
-        export WLR_RENDERER=pixman
         exec ${pkgs.cage}/bin/cage -- ${pkgs.waydroid}/bin/waydroid app launch "$1"
       '')
     ];

@@ -96,6 +96,8 @@
     # images stop competing with / and /nix on the root disk. Unlocks from the
     # keyfile copied into the initrd by boot.initrd.secrets (see default.nix),
     # so it never prompts.
+    # NOTE: on this machine the disk enumerates as nvme0 and the partition is
+    # labeled "containers" (not disk-*-containers) — keep label="containers".
     nvme1 = {
       type = "disk";
       device = "/dev/disk/by-id/nvme-Samsung_SSD_970_EVO_500GB_S5H7NS0N545721D";
@@ -103,6 +105,7 @@
         type = "gpt";
         partitions.containers = {
           size = "100%";
+          label = "containers";
           content = {
             type = "luks";
             name = "cryptcontainers";

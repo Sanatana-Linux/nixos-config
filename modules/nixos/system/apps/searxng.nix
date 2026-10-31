@@ -37,6 +37,15 @@ with lib; let
       limiter: false  # private instance — no rate limiting
       public_instance: false
 
+    outgoing:
+      request_timeout: 10.0
+      max_request_timeout: 15.0
+      pool_connections: 100
+      pool_maxsize: 20
+      enable_http2: true
+      # Don't verify SSL to avoid expired cert issues
+      verify: false
+
     search:
       safe_search: 0
       autocomplete: "google"
@@ -243,9 +252,9 @@ with lib; let
       - name: public domain image archive
         disabled: false
       - name: quark
-        disabled: false
+        disabled: true
       - name: quark images
-        disabled: false
+        disabled: true
       - name: reddit
         disabled: false
       - name: searchmysite

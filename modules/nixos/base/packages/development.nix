@@ -99,6 +99,7 @@ in {
           shfmt # bash format tool
           python313Packages.black # Python formatter (from stable nixpkgs)
           prettier # Multi-language formatter
+          oxfmt # Ultra-fast Rust-based formatter for JS/TS/JSON/YAML/etc
           yamlfmt # Extensible command line tool or library to format yaml files
           rust-analyzer # Rust language server
           shellcheck # Shell script linter

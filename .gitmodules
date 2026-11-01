@@ -1,12 +1,16 @@
 [submodule "external/nvim"]
 	path = external/nvim
 	url = https://github.com/Thomashighbaugh/nvim-forge
+	branch = main
 [submodule "external/firefox"]
 	path = external/firefox
 	url = https://github.com/Thomashighbaugh/firefox
+	branch = master
 [submodule "external/awesome"]
 	path = external/awesome
 	url = https://github.com/Sanatana-Linux/nixos-awesomewm
+	branch = main
 [submodule "external/secrets"]
 	path = external/secrets
 	url = https://github.com/Thomashighbaugh/secrets.git
+	branch = main

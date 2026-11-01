@@ -301,6 +301,81 @@
     stylix.enable = true;
   };
 
+  # ── NIC bonding: enp5s0 + enp6s0f1 -> bond0 (192.168.1.203) ─────────
+  # Both NICs sit on the same L2 segment and each flaps independently. Any
+  # service that pinned a host address to .203 died with "cannot assign
+  # requested address" the moment enp5s0 dropped — Docker's published ports in
+  # particular. Bonding them active-backup gives the host one stable address
+  # and survives a single NIC or cable failing. active-backup needs no
+  # switch-side LACP configuration; 802.3ad is a later switch-config change.
+  #
+  # The bond clones enp5s0's MAC (d4:5d:64:d7:6d:2c) so the router's existing
+  # .203 DHCP reservation still applies, and primary=enp5s0 keeps traffic on
+  # the original NIC until it actually goes down.
+  networking.networkmanager.ensureProfiles.profiles = {
+    bond0 = {
+      connection = {
+        id = "bond0";
+        type = "bond";
+        interface-name = "bond0";
+        autoconnect = "true";
+        autoconnect-priority = "100";
+      };
+      bond = {
+        mode = "active-backup";
+        miimon = "100";
+        primary = "enp5s0";
+      };
+      ethernet.cloned-mac-address = "d4:5d:64:d7:6d:2c";
+      ipv4.method = "auto";
+      ipv6.method = "auto";
+    };
+
+    bond0-port-enp5s0 = {
+      connection = {
+        id = "bond0-port-enp5s0";
+        type = "ethernet";
+        interface-name = "enp5s0";
+        master = "bond0";
+        slave-type = "bond";
+        autoconnect = "true";
+        autoconnect-priority = "100";
+      };
+    };
+
+    bond0-port-enp6s0f1 = {
+      connection = {
+        id = "bond0-port-enp6s0f1";
+        type = "ethernet";
+        interface-name = "enp6s0f1";
+        master = "bond0";
+        slave-type = "bond";
+        autoconnect = "true";
+        autoconnect-priority = "100";
+      };
+    };
+  };
+
+  # `ensureProfiles` only writes the keyfiles and reloads NetworkManager — it
+  # never activates anything. Without this, NM would keep the auto-created
+  # "Wired connection N" profiles on the ports and the bond would sit idle.
+  # Activating bond0 first lets NM deactivate those profiles by enslaving the
+  # NICs; deleting them afterwards stops them from winning the next boot race.
+  systemd.services.nm-bond0-activate = {
+    description = "Activate bond0 and drop NetworkManager's auto-created wired profiles";
+    after = ["NetworkManager.service" "NetworkManager-ensure-profiles.service"];
+    wants = ["NetworkManager-ensure-profiles.service"];
+    wantedBy = ["multi-user.target"];
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+    };
+    script = ''
+      ${pkgs.networkmanager}/bin/nmcli connection up bond0 || true
+      ${pkgs.networkmanager}/bin/nmcli connection delete "Wired connection 1" "Wired connection 2" 2>/dev/null || true
+    '';
+  };
+
   # Static CPU governor. With power-profiles-daemon disabled the amd_pstate
   # driver is driven by this governor; `performance` pins the clock for maximum
   # desktop responsiveness on this always-on workstation.

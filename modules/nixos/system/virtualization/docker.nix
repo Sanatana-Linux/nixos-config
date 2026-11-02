@@ -36,8 +36,8 @@ in {
 
     dns = mkOption {
       type = types.listOf types.str;
-      default = ["9.9.9.11" "149.112.112.11" "2620:fe::11" "2620:fe::fe:11" "1.1.1.1"];
-      description = "DNS servers for Docker containers. Explicit DNS prevents resolution failures when host network changes (wifi on/off).";
+      default = ["172.17.0.1" "1.1.1.1"];
+      description = "DNS servers for Docker containers, tried in order. Defaults to the host-side dnsmasq reachable over the docker bridge (see the dnsmasq block below), so containers resolve through the host's upstreams instead of reaching them directly.";
     };
 
     composeSupport = mkOption {
@@ -82,6 +82,31 @@ in {
       containerd.enable = true;
       oci-containers.backend = "docker";
     };
+
+    # Local forwarder for container DNS. Bridge containers cannot reach the
+    # LAN's resolvers directly here (IPv4 port 53 is filtered on this network),
+    # and a dead resolver in the list makes glibc block for its full timeout on
+    # every lookup — which is what made every SearXNG engine time out. dnsmasq
+    # answers on the docker bridge gateway and forwards to upstreams that
+    # actually respond. resolveLocalQueries stays off so the host's own
+    # /etc/resolv.conf is unaffected.
+    services.dnsmasq = {
+      enable = true;
+      resolveLocalQueries = false;
+      settings = {
+        port = 53;
+        listen-address = ["127.0.0.1" "172.17.0.1"];
+        bind-dynamic = true;
+        no-resolv = true;
+        cache-size = 1000;
+        server = ["2620:fe::11" "2620:fe::fe:11" "9.9.9.11" "149.112.112.11" "1.1.1.1"];
+      };
+    };
+
+    networking.firewall.extraInputRules = ''
+      ip saddr 172.17.0.0/16 udp dport 53 accept
+      ip saddr 172.17.0.0/16 tcp dport 53 accept
+    '';
 
     hardware = mkIf cfg.nvidia {
       # nvidia-container-toolkit.enable = true;

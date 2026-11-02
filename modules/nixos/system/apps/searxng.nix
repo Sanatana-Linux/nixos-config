@@ -38,15 +38,11 @@ with lib; let
       public_instance: false
 
     outgoing:
-      request_timeout: 3.0
-      max_request_timeout: 5.0
-      pool_connections: 25
-      pool_maxsize: 5
+      request_timeout: 5.0
+      max_request_timeout: 8.0
+      pool_connections: 100
+      pool_maxsize: 20
       enable_http2: true
-      # Don't verify SSL to avoid expired cert issues
-      verify: false
-      retries: 0
-      retry_on_timeout: false
 
     search:
       safe_search: 0
@@ -502,8 +498,8 @@ in {
     # OCI container for SearXNG — starts at boot via Docker
     virtualisation.oci-containers.containers."searxng" = {
       image = cfg.image;
+      ports = ["${toString cfg.port}:8080"];
       autoStart = true;
-      ports = [];
       # Mount generated config; container's entrypoint merges with defaults
       volumes = [
         "${settingsYaml}:/etc/searxng/settings.yml:ro"
@@ -515,9 +511,7 @@ in {
       environmentFiles = [
         config.sops.secrets.searxng_secret.path
       ];
-      extraOptions = cfg.extraOptions ++ [
-        "--network=host"
-      ];
+      extraOptions = cfg.extraOptions;
     };
   };
 }

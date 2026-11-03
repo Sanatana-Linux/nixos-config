@@ -222,17 +222,19 @@
   services.xserver = {
     enable = true;
     videoDrivers = ["nvidia"];
+    dpi = lib.mkForce 96;
   };
+
+  # The firmware mux is dGPU-only: nixos-hardware's Legion module imports
+  # common/gpu/nvidia/prime.nix, which force-enables PRIME offload — that is
+  # what put a modesetting Intel screen into xorg.conf and left X with no
+  # screens once the mux took the iGPU away. Kill it, as on bagalamukhi.
+  hardware.nvidia.prime.offload.enable = lib.mkForce false;
 
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
   };
-
-  # Keep nixos-hardware's Intel GPU driver aligned with the project's
-  # intel.nix packageOverrides so both resolve to the same hybrid-codec
-  # intel-vaapi-driver build — otherwise graphics-drivers collides.
-  hardware.intelgpu.enableHybridCodec = true;
 
   environment.systemPackages = with pkgs; [
     easyeffects

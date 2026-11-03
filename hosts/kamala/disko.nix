@@ -92,10 +92,10 @@
       };
     };
 
-    # Second NVMe holds the container image store so large docker/comfyui
-    # images stop competing with / and /nix on the root disk. Unlocks from the
-    # keyfile copied into the initrd by boot.initrd.secrets (see default.nix),
-    # so it never prompts.
+    # Second NVMe holds the Docker data root (images, containers, volumes and
+    # build cache) so large docker/comfyui images stop competing with / and
+    # /nix on the root disk. Unlocks from the keyfile copied into the initrd by
+    # boot.initrd.secrets (see default.nix), so it never prompts.
     # NOTE: on this machine the disk enumerates as nvme0 and the partition is
     # labeled "containers" (not disk-*-containers) — keep label="containers".
     nvme1 = {
@@ -116,7 +116,7 @@
             content = {
               type = "filesystem";
               format = "ext4";
-              mountpoint = "/var/lib/containerd";
+              mountpoint = "/var/lib/docker";
             };
           };
         };

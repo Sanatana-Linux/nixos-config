@@ -441,14 +441,14 @@
   # the system needs to reach multi-user lives on it. Without these, a missing
   # or slow-enumerating disk parks stage 1 on the device unit until systemd's
   # 90 s DefaultDeviceTimeoutSec expires, then drops to the emergency shell.
-  # `nofail` keeps systemd-cryptsetup@cryptcontainers and the /var/lib/containerd
+  # `nofail` keeps systemd-cryptsetup@cryptcontainers and the /var/lib/docker
   # mount from failing cryptsetup.target / the boot transaction, and the short
   # device timeout bounds the wait when the disk is absent entirely.
   boot.initrd.luks.devices.cryptcontainers = {
     crypttabExtraOpts = ["nofail" "x-systemd.device-timeout=10s"];
   };
 
-  fileSystems."/var/lib/containerd".options = [
+  fileSystems."/var/lib/docker".options = [
     "nofail"
     "x-systemd.device-timeout=10s"
     "x-systemd.mount-timeout=10s"

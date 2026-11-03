@@ -454,6 +454,53 @@
     "x-systemd.mount-timeout=10s"
   ];
 
+  # Encrypted btrfs data and backup disks. Both unlock from the fTPM at boot;
+  # nofail keeps a missing disk from blocking the boot transaction.
+  boot.initrd.luks.devices.cryptwork = {
+    device = "/dev/disk/by-uuid/0e3f17ba-cda4-4b2f-94a4-4c791f8e92ac";
+    crypttabExtraOpts = ["tpm2-device=auto" "nofail" "x-systemd.device-timeout=10s"];
+  };
+
+  boot.initrd.luks.devices.cryptbackup = {
+    device = "/dev/disk/by-uuid/e5148cab-c415-4a9b-923f-ebf6c0137890";
+    crypttabExtraOpts = ["tpm2-device=auto" "nofail" "x-systemd.device-timeout=10s"];
+  };
+
+  fileSystems."/data" = {
+    device = "/dev/mapper/cryptwork";
+    fsType = "btrfs";
+    options = [
+      "subvol=@data"
+      "compress=zstd:3"
+      "noatime"
+      "nofail"
+      "x-systemd.device-timeout=10s"
+      "x-systemd.mount-timeout=10s"
+    ];
+  };
+
+  fileSystems."/backup" = {
+    device = "/dev/mapper/cryptbackup";
+    fsType = "btrfs";
+    options = [
+      "subvol=@backup"
+      "compress=zstd:3"
+      "noatime"
+      "nofail"
+      "x-systemd.device-timeout=10s"
+      "x-systemd.mount-timeout=10s"
+    ];
+  };
+
+  environment.systemPackages = [pkgs.btrfs-progs pkgs.restic];
+
+  # Monthly btrfs scrub catches bitrot on the two data disks.
+  services.btrfs.autoScrub = {
+    enable = true;
+    interval = "monthly";
+    fileSystems = ["/data" "/backup"];
+  };
+
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
@@ -471,7 +518,20 @@
         "publish-addresses" = true;
       };
     };
+
+    # Deduplicated, encrypted snapshots of the working data and /data.
+    restic.backups.main = {
+      repository = "/backup/restic/main";
+      passwordFile = "/etc/restic/password";
+      paths = ["/home/tlh/Data" "/data"];
+      initialize = true;
+      pruneOpts = ["--keep-daily 7" "--keep-weekly 4" "--keep-monthly 6"];
+      timerConfig = {OnCalendar = "daily";};
+    };
   };
+
+  # restic must not run before the backup disk is mounted.
+  systemd.services."restic-backups-main".unitConfig.RequiresMountsFor = ["/backup"];
 
   system.stateVersion = "24.11";
 }

@@ -30,6 +30,12 @@ in {
       package = cfg.package;
       user = "ollama";
       group = "ollama";
+      # Listen on the LAN so SwarmUI on kamala (192.168.1.203) can use the
+      # API for MagicPrompt and other integrations.
+      host = "0.0.0.0";
     };
+
+    # Ollama API port, reachable from the LAN.
+    networking.firewall.allowedTCPPorts = [11434];
   };
 }

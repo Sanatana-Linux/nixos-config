@@ -163,12 +163,18 @@
         enable = true;
         cuda.enable = true;
         lact.enable = true;
-        prime = {
-          intelBusId = "PCI:00:02:0";
-          nvidiaBusId = "PCI:01:00:0";
-        };
+        # Firmware mux is flipped to dGPU-only (igpumode=0, hybrid off), same
+        # as bagalamukhi on identical hardware. PRIME sync must not engage —
+        # it would bind the Intel modesetting driver to a framebuffer the mux
+        # has already taken away, and X comes up with no screens.
+        prime.enable = false;
       };
-      intel.enable = true;
+      # Keep the CPU-side tuning, drop the i915/X/VA-API plumbing that assumes
+      # the iGPU has a display role.
+      intel = {
+        enable = true;
+        gpu.enable = false;
+      };
       bluetooth.enable = true;
       udev.enable = true;
       lenovo = {

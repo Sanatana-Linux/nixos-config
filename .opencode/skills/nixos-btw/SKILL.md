@@ -42,7 +42,7 @@ nixos-rebuild build --flake .#bhairavi
 nixos-rebuild dry-activate --flake .#bagalamukhi
 
 # Actual switch on a host
-sudo nixos-rebuild switch --flake .#bagalamukhi   # requires --impure (sops absolute path)
+nixos-rebuild --sudo switch --flake .#bagalamukhi   # requires --impure (sops absolute path)
 
 # Format before/after
 alejandra .

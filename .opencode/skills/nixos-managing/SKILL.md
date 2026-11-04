@@ -42,10 +42,10 @@ nixos-rebuild vm --flake .#bhairavi
 nixos-rebuild dry-activate --flake .#<host>
 
 # Activate now + persist boot entry
-sudo nixos-rebuild switch --flake .#<host> --impure
+nixos-rebuild --sudo switch --flake .#<host> --impure
 
 # Roll back to previous generation
-sudo nixos-rebuild switch --rollback
+nixos-rebuild --sudo switch --rollback
 ```
 
 ### Option Verification — Always Verify Before Suggesting

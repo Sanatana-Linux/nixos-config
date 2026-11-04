@@ -86,7 +86,7 @@ with lib; let cfg = config.modules.<category>.<name>; in {
 
 | Task | Command |
 |------|---------|
-| Rebuild NixOS (host) | `sudo nixos-rebuild switch --flake .#<host> --impure` |
+| Rebuild NixOS (host) | `nixos-rebuild --sudo switch --flake .#<host> --impure` |
 | Test build (safe) | `nixos-rebuild build --flake .#bhairavi` |
 | VM test | `nixos-rebuild vm --flake .#bhairavi` |
 | Dev shell | `nix develop` |

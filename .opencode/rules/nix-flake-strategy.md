@@ -5,8 +5,10 @@
 ## Build & Switch by Host
 
 ```bash
-sudo nixos-rebuild switch --flake .#<host> --impure
+nixos-rebuild switch --flake .#<host> --impure --sudo
 ```
+
+Never put `sudo` in front of `nixos-rebuild` — see `nixos-rebuild-invocation.md`.
 
 Available hosts: bagalamukhi, kamala, matangi, bhairavi, chhinamasta
 

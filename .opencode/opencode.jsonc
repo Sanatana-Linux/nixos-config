@@ -30,6 +30,7 @@
     ".opencode/rules/nix-module-patterns.md",
     ".opencode/rules/nix-secrets-management.md",
     ".opencode/rules/nix-pkgs-system-deprecation.md",
+    ".opencode/rules/nixos-rebuild-invocation.md",
     ".opencode/rules/graph-context.md"
   ],
   "tools": {

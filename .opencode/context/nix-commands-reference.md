@@ -36,10 +36,10 @@ nix flake metadata
 nix build '.#nixosConfigurations.bagalamukhi.config.system.build.toplevel'
 
 # Switch to new config
-sudo nixos-rebuild switch --flake .#bagalamukhi
+nixos-rebuild --sudo switch --flake .#bagalamukhi
 
 # Test without switching
-sudo nixos-rebuild test --flake .#bagalamukhi
+nixos-rebuild --sudo test --flake .#bagalamukhi
 
 # Build ISO
 nix build .#nixosConfigurations.chhinamasta.config.system.build.isoImage

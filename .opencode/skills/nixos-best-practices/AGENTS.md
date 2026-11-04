@@ -488,7 +488,7 @@ nixos-rebuild build --flake .#hostname --show-trace
 
 ```bash
 # Verify rebuild succeeded
-sudo nixos-rebuild switch --flake .#hostname
+nixos-rebuild --sudo switch --flake .#hostname
 
 # Check current generation
 sudo nix-env --list-generations --profile /nix/var/nix/profiles/system

@@ -48,7 +48,7 @@ touch /etc/nixos/.nixos-build
 
 # 2. Build/switch (test on bhairavi first)
 nixos-rebuild build --flake .#bhairavi          # safe test
-# sudo nixos-rebuild switch --flake .#bagalamukhi --impure   # actual switch
+# nixos-rebuild --sudo switch --flake .#bagalamukhi --impure   # actual switch
 
 # 3. Release the lock
 rm -f /etc/nixos/.nixos-build

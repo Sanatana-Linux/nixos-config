@@ -90,10 +90,10 @@ For detailed workflow, see [[nix-secrets-reference]] and the [sops-nix guide](ht
 
 ```bash
 # Build specific host
-sudo nixos-rebuild switch --flake .#bagalamukhi
+nixos-rebuild --sudo switch --flake .#bagalamukhi
 
 # Test config without switching
-sudo nixos-rebuild test --flake .#$(hostname)
+nixos-rebuild --sudo test --flake .#$(hostname)
 
 # Enter dev shell
 nix develop

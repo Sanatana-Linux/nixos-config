@@ -207,13 +207,13 @@ Always rebuild after config changes.
 
 ```bash
 # After editing NixOS config
-sudo nixos-rebuild switch --flake .#hostname
+nixos-rebuild --sudo switch --flake .#hostname
 
 # After editing Home Manager config (standalone)
 home-manager switch --flake .#hostname
 
 # When using NixOS-integrated Home Manager
-sudo nixos-rebuild switch --flake .#hostname
+nixos-rebuild --sudo switch --flake .#hostname
 ```
 
 ## Mistake 8: Overriding systemPackages Multiple Times

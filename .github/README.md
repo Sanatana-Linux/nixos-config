@@ -30,10 +30,10 @@
 
 ```bash
 # Build and switch
-sudo nixos-rebuild switch --flake .#bagalamukhi
+nixos-rebuild --sudo switch --flake .#bagalamukhi
 
 # Test without switching
-sudo nixos-rebuild test --flake .#bagalamukhi
+nixos-rebuild --sudo test --flake .#bagalamukhi
 
 # Build ISO
 nix build .#nixosConfigurations.chhinamasta.config.system.build.isoImage

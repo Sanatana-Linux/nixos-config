@@ -143,10 +143,10 @@ Available variables: `base00`-`base0F`, `base00Hex`-`base0FHex`, `cursor`, `curs
 
 ```bash
 # Build and switch
-sudo nixos-rebuild switch --flake .#bagalamukhi
+nixos-rebuild --sudo switch --flake .#bagalamukhi
 
 # Test without switching
-sudo nixos-rebuild test --flake .#bagalamukhi
+nixos-rebuild --sudo test --flake .#bagalamukhi
 
 # VM test
 nixos-rebuild vm --flake .#bhairavi

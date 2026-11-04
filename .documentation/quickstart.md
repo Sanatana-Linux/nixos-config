@@ -190,7 +190,7 @@ sudo chown -R $USER:users /etc/nixos
 git config --global --add safe.directory /etc/nixos
 
 # rebuild after edits
-sudo nixos-rebuild switch --flake /etc/nixos#$(hostname) --impure
+nixos-rebuild --sudo switch --flake /etc/nixos#$(hostname) --impure
 ```
 
 ## Troubleshooting

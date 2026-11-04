@@ -51,7 +51,7 @@ nixos-rebuild build --flake .#bhairavi
 nixos-rebuild dry-activate --flake .#<host>
 
 # Actual switch (primary host)
-sudo nixos-rebuild switch --flake .#bagalamukhi --impure
+nixos-rebuild --sudo switch --flake .#bagalamukhi --impure
 ```
 
 The `--impure` flag is required because sops-nix references the absolute path `external/secrets/secrets.yaml`.
@@ -77,7 +77,7 @@ NixOS generations are the rollback mechanism:
 nix-env --list-generations -p /nix/var/nix/profiles/system
 
 # Roll back to previous generation
-sudo nixos-rebuild switch --rollback
+nixos-rebuild --sudo switch --rollback
 # Or reboot and pick an earlier generation from the boot menu
 ```
 

@@ -24,7 +24,7 @@ A collection of issues encountered, root causes, and resolutions from actual set
 
 **Workaround**: Apply build constraints to prevent resource exhaustion:
 ```bash
-sudo nixos-rebuild switch --flake .#hostname --max-jobs 1 --cores 16
+nixos-rebuild --sudo switch --flake .#hostname --max-jobs 1 --cores 16
 ```
 This limits parallel builds and reserves cores for system responsiveness. Installation takes longer but succeeds without OOM or thermal shutdown.
 

@@ -42,9 +42,13 @@
 
 ### Build & Switch
 ```bash
-sudo nixos-rebuild switch --flake .#bagalamukhi  # primary host
-sudo nixos-rebuild switch --flake .#matangi      # Sara's host
+nixos-rebuild switch --flake .#bagalamukhi --sudo  # primary host
+nixos-rebuild switch --flake .#matangi --sudo      # Sara's host
 ```
+
+Never `sudo nixos-rebuild` — elevation belongs on the command as `--sudo`
+(`--elevate=sudo`), so evaluation and building stay in your user environment.
+See `.opencode/rules/nixos-rebuild-invocation.md`.
 
 ### Test
 ```bash

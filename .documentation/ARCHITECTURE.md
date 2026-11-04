@@ -437,10 +437,10 @@ config = mkIf cfg.enable (mkMerge [
 
 ```bash
 # Build and switch to a host
-sudo nixos-rebuild switch --flake .#bagalamukhi
+nixos-rebuild --sudo switch --flake .#bagalamukhi
 
 # Test configuration without switching
-sudo nixos-rebuild test --flake .#bagalamukhi
+nixos-rebuild --sudo test --flake .#bagalamukhi
 
 # Format code
 nix fmt

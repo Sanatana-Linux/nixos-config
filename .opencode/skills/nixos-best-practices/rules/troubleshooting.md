@@ -244,7 +244,7 @@ nix flake metadata
 
 1. Verify rebuild ran successfully:
 ```bash
-sudo nixos-rebuild switch --flake .#hostname
+nixos-rebuild --sudo switch --flake .#hostname
 # Look for "success" message
 ```
 
@@ -267,7 +267,7 @@ nix eval .#nixosConfigurations.myhost.config.some.option
 **Fix:**
 - Ensure rebuild succeeded
 - Check if service needs restart: `systemctl restart service-name`
-- For Home Manager: `home-manager switch` (or `sudo nixos-rebuild switch` if integrated)
+- For Home Manager: `home-manager switch` (or `nixos-rebuild --sudo switch` if integrated)
 
 ## Build Fails with "store collision"
 

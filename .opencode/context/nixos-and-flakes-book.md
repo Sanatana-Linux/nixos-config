@@ -44,8 +44,8 @@ NixOS manages **static** system state declaratively. Dynamic data (DBs, user fil
 ## Reference Commands
 
 ```bash
-sudo nixos-rebuild switch --flake .    # build + activate
-sudo nixos-rebuild boot --flake .      # build, activate on next boot
-sudo nixos-rebuild build --flake .     # build only
+nixos-rebuild --sudo switch --flake .    # build + activate
+nixos-rebuild --sudo boot --flake .      # build, activate on next boot
+nixos-rebuild build --flake .           # build only
 nixos-rebuild vm --flake .            # test in VM
 ```

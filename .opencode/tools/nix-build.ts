@@ -34,7 +34,7 @@ export default tool({
         cmd = `nixos-rebuild build --flake ${flake}`
         break
       case "switch":
-        cmd = `sudo nixos-rebuild switch --flake ${flake}`
+        cmd = `nixos-rebuild switch --flake ${flake} --sudo`
         break
       case "vm":
         cmd = `nixos-rebuild vm --flake ${flake}`

@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 with lib; let
@@ -81,6 +82,12 @@ in {
         LogLevel INFO
       '';
     };
+
+    # Non-interactive SSH password authentication for provisioning scripts and
+    # one-off transfers to hosts that do not yet have a key installed.
+    environment.systemPackages = with pkgs; [
+      sshpass
+    ];
 
     # Ensure SSH is allowed through firewall if firewall module is enabled
     modules.system.security.firewall.allowSSH = mkDefault (config.modules.system.security.firewall.enable);

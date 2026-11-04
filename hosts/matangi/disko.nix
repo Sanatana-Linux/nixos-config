@@ -20,11 +20,11 @@
 #
 # Until enrolled, the passphrase is the fallback.
 #
-# NOTE: this layout moves the ESP to /boot/efi and adds a separate /boot
-# partition, whereas matangi's current config sets `boot.efiMountPoint = "/boot"`.
-# Before installing with this file, change hosts/matangi/default.nix to
-# `boot.efiMountPoint = "/boot/efi"` (or omit it — that is the default) and add
-# `boot.initrd.systemd.tpm2.enable = true;`.
+# NOTE: this layout puts the ESP at /boot/efi, matching matangi's running
+# install. It also creates a dedicated 2G /boot partition; the running install
+# keeps /boot on the root filesystem instead. Either arrangement keeps kernels
+# off the ESP. Add `boot.initrd.systemd.tpm2.enable = true;` when installing
+# with this file.
 #
 # Create the shared passphrase file before running disko:
 #   printf '%s' 'PASSPHRASE' > /root/luks.key && chmod 600 /root/luks.key

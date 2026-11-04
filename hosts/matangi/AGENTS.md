@@ -10,8 +10,8 @@ Sara's laptop — Lenovo Legion Pro with Intel+NVIDIA Prime hybrid graphics, use
 
 | File | Description |
 |------|-------------|
-| `default.nix` | Host config — imports hardware-configuration and user smg; enables system/boot/plymouth (efiMountPoint /boot), base, shell+zsh, nix-ld/appimage/shotcut, performance (undervolt, cachy, oomd, zram), laptop power with powerProfilesDaemon, packages (development disabled except nixUtilities/systemCompilers, gui with libs, multimedia with stableVideoEditors, network, python dataProcessing, shell, system), NVIDIA Prime (intelBusId PCI:00:02:0, nvidiaBusId PCI:01:00:0), Intel, bluetooth, TPM, udev, Logitech, Lenovo, sound, networking (hostname matangi, quad9 DNS), iPhone, Stylix, XFCE desktop, Brother printer (user smg), Ollama AI, security (doas, fail2ban, SSH, sudo, PAM, packages); forces nvidia fullCompositionPipeline off |
-| `hardware-configuration.nix` | Auto-generated hardware config — NVMe root + EFI boot + swap partition, Intel CPU, DHCP networking, x86_64-linux |
+| `default.nix` | Host config — imports hardware-configuration and user smg; enables system/boot/plymouth (ESP mounted at /boot/efi), base, shell+zsh, nix-ld/appimage/shotcut, performance (undervolt, cachy, oomd, zram), laptop power with powerProfilesDaemon, packages (development disabled except nixUtilities/systemCompilers, gui with libs, multimedia with stableVideoEditors, network, python dataProcessing, shell, system), NVIDIA Prime (intelBusId PCI:00:02:0, nvidiaBusId PCI:01:00:0), Intel, bluetooth, TPM, udev, Logitech, Lenovo, sound, networking (hostname matangi, quad9 DNS), iPhone, Stylix, XFCE desktop, Brother printer (user smg), Ollama AI, security (doas, fail2ban, SSH, sudo, PAM, packages); forces nvidia fullCompositionPipeline off |
+| `hardware-configuration.nix` | Auto-generated hardware config — ext4 root, ESP mounted at /boot/efi (kernels in root /boot), swap partition, Intel CPU, DHCP networking, x86_64-linux |
 
 ## For AI Agents
 

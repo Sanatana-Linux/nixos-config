@@ -33,7 +33,6 @@
         enable = true;
         theme.enable = true;
         advancedBios.enable = true;
-        efiMountPoint = "/boot";
       };
       networking = {
         enable = true;

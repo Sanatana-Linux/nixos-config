@@ -7,7 +7,6 @@
 }: {
   imports = [
     ./hardware-configuration.nix
-    ./sops.nix
     ../../modules/nixos/system/users/smg.nix
   ];
 

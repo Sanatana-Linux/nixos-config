@@ -10,7 +10,7 @@
 - **Key config**: `external/secrets/.sops.yaml` — maps host keys to encryption rules
 - **Host configs**: `hosts/<host>/sops.nix` — per-host secret declarations
 - **SSH key**: `/etc/ssh/ssh_host_ed25519_key`
-- **Hosts**: bagalamukhi, matangi, bhairavi, chhinamasta
+- **Hosts**: bagalamukhi, kamala, bhairavi, chhinamasta. matangi deliberately imports no sops configuration — it declares no secrets.
 
 ## Secrets File Structure
 

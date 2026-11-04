@@ -162,7 +162,13 @@ with lib; {
       efi = {
         canTouchEfiVariables = true;
 
-        efiSysMountPoint = "/boot/efi";
+        # The ESP location is per-host: bagalamukhi mounts it at /boot/efi,
+        # matangi mounts the ESP directly at /boot with no separate /boot
+        # partition. Hardcoding /boot/efi here makes grub-install write its core
+        # image to a directory on matangi's ESP instead of the ESP root, so the
+        # firmware keeps booting a stale core against freshly regenerated
+        # modules and fails with "symbol 'grub_memcpy' not found".
+        efiSysMountPoint = config.modules.system.boot.efiMountPoint;
       };
 
       systemd-boot.enable = config.modules.system.boot.loader == "systemd-boot";

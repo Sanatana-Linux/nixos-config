@@ -526,12 +526,37 @@
       paths = ["/home/tlh/Data" "/data"];
       initialize = true;
       pruneOpts = ["--keep-daily 7" "--keep-weekly 4" "--keep-monthly 6"];
-      timerConfig = {OnCalendar = "daily";};
+      timerConfig = {OnCalendar = "*-*-* 00:00:00";};
+    };
+
+    # n8n state: copy the volume without the live SQLite files, then take a
+    # consistent sqlite3 .backup. Separate job so the large data snapshot
+    # keeps its parent chain (a changed path set forces a full re-read).
+    restic.backups.n8n = {
+      repository = "/backup/restic/main";
+      passwordFile = "/etc/restic/password";
+      paths = ["/var/lib/restic-staging/n8n"];
+      timerConfig = {OnCalendar = "*-*-* 01:30:00";};
+      backupPrepareCommand = ''
+        set -eu
+        ${pkgs.coreutils}/bin/install -d -m 0700 /var/lib/restic-staging/n8n
+        ${pkgs.rsync}/bin/rsync -a --delete \
+          --exclude database.sqlite \
+          --exclude 'database.sqlite-wal' \
+          --exclude 'database.sqlite-shm' \
+          /var/lib/docker/volumes/n8n_data/_data/ /var/lib/restic-staging/n8n/
+        ${pkgs.sqlite}/bin/sqlite3 /var/lib/docker/volumes/n8n_data/_data/database.sqlite \
+          ".backup '/var/lib/restic-staging/n8n/database.sqlite'"
+      '';
+      backupCleanupCommand = ''
+        ${pkgs.coreutils}/bin/rm -rf /var/lib/restic-staging/n8n
+      '';
     };
   };
 
-  # restic must not run before the backup disk is mounted.
+  # restic must not run before its source/backup volumes are mounted.
   systemd.services."restic-backups-main".unitConfig.RequiresMountsFor = ["/backup"];
+  systemd.services."restic-backups-n8n".unitConfig.RequiresMountsFor = ["/backup" "/var/lib/docker"];
 
   system.stateVersion = "24.11";
 }

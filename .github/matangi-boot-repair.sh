@@ -9,19 +9,12 @@ set -Eeuo pipefail
 # The live ISO's nix may not enable flakes/commands by default.
 export NIX_CONFIG="experimental-features = nix-command flakes"
 
-LOG=${MATANGI_LOG:-/tmp/matangi-boot-repair.log}
-if : >>"$LOG" 2>/dev/null; then
-	exec > >(tee -a "$LOG") 2>&1
-else
-	LOG="(not writable; logging disabled)"
-fi
-
 STEP="startup"
 step() {
 	STEP="$1"
 	printf '\n==> %s\n' "$1"
 }
-trap 'rc=$?; printf "\nFAILED in step: %s\n  at line: %s\n  command: %s\n  exit code: %s\n  full transcript: %s\n" "$STEP" "$LINENO" "$BASH_COMMAND" "$rc" "$LOG" >&2; exit "$rc"' ERR
+trap 'rc=$?; printf "\nFAILED: step=%s line=%s exit=%s\n  command: %s\n" "$STEP" "$LINENO" "$rc" "$BASH_COMMAND" >&2; exit "$rc"' ERR
 
 ROOT_UUID=66e07834-4319-432a-8b31-cccc99fe1769
 ESP_UUID=4854-CD54
@@ -66,8 +59,22 @@ step "handing the checkout to root for evaluation"
 chown -R root:root /mnt/etc/nixos
 
 step "installing the full system and bootloader (builds the whole closure; longest step, expect 10-40 minutes)"
-nixos-install --root /mnt --flake /mnt/etc/nixos#matangi --impure \
-  --option extra-experimental-features "nix-command flakes"
+install_log=/tmp/nixos-install-output.txt
+if ! : >"$install_log" 2>/dev/null; then
+	install_log=""
+fi
+if [ -n "$install_log" ]; then
+	if ! nixos-install --root /mnt --flake /mnt/etc/nixos#matangi --impure \
+		--option extra-experimental-features "nix-command flakes" 2>&1 | tee "$install_log"; then
+		printf '\n===== nixos-install FAILED — last 25 lines =====\n' >&2
+		tail -n 25 "$install_log" >&2 || true
+		printf '===== end installer output =====\n' >&2
+		exit 1
+	fi
+else
+	nixos-install --root /mnt --flake /mnt/etc/nixos#matangi --impure \
+		--option extra-experimental-features "nix-command flakes"
+fi
 
 step "cleaning up mounts"
 umount -R /mnt || echo "warning: /mnt did not unmount cleanly; a reboot releases it"

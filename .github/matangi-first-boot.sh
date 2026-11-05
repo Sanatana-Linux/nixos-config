@@ -3,25 +3,34 @@
 #
 # Restores ownership of the checkout, clears the stale kernels and GRUB modules
 # the old layout left on the ESP, and verifies the new layout actually took.
-# Owner for /etc/nixos is the numeric uid:gid the repair script saved.
-# Optional argument overrides it; no username lookup is performed.
+# Safe to run more than once.
 set -Eeuo pipefail
-
-LOG=${MATANGI_LOG:-/tmp/matangi-first-boot.log}
-if : >> "$LOG" 2>/dev/null; then
-  exec > >(tee -a "$LOG") 2>&1
-else
-  LOG="(not writable; logging disabled)"
-fi
 
 STEP="startup"
 step() {
 	STEP="$1"
 	printf '\n==> %s\n' "$1"
 }
-trap 'rc=$?; printf "\nFAILED in step: %s\n  at line: %s\n  command: %s\n  exit code: %s\n  full transcript: %s\n" "$STEP" "$LINENO" "$BASH_COMMAND" "$rc" "$LOG" >&2; exit "$rc"' ERR
+trap 'rc=$?; printf "\nFAILED: step=%s line=%s exit=%s\n  command: %s\n" "$STEP" "$LINENO" "$rc" "$BASH_COMMAND" >&2; exit "$rc"' ERR
 
-OWNER="${1:-$(cat /etc/nixos.owner 2>/dev/null || echo 0:0)}"
+# Numeric uid:gid only — no passwd lookup. Order: explicit argument, value
+# saved by the repair script, owner of the user's home directory, root.
+resolve_owner() {
+	if [ -n "${1:-}" ]; then
+		printf '%s' "$1"
+		return
+	fi
+	if [ -r /etc/nixos.owner ]; then
+		cat /etc/nixos.owner
+		return
+	fi
+	if [ -d /home/smg ]; then
+		stat -c '%u:%g' /home/smg
+		return
+	fi
+	printf '0:0'
+}
+OWNER=$(resolve_owner "${1:-}")
 failures=0
 
 step "checking privileges"
@@ -29,6 +38,10 @@ if [ "$(id -u)" -ne 0 ]; then
 	echo "Run this script with sudo." >&2
 	exit 1
 fi
+
+step "resolving the checkout owner"
+printf 'using owner %s\n' "$OWNER"
+printf '%s' "$OWNER" >/etc/nixos.owner 2>/dev/null || true
 
 step "removing stale kernels and GRUB modules from the ESP"
 shopt -s nullglob
@@ -43,7 +56,7 @@ fi
 
 step "restoring ownership of /etc/nixos to $OWNER"
 chown -R "$OWNER" /etc/nixos
-printf 'ok: /etc/nixos now owned by %s\n' "$(stat -c '%U:%G' /etc/nixos)"
+printf 'ok: /etc/nixos now owned by %s\n' "$(stat -c '%u:%g' /etc/nixos)"
 
 step "verifying /boot/efi is the vfat ESP"
 if [ "$(findmnt -no FSTYPE /boot/efi 2>/dev/null)" = "vfat" ]; then

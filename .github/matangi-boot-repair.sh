@@ -7,10 +7,10 @@
 set -Eeuo pipefail
 
 LOG=${MATANGI_LOG:-/tmp/matangi-boot-repair.log}
-if : >> "$LOG" 2>/dev/null; then
-  exec > >(tee -a "$LOG") 2>&1
+if : >>"$LOG" 2>/dev/null; then
+	exec > >(tee -a "$LOG") 2>&1
 else
-  LOG="(not writable; logging disabled)"
+	LOG="(not writable; logging disabled)"
 fi
 
 STEP="startup"
@@ -40,13 +40,13 @@ nix-shell -p git --run "
 "
 
 step "moving the ESP to /boot/efi and kernels onto the root filesystem"
+lsblk -o NAME,SIZE,FSTYPE,UUID,MOUNTPOINTS
 mkdir -p /mnt/esp-stage /mnt/boot /mnt/boot/efi
 mount "UUID=$ESP_UUID" /mnt/esp-stage
 cp -a /mnt/esp-stage/. /mnt/boot/
 rm -rf /mnt/boot/EFI
-mount "UUID=$ESP_UUID" /mnt/boot/efi
-cp -a /mnt/esp-stage/EFI /mnt/boot/efi/
 umount /mnt/esp-stage
+mount "UUID=$ESP_UUID" /mnt/boot/efi
 rmdir /mnt/esp-stage
 
 step "checking UEFI boot mode"

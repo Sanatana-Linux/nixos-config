@@ -63,7 +63,7 @@ step "handing the checkout to root for evaluation"
 chown -R root:root /mnt/etc/nixos
 
 step "installing the full system and bootloader (builds the whole closure; longest step, expect 10-40 minutes)"
-nixos-install --root /mnt --flake /mnt/etc/nixos#matangi --no-root-passwd
+nixos-install --root /mnt --flake /mnt/etc/nixos#matangi
 
 step "cleaning up mounts"
 umount -R /mnt || echo "warning: /mnt did not unmount cleanly; a reboot releases it"

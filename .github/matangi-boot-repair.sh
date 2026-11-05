@@ -33,6 +33,7 @@ mount "UUID=$ROOT_UUID" /mnt
 
 step "updating /etc/nixos to origin/main"
 own=$(stat -c '%u:%g' /mnt/etc/nixos)
+printf '%s' "$own" > /mnt/etc/nixos.owner 2>/dev/null || true
 nix-shell -p git --run "
   git -C /mnt/etc/nixos -c safe.directory='*' fetch origin &&
   git -C /mnt/etc/nixos -c safe.directory='*' reset --hard origin/main

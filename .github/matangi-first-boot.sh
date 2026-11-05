@@ -3,7 +3,8 @@
 #
 # Restores ownership of the checkout, clears the stale kernels and GRUB modules
 # the old layout left on the ESP, and verifies the new layout actually took.
-# Optional argument: owner for /etc/nixos, default smg:users.
+# Owner for /etc/nixos is the numeric uid:gid the repair script saved.
+# Optional argument overrides it; no username lookup is performed.
 set -Eeuo pipefail
 
 LOG=${MATANGI_LOG:-/tmp/matangi-first-boot.log}
@@ -20,7 +21,7 @@ step() {
 }
 trap 'rc=$?; printf "\nFAILED in step: %s\n  at line: %s\n  command: %s\n  exit code: %s\n  full transcript: %s\n" "$STEP" "$LINENO" "$BASH_COMMAND" "$rc" "$LOG" >&2; exit "$rc"' ERR
 
-OWNER="${1:-smg:users}"
+OWNER="${1:-$(cat /etc/nixos.owner 2>/dev/null || echo 0:0)}"
 failures=0
 
 step "checking privileges"

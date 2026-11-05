@@ -63,8 +63,17 @@ step "handing the checkout to root for evaluation"
 chown -R root:root /mnt/etc/nixos
 
 step "installing the full system and bootloader (builds the whole closure; longest step, expect 10-40 minutes)"
-nixos-install --root /mnt --flake /mnt/etc/nixos#matangi \
-	--impure --no-root-passwd --no-channel-copy
+NI=$(command -v nixos-install)
+args=(--root /mnt --flake /mnt/etc/nixos#matangi)
+if grep -aq -- '--no-root-passwd' "$NI"; then
+	args+=(--no-root-passwd)
+elif grep -aq -- '--no-root-password' "$NI"; then
+	args+=(--no-root-password)
+fi
+if grep -aq -- '--no-channel-copy' "$NI"; then
+	args+=(--no-channel-copy)
+fi
+nixos-install "${args[@]}"
 
 step "cleaning up mounts"
 umount -R /mnt || echo "warning: /mnt did not unmount cleanly; a reboot releases it"

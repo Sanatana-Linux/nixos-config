@@ -66,11 +66,8 @@ step "handing the checkout to root for evaluation"
 chown -R root:root /mnt/etc/nixos
 
 step "installing the full system and bootloader (builds the whole closure; longest step, expect 10-40 minutes)"
-SYSTEM=$(nix --extra-experimental-features 'nix-command flakes' build \
-  --impure --no-link --print-out-paths \
-  "/mnt/etc/nixos#nixosConfigurations.matangi.config.system.build.toplevel")
-
-nixos-install --root /mnt --system "$SYSTEM"
+nixos-install --root /mnt --flake /mnt/etc/nixos#matangi --impure \
+  --option extra-experimental-features "nix-command flakes"
 
 step "cleaning up mounts"
 umount -R /mnt || echo "warning: /mnt did not unmount cleanly; a reboot releases it"

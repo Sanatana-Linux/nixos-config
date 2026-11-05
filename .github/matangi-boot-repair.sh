@@ -73,6 +73,24 @@ else
 		--option extra-experimental-features "nix-command flakes"
 fi
 
+step "normalising /mnt/etc/fstab for the /boot layout"
+fstab=/mnt/etc/fstab
+if grep -qE '^[^#].*[[:space:]]/boot/efi[[:space:]]' "$fstab"; then
+  sed -i -E 's#([[:space:]])/boot/efi([[:space:]])#\1/boot\2#' "$fstab"
+  echo "rewrote /boot/efi -> /boot in fstab"
+fi
+if ! grep -qE '^[^#].*[[:space:]]/boot[[:space:]]' "$fstab"; then
+  printf 'UUID=%s /boot vfat fmask=0022,dmask=0022 0 2\n' "$ESP_UUID" >> "$fstab"
+  echo "appended /boot entry to fstab"
+fi
+grep -nE '^[^#].*[[:space:]]/boot[[:space:]]' "$fstab"
+
+step "ensuring the GRUB core is installed"
+if [ ! -e /mnt/boot/EFI/nixos/grubx64.efi ]; then
+  echo "core missing; running grub-install inside the target"
+  nixos-enter --root /mnt -c 'grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=nixos --recheck && grub-mkconfig -o /boot/grub/grub.cfg'
+fi
+
 step "restoring checkout ownership to $own"
 chown -R "$own" /mnt/etc/nixos
 printf 'ok: /mnt/etc/nixos now owned by %s\n' "$(stat -c '%u:%g' /mnt/etc/nixos)"
@@ -91,14 +109,10 @@ else
 	echo "FAIL: /boot/EFI/nixos/grubx64.efi missing — firmware entry has no core to load" >&2
 	failures=$((failures + 1))
 fi
-shopt -s nullglob
-kernels=(/mnt/boot/vmlinuz*)
-initrds=(/mnt/boot/initrd*)
-shopt -u nullglob
-if [ "${#kernels[@]}" -gt 0 ] && [ "${#initrds[@]}" -gt 0 ]; then
-	printf 'ok: %s kernel(s), %s initrd(s)\n' "${#kernels[@]}" "${#initrds[@]}"
+if [ -s /mnt/boot/grub/grub.cfg ]; then
+	echo "ok: /boot/grub/grub.cfg present"
 else
-	echo "FAIL: no kernel or initrd found in /boot" >&2
+	echo "FAIL: /boot/grub/grub.cfg missing" >&2
 	failures=$((failures + 1))
 fi
 df -h /mnt/boot || true

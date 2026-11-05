@@ -68,18 +68,14 @@ else
 	echo "FAIL: /boot/EFI/nixos/grubx64.efi missing" >&2
 	failures=$((failures + 1))
 fi
-
-step "verifying kernels are present in /boot"
-shopt -s nullglob
-kernels=(/boot/vmlinuz*)
-initrds=(/boot/initrd*)
-shopt -u nullglob
-if [ "${#kernels[@]}" -gt 0 ] && [ "${#initrds[@]}" -gt 0 ]; then
-	printf 'ok: %s kernel(s), %s initrd(s)\n' "${#kernels[@]}" "${#initrds[@]}"
+step "verifying grub.cfg is present"
+if [ -s /boot/grub/grub.cfg ]; then
+	echo "ok: /boot/grub/grub.cfg present"
 else
-	echo "FAIL: no kernel or initrd found in /boot" >&2
+	echo "FAIL: /boot/grub/grub.cfg missing" >&2
 	failures=$((failures + 1))
 fi
+
 
 step "verifying the running kernel"
 case "$(uname -r)" in

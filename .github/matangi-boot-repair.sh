@@ -29,6 +29,9 @@ if [ "$(id -u)" -ne 0 ]; then
 	exit 1
 fi
 
+step "clearing any mounts left by a previous run"
+umount -R /mnt 2>/dev/null || true
+
 step "mounting the root filesystem (UUID=$ROOT_UUID)"
 mount "UUID=$ROOT_UUID" /mnt
 
@@ -47,7 +50,7 @@ cp -a /mnt/esp-stage/. /mnt/boot/
 rm -rf /mnt/boot/EFI
 umount /mnt/esp-stage
 mount "UUID=$ESP_UUID" /mnt/boot/efi
-rmdir /mnt/esp-stage
+rmdir /mnt/esp-stage 2>/dev/null || true
 
 step "checking UEFI boot mode"
 if [ ! -d /sys/firmware/efi ]; then

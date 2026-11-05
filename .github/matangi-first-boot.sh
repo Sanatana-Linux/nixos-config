@@ -6,8 +6,12 @@
 # Optional argument: owner for /etc/nixos, default smg:users.
 set -Eeuo pipefail
 
-LOG=/tmp/matangi-first-boot.log
-exec > >(tee -a "$LOG") 2>&1
+LOG=${MATANGI_LOG:-/tmp/matangi-first-boot.log}
+if : >> "$LOG" 2>/dev/null; then
+  exec > >(tee -a "$LOG") 2>&1
+else
+  LOG="(not writable; logging disabled)"
+fi
 
 STEP="startup"
 step() {

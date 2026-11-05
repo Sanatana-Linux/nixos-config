@@ -6,8 +6,12 @@
 # full system and bootloader with nixos-install.
 set -Eeuo pipefail
 
-LOG=/tmp/matangi-boot-repair.log
-exec > >(tee -a "$LOG") 2>&1
+LOG=${MATANGI_LOG:-/tmp/matangi-boot-repair.log}
+if : >> "$LOG" 2>/dev/null; then
+  exec > >(tee -a "$LOG") 2>&1
+else
+  LOG="(not writable; logging disabled)"
+fi
 
 STEP="startup"
 step() {

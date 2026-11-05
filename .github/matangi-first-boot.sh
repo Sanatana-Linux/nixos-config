@@ -39,6 +39,12 @@ if [ "$(id -u)" -ne 0 ]; then
 	exit 1
 fi
 
+step "checking this is the installed system, not the live ISO"
+if [ ! -d /etc/nixos ]; then
+	echo "This is the live ISO. Run matangi-boot-repair.sh here, reboot into matangi, then run this script." >&2
+	exit 1
+fi
+
 step "resolving the checkout owner"
 printf 'using owner %s\n' "$OWNER"
 printf '%s' "$OWNER" >/etc/nixos.owner 2>/dev/null || true

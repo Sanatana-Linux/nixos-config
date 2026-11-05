@@ -2,8 +2,9 @@
 # matangi boot repair — run from a NixOS live ISO booted in UEFI mode.
 #
 # Repoints the ESP to /boot/efi, moves kernels and GRUB modules onto the ext4
-# root filesystem, updates the checkout to origin/main, then reinstalls the
-# full system and bootloader with nixos-install.
+# root filesystem, updates the checkout to origin/main, reinstalls the full
+# system and bootloader, then verifies the result and restores checkout
+# ownership. Everything runs from the ISO; nothing else is needed afterwards.
 set -Eeuo pipefail
 
 # The live ISO's nix may not enable flakes/commands by default.
@@ -33,7 +34,7 @@ mount "UUID=$ROOT_UUID" /mnt
 
 step "updating /etc/nixos to origin/main"
 own=$(stat -c '%u:%g' /mnt/etc/nixos)
-printf '%s' "$own" > /mnt/etc/nixos.owner 2>/dev/null || true
+printf '%s' "$own" >/mnt/etc/nixos.owner 2>/dev/null || true
 nix-shell -p git --run "
   git -C /mnt/etc/nixos -c safe.directory='*' fetch origin &&
   git -C /mnt/etc/nixos -c safe.directory='*' reset --hard origin/main
@@ -60,10 +61,7 @@ step "handing the checkout to root for evaluation"
 chown -R root:root /mnt/etc/nixos
 
 step "installing the full system and bootloader (builds the whole closure; longest step, expect 10-40 minutes)"
-install_log=/tmp/nixos-install-output.txt
-if ! : >"$install_log" 2>/dev/null; then
-	install_log=""
-fi
+install_log=$(mktemp /tmp/nixos-install.XXXXXX 2>/dev/null) || install_log=""
 if [ -n "$install_log" ]; then
 	if ! nixos-install --root /mnt --flake /mnt/etc/nixos#matangi --impure \
 		--option extra-experimental-features "nix-command flakes" 2>&1 | tee "$install_log"; then
@@ -72,12 +70,58 @@ if [ -n "$install_log" ]; then
 		printf '===== end installer output =====\n' >&2
 		exit 1
 	fi
+	rm -f "$install_log"
 else
 	nixos-install --root /mnt --flake /mnt/etc/nixos#matangi --impure \
 		--option extra-experimental-features "nix-command flakes"
 fi
 
+step "restoring checkout ownership to $own"
+chown -R "$own" /mnt/etc/nixos
+printf 'ok: /mnt/etc/nixos now owned by %s\n' "$(stat -c '%u:%g' /mnt/etc/nixos)"
+
+step "clearing stale kernels and GRUB modules from the ESP"
+shopt -s nullglob
+stale=(/mnt/boot/efi/vmlinuz-* /mnt/boot/efi/initrd-* /mnt/boot/efi/grub)
+shopt -u nullglob
+if [ "${#stale[@]}" -gt 0 ]; then
+	rm -rf -- "${stale[@]}"
+	printf 'removed: %s\n' "${stale[*]}"
+else
+	echo "nothing stale on the ESP"
+fi
+
+step "verifying the installed layout"
+failures=0
+if [ "$(findmnt -no FSTYPE /mnt/boot/efi 2>/dev/null)" = "vfat" ]; then
+	printf 'ok: /boot/efi is vfat (%s)\n' "$(findmnt -no SOURCE /mnt/boot/efi)"
+else
+	echo "FAIL: /boot/efi is not a vfat mount" >&2
+	failures=$((failures + 1))
+fi
+if findmnt -n /mnt/boot >/dev/null 2>&1; then
+	echo "FAIL: /boot is a separate mount; kernels should sit on the root filesystem" >&2
+	failures=$((failures + 1))
+else
+	echo "ok: /boot is a plain directory on /"
+fi
+shopt -s nullglob
+kernels=(/mnt/boot/vmlinuz*)
+initrds=(/mnt/boot/initrd*)
+shopt -u nullglob
+if [ "${#kernels[@]}" -gt 0 ] && [ "${#initrds[@]}" -gt 0 ]; then
+	printf 'ok: %s kernel(s), %s initrd(s) in /boot\n' "${#kernels[@]}" "${#initrds[@]}"
+else
+	echo "FAIL: no kernel or initrd found in /boot" >&2
+	failures=$((failures + 1))
+fi
+df -h /mnt/boot/efi || true
+if [ "$failures" -ne 0 ]; then
+	printf '%s verification check(s) failed — see above\n' "$failures" >&2
+	exit 1
+fi
+
 step "cleaning up mounts"
 umount -R /mnt || echo "warning: /mnt did not unmount cleanly; a reboot releases it"
 
-printf '\nDone. Reboot, then run: sudo chown -R %s /etc/nixos\n' "$own"
+printf '\nDone. Reboot.\n'

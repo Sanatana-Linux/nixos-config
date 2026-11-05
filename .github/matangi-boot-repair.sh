@@ -82,7 +82,7 @@ if [ ! -e /mnt/boot/EFI/nixos/grubx64.efi ]; then
 fi
 
 step "restoring checkout ownership"
-chown -R "$own" /mnt/etc/nixos
+nixos-enter --root /mnt -c "chown -R $own /etc/nixos"
 
 step "cleaning up mounts"
 umount -R /mnt || true

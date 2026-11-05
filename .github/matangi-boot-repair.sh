@@ -6,6 +6,9 @@
 # full system and bootloader with nixos-install.
 set -Eeuo pipefail
 
+# The live ISO's nix may not enable flakes/commands by default.
+export NIX_CONFIG="experimental-features = nix-command flakes"
+
 LOG=${MATANGI_LOG:-/tmp/matangi-boot-repair.log}
 if : >>"$LOG" 2>/dev/null; then
 	exec > >(tee -a "$LOG") 2>&1

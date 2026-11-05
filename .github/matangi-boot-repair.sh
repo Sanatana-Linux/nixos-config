@@ -1,10 +1,12 @@
 #!/run/current-system/sw/bin/bash
 # matangi boot repair — run from a NixOS live ISO booted in UEFI mode.
 #
-# Repoints the ESP to /boot/efi, moves kernels and GRUB modules onto the ext4
-# root filesystem, updates the checkout to origin/main, reinstalls the full
-# system and bootloader, then verifies the result and restores checkout
-# ownership. Everything runs from the ISO; nothing else is needed afterwards.
+# The vfat ESP is mounted at /boot on this host; there is no separate /boot/efi.
+# The original boot failure was grub-install writing its core image to
+# /boot/efi — a plain directory inside the ESP — while the firmware entry kept
+# loading the stale core from the ESP root. modules/nixos/system/boot.nix now
+# honours boot.efiMountPoint, so installing with the ESP mounted at /boot
+# rewrites the core exactly where the firmware looks.
 set -Eeuo pipefail
 
 # The live ISO's nix may not enable flakes/commands by default.
@@ -40,15 +42,10 @@ nix-shell -p git --run "
   git -C /mnt/etc/nixos -c safe.directory='*' reset --hard origin/main
 "
 
-step "moving the ESP to /boot/efi and kernels onto the root filesystem"
+step "mounting the ESP at /mnt/boot"
 lsblk -o NAME,SIZE,FSTYPE,UUID,MOUNTPOINTS
-mkdir -p /mnt/esp-stage /mnt/boot /mnt/boot/efi
-mount "UUID=$ESP_UUID" /mnt/esp-stage
-cp -a /mnt/esp-stage/. /mnt/boot/
-rm -rf /mnt/boot/EFI
-umount /mnt/esp-stage
-mount "UUID=$ESP_UUID" /mnt/boot/efi
-rmdir /mnt/esp-stage 2>/dev/null || true
+mkdir -p /mnt/boot
+mount "UUID=$ESP_UUID" /mnt/boot
 
 step "checking UEFI boot mode"
 if [ ! -d /sys/firmware/efi ]; then
@@ -80,42 +77,31 @@ step "restoring checkout ownership to $own"
 chown -R "$own" /mnt/etc/nixos
 printf 'ok: /mnt/etc/nixos now owned by %s\n' "$(stat -c '%u:%g' /mnt/etc/nixos)"
 
-step "clearing stale kernels and GRUB modules from the ESP"
-shopt -s nullglob
-stale=(/mnt/boot/efi/vmlinuz-* /mnt/boot/efi/initrd-* /mnt/boot/efi/grub)
-shopt -u nullglob
-if [ "${#stale[@]}" -gt 0 ]; then
-	rm -rf -- "${stale[@]}"
-	printf 'removed: %s\n' "${stale[*]}"
-else
-	echo "nothing stale on the ESP"
-fi
-
 step "verifying the installed layout"
 failures=0
-if [ "$(findmnt -no FSTYPE /mnt/boot/efi 2>/dev/null)" = "vfat" ]; then
-	printf 'ok: /boot/efi is vfat (%s)\n' "$(findmnt -no SOURCE /mnt/boot/efi)"
+if [ "$(findmnt -no FSTYPE /mnt/boot 2>/dev/null)" = "vfat" ]; then
+	printf 'ok: /boot is the vfat ESP (%s)\n' "$(findmnt -no SOURCE /mnt/boot)"
 else
-	echo "FAIL: /boot/efi is not a vfat mount" >&2
+	echo "FAIL: /boot is not a vfat mount" >&2
 	failures=$((failures + 1))
 fi
-if findmnt -n /mnt/boot >/dev/null 2>&1; then
-	echo "FAIL: /boot is a separate mount; kernels should sit on the root filesystem" >&2
-	failures=$((failures + 1))
+if [ -e /mnt/boot/EFI/nixos/grubx64.efi ]; then
+	echo "ok: /boot/EFI/nixos/grubx64.efi present"
 else
-	echo "ok: /boot is a plain directory on /"
+	echo "FAIL: /boot/EFI/nixos/grubx64.efi missing — firmware entry has no core to load" >&2
+	failures=$((failures + 1))
 fi
 shopt -s nullglob
 kernels=(/mnt/boot/vmlinuz*)
 initrds=(/mnt/boot/initrd*)
 shopt -u nullglob
 if [ "${#kernels[@]}" -gt 0 ] && [ "${#initrds[@]}" -gt 0 ]; then
-	printf 'ok: %s kernel(s), %s initrd(s) in /boot\n' "${#kernels[@]}" "${#initrds[@]}"
+	printf 'ok: %s kernel(s), %s initrd(s)\n' "${#kernels[@]}" "${#initrds[@]}"
 else
 	echo "FAIL: no kernel or initrd found in /boot" >&2
 	failures=$((failures + 1))
 fi
-df -h /mnt/boot/efi || true
+df -h /mnt/boot || true
 if [ "$failures" -ne 0 ]; then
 	printf '%s verification check(s) failed — see above\n' "$failures" >&2
 	exit 1

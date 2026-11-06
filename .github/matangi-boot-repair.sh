@@ -1,9 +1,8 @@
 #!/run/current-system/sw/bin/bash
 # matangi boot repair — run from a NixOS live ISO booted in UEFI mode.
 #
-# Mounts the vfat ESP at /boot, reinstalls the system with that layout, makes
-# sure /etc/fstab mounts the ESP at /boot and the GRUB core lands at
-# /boot/EFI/nixos/grubx64.efi.
+# Mounts the vfat ESP at /boot, reinstalls the system with that layout, and
+# installs the GRUB core at /boot/EFI/nixos/grubx64.efi if it is missing.
 set -Eeuo pipefail
 
 export NIX_CONFIG="experimental-features = nix-command flakes"

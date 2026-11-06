@@ -52,23 +52,8 @@ step "handing the checkout to root for evaluation"
 chown -R root:root /mnt/etc/nixos
 
 step "reinstalling the system and bootloader (longest step, 10-40 minutes)"
-install_log=$(mktemp /tmp/nixos-install.XXXXXX 2>/dev/null) || install_log=""
-if [ -n "$install_log" ]; then
-	if ! nixos-install --root /mnt --flake /mnt/etc/nixos#matangi --impure \
-		--option extra-experimental-features "nix-command flakes" 2>&1 | tee "$install_log"; then
-		printf '\n===== nixos-install FAILED =====\n' >&2
-		printf -- '--- failing derivations / errors ---\n' >&2
-		grep -nE 'error:|failed to build|builder for|dependency|cannot|not valid|No space' "$install_log" | tail -n 40 >&2 || true
-		printf -- '--- last 60 lines ---\n' >&2
-		tail -n 60 "$install_log" >&2 || true
-		printf '===== end installer output =====\n' >&2
-		exit 1
-	fi
-	rm -f "$install_log"
-else
-	nixos-install --root /mnt --flake /mnt/etc/nixos#matangi --impure \
-		--option extra-experimental-features "nix-command flakes"
-fi
+nixos-install --root /mnt --flake /mnt/etc/nixos#matangi --impure \
+  --option extra-experimental-features "nix-command flakes"
 
 step "pinning the ESP to /boot in fstab"
 fstab=/mnt/etc/fstab

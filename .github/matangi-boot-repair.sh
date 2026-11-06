@@ -55,15 +55,6 @@ step "reinstalling the system and bootloader (longest step, 10-40 minutes)"
 nixos-install --root /mnt --flake /mnt/etc/nixos#matangi --impure \
   --option extra-experimental-features "nix-command flakes"
 
-step "pinning the ESP to /boot in fstab"
-fstab=/mnt/etc/fstab
-if grep -qE '^[^#].*[[:space:]]/boot/efi[[:space:]]' "$fstab"; then
-	sed -i -E 's#([[:space:]])/boot/efi([[:space:]])#\1/boot\2#' "$fstab"
-fi
-if ! grep -qE '^[^#].*[[:space:]]/boot[[:space:]]' "$fstab"; then
-	printf 'UUID=%s /boot vfat fmask=0022,dmask=0022 0 2\n' "$ESP_UUID" >>"$fstab"
-fi
-
 step "installing the GRUB core at /boot/EFI/nixos"
 if [ ! -e /mnt/boot/EFI/nixos/grubx64.efi ]; then
 	nixos-enter --root /mnt -c 'grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=nixos --recheck && grub-mkconfig -o /boot/grub/grub.cfg'

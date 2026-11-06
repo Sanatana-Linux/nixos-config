@@ -1,8 +1,9 @@
 #!/run/current-system/sw/bin/bash
 # matangi boot repair — run from a NixOS live ISO booted in UEFI mode.
 #
-# Mounts the vfat ESP at /boot, reinstalls the system with that layout, and
-# installs the GRUB core at /boot/EFI/nixos/grubx64.efi if it is missing.
+# Mounts the vfat ESP at /boot and reinstalls the system with that layout.
+# The bootloader is installed by nixos-install itself, which uses the EFI-aware
+# grub package by absolute path.
 set -Eeuo pipefail
 
 export NIX_CONFIG="experimental-features = nix-command flakes"
@@ -54,10 +55,6 @@ step "reinstalling the system and bootloader (longest step, 10-40 minutes)"
 nixos-install --root /mnt --flake /mnt/etc/nixos#matangi --impure \
   --option extra-experimental-features "nix-command flakes"
 
-step "installing the GRUB core at /boot/EFI/nixos"
-if [ ! -e /mnt/boot/EFI/nixos/grubx64.efi ]; then
-	nixos-enter --root /mnt -c 'grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=nixos --recheck && grub-mkconfig -o /boot/grub/grub.cfg'
-fi
 
 step "restoring checkout ownership"
 nixos-enter --root /mnt -c "chown -R $own /etc/nixos"

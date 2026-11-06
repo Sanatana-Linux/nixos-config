@@ -92,7 +92,10 @@
           specializedFormats = true;
           integrationLibs = true;
         };
-        core.enable = true;
+        core = {
+          enable = true;
+          codingTools = false;
+        };
         development = {
           enable = false;
           linters = false;

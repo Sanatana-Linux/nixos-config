@@ -9,6 +9,12 @@ with lib; let
 in {
   options.modules.base.packages.core = {
     enable = mkEnableOption "Core system utilities";
+
+    codingTools = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Install OpenCode and the mcp-nixos MCP server";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -55,8 +61,6 @@ in {
       papirus-folders # Papirus icon folder colors
 
       # Misc Utilities
-      llm-agents.opencode # opencode from numtide/llm-agents.nix (tracks upstream releases)
-      mcp-nixos # MCP server exposing package/option search to OpenCode
       tealdeer # tldr pages in Rust
       dmg2img # Convert DMG to IMG
       cbfmt # Clipboard formatter
@@ -65,6 +69,10 @@ in {
       libapparmor # AppArmor security library
       libglibutil # GLib utilities
       sillytavern
+    ]
+    ++ optionals cfg.codingTools [
+      llm-agents.opencode # opencode from numtide/llm-agents.nix (tracks upstream releases)
+      mcp-nixos # MCP server exposing package/option search to OpenCode
     ];
   };
 }

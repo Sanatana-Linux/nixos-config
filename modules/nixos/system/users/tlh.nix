@@ -67,6 +67,7 @@ in {
           "kvm"
           "networkmanager"
           "power"
+          "render"
           "systemd-journal"
           "tss"
           "wireshark"

@@ -35,6 +35,7 @@ in {
         glew_1_10 # Older version of GLEW for compatibility
         glfw # OpenGL framework for window/context/input
         mesa # Open-source OpenGL implementation
+        mesa_glu
         xorg_sys_opengl # Xorg OpenGL system integration
         libxshmfence # X shared memory fence Library
         libva # Video Acceleration API

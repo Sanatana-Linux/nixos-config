@@ -76,6 +76,7 @@ in {
           mp4v2
           oggvideotools
           peek
+          pypeek
           yt-dlp
           svt-av1
           # Video editing effects and filters

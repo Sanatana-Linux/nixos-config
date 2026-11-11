@@ -27,7 +27,7 @@
       # erlang = pkgs.beam.interpreters.erlang;
 
       # use latest version of Erlang 27
-      erlang = final.beam.interpreters.erlang_27;
+      erlang = final.beam.interpreters.erlang_28;
 
       # specify exact version of Erlang OTP
       # erlang = pkgs.beam.interpreters.erlang.override {
@@ -46,7 +46,7 @@
       # elixir = pkgs-beam.elixir;
 
       # use latest version of Elixir 1.17
-      elixir = pkgs-beam.elixir_1_17;
+      elixir = pkgs-beam.elixir_1_19;
 
       # specify exact version of Elixir
       # elixir = pkgs-beam.elixir.override {

@@ -16,7 +16,7 @@
   in {
     devShells = forEachSupportedSystem ({pkgs}: {
       default = pkgs.mkShell {
-        packages = with pkgs; [ruby_3_2];
+        packages = with pkgs; [ruby_3_3];
       };
     });
   };

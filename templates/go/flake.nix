@@ -1,5 +1,5 @@
 {
-  description = "A Nix-flake-based Go 1.22 development environment";
+  description = "A Nix-flake-based Go 1.25 development environment";
 
   inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
@@ -7,7 +7,7 @@
     self,
     nixpkgs,
   }: let
-    goVersion = 22; # Change this to update the whole stack
+    goVersion = 25; # Change this to update the whole stack
 
     supportedSystems = ["x86_64-linux" "aarch64-linux"];
     forEachSupportedSystem = f:
@@ -28,9 +28,6 @@
         packages = with pkgs; [
           # go (version is specified by overlay)
           go
-
-          # goimports, godoc, etc.
-          gotools
 
           # https://github.com/golangci/golangci-lint
           golangci-lint

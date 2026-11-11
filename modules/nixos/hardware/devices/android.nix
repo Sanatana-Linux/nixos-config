@@ -31,14 +31,11 @@ with lib; {
         # mount android with fuse
         go-mtpfs
         # download apks from terminal
-        apkeep
-        # identify .apk files
         apkid
         #  Copy/extract/patch android apk signatures & compare APKs
         apksigcopier
 
         apkeditor
-        apkeep
 
         apkleaks
         # sign and verify apk files

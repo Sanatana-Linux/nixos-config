@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 with lib; let
@@ -18,7 +19,7 @@ in {
         (P/E-core) aware; `scx_bpfland` is a good general-purpose desktop
         alternative; `scx_rusty` is the classic all-rounder. Requires a kernel
         built with `CONFIG_SCHED_CLASS_EXT` (the XanMod kernel has it) and the
-        NixOS `services.scx` module, which asserts kernel >= 6.12.
+        NixOS `services.scx-loader` module, which asserts kernel >= 6.12.
       '';
     };
 
@@ -31,10 +32,10 @@ in {
   };
 
   config = mkIf cfg.enable {
-    services.scx = {
+    services.scx-loader = {
       enable = true;
-      inherit (cfg) scheduler;
-      inherit (cfg) extraArgs;
+      schedsPackages = [pkgs.scx.full];
+      config.default_sched = cfg.scheduler;
     };
   };
 }

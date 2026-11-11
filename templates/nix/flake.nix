@@ -18,9 +18,6 @@
       default = pkgs.mkShell {
         packages = with pkgs; [
           cachix
-          lorri
-          niv
-          nixfmt-classic
           statix
           vulnix
           haskellPackages.dhall-nix

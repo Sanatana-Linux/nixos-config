@@ -62,6 +62,21 @@
         acpi_call = signModulePackage kPrev.acpi_call;
         lenovo-legion-module = signModulePackage kPrev.lenovo-legion-module;
         ryzen-smu = signModulePackage kPrev.ryzen-smu;
+        # Recent nixpkgs ships the XanMod kernel source tarball with the
+        # `tools-add-128-bit-integer-types-for-aarch64.patch` already applied.
+        # patchPhase then fails with "Reversed patch detected" because it
+        # prompts interactively. Drop already-applied patches to work around this.
+        kernel = kPrev.kernel.overrideAttrs (old: {
+          patches = [];
+        });
+      });
+
+    # Same cert fix for the standard kernel packages (currently in use).
+    linuxPackages_latest =
+      prev.linuxPackages_latest.extend
+      (_kFinal: kPrev: {
+        acpi_call = signModulePackage kPrev.acpi_call;
+        lenovo-legion-module = signModulePackage kPrev.lenovo-legion-module;
       });
 
     # pipx and anyio fail their own test suites inside the Nix sandbox: pipx
@@ -90,8 +105,8 @@
         }
     );
 
-    # nix-search CLI from the `nps` flake input; not packaged in nixpkgs.
-    nps = inputs.nps.defaultPackage.${prev.stdenv.hostPlatform.system};
+    # nix-search CLI now packaged in nixpkgs.
+    nps = prev.nps;
 
     # nixpkgs' typescript-language-server 6.0.2 ships a pnpmDeps hash that no
     # longer reproduces (the FOD aborts). Use the stable-channel 5.3.0 instead.

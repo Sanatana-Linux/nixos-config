@@ -55,13 +55,8 @@ with lib; {
     boot = {
       tmp.cleanOnBoot = true;
 
-      # XanMod mainline (7.2.x) from nixpkgs. The CachyOS LTO + BORE + x86-64-v3
-      # kernel is a local build on every nixpkgs bump: Hydra does not build it,
-      # and the CachyOS mirror only carries the exact revisions it has indexed,
-      # so each update costs a full LTO kernel compile before anything else can
-      # be tested. XanMod ships the same scheduler and config lineage and is
-      # built by Hydra, so it substitutes.
-      kernelPackages = pkgs.linuxPackages_xanmod_latest;
+      # Standard kernel from nixpkgs. Hydra builds substitutes, so updates are fast.
+      kernelPackages = pkgs.linuxPackages_latest;
 
       blacklistedKernelModules = ["nouveau"];
 

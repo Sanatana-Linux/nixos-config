@@ -57,7 +57,6 @@ in {
           grex # Regex generator
           bc # Arbitrary precision calculator
           pandoc # Document converter
-          tectonic # Modern LaTeX/PDF typesetting engine
 
           # Diagrams & Documentation
           mermaid-cli # Mermaid diagram CLI (mmdc)
@@ -229,7 +228,6 @@ in {
           tree-sitter-grammars.tree-sitter-vim # Vim grammar
           tree-sitter-grammars.tree-sitter-vue # Vue grammar
           tree-sitter-grammars.tree-sitter-yaml # YAML grammar
-          python312Packages.tree-sitter-language-pack # Python tree-sitter bindings
         ]
         # Language servers
         ++ optionals cfg.languageServers [

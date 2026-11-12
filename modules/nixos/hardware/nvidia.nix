@@ -143,7 +143,7 @@ in {
           nvidia-texture-tools
           nv-codec-headers
           nvtopPackages.full
-          nvidia_cg_toolkit
+          # nvidia_cg_toolkit # NVIDIA Cg toolkit - not available on aarch64
           nvidia-optical-flow-sdk
           # Vulkan
           vulkan-headers

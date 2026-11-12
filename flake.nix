@@ -277,7 +277,40 @@
         ];
       };
 
-      # ┣━━━━━━━━━━━━━━━━━━━━━┫ NixOS Live USB ┣━━━━━━━━━━━━━━━━━━━━━┫
+      # ┣━━━━━━━━━━━━━━━━━━┫ Raspberry Pi 3 — Headless DNS Adblocker ┣━━━━━━━━━━━━━━━━━┫
+      # Raspberry Pi 3 Model B (BCM2837, AArch64), 32 GB SD card. Headless
+      # AdGuard Home DNS adblocker for the LAN. Built remotely from this
+      # machine; hardware-configuration.nix is a starter that must be
+      # regenerated on the Pi before first switch.
+      rpi3 = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        modules = [
+          inputs.sops-nix.nixosModules.sops
+          inputs.nur.modules.nixos.default
+          inputs.nixos-hardware.nixosModules.raspberry-pi-3
+          inputs.stylix.nixosModules.stylix
+          inputs.bhairava-grub-theme.nixosModule
+          inputs.home-manager.nixosModules.home-manager
+          inputs.greeter-ganapati.nixosModules.default
+          inputs.om.nixosModules.om
+          ./modules/nixos
+          {
+            home-manager = {
+              useUserPackages = true;
+              backupFileExtension = "bak";
+              overwriteBackup = true;
+              extraSpecialArgs = {inherit inputs outputs;};
+              sharedModules = [./modules/home-manager];
+              users = {
+                tlh = {imports = [./modules/home-manager/users/tlh-rpi3/default.nix];};
+              };
+            };
+          }
+          ./hosts/rpi3
+        ];
+      };
+
+      # ┣━━━━━━━━━━━━━━━━━━┫ NixOS Live USB ┣━━━━━━━━━━━━━━━━━━━━━┫
       chhinamasta = nixpkgs.lib.nixosSystem {
         specialArgs = {
           inherit inputs outputs self;

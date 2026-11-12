@@ -91,7 +91,7 @@ in {
         # nvidia-container-toolkit # NVIDIA container toolkit
         nvidia-texture-tools # NVIDIA texture processing tools
         nvidia-vaapi-driver # NVIDIA VAAPI driver
-        nvidia_cg_toolkit # NVIDIA Cg toolkit
+        # nvidia_cg_toolkit # NVIDIA Cg toolkit - not available on aarch64
         nvtopPackages.nvidia # NVIDIA GPU monitoring tool
         peakperf # Performance analysis tool
         libva-vdpau-driver # VAAPI to VDPAU translation library

@@ -129,6 +129,10 @@
         };
         sudo.enable = true;
         tpm.enable = true;
+        # Secrets CLI tooling, installed into the system profile from the
+        # external/secrets submodule so it is always the current build and
+        # works from any directory.
+        secretsTools.enable = true;
 
         # Firewall configuration
         firewall = {

@@ -19,7 +19,8 @@ in {
         buildInputs = [pkgs.makeWrapper];
         postBuild = ''
           wrapProgram $out/bin/shotcut \
-            --prefix FREI0R_PATH : "${pkgs.frei0r}/lib/frei0r-1"
+            --prefix FREI0R_PATH : "${pkgs.frei0r}/lib/frei0r-1" \
+            --prefix MLT_REPOSITORY : "${pkgs.mlt}/lib/mlt-7"
         '';
         meta.mainProgram = "shotcut";
       };

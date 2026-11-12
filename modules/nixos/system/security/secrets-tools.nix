@@ -21,6 +21,7 @@ with lib; let
     inherit pkgs;
     lib = pkgs.lib;
     systemKeyFile = cfg.sopsKeyFile;
+    repoRootDefault = cfg.secretsDir;
   };
 
   scriptNames = [

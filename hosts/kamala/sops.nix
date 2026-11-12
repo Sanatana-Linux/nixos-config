@@ -9,4 +9,8 @@
   # cannot be hashed into the nix store at eval time. Disable eval-time
   # validation; integrity is enforced by the sops CLI during edits.
   sops.validateSopsFiles = false;
+  # Point the interactive `sops` CLI at the same key the system uses, instead
+  # of relying on the ~/.config/sops/age default path (which the secrets
+  # repo's justfile overwrites with an unrelated key set).
+  environment.sessionVariables.SOPS_AGE_KEY_FILE = "/var/lib/sops/age-keys.txt";
 }

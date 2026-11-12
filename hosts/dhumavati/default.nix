@@ -42,7 +42,7 @@
       };
       networking = {
         enable = true;
-        hostName = "rpi3";
+        hostName = "dhumavati";
         # Headless Pi — Ethernet + WiFi both available, use NetworkManager.
         wifi = {
           randomMac = false;
@@ -142,7 +142,7 @@
   };
 
   # ── AdGuard Home — network-wide adblocking DNS server ───────────────────
-  # mDNS so `ssh rpi3.local` works from bagalamukhi/kamala on the LAN.
+  # mDNS so `ssh dhumavati.local` works from bagalamukhi/kamala on the LAN.
   services.avahi = {
     enable = true;
     nssmdns4 = true;
@@ -155,7 +155,7 @@
   # Stylix declared at NixOS level so the local modules/nixos/stylix module
   # can reference config.stylix without error. Enabled here so stylix's
   # home-manager integration module is loaded and declares stylix options
-  # at user level; then disabled via tlh-rpi3 override so no theming runs.
+  # at user level; then disabled via tlh-dhumavati override so no theming runs.
   stylix = {
     enable = true;
     base16Scheme = "/etc/nixos/external/base16_monokai_pro/base16-sanatana-linux.yml";

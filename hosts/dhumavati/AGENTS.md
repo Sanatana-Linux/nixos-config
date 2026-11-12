@@ -1,6 +1,4 @@
-<!-- Generated: 2026-11-12 -->
-
-# rpi3
+# dhumavati
 
 ## Purpose
 Raspberry Pi 3 Model B (BCM2837, AArch64), 32 GB SD card. Headless AdGuard
@@ -28,12 +26,12 @@ before first switch.
 - No desktop, no Stylix, no NVIDIA/Intel/AMD hardware modules — headless
 - `hardware-configuration.nix` is a starter; regenerate on the target with `nixos-generate-config --show-hardware-config` before first switch
 - AdGuard Home (`services.adguardhome`) provides network-wide DNS ad blocking on port 53, web UI on port 3000
-- Build remotely: `nixos-rebuild switch --flake .#rpi3 --impure --sudo` (run on the Pi after copying the flake)
+- Build remotely: `nixos-rebuild switch --flake .#dhumavati --impure --sudo` (run on the Pi after copying the flake)
 
 ### Module enables
 - `modules.system.performance.default.enable = true` (oomd + zram, no undervolt)
 - `services.adguardhome.enable = true` — DNS adblocker
-- `services.avahi.enable = true` — mDNS for `rpi3.local`
+- `services.avahi.enable = true` — mDNS for `dhumavati.local`
 - `users.tlh.enable = true` — primary user
 
 ### Boot process

@@ -277,12 +277,12 @@
         ];
       };
 
-      # ┣━━━━━━━━━━━━━━━━━━┫ Raspberry Pi 3 — Headless DNS Adblocker ┣━━━━━━━━━━━━━━━━━┫
+      # ┣━━━━━━━━━━━━━━━━━┫ Dhumavati — Headless DNS Adblocker ┣━━━━━━━━━━━━━━━━━┫
       # Raspberry Pi 3 Model B (BCM2837, AArch64), 32 GB SD card. Headless
       # AdGuard Home DNS adblocker for the LAN. Built remotely from this
       # machine; hardware-configuration.nix is a starter that must be
       # regenerated on the Pi before first switch.
-      rpi3 = nixpkgs.lib.nixosSystem {
+      dhumavati = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [
           inputs.sops-nix.nixosModules.sops
@@ -302,11 +302,11 @@
               extraSpecialArgs = {inherit inputs outputs;};
               sharedModules = [./modules/home-manager];
               users = {
-                tlh = {imports = [./modules/home-manager/users/tlh-rpi3/default.nix];};
+                tlh = {imports = [./modules/home-manager/users/tlh-dhumavati/default.nix];};
               };
             };
           }
-          ./hosts/rpi3
+          ./hosts/dhumavati
         ];
       };
 

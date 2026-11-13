@@ -16,7 +16,7 @@
   # Root filesystem — ext4 on the SD card. UUID/label to be regenerated on
   # the target machine with `nixos-generate-config --show-hardware-config`.
   fileSystems."/" = {
-    device = "/dev/disk/by-label/dhumavati-root";
+    device = lib.mkDefault "/dev/disk/by-label/dhumavati-root";
     fsType = "ext4";
     options = ["noatime" "commit=120"];
   };
@@ -24,7 +24,7 @@
   # Firmware partition — FAT32, holds Raspberry Pi boot files, U-Boot, and
   # extlinux.conf. Mounted at /boot/firmware for the rpi firmware module.
   fileSystems."/boot/firmware" = {
-    device = "/dev/disk/by-label/dhumavati-firmware";
+    device = lib.mkDefault "/dev/disk/by-label/dhumavati-firmware";
     fsType = "vfat";
     options = ["fmask=0022" "dmask=0022"];
   };

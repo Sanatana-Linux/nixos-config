@@ -178,5 +178,6 @@
   };
 
   system.stateVersion = "24.11";
-  nixpkgs.config = { allowUnsupportedSystem = true; allowUnfree = true; };
+  nixpkgs.config.allowUnsupportedSystem = true;
+  nixpkgs.config.allowUnfree = true;
 }

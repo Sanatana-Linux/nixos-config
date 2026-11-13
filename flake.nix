@@ -342,5 +342,37 @@
       };
     };
     # ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
+
+    # Raspberry Pi 3 SD card image for Dhumavati
+    # Build with: nix build --impure --system aarch64-linux .#dhumavati
+    dhumavatiSdImage = nixpkgs.lib.nixosSystem {
+      system = "aarch64-linux";
+      specialArgs = {inherit inputs outputs;};
+      modules = [
+        "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
+        inputs.sops-nix.nixosModules.sops
+        inputs.nur.modules.nixos.default
+        inputs.nixos-hardware.nixosModules.raspberry-pi-3
+        inputs.stylix.nixosModules.stylix
+        inputs.bhairava-grub-theme.nixosModule
+        inputs.home-manager.nixosModules.home-manager
+        inputs.greeter-ganapati.nixosModules.default
+        inputs.om.nixosModules.om
+        ./modules/nixos
+        {
+          home-manager = {
+            useUserPackages = true;
+            backupFileExtension = "bak";
+            overwriteBackup = true;
+            extraSpecialArgs = {inherit inputs outputs;};
+            sharedModules = [./modules/home-manager];
+            users = {
+              tlh = {imports = [./modules/home-manager/users/tlh-dhumavati/default.nix];};
+            };
+          };
+        }
+        ./hosts/dhumavati
+      ];
+    };
   };
 }

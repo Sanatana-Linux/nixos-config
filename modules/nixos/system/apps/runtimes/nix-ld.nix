@@ -9,6 +9,7 @@ with lib; let
 in {
   options.modules.system.apps.nix-ld = {
     enable = mkEnableOption "nix-ld for running dynamically linked binaries";
+    enableNvidia = mkEnableOption "Include CUDA and NVIDIA libraries in nix-ld profile";
   };
 
   config = mkIf cfg.enable {
@@ -68,20 +69,22 @@ in {
         portaudio # Cross-platform audio I/O library
         speex # Speech codec library
 
-        # CUDA/NVIDIA
-        config.boot.kernelPackages.nvidiaPackages.production # NVIDIA X11 kernel module
-        cudaPackages.nccl # NVIDIA Collective Communications Library
-        cudaPackages.libnvjitlink # CUDA JIT linker
-        cudaPackages.cccl # CUDA C++ Core Libraries
-        cudaPackages.cuda_cudart # CUDA runtime library
-        cudaPackages.cuda_gdb # CUDA debugger
-        cudaPackages.saxpy # CUDA sample code
-        cudaPackages.cuda_nvml_dev # NVIDIA Management Library (dev)
-        cudaPackages.cuda_opencl # CUDA OpenCL support
-        cudaPackages.cudatoolkit # CUDA toolkit
-        cudaPackages.libcublas # CUDA BLAS library
-        cudaPackages.libcusparse # CUDA sparse matrix library
-        cudatoolkit # CUDA toolkit (meta)
+        # CUDA/NVIDIA libraries (only on GPU hosts)
+        lib.optionals cfg.enableNvidia [
+          config.boot.kernelPackages.nvidiaPackages.production # NVIDIA X11 kernel module
+          cudaPackages.nccl # NVIDIA Collective Communications Library
+          cudaPackages.libnvjitlink # CUDA JIT linker
+          cudaPackages.cccl # CUDA C++ Core Libraries
+          cudaPackages.cuda_cudart # CUDA runtime library
+          cudaPackages.cuda_gdb # CUDA debugger
+          cudaPackages.saxpy # CUDA sample code
+          cudaPackages.cuda_nvml_dev # NVIDIA Management Library (dev)
+          cudaPackages.cuda_opencl # CUDA OpenCL support
+          cudaPackages.cudatoolkit # CUDA toolkit
+          cudaPackages.libcublas # CUDA BLAS library
+          cudaPackages.libcusparse # CUDA sparse matrix library
+          cudatoolkit # CUDA toolkit (meta)
+        ]
         intel-media-driver # Intel VAAPI driver for GPUs
         intel-vaapi-driver # Intel VAAPI driver (older)
         # libnvidia-container # NVIDIA container runtime library
@@ -93,7 +96,6 @@ in {
         nvidia-vaapi-driver # NVIDIA VAAPI driver
         # nvidia_cg_toolkit # NVIDIA Cg toolkit - not available on aarch64
         nvtopPackages.nvidia # NVIDIA GPU monitoring tool
-        peakperf # Performance analysis tool
         libva-vdpau-driver # VAAPI to VDPAU translation library
         # GStreamer - multimedia framework for audio/video processing
         gst_all_1.gstreamer # Core GStreamer framework

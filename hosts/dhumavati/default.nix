@@ -158,7 +158,7 @@
   # at user level; then disabled via tlh-dhumavati override so no theming runs.
   stylix = {
     enable = true;
-    base16Scheme = "/etc/nixos/external/base16_monokai_pro/base16-sanatana-linux.yml";
+    base16Scheme = ../../external/base16_monokai_pro/base16-sanatana-linux.yml;
   };
 
   # Pi 3 boots via U-Boot + extlinux, not GRUB.

@@ -83,6 +83,7 @@
       };
       apps = {
         nix-ld.enable = true;
+        nix-ld.enableNvidia = true;
         appimage = {
           enable = true;
           binfmt = true;

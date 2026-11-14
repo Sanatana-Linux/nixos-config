@@ -178,6 +178,13 @@
   };
 
   system.stateVersion = "24.11";
-  nixpkgs.config.allowUnsupportedSystem = true;
-  nixpkgs.config.allowUnfree = true;
+  # zfs-kernel is broken on aarch64 but dhumavati doesn't need ZFS — allow
+  # evaluation so the SD card image builds. The Pi uses ext4 root only.
+  nixpkgs.config = {
+    allowUnsupportedSystem = true;
+    allowUnfree = true;
+    problems.handlers = {
+      zfs.broken = "warn";
+    };
+  };
 }

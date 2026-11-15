@@ -15,6 +15,18 @@ in {
       default = pkgs.ollama-cuda;
       description = "The Ollama package to use";
     };
+
+    host = mkOption {
+      type = types.str;
+      default = "0.0.0.0";
+      description = "The host Ollama listens on";
+    };
+
+    openFirewall = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Whether to open the Ollama API port in the firewall";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -30,12 +42,9 @@ in {
       package = cfg.package;
       user = "ollama";
       group = "ollama";
-      # Listen on the LAN so SwarmUI on kamala (192.168.1.203) can use the
-      # API for MagicPrompt and other integrations.
-      host = "0.0.0.0";
+      host = cfg.host;
     };
 
-    # Ollama API port, reachable from the LAN.
-    networking.firewall.allowedTCPPorts = [11434];
+    networking.firewall.allowedTCPPorts = lib.optionals cfg.openFirewall [11434];
   };
 }

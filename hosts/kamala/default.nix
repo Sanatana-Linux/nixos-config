@@ -85,6 +85,7 @@
             enable = true;
             host = "0.0.0.0";
             openFirewall = true;
+            package = pkgs.ollama-pascal;
           };
           core.enable = true;
         };

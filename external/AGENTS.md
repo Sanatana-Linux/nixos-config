@@ -14,6 +14,10 @@ Git submodules for external configurations managed outside the NixOS flake. Each
 | `nvim/` | Neovim config (see `nvim/AGENTS.md`) |
 | `firefox/` | Firefox theme/userChrome (see `firefox/AGENTS.md`) |
 | `base16_monokai_pro/` | Base16 Monokai Pro Spectrum color scheme |
+| `om/` | OpenMenu — Sanatana-Linux fork of numtide/llm-agents.nix |
+| `sharabha-gtk-theme/` | GTK theme (Sanatana-Linux) |
+| `lightdm-greeter-ganapati/` | LightDM webkit2 greeter theme (Sanatana-Linux) |
+| `bhairava-grub-theme/` | Custom GRUB theme (Sanatana-Linux) |
 | `README.md` | Submodule documentation |
 
 ## Subdirectories
@@ -24,6 +28,10 @@ Git submodules for external configurations managed outside the NixOS flake. Each
 | `nvim/` | Neovim config — symlinked to `~/.config/nvim` (see `nvim/AGENTS.md`) |
 | `firefox/` | Firefox userChrome theme — symlinked to profile's `chrome/` dir (see `firefox/AGENTS.md`) |
 | `base16_monokai_pro/` | Base16 color scheme for Stylix |
+| `om/` | OpenMenu — Sanatana-Linux fork of numtide/llm-agents.nix |
+| `sharabha-gtk-theme/` | GTK theme (Sanatana-Linux) |
+| `lightdm-greeter-ganapati/` | LightDM webkit2 greeter theme (Sanatana-Linux) |
+| `bhairava-grub-theme/` | Custom GRUB theme (Sanatana-Linux) |
 
 ## For AI Agents
 

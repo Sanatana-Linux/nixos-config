@@ -9,3 +9,10 @@ However I saw this [from ryan4yin's Flake Book])(https://nixos-and-flakes.thiscu
 I could leverage nix to effectively fully provision the system as expected without needing to worry about git cloning the awesomewm and neovim configurations or dealing with the tedious iterative process
 coupled with the already onerous process of making firefox optimal for my workflow according to my idiosyncratic and mildly obsessive-compulsive preferences. Now I am free to focus on driving myself mildly 
 insane to my hearts content and thus benefit more rapidly from devtools and css snippets from 3rd parties. `Hooraw!`
+
+The following Sanatana-Linux repositories are also tracked as submodules under `external/` for co-location with the NixOS configuration:
+
+- `external/om` — OpenMenu fork
+- `external/sharabha-gtk-theme` — GTK theme
+- `external/lightdm-greeter-ganapati` — LightDM greeter theme
+- `external/bhairava-grub-theme` — GRUB theme

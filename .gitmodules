@@ -14,3 +14,15 @@
 	path = external/secrets
 	url = https://github.com/Thomashighbaugh/secrets.git
 	branch = main
+[submodule "external/om"]
+	path = external/om
+	url = https://github.com/Sanatana-Linux/om.git
+[submodule "external/sharabha-gtk-theme"]
+	path = external/sharabha-gtk-theme
+	url = https://github.com/Sanatana-Linux/sharabha-gtk-theme.git
+[submodule "external/lightdm-greeter-ganapati"]
+	path = external/lightdm-greeter-ganapati
+	url = https://github.com/Sanatana-Linux/lightdm-greeter-ganapati.git
+[submodule "external/bhairava-grub-theme"]
+	path = external/bhairava-grub-theme
+	url = https://github.com/Sanatana-Linux/Bhairava-Grub-Theme.git

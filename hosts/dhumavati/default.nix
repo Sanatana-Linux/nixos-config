@@ -50,7 +50,10 @@
         };
       };
       apps = {
-        nix-ld.enable = true;
+        # Headless Pi: nix-ld pulls in heavyweight GUI libraries (PyQt6,
+        # GStreamer, GTK, Intel/NVIDIA) that compile for hours on aarch64 and
+        # are never used by a DNS server. Disabled to keep the image lean.
+        nix-ld.enable = false;
         appimage.enable = false;
         ai = {
           ollama.enable = false;

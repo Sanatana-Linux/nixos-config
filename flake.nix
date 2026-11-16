@@ -379,6 +379,6 @@
         }
         ./hosts/dhumavati
       ];
-    }).config.system.build.toplevel;
+    }).config.system.build.sdImage;
   };
 }

@@ -85,18 +85,19 @@ in {
           cudaPackages.libcusparse # CUDA sparse matrix library
           cudatoolkit # CUDA toolkit (meta)
         ]
-        ++ [
+        ++ lib.optionals pkgs.stdenv.hostPlatform.isx86_64 [
+          # Intel/NVIDIA desktop GPU userspace — these do not build on ARM
+          # (intel-gpu-tools etc.), so they are only pulled in on x86_64.
           intel-media-driver # Intel VAAPI driver for GPUs
           intel-vaapi-driver # Intel VAAPI driver (older)
-          # libnvidia-container # NVIDIA container runtime library
-          libvdpau # Video Decode and Presentation API for Unix
-          libvdpau-va-gl # VDPAU driver with VA-API backend
           nv-codec-headers # NVIDIA codec headers
-          # nvidia-container-toolkit # NVIDIA container toolkit
           nvidia-texture-tools # NVIDIA texture processing tools
           nvidia-vaapi-driver # NVIDIA VAAPI driver
-          # nvidia_cg_toolkit # NVIDIA Cg toolkit - not available on aarch64
           nvtopPackages.nvidia # NVIDIA GPU monitoring tool
+        ]
+        ++ [
+          libvdpau # Video Decode and Presentation API for Unix
+          libvdpau-va-gl # VDPAU driver with VA-API backend
           libva-vdpau-driver # VAAPI to VDPAU translation library
           # GStreamer - multimedia framework for audio/video processing
           gst_all_1.gstreamer # Core GStreamer framework

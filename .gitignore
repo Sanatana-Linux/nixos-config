@@ -93,13 +93,12 @@ CustomizableUI.sys.mjs:4319:17
 *.tmp
 
 # OpenCode session state (gitignored)
-.opencode/state/
-.opencode/cache/
-.opencode/node_modules/
-.opencode/package.json
-.opencode/package-lock.json
-.opencode/bun.lock
-.opencode/.gitignore 
+**/.opencode/state/
+**/.opencode/cache/
+**/.opencode/node_modules/
+**/.opencode/package-lock.json
+**/.opencode/bun.lock
+**/.opencode/.gitignore 
 !.opencode/state/init/ 
 !.opencode/state/project-memory.json 
 node_modules/

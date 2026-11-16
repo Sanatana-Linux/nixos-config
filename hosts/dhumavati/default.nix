@@ -178,6 +178,10 @@
   };
 
   system.stateVersion = "24.11";
+  # The sd-image base profile enables ZFS by default when the package is
+  # "available" on the platform, but ZFS 2.4.4 does not build against kernel
+  # 7.3.4 (max supported 7.2) and the Pi uses ext4 root only. Force it off.
+  boot.supportedFilesystems.zfs = lib.mkForce false;
   # zfs-kernel is broken on aarch64 but dhumavati doesn't need ZFS — allow
   # evaluation so the SD card image builds. The Pi uses ext4 root only.
   nixpkgs.config = {

@@ -31,8 +31,9 @@ in {
       scx.enable = mkDefault true;
     };
 
-    # Performance analysis tools
-    environment.systemPackages = with pkgs; [peakperf];
+    # Performance analysis tools (peakperf is x86-only)
+    environment.systemPackages = with pkgs;
+      lib.optionals pkgs.stdenv.hostPlatform.isx86_64 [peakperf];
 
     # Additional kernel sysctl settings from historical config
     # NOTE: overcommit_memory deliberately NOT set — kernel default (0, heuristic) is correct for desktop.

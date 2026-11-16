@@ -31,7 +31,9 @@ in {
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf (cfg.enable && pkgs.stdenv.hostPlatform.isx86_64) {
+    # SCX BPF schedulers are x86_64-focused; the loader/packages do not apply
+    # (or build) on aarch64 hosts such as the Raspberry Pi.
     services.scx-loader = {
       enable = true;
       schedsPackages = [pkgs.scx.full];

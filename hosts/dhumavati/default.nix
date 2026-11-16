@@ -23,6 +23,13 @@
   # om — NixOS Operations Manager (Zig)
   programs.om.enable = true;
 
+  # SSH keys from bagalamukhi (this build device) so the Pi is reachable
+  # immediately on first boot, before sops provisioning can run.
+  users.users.tlh.openssh.authorizedKeys.keys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMURzKV2nYHMRn7/EDth3ghVUFSo259R++qezrDxqYVr tlh@bagalamukhi"
+    "ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBAHp9kjAO8N2QAsKAXotUpLdOw09kJkoIfsbj/jnImg8UdJL8fDOd+wQuH3PwDhfohTNcDH90JUe5Xn9fa69DUG7zwBFcPkT6jE765bCpoXU//lenupzBiLvvA0C0TNyxKIC9Q+4zeu8Fr/2E9k8ef4iKbcXBUf3U7AkZwoIRID/BkZEgw== tlh@bagalamukhi"
+  ];
+
   modules = {
     # System
     system = {
@@ -106,7 +113,12 @@
     };
 
     # User
-    users.tlh.enable = true;
+    users.tlh = {
+      enable = true;
+      # Temporary first-boot password for SSH/console access; change with
+      # `passwd` after logging in. mutableUsers = true lets that stick.
+      initialPassword = "password";
+    };
 
     base.shell = {
       enable = true;

@@ -331,9 +331,7 @@
   };
 
   # aarch64 binfmt emulation for building dhumavati (Raspberry Pi 3) sd card images
-  environment.etc."binfmt.d/qemu-aarch64.conf".text = ''
-    :aarch64:M:0:\\x7f\\x45\\x4c\\x46\\x02\\x01\\x01\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\xb7\\x00:\\xff\\xff\\xff\\xff\\xff\\xff\\xff\\xff\\xff\\xff\\xff\\xff\\xff\\xff\\xff\\xff\\x00\\x00\\xff\\xff:/run/current-system/sw/bin/qemu-aarch64:OC
-  '';
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   system.stateVersion = "24.11";
 }

@@ -13,8 +13,8 @@
           with open('./legion_linux/legion.py') as f:
               content = f.read()
           # Wrap _read_file_int in try/except
-          old = '    def _read_file_int(self, file_path) -> int:\n        return int(self._read_file_str(file_path))'
-          new = '    def _read_file_int(self, file_path) -> int:\n        try:\n            return int(self._read_file_str(file_path))\n        except (IOError, ValueError):\n            log.warning("Feature _read_file_int failed for %s, returning 0", file_path)\n            return 0'
+          old = '    def _read_file_int(self, file_path) -> int:\\n        return int(self._read_file_str(file_path))'
+          new = '    def _read_file_int(self, file_path) -> int:\\n        try:\\n            return int(self._read_file_str(file_path))\\n        except (IOError, ValueError):\\n            log.warning("Feature _read_file_int failed for %s, returning 0", file_path)\\n            return 0'
           content = content.replace(old, new)
           with open('./legion_linux/legion.py', 'w') as f:
               f.write(content)

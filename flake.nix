@@ -345,9 +345,12 @@
 
     # Raspberry Pi 3 SD card image for Dhumavati
     # Build with: nix build --impure --system aarch64-linux .#dhumavati
-    dhumavatiSdImage = nixpkgs.lib.nixosSystem {
+    dhumavatiSdImage = (nixpkgs.lib.nixosSystem {
       system = "aarch64-linux";
-      specialArgs = {inherit inputs outputs;};
+      specialArgs = {
+        inherit inputs outputs;
+        format = "sdImage";
+      };
       modules = [
         "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
         inputs.sops-nix.nixosModules.sops
@@ -373,6 +376,6 @@
         }
         ./hosts/dhumavati
       ];
-    };
+    }).config.system.build.toplevel;
   };
 }

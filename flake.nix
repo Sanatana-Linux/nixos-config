@@ -344,24 +344,17 @@
     # ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
 
     # Raspberry Pi 3 SD card image for Dhumavati
-    # Cross-compiled on x86_64 for aarch64 (uses qemu emulator, no binfmt_misc needed)
-    # Build with: nix build --impure .#dhumavatiSdImage
+    # Built natively for aarch64 on x86_64 via qemu binfmt emulation
+    # (boot.binfmt.emulatedSystems on the build host). Native aarch64 packages
+    # substitute from cache.nixos.org, so this is far faster than cross-compiling.
+    # Build with: nix build --impure --system aarch64-linux .#dhumavatiSdImage
     dhumavatiSdImage = (nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
+      system = "aarch64-linux";
       specialArgs = {
         inherit inputs outputs;
         format = "sdImage";
       };
       modules = [
-        {
-          nixpkgs.buildPlatform = "x86_64-linux";
-          nixpkgs.hostPlatform = "aarch64-linux";
-        }
-        # nix-ld pulls in Lua/LuaJIT packages whose wrap-lua-hook propagates
-        # make-shell-wrapper-hook, which throws under cross-compilation
-        # ("makeWrapper must be in nativeBuildInputs"). The Pi is headless and
-        # doesn't need nix-ld, so disable it for this cross-compiled image.
-        {modules.system.apps.nix-ld.enable = nixpkgs.lib.mkForce false;}
         "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
         inputs.sops-nix.nixosModules.sops
         inputs.nur.modules.nixos.default

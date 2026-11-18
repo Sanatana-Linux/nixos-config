@@ -44,6 +44,7 @@ in {
       };
       desktop.awesomewm.enable = true;
       security.sudo.enable = true;
+      security.polkit.enable = true;
     };
 
     base = {

@@ -123,6 +123,7 @@
           adminUser = "tlh";
         };
         sudo.enable = true;
+        polkit.enable = true;
         tpm.enable = true;
         # Secrets CLI tooling, installed into the system profile from the
         # external/secrets submodule so it is always the current build and

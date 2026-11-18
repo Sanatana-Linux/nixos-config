@@ -81,6 +81,7 @@
           adminUser = "tlh";
         };
         sudo.enable = true;
+        polkit.enable = true;
         tpm.enable = false;
 
         firewall = {

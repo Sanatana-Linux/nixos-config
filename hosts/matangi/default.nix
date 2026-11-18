@@ -67,6 +67,7 @@
           passwordAuthentication = true;
         };
         sudo.enable = true;
+        polkit.enable = true;
         pam.enable = true;
         tpm.enable = true;
         firewall = {

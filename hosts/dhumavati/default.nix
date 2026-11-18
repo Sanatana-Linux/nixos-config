@@ -194,6 +194,11 @@
   # Pi 3 boots via U-Boot + extlinux, not GRUB.
   boot.loader.grub.enable = lib.mkForce false;
 
+  # No display to splash on. Plymouth would only hide the kernel log, which over
+  # the UART is the one place this box can report a failed mount, and it drags a
+  # theme engine plus a KDE control module into the closure for nothing.
+  boot.plymouth.enable = lib.mkForce false;
+
   # A bootable menu, not a dead end. With no menu a generation that cannot boot
   # is unreachable and the only way back is pulling the card. U-Boot reads
   # TIMEOUT 0 as "wait forever" (the fleet default renders exactly that, which is

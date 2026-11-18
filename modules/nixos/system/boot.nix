@@ -69,8 +69,6 @@ with lib; {
       kernelParams =
         [
           "fbcon=nodefer"
-          "splash"
-          "quiet"
           "rd.udev.log_priority=3"
           # reboot=acpi prevents hangs on reboot by using ACPI reset instead of
           # the default EFI/PCI reset mechanisms, which can hang on some hardware
@@ -110,6 +108,14 @@ with lib; {
         # where intel_pstate does not exist.
         ++ optionals config.modules.hardware.intel.enable [
           "intel_pstate=passive"
+        ]
+        # Silencing the console only makes sense when there is a splash drawn over
+        # it. A host with plymouth off — dhumavati, a headless DNS appliance —
+        # wants the boot log, which on a board with no display and only a UART is
+        # the one place a failed mount or a wedged unit can be read.
+        ++ optionals config.boot.plymouth.enable [
+          "splash"
+          "quiet"
         ];
 
       plymouth.enable = true;
@@ -134,11 +140,16 @@ with lib; {
         grub2
         mesa
         mesa-demos
-        plymouth
-        kdePackages.plymouth-kcm
         linuxHeaders
         luajitPackages.ldbus
         xssproxy
+      ]
+      # Only hosts that actually draw a splash need the theme engine or the KDE
+      # control module for it; on a headless board they are dead weight in the
+      # closure.
+      ++ optionals config.boot.plymouth.enable [
+        plymouth
+        kdePackages.plymouth-kcm
       ]
       ++ optionals config.modules.system.boot.development.enable [
         efibootmgr

@@ -260,6 +260,22 @@
     RestartSec = lib.mkForce "2s";
   };
 
+  # --- Power loss: return to service without a human ---
+  # The watchdog, kernel.panic and the healthcheck timer below already cover a
+  # wedged kernel and a wedged resolver. What is left is the card itself: it is
+  # the only state that survives a cut, so avoid writing to it needlessly and do
+  # not hold writes back — the boot menu (boot.loader.timeout above) and the
+  # labels in hardware-configuration.nix are what make the next boot find its
+  # root and stay selectable.
+
+  # AdGuard rewrites its query log continuously — the busiest writer on a box
+  # with no swap partition. interval = 0 keeps it in memory only, so a power cut
+  # cannot land in the middle of a write and the card sees no steady churn.
+  services.adguardhome.settings.querylog.interval = 0;
+
+  # Bound the journal rather than letting it grow across months of uptime.
+  services.journald.settings.Journal.SystemMaxUse = "64M";
+
   # Same for the uplink: losing NetworkManager means losing the box.
   systemd.services.NetworkManager.serviceConfig = {
     Restart = lib.mkForce "always";

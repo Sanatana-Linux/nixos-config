@@ -26,7 +26,11 @@
   fileSystems."/" = {
     device = lib.mkDefault "/dev/disk/by-label/NIXOS_SD";
     fsType = "ext4";
-    options = ["noatime" "commit=120"];
+    # commit=120 held journal commits for two minutes, so a power cut threw away
+    # up to that much recent writing on a card that is only ever turned off
+    # abruptly. Nothing on this box needs a wide write-back window, so keep it
+    # short and let the journal replay at boot do the rest.
+    options = ["noatime" "commit=5"];
   };
 
   # Firmware partition — FAT32, holds Raspberry Pi boot files, U-Boot, and

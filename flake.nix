@@ -279,12 +279,21 @@
 
       # ┣━━━━━━━━━━━━━━━━━┫ Dhumavati — Headless DNS Adblocker ┣━━━━━━━━━━━━━━━━━┫
       # Raspberry Pi 3 Model B (BCM2837, AArch64), 32 GB SD card. Headless
-      # AdGuard Home DNS adblocker for the LAN. Built remotely from this
-      # machine; hardware-configuration.nix is a starter that must be
-      # regenerated on the Pi before first switch.
+      # AdGuard Home DNS adblocker for the LAN.
       dhumavati = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
+        system = "aarch64-linux";
+        specialArgs = {
+          inherit inputs outputs;
+          format = "sdImage";
+        };
         modules = [
+          # The SD image module belongs to this configuration rather than to a
+          # second, inline system. It is what defines fileSystems."/" in terms of
+          # sdImage.rootVolumeLabel and installs the firmware + extlinux layout,
+          # so every bootable generation has to be evaluated with it present —
+          # otherwise the labels it writes and the labels the host config looks up
+          # are free to drift, and the card boots into emergency mode.
+          "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
           inputs.sops-nix.nixosModules.sops
           inputs.nur.modules.nixos.default
           inputs.nixos-hardware.nixosModules.raspberry-pi-3
@@ -306,6 +315,13 @@
               };
             };
           }
+          # The Pi 3 firmware installer copies the whole vendor overlay set, so
+          # the FAT partition needs more room than the 30 MiB default. USB and
+          # Ethernet wiring lives in the host config so the activation-time
+          # config.txt rewrite keeps it.
+          ({...}: {
+            sdImage.firmwareSize = 64;
+          })
           ./hosts/dhumavati
         ];
       };
@@ -343,50 +359,12 @@
     };
     # ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
 
-    # Raspberry Pi 3 SD card image for Dhumavati
-    # Built natively for aarch64 on x86_64 via qemu binfmt emulation
-    # (boot.binfmt.emulatedSystems on the build host). Native aarch64 packages
-    # substitute from cache.nixos.org, so this is far faster than cross-compiling.
-    # Build with: nix build --impure --system aarch64-linux .#dhumavatiSdImage
-    dhumavatiSdImage =
-      (nixpkgs.lib.nixosSystem {
-        system = "aarch64-linux";
-        specialArgs = {
-          inherit inputs outputs;
-          format = "sdImage";
-        };
-        modules = [
-          "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
-          inputs.sops-nix.nixosModules.sops
-          inputs.nur.modules.nixos.default
-          inputs.nixos-hardware.nixosModules.raspberry-pi-3
-          inputs.stylix.nixosModules.stylix
-          inputs.bhairava-grub-theme.nixosModule
-          inputs.home-manager.nixosModules.home-manager
-          inputs.greeter-ganapati.nixosModules.default
-          inputs.om.nixosModules.om
-          ./modules/nixos
-          {
-            home-manager = {
-              useUserPackages = true;
-              backupFileExtension = "bak";
-              overwriteBackup = true;
-              extraSpecialArgs = {inherit inputs outputs;};
-              sharedModules = [./modules/home-manager];
-              users = {
-                tlh = {imports = [./modules/home-manager/users/tlh-dhumavati/default.nix];};
-              };
-            };
-          }
-          # Raspberry Pi 3: the firmware installer copies the whole vendor
-          # overlay set, so the FAT partition needs more room than the 30 MiB
-          # default. USB/Ethernet wiring lives in the host config so the
-          # activation-time config.txt rewrite keeps it.
-          ({...}: {
-            sdImage.firmwareSize = 64;
-          })
-          ./hosts/dhumavati
-        ];
-      }).config.system.build.sdImage;
+    # Raspberry Pi 3 SD card image for Dhumavati. The image is built by
+    # nixosConfigurations.dhumavati itself (aarch64-linux, with the SD-image
+    # module in its own module list); this alias only preserves the old attribute
+    # name. Build either way:
+    #   nix build --impure .#nixosConfigurations.dhumavati.config.system.build.sdImage
+    #   nix build --impure --system aarch64-linux .#dhumavatiSdImage
+    dhumavatiSdImage = self.nixosConfigurations.dhumavati.config.system.build.sdImage;
   };
 }

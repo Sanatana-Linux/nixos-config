@@ -194,13 +194,22 @@
   # Pi 3 boots via U-Boot + extlinux, not GRUB.
   boot.loader.grub.enable = lib.mkForce false;
 
-  # Headless boot — U-Boot on the Pi 3 has no working USB keyboard, so the
-  # extlinux menu must never wait for a keypress. The fleet default
-  # (`timeoutStyle = "hidden"`) renders `TIMEOUT 0`, which U-Boot interprets
-  # as "wait forever" and hangs at the generation menu. A timeout of 0 makes
-  # the extlinux builder emit `TIMEOUT 1` with no menu at all, booting the
-  # default generation immediately.
-  boot.loader.timeout = lib.mkForce 0;
+  # A bootable menu, not a dead end. With no menu a generation that cannot boot
+  # is unreachable and the only way back is pulling the card. U-Boot reads
+  # TIMEOUT 0 as "wait forever" (the fleet default renders exactly that, which is
+  # what this used to force), so keep a short non-zero wait and reach the menu
+  # over the serial console configured below.
+  boot.loader.timeout = lib.mkForce 5;
+
+  # Console on HDMI and on the UART. The UART is already enabled in config.txt;
+  # listing it last makes it /dev/console, so a headless unit with no monitor
+  # still shows boot messages, the extlinux menu and the emergency shell.
+  boot.kernelParams = ["console=tty0" "console=ttyS0,115200n8"];
+
+  # Recovery without a password: when initrd cannot mount the root filesystem it
+  # drops to an emergency shell, and this is what makes that shell usable on a
+  # box with no keyboard attached.
+  boot.initrd.systemd.emergencyAccess = true;
 
   # AdGuard Home — network-wide adblocking DNS server.
   services.adguardhome = {

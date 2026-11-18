@@ -16,10 +16,15 @@
   boot.kernelModules = ["bcm2708_rng" "snd_bcm2835" "smsc95xx"];
   boot.extraModulePackages = [];
 
-  # Root filesystem — ext4 on the SD card. UUID/label to be regenerated on
-  # the target machine with `nixos-generate-config --show-hardware-config`.
+  # Root filesystem — ext4 on the SD card. The label is the one the image
+  # actually writes: the SD-image module labels partitions from
+  # sdImage.rootVolumeLabel / sdImage.firmwarePartitionName, whose defaults are
+  # NIXOS_SD and FIRMWARE, and it defines fileSystems at normal priority (which
+  # beats mkDefault). Naming the same values here keeps a generation built on the
+  # device bootable against the card the image produced — a different label here
+  # means initrd waits for a device that does not exist and drops to emergency.
   fileSystems."/" = {
-    device = lib.mkDefault "/dev/disk/by-label/dhumavati-root";
+    device = lib.mkDefault "/dev/disk/by-label/NIXOS_SD";
     fsType = "ext4";
     options = ["noatime" "commit=120"];
   };
@@ -27,7 +32,7 @@
   # Firmware partition — FAT32, holds Raspberry Pi boot files, U-Boot, and
   # extlinux.conf. Mounted at /boot/firmware for the rpi firmware module.
   fileSystems."/boot/firmware" = {
-    device = lib.mkDefault "/dev/disk/by-label/dhumavati-firmware";
+    device = lib.mkDefault "/dev/disk/by-label/FIRMWARE";
     fsType = "vfat";
     options = ["fmask=0022" "dmask=0022"];
   };

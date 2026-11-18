@@ -10,7 +10,10 @@
   # Raspberry Pi 3 boot modules — the BCM2837 needs these early for storage/USB.
   boot.initrd.availableKernelModules = ["dwc2" "usbhid" "usb_storage" "bcm2708_rng"];
   boot.initrd.kernelModules = ["dwc2" "usbhid" "usb_storage" "bcm2708_rng"];
-  boot.kernelModules = ["bcm2708_rng" "snd_bcm2835"];
+  # smsc95xx is the Pi 3's onboard LAN9514 Ethernet (a USB-attached chip).
+  # Loading it explicitly means the interface shows up even if udev's
+  # modalias autoload misses it on a cold boot.
+  boot.kernelModules = ["bcm2708_rng" "snd_bcm2835" "smsc95xx"];
   boot.extraModulePackages = [];
 
   # Root filesystem — ext4 on the SD card. UUID/label to be regenerated on

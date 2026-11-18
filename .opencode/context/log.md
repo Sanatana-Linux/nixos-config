@@ -121,3 +121,17 @@
 - nixpkgs packages `shim-unsigned` but no bootloader path consumes it; the nixpkgs GRUB EFI build carries 293 modules with neither `shim_lock` nor `verify`
 
 **Open**: the drive/LUKS migration for the same host is staged outside context at `/etc/nixos/.tmp/kamala-storage/` (gitignored) — summarised in §8 of the new research page.
+
+## 2026-11-17 — Raspberry Pi 3 image: build guide + first-boot fixes
+
+**Created**:
+- `raspberry-pi-sd-image-build.md` — how to build `dhumavatiSdImage` on x86_64 through `boot.binfmt.emulatedSystems`, why cross-compilation is rejected, the Pi 3 wiring that each cost a failed boot (extlinux `TIMEOUT 0` hang, dwc2 OTG → LAN9514 invisible, firewall missing port 53, oomd killing `system.slice`), flash + read-back verification, and the unsigned-path `nix copy` workaround
+
+**Files updated**:
+- `index.md` — registered `raspberry-pi-sd-image-build` under Frameworks
+
+**Findings worth keeping**:
+- `nixos-hardware`'s raspberry-pi module replaces `sdImage.populateFirmwareCommands` with `install-rpi-firmware`, which renders `config.txt` from `hardware.raspberry-pi.configtxt.*`. Appending to the generic sd-image commands is silently discarded; board wiring must be expressed through those options.
+- The rendered form `dtoverlay=X` + `dtparam=k=v` + `dtoverlay=` is intentional and equivalent to the comma form — the "dtparam applies to the last loaded overlay" rule is why the terminator exists.
+- `systemd.oomd.enableSystemSlice = true` (the fleet default) gives oomd kill authority over every system service; on 1 GiB it kills AdGuard → NetworkManager → getty/sshd in that order.
+- `nix copy --to ssh-ng://` refuses locally built paths for untrusted remote users; exporting the closure diff and importing it as root works and keeps the system declarative.

@@ -20,6 +20,8 @@ in {
       moor
       curl
       direnv
+      dua
+      duc
       dust
       duf
       editorconfig-core-c

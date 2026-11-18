@@ -195,6 +195,7 @@ in {
         tree = "eza --icons --tree";
         cat = "bat --style=plain";
         du = "${lib.getBin dust}/bin/dust";
+        lld = "${lib.getBin dua}/bin/dua";
         gz = "gzip -l";
         rm = "rm -rvf";
         trm = "${lib.getBin trash-cli}/bin/trash-cli";

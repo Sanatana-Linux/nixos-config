@@ -1,4 +1,5 @@
 {
+  config,
   inputs,
   lib,
   outputs,
@@ -88,7 +89,11 @@
           allowHTTP = false;
           allowHTTPS = false;
           allowDevelopment = false;
-          customTcpPorts = [3000]; # AdGuard Home web UI
+          # 53 is AdGuard's resolver, not just its UI: LAN clients point their
+          # DNS here, so both TCP and UDP have to be open. `openFirewall` on
+          # the AdGuard module only covers the web port.
+          customTcpPorts = [53 3000];
+          customUdpPorts = [53];
           logRefusedConnections = true;
           trustedInterfaces = ["lo" "localhost" "127.0.0.1"];
         };
@@ -176,8 +181,26 @@
     base16Scheme = ../../external/base16_monokai_pro/base16-sanatana-linux.yml;
   };
 
+  # The Pi 3's onboard Ethernet is a LAN9514 hung off the dwc2 USB controller.
+  # The vendor device tree carries no `dr_mode`, so mainline dwc2 comes up in
+  # OTG mode and the chip never enumerates — no interface, no DHCP, no SSH.
+  # The stock dwc2 overlay pins the controller to host mode, which also has to
+  # be set here (not only in the SD image) because the firmware installer
+  # rewrites config.txt on every activation.
+  hardware.raspberry-pi.configtxt.deviceTreeOverlays.pi3 = [
+    {dwc2.dr_mode = "host";}
+  ];
+
   # Pi 3 boots via U-Boot + extlinux, not GRUB.
   boot.loader.grub.enable = lib.mkForce false;
+
+  # Headless boot — U-Boot on the Pi 3 has no working USB keyboard, so the
+  # extlinux menu must never wait for a keypress. The fleet default
+  # (`timeoutStyle = "hidden"`) renders `TIMEOUT 0`, which U-Boot interprets
+  # as "wait forever" and hangs at the generation menu. A timeout of 0 makes
+  # the extlinux builder emit `TIMEOUT 1` with no menu at all, booting the
+  # default generation immediately.
+  boot.loader.timeout = lib.mkForce 0;
 
   # AdGuard Home — network-wide adblocking DNS server.
   services.adguardhome = {
@@ -190,6 +213,110 @@
     settings.filters_enabled = true;
     settings.protection_enabled = true;
     mutableSettings = true;
+  };
+
+  # The shared oomd module marks *system.slice* (and the root slice) with
+  # ManagedOOMMemoryPressure=kill at 80%. On a 1 GiB Pi 3 with zram those
+  # thresholds are reached routinely, and oomd then SIGKILLs whole system
+  # services — it took out AdGuard, NetworkManager and even getty/sshd. Keep
+  # oomd watching user slices (a runaway build still gets reclaimed) but stop
+  # it from killing system units.
+  systemd.oomd = {
+    enableRootSlice = lib.mkForce false;
+    enableSystemSlice = lib.mkForce false;
+  };
+
+  # The Pi 3 has 1 GiB of RAM and runs systemd-oomd. The LAN's resolver and
+  # the uplink must never be what gets sacrificed under memory pressure:
+  # a negative OOMScoreAdjust makes the kernel pick something else, and
+  # ManagedOOMPreference=avoid keeps systemd-oomd off these cgroups entirely.
+  # MemoryMin reserves a floor so they survive even a hard squeeze.
+  systemd.services.adguardhome.serviceConfig = {
+    OOMScoreAdjust = -900;
+    ManagedOOMPreference = "avoid";
+    MemoryMin = "64M";
+    # AdGuard grows with filter lists and the query log. MemoryHigh is a soft
+    # ceiling: reclaim starts there, but nothing is killed — MemoryMax would
+    # SIGKILL the resolver, which is the failure this box is being tuned to
+    # avoid.
+    MemoryHigh = "192M";
+  };
+
+  # --- Resilience: the resolver must always come back ---
+  # Restart=always at 2 s. nixpkgs sets StartLimitIntervalSec=5 / Burst=10, and
+  # a 2 s delay means at most 3 starts per window, so the rate limiter can never
+  # trip — a crash-looping resolver keeps being retried instead of staying dead.
+  systemd.services.adguardhome.serviceConfig = {
+    Restart = lib.mkForce "always";
+    RestartSec = lib.mkForce "2s";
+  };
+
+  # Same for the uplink: losing NetworkManager means losing the box.
+  systemd.services.NetworkManager.serviceConfig = {
+    Restart = lib.mkForce "always";
+    RestartSec = lib.mkForce "2s";
+    MemoryHigh = lib.mkForce "96M";
+  };
+
+  # fail2ban is a Python daemon (~43 MB); it may be throttled but never killed.
+  systemd.services.fail2ban.serviceConfig.MemoryHigh = "96M";
+
+  # The BCM2835 hardware watchdog is built into the kernel, so a wedged kernel
+  # or a systemd main loop that stops making progress reboots the board instead
+  # of leaving it dark on the LAN. kernel.panic then guarantees a reboot even
+  # for a panic that never reaches systemd.
+  systemd.settings.Manager.RuntimeWatchdogSec = "60s";
+  boot.kernel.sysctl."kernel.panic" = lib.mkForce 10;
+
+  # Crash dumps are useless on a DNS appliance and cost RAM plus SD writes at
+  # the worst possible moment.
+  systemd.coredump.enable = lib.mkForce false;
+
+  # Restart=always covers a resolver that dies. This covers the other half: the
+  # process is alive but wedged (stalled upstream, poisoned cache, deadlock
+  # after a memory squeeze) and silently answers nothing. A failed lookup on
+  # loopback restarts it; the timer is what makes it self-healing without a
+  # human noticing.
+  systemd.services.adguardhome-healthcheck = {
+    description = "Restart AdGuard Home when DNS stops answering";
+    after = ["adguardhome.service"];
+    wants = ["adguardhome.service"];
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = pkgs.writeShellScript "adguardhome-healthcheck" ''
+        set -eu
+        if ! ${pkgs.dnsutils}/bin/dig +time=2 +tries=1 +short @127.0.0.1 example.com >/dev/null 2>&1; then
+          ${config.systemd.package}/bin/systemctl try-restart adguardhome.service
+        fi
+      '';
+    };
+  };
+  systemd.timers.adguardhome-healthcheck = {
+    wantedBy = ["timers.target"];
+    timerConfig = {
+      OnBootSec = "2min";
+      OnUnitActiveSec = "60s";
+    };
+  };
+
+  # Fleet default is 33% of RAM for zram. A headless DNS box has no desktop
+  # working set to protect, so a larger compressed swap pool gives the kernel
+  # somewhere to park cold anonymous pages instead of evicting page cache or
+  # touching the SD card.
+  zramSwap.memoryPercent = lib.mkForce 50;
+
+  # Builds are the one workload that can consume the whole board; throttle them
+  # before they can push the resolver out of memory.
+  systemd.services.nix-daemon.serviceConfig.MemoryHigh = "256M";
+  systemd.services.NetworkManager.serviceConfig = {
+    OOMScoreAdjust = -800;
+    ManagedOOMPreference = "avoid";
+    MemoryMin = "32M";
+  };
+  # Keeping sshd alive is what keeps the box remotely recoverable.
+  systemd.services.sshd.serviceConfig = {
+    OOMScoreAdjust = -600;
+    ManagedOOMPreference = "avoid";
   };
 
   system.stateVersion = "24.11";

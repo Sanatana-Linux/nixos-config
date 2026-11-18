@@ -8,6 +8,7 @@
   imports = [
     ./hardware-configuration.nix
     ./sops.nix
+    ./wd500.nix
     ../../modules/nixos/system/users/tlh.nix
   ];
 

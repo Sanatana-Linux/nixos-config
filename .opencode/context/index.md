@@ -17,6 +17,7 @@
 | [[lenovo-legion-ec-wmi-interface-reference]] | EC, WMI, ACPI, and firmware interfaces for Lenovo Legion laptops (model: Legion Pro 5 16IRX9) |
 | [[lenovo-legion-kernel-overlay-fixes]] | Two critical patches to the nixpkgs lenovo-legion package — sysfs path fix and upstream tracking |
 | [[sea-greeter-display-manager]] | Sea-greeter LightDM WebKit greeter architecture, theming, HW acceleration |
+| [[raspberry-pi-sd-image-build]] | Building the aarch64 Pi 3 SD image from x86_64 via binfmt — flake attribute, Pi 3 wiring (dwc2 host, firewall 53, oomd scoping), flash + read-back verification, troubleshooting table |
 
 ## Decisions — ADRs
 

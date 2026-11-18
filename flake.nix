@@ -348,37 +348,45 @@
     # (boot.binfmt.emulatedSystems on the build host). Native aarch64 packages
     # substitute from cache.nixos.org, so this is far faster than cross-compiling.
     # Build with: nix build --impure --system aarch64-linux .#dhumavatiSdImage
-    dhumavatiSdImage = (nixpkgs.lib.nixosSystem {
-      system = "aarch64-linux";
-      specialArgs = {
-        inherit inputs outputs;
-        format = "sdImage";
-      };
-      modules = [
-        "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
-        inputs.sops-nix.nixosModules.sops
-        inputs.nur.modules.nixos.default
-        inputs.nixos-hardware.nixosModules.raspberry-pi-3
-        inputs.stylix.nixosModules.stylix
-        inputs.bhairava-grub-theme.nixosModule
-        inputs.home-manager.nixosModules.home-manager
-        inputs.greeter-ganapati.nixosModules.default
-        inputs.om.nixosModules.om
-        ./modules/nixos
-        {
-          home-manager = {
-            useUserPackages = true;
-            backupFileExtension = "bak";
-            overwriteBackup = true;
-            extraSpecialArgs = {inherit inputs outputs;};
-            sharedModules = [./modules/home-manager];
-            users = {
-              tlh = {imports = [./modules/home-manager/users/tlh-dhumavati/default.nix];};
+    dhumavatiSdImage =
+      (nixpkgs.lib.nixosSystem {
+        system = "aarch64-linux";
+        specialArgs = {
+          inherit inputs outputs;
+          format = "sdImage";
+        };
+        modules = [
+          "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
+          inputs.sops-nix.nixosModules.sops
+          inputs.nur.modules.nixos.default
+          inputs.nixos-hardware.nixosModules.raspberry-pi-3
+          inputs.stylix.nixosModules.stylix
+          inputs.bhairava-grub-theme.nixosModule
+          inputs.home-manager.nixosModules.home-manager
+          inputs.greeter-ganapati.nixosModules.default
+          inputs.om.nixosModules.om
+          ./modules/nixos
+          {
+            home-manager = {
+              useUserPackages = true;
+              backupFileExtension = "bak";
+              overwriteBackup = true;
+              extraSpecialArgs = {inherit inputs outputs;};
+              sharedModules = [./modules/home-manager];
+              users = {
+                tlh = {imports = [./modules/home-manager/users/tlh-dhumavati/default.nix];};
+              };
             };
-          };
-        }
-        ./hosts/dhumavati
-      ];
-    }).config.system.build.sdImage;
+          }
+          # Raspberry Pi 3: the firmware installer copies the whole vendor
+          # overlay set, so the FAT partition needs more room than the 30 MiB
+          # default. USB/Ethernet wiring lives in the host config so the
+          # activation-time config.txt rewrite keeps it.
+          ({...}: {
+            sdImage.firmwareSize = 64;
+          })
+          ./hosts/dhumavati
+        ];
+      }).config.system.build.sdImage;
   };
 }

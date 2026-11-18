@@ -201,14 +201,11 @@
   # over the serial console configured below.
   boot.loader.timeout = lib.mkForce 5;
 
-  # Console on HDMI and on the UART. The UART is already enabled in config.txt;
-  # listing it last makes it /dev/console, so a headless unit with no monitor
-  # still shows boot messages, the extlinux menu and the emergency shell.
-  boot.kernelParams = ["console=tty0" "console=ttyS0,115200n8"];
-
-  # Recovery without a password: when initrd cannot mount the root filesystem it
-  # drops to an emergency shell, and this is what makes that shell usable on a
-  # box with no keyboard attached.
+  # Console on HDMI and on the UART. The Raspberry Pi modules already put
+  # console=tty0, console=ttyS0 and console=ttyAMA0 on the kernel command line,
+  # so this only has to keep initrd's emergency shell answerable on a board with
+  # no keyboard: the UART is enabled in config.txt and those console entries are
+  # what make it reachable.
   boot.initrd.systemd.emergencyAccess = true;
 
   # AdGuard Home — network-wide adblocking DNS server.

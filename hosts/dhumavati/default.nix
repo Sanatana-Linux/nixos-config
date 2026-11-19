@@ -271,10 +271,23 @@
   # labels in hardware-configuration.nix are what make the next boot find its
   # root and stay selectable.
 
-  # Retention for the query log. The field is a Go duration, and AdGuard exits at
-  # startup on anything under an hour ("init querylog: unsupported interval: less
-  # than an hour") — a bare integer therefore can never be valid, it parses as
-  # nanoseconds (0 rendered as "0s"). 24h keeps a day of history.
+  # A fresh card boots at 97% full because the stock expand-root-partition runs
+  # `partprobe` under `set -e`; against a mounted root it returns non-zero and the
+  # script dies before resize2fs. partx updates the live table instead, and both
+  # steps are idempotent, so the failures here cannot abort the boot either.
+  systemd.services.expand-root-partition.script = lib.mkForce ''
+    rootPart=$(${pkgs.util-linux}/bin/findmnt -n -o SOURCE /)
+    bootDevice=$(${pkgs.util-linux}/bin/lsblk -npo PKNAME "$rootPart")
+    partNum=$(${pkgs.util-linux}/bin/lsblk -npo MAJ:MIN "$rootPart" | ${pkgs.gawk}/bin/gawk -F: '{print $2}')
+    echo ",+," | ${pkgs.util-linux}/bin/sfdisk -N"$partNum" --no-reread "$bootDevice" || true
+    ${pkgs.util-linux}/bin/partx -u "$bootDevice" || ${pkgs.parted}/bin/partprobe "$bootDevice" || true
+    ${pkgs.e2fsprogs}/bin/resize2fs "$rootPart" || true
+  '';
+
+  # AdGuard retention. The field is a Go duration and AdGuard exits at startup on
+  # anything under an hour ("init querylog: unsupported interval: less than an
+  # hour"), so an integer can never be valid — 0 parsed as "0s" and crash-looped
+  # the resolver. 24h keeps a day of query history.
   services.adguardhome.settings.querylog.interval = "24h";
 
   # Bound the journal rather than letting it grow across months of uptime.

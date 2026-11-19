@@ -271,10 +271,11 @@
   # labels in hardware-configuration.nix are what make the next boot find its
   # root and stay selectable.
 
-  # AdGuard rewrites its query log continuously — the busiest writer on a box
-  # with no swap partition. interval = 0 keeps it in memory only, so a power cut
-  # cannot land in the middle of a write and the card sees no steady churn.
-  services.adguardhome.settings.querylog.interval = 0;
+  # Retention for the query log. The field is a Go duration, and AdGuard exits at
+  # startup on anything under an hour ("init querylog: unsupported interval: less
+  # than an hour") — a bare integer therefore can never be valid, it parses as
+  # nanoseconds (0 rendered as "0s"). 24h keeps a day of history.
+  services.adguardhome.settings.querylog.interval = "24h";
 
   # Bound the journal rather than letting it grow across months of uptime.
   services.journald.settings.Journal.SystemMaxUse = "64M";

@@ -9,7 +9,7 @@ with lib; let
 
   browser = ["firefox.desktop"];
   archiveExtractor = ["file-roller.desktop"]; # Define file-roller application
-  pdfViewer = ["foliate.desktop"]; # Define pdfViewer application
+  documentViewer = ["org.gnome.Papers.desktop"]; # GNOME's document viewer (PDF, DjVu, TIFF, comics)
   videoPlayer = ["vlc.desktop"]; # VLC application
   imageViewer = ["org.gnome.Loupe.desktop"];
   neovim = ["nvim.desktop"]; # Neovim for text files
@@ -77,12 +77,39 @@ with lib; let
     "application/zip" = archiveExtractor;
     "application/x-zip-compressed" = archiveExtractor;
 
-    # Ebook formats... Sorry but firefox just does it better!
-    "application/epub+zip" = pdfViewer;
-    "application/epub" = pdfViewer; # .epub
-    "application/pdf" = pdfViewer;
-    "application/x-pdf" = pdfViewer;
-    "application/mobi" = pdfViewer;
+    # Documents. Papers is GNOME's document viewer: it covers PDF (including
+    # the gz/bz/xz-compressed variants), DjVu, TIFF, Illustrator and the comic
+    # book archives. Its desktop file declares exactly this set, so these are
+    # the formats it will actually open.
+    "application/pdf" = documentViewer;
+    "application/x-pdf" = documentViewer;
+    "application/x-ext-pdf" = documentViewer;
+    "application/x-bzpdf" = documentViewer;
+    "application/x-gzpdf" = documentViewer;
+    "application/x-xzpdf" = documentViewer;
+
+    "image/vnd.djvu" = documentViewer;
+    "image/vnd.djvu+multipage" = documentViewer;
+    "application/x-ext-djvu" = documentViewer;
+    "application/x-ext-djv" = documentViewer;
+
+    "image/tiff" = documentViewer;
+    "application/illustrator" = documentViewer;
+
+    "application/vnd.comicbook+zip" = documentViewer;
+    "application/vnd.comicbook-rar" = documentViewer;
+    "application/x-cbz" = documentViewer;
+    "application/x-cbr" = documentViewer;
+    "application/x-cb7" = documentViewer;
+    "application/x-cbt" = documentViewer;
+    "application/x-ext-cbz" = documentViewer;
+    "application/x-ext-cbr" = documentViewer;
+    "application/x-ext-cb7" = documentViewer;
+    "application/x-ext-cbt" = documentViewer;
+
+    # EPUB/MOBI are deliberately absent: Papers has no EPUB backend, and the
+    # config installs no other reader, so those files open via an explicit
+    # "Open With" instead of a default that would fail.
   };
 in {
   options.modules.core.xdg = {
@@ -92,7 +119,7 @@ in {
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
       loupe
-      foliate
+      papers
       xdg-utils
       xdg-desktop-portal-gtk
       xdg-desktop-portal
@@ -147,8 +174,8 @@ in {
         # Archive manager
         "preferred/ArchiveManager" = "file-roller";
 
-        # PDF viewer
-        "preferred/DocumentViewer" = "foliate";
+        # Document viewer
+        "preferred/DocumentViewer" = "org.gnome.Papers";
       };
 
       # Additional XFCE mime associations for better integration
@@ -178,8 +205,13 @@ in {
         "default/image/*" = "org.gnome.Loupe.desktop";
 
         # Documents
-        "default/application/pdf" = "foliate.desktop";
-        "default/application/epub+zip" = "foliate.desktop";
+        "default/application/pdf" = "org.gnome.Papers.desktop";
+        "default/application/x-pdf" = "org.gnome.Papers.desktop";
+        "default/image/vnd.djvu" = "org.gnome.Papers.desktop";
+        "default/image/tiff" = "org.gnome.Papers.desktop";
+        "default/application/vnd.comicbook+zip" = "org.gnome.Papers.desktop";
+        "default/application/x-cbz" = "org.gnome.Papers.desktop";
+        "default/application/x-cbr" = "org.gnome.Papers.desktop";
 
         # Archives
         "default/application/zip" = "file-roller.desktop";
@@ -212,24 +244,12 @@ in {
         defaultApplications = associations;
       };
 
-      # Desktop entry overrides for optimal libadwaita app behavior
-      desktopEntries = {
-        foliate = {
-          name = "Foliate";
-          comment = "Read e-books in style";
-          exec = "env ADW_DEBUG_COLOR_SCHEME=prefer-dark GSETTINGS_SCHEMA_DIR=${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}/glib-2.0/schemas foliate %F";
-          icon = "com.github.johnfactotum.Foliate";
-          mimeType = [
-            "application/epub+zip"
-            "application/x-mobipocket-ebook"
-            "application/x-fictionbook"
-            "text/plain"
-            "application/pdf"
-          ];
-          categories = ["Office" "Viewer"];
-          startupNotify = true;
-        };
-      };
+      # Desktop entry overrides for optimal libadwaita app behavior.
+      # No entry is needed for the document viewer: Papers ships its own
+      # org.gnome.Papers.desktop with the right MimeType list, and being
+      # libadwaita it follows the color-scheme Stylix already sets. Overriding
+      # it would only shadow the packaged Exec and MIME declarations.
+      desktopEntries = {};
     };
   };
 }

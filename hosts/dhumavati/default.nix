@@ -51,6 +51,15 @@
       networking = {
         enable = true;
         hostName = "dhumavati";
+        # The LAN's resolver: AdGuard Home filters DNS for every client.
+        adguard = {
+          enable = true;
+          # The router advertises this box as the LAN's first resolver, so this
+          # box's own DHCP lease names itself — AdGuard must never inherit that
+          # or it forwards to itself. Point it at the gateway instead: the router
+          # owns the public fallback tier (Quad9, Cloudflare) from there.
+          upstreamDns = ["192.168.1.1"];
+        };
         # Headless Pi — Ethernet + WiFi both available, use NetworkManager.
         wifi = {
           randomMac = false;
@@ -214,18 +223,10 @@
   # what make it reachable.
   boot.initrd.systemd.emergencyAccess = true;
 
-  # AdGuard Home — network-wide adblocking DNS server.
-  services.adguardhome = {
-    enable = true;
-    settings.http.address = "0.0.0.0:3000";
-    settings.dns.bootstrap_dns = [
-      "9.9.9.9:53"
-      "149.112.112.112:53"
-    ];
-    settings.filters_enabled = true;
-    settings.protection_enabled = true;
-    mutableSettings = true;
-  };
+  # AdGuard Home itself lives in modules.system.networking.adguard, which this
+  # host enables above. What stays here describes this board rather than the
+  # resolver: how much memory it may hold and what must not be killed under
+  # pressure.
 
   # The shared oomd module marks *system.slice* (and the root slice) with
   # ManagedOOMMemoryPressure=kill at 80%. On a 1 GiB Pi 3 with zram those
@@ -255,13 +256,8 @@
   };
 
   # --- Resilience: the resolver must always come back ---
-  # Restart=always at 2 s. nixpkgs sets StartLimitIntervalSec=5 / Burst=10, and
-  # a 2 s delay means at most 3 starts per window, so the rate limiter can never
-  # trip — a crash-looping resolver keeps being retried instead of staying dead.
-  systemd.services.adguardhome.serviceConfig = {
-    Restart = lib.mkForce "always";
-    RestartSec = lib.mkForce "2s";
-  };
+  # Restart policy and the answering-nothing healthcheck both come from
+  # modules.system.networking.adguard, so they cannot drift per host.
 
   # --- Power loss: return to service without a human ---
   # The watchdog, kernel.panic and the healthcheck timer below already cover a
@@ -284,11 +280,7 @@
     ${pkgs.e2fsprogs}/bin/resize2fs "$rootPart" || true
   '';
 
-  # AdGuard retention. The field is a Go duration and AdGuard exits at startup on
-  # anything under an hour ("init querylog: unsupported interval: less than an
-  # hour"), so an integer can never be valid — 0 parsed as "0s" and crash-looped
-  # the resolver. 24h keeps a day of query history.
-  services.adguardhome.settings.querylog.interval = "24h";
+  # AdGuard retention is an option of the adguard module (querylogInterval).
 
   # Bound the journal rather than letting it grow across months of uptime.
   services.journald.settings.Journal.SystemMaxUse = "64M";

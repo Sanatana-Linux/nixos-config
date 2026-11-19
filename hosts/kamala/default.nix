@@ -35,7 +35,14 @@
       cron.enable = false;
       boot = {
         enable = true;
-        theme.enable = true;
+        # New Albion artwork: the 580W shot on the left edge, window frame.
+        theme = {
+          enable = true;
+          variant = "580W";
+          style = "window";
+          side = "left";
+          color = "dark";
+        };
         advancedBios.enable = true;
         development.enable = true;
         configurationLimit = 10;

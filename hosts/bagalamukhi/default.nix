@@ -8,7 +8,6 @@
   imports = [
     ./hardware-configuration.nix
     ./sops.nix
-    ./wd500.nix
     ../../modules/nixos/system/users/tlh.nix
   ];
 
@@ -48,7 +47,14 @@
       cron.enable = false;
       boot = {
         enable = true;
-        theme.enable = true;
+        # New Albion artwork: yerba-buena on the right edge, window frame.
+        theme = {
+          enable = true;
+          variant = "yerba-buena";
+          style = "window";
+          side = "right";
+          color = "dark";
+        };
         advancedBios.enable = true;
         development.enable = true;
         configurationLimit = 10;
@@ -333,7 +339,7 @@
   };
 
   # aarch64 binfmt emulation for building dhumavati (Raspberry Pi 3) sd card images
-  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+  boot.binfmt.emulatedSystems = ["aarch64-linux"];
 
   system.stateVersion = "24.11";
 }

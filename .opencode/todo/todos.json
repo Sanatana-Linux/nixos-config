@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "id": "mwn4gj5a-p036k",
+      "text": "add diskstui package to the disk management packages, do a git commit push for this repo and its sub repos, update the flake.lock file, rebuild the bagalamukhi configuration theb ssh into kamala (port 2222) and git pull the nixos configuration and rebuild it there too.",
+      "createdAt": "2026-11-19T05:40:56.686Z"
+    }
+  ]
+}

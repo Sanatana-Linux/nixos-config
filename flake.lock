@@ -68,26 +68,6 @@
         "type": "github"
       }
     },
-    "bhairava-grub-theme": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1739089606,
-        "narHash": "sha256-pu3LR7p/fUdqEWiWs2LfpZeXalYk7N/umkheVkfliV8=",
-        "owner": "Sanatana-Linux",
-        "repo": "Bhairava-Grub-Theme",
-        "rev": "de7a57a353894e651be61b5c4b7849142f5bec59",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Sanatana-Linux",
-        "repo": "Bhairava-Grub-Theme",
-        "type": "github"
-      }
-    },
     "bun2nix": {
       "inputs": {
         "flake-parts": [
@@ -509,6 +489,26 @@
         "type": "github"
       }
     },
+    "new-albion-grub": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1795050019,
+        "narHash": "sha256-r2aMRKu8fIk1VfrgNb4hcSLtsNeEC3KQzznBd83Ijyc=",
+        "owner": "Sanatana-Linux",
+        "repo": "new-albion-grub2-themes",
+        "rev": "3ca5db6f085ff43fa876d664447d0fccd36a6eac",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Sanatana-Linux",
+        "repo": "new-albion-grub2-themes",
+        "type": "github"
+      }
+    },
     "nix-index-database": {
       "inputs": {
         "nixpkgs": [
@@ -739,13 +739,13 @@
     },
     "root": {
       "inputs": {
-        "bhairava-grub-theme": "bhairava-grub-theme",
         "disko": "disko",
         "firefox-nightly": "firefox-nightly",
         "greeter-ganapati": "greeter-ganapati",
         "home-manager": "home-manager",
         "llm-agents": "llm-agents",
         "lua-pam": "lua-pam",
+        "new-albion-grub": "new-albion-grub",
         "nix-index-database": "nix-index-database",
         "nixos-generators": "nixos-generators",
         "nixos-hardware": "nixos-hardware",

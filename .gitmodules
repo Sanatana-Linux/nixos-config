@@ -23,6 +23,6 @@
 [submodule "external/lightdm-greeter-ganapati"]
 	path = external/lightdm-greeter-ganapati
 	url = https://github.com/Sanatana-Linux/lightdm-greeter-ganapati.git
-[submodule "external/bhairava-grub-theme"]
-	path = external/bhairava-grub-theme
-	url = https://github.com/Sanatana-Linux/Bhairava-Grub-Theme.git
+[submodule "external/new-albion-grub2-themes"]
+	path = external/new-albion-grub2-themes
+	url = https://github.com/Sanatana-Linux/new-albion-grub2-themes

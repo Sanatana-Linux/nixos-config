@@ -30,7 +30,14 @@
       systemd.enable = true;
       boot = {
         enable = true;
-        theme.enable = true;
+        # New Albion artwork: golden-gate on the right edge, window frame.
+        theme = {
+          enable = true;
+          variant = "golden-gate";
+          style = "window";
+          side = "right";
+          color = "dark";
+        };
         advancedBios.enable = true;
         efiMountPoint = "/boot";
       };

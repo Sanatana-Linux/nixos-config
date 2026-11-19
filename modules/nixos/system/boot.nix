@@ -2,9 +2,55 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }:
-with lib; {
+with lib; let
+  grubTheme = config.modules.system.boot.theme;
+
+  # Resolution the theme assets and the GRUB framebuffer are generated for.
+  # Naming them together keeps the gfxmode request and the artwork the same
+  # size, so GRUB draws the menu at its native scale instead of rescaling it.
+  themeResolutions = {
+    "1080p" = "1920x1080";
+    "2k" = "2560x1440";
+    "4k" = "3840x2160";
+  };
+
+  # New Albion is a directory of assets plus generate.sh, which lays one theme
+  # directory out from a (theme, style, side, color, screen) tuple. The flake
+  # input's own NixOS module cannot be imported: it uses `lib` without taking
+  # it as a module argument, so any evaluation of what it defines fails with
+  # "undefined variable 'lib'". This derivation runs the same script against
+  # the same source and produces the same layout.
+  newAlbionTheme = pkgs.stdenv.mkDerivation {
+    pname = "new-albion-grub-theme";
+    version = "1.0.0";
+    src = inputs.new-albion-grub;
+
+    nativeBuildInputs = [pkgs.bash pkgs.coreutils];
+
+    buildPhase = ''
+      runHook preBuild
+      bash ./generate.sh \
+        --theme ${grubTheme.variant} \
+        --type ${grubTheme.style} \
+        --side ${grubTheme.side} \
+        --color ${grubTheme.color} \
+        --screen ${grubTheme.screen} \
+        --dest .
+      runHook postBuild
+    '';
+
+    installPhase = ''
+      runHook preInstall
+      mkdir -p "$out/share/grub/themes"
+      mv "New-Albion-${grubTheme.variant}-${grubTheme.style}-${grubTheme.side}-${grubTheme.color}-${grubTheme.screen}" \
+        "$out/share/grub/themes/new-albion"
+      runHook postInstall
+    '';
+  };
+in {
   options.modules.system.boot = {
     enable = mkEnableOption "System bootloader configuration";
 
@@ -38,8 +84,45 @@ with lib; {
       description = "Whether to use OS prober to discover other operating systems";
     };
 
+    # New Albion GRUB theme. The upstream module generates one theme directory
+    # from these values at build time, so the artwork, its placement, and the
+    # asset resolution have to be declared per host rather than globally.
     theme = {
-      enable = mkEnableOption "Bhairava custom GRUB theme";
+      enable = mkEnableOption "New Albion custom GRUB theme";
+
+      variant = mkOption {
+        type = types.enum ["yerba-buena" "fog" "580W" "golden-gate"];
+        default = "yerba-buena";
+        description = "Background artwork drawn behind the GRUB menu";
+      };
+
+      style = mkOption {
+        type = types.enum ["window" "float" "sharp" "blur"];
+        default = "window";
+        description = "Frame style around the menu entries";
+      };
+
+      side = mkOption {
+        type = types.enum ["left" "right"];
+        default = "left";
+        description = "Side of the screen the artwork occupies";
+      };
+
+      color = mkOption {
+        type = types.enum ["dark"];
+        default = "dark";
+        description = "Colour scheme; the upstream theme set ships dark only";
+      };
+
+      screen = mkOption {
+        type = types.enum ["1080p" "2k" "4k"];
+        default = "1080p";
+        description = ''
+          Resolution preset the theme assets are generated for. Matches the
+          gfxmode the module requests, so a mismatch means GRUB scales the
+          menu rather than failing to draw it.
+        '';
+      };
     };
 
     advancedBios = {
@@ -179,21 +262,33 @@ with lib; {
 
       systemd-boot.enable = config.modules.system.boot.loader == "systemd-boot";
 
-      grub = mkIf (config.modules.system.boot.loader == "grub") {
-        enable = true;
-        device = "nodev";
-        efiSupport = true;
-        timeoutStyle = config.modules.system.boot.timeoutStyle;
-        configurationLimit = config.modules.system.boot.configurationLimit;
-        useOSProber = false;
-        bhairava-grub-theme.enable = config.modules.system.boot.theme.enable;
+      grub = mkIf (config.modules.system.boot.loader == "grub") (mkMerge [
+        {
+          enable = true;
+          device = "nodev";
+          efiSupport = true;
+          timeoutStyle = config.modules.system.boot.timeoutStyle;
+          configurationLimit = config.modules.system.boot.configurationLimit;
+          useOSProber = false;
 
-        extraEntries = optionalString config.modules.system.boot.advancedBios.enable ''
-          menuentry 'UEFI Firmware Settings' --class efi --class uefi  {
-            fwsetup
-          }
-        '';
-      };
+          extraEntries = optionalString config.modules.system.boot.advancedBios.enable ''
+            menuentry 'UEFI Firmware Settings' --class efi --class uefi  {
+              fwsetup
+            }
+          '';
+        }
+
+        # Theme settings only exist when the theme is enabled, so the
+        # derivation is not instantiated on hosts that never draw it —
+        # dhumavati boots from extlinux on a Pi and must not pull theme
+        # assets into its closure.
+        (mkIf grubTheme.enable {
+          theme = "${newAlbionTheme}/share/grub/themes/new-albion";
+          gfxmodeEfi = themeResolutions.${grubTheme.screen};
+          gfxmodeBios = themeResolutions.${grubTheme.screen};
+          splashImage = "${newAlbionTheme}/share/grub/themes/new-albion/background.jpg";
+        })
+      ]);
     };
   };
 }

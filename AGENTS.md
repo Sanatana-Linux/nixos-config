@@ -96,7 +96,7 @@ nix develop  # enter project dev shell
 | nixos-hardware | Hardware-specific modules |
 | nur | Nix User Repository |
 | nix-index-database | Pre-built nix-index DB |
-| bhairava-grub-theme | Custom GRUB theme |
+| new-albion-grub | New Albion GRUB2 theme set (per-host variant) |
 | nixos-generators | VM/ISO/cloud image builder |
 | nps | Nix package search |
 | sops-nix | Secrets management (sops + age) |

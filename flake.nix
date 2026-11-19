@@ -33,8 +33,11 @@
       url = "github:OleMussmann/Nix-Package-Search";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    bhairava-grub-theme = {
-      url = "github:Sanatana-Linux/Bhairava-Grub-Theme";
+    # New Albion GRUB2 themes. One module, per-host variant: the derivation is
+    # built from theme/style/side/color/screen, so every host gets its own
+    # generated theme directory rather than a shared fixed one.
+    new-albion-grub = {
+      url = "github:Sanatana-Linux/new-albion-grub2-themes";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-index-database = {
@@ -93,7 +96,7 @@
     stable,
     home-manager,
     stylix,
-    bhairava-grub-theme,
+    new-albion-grub,
     sharabha-gtk,
     om,
     ...
@@ -161,7 +164,6 @@
           inputs.stylix.nixosModules.stylix
           inputs.nur.modules.nixos.default
           inputs.nixos-hardware.nixosModules.lenovo-legion-16irx9h
-          inputs.bhairava-grub-theme.nixosModule
           inputs.nix-index-database.nixosModules.nix-index
           inputs.home-manager.nixosModules.home-manager
           inputs.greeter-ganapati.nixosModules.default
@@ -197,7 +199,6 @@
           inputs.nur.modules.nixos.default
           inputs.disko.nixosModules.disko
           inputs.nixos-hardware.nixosModules.asus-pro-ws-x570-ace
-          inputs.bhairava-grub-theme.nixosModule
           inputs.nix-index-database.nixosModules.nix-index
           inputs.home-manager.nixosModules.home-manager
           inputs.greeter-ganapati.nixosModules.default
@@ -228,7 +229,6 @@
           inputs.stylix.nixosModules.stylix
           inputs.nur.modules.nixos.default
           inputs.nixos-hardware.nixosModules.lenovo-legion-16irx9h
-          inputs.bhairava-grub-theme.nixosModule
           inputs.home-manager.nixosModules.home-manager
           inputs.greeter-ganapati.nixosModules.default
           inputs.om.nixosModules.om
@@ -255,7 +255,6 @@
           inputs.sops-nix.nixosModules.sops
           inputs.stylix.nixosModules.stylix
           inputs.nur.modules.nixos.default
-          inputs.bhairava-grub-theme.nixosModule
           inputs.home-manager.nixosModules.home-manager
           inputs.nixos-generators.nixosModules.all-formats
           inputs.greeter-ganapati.nixosModules.default
@@ -298,7 +297,6 @@
           inputs.nur.modules.nixos.default
           inputs.nixos-hardware.nixosModules.raspberry-pi-3
           inputs.stylix.nixosModules.stylix
-          inputs.bhairava-grub-theme.nixosModule
           inputs.home-manager.nixosModules.home-manager
           inputs.greeter-ganapati.nixosModules.default
           inputs.om.nixosModules.om
@@ -336,7 +334,6 @@
           inputs.sops-nix.nixosModules.sops
           inputs.stylix.nixosModules.stylix
           inputs.nur.modules.nixos.default
-          inputs.bhairava-grub-theme.nixosModule
           inputs.home-manager.nixosModules.home-manager
           inputs.greeter-ganapati.nixosModules.default
           inputs.om.nixosModules.om

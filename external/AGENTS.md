@@ -17,7 +17,7 @@ Git submodules for external configurations managed outside the NixOS flake. Each
 | `om/` | OpenMenu — Sanatana-Linux fork of numtide/llm-agents.nix |
 | `sharabha-gtk-theme/` | GTK theme (Sanatana-Linux) |
 | `lightdm-greeter-ganapati/` | LightDM webkit2 greeter theme (Sanatana-Linux) |
-| `bhairava-grub-theme/` | Custom GRUB theme (Sanatana-Linux) |
+| `new-albion-grub2-themes/` | GRUB2 theme set (Sanatana-Linux) |
 | `README.md` | Submodule documentation |
 
 ## Subdirectories
@@ -31,7 +31,7 @@ Git submodules for external configurations managed outside the NixOS flake. Each
 | `om/` | OpenMenu — Sanatana-Linux fork of numtide/llm-agents.nix |
 | `sharabha-gtk-theme/` | GTK theme (Sanatana-Linux) |
 | `lightdm-greeter-ganapati/` | LightDM webkit2 greeter theme (Sanatana-Linux) |
-| `bhairava-grub-theme/` | Custom GRUB theme (Sanatana-Linux) |
+| `new-albion-grub2-themes/` | GRUB2 theme set (Sanatana-Linux) |
 
 ## For AI Agents
 

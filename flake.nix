@@ -307,7 +307,15 @@
               backupFileExtension = "bak";
               overwriteBackup = true;
               extraSpecialArgs = {inherit inputs outputs;};
-              sharedModules = [./modules/home-manager];
+              sharedModules = [
+                ./modules/home-manager/desktop
+                ./modules/home-manager/environment
+                ./modules/home-manager/packages
+                ./modules/home-manager/programs
+                ./modules/home-manager/services
+                ./modules/home-manager/shell
+                # stylix excluded — headless Pi has no use for GTK/Qt theming
+              ];
               users = {
                 tlh = {imports = [./modules/home-manager/users/tlh-dhumavati/default.nix];};
               };

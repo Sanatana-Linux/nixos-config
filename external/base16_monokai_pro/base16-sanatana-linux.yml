@@ -1,4 +1,4 @@
-scheme: "Sanatana Linux"
+scheme: "Sanatana Linux Base16 Color Scheme"
 author: "Thomas Leon Highbaugh"
 base00: "#0c0c0c" # Default Background
 base01: "#1c1c1c" # Lighter Background (used for status bars, line highlighting, etc.)
@@ -10,8 +10,8 @@ base06: "#d9d5df" # Light Accent Foreground
 base07: "#f7f1ff" # Bright Accent Foreground
 base08: "#fc618d" # Red
 base09: "#ff9e64" # Orange
-base0A: "#fce566" # Yellow
-base0B: "#7dca99" # Green
+base0A: "#fce566" # Yellow `many Bothans died to bring you this yellow.`
+base0B: "#7dca99" # Green 
 base0C: "#59bbe5" # Cyan
 base0D: "#6b9ce8" # Blue
 base0E: "#948ae3" # Magenta

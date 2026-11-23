@@ -152,13 +152,14 @@ in {
         "ryzen_smu" # out-of-tree SMU driver (ryzen-monitor-ng, zenstates)
       ];
 
-    # Out-of-tree modules: asus-ec-sensors (ASUS EC telemetry), ryzen_smu
-    # (SMU telemetry), and optionally zenpower.
+    # Out-of-tree modules: ryzen_smu (SMU telemetry) and optionally zenpower.
+    # asus_ec_sensors is NOT here: the mainline kernel builds it in-tree from
+    # drivers/hwmon, so adding the out-of-tree package as well puts the same
+    # asus-ec-sensors.ko in the modules buildEnv twice and fails with
+    # "two given paths contain a conflicting subpath". The module still loads
+    # by name from cfg.sensors above.
     boot.extraModulePackages =
-      optionals cfg.sensors [
-        config.boot.kernelPackages.asus-ec-sensors
-      ]
-      ++ optionals cfg.monitoring [
+      optionals cfg.monitoring [
         config.boot.kernelPackages.ryzen-smu
       ]
       ++ optionals cfg.zenpower [

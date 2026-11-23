@@ -46,6 +46,9 @@
         advancedBios.enable = true;
         development.enable = true;
         configurationLimit = 10;
+        # Headless: no display is normally attached, so GRUB boots the default
+        # entry on its own after the countdown.
+        headless.enable = true;
       };
       networking = {
         enable = true;
@@ -103,6 +106,9 @@
           enable = true;
           # Go-native Greeter Ganapati (imported via greeter-ganapati flake input).
           greeter = "ganapati";
+          # Headless most of the time: boot to the console, and start LightDM
+          # from a tty once video is attached.
+          autostart = false;
         };
       };
       performance = {

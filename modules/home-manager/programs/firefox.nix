@@ -129,7 +129,8 @@ in {
           absolute-enable-right-click
           auto-referer
           auto-tab-discard
-          bitwarden
+          # bitwarden removed: native messaging host com.8bit.bitwarden not available;
+          # extension was retrying constantly and wasting CPU
           cookie-quick-manager
           copy-selection-as-markdown
           don-t-fuck-with-paste

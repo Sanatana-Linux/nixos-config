@@ -28,6 +28,17 @@ in {
       default = false;
       description = "Enable numlock automatically";
     };
+
+    autostart = mkOption {
+      type = types.bool;
+      default = true;
+      description = ''
+        Whether LightDM is pulled in at boot. Disable it on a host that runs
+        headless and reaches a graphical session only with a display attached:
+        LightDM stays installed and configured, and is started from a console
+        with `systemctl start display-manager`.
+      '';
+    };
   };
 
   config = mkIf cfg.enable {
@@ -35,6 +46,11 @@ in {
       enable = true;
       background = ./assets/wallpaper.png;
     };
+
+    # The display manager is wanted by graphical.target, so leaving
+    # multi-user.target as the boot unit keeps the console in front and starts
+    # LightDM only when something asks for the graphical target.
+    systemd.defaultUnit = mkIf (!cfg.autostart) (mkForce "multi-user.target");
 
     # Exactly one greeter may own lightdm.conf's greeter-session, and each
     # greeter module registers the `greeter` option. Guard each on cfg.greeter

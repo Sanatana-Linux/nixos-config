@@ -24,6 +24,74 @@
   # om — NixOS Operations Manager (Zig)
   programs.om.enable = true;
 
+  # Blocky — lightweight DNS ad-blocker for the LAN (replaces AdGuard Home).
+  # Upstream is the gateway; the router owns the public fallback tier.
+  services.blocky.enable = true;
+  services.blocky.settings = {
+    upstreams = {
+      groups = {
+        default = [ "192.168.1.1" ];
+      };
+    };
+    blocking = {
+      denylists = {
+        # Advertising and tracking lists from gist (no adult content)
+        ads = [
+          "https://adaway.org/hosts.txt"
+          "https://raw.githubusercontent.com/anudeepND/blacklist/master/adservers.txt"
+          "https://raw.githubusercontent.com/jdlingyu/ad-wars/master/hosts"
+          "https://raw.githubusercontent.com/FadeMind/hosts.extras/master/UncheckyAds/hosts"
+          "https://raw.githubusercontent.com/bigdargon/hostsVN/master/hosts"
+          "https://s3.amazonaws.com/lists.disconnect.me/simple_ad.txt"
+          "https://v.firebog.net/hosts/AdguardDNS.txt"
+          "https://v.firebog.net/hosts/Admiral.txt"
+          "https://v.firebog.net/hosts/Easylist.txt"
+          "https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&showintro=0&mimetype=plaintext"
+          "https://paulgb.github.io/BarbBlock/blacklists/hosts-file.txt"
+        ];
+        tracking = [
+          "https://v.firebog.net/hosts/Easyprivacy.txt"
+          "https://v.firebog.net/hosts/Prigent-Ads.txt"
+          "https://raw.githubusercontent.com/FadeMind/hosts.extras/master/add.2o7Net/hosts"
+          "https://raw.githubusercontent.com/crazy-max/WindowsSpyBlocker/master/data/hosts/spy.txt"
+          "https://hostfiles.frogeye.fr/firstparty-trackers-hosts.txt"
+          "https://www.github.developerdan.com/hosts/lists/ads-and-tracking-extended.txt"
+          "https://raw.githubusercontent.com/Perflyst/PiHoleBlocklist/master/android-tracking.txt"
+          "https://raw.githubusercontent.com/Perflyst/PiHoleBlocklist/master/SmartTV.txt"
+          "https://raw.githubusercontent.com/Perflyst/PiHoleBlocklist/master/AmazonFireTV.txt"
+          "https://gitlab.com/quidsup/notrack-blocklists/raw/master/notrack-blocklist.txt"
+        ];
+        malware = [
+          "https://raw.githubusercontent.com/PolishFiltersTeam/KADhosts/master/KADhosts.txt"
+          "https://raw.githubusercontent.com/FadeMind/hosts.extras/master/add.Spam/hosts"
+          "https://raw.githubusercontent.com/matomo-org/referrer-spam-blacklist/master/spammers.txt"
+          "https://raw.githubusercontent.com/VeleSila/yhosts/master/hosts"
+          "https://winhelp2002.mvps.org/hosts.txt"
+          "https://raw.githubusercontent.com/DandelionSprout/adfilt/master/Alternate%20versions%20Anti-Malware%20List/AntiMalwareHosts.txt"
+          "https://osint.digitalside.it/Threat-Intel/lists/latestdomains.txt"
+          "https://raw.githubusercontent.com/FadeMind/hosts.extras/master/add.Risk/hosts"
+          "https://bitbucket.org/ethanr/dns-blacklists/raw/8575c9f96e5b4a1308f2f12394abd86d0927a4a0/bad_lists/Mandiant_APT1_Report_Appendix_D.txt"
+          "https://phishing.army/download/phishing_army_blocklist_extended.txt"
+          "https://gitlab.com/quidsup/notrack-blocklists/raw/master/notrack-malware.txt"
+          "https://v.firebog.net/hosts/RPiList-Malware.txt"
+          "https://v.firebog.net/hosts/RPiList-Phishing.txt"
+          "https://raw.githubusercontent.com/Spam404/lists/master/main-blacklist.txt"
+          "https://raw.githubusercontent.com/AssoEchap/stalkerware-indicators/master/generated/hosts"
+          "https://urlhaus.abuse.ch/downloads/hostfile/"
+          "https://malware-filter.gitlab.io/malware-filter/phishing-filter-hosts.txt"
+          "https://s3.amazonaws.com/lists.disconnect.me/simple_malvertising.txt"
+          "https://v.firebog.net/hosts/Prigent-Crypto.txt"
+        ];
+        suspicious = [
+          "https://v.firebog.net/hosts/static/w3kbl.txt"
+          "https://someonewhocares.org/hosts/zero/hosts"
+          "https://raw.githubusercontent.com/RooneyMcNibNug/pihole-stuff/master/SNAFU.txt"
+          "https://v.firebog.net/hosts/neohostsbasic.txt"
+        ];
+      };
+    };
+  };
+
   # SSH keys from bagalamukhi (this build device) so the Pi is reachable
   # immediately on first boot, before sops provisioning can run.
   users.users.tlh.openssh.authorizedKeys.keys = [
@@ -51,15 +119,6 @@
       networking = {
         enable = true;
         hostName = "dhumavati";
-        # The LAN's resolver: AdGuard Home filters DNS for every client.
-        adguard = {
-          enable = true;
-          # The router advertises this box as the LAN's first resolver, so this
-          # box's own DHCP lease names itself — AdGuard must never inherit that
-          # or it forwards to itself. Point it at the gateway instead: the router
-          # owns the public fallback tier (Quad9, Cloudflare) from there.
-          upstreamDns = ["192.168.1.1"];
-        };
         # Headless Pi — Ethernet + WiFi both available, use NetworkManager.
         wifi = {
           randomMac = false;
@@ -99,10 +158,10 @@
           allowHTTP = false;
           allowHTTPS = false;
           allowDevelopment = false;
-          # 53 is AdGuard's resolver, not just its UI: LAN clients point their
-          # DNS here, so both TCP and UDP have to be open. `openFirewall` on
-          # the AdGuard module only covers the web port.
-          customTcpPorts = [53 3000];
+          # 53 is Blocky's resolver, not just its UI: LAN clients point their
+          # DNS here, so both TCP and UDP have to be open. 4000 is Blocky's
+          # HTTP dashboard port.
+          customTcpPorts = [53 4000];
           customUdpPorts = [53];
           logRefusedConnections = true;
           trustedInterfaces = ["lo" "localhost" "127.0.0.1"];
@@ -162,6 +221,15 @@
             enable_uart = true;
             # Disable Bluetooth to free the UART and reduce power.
             disable_bt = true;
+            # Headless DNS box — don't turbo the CPU (arm_boost draws extra
+            # power and triggers undervoltage under load). Cap at 600MHz; a
+            # resolver doesn't need 1.2GHz.
+            arm_boost = false;
+            arm_freq = "600";
+            core_freq = "250";
+            gpu_mem = "16";
+            hdmi_ignore_hotplug = "1";
+            disable_camera = "1";
           };
         };
         deviceTreeOverlays = {
@@ -171,7 +239,6 @@
     };
   };
 
-  # ── AdGuard Home — network-wide adblocking DNS server ───────────────────
   # mDNS so `ssh dhumavati.local` works from bagalamukhi/kamala on the LAN.
   services.avahi = {
     enable = true;
@@ -182,14 +249,9 @@
     };
   };
 
-  # Stylix declared at NixOS level so the local modules/nixos/stylix module
-  # can reference config.stylix without error. Enabled here so stylix's
-  # home-manager integration module is loaded and declares stylix options
-  # at user level; then disabled via tlh-dhumavati override so no theming runs.
-  stylix = {
-    enable = true;
-    base16Scheme = ../../external/base16_monokai_pro/base16-sanatana-linux.yml;
-  };
+  # Headless Pi — no GUI theming needed. Stylix disabled at system level so it
+  # does not pull in GTK/Qt/gnome-shell packages the Pi has no use for.
+  stylix.enable = false;
 
   # The Pi 3's onboard Ethernet is a LAN9514 hung off the dwc2 USB controller.
   # The vendor device tree carries no `dr_mode`, so mainline dwc2 comes up in
@@ -223,10 +285,9 @@
   # what make it reachable.
   boot.initrd.systemd.emergencyAccess = true;
 
-  # AdGuard Home itself lives in modules.system.networking.adguard, which this
-  # host enables above. What stays here describes this board rather than the
-  # resolver: how much memory it may hold and what must not be killed under
-  # pressure.
+  # Blocky itself lives in services.blocky, enabled above. What stays here
+  # describes this board rather than the resolver: how much memory it may hold
+  # and what must not be killed under pressure.
 
   # The shared oomd module marks *system.slice* (and the root slice) with
   # ManagedOOMMemoryPressure=kill at 80%. On a 1 GiB Pi 3 with zram those
@@ -244,20 +305,18 @@
   # a negative OOMScoreAdjust makes the kernel pick something else, and
   # ManagedOOMPreference=avoid keeps systemd-oomd off these cgroups entirely.
   # MemoryMin reserves a floor so they survive even a hard squeeze.
-  systemd.services.adguardhome.serviceConfig = {
+  systemd.services.blocky.serviceConfig = {
     OOMScoreAdjust = -900;
     ManagedOOMPreference = "avoid";
-    MemoryMin = "64M";
-    # AdGuard grows with filter lists and the query log. MemoryHigh is a soft
-    # ceiling: reclaim starts there, but nothing is killed — MemoryMax would
-    # SIGKILL the resolver, which is the failure this box is being tuned to
-    # avoid.
-    MemoryHigh = "192M";
+    MemoryMin = "32M";
+    # Blocky is far lighter than AdGuard Home. MemoryHigh is a soft ceiling:
+    # reclaim starts there, but nothing is killed.
+    MemoryHigh = "96M";
   };
 
   # --- Resilience: the resolver must always come back ---
-  # Restart policy and the answering-nothing healthcheck both come from
-  # modules.system.networking.adguard, so they cannot drift per host.
+  # Restart=on-failure comes from the blocky module. The healthcheck timer
+  # below covers a process that is alive but wedged.
 
   # --- Power loss: return to service without a human ---
   # The watchdog, kernel.panic and the healthcheck timer below already cover a
@@ -279,8 +338,6 @@
     ${pkgs.util-linux}/bin/partx -u "$bootDevice" || ${pkgs.parted}/bin/partprobe "$bootDevice" || true
     ${pkgs.e2fsprogs}/bin/resize2fs "$rootPart" || true
   '';
-
-  # AdGuard retention is an option of the adguard module (querylogInterval).
 
   # Bound the journal rather than letting it grow across months of uptime.
   services.journald.settings.Journal.SystemMaxUse = "64M";
@@ -306,26 +363,26 @@
   # the worst possible moment.
   systemd.coredump.enable = lib.mkForce false;
 
-  # Restart=always covers a resolver that dies. This covers the other half: the
-  # process is alive but wedged (stalled upstream, poisoned cache, deadlock
+  # Restart=on-failure covers a resolver that dies. This covers the other half:
+  # the process is alive but wedged (stalled upstream, poisoned cache, deadlock
   # after a memory squeeze) and silently answers nothing. A failed lookup on
   # loopback restarts it; the timer is what makes it self-healing without a
   # human noticing.
-  systemd.services.adguardhome-healthcheck = {
-    description = "Restart AdGuard Home when DNS stops answering";
-    after = ["adguardhome.service"];
-    wants = ["adguardhome.service"];
+  systemd.services.blocky-healthcheck = {
+    description = "Restart Blocky when DNS stops answering";
+    after = ["blocky.service"];
+    wants = ["blocky.service"];
     serviceConfig = {
       Type = "oneshot";
-      ExecStart = pkgs.writeShellScript "adguardhome-healthcheck" ''
+      ExecStart = pkgs.writeShellScript "blocky-healthcheck" ''
         set -eu
         if ! ${pkgs.dnsutils}/bin/dig +time=2 +tries=1 +short @127.0.0.1 example.com >/dev/null 2>&1; then
-          ${config.systemd.package}/bin/systemctl try-restart adguardhome.service
+          ${config.systemd.package}/bin/systemctl try-restart blocky.service
         fi
       '';
     };
   };
-  systemd.timers.adguardhome-healthcheck = {
+  systemd.timers.blocky-healthcheck = {
     wantedBy = ["timers.target"];
     timerConfig = {
       OnBootSec = "2min";

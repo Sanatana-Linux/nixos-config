@@ -101,7 +101,10 @@
           googleChrome = true;
         };
         ai = {
-          ollama.enable = true;
+          ollama = {
+            enable = true;
+            package = pkgs.ollama-cuda-04017;
+          };
           core.enable = true;
         };
       };

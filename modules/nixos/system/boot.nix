@@ -68,8 +68,15 @@ in {
 
     timeoutStyle = mkOption {
       type = types.enum ["hidden" "menu" "countdown"];
-      default = "hidden";
-      description = "How the GRUB menu timeout is handled";
+      default =
+        if config.modules.system.boot.headless.enable
+        then "hidden"
+        else "menu";
+      description = ''
+        How the GRUB menu timeout is handled. A headless host draws no menu
+        and boots unattended, so it hides the menu; every other host shows it
+        and waits for a selection.
+      '';
     };
 
     configurationLimit = mkOption {
@@ -122,6 +129,19 @@ in {
           gfxmode the module requests, so a mismatch means GRUB scales the
           menu rather than failing to draw it.
         '';
+      };
+    };
+
+    # A host with no display attached has no one to pick a menu entry, so it
+    # boots the default entry unattended after a fixed countdown. Hosts that
+    # have a display leave the menu up and wait for a selection instead.
+    headless = {
+      enable = mkEnableOption "headless operation with a visible GRUB countdown instead of an immediate boot";
+
+      timeout = mkOption {
+        type = types.int;
+        default = 10;
+        description = "Seconds the GRUB menu waits before booting the default entry";
       };
     };
 
@@ -246,7 +266,15 @@ in {
       ];
 
     boot.loader = {
-      timeout = mkIf (config.modules.system.boot.timeoutStyle == "hidden") null;
+      # Headless hosts draw no menu and take the default entry after a fixed
+      # countdown. Every other host leaves the menu up and waits: GRUB's -1
+      # (NixOS `null`) means "boot only when someone selects an entry". A
+      # literal timeout of 0 is the opposite — GRUB reads it as "boot the
+      # default immediately without showing the menu".
+      timeout = mkMerge [
+        (mkIf config.modules.system.boot.headless.enable config.modules.system.boot.headless.timeout)
+        (mkIf (!config.modules.system.boot.headless.enable) null)
+      ];
 
       efi = {
         canTouchEfiVariables = true;

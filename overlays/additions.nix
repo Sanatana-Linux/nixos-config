@@ -8,5 +8,10 @@
         lib = final.pkgs.lib;
         fetchFromGitHub = final.pkgs.fetchFromGitHub;
       };
+      ollama-cuda-04017 = import ../pkgs/ollama-cuda-04017 {
+        pkgs = final.pkgs;
+        lib = final.pkgs.lib;
+        fetchFromGitHub = final.pkgs.fetchFromGitHub;
+      };
     };
 }

@@ -21,11 +21,10 @@ pkgs.ollama-cuda.overrideAttrs (old: rec {
     owner = "ollama";
     repo = "ollama";
     tag = "v${version}";
-    hash = "sha256-1icr0xkxymc2siihiww8ahxzlnj36ymbii1syg3f2nkd3d4ma9iz=";
+    hash = "sha256-PyZVSRttWuHG8zrEuKo3Q1r6O1SI8whj1IJV32cHmcU=";
   };
 
-  # Placeholder — replaced with the real hash after the first build attempt.
-  vendorHash = "sha256-0000000000000000000000000000000000000000000000000000=";
+  vendorHash = "sha256-1mzJrZUHH2ouP6I+LVojHbft7No5AumqKZVq0I/Ubsg=";
 
   passthru =
     (old.passthru or {})
@@ -35,7 +34,7 @@ pkgs.ollama-cuda.overrideAttrs (old: rec {
         owner = "ggml-org";
         repo = "llama.cpp";
         tag = llamaCppVersion;
-        hash = "sha256-0ibd0xpqfxargpqqp881kv8189ybq1zcpdh2wygkd826m8pn1swl=";
+        hash = "sha256-lOtgL6pGoDaf5wK2y37AyycU0J4BoYvxfVl1h28HbUU=";
       };
     };
 

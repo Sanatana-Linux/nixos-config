@@ -68,14 +68,12 @@ in {
 
     timeoutStyle = mkOption {
       type = types.enum ["hidden" "menu" "countdown"];
-      default =
-        if config.modules.system.boot.headless.enable
-        then "hidden"
-        else "menu";
+      default = "menu";
       description = ''
-        How the GRUB menu timeout is handled. A headless host draws no menu
-        and boots unattended, so it hides the menu; every other host shows it
-        and waits for a selection.
+        How the GRUB menu timeout is handled. The menu is shown by default so
+        the New Albion theme is drawn; hiding it also hides the artwork. What
+        differs between hosts is the timeout: a headless host counts down and
+        boots the default entry, every other host waits for a selection.
       '';
     };
 
@@ -266,11 +264,11 @@ in {
       ];
 
     boot.loader = {
-      # Headless hosts draw no menu and take the default entry after a fixed
-      # countdown. Every other host leaves the menu up and waits: GRUB's -1
-      # (NixOS `null`) means "boot only when someone selects an entry". A
-      # literal timeout of 0 is the opposite — GRUB reads it as "boot the
-      # default immediately without showing the menu".
+      # Headless hosts count down from the themed menu and then boot the
+      # default entry unattended. Every other host holds the menu up and waits:
+      # GRUB's -1 (NixOS `null`) means "boot only when someone selects an
+      # entry". A literal timeout of 0 is the opposite — GRUB reads it as "boot
+      # the default immediately without showing the menu".
       timeout = mkMerge [
         (mkIf config.modules.system.boot.headless.enable config.modules.system.boot.headless.timeout)
         (mkIf (!config.modules.system.boot.headless.enable) null)

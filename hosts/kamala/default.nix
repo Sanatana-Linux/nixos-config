@@ -90,11 +90,9 @@
           googleChrome = true;
         };
         ai = {
-          # Ollama serves the rest of the LAN. Loopback-only makes it unreachable from Docker.
+          # Ollama stays on loopback: nothing off-box reaches it, in Docker or on the LAN, so the firewall needs no opening for it.
           ollama = {
             enable = true;
-            host = "0.0.0.0";
-            openFirewall = true;
             package = pkgs.ollama-pascal;
           };
           core.enable = true;

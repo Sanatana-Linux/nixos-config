@@ -129,8 +129,12 @@ in {
           absolute-enable-right-click
           auto-referer
           auto-tab-discard
-          # bitwarden removed: native messaging host com.8bit.bitwarden not available;
-          # extension was retrying constantly and wasting CPU
+          # Bitwarden is deliberately not listed here: it is installed from AMO
+          # (signed, and ahead of the NUR revision), and its optional
+          # nativeMessaging permission is revoked so it never dials the
+          # Bitwarden desktop app. Repacking the XPI to strip desktop
+          # integration is not an option — this Firefox is built with
+          # MOZ_REQUIRE_SIGNING, which deletes a modified XPI at startup.
           cookie-quick-manager
           copy-selection-as-markdown
           don-t-fuck-with-paste

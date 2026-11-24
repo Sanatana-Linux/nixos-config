@@ -16,7 +16,13 @@ with lib; {
       };
       services = {
         systemd-tmpfiles-setup.environment.SYSTEMD_TMPFILES_FORCE_SUBVOL = "0";
-        systemd-machine-id-commit.enable = false;
+        # Commits the transient machine ID to /etc/machine-id. Left enabled: a
+        # host whose /etc/machine-id reads "uninitialized" gets a fresh random
+        # ID on every boot, and anything keyed to it breaks — libvirt opens its
+        # secrets-encryption key through LoadCredentialEncrypted, and systemd
+        # discards the stored key as coming "from a different machine ID", so
+        # libvirtd fails with 243/CREDENTIALS on every boot.
+        systemd-machine-id-commit.enable = true;
 
         # systemd-logind holds a connection to the system bus. A bus *restart*
         # (not the SIGHUP reload a switch normally does) severs that connection
